@@ -1,0 +1,1 @@
+sap.ui.define(["./BaseController"],function(n){"use strict";return n.extend("com.erpis.shiperp.planningcockpit.controller.NotFound",{onLinkPressed:function(){this.getRouter().navTo("worklist")}})});

@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+	<form:SimpleForm id="SimpleFormFOHeader" editable="true" layout="ResponsiveGridLayout" title="" labelSpanXL="4" labelSpanL="3"
+		labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="1" columnsM="1" singleContainerFullSize="false">
+		<form:content>
+			<core:Title text=""/>
+			<Label text="{i18n>requestRoutingFreightOrderNumber}"/>
+			<Text text="{local>/RequestRoutingHeader/FONumber}"/>
+			<Label text="{i18n>requestRoutingCreatedOnDate}"/>
+			<DatePicker placeholder="{i18n>requestRoutingEnterDatePLaceHolder}" change="handleChange" class="sapUiSmallMarginBottom" value="{path: 'local>/RequestRoutingHeader/CreatedOnDate', formatter: '.formatter.formatDate'}"/>
+			<Label text="{i18n>requestRoutingLatestRequestedDeliveryDate}"/>
+			<Text text="{path: 'local>/RequestRoutingHeader/DeliveryDate', formatter: '.formatter.formatDateStringFull'}"/>
+			<core:Title text=""/>
+			<Label text="{i18n>requestRoutingCarrier}"/>
+			<Text text="{local>/RequestRoutingHeader/Carrier}"/>
+			<Label text="{i18n>requestRoutingCarrierName}"/>
+			<Text text="{local>/RequestRoutingHeader/CarrierName}"/>
+			<Label text="{i18n>requestRoutingShipmentDescription}"/>
+			<Text text="{local>/RequestRoutingHeader/ShipmentDescription}"/>
+		</form:content>
+	</form:SimpleForm>
+</core:FragmentDefinition>

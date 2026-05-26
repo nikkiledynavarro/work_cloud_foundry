@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ColumnListItem>
+		<cells>
+			<ObjectIdentifier title="{MainModel>TrackNo}"/>
+			<Text text="{MainModel>Status}"/>
+			<Text text="{path:'MainModel>TrackDate', formatter: '.formatDateString'}"/>
+		</cells>
+	</ColumnListItem>
+</core:FragmentDefinition>

@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Create Freight Order" class="sapUiContentPadding">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="4"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Freight Order/Booking Type"/>
+					<ComboBox id="cbFOType" >
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Document Type"/>
+					<ComboBox id="cbDocType" >
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Carrier"/>
+					<ComboBox id="cbCarrier">
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Carrier Service"/>
+					<ComboBox id="cbCarrierService">
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Source Location"/>
+					<ComboBox id="cbSourceLocation">
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Departure Date/Time"/>
+					<DatePicker id="dpDepDate" valueFormat="yyyy-MM-dd" displayFormat="long" displayFormatType="Islamic" change="handleChange" class="sapUiSmallMarginBottom"/>
+					<TimePicker id="tpDepTime" value="19:15" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" placeholder="Enter meeting start time"/>
+					<Label text="Destination Location"/>
+					<ComboBox id="cbDestLocation">
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<Label text="Arrival Date/Time"/>
+					<DatePicker id="dpArrDate" valueFormat="yyyy-MM-dd" displayFormat="long" displayFormatType="Islamic" change="handleChange" class="sapUiSmallMarginBottom"/>
+					<TimePicker id="tpArrTime" value="19:15" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" placeholder="Enter meeting start time"/>
+					<Label text="Payment Option"/>
+					<ComboBox >
+						<items>
+							<core:Item text="" key=""/>
+						</items>
+					</ComboBox>
+					<CheckBox text="Prepaid and Add" selected="true"/>
+					<Label text="3rd Party Acct No"/>
+					<Input type="Text" value=""/>
+					<Label text="3P/Coll Zip/Country"/>
+					<Input type="Text" value=""/>
+					<Input type="Text" value=""/>
+					<Label text="Shipment Description"/>
+					<Input type="Text" value=""/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="Create" type="Emphasized" press="onCreateFreightOrder"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCreateFreightOrderClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

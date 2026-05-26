@@ -1,0 +1,72 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table id="tblRateQuoteFUItem" class="border_lightgray_nobottom" width="100%" mode="None" busyIndicatorDelay="99999"
+		growingScrollToLoad="true" items="{path: 'local>/RateQuoteFreightUnits'}" growing="true" growingThreshold="100" fixedLayout="false">
+		<columns>
+			<Column hAlign="Center">
+				<Text text="{i18n>foRateQuoteFoWeightCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoTotalWeightCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoTotalDimWghtCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoDimWeightCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoUomCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoLenghtCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoWidthCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoHeightCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoHUomCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoQtyCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoBaseUomCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoNetValueCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoUnitPriceCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoCurrencyCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteFoHuNoCol}"/>
+			</Column>
+		</columns>
+		<ColumnListItem type="Inactive">
+			<cells>
+				<Text text="{local>Weight}"/>
+				<Text text="{local>TotalWeight}"/>
+				<Text text="{local>TotalDimWeight}"/>
+				<Text text="{local>DimWeight}"/>
+				<Text text="{local>UoM}"/>
+				<Text text="{local>Lenght}"/>
+				<Text text="{local>Width}"/>
+				<Text text="{local>Height}"/>
+				<Text text="{local>HUoM}"/>
+				<Text text="{local>Quantity}"/>
+				<Text text="{local>BaseUoM}"/>
+				<Text text="{local>NetValue}"/>
+				<Text text="{local>UnitPrice}"/>
+				<Text text="{local>Currency}"/>
+				<Text text="{local>HUNo}"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

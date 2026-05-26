@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<core:Title text="Options"></core:Title>
+	<Label text="Nota Fiscal"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/dhl/opt01/Notafiscal}"></Input>
+	<Label/>
+	<CheckBox text="Customs" tooltip="Customs" selected="{local>/basic/carrier_data/carrier_options/dhl/opt01/ChC}"/>
+	<CheckBox text="Break Bulk" tooltip="Break Bulk" selected="{local>/basic/carrier_data/carrier_options/dhl/opt01/ChBb}"/>
+	<core:Title text="Lithium Battery"></core:Title>
+	<Label text="Lithium Type"/>
+	<ComboBox items="{/xSERPERPxI_PCLITHTYPE}" selectedKey="{local>/basic/carrier_data/carrier_options/dhl/opt01/LithiumBatt}">
+		<items>
+			<core:Item key="{Code}" text="{Description}"/>
+		</items>
+	</ComboBox>
+</core:FragmentDefinition>

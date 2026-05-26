@@ -1,0 +1,38 @@
+<mvc:View controllerName="com.erpis.shiperp.eod.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}" showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="End of Day Close"/>
+					</FlexBox>
+				</f:heading>
+				<f:navigationActions>
+					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
+						app:crossNavigate="#Parcel-ship"/>
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<l:DynamicSideContent id="dynamicSideContent" containerQuery="true" equalSplit="false" sideContentPosition="Begin">
+				<l:mainContent>
+					<core:Fragment fragmentName="com.erpis.shiperp.eod.fragment.CloseListItem" type="XML"/>
+				</l:mainContent>
+				<l:sideContent>
+					<core:Fragment fragmentName="com.erpis.shiperp.eod.fragment.CloseForm" type="XML"/>
+				</l:sideContent>
+			</l:DynamicSideContent>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Execute" press="onExecute"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

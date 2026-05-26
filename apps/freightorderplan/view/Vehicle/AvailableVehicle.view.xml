@@ -1,0 +1,257 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.Vehicle.AvailableVehicle" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f" height="100%" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageIdEWM" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!--  DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"></Text>
+				</f:snappedContent>
+				<f:actions>
+					<MenuButton text="Vehicle Screen" tooltip="Vehicle Screen" class="sapUiSmallMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem text="Plan to TU Screen" press="onPlantoTUScreenPress"/>
+								<MenuItem text="TU Screen" press="onTUScreenPress"/>
+								<MenuItem text="Vehicle Screen" press="onVehicleScreenPress"/>
+							</Menu>
+						</menu>
+					</MenuButton>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<core:Fragment fragmentName="com.erpis.shiperp.hr7.tuv.fragment.Vehicle.DynamicFilterVehicle" type="XML"/>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<IconTabBar id="itbFreightUnit" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding "
+				expandable="false">
+				<content>
+					<ScrollContainer horizontal="true" vertical="true">
+						<smartTable:SmartTable entitySet="VehicleHeaderSet" smartFilterId="DynamicFilter" tableType="ResponsiveTable" useExportToExcel="true"
+							useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SmartFilterPKey" enableAutoBinding="true" id="VehicleTable"
+							header="{i18n>HeaderVehicle}" showRowCount="true" showFullScreenButton="true" demandPopin="false" showOverlay="onShowOverlay"
+							initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind" tableBindingPath="oModelVehicle>/" customData:useSmartToggle="true"
+							customData:useSmartField="false">
+							<smartTable:customToolbar>
+								<OverflowToolbar height="3rem" design="Transparent">
+									<ToolbarSpacer/>
+									<!--Load-->
+									<MenuButton text="Load" tooltip="Load">
+										<menu>
+											<Menu>
+												<MenuItem text="Start Loading" press="onStartLoadingPress"/>
+												<MenuItem text="Finish Loading" press="onFinishLoadingPress"/>
+												<MenuItem text="Reverse Loading Begin" press="onReverseLoadingBeginPress"/>
+												<MenuItem text="Reverse Loading End" press="onReverseLoadingEndPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Unload-->
+									<MenuButton text="Unload" tooltip="">
+										<menu>
+											<Menu>
+												<MenuItem text="Start Loading" press="onUnloadStartLoadingPress"/>
+												<MenuItem text="Finish Loading" press="onUnloadFinishLoadingPress"/>
+												<MenuItem text="Reverse Unloading Begin" press="onReverseUnloadingBeginPress"/>
+												<MenuItem text="Reverse Unloading End" press="onReverseUnloadingEndPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Create Vehicle-->
+									<Button text="Create New Vehicle" pressed="true" tooltip="Create Vehicle" press="onCreateNewVehicle"/>
+									<!--Vehicle Details-->
+									<MenuButton text="Vehicle Details" tooltip="Vehicle Details">
+										<menu>
+											<Menu>
+												<MenuItem text="Vehicle Details" press="onVehicleDetailPress"/>
+												<MenuItem text="Edit Vehicle" press="onEditVehiclePress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Goods Mvt-->
+									<MenuButton text="Goods Mvt" tooltip="Goods Movement">
+										<menu>
+											<Menu>
+												<MenuItem text="Good Issue" press="onGoodIssuePress"/>
+												<MenuItem text="Reverse Goods Issue" press="onReverseGoodsIssuePress"/>
+												<MenuItem text="Good Receipt" press="onGoodReceiptPress"/>
+												<MenuItem text="Reverse Goods Receipt" press="onReverseGoodsReceiptPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Checkpt-->
+									<MenuButton text="Checkpt" tooltip="Checkpoint">
+										<menu>
+											<Menu>
+												<MenuItem text="Arrival" press="onArrivalSavePress"/>
+												<MenuItem text="Reverse Arrival" press="onReverseArrivalSavePress"/>
+												<MenuItem text="Departure" press="onDepartureSavePress"/>
+												<MenuItem text="Reverse Departure" press="onReverseDepartureSavePress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--TM-->
+									<!--<MenuButton text="TM" tooltip="TM">-->
+									<!--	<menu>-->
+									<!--		<Menu>-->
+									<!--			<MenuItem text="Send Message To TM" press="onSendMessagePress"/>-->
+									<!--			<MenuItem text="Cancel Message To TM" press="onCancelMessagePress"/>-->
+									<!--		</Menu>-->
+									<!--	</menu>-->
+									<!--</MenuButton>-->
+									<!--Invoice-->
+									<!--<MenuButton text="Invoice" tooltip="Invoice">-->
+									<!--	<menu>-->
+									<!--		<Menu>-->
+									<!--			<MenuItem text="Request Invoice" press="onRequestInvoicePress"/>-->
+									<!--			<MenuItem text="Cancel Invoice" press="onCancelInoivePress"/>-->
+									<!--			<MenuItem text="Print Invoice" press="onPrintInvoicePress"/>-->
+									<!--		</Menu>-->
+									<!--	</menu>-->
+									<!--</MenuButton>-->
+									<!--Refresh List-->
+									<Button text="Refresh List" pressed="true" tooltip="Refresh vehicle list" press="onRefreshListPress"/>
+									<ToolbarSeparator/>
+								</OverflowToolbar>
+							</smartTable:customToolbar>
+							<Table growing="true" selectionChange="onSelectionChange" growingThreshold="100" showOverlay="false" growingScrollToLoad="false"
+								mode="MultiSelect" fixedLayout="true">
+								<columns>
+									<!--Vehicle-->
+									<Column>
+										<Text text="{i18n>Vehicle}" wrapping="false" tooltip="{i18n>Vehicle}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "VehNum", "columnIndex":"1", "leadingProperty": "VehNum"}'/>
+										</customData>
+									</Column>
+									<!--Carrier-->
+									<Column>
+										<Text text="{i18n>Carrier}" wrapping="false" tooltip="{i18n>Carrier}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Carrier", "columnIndex":"2", "leadingProperty": "Carrier"}'/>
+										</customData>
+									</Column>
+									<!--Carrier Service-->
+									<Column>
+										<Text text="{i18n>CarrierService}" wrapping="false" tooltip="{i18n>CarrierService}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Service", "columnIndex":"3", "leadingProperty": "Service"}'/>
+										</customData>
+									</Column>
+									<!--Loading Started-->
+									<Column>
+										<Text text="{i18n>LoadingStarted}" wrapping="false" tooltip="{i18n>LoadingStarted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatLs", "columnIndex":"4", "leadingProperty": "StatLs"}'/>
+										</customData>
+									</Column>
+									<!--Loading Completed-->
+									<Column>
+										<Text text="{i18n>LoadingCompleted}" wrapping="false" tooltip="{i18n>LoadingCompleted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatLc", "columnIndex":"5", "leadingProperty": "StatLc"}'/>
+										</customData>
+									</Column>
+									<!--Arrival At Checkpoint-->
+									<Column>
+										<Text text="{i18n>ArrivalAtCheckpoint}" wrapping="false" tooltip="{i18n>ArrivalAtCheckpoint}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatChki", "columnIndex":"6", "leadingProperty": "StatChki"}'/>
+										</customData>
+									</Column>
+									<!--Departure From Checkpoint-->
+									<Column>
+										<Text text="{i18n>DepartureFromCheckpoint}" wrapping="false" tooltip="{i18n>DepartureFromCheckpoint}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatChko", "columnIndex":"7", "leadingProperty": "StatChko"}'/>
+										</customData>
+									</Column>
+									<!--GI Started-->
+									<Column>
+										<Text text="{i18n>GIStarted}" wrapping="false" tooltip="{i18n>GIStarted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatBgi", "columnIndex":"8", "leadingProperty": "StatBgi"}'/>
+										</customData>
+									</Column>
+									<!--GI Posted-->
+									<Column>
+										<Text text="{i18n>GIPosted}" wrapping="false" tooltip="{i18n>GIPosted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatPgr", "columnIndex":"9", "leadingProperty": "StatPgr"}'/>
+										</customData>
+									</Column>
+									<!--Transportation Mode-->
+									<Column>
+										<Text text="{i18n>TransportationMode}" wrapping="false" tooltip="{i18n>TransportationMode}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "LoadWeight", "columnIndex":"10", "leadingProperty": "LoadWeight"}'/>
+										</customData>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Navigation" press="onNavigateDeliveryOrderDetail" vAlign="Middle">
+										<cells>
+											<!--Vehicle-->
+											<Link text="{path: 'oModelVehicle>VehNum', formatter: '.formatter.validateDocNo'}" press="onVehicleNoPressed"/>
+											<!--Carrier-->
+											<Text text="{oModelVehicle>Carrier}"/>
+											<!--Carrier Service-->
+											<Text text="{oModelVehicle>Service}"/>
+											<!--Loading Started-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatLs', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatLs', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatLs', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--Loading Completed-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatLc', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatLc', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatLc', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--Arrivel At Checkpoint-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatChki', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatChki', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatChki', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--Departure From Checkpoint-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatChko', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatChko', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatChko', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--GI Started-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatBgi', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatBgi', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatBgi', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--GI Posted-->
+											<ObjectStatus icon="{path: 'oModelVehicle>StatPgr', formatter: '.formatter.validateVehicleIcon'}"
+												state="{path: 'oModelVehicle>StatPgr', formatter: '.formatter.validateVehicleStatusColor'}"
+												tooltip="{path: 'oModelVehicle>StatPgr', formatter: '.formatter.validateTooltip'}"></ObjectStatus>
+											<!--Transportation Mode-->
+											<Text text="{oModelVehicle>LoadWeight}"/>
+											<!--<Text text="{oModelVehicle>VehWeight}"/>-->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</ScrollContainer>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

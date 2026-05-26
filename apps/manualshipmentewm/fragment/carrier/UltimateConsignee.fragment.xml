@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text="Name / Attention"/>
+	<Input placeholder="Name" tooltip="Name" value="{local>/basic/partners/shipto/address/name1}"></Input>
+	<Input placeholder="Attention" tooltip="Attention" value="{local>/basic/partners/shipto/address/name2}"></Input>
+	<Label text="Address 1/2"/>
+	<Input placeholder="Address 1" tooltip="Address 1" value="{local>/basic/partners/shipto/address/street1}"></Input>
+	<Input placeholder="Address 2" tooltip="Address 2" value="{local>/basic/partners/shipto/address/street2}"></Input>
+	<Label text="Address 3/4"/>
+	<Input placeholder="Address 3" tooltip="Address 3" value="{local>/basic/partners/shipto/address/street3}"></Input>
+	<Input placeholder="Address 4" tooltip="Address 4" value="{local>/basic/partners/shipto/address/street4}"></Input>
+	<Label text="Customer"/>
+	<Input placeholder="Customer ID" tooltip="Customer ID" value="{local>/basic/partners/shipto/Customerid}"></Input>
+	<Input placeholder="Email" tooltip="Email" value="{local>/basic/partners/shipto/address/email}"></Input>
+	<Label text="Phone/Fax"></Label>
+	<Input placeholder="Phone" tooltip="Phone" value="{local>/basic/partners/shipto/address/telephone}"></Input>
+	<Input placeholder="Fax" tooltip="Fax" value="{local>/basic/partners/shipto/address/fax}"></Input>
+	<Label text="Fed / State TaxID"/>
+	<Input placeholder="Fed TaxID" tooltip="Fed TaxID" value="{local>/basic/partners/shipto/FedTaxId}"></Input>
+	<Input placeholder="State TaxID" tooltip="State TaxID" value="{local>/basic/partners/shipto/StateTaxId}"></Input>
+	<Label text="Country / Region"/>
+	<ComboBox selectedKey="{local>/basic/partners/shipto/address/country}" tooltip="Country" items="{path: '/xSERPERPxI_PCCNTR', length: 999}">
+		<items>
+			<core:Item text="{Name}" key="{Country}"/>
+		</items>
+	</ComboBox>
+	<ComboBox tooltip="State" items="{path: '/xSERPERPxI_PCSTATE', length: 999}">
+		<items>
+			<core:Item text="{Description}" key="{Region}"/>
+		</items>
+	</ComboBox>
+	<Label text="City"/>
+	<Input placeholder="City" value="{local>/basic/partners/shipto/address/city}"></Input>
+	<Label text="Postal"/>
+	<Input placeholder="Postal Code" value="{local>/basic/partners/shipto/address/postalcode}"/>
+</core:FragmentDefinition>

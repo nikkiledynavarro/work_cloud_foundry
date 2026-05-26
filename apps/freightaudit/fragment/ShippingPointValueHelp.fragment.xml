@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog noDataText="{i18n>NoShippingPointFound}" title="{i18n>shptDialogTitle}" search="handleShippingPointSearch"
+		liveChange="handleShippingPointSearch" confirm="onHandleShippingPointSelect" items="{ path: '/xSERPERPxCDS_SHPNT' }" multiSelect="true">
+		<StandardListItem title="{Description}" description="{ShippingPoint}" iconDensityAware="false" iconInset="false" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

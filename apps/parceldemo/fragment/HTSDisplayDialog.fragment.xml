@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Harmonized Tariff Schedule" class="sapUiContentPadding" contentWidth="800px">
+		<content>
+			<Table mode="SingleSelectMaster" class="border_lightgray_nobottom" showSeparators="All" growing="false" items="{local>/HTS}">
+				<columns>
+					<Column>
+						<Text text="{i18n>Code}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>ctryOrigin}"/>
+					</Column>
+					<Column width="8rem">
+						<Text text="{i18n>Description}"/>
+					</Column>
+					<Column width="3rem">
+						<Text text="{i18n>Value}"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="{i18n>Currency}"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="{i18n>Weight}"/>
+					</Column>
+					<Column width="4.5rem" >
+						<Text text="{i18n>WeightUnit}" wrapping="true"/>
+					</Column>
+				</columns>
+				<items >
+					<ColumnListItem type="Active">
+						<cells>
+							<Input value="{local>htscode}" editable="true"/>
+							<ComboBox selectedKey="{local>ctryoforigin}" tooltip="Country" items="{path: '/xSERPERPxI_PCCNTR', length: 999}">
+								<items>
+									<core:Item text="{Name}" key="{Country}"/>
+								</items>
+							</ComboBox>
+							<TextArea value="{local>description}" editable="true" width="100%" rows="4"/>
+							<Input value="{local>netvalue}" editable="true"/>
+							<Text text="{local>currency}"/>
+							<ObjectNumber number="{local>weight}" state="Warning"/>
+							<Text text="{local>weight_unit}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button press="onCloseHTSDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

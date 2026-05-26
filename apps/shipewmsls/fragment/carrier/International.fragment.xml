@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<core:Title text="Duties and Taxes"></core:Title>
+	<Label text="Payment"/>
+	<ComboBox selectedKey="{local>/basic/international/duties_and_taxes/billoption}" items="{/xSERPERPxCDS_BILLOP}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<CheckBox text="Prepaid and Add"
+		selected="{= (${local>/basic/international/duties_and_taxes/ppaid_add} &amp;&amp; ${local>/basic/international/duties_and_taxes/billoption} ==='PPAID') ? true: false }"
+		enabled="{= ${local>/basic/international/duties_and_taxes/billoption} ==='PPAID'? true: false}" select="onPrepaidInternationalSelect"/>
+	<Label text="3P/COLL Account"/>
+	<Input value="{local>/basic/international/duties_and_taxes/thirdpartyacct}" tooltip="account" placeholder="account"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+	<Label text="3P/COLL Country"/>
+	<!--<ComboBox selectedKey="{local>/basic/international/duties_and_taxes/thirdpartyctry}" tooltip="Country" change="onUpdateDomestic"-->
+	<!--	items="{path: '/xSERPERPxI_PCCNTR', length: 999}">-->
+	<!--	<items>-->
+	<!--		<core:Item text="{Name}" key="{Country}"/>-->
+	<!--	</items>-->
+	<!--</ComboBox>-->
+	<Input value="{local>/basic/international/duties_and_taxes/thirdpartyctry}" tooltip="Country" placeholder="Country"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+	<Label text="3P/COLL Zip"/>
+	<Input value="{local>/basic/international/duties_and_taxes/thirdpartyzip}" tooltip="zip" placeholder="zip"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+	<core:Title text="International Options"></core:Title>
+	<VBox direction="Column" alignItems="Start" justifyContent="Start"
+		items="{ path: 'local>/BindingHazmatOpt', templateShareable: false, parameters: { expand: 'value_list/results' }}">
+		<CustomListItem>
+			<HBox>
+				<Label text="{local>field_desc} :  " class="sapUiTinyMarginEnd">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</Label>
+				<ComboBox selectedKey="{local>field_value}" change="onHazmatOptionChange"
+					items="{path: 'local>value_list/results', templateShareable: false}">
+					<core:Item key="{local>Key}" text="{local>Value}"/>
+				</ComboBox>
+				<layoutData>
+					<FlexItemData growFactor="2"/>
+				</layoutData>
+			</HBox>
+		</CustomListItem>
+	</VBox>
+</core:FragmentDefinition>

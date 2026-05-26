@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.erpis.shiperp.sls.quickpacksls.quickpacksls",
+        "description": "Quick Pack SLS",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#quickpacksls-Display",
+        "navigationComponentName": "com.erpis.shiperp.sls.quickpacksls",
+        "intentSemanticObject": "quickpacksls",
+        "intentAction": "Display",
+        "html5ApplicationName": "quickpacksls",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "87093038-912d-43d6-861e-87b34db81e26-1686555337839"
+        ],
+        "contentPackages": [
+            "2194ea50-66e6-4cbf-a869-a936fa03a6f2-1625804098378"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Quick Pack",
+        "subtitle": "SLS",
+        "searchKeywords": "Quick Pack SLS",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

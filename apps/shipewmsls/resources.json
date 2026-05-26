@@ -1,0 +1,838 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/ControlUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/ControlUtils.js"
+        },
+        {
+            "name": "common/DynamicView-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/DynamicView.js"
+        },
+        {
+            "name": "common/HttpHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/HttpHelper.js"
+        },
+        {
+            "name": "common/UploadUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/UploadUtils.js"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "common/hotkeyInterface-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/hotkeyInterface.js"
+        },
+        {
+            "name": "common/jquery_hotkeys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/jquery_hotkeys.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Home-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/AddHazmatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/BatteryDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ComercialInvoiceDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CommodityCodeValueHelpDlg.fragment.xml"
+        },
+        {
+            "name": "fragment/ConditionTablesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CreateHUDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ETDUploadDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/HTSDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/HUItemDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/HazmatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Identification.fragment.xml"
+        },
+        {
+            "name": "fragment/MassScaleUpdateDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/NAFTADialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PackBundleDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PackMatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RePackItemDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ReportHazmatMaterial.fragment.xml"
+        },
+        {
+            "name": "fragment/ReprintColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/ReprintDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/SerialDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Shipmentcontainshazmat.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ValidateAddressDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/WarehouseNumberDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/address/AddressShipTo.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressImporter.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressShipFrom.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressSoldTo.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/DHL.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/DHLInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedEx.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExGround.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExGroundCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExGroundHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/International.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabCarrier.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabUltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/UPS.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/UPSInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/USPS.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/UltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/AddProductDetail.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/AdvancedPackingDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/HUItemsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/HUPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/ItemsPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/ManualShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/MoreOptionsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/PackingOverviewDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/TabManualShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/DialogRefDisplay.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/PreviousShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/SmallParcel.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/TabParcel.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/TabPreviousShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/shipment/TabShipmentCarrier.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/pages/View1-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/View1.js"
+        },
+        {
+            "name": "test/testsuite.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/unit/AllTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/controller/View1-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/common/ControlUtils.js"
+        },
+        {
+            "name": "tmp/common/DynamicView.js"
+        },
+        {
+            "name": "tmp/common/HttpHelper.js"
+        },
+        {
+            "name": "tmp/common/UploadUtils.js"
+        },
+        {
+            "name": "tmp/common/Utils.js"
+        },
+        {
+            "name": "tmp/common/hotkeyInterface.js"
+        },
+        {
+            "name": "tmp/common/jquery_hotkeys.js"
+        },
+        {
+            "name": "tmp/controller/App.controller.js"
+        },
+        {
+            "name": "tmp/controller/BaseController.js"
+        },
+        {
+            "name": "tmp/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp/controller/Main.controller.js"
+        },
+        {
+            "name": "tmp/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/fragment/AddHazmatDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/BatteryDetailDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ComercialInvoiceDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/CommodityCodeValueHelpDlg.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ConditionTablesDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/CreateHUDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ETDUploadDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/HTSDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/HUItemDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/HazmatDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/Identification.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/MassScaleUpdateDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/NAFTADialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/PackBundleDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/PackMatDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RateAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RateDetailColumnListItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RateDetailsDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RatePricingColumnListItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RatePricingsDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RatesDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/RePackItemDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ReportHazmatMaterial.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ReprintColumnListItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ReprintDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/SerialDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/Shipmentcontainshazmat.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ValidateAddressDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/WarehouseNumberDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/address/AddressShipTo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/address/TabAddressImporter.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/address/TabAddressShipFrom.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/address/TabAddressSoldTo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/DHL.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/DHLInternational.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedEx.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExGround.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExGroundCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExGroundHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/FedExInternational.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/International.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/TabCarrier.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/TabInternational.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/TabUltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/UPS.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/UPSInternational.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/USPS.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/carrier/UltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/AddProductDetail.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/AdvancedPackingDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/HUItemsDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/HUPacking.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/ItemsPacking.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/ManualShipment.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/MoreOptionsDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/PackingOverviewDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/packing/TabManualShipment.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/parcel/DialogRefDisplay.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/parcel/PreviousShipment.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/parcel/SmallParcel.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/parcel/TabParcel.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/parcel/TabPreviousShipment.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/shipment/TabShipmentCarrier.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/image/shiperp_logo.png"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/model/formatter.js"
+        },
+        {
+            "name": "tmp/model/models.js"
+        },
+        {
+            "name": "tmp/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.html"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/test.html"
+        },
+        {
+            "name": "tmp/view/App.view.xml"
+        },
+        {
+            "name": "tmp/view/Home.view.xml"
+        },
+        {
+            "name": "tmp/view/Main.view.xml"
+        },
+        {
+            "name": "tmp/view/NotFound.view.xml"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/common/ControlUtils.js"
+        },
+        {
+            "name": "tmp-dbg/common/DynamicView.js"
+        },
+        {
+            "name": "tmp-dbg/common/HttpHelper.js"
+        },
+        {
+            "name": "tmp-dbg/common/UploadUtils.js"
+        },
+        {
+            "name": "tmp-dbg/common/Utils.js"
+        },
+        {
+            "name": "tmp-dbg/common/hotkeyInterface.js"
+        },
+        {
+            "name": "tmp-dbg/common/jquery_hotkeys.js"
+        },
+        {
+            "name": "tmp-dbg/controller/App.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/BaseController.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp-dbg/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/Main.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/model/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp-dbg/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        }
+    ]
+}

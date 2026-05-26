@@ -1,0 +1,149 @@
+{
+    "resources": [
+        {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "common/hotkeyInterface.js"
+        },
+        {
+            "name": "common/jquery_hotkeys.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
+        },
+        {
+            "name": "fragment/CreateShipmentDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/DuplicateItemsSelection.fragment.xml"
+        },
+        {
+            "name": "fragment/HUItemsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ItemsPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressCarrierService.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressImporter.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressShipFrom.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressShipTo.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressSoldTo.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        }
+    ]
+}

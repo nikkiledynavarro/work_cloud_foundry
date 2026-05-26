@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog contentWidth="400px" contentHeight="auto">
+		<customHeader>
+			<Toolbar>
+				<Title text="{i18n>planOrShipment}" textAlign="Center"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<HBox justifyContent="Center" alignItems="Center">
+				<Button text="{i18n>btnPlanNewShipment}" press="onPlanNewShipment" type="Accept" class="sapUiSmallMarginEnd"/>
+				<Button text="{i18n>btnPlantoExistingShipment}" press="onPlantoExistingShipment" type="Emphasized"/>
+			</HBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

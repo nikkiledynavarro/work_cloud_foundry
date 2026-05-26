@@ -1,0 +1,209 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="idBoLOverride" title="{i18n>bolOverride}" contentWidth="1000px" contentHeight="800px">
+		<content>
+			<f:SimpleForm layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<VBox>
+						<!-- General Section -->
+						<Title text="{i18n>general}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Ship Date-->
+							<Label text="{i18n>shipDate}" class="sapUiTinyMarginEnd"/>
+							<DatePicker id="idShipDate" value="{local>/Bol/Shipdate}" valueFormat="MM-dd-yyyy" displayFormat="MM/dd/yyyy" width="20rem"></DatePicker>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Carrier / Service-->
+							<Label text="Carrier/ Service" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idCarrierBol" change="onChangeCarrierBol" items="{path: '/xSERPERPxCDS_LTLPLAN_CARR'}" selectedKey="{local>/Bol/Carrname}"
+								class="sapUiTinyMarginEnd" width="14rem">
+								<core:Item key="{Code}" text="{Description}"/>
+							</ComboBox>
+							<ComboBox id="idServiceBol" change="onChangeService" items="{path: '/xSERPERPxCDS_LTLPLAN_SERVICES'}" selectedKey="{local>/Bol/Servicename}"
+								width="13rem">
+								<core:Item key="{Service}" text="{Description}"/>
+							</ComboBox>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Reference 1-->
+							<Label text="{i18n>reference1}" class="sapUiTinyMarginEnd"/>
+							<Input id="idReference1" value="{local>/Bol/Ref1}" width="15rem" class="sapUiTinyMarginEnd"/>
+							<!--CoD Type-->
+							<Label text="{i18n>codType}" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idCODType" items="{path: 'local>/CODType',sorter: {path: 'Tendertype', descending: true}}" selectedKey="{local>/Bol/Codtype}"
+								width="10rem">
+								<core:Item key="{local>Tendertype}" text="{local>Description}"/>
+							</ComboBox>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Reference 2 -->
+							<Label text="{i18n>reference2}" class="sapUiTinyMarginEnd"/>
+							<Input id="idReference2" value="{local>/Bol/Ref2}" width="15rem" class="sapUiTinyMarginEnd"/>
+							<!--CoD Amount-->
+							<Label text="{i18n>codAmount}" class="sapUiTinyMarginEnd"/>
+							<Input id="idCodAmount" value="{local>/Bol/Codamount}" width="11rem" class="sapUiTinyMarginEnd"/>
+						</HBox>
+						<!-- Ship to Address Section -->
+						<Title text="{i18n>shipToAddress}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Address-->
+							<Label text="{i18n>address}" class="sapUiTinyMarginEnd"/>
+							<Input id="idAddress" value="{local>/Bol/Shiptoaddr}" width="35rem"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--City-->
+							<Label text="{i18n>city}" class="sapUiTinyMarginEnd"/>
+							<Input id="idcity" value="{local>/Bol/Shiptocity}" width="10rem" class="sapUiTinyMarginEnd"/>
+							<!--State-->
+							<Label text="{i18n>state}" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idState" items="{path: 'local>/State'}" selectedKey="{local>/Bol/Shiptostate}" width="10rem" class="sapUiTinyMarginEnd">
+								<core:Item key="{local>Bland}" text="{local>Bezei}"/>
+							</ComboBox>
+							<!--Zip-->
+							<Label text="{i18n>zip}" class="sapUiTinyMarginEnd"/>
+							<Input id="idzip" value="{local>/Bol/Shiptozip}" width="10rem"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Country-->
+							<Label text="{i18n>country}" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idCountry" items="{path: 'local>/Country'}" change="onChangeCountry" selectedKey="{local>/Bol/Land1}" width="10rem"
+								class="sapUiTinyMarginEnd">
+								<core:Item key="{local>Land1}" text="{local>Landx}"/>
+							</ComboBox>
+							<!--Phone-->
+							<Label text="{i18n>phone}" class="sapUiTinyMarginEnd"/>
+							<Input id="idPhone" value="{local>/Bol/Telf1}" width="8rem"/>
+						</HBox>
+						<!-- Remarks/Instructions Section -->
+						<Title text="{i18n>remarksInstructions}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Remarks/Instructions-->
+							<Input id="idRemarks" value="{local>/Bol/Remarks}" width="32rem" class="sapUiMediumMarginBottom"/>
+						</HBox>
+						<HBox>
+							<Table mode="MultiSelect" selectionChange="onSelectionChangeBolDetail" growing="true" items="{path: 'local>/BolDetails'}"
+								growingThreshold="100" showOverlay="false" growingScrollToLoad="false" fixedLayout="true">
+								<columns>
+									<!--Pallet-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Pallet" wrapping="false" tooltip="Pallet"/>
+										</HBox>
+									</Column>
+									<!--OUM-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="OUM" wrapping="false" tooltip="OUM"/>
+										</HBox>
+									</Column>
+									<!--Length-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Length" wrapping="false" tooltip="Length"/>
+										</HBox>
+									</Column>
+									<!--Width-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Width" wrapping="false" tooltip="Width"/>
+										</HBox>
+									</Column>
+									<!--Height-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Height" wrapping="false" tooltip="Width"/>
+										</HBox>
+									</Column>
+									<!-- Net Width-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Net Width" wrapping="false" tooltip="Net Width"/>
+										</HBox>
+									</Column>
+									<!--Weight-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Weight" wrapping="false" tooltip="Net Width"/>
+										</HBox>
+									</Column>
+									<!-- Hazmat Flag-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Hazmat Flag" wrapping="false" tooltip="Hazmat Flag"/>
+										</HBox>
+									</Column>
+									<!--Pack Materials-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="Pack Materials" wrapping="false" tooltip="Pack Materials"/>
+										</HBox>
+									</Column>
+									<!--NMFC Number-->
+									<Column hAlign="Center" vAlign="Middle">
+										<HBox alignItems="Center">
+											<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+											<Text text="NMFC Number" wrapping="false" tooltip="NMFC Number"/>
+										</HBox>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<!--Pallet-->
+											<Text text="{local>Palletcnt}" wrapping="false"/>
+											<!-- OUM-->
+											<Text text="{local>Uom}" wrapping="false"/>
+											<!--Length-->
+											<Text text="{local>Laeng}" wrapping="false"/>
+											<!--Width-->
+											<Text text="{local>Breit}" wrapping="false"/>
+											<!--Width-->
+											<Text text="{local>Hoehe}" wrapping="false"/>
+											<!--Net Width-->
+											<Text text="{local>NetWeight}" wrapping="false"/>
+											<!-- Weight-->
+											<Text text="{local>Weight}" wrapping="false"/>
+											<!--Hazmat Flag-->
+											<CheckBox selected="{local>HazmatFlg}" enabled="true" editable="false"/>
+											<!--Pack Materials-->
+											<Text text="{local>Vhilm}" wrapping="false"/>
+											<!--NMFC Number-->
+											<Text text="{local>NmfcNum}" wrapping="false"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</HBox>
+						<Title text="" class="sapUiMediumMarginTop"/>
+						<HBox>
+							<FlexBox>
+								<HBox alignItems="Center" class="sapUiMediumMarginEnd">
+									<Label text="Total Pieces:" width="5rem" class="sapUiSmallMarginEnd"/>
+									<Input value="{local>/total/totalPieces}" placeholder="Total Pieces" liveChange="onInputLiveChange" enabled="true" editable="false"/>
+								</HBox>
+								<HBox alignItems="Center" class="sapUiMediumMarginEnd">
+									<Label text="{i18n>totalWeight}: " width="5rem" class="sapUiSmallMarginEnd"/>
+									<Input value="{local>/total/totalWeight}" placeholder="Total Weight" liveChange="onInputLiveChange" enabled="true" editable="false"/>
+								</HBox>
+							</FlexBox>
+						</HBox>
+					</VBox>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<!-- Button -->
+		<buttons>
+			<Button text="{i18n>btnSaveBoLOverWite}" press="onSaveInfo" icon="sap-icon://save" type="Emphasized"/>
+			<Button text="{i18n>btnPlaningPrint}" icon="sap-icon://print" press="onPlanningPrint" type="Emphasized"/>
+			<Button text="{i18n>btnCancel}" press="onCloselBolOverride" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

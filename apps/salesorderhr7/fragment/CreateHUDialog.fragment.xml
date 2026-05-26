@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Create new Handling Unit">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>PackMat}"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtPackMat" value="{global>/defaultAddHU/Vhilm}" submit="onCreateHU" showValueHelp="true"
+										valueHelpRequest="onPackMatValueRequested"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>length}"/>
+								</form:label>
+								<form:fields>
+									<Input value="{global>/defaultAddHU/Laeng}" type="Number"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>width}"/>
+								</form:label>
+								<form:fields>
+									<Input value="{global>/defaultAddHU/Breit}" type="Number"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>height}"/>
+								</form:label>
+								<form:fields>
+									<Input value="{global>/defaultAddHU/Hoehe}" type="Number"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>unitOfDim}"/>
+								</form:label>
+								<form:fields>
+									<Input value="{global>/defaultAddHU/Meabm}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label></form:label>
+								<form:fields>
+									<CheckBox text="Add next items" id="idAddNextItemHU"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="{i18n>continue}" type="Emphasized" press="onCreateHU"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" press="onCloseNewHUDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

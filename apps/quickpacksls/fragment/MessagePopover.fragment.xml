@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<ResponsivePopover contentWidth="440px" contentHeight="320px" verticalScrolling="false" modal="true" placement="Top"
+		beforeClose="onBeforeMessagePopoverClose">
+		<customHeader>
+			<OverflowToolbar height="2.5rem">
+				<Button id="btnMessagePopoverBack" icon="sap-icon://nav-back" visible="false" press="onMessageViewBack"></Button>
+				<ToolbarSpacer/>
+				<Button text="Clear Messages" press="_clearMessages"/>
+				<Button icon="sap-icon://decline" press="onClosePopover"></Button>
+			</OverflowToolbar>
+		</customHeader>
+		<content>
+			<MessageView items="{messageModel>/aMessages}" showDetailsPageHeader="false" itemSelect="onSelectMessageItem">
+				<items>
+					<MessageItem type="{messageModel>type}" title="{messageModel>title}" description="{messageModel>description}"
+						subtitle="{messageModel>subtitle}" counter="{messageModel>counter}"/>
+				</items>
+			</MessageView>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

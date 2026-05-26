@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Output List" class="sapUiContentPadding" afterOpen="onReprintDialogAfterOpen">
+		<FlexBox fitContainer="true" justifyContent="SpaceBetween">
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Tracking No./TU No."/>
+				<Input id="txtCarrierPrint" value="{local>/ReprintFilter/Objectkey}"/>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Object Type"/>
+				<ComboBox id="txtDeliveryPrint" items="{path: '/xSERPERPxI_PCPOBJECTTYP', length: 999}" value="{local>/ReprintFilter/Objecttype}">
+					<core:Item text="{Objecttype}" key="{Objecttype}"/>
+				</ComboBox>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="HU"/>
+				<Input value="{local>/ReprintFilter/Exidv}"/>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Date Range"/>
+				<DateRangeSelection width="auto" displayFormat="MM/dd/yyyy" change="onInputDateRangeSearchOptDlgChange" id="idInputDateRange"
+					value="{local>/ReprintFilter/Erdat}" enabled="true"/>
+				<!--<DatePicker id="dpCreatedOnPrint" value="{local>/ReprintFilter/erdat}" valueFormat="yyyy-MM-dd"/>-->
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="DocNo"/>
+				<Input id="txtTrackNoPrint" value="{local>/ReprintFilter/Docno}"/>
+			</FlexBox>
+		</FlexBox>
+		<Button text="Search" type="Emphasized" class="sapUiTinyMarginTop" press="onFilterReprintPress"/>
+		<Table id="tblReprintList" mode="MultiSelect" class="sapUiTinyMarginTop border_lightgray_nobottom" showSeparators="All" growing="false">
+			<columns>
+				<Column width="12rem">
+					<Text text="Tracking No./TU No."/>
+				</Column>
+				<Column>
+					<Text text="Output Type"/>
+				</Column>
+				<Column>
+					<Text text="Line Item"/>
+				</Column>
+				<Column>
+					<Text text="HU"/>
+				</Column>
+				<Column>
+					<Text text="Date Range"/>
+				</Column>
+				<Column>
+					<Text text="Doc No"/>
+				</Column>
+			</columns>
+		</Table>
+		<beginButton>
+			<Button press="onConfirmReprint" text="Reprint" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseReprintDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

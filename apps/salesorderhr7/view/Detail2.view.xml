@@ -1,0 +1,47 @@
+<mvc:View height="100%" controllerName="com.erpis.shiperp.salesorder.hr7.controller.Detail2" xmlns:sf="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:layout="sap.ui.layout">
+	<f:DynamicPage id="idPage" showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Shipset: {global>Counter}" wrapping="true" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+				</f:heading>
+				<f:navigationActions>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/endColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://full-screen" type="Transparent"/>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/endColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://exit-full-screen" type="Transparent"/>
+					<OverflowToolbarButton press="onCloseDetailPress" icon="sap-icon://decline" type="Transparent" tooltip="Close"/>
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<layout:HorizontalLayout allowWrapping="true">
+						<layout:VerticalLayout class="sapUiSmallMarginEnd">
+							<ObjectAttribute title="Shipping Point" text="{global>Vstel}" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute title="Incoterms" text="{global>Inco1}"/>
+						</layout:VerticalLayout>
+						<layout:VerticalLayout>
+							<ObjectAttribute title="Ship To" text="{global>Kunwe}" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute title="Delivery" text="{global>Delivery}"/>
+						</layout:VerticalLayout>
+					</layout:HorizontalLayout>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.salesorder.hr7.fragment.CarrierService" type="XML"/>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Save" press="onSaveShipset"/>
+				<Button type="Reject" text="Cancel" press="onCancelShipset"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,75 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text="Carrier"/>
+	<ComboBox id="cbCarrier" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		selectionChange="onCarrierChange" items="{local>/CarrierList}" selectedKey="{local>/basic/carrier_data/carrier}">
+		<core:Item key="{local>carrier}" text="{local>description}"></core:Item>
+	</ComboBox>
+	<Label text="Service"/>
+	<ComboBox id="selectService" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		selectedKey="{local>/basic/carrier_data/service}" items="{local>/ServiceList}" selectionChange="onServiceChange">
+		<core:Item key="{local>service}" text="{local>description}"></core:Item>
+	</ComboBox>
+	<Label text="Ship Date/ Arrival Date"/>
+	<DatePicker placeholder="Shipment Date" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		value="{path:'local>/basic/date_time/shipment_date', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yyyy'}}"/>
+	<DatePicker placeholder="Arrival Date" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		value="{path:'local>/basic/date_time/arrival_date', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yyyy'}}"/>
+	<Label text="Package Type"/>
+	<ComboBox id="selectPackage" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		selectedKey="{local>/basic/misc/package_type}" items="{/xSERPERPxI_PCPACTYPE}">
+		<core:Item key="{PackageType}" text="{Description}"></core:Item>
+	</ComboBox>
+	<Label text="Declared / Insured Value"/>
+	<Input value="{local>/basic/declared}" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		tooltip="Declared Value" placeholder="Declared Value">
+		<layoutData>
+			<l:GridData span="XL3 L3 M3 S3"/>
+		</layoutData>
+	</Input>
+	<Text text="{local>/basic/unit/currency}">
+		<layoutData>
+			<l:GridData span="XL1 L1 M1 S1"/>
+		</layoutData>
+	</Text>
+	<Input value="{local>/basic/insurance/value}" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		tooltip="Insured Value" placeholder="Insured Value">
+		<layoutData>
+			<l:GridData span="XL3 L3 M3 S3"/>
+		</layoutData>
+	</Input>
+	<Text text="{local>/basic/unit/currency}">
+		<layoutData>
+			<l:GridData span="XL1 L1 M1 S1"/>
+		</layoutData>
+	</Text>
+	<Label text="Shipment Description"/>
+	<Input value="{local>/basic/misc/description}" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"/>
+	<Label text="Billing Option"/>
+	<ComboBox id="cbBillingOptionParcel" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		selectedKey="{local>/basic/payment/billing_option}" items="{/xSERPERPxCDS_BILLOP}" change="onChangeBillingOption">
+		<core:Item key="{Code}" text="{Description}"></core:Item>
+	</ComboBox>
+	<CheckBox text="Prepaid and add" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		visible="{= (${local>/basic/payment/billing_option} === 'PPAID') ? true : false}"
+		selected="{= (${local>/basic/payment/ppaid_add} &amp;&amp; ${local>/basic/payment/billing_option} ==='PPAID') ? true: false }"
+		select="onPrepaidSelect"/>
+	<Label text="Third Party Account" visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}"/>
+	<Input value="{local>/basic/payment/thirdpartyacct}" placeholder="Account"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}"/>
+	<Label text="Third Party Zip" visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}"/>
+	<Input value="{local>/basic/payment/thirdpartyzip}" placeholder="Zip code"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}"/>
+	<Label text="Third Party Country" visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}"/>
+	<ComboBox id="cbThirdPartyCountry" enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }"
+		selectedKey="{local>/basic/payment/thirdpartyctry}" tooltip="Country"
+		visible="{= (${local>/basic/payment/billing_option} === '3PRTY') ? true : false}" items="{path: '/xSERPERPxI_PCCNTR', length: 999}">
+		<core:Item text="{Name}" key="{Country}"/>
+	</ComboBox>
+	<Label></Label>
+	<Button text="{i18n>References}" press="onBtnPressRefChange"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }" type="Emphasized"/>
+	<Button text="{i18n>ResetBizrule}" press="onResetBizrule"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/Shipped} === true) ? true : false }" type="Emphasized"/>
+</core:FragmentDefinition>

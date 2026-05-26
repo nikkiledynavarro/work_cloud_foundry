@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="Ship To" class="sapUiPopupWithPadding" items="{/xSERPERPxI_ECCMANSHIPTO}"
+		liveChange="handleShipToValueHelpSearch" confirm="onShipToConfirm" cancel="handleShipToValueHelpClose">
+		<StandardListItem title="{Shipto}" description="{Name1}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

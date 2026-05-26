@@ -1,0 +1,675 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/AttachmentUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/AttachmentUtils.js"
+        },
+        {
+            "name": "common/DynamicFilter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/DynamicFilter.js"
+        },
+        {
+            "name": "common/HttpHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/HttpHelper.js"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ConditionDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ConditionDetail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/FreightOrder-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/FreightOrder.controller.js"
+        },
+        {
+            "name": "controller/FreightOrderDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/FreightOrderDetail.controller.js"
+        },
+        {
+            "name": "controller/FreightOrderDetailItem-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/FreightOrderDetailItem.controller.js"
+        },
+        {
+            "name": "controller/FreightUnit-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/FreightUnit.controller.js"
+        },
+        {
+            "name": "controller/FreightUnitDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/FreightUnitDetail.controller.js"
+        },
+        {
+            "name": "controller/Home-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "controller/RateQuote-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/RateQuote.controller.js"
+        },
+        {
+            "name": "controller/RequestForPickup-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/RequestForPickup.controller.js"
+        },
+        {
+            "name": "controller/RequestRouting-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/RequestRouting.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/DynamicFilter.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorder/CarrierServiceValueHelpDlg.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorder/FreightOrderFormDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorder/FreightOrderPackingHUDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorder/FreightOrderPackingMADialog.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorderdetailitem/PackageDetails.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorderdetailitem/ShipFrom.fragment.xml"
+        },
+        {
+            "name": "fragment/freightorderdetailitem/ShipTo.fragment.xml"
+        },
+        {
+            "name": "fragment/freightunit/FreightUnitItem.fragment.xml"
+        },
+        {
+            "name": "fragment/freightunit/PlanOrConsolidateDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ratequote/RateQuoteFreightUnitItem.fragment.xml"
+        },
+        {
+            "name": "fragment/ratequote/RateQuoteItem.fragment.xml"
+        },
+        {
+            "name": "fragment/requestforpickup/RequestForPickupAttachments.fragment.xml"
+        },
+        {
+            "name": "fragment/requestforpickup/RequestForPickupPackageDetails.fragment.xml"
+        },
+        {
+            "name": "fragment/requestrouting/RequestRoutingFOContentDetail.fragment.xml"
+        },
+        {
+            "name": "fragment/requestrouting/RequestRoutingFOHeaderDetails.fragment.xml"
+        },
+        {
+            "name": "fragment/requestrouting/RequestRoutingFOPartners.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/FreightOrderDetail.json"
+        },
+        {
+            "name": "model/FreightUnitDetail.json"
+        },
+        {
+            "name": "model/StatusList.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/pages/View1-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/View1.js"
+        },
+        {
+            "name": "test/testsuite.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/unit/AllTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/controller/View1-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/common/AttachmentUtils.js"
+        },
+        {
+            "name": "tmp/common/DynamicFilter.js"
+        },
+        {
+            "name": "tmp/common/HttpHelper.js"
+        },
+        {
+            "name": "tmp/common/Utils.js"
+        },
+        {
+            "name": "tmp/controller/App.controller.js"
+        },
+        {
+            "name": "tmp/controller/BaseController.js"
+        },
+        {
+            "name": "tmp/controller/ConditionDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp/controller/FreightOrder.controller.js"
+        },
+        {
+            "name": "tmp/controller/FreightOrderDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/FreightOrderDetailItem.controller.js"
+        },
+        {
+            "name": "tmp/controller/FreightUnit.controller.js"
+        },
+        {
+            "name": "tmp/controller/FreightUnitDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp/controller/RateQuote.controller.js"
+        },
+        {
+            "name": "tmp/controller/RequestForPickup.controller.js"
+        },
+        {
+            "name": "tmp/controller/RequestRouting.controller.js"
+        },
+        {
+            "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/fragment/DynamicFilter.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorder/CarrierServiceValueHelpDlg.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorder/FreightOrderFormDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorder/FreightOrderPackingHUDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorder/FreightOrderPackingMADialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorderdetailitem/PackageDetails.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorderdetailitem/ShipFrom.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightorderdetailitem/ShipTo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightunit/FreightUnitItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/freightunit/PlanOrConsolidateDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ratequote/RateQuoteFreightUnitItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ratequote/RateQuoteItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/requestforpickup/RequestForPickupAttachments.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/requestforpickup/RequestForPickupPackageDetails.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/requestrouting/RequestRoutingFOContentDetail.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/requestrouting/RequestRoutingFOHeaderDetails.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/requestrouting/RequestRoutingFOPartners.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/model/FreightOrderDetail.json"
+        },
+        {
+            "name": "tmp/model/FreightUnitDetail.json"
+        },
+        {
+            "name": "tmp/model/StatusList.json"
+        },
+        {
+            "name": "tmp/model/formatter.js"
+        },
+        {
+            "name": "tmp/model/models.js"
+        },
+        {
+            "name": "tmp/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.html"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/view/App.view.xml"
+        },
+        {
+            "name": "tmp/view/ConditionDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/FreightOrder.view.xml"
+        },
+        {
+            "name": "tmp/view/FreightOrderDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/FreightOrderDetailItem.view.xml"
+        },
+        {
+            "name": "tmp/view/FreightUnit.view.xml"
+        },
+        {
+            "name": "tmp/view/FreightUnitDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/Home.view.xml"
+        },
+        {
+            "name": "tmp/view/NotFound.view.xml"
+        },
+        {
+            "name": "tmp/view/ObjectNotFound.view.xml"
+        },
+        {
+            "name": "tmp/view/RateQuote.view.xml"
+        },
+        {
+            "name": "tmp/view/RequestForPickup.view.xml"
+        },
+        {
+            "name": "tmp/view/RequestRouting.view.xml"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/common/AttachmentUtils.js"
+        },
+        {
+            "name": "tmp-dbg/common/DynamicFilter.js"
+        },
+        {
+            "name": "tmp-dbg/common/HttpHelper.js"
+        },
+        {
+            "name": "tmp-dbg/common/Utils.js"
+        },
+        {
+            "name": "tmp-dbg/controller/App.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/BaseController.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ConditionDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp-dbg/controller/FreightOrder.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/FreightOrderDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/FreightOrderDetailItem.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/FreightUnit.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/FreightUnitDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/Home.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/RateQuote.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/RequestForPickup.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/RequestRouting.controller.js"
+        },
+        {
+            "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/model/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp-dbg/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/ConditionDetail.view.xml"
+        },
+        {
+            "name": "view/FreightOrder.view.xml"
+        },
+        {
+            "name": "view/FreightOrderDetail.view.xml"
+        },
+        {
+            "name": "view/FreightOrderDetailItem.view.xml"
+        },
+        {
+            "name": "view/FreightUnit.view.xml"
+        },
+        {
+            "name": "view/FreightUnitDetail.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/RateQuote.view.xml"
+        },
+        {
+            "name": "view/RequestForPickup.view.xml"
+        },
+        {
+            "name": "view/RequestRouting.view.xml"
+        }
+    ]
+}

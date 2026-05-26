@@ -1,0 +1,200 @@
+{
+    "resources": [
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "common/jquery_hotkeys.js"
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "common/DynamicFilter.js"
+        },
+        {
+            "name": "common/AttachmentUtils.js"
+        },
+        {
+            "name": "Gruntfile.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "common/AttachmentUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Home-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/jquery_hotkeys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/DynamicFilter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Gruntfile-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../../../sap-ui-version.json"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/RequestPickup/RequestForPickupDetails.fragment.xml"
+        },
+        {
+            "name": "fragment/RequestPickup/GeneralInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/RequestPickup/DateTimeInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RatesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RatePricingsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RatePricingColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RateDetailsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RateDetailColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/RateAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Rates/ConditionTablesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Plan/PlanShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/Plan/PlanNewShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/Plan/ConsolidateToExistingShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/BoL/BoLOverride.fragment.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/DynamicHeader.fragment.xml"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "index.html"
+        }
+    ]
+}

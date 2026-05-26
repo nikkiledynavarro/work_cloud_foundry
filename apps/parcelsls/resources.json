@@ -1,0 +1,329 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/ControlUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/ControlUtils.js"
+        },
+        {
+            "name": "common/DynamicView-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/DynamicView.js"
+        },
+        {
+            "name": "common/HttpHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/HttpHelper.js"
+        },
+        {
+            "name": "common/UploadUtils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/UploadUtils.js"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "common/hotkeyInterface-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/hotkeyInterface.js"
+        },
+        {
+            "name": "common/jquery_hotkeys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/jquery_hotkeys.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Home-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/AddHazmatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/BatteryDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CommodityCodeValueHelpDlg.fragment.xml"
+        },
+        {
+            "name": "fragment/CreateHUDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CreateProNumber.fragment.xml"
+        },
+        {
+            "name": "fragment/ETDUploadDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/HTSDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/HazmatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MassScaleUpdateDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/NAFTADialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PackMatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ReprintColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/ReprintDisplayDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/SerialDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ValidateAddressDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/address/AddressShipTo.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressImporter.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressShipFrom.fragment.xml"
+        },
+        {
+            "name": "fragment/address/TabAddressSoldTo.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/CNWYAndGENInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/DHLInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FDXGInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExGroundCODRecipientDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExGroundHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExHoldAtLocationDetailDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/FedExInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/International.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabCarrier.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/TabUltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/UPSInternational.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/USPS.fragment.xml"
+        },
+        {
+            "name": "fragment/carrier/UltimateConsignee.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/AdvancedPackingDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/HUItemsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/HUPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/ItemsPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/MoreOptionsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/PackingOverviewDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/DialogRefDisplay.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/PreviousShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/SmallParcel.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/TabParcel.fragment.xml"
+        },
+        {
+            "name": "fragment/parcel/TabPreviousShipment.fragment.xml"
+        },
+        {
+            "name": "fragment/shipment/TabShipmentCarrier.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        }
+    ]
+}

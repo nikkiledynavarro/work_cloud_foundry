@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<ColumnListItem highlight="{= ${Cancelled} ==='X'? 'Error': 'Success'}">
+		<cells>
+			<Text text="{CloseID}"/>
+			<Text text="{CarrierCode}"/>
+			<Text text="{AccountNumber}"/>
+			<Text text="{ShippingPoint}"/>
+			<Text text="{path: 'Createdon', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy/MM/dd' }}"/>
+		</cells>
+	</ColumnListItem>
+</core:FragmentDefinition>

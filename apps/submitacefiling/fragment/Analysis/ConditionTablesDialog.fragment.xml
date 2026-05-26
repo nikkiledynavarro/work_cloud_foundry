@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>conditionTablesTitle}" class="sapUiContentPadding" contentWidth="1000px">
+		<Table id="tblCondtableList" mode="None" fixedLayout="false" class="border_lightgray_nobottom" showSeparators="All" growing="false"
+			items="{ path : 'local>/ConditionTables' }">
+			<columns>
+				<Column>
+					<header>
+						<Text text="{i18n>tablename}"/>
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="{i18n>conflag}"/>
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="{i18n>dataexist}"/>
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="{i18n>ddtext}"/>
+					</header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{local>Tabname}"/>
+						<Text text="{local>Contflag}"/>
+						<Text text="{local>Dataexist}"/>
+						<Text text="{local>Ddtext}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<endButton>
+			<Button press="onconDitionTableClose" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

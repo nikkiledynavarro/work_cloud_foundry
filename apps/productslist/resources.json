@@ -1,0 +1,125 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/Detail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Detail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/ListSelector-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ListSelector.js"
+        },
+        {
+            "name": "controller/Master-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Master.controller.js"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/GroupSortState-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/GroupSortState.js"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/grouper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/grouper.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Detail.view.xml"
+        },
+        {
+            "name": "view/DetailNoObjectsAvailable.view.xml"
+        },
+        {
+            "name": "view/DetailObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/Master.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ViewSettingsDialog.fragment.xml"
+        }
+    ]
+}

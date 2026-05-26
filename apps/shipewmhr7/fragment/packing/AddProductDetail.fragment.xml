@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Add product Details" class="sapUiContentPadding" contentWidth="800px">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="4"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+					singleContainerFullSize="false">
+					<f:content>
+						<Label text="Product"/>
+						<Input value="{local>/NewHazMatItem/Actualqty}"/>
+						<Label text="Description"/>
+						<Input value="{local>/NewHazMatItem/Packweight}"/>
+						<Label text="Quantity/ UoM/ Weight/ UoM"/>
+						<Input value="{local>/NewHazMatIeight}"/>
+						<Input value="{local>/NewHazMatIt}"/>
+						<Input value="{local>/NewHazMatItem}"/>
+						<Input value="{local>/NewHazMatItem/Dgregulation}"/>
+						<Label text="NeValue/ Unit Price/ Currency"/>
+						<Input value="{local>/NewHazMatItershipnam}"/>
+						<Input value="{local>/NewHazMatIem}"/>
+						<Input value="{local>/Newpnam}"/>
+						<Label text="Harmonized Code/ COO"/>
+						<Input value="{local>/NewHazMatItess}"/>
+						<Input value="{local>/NewHass}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Emphasized" press="onProductionDetailPress"/>
+		</beginButton>
+		<endButton>
+			<Button press="onProductDetailsClose" text="{i18n>Cancel}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

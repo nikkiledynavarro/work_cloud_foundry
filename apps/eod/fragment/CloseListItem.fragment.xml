@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Table class="shadow" mode="MultiSelect" id="iCloseTab" selectionChange="onSelectionChange">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="EoD Close Log"/>
+				<ToolbarSpacer/>
+				<Button tooltip="{i18n>cancelClosebtn}" icon="sap-icon://decline" type="Reject" press="onCancelClose"/>
+				<Button tooltip="{i18n>resendPldbtn}" icon="sap-icon://refresh" type="Accept" press="onResendPld"/>
+				<Button tooltip="{i18n>resendClosebtn}" icon="sap-icon://connected" type="Default" press="onResendClose"/>
+				<Button tooltip="{i18n>proshipBtn}" icon="sap-icon://print" type="Default"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="Close ID"/>
+			</Column>
+			<Column>
+				<Text text="Carrier"/>
+			</Column>
+			<Column>
+				<Text text="Account No"/>
+			</Column>
+			<Column>
+				<Text text="Shp.Point"/>
+			</Column>
+			<Column>
+				<Text text="Created Date"/>
+			</Column>
+		</columns>
+	</Table>
+</core:FragmentDefinition>

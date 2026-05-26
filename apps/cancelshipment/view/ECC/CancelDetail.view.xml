@@ -1,0 +1,51 @@
+<mvc:View controllerName="com.erpis.shiperp.sls.cancelshipment.controller.ECC.CancelDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageId" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Select width="auto" id="idDocTypeSelect" class="margin_right_5px" items="{cancelECCService>/xSERPERPxI_CATYP}" change="onRefresh">
+							<core:Item key="{cancelECCService>ValueKey}" text="{cancelECCService>Description}"/>
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Select>
+						<Input width="10rem" submit="onFilterChange" id="idIDInp" class="margin_right_5px">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Input>
+						<Button icon="sap-icon://reset" tooltip="Reset Data" press="onRefresh" type="Emphasized">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
+						app:crossNavigate="#parcelsls-Display"/>
+					<Button icon="sap-icon://clinical-tast-tracker" tooltip="Open Track Shipment App" type="Accept" press="onCrossNavigate"
+						app:crossNavigate="#trackshipmentewmsls-Display"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<core:Fragment fragmentName="com.erpis.shiperp.sls.cancelshipment.fragment.ECC.TrackproInfo" type="XML"/>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<Button enabled="{= ${Status} === 'CN' ? false : true }" id="popoverButton" icon="sap-icon://message-popup"
+					text="{messageModel>/messagesLength}" type="Emphasized" press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>detailGlobalActionCancel}" press="onCancel" type="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

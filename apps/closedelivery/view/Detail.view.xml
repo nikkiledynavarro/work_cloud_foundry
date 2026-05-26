@@ -1,0 +1,53 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="com.erpis.shiperp.closedelivery.hr7.controller.Detail" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:sf="sap.ui.layout.form" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" height="100%">
+	<f:DynamicPage id="dynamicPageId" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Delivery: 123" wrapping="true" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+				</f:heading>
+				<f:navigationActions>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://full-screen" type="Transparent"/>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://exit-full-screen" type="Transparent"/>
+					<OverflowToolbarButton press="onCloseDetailPress" icon="sap-icon://decline" type="Transparent" tooltip="Close"/>
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true" id="headerContent">
+				<f:content>
+					<layout:HorizontalLayout allowWrapping="true">
+						<layout:VerticalLayout class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+							<ObjectStatus state="Warning" text="Ship to:" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="ERP Customer" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="8124 DETAL SHORES SACRAMENTO" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="CA US 95831"/>
+						</layout:VerticalLayout>
+						<layout:VerticalLayout>
+							<ObjectStatus state="Warning" class="sapUiTinyMarginBottom" text="Statuses"/>
+							<ObjectStatus title="Goods Movement Status" text="Open" state="Error" class="sapUiTinyMarginBottom"/>
+							<ObjectStatus title="Shipment Status" class="sapUiTinyMarginBottom" text="{DeliveryStatusText}"
+								state="{path: 'DeliveryStatus', formatter:'.formatter.formatDeliveryStatus'}"/>
+						</layout:VerticalLayout>
+					</layout:HorizontalLayout>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.closedelivery.hr7.fragment.ListItems" type="XML"/>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar >
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="Close Delivery" press="onAddressValidation" type="Emphasized"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

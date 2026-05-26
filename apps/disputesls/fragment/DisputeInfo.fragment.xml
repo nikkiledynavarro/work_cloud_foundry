@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Table id="idTableDisputeList" width="auto" noDataText="{i18n>Nodata}" growing="true" growingScrollToLoad="true" growingThreshold="100" busyIndicatorDelay="99999"
+		updateFinished="onTableDisputeListUpdateFinished" mode="MultiSelect" fixedLayout="false">
+		<columns>
+			<Column>
+				<Text text="{i18n>tableDisputeIDColumnTitle}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableDocStatusColumnTitle}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableInvnumColumnTitle}" wrapping="false" tooltip="{i18n>tableInvnumColumnTitleFull}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableAccountNoColumnTitle}" wrapping="false" tooltip="{i18n>tableAccountNoColumnTitleFull}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableCarrierColumnTitle}" wrapping="false"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableCCodeColumnTitleFull}" wrapping="false" tooltip="{i18n>tableCCodeColumnTitleFull}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableCreatedOnColumnTitle}" wrapping="false"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableCompletedOnColumnTitle}" wrapping="false"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableDaysOpenColumnTitle}" wrapping="false"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>tableTotalCreditAmtColumnTitle}" wrapping="false" tooltip="{i18n>tableTotalCreditAmtColumnTitleFull}"/>
+			</Column>
+		</columns>
+	</Table>
+</core:FragmentDefinition>

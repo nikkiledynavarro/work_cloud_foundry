@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Panel width="auto" class="shadow sapUiNoPaddingContent" expandable="false">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Control Panel"/>
+				<ToolbarSpacer/>
+				<!--<Button icon="sap-icon://search" type="Emphasized"/>-->
+			</Toolbar>
+		</headerToolbar>
+		<f:Form editable="true">
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanS="4" adjustLabelSpan="false" emptySpanS="0" singleContainerFullSize="false"/>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="Carrier">
+							<f:fields>
+								<Select items="{/xSERPERPxI_CCARR}" change="onCarrierChange" id="idCarrierSelect">
+									<core:Item text="{CarrierName}" key="{CarrierCode}"/>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="">
+							<f:fields>
+								<CheckBox text="Trade Direct" id="idTradeDirectChck"></CheckBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Service">
+							<f:fields>
+								<Select id="idServiceSelect" forceSelection="false"></Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Shp.Point">
+							<f:fields>
+								<Select items="{/xSERPERPxI_CTVSTT}" id="idShippingPointSelect" change="onShippingPointChange">
+									<core:Item text="{ShippingPoint}" key="{ShippingPoint}"/>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Account No">
+							<f:fields>
+								<Input id="idAccountnoInputFrom" placeholder="From" submit="onAccountNoChange"/>
+								<Input id="idAccountnoInputTo" placeholder="To" submit="onAccountNoChange"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Port of Export">
+							<f:fields>
+								<Select id="idBreakbulkPortSelect"></Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Close Date">
+							<f:fields>
+								<DatePicker id="idCloseDatePicker" valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="">
+							<f:fields>
+								<RadioButtonGroup>
+									<RadioButton text="Reference Shipping Point" id="idReferenceShipPointRadio"></RadioButton>
+									<RadioButton text="Shipping Point" id="idShipPointRadio"></RadioButton>
+								</RadioButtonGroup>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</Panel>
+</core:FragmentDefinition>

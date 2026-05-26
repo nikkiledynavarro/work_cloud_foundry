@@ -1,0 +1,66 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.TU.AssignTUs" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<Page>
+		<content>
+			<!-- Panel for TreeTable -->
+			<Panel>
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Vehicle No: {path: 'local>/VehNum', formatter: '.formatter.validateDocNo'}" level="H2" titleStyle="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ui:TreeTable id="AssignTUsTree" rows="{path:'local>/Veh_AssginedHus', parameters: {arrayNames:['noitems']}}" selectionMode="None"
+						enableSelectAll="false" ariaLabelledBy="title">
+						<ui:columns>
+							<!--TUV-->
+							<ui:Column width="25rem">
+								<Label text="{i18n>tuv}"/>
+								<ui:template>
+									<ObjectStatus press="onAssigedDelivPressed" state="{path: 'local>VehNum', formatter: '.formatter.formatDocNoItemCategoryState'}" text="{local>TuNum}"
+										icon="{path: 'local>VehNum', formatter: '.formatter.formatDocNoItemCategoryIcon'}"  active="true"/>
+								</ui:template>
+							</ui:Column>
+							<!--Loading Weight-->
+							<ui:Column>
+								<Label text="{i18n>loadingWeight}"/>
+								<ui:template>
+									<Text text="{local>LoadWeight}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Carrier-->
+							<ui:Column>
+								<Label text="{i18n>carrier}"/>
+								<ui:template>
+									<Text text="{local>tucarrier}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Service-->
+							<ui:Column>
+								<Label text="{i18n>service}"/>
+								<ui:template>
+									<Text text="{local>tuservice}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Loading Date-->
+							<ui:Column>
+								<Label text="{i18n>loadingDate}"/>
+								<ui:template>
+									<Text text="{local>EndDateCat}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+						</ui:columns>
+					</ui:TreeTable>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar id="idFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://navigation-left-arrow" text="{i18n>backToVehicleScreenButton}" press="onNavBackScreen" type="Emphasized"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

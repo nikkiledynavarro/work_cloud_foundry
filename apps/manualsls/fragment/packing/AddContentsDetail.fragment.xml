@@ -1,0 +1,75 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Add Contents">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Material No"/>
+								</form:label>
+								<form:fields>
+									<Input id="idMaterial" submit="onChangMaterialNoDetailPress" value="{local>/AddContentsDetail/material}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Total"/>
+								</form:label>
+								<form:fields>
+									<Input id="idDescription" value="{local>/AddContentsDetail/totalqty}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Balance"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWidthQuantity" value="{local>/AddContentsDetail/openqty}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Partial"/>
+								</form:label>
+								<form:fields>
+									<Input id="idHeightNeValue" value="{local>/AddContentsDetail/partialqty}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="UOM/ Weight"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWeightHarmonized" value="{local>/AddContentsDetail/uom}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWeightunitCOO" value="{local>/AddContentsDetail/weight}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="UOM"/>
+								</form:label>
+								<form:fields>
+									<Input id="idUOMValue" value="{local>/AddContentsDetail/weightunit}"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="1" labelSpanL="3" columnsM="1" labelSpanM="4" labelSpanS="4"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Emphasized" press="onProductionDetailPress"/>
+		</beginButton>
+		<endButton>
+			<Button press="onProductDetailsClose" text="{i18n>Cancel}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

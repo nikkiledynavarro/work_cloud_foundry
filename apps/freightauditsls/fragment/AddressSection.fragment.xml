@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="{i18n>ShipFrom}"/>
+			<Label text="{i18n>CompanyName}"/>
+			<Text id="ShipperCompany" text="{ShipperCompany}"/>
+			<Label text="{i18n>ShipperName}"/>
+			<Text text="{ShipperName}"/>
+			<Label text="{i18n>State}"/>
+			<Text text="{ShipperState}"/>
+			<Label text="{i18n>PostalCode}"/>
+			<Text text="{ShipperPostalCode}"/>
+			<Label text="{i18n>Country}"/>
+			<Text text="{ShipperCountry}"/>
+			<core:Title text="{i18n>ShipTo}"/>
+			<Label text="{i18n>CompanyName}"/>
+			<Text id="RecipientCompany" text="{RecipientCompany}"/>
+			<Label text="{i18n>ConsigneeName}"/>
+			<Text text="{RecipientName}"/>
+			<Label text="{i18n>City}"/>
+			<Text text="{RecipientCity}"/>
+			<Label text="{i18n>State}"/>
+			<Text text="{RecipientState}"/>
+			<Label text="{i18n>PostalCode}"/>
+			<Text text="{RecipientPostalCode}"/>
+			<Label text="{i18n>Country}"/>
+			<Text text="{RecipientCountry}"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

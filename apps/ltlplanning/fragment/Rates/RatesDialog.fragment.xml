@@ -1,0 +1,119 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Carrier Rates" class="sapUiContentPadding" stretch="true">
+		<content>
+			<IconTabBar class="border_lightgray_nobottom sapUiNoContentPadding">
+				<items>
+					<IconTabFilter text="Rates">
+						<ScrollContainer horizontal="true">
+							<Table id="tableRates" items="{path: 'local>/Rates', sorter: { path: 'Code', descending: true } }" mode="SingleSelectLeft">
+								<headerToolbar>
+									<Toolbar>
+										<Button icon="sap-icon://paid-leave" text="Pricing" tooltip="Pricing" press="onShowPricingDetail"/>
+										<Button icon="sap-icon://restart" text="Analysis" tooltip="Analysis" press="onShowAnalysisDetail"/>
+										<Button icon="sap-icon://detail-view" text="Details" tooltip="Details" press="onShowRateDetail"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column width="4rem">
+										<Text text="Carrier Code"/>
+									</Column>
+									<Column width="4rem">
+										<Text text="Carrier Name"/>
+									</Column>
+									<Column width="4rem">
+										<Text text="Carrier Service ID"/>
+									</Column>
+									<Column width="4rem">
+										<Text text="Carrier Service"/>
+									</Column>
+									<Column width="4rem">
+										<Text text="Carrier Rate"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="List Rate"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Currency"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Transit Time"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Delivery Date"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Priority"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Zone"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Trans ID"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Retail Rate"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{local>CarrrierCode}" wrapping="false" tooltip="{local>carrierid}"/>
+											<Text text="{local>Carrrier}" wrapping="false" tooltip="{local>carriername}"/>
+											<Text text="{local>ServiceId}" wrapping="false" tooltip="{local>serviceid}"/>
+											<Text text="{local>CarrierService}" wrapping="false" tooltip="{local>servicename}"/>
+											<ObjectNumber number="{local>Rate}" state="Success"/>
+											<ObjectNumber number="{local>Listrate}" state="Warning"/>
+											<ObjectNumber number="{local>Billablerate}" state="None"/>
+											<Text text="{local>Currency}"/>
+											<Text text="{local>Timeintransit}"/>
+											<Text text="{path:'local>Deliverydate', formatter: '.formatter.formatDateString'}"/>
+											<Text text="{= parseInt(${local>Priority})}" textAlign="Center"/>
+											<Text text="{local>Zone}"/>
+											<Text text="{local>Transactionid}"/>
+											<Text text="{local>Retailrate}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</IconTabFilter>
+					<IconTabFilter text="Errors ({local>/RateErrors/length})">
+						<Table id="tableRateErrors" items="{path: 'local>/RateErrors'}" mode="None">
+							<columns>
+								<Column>
+									<Text text="Type"/>
+								</Column>
+								<Column>
+									<Text text="ID"/>
+								</Column>
+								<Column>
+									<Text text="Message No"/>
+								</Column>
+								<Column>
+									<Text text="Text"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectStatus text="{local>Type}" state="{= ${local>Type} === 'E' ? 'Error' : 'Warning' }" tooltip="{local>Type}"/>
+										<Text text="{local>Id}" wrapping="false" tooltip="{local>Id}"/>
+										<Text text="{local>Number}" wrapping="false" tooltip="{local>Number}"/>
+										<Text text="{local>Message}" wrapping="false" tooltip="{local>Message}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<!-- Button -->
+		<beginButton>
+			<Button text="Ok" press="onAcceptRates" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCancelRates" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

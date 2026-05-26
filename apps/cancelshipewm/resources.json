@@ -1,0 +1,413 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ECC/CancelDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ECC/CancelDetail.controller.js"
+        },
+        {
+            "name": "controller/EWM/CancelDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/EWM/CancelDetail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Login-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Login.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/ECC/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ECC/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ECC/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/EWM/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/EWM/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/EWM/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/EWM/WarehouseNumberDialog.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "localService/ECC/metadata.xml"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "serviceBinding-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "serviceBinding.js"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/pages/App-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/App.js"
+        },
+        {
+            "name": "test/testsuite.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/unit/AllTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/App.controller.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/common/Utils.js"
+        },
+        {
+            "name": "tmp/controller/App.controller.js"
+        },
+        {
+            "name": "tmp/controller/BaseController.js"
+        },
+        {
+            "name": "tmp/controller/ECC/CancelDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/EWM/CancelDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp/controller/Login.controller.js"
+        },
+        {
+            "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/fragment/ECC/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ECC/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/ECC/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/EWM/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/EWM/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/EWM/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/EWM/WarehouseNumberDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/image/shiperp_logo.png"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/localService/ECC/metadata.xml"
+        },
+        {
+            "name": "tmp/localService/metadata.xml"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/model/formatter.js"
+        },
+        {
+            "name": "tmp/model/models.js"
+        },
+        {
+            "name": "tmp/serviceBinding.js"
+        },
+        {
+            "name": "tmp/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/App.js"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.html"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp/test/unit/controller/App.controller.js"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/view/App.view.xml"
+        },
+        {
+            "name": "tmp/view/ECC/CancelDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/EWM/CancelDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/Login.view.xml"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/common/Utils.js"
+        },
+        {
+            "name": "tmp-dbg/controller/App.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/BaseController.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ECC/CancelDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/EWM/CancelDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp-dbg/controller/Login.controller.js"
+        },
+        {
+            "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/model/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "tmp-dbg/serviceBinding.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/App.js"
+        },
+        {
+            "name": "tmp-dbg/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/controller/App.controller.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/ECC/CancelDetail.view.xml"
+        },
+        {
+            "name": "view/EWM/CancelDetail.view.xml"
+        },
+        {
+            "name": "view/Login.view.xml"
+        }
+    ]
+}

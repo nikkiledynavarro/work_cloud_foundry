@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table id="idTrackproTabEWM" growing="true" growingThreshold="100" busyIndicatorDelay="99999" growingScrollToLoad="true" fixedLayout="false"
+		class="border_lightgray_nobottom" width="100%" mode="{= ${local>/Mps} ? 'None' : 'MultiSelect' }"
+		items="{path: 'local>/freightUnitList', sorter: {path: 'HUNo', descending: false} }">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{i18n>tbShippingTitle} {path: 'local>/Mps', formatter: '.formatter.mpsTypeCheck'}"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColTrackNo}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColHuNo}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColPackMat}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColDeliver}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detailTabColWeight}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detailTabColUOM}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detailTabColL}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detailTabColW}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detailTabColH}"/>
+			</Column>
+		</columns>
+		<ColumnListItem type="Inactive" highlight="{= ${local>/Mps} ? 'Success' : 'Warning' }">
+			<cells>
+				<Text text="{local>Trackingnum}"/>
+				<Text text="{local>Exidv}"/>
+				<Text text="{local>Pmat}"/>
+				<Text text="{local>EccDelivery}"/>
+				<ObjectNumber number="{local>Weight}" state="Success"/>
+				<Text text="{local>Weightunit}"/>
+				<ObjectNumber number="{local>Laeng}" state="Warning"/>
+				<ObjectNumber number="{local>Breit}" state="Warning"/>
+				<ObjectNumber number="{local>Hoehe}" state="Warning"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

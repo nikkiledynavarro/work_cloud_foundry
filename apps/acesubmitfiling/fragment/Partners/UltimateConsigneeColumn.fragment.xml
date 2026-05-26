@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Name-->
+	<Label text="{i18n>name}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad13}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Contact name-->
+	<Label text="{i18n>contactName}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad15}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Contact phone-->
+	<Label text="{i18n>contactPhone}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad17}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Address Line 1-->
+	<Label text="{i18n>address1}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad18}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Address line 2-->
+	<Label text="{i18n>address2}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad19}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--City-->
+	<Label text="{i18n>city}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad110}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<core:Title text=""></core:Title>
+	<!--State-->
+	<Label text="{i18n>state}"/>
+	<ComboBox id="idState" items="{path: 'local>/States'}" selectedKey="{local>/basic/partners/ultimate_consignee/Ad111}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{local>Bland}" text="{local>Bland} - {local>Bezei}"></core:Item>
+	</ComboBox>
+	<!--Country-->
+	<Label text="{i18n>country}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad112}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Postal code-->
+	<Label text="{i18n>postalCode}"/>
+	<Input value="{local>/basic/partners/ultimate_consignee/Ad113}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Ultimate consignee type-->
+	<Label text="{i18n>ultimateConsigneeType}"/>
+	<ComboBox id="idUltimateCT" selectedKey="{local>/basic/partners/ultimate_consignee/Ad114}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="D" text="Direct Consumer"/>
+		<core:Item key="G" text="Government Entity"/>
+		<core:Item key="O" text="Other/Unknown"/>
+		<core:Item key="R" text="Reseller"/>
+	</ComboBox>
+	<!--SoldEnRoute indicator-->
+	<Label text="{i18n>soldEnRouteIndicator}"/>
+	<ComboBox selectedKey="{local>/basic/partners/ultimate_consignee/Ad16}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="N" text="No"/>
+		<core:Item key="Y" text="Yes"/>
+	</ComboBox>
+</core:FragmentDefinition>

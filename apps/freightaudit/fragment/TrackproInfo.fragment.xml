@@ -1,0 +1,131 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table id="idInvoiceDetailTab" class="border_lightgray_nobottom" width="100%" mode="MultiSelect" updateFinished="onTrackProUpdateFinished"
+		busyIndicatorDelay="99999" growingScrollToLoad="true" items="{path: 'toDTL', sorter: [{path: 'TrackingNo', descending: false}] }"
+		growing="true" growingThreshold="100" fixedLayout="false">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Text text="{i18n>detailTabActAllShipment}"/>
+				<ToolbarSeparator/>
+				<ToggleButton id="idTgActionSuccess" icon="sap-icon://status-completed" type="Accept" app:filter="G" press="onQuickFilter" tooltip="Success">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToggleButton id="idTgActionWarning1" icon="sap-icon://settings" class="orange_button" type="Default" app:filter="Y1" press="onQuickFilter"
+					tooltip="Charge code level unmatched">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToggleButton id="idTgActionWarning2" icon="sap-icon://compare-2" class="orange_button" type="Default" app:filter="Y3" press="onQuickFilter"
+					tooltip="Exceed configured tolerance">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToggleButton id="idTgActionError1" icon="sap-icon://settings" type="Reject" app:filter="R1" press="onQuickFilter"
+					tooltip="Charge code level unmatched">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToggleButton id="idTgActionError2" icon="sap-icon://past" type="Reject" app:filter="R2" press="onQuickFilter" tooltip="Ship Date Delay">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToggleButton id="idTgActionError3" icon="sap-icon://compare-2" type="Reject" app:filter="R3" press="onQuickFilter"
+					tooltip="Exceed configured tolerance">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</ToggleButton>
+				<ToolbarSpacer/>
+				<Select change="onQuickFilter" id="idStatusDtlSelect">
+					<items>
+						<core:Item text="{i18n>SelectAPVStatus}" key=""/>
+						<core:Item text="{path:'i18n>A', formatter: '.formatter.releaseDtlStatusText'}" key="A"/>
+						<core:Item text="{path:'i18n>D', formatter: '.formatter.releaseDtlStatusText'}" key="D"/>
+						<core:Item text="{path:'i18n>O', formatter: '.formatter.releaseDtlStatusText'}" key="O"/>
+						<core:Item text="{path:'i18n>R', formatter: '.formatter.releaseDtlStatusText'}" key="R"/>
+						<core:Item text="{path:'i18n>RE', formatter: '.formatter.releaseDtlStatusText'}" key="RE"/>
+					</items>
+					<layoutData>
+						<OverflowToolbarLayoutData priority="Low"/>
+					</layoutData>
+				</Select>
+				<MultiInput enableMultiLineMode="true" id="idShippingPtSelect" showValueHelp="true" tokenUpdate="onQuickFilter" placeholder="Shipping Point"
+					valueHelpRequest="onOpenShippingPointDialog" tokens="{local>/aSelectedShippingPoints}"
+					width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? '12rem' : '8rem' }">
+					<tokens>
+						<Token key="{local>key}" text="{local>key}"/>
+					</tokens>
+				</MultiInput>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column hAlign="Center">
+				<Text text="{i18n>detailTabColMatch}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="WithoutHeader" width="9.5rem">
+				<Text text="{i18n>detailTabColTrackNo}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColPayAmt}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>tableSerpAmtColumnTitleFull}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColApvStat}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet" width="6rem">
+				<Text text="{i18n>detailTabColApInv}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Center" vAlign="Middle">
+				<Text text="{i18n>detailTabColDelv}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColDelvDate}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColEstDate}"/>
+			</Column>
+			<Column demandPopin="true">
+				<Text text="{i18n>detailTabColShipPt}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColBillWgt}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet" width="3rem">
+				<Text text="{i18n>detailTabColUOM}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>detailTabColDispId}"/>
+			</Column>
+		</columns>
+		<ColumnListItem type="Inactive">
+			<cells>
+				<ObjectStatus icon="{ parts: [{path: 'MatchStatus'}], formatter: '.formatter.trafficLight'}"
+					state="{ path: 'MatchStatus', formatter: '.formatter.trafficLightState'}"
+					tooltip="{ parts: [{path: 'MatchStatus'}], formatter: '.formatter.trafficLightTooltip'}"/>
+				<Link text="{TrackingNo}" press="onTrackNumberLinkPressed" enabled="{= ${DetailStatus} === 'RE' ? false : true }"/>
+				<Link text="{ parts:[{path:'PayAmount'}, {path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+					press="onPayamtPress" enabled="{= ${DetailStatus} === 'O' ? true : false }"/>
+				<Text text="{ parts:[{path:'SERPAmount'}, {path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"/>
+				<ObjectStatus text="{path: 'DetailStatus', formatter: '.formatter.releaseDtlStatusText'}"
+					state="{path: 'DetailStatus', formatter: '.formatter.releaseDtlStatusState'}"/>
+				<Text text="{path: 'ObjectKey', formatter: '.formatter.formatAPInvoiceNumberOnInvoiceListView'}"/>
+				<!--<Text text="{Delivery}"/>-->
+				<Button icon="sap-icon://list" press="onShowDeliveries"/>
+				<Text text="{path: 'DeliveryDate', formatter: '.formatter.formatDateString' }"/>
+				<Text text="{path: 'EstimateDate', formatter: '.formatter.formatDateString' }"/>
+				<Text text="{ShippingPoint}"/>
+				<Text text="{BilledWeight}"/>
+				<Text text="{WeightUnit}"/>
+				<Link text="{DisputeID}" press="onDisputeIDLinkPressed"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

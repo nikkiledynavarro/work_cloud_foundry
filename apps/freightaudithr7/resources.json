@@ -1,0 +1,353 @@
+{
+    "resources": [
+        {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
+        },
+        {
+            "name": "annotations/annotations.xml"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ConditionDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ConditionDetail.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/InvoiceDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/InvoiceDetail.controller.js"
+        },
+        {
+            "name": "controller/InvoiceList-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/InvoiceList.controller.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
+        },
+        {
+            "name": "fragment/APInvoiceNumberDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/AddressSection.fragment.xml"
+        },
+        {
+            "name": "fragment/CarrierValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/ComparisonSection.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeListDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/FreightSection.fragment.xml"
+        },
+        {
+            "name": "fragment/GeneralSection.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/PayamtUpdate.fragment.xml"
+        },
+        {
+            "name": "fragment/ReversalReasonDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingPointValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/SimulateGrid.fragment.xml"
+        },
+        {
+            "name": "fragment/StatusDialogDtl.fragment.xml"
+        },
+        {
+            "name": "fragment/StatusDialogHdr.fragment.xml"
+        },
+        {
+            "name": "fragment/TrackingDeliveryDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/VendorValueHelp.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/StatusList.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "test/integration/ObjectJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "test/integration/WorklistJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/WorklistJourney.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/pages/App-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/App.js"
+        },
+        {
+            "name": "test/integration/pages/Browser-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Browser.js"
+        },
+        {
+            "name": "test/integration/pages/Common-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Common.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "test/integration/pages/Object-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Object.js"
+        },
+        {
+            "name": "test/integration/pages/Worklist-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "test/integration/pages/shareOptions-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "test/mockServer.html"
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/unit/allTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/allTests.js"
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel.js"
+        },
+        {
+            "name": "test/unit/model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/formatter.js"
+        },
+        {
+            "name": "test/unit/model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/models.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/ConditionDetail.view.xml"
+        },
+        {
+            "name": "view/InvoiceDetail.view.xml"
+        },
+        {
+            "name": "view/InvoiceList.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        }
+    ]
+}

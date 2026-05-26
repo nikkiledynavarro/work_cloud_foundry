@@ -1,0 +1,134 @@
+<mvc:View controllerName="com.erpis.shiperp.salesorder.hr7.controller.CreateSO" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Simulate Sales Order" wrapping="true" id="title"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<FlexBox width="100%" direction="Column">
+				<FlexBox fitContainer="true" wrap="Wrap" justifyContent="SpaceBetween" displayInline="true" direction="Row">
+					<core:Fragment fragmentName="com.erpis.shiperp.salesorder.hr7.fragment.OrderDetail" type="XML"/>
+					<core:Fragment fragmentName="com.erpis.shiperp.salesorder.hr7.fragment.OrderItems" type="XML"/>
+				</FlexBox>
+				<Table inset="false" items="{ path: 'global>/ShipSetSimulation' }" mode="SingleSelectLeft" id="idSimulateShipsetTab"
+					class="border_lightgray_nobottom sapUiSmallMarginTop" width="100%" fixedLayout="false" includeItemInSelection="true"
+					selectionChange="onShipsetSimulationChange">
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Title text="Shipsets ({global>/ShipSetSimulation/length})" level="H2"/>
+								<ToolbarSeparator/>
+								<ComboBox id="idCarrierComboSim" placeholder="Carrier" class="sapUiTinyMarginBegin" items="{global>/CarrierListSet}"
+									selectionChange="onCarrierSelectionChange" showSecondaryValues="true">
+									<core:ListItem key="{global>Code}" text="{global>Description}" additionalText="{global>Code}"/>
+								</ComboBox>
+								<ComboBox placeholder="Service" selectionChange="onChangeService" showSecondaryValues="true" id="idServiceComboSim"
+									items="{global>/ServiceListSet}">
+									<core:ListItem key="{global>Service}" text="{global>Description}" additionalText="{global>Service}"/>
+								</ComboBox>
+								<ToolbarSpacer/>
+								<OverflowToolbarButton type="Ghost" icon="sap-icon://lead" tooltip="Single Rate" press="onSimulateSingleRate"
+									enabled="{=${global>/ShipSetSimulation}.length >0 ?true:false}"/>
+								<OverflowToolbarButton type="Ghost" icon="sap-icon://collections-insight" tooltip="Rate Shop" press="onSimulateRateShop"
+									enabled="{=${global>/ShipSetSimulation}.length >0 ?true:false}"/>
+								<OverflowToolbarButton type="Ghost" icon="sap-icon://paid-leave" tooltip="Optimization" press="onSimulateOptimization"
+									enabled="{=${global>/ShipSetSimulation}.length >0 ?true:false}"/>
+								<ToolbarSeparator/>
+								<OverflowToolbarButton type="Ghost" icon="sap-icon://inbox" tooltip="Packing Proposal" press="onSimulatePackProposal"
+									enabled="{=${global>/ShipSetSimulation}.length >0 ?true:false}"/>
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="Counter" tooltip="Counter" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="Ship.Pt" tooltip="Shipping Point" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="IncoT" tooltip="Incoterms" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="CarrCode" tooltip="Carrier" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Service" tooltip="Service Desc" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="Ship To" tooltip="Ship To Party" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="Loading Date" tooltip="Loading Date" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Delivery" tooltip="Delivery" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Misc.Carr" tooltip="Misc Carrier" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Carr.Rate" tooltip="Carrier Rate" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="List Rate" tooltip="List Rate" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Weight" tooltip="Weight" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="UOM" tooltip="UOM" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Vol" tooltip="Volume" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+							<Text text="Bill.Opt" tooltip="Billing Option" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Ins.Typ" tooltip="Insurance Type" wrapping="false"/>
+						</Column>
+						<Column minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline">
+							<Text text="Ins.Value" tooltip="Insured Value" wrapping="false"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem press="onSelectionChange" type="Active">
+							<cells>
+								<Link text="{global>Counter}" press="onShipsetItemPress" emphasized="true" wrapping="false" tooltip="{global>Counter}"/>
+								<Text text="{global>Vstel}" wrapping="false" tooltip="{global>Vstel}"/>
+								<Text text="{global>Inco1}" wrapping="false" tooltip="{global>Inco1}"/>
+								<Text text="{global>Carrier}" wrapping="false" tooltip="{global>Carrier}"/>
+								<Text text="{global>ServiceDesc}" wrapping="false" tooltip="{global>ServiceDesc}"/>
+								<Text text="{global>Kunwe}" wrapping="false" tooltip="{global>Kunwe}"/>
+								<Text text="{path: 'global>Lddat', formatter: '.formatter.formatDateString'}" wrapping="false"/>
+								<Text text="{global>Delivery}" wrapping="false" tooltip="{global>Delivery}"/>
+								<Text text="{global>Misccarr}" wrapping="false" tooltip="{global>Misccarr}"/>
+								<Text text="{global>Rate}" wrapping="false" tooltip="{global>Rate}"/>
+								<Text text="{global>Listrate}" wrapping="false" tooltip="{global>Listrate}"/>
+								<Text text="{global>Brgew}" wrapping="false" tooltip="{global>Brgew}"/>
+								<Text text="{global>Gewei}" wrapping="false" tooltip="{global>Gewei}"/>
+								<Text text="{global>Volum}" wrapping="false" tooltip="{global>Volum}"/>
+								<Text text="{global>Billoption}" wrapping="false" tooltip="{global>Billoption}"/>
+								<Text text="{global>Instype}" wrapping="false" tooltip="{global>Instype}"/>
+								<Text text="{global>Insvalue}" wrapping="false" tooltip="{global>Insvalue}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</FlexBox>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Simulate" press="onSimulate"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

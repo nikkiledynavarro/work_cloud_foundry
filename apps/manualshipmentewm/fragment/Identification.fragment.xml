@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Informations" icon="sap-icon://information" class="sapUiContentPadding" contentWidth="1300px">
+		<content>
+			<Table id="idIdentificat" class="border_lightgray_nobottom" showSeparators="All" growing="false"
+				items="{path: 'local>/IdentificationAll', templateShareable:false}">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Identifications"/>
+						<ToolbarSpacer/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="8rem">
+						<Text text="{i18n>Shiperpidtype}"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="{i18n>ValueIdentifications}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{local>IdType}"/>
+							<Text text="{local>IdValue}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button press="onCloseIdentifications" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

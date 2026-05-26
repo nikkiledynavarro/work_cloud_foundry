@@ -1,0 +1,123 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:upload="sap.m.upload" xmlns:u="sap.ui.unified">
+	<Dialog title="Request Pickup" contentWidth="100%" contentHeight="100%">
+		<content>
+			<VBox>
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text=""></core:Title>
+						<core:Fragment fragmentName="com.erpis.shiperp.hr7.ltlplanning.fragment.RequestPickup.GeneralInfo" type="XML"/>
+						<core:Title text=""></core:Title>
+						<core:Fragment fragmentName="com.erpis.shiperp.hr7.ltlplanning.fragment.RequestPickup.DateTimeInfo" type="XML"/>
+					</f:content>
+				</f:SimpleForm>
+				<FlexBox class="sapUiSmallMarginBegin">
+					<HBox alignItems="Center">
+						<Label text="Text:" width="5rem" textAlign="End" class="sapUiSmallMarginEnd"/>
+						<Input value="{local>/PickupRequestInfo/Text}" width="50rem"/>
+					</HBox>
+				</FlexBox>
+				<FlexBox class="sapUiSmallMarginBegin">
+					<HBox>
+						<Table mode="MultiSelect" growing="true" items="{path: 'local>/PickupRequest'}" growingThreshold="100" showOverlay="false"
+							growingScrollToLoad="false" fixedLayout="true">
+							<headerToolbar>
+								<Toolbar>
+									<Title text="Pickup Request"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Customer PO's" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Customer Ref. Date" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Sales Doc" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Created On" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Reqd Deliv Date" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Service Agent" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Name 1" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Miss Carr" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="City" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Region" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Postal Code" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Tracking Number" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Delivery Date" tooltip="Delivery Date (From/To)" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Total Weight" wrapping="false"/>
+								</Column>
+								<Column hAlign="Center" vAlign="Middle">
+									<Text text="Weight unit" wrapping="false"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{local>Custpo}" wrapping="false"/>
+										<Text text="{local>Bstdk}" wrapping="false"/>
+										<Text text="{local>Vbeln}" wrapping="false"/>
+										<Text text="{path:'local>Erdat', formatter: '.formatter.formatDateString'}" wrapping="false"/>
+										<Text text="{path:'local>Vdatu', formatter: '.formatter.formatDateString'}" wrapping="false"/>
+										<Text text="{local>Gwldt}" wrapping="false"/>
+										<Text text="{local>Tdlnr}" wrapping="false"/>
+										<Text text="{local>Carriername}" wrapping="false"/>
+										<Text text="{local>Misccarrier}" wrapping="false"/>
+										<Text text="{local>Tdlnr}" wrapping="false"/>
+										<Text text="{local>Ort01}" wrapping="false"/>
+										<Text text="{local>Regio}" wrapping="false"/>
+										<Text text="{local>Pstlz}" wrapping="false"/>
+										<Text text="{local>Land1}" wrapping="false"/>
+										<Text text="{local>Pronumber}" wrapping="false"/>
+										<Text text="{local>Lfdat}" wrapping="false"/>
+										<Text text="{local>Btgew}" wrapping="false"/>
+										<Text text="{local>Gewei}" wrapping="false"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</HBox>
+				</FlexBox>
+				<FlexBox class="sapUiSmallMarginBegin">
+					<UploadCollection id="FileUpload" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true"
+						instantUpload="false" noDataDescription="" change="onUploadUserFileChange" fileDeleted="onFileDeleted"
+						filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"
+						uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadUrl="/srv/document/upload">
+						<layoutData>
+							<FlexItemData growFactor="1"/>
+						</layoutData>
+					</UploadCollection>
+				</FlexBox>
+			</VBox>
+		</content>
+		<!-- Button -->
+		<buttons>
+			<Button text="Send Mail" icon="sap-icon://email" press="onSendEmail" type="Emphasized"/>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCloseRP" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

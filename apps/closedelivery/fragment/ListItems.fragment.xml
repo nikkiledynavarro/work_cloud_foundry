@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Table width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? 'auto' : 'auto' }"
+		items="{path: 'local>/Contents', sorter: { path: 'deliveryitem', descending: false }}" id="listDetail" growing="false"
+		class="border_lightgray_nobottom" fixedLayout="true">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="Line Items"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="1rem">
+				<Text text="Material"/>
+			</Column>
+			<Column width="2rem">
+				<Text text="Description"/>
+			</Column>
+			<Column width="2rem">
+				<Text text="Delivery Quantity"/>
+			</Column>
+			<Column width="2rem">
+				<Text text="Delivery UoM"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{local>deliveryitem}"/>
+					<Text text="{local>material}"/>
+					<Text text="{local>weight}"/>
+					<Text text="{local>weightunit}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

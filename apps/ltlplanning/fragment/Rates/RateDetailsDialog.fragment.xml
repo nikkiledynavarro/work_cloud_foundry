@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Rate Details" class="sapUiContentPadding" contentWidth="1300px">
+		<Table id="tblRateDetailList" mode="None" fixedLayout="false" class="border_lightgray_nobottom" showSeparators="All" growing="false">
+			<columns>
+				<Column>
+					<Text text="Carrier"/>
+				</Column>
+				<Column>
+					<Text text="Service"/>
+				</Column>
+				<Column>
+					<Text text="Charge Type"/>
+				</Column>
+				<Column>
+					<Text text="Charge Code"/>
+				</Column>
+				<Column>
+					<Text text="Condition Type"/>
+				</Column>
+				<Column>
+					<Text text="Carrier Rate"/>
+				</Column>
+				<Column>
+					<Text text="Percentage"/>
+				</Column>
+				<Column>
+					<Text text="Currency"/>
+				</Column>
+				<Column>
+					<Text text="Pricing Unit"/>
+				</Column>
+				<Column>
+					<Text text="Condition Unit"/>
+				</Column>
+				<Column>
+					<Text text="+/-"/>
+				</Column>
+				<Column>
+					<Text text="Calculation Type"/>
+				</Column>
+			</columns>
+		</Table>
+		<endButton>
+			<Button press="onCloseRateDetailDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

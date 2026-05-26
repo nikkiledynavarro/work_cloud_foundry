@@ -1,0 +1,206 @@
+<mvc:View controllerName="com.erpis.shiperp.freightorder.controller.FreightOrder" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:sv="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<sv:SmartVariantManagement id="smartVariant" persistencyKey="SmartFilterPKey"/>
+					</FlexBox>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!--Start Filter-->
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<core:Fragment fragmentName="com.erpis.shiperp.freightorder.fragment.DynamicFilter" type="XML"/>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- Conten data-->
+		<f:content>
+			<IconTabBar id="itbFreightOrder" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding "
+				expandable="false" selectedKey="{local>/ExecutionStatusKey}">
+				<items>
+					<IconTabFilter icon="sap-icon://my-sales-order" id="iconAll" text="{i18n>freightOrderAllTab}" key="All" tooltip="{i18n>freightOrderAllTab}"
+						count="{local>/All}"></IconTabFilter>
+					<IconTabSeparator icon="sap-icon://vertical-grip"/>
+					<IconTabFilter id="iconNotStarted" text="{i18n>freightOrderNotStartedTab}" key="NotStarted" icon="sap-icon://appointment-2"
+						tooltip="{i18n>freightOrderNotStartedTab}" count="{local>/NotStarted}" iconColor="Negative"></IconTabFilter>
+					<IconTabFilter id="iconLoadded" key="Loadded" icon="sap-icon://appointment" text="{i18n>freightOrderLoaddedTab}"
+						tooltip="{i18n>freightOrderLoaddedTab}" count="{local>/Loadded}" iconColor="Critical"></IconTabFilter>
+					<IconTabFilter id="iconShipped" key="InExecution" icon="sap-icon://shipping-status" text="{i18n>freightOrderInExecutionTab}"
+						tooltip="{i18n>freightOrderInExecutionTab}" count="{local>/InExecution}" iconColor="Positive"></IconTabFilter>
+					<IconTabSeparator icon="sap-icon://vertical-grip"/>
+				</items>
+				<content>
+					<ScrollContainer horizontal="true" vertical="true">
+						<smartTable:SmartTable entitySet="xSERPTMxFreightOrderSet" smartFilterId="foDynamicFilter" tableType="ResponsiveTable"
+							useExportToExcel="true" useVariantManagement="false" useTablePersonalisation="false" persistencyKey="DynamicFilterPKey"
+							enableAutoBinding="true" id="freightOrderTable" header="{i18n>freightOrderItems}" showRowCount="true" showFullScreenButton="true"
+							demandPopin="false" showOverlay="onShowOverlay" initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind">
+							<smartTable:customToolbar>
+								<OverflowToolbar height="3rem" design="Transparent">
+									<ToolbarSpacer/>
+									<Link text="{i18n>freightOrderTenderAction}" press="onTenderActionPressed" tooltip="{i18n>freightOrderTenderAction}"/>
+									<OverflowToolbarButton id="SingleRate" icon="sap-icon://accounting-document-verification" type="Default" press="onSingleRateClick" tooltip="{i18n>freightOrderRateQuoteSingleAction}"/>
+									<OverflowToolbarButton id="RateShop" icon="sap-icon://accounting-document-verification" type="Default" press="onRateShopClick"
+										tooltip="{i18n>freightOrderRateQuoteMultiAction}"/>
+									<!--<OverflowToolbarButton id="Optimization" icon="sap-icon://accounting-document-verification" type="Default" press="onOptimizationClick"-->
+									<!--	tooltip="{i18n>freightOrderRateQuoteOptimizeAction}"/>-->
+									<OverflowToolbarButton icon="sap-icon://newspaper" tooltip="{i18n>freightOrderRequestRoutingAction}"
+										text="{i18n>freightOrderRequestRoutingAction}" press="onRequestRoutingActionPressed"/>
+									<Link text="{i18n>freightOrderRequestPickupAction}" press="onRequestForPickUpActionPressed" tooltip="{i18n>freightOrderRequestPickupAction}"/>
+									<Link text="{i18n>freightOrderBOLOverwriteAction}" press="onBolOverwritePressed" tooltip="{i18n>freightOrderBOLOverwriteAction}"/>
+									<OverflowToolbarButton icon="sap-icon://decline" tooltip="{i18n>freightOrderRequestPickupAction}"
+										text="{i18n>freightOrderRequestPickupAction}" press="onGroup" type="Reject"/>
+									<OverflowToolbarButton icon="sap-icon://edit" tooltip="{i18n>freightOrderRequestPickupAction}" text="{i18n>freightOrderRequestPickupAction}"
+										press="onGroup"/>
+								</OverflowToolbar>
+							</smartTable:customToolbar>
+							<Table noDataText="{local>/tableNoDataText}" growing="true" growingThreshold="100" showOverlay="false" growingScrollToLoad="false"
+								updateFinished="onUpdatedFreightOrderList" selectionChange="onFreightOrderSelectionChange" mode="SingleSelectLeft" fixedLayout="true">
+								<!--<headerToolbar>-->
+								<!--	<OverflowToolbar>-->
+								<!--		<ToolbarSpacer/>-->
+								<!--		<Link text="{i18n>freightOrderRequestPickupAction}" press="onFreightUnitPressed" tooltip="Freight Unit"/>-->
+								<!--	</OverflowToolbar>-->
+								<!--</headerToolbar>-->
+								<columns>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>freightOrderCol}" wrapping="true"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "FreightOrderNumber", "columnIndex":"0", "leadingProperty": "FreightOrderNumber"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>freightOrderExcStatusCol}" wrapping="true" tooltip="{i18n>freightOrderExcStatusCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ExecutionStatus", "columnIndex":"1", "leadingProperty": "ExecutionStatus"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="6rem">
+										<Text text="{i18n>freightOrderCarrierCol}" wrapping="true" tooltip="{i18n>freightOrderCarrierCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Carrier", "columnIndex":"2", "leadingProperty": "Carrier"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="6rem">
+										<Text text="{i18n>freightOrderCarrierSrvCol}" wrapping="true" tooltip="{i18n>freightOrderCarrierSrvCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "CarrierService", "columnIndex":"3", "leadingProperty": "CarrierService"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="5rem">
+										<Text text="{i18n>freightOrderEquipmentTypeCol}" wrapping="true" tooltip="{i18n>freightOrderEquipmentTypeCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "EquipmentType", "columnIndex":"4", "leadingProperty": "EquipmentType"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>freightOrderSrcLocationCol}" wrapping="true" tooltip="{i18n>freightOrderSrcLocationCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "SourceLocation", "columnIndex":"5", "leadingProperty": "SourceLocation"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>freightOrderDestinationLocCol}" wrapping="true" tooltip="{i18n>freightOrderDestinationLocCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "DestinationLocation", "columnIndex":"6", "leadingProperty": "DestinationLocation"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>freightOrderDestinationLocDesCol}" wrapping="true" tooltip="{i18n>freightOrderDestinationLocDesCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "DestinationLocDesc", "columnIndex":"7", "leadingProperty": "DestinationLocDesc"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="3rem">
+										<Text text="{i18n>freightOrderDangerousGoodCol}" wrapping="true" tooltip="{i18n>freightOrderDangerousGoodCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "DangerousGoods", "columnIndex":"8", "leadingProperty": "DangerousGoods"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="3rem">
+										<Text text="{i18n>freightOrderGrossWeightCol}" wrapping="true" tooltip="{i18n>freightOrderGrossWeightCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "GrossWeight", "columnIndex":"9", "leadingProperty": "GrossWeight"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="3rem">
+										<Text text="{i18n>freightOrderGrossWeightUomCol}" wrapping="true" tooltip="{i18n>freightOrderGrossWeightUomCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "GrossWeightUoM", "columnIndex":"10", "leadingProperty": "GrossWeightUoM"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="2rem">
+										<Text text="{i18n>freightOrderPalletCountCol}" wrapping="true" tooltip="{i18n>freightOrderPalletCountCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "PalletCount", "columnIndex":"11", "leadingProperty": "PalletCount"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="2rem">
+										<Text text="{i18n>freightOrderSubHubCountCol}" wrapping="true" tooltip="{i18n>freightOrderSubHubCountCol}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "SubHUCount", "columnIndex":"12", "leadingProperty": "SubHUCount"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="2rem">
+										<Text text="{i18n>freightOrderFormsCol}" wrapping="true" tooltip="{i18n>freightOrderFormsCol}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Navigation" vAlign="Middle" press="onFreightOrderItemNavPressed">
+										<cells>
+											<Link text="{FreightOrderNumber}" press="onFreightOrderPressed" tooltip="{FreightOrderNumber}" wrapping="true"/>
+											<ObjectStatus text="{path: 'ExecutionStatus', formatter: '.formatter.freightOrderExecutionStatusText'}"
+												state="{path: 'ExecutionStatus', formatter: '.formatter.freightOrderExecutionStatusState'}"/>
+											<ComboBox items="{ path: '/xSERPTMxFODDCarrierSet', sorter: { path: 'CarrierId' },templateShareable:false }" selectedKey="{Carrier}"
+												change="onCarrierChange">
+												<core:Item key="{CarrierId}" text="{parts: [{path: 'CarrierId'}, {path: 'CarrierText'}], formatter: '.formatter.formatComboboxTwoText'}"/>
+											</ComboBox>
+											<Input id="idCarrierService" placeholder="{i18n>freightOrderCarrSrvSelect}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onSelectCarrierService"
+												valueHelpOnly="true" value="{CarrierService}" suggestionItems="{local>/CarrierServices}">
+												<suggestionItems>
+													<core:Item text="{CarrierServiceId}"/>
+												</suggestionItems>
+											</Input>
+											<ComboBox items="{ path: '/xSERPTMxFODDEquipmentSet', sorter: { path: 'EquipmentId' },templateShareable:false }"
+												selectedKey="{EquipmentType}" change="onEquipmentChange">
+												<core:Item key="{EquipmentId}"
+													text="{parts: [{path: 'EquipmentId'}, {path: 'EquipmentText'}], formatter: '.formatter.formatComboboxTwoText'}"/>
+											</ComboBox>
+											<Text text="{SourceLocation}"></Text>
+											<Text text="{DestinationLocation}"></Text>
+											<Text text="{DestinationLocDesc}"></Text>
+											<CheckBox select="onDangerousChange" selected="{path: 'DangerousGoods', formatter: '.formatter.formatDangerousGoods'}"/>
+											<Text text="{path: 'GrossWeight', formatter: '.formatter.formatAmountQty'}"/>
+											<Text text="{GrossWeightUoM}"></Text>
+											<Text text="{PalletCount}"></Text>
+											<Text text="{SubHUCount}"></Text>
+											<Button icon="sap-icon://notes" text="" press="onFormPressed"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</ScrollContainer>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<!-- Footer-->
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>backToFUScreenButton}" press="onNavBackToFreightUnitScreen" type="Emphasized"/>
+				<Button text="{i18n>freightOrderPackButton}" press="onFreightOrderPackButtonPressed" type="Emphasized"/>
+				<Button text="{i18n>freightOrderCloseButton}" press="onFreightOrderCloseButtonPressed" type="Emphasized" class="sapUiTinyMarginEnd"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

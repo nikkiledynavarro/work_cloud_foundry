@@ -1,0 +1,91 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.quickpackewm.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true"
+		selectedSection="iconTabPacking">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:heading>
+					<VBox>
+						<FlexBox alignItems="Center">
+							<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink'}" height="1.5rem" tooltip="logo"/>
+							<Select id="cbInputType" width="13rem" class="margin_right_5px" change="onInputTypeChange">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+								<items>
+									<core:Item text="Outbound Delivery Order" key="01"/>
+								</items>
+							</Select>
+							<MultiInput type="Number" submit="onSubmit" id="txtId" width="13rem" placeholder="Scan one or more documents" class="margin_right_5px"
+								showValueHelp="false">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</MultiInput>
+							<Button icon="sap-icon://refresh" tooltip="Refresh - Shift+F5" type="Emphasized" press="onResetData" id="btnResetData"/>
+						</FlexBox>
+						<FlexBox fitContainer="true" wrap="Wrap">
+							<f:SimpleForm id="SimpleForm" title="" editable="false" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4">
+								<f:content>
+									<core:Title text="Order Information"></core:Title>
+									<Label text="Packaging Material"/>
+									<ComboBox items="{ path: '/xSERPERPxCDS_QP_PACKMATERIAL', length: 9999}" change="onValidatePackagingMaterial" id="txtPackagingMaterial"
+										selectedKey="{local>/general/Pmat}" enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }">
+										<core:ListItem key="{Matnr}" text="{Matnr}"/>
+									</ComboBox>
+									<Label text="Storage Bin"/>
+									<ComboBox items="{ path: 'local>/StorageBin', length: 9999 }" id="txtStorageBin" change="onValidateStorageBin"
+										selectedKey="{local>/general/StorageBin}" enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }">
+										<core:ListItem key="{local>Lgpla}" text="{local>Lgpla} - {local>Lgtyp}"/>
+									</ComboBox>
+									<core:Title text="Scanning"></core:Title>
+									<Label text="Item Barcode/ Material Number"/>
+									<Input type="Text" id="txtItemBarcode" value="{local>/general/Barcode}" submit="onValidateBarcode" placeholder="Enter Item Barcode"
+										showValueHelp="false" enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }"/>
+									<Input type="Text" id="txtMaterialNo" value="{local>/general/Matnr}" submit="onValidateMaterialNumber" placeholder="Enter Material Number"
+										showValueHelp="false" enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }"/>
+									<Label text="Batch Number/ Quantity"/>
+									<Input type="Text" id="txtBatNo" value="{local>/general/Charg}" submit="onValidateBatchNumber" placeholder="Enter Batch Number"
+										showValueHelp="false" enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }"/>
+									<Input type="Text" id="txtQuantity" value="{local>/general/Quantity}" submit="onValidateQuantity" placeholder="Enter Quantity"
+										showValueHelp="false" enabled="false"/>
+									<core:Title text="Ship-From"></core:Title>
+									<Text text="{local>/general/ShipfromName}"/>
+									<Label text=""/>
+									<Text text="{local>/general/ShipfromAddr}"/>
+									<core:Title text="Ship-To"></core:Title>
+									<Text text="{local>/general/ShiptoName}"/>
+									<Label text=""/>
+									<Text text="{local>/general/ShiptoAddr}"/>
+								</f:content>
+							</f:SimpleForm>
+						</FlexBox>
+					</VBox>
+				</uxap:heading>
+				<uxap:navigationActions></uxap:navigationActions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:sections>
+			<uxap:ObjectPageSection id="iconTabPacking">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Contents">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.packing.ItemsPacking" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="idShipmentBtn" press="onExecute" icon="sap-icon://shipping-status"
+					enabled="{= (${local>/isOnlyOneSelected} &amp;&amp; ${local>/Shipped} === true) ? true : false }" type="Accept" text="Ship"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

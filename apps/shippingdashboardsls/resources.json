@@ -1,0 +1,445 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/GlobalFilters-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/GlobalFilters.controller.js"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Chart-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Chart.controller.js"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/ColumnListItemTemplate.fragment.xml"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Component.js"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Content.fragment.xml"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/Header.fragment.xml"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/HeaderTotalNumber.fragment.xml"
+        },
+        {
+            "name": "ext/InvoiceHeaderStatusCard/InvoiceStatus.fragment.xml"
+        },
+        {
+            "name": "ext/OpenActionCard/Chart-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/OpenActionCard/Chart.controller.js"
+        },
+        {
+            "name": "ext/OpenActionCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/OpenActionCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "ext/OpenActionCard/Component.js"
+        },
+        {
+            "name": "ext/OpenActionCard/Content.fragment.xml"
+        },
+        {
+            "name": "ext/QuickLinkCard/Chart-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/QuickLinkCard/Chart.controller.js"
+        },
+        {
+            "name": "ext/QuickLinkCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/QuickLinkCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "ext/QuickLinkCard/Component.js"
+        },
+        {
+            "name": "ext/QuickLinkCard/Content.fragment.xml"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Chart-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Chart.controller.js"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/ColumnListItemTemplate.fragment.xml"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Component.js"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Content.fragment.xml"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Header.fragment.xml"
+        },
+        {
+            "name": "ext/TrackingShipmentCard/Popover.fragment.xml"
+        },
+        {
+            "name": "ext/readme.txt"
+        },
+        {
+            "name": "fragment/GlobalFilters.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "models/OpenActions.json"
+        },
+        {
+            "name": "models/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "models/formatter.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/pages/View1-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/View1.js"
+        },
+        {
+            "name": "test/testsuite.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/unit/AllTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/controller/View1-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/controller/BaseController.js"
+        },
+        {
+            "name": "tmp/controller/GlobalFilters.controller.js"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/ColumnListItemTemplate.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/Component.js"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/Content.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/Header.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/HeaderTotalNumber.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/InvoiceStatus.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/OpenActionCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp/ext/OpenActionCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/ext/OpenActionCard/Component.js"
+        },
+        {
+            "name": "tmp/ext/OpenActionCard/Content.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/QuickLinkCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp/ext/QuickLinkCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/ext/QuickLinkCard/Component.js"
+        },
+        {
+            "name": "tmp/ext/QuickLinkCard/Content.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/ColumnListItemTemplate.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Component.js"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Content.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Header.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/TrackingShipmentCard/Popover.fragment.xml"
+        },
+        {
+            "name": "tmp/ext/readme.txt"
+        },
+        {
+            "name": "tmp/fragment/GlobalFilters.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/models/OpenActions.json"
+        },
+        {
+            "name": "tmp/models/formatter.js"
+        },
+        {
+            "name": "tmp/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.html"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/controller/BaseController.js"
+        },
+        {
+            "name": "tmp-dbg/controller/GlobalFilters.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/InvoiceHeaderStatusCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/InvoiceHeaderStatusCard/Component.js"
+        },
+        {
+            "name": "tmp-dbg/ext/OpenActionCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/OpenActionCard/Component.js"
+        },
+        {
+            "name": "tmp-dbg/ext/QuickLinkCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/QuickLinkCard/Component.js"
+        },
+        {
+            "name": "tmp-dbg/ext/TrackingShipmentCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/TrackingShipmentCard/Component.js"
+        },
+        {
+            "name": "tmp-dbg/models/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/View1.js"
+        },
+        {
+            "name": "tmp-dbg/test/testsuite.qunit.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/AllTests.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/controller/View1.controller.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/unitTests.qunit.js"
+        }
+    ]
+}

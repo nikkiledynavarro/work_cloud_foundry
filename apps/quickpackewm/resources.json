@@ -1,0 +1,193 @@
+{
+    "resources": [
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/ControlUtils.js"
+        },
+        {
+            "name": "common/DynamicView.js"
+        },
+        {
+            "name": "common/UploadUtils.js"
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Home.controller.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "controller/ShipmentDetails.controller.js"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "fragment/CreateProNumber.fragment.xml"
+        },
+        {
+            "name": "fragment/HTS/HTSDisplay.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/SerialDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingStationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/WarehouseNumberDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/freight/TabFreight.fragment.xml"
+        },
+        {
+            "name": "fragment/freightunits/TabFreightUnits.fragment.xml"
+        },
+        {
+            "name": "fragment/general/EditDimensionsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/general/Packaging.fragment.xml"
+        },
+        {
+            "name": "fragment/general/Payment.fragment.xml"
+        },
+        {
+            "name": "fragment/general/Shipment.fragment.xml"
+        },
+        {
+            "name": "fragment/general/TabGeneral.fragment.xml"
+        },
+        {
+            "name": "fragment/handlingunits/MoreOptionsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/handlingunits/TabHandlingUnits.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/ItemsPacking.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/MaterialsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/OverpackDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/packing/PackingOverviewDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/partners/Importer.fragment.xml"
+        },
+        {
+            "name": "fragment/partners/ShipFrom.fragment.xml"
+        },
+        {
+            "name": "fragment/partners/ShipTo.fragment.xml"
+        },
+        {
+            "name": "fragment/partners/SoldTo.fragment.xml"
+        },
+        {
+            "name": "fragment/partners/TabPartners.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_en"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/arrangements/Startup.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.js"
+        },
+        {
+            "name": "test/integration/pages/Main.js"
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/testsuite.qunit.js"
+        },
+        {
+            "name": "test/unit/AllTests.js"
+        },
+        {
+            "name": "test/unit/controller/Main.controller.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.js"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/Home.view.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ShipmentDetails.view.xml"
+        }
+    ]
+}

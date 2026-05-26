@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog contentWidth="400px" contentHeight="auto">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Title text="Save As Template"/>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" press="onCancelTemplate" type="Reject"/>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<FlexBox class="sapUiSmallMarginTopBottom">
+				<HBox alignItems="Center" justifyContent="End">
+					<Label text="Template Name:" width="10rem" textAlign="End" class="sapUiSmallMarginEnd"/>
+					<Input value="{local>/template/Name}" submit="onSaveAsTemplate" width="10rem"/>
+				</HBox>
+			</FlexBox>
+		</content>
+		<beginButton>
+			<Button text="Ok" press="onSaveAsTemplate" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCancelTemplatePress" type="Default"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

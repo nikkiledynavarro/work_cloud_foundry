@@ -1,0 +1,40 @@
+(function () {
+	"use strict";
+	/*global jQuery, sap */
+
+	jQuery.sap.declare("com.erpis.shiperp.shippingdashboardhr7.Component");
+	jQuery.sap.require("sap.ovp.cards.custom.Component");
+
+	sap.ovp.cards.custom.Component.extend("com.erpis.shiperp.shippingdashboardhr7.ext.QuickLinkCard.Component", {
+		// use inline declaration instead of component.json to save a round trip
+		// Here "Path" denotes a relative path of your fragment/controller from webapp
+
+		metadata: {
+			properties: {
+				"contentFragment": {
+					"type": "string",
+					"defaultValue": "com.erpis.shiperp.shippingdashboardhr7.ext.QuickLinkCard.Content" // Here you have to put the "Path" to the content fragment you want for your custom card
+				}
+			},
+
+			version: "@version@",
+
+			library: "sap.ovp",
+
+			includes: [],
+
+			dependencies: {
+				libs: [],
+				components: []
+			},
+			config: {},
+			customizing: {
+				"sap.ui.controllerExtensions": {
+					"sap.ovp.cards.generic.Card": {
+						controllerName: "com.erpis.shiperp.shippingdashboardhr7.ext.QuickLinkCard.Chart" // Here you have to put the "Path" to the controller for your custom card
+					}
+				}
+			}
+		}
+	});
+})();

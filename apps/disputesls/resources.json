@@ -1,0 +1,148 @@
+{
+    "resources": [
+        {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/DisputeDetail.controller.js"
+        },
+        {
+            "name": "controller/DisputeList.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
+        },
+        {
+            "name": "fragment/CarrierValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/CompanyCodeValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/CreditAtmUpdate.fragment.xml"
+        },
+        {
+            "name": "fragment/DeletedListDispute.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeConsolListDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeDetailNoDataDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeListColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/NoteAndAttachment.fragment.xml"
+        },
+        {
+            "name": "fragment/StatusUpdate.fragment.xml"
+        },
+        {
+            "name": "fragment/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/UpdateReasonAndNote.fragment.xml"
+        },
+        {
+            "name": "fragment/UploadCollectionItemTemplate.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/DisputeDetail.view.xml"
+        },
+        {
+            "name": "view/DisputeList.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        }
+    ]
+}

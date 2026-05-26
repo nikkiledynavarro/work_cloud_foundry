@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<smartFilterBar:SmartFilterBar entitySet="DocumentListSet" id="DynamicFilter" assignedFiltersChanged="onAssignedFiltersChanged"
+		persistencyKey="DynamicFilterPKey" useToolbar="false" considerSelectionVariants="true">
+		<!--Shipment Filter -->
+		<smartFilterBar:controlConfiguration>
+			<!--Delivery Created On-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="CreatedOn" label="{i18n>deliveryCreatedOn}" visibleInAdvancedArea="true"
+				controlType="date" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="dateCreatedOn" delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Delivery Document-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="Vbeln" label="{i18n>deliveryDocument}" visibleInAdvancedArea="true"
+				filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiInput id="idDeliveryDoc" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+	</smartFilterBar:SmartFilterBar>
+</core:FragmentDefinition>

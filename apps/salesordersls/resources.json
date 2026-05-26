@@ -1,0 +1,208 @@
+{
+    "resources": [
+        {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
+        },
+        {
+            "name": "common/ControlUtils.js"
+        },
+        {
+            "name": "common/DynamicView.js"
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/CreateSO.controller.js"
+        },
+        {
+            "name": "controller/Detail.controller.js"
+        },
+        {
+            "name": "controller/Detail2.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/Master.controller.js"
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
+        },
+        {
+            "name": "fragment/CarrierAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CarrierService.fragment.xml"
+        },
+        {
+            "name": "fragment/CreateHUDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/CustomerDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/EditHUDimensionDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MasterListTemplate.fragment.xml"
+        },
+        {
+            "name": "fragment/MaterialDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/MessagePopover.fragment.xml"
+        },
+        {
+            "name": "fragment/MoreOptionsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/OrderDetail.fragment.xml"
+        },
+        {
+            "name": "fragment/OrderItems.fragment.xml"
+        },
+        {
+            "name": "fragment/PackMatDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PackingProposalDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PackingProposalSimulationDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/PlantDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateAnalysisDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RateDetailsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/RatePricingsDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/RatesDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/SearchOptionDateRangeDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/SearchOptionDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/SelectSalesAreaDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShippingPointDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ShipsetItemDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/Shipsets.fragment.xml"
+        },
+        {
+            "name": "fragment/UoMDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/ValidateAddressDialog.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/CreateSO.view.xml"
+        },
+        {
+            "name": "view/Detail.view.xml"
+        },
+        {
+            "name": "view/Detail2.view.xml"
+        },
+        {
+            "name": "view/DetailObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/Master.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        }
+    ]
+}

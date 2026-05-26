@@ -1,0 +1,109 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:uxap="sap.uxap" xmlns:form="sap.ui.layout.form">
+	<uxap:ObjectPageLayout id="ObjectPe" enableLazyLoading="true" showFooter="false" useIconTabBar="false" height="100%"
+		toggleHeaderOnTitleClick="true" alwaysShowContentHeader="false" useTwoColumnsForLargeScreen="true" headerContentPinnable="true"
+		preserveHeaderStateOnScroll="true" backgroundDesignAnchorBar="Transparent">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:expandedHeading>
+					<FlexBox fitContainer="true" alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="Open Deliveries for Shipment"/>
+					</FlexBox>
+				</uxap:expandedHeading>
+				<uxap:snappedHeading>
+					<FlexBox fitContainer="true" alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="Open Deliveries for Shipment"/>
+					</FlexBox>
+				</uxap:snappedHeading>
+				<uxap:actions>
+					<Button id="idShipButton" icon="sap-icon://shipping-status" text="Ship" type="Emphasized" press="onShipmentPress">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="High"/>
+						</layoutData>
+					</Button>
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<form:Form editable="true">
+				<form:layout>
+					<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+						emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false"/>
+				</form:layout>
+				<form:formContainers>
+					<form:FormContainer expanded="true">
+						<form:formElements>
+							<form:FormElement>
+								<form:label>
+									<Label text="Created On"/>
+								</form:label>
+								<form:fields>
+									<DateRangeSelection width="200px" id="idDateTimeHeader" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement >
+								<form:label>
+									<Label text="Shipment Status"/>
+								</form:label>
+								<form:fields>
+									<ComboBox width="200px" class="sapUiTinyMarginEnd" selectedKey="{local>/ObjectTypeKey}" change="handleChange" items="{user>/objectTypes}">
+										<core:Item key="{user>objectType}" text="{user>description}"></core:Item>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement >
+								<form:label>
+									<Label text="Store Number"/>
+								</form:label>
+								<form:fields>
+									<Input width="200px" id="txtHUNo" type="Number" submit="onCreateHU"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+			</form:Form>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection titleUppercase="false" showTitle="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection titleUppercase="false">
+						<uxap:blocks>
+							<List inset="false" id="idF4ConfigHeaders" mode="MultiSelect" growing="true" growingThreshold="100" width="auto" busyIndicatorDelay="10"
+								updateFinished="onHeaderListUpdateFinish">
+								<headerToolbar>
+									<Toolbar>
+										<SearchField id="idSearchOn" placeholder="Search" search="onSearchHeader"/>
+									</Toolbar>
+								</headerToolbar>
+								<items>
+									<CustomListItem type="Navigation">
+										<HBox>
+											<core:Icon color="#00688B" size="3rem" src="sap-icon://sales-document" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"/>
+											<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+												<ObjectAttribute title="Delivery" text="{AdminModel>duration}"></ObjectAttribute>
+											</VBox>
+										</HBox>
+										<FlexBox alignItems="Center" justifyContent="SpaceBetween" width="100%" class="sapUiTinyMarginBegin">
+											<VBox justifyContent="SpaceBetween">
+												<ObjectAttribute title="Cust.Ref" text="{AdminModel>duration}"></ObjectAttribute>
+												<ObjectAttribute title="Sale Order" text="{AdminModel>isActive}"></ObjectAttribute>
+												<ObjectAttribute title="Ship To" text="{AdminModel>isActive}"></ObjectAttribute>
+											</VBox>
+											<VBox>
+												<Text text="10/09/2023" class="sapUiTinyMarginEnd"/>
+												<ObjectStatus text="Completely Processed" state="Success" class="sapUiTinyMarginEnd"/>
+											</VBox>
+										</FlexBox>
+									</CustomListItem>
+								</items>
+							</List>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</core:FragmentDefinition>

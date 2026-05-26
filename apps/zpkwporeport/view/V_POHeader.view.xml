@@ -1,0 +1,20 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="z.zpkw_poreport.controller.V_POHeader">
+	<App>
+		<pages>
+			<Page title="Purchase Order Overview">
+			<content>
+			    <Select xmlns="sap.m" id="select2" items="{/POHeaderSet}" change="OnItemChange">
+			        <items>
+			            <core:Item xmlns:core="sap.ui.core" key="item-key-1" text="{Ebeln}" id="item5"/>
+			            </items>
+			        
+			    </Select><List noDataText="Drop list items here" id="list4" items="{/POHeaderSet}">
+			        <items>
+			            <StandardListItem type="Navigation" title="PO# {Ebeln}" id="item7" press="GoToPODetail"/>
+			        </items>
+			    </List>
+			</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,87 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Add Contents">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Product"/>
+								</form:label>
+								<form:fields>
+									<Input id="idMaterial" submit="onChangMaterialNoDetailPress" value="{local>/AddContentsDetail/material}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Description"/>
+								</form:label>
+								<form:fields>
+									<Input id="idDescription" submit="onChangMaterialNoDetailPress" value="{local>/AddContentsDetail/productText}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Weight/UOM"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWeightunit" value="{local>/AddContentsDetail/weight}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idUOM" value="{local>/AddContentsDetail/uom}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Quantity/UOM"/>
+								</form:label>
+								<form:fields>
+									<Input id="idQuantity" value="{local>/AddContentsDetail/qty_uom}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idUOMValue" value="{local>/AddContentsDetail/weightunit}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Net Value/ Unit Price/ Currency"/>
+								</form:label>
+								<form:fields>
+									<Input id="idHeightNeValue" value="{local>/AddContentsDetail/netvalue}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idHeightUnit" value="{local>/AddContentsDetail/unitprice}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idHeightCurrency" value="{local>/AddContentsDetail/currency}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Harmonized Code/ COO"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWeightHarmonized" value="{local>/AddContentsDetail/harmonizedcode}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWeightunitCOO" value="{local>/AddContentsDetail/ctryoforigin}"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="1" labelSpanL="3" columnsM="1" labelSpanM="4" labelSpanS="4"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Emphasized" press="onProductionDetailPress"/>
+		</beginButton>
+		<endButton>
+			<Button press="onProductDetailsClose" text="Cancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

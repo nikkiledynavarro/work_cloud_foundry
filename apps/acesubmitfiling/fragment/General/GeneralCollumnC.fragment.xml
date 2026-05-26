@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text=""/>
+	<CheckBox selected="{local>/basic/general/sub_general/Rcc}" text="{i18n>relatedCompanies}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<Label text=""/>
+	<CheckBox selected="{local>/basic/general/sub_general/Haz}" text="{i18n>hazardousCargo}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<Label text=""/>
+	<CheckBox selected="{local>/basic/general/sub_general/Rt}" text="{i18n>routedTransFlag}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+</core:FragmentDefinition>

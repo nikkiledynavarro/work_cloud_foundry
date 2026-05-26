@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Deliveries" contentWidth="1100px" contentHeight="600px">
+		<content>
+			<VBox class="sapUiSmallMargin sapUiResponsiveMargin">
+				<Table id="idDeliveries" mode="MultiSelect" showSeparators="All" growing="false"
+					items="{path: 'local>/aDeliveriesList', templateShareable:false}">
+					<headerToolbar>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Label text="Search: "></Label>
+							<SearchField placeholder="Delivery" search="onSearchDelivery" width="15rem"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column vAlign="Middle" hAlign="Center">
+							<Text text="Delivery Number"/>
+						</Column>
+						<Column vAlign="Middle" hAlign="Center">
+							<Text text="Delivery Type"/>
+						</Column>
+						<Column vAlign="Middle" hAlign="End">
+							<Text text="Ship To"/>
+						</Column>
+						<Column vAlign="Middle" hAlign="End">
+							<Text text="Created On"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{local>Delivery}"></Text>
+								<Text text="{local>DelivType}"></Text>
+								<Text text="{local>ShipTo}"></Text>
+								<Text text="{local>CreatedOn}"></Text>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Accept" press="onAcceptShipmentPress"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onCancelPopup"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

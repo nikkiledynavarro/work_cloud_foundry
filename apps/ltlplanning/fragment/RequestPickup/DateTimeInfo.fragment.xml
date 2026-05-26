@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--DoorNr-->
+	<Label text="DoorNr"/>
+	<ComboBox id="idDoorNr" change="onChangeDoor" items="{path: '/xSERPERPxCDS_LTLPLAN_DOOR'}" selectedKey="{local>/PickupRequestInfo/Doornumr}"
+		value="{local>/PickupRequestInfo/Doornumr}" class="sapUiTinyMarginEnd" width="11rem">
+		<core:Item key="{Doorn}" text="{Descr}"/>
+	</ComboBox>
+	<!--Pick Up Date-->
+	<Label text="Pick Up Date"/>
+	<DatePicker id="idPickupDate" placeholder="Pick Up Date"
+		value="{path:'local>/PickupRequestInfo/Pudate', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yyyy'}}" width="16rem"/>
+	<!--Pick Up Time	-->
+	<Label text="Pick Up Time"/>
+	<TimePicker value="{path:'local>/PickupRequestInfo/Putime', type:'sap.ui.model.type.Time', formatOptions:{pattern:'HH:mm:ss'}}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss" width="14rem"/>
+	<!--Dock Open Time-->
+	<Label text="Dock Open Time"/>
+	<TimePicker
+		value="{path: 'local>/PickupRequestInfo/Dockopen', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss" width="14rem"/>
+	<!--Door Close Time-->
+	<Label text="Dock Closed Time"/>
+	<TimePicker
+		value="{path: 'local>/PickupRequestInfo/Dockclos', type: 'sap.ui.model.type.Time', formatOptions: {pattern: 'HH:mm:ss'}}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss" width="14rem"/>
+</core:FragmentDefinition>

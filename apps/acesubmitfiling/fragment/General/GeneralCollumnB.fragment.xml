@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Transportation ref no-->
+	<Label text="{i18n>transportationRefNo}"/>
+	<Input id="idTransportaionRN" value="{local>/basic/general/sub_general/Bn}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Departure date-->
+	<Label text="{i18n>departureDate}"/>
+	<DatePicker id="idDepartureDate" value="{path:'local>/basic/general/sub_general/Eda'}" valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Mode of transport-->
+	<Label text="{i18n>modeOfTransport}"/>
+	<ComboBox id="idModeOT" items="{ path: '/xSERPERPxCDS_MODET' }" selectedKey="{local>/basic/general/sub_general/Mot}"
+		selectionChange="onServiceChange" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{Mot}" text="{MotDesc}"></core:Item>
+	</ComboBox>
+	<!--Carrier-->
+	<Label text="{i18n>carrier}"/>
+	<ComboBox id="idCarrier" items="{ path: 'local>/Carrieres' }" selectedKey="{local>/basic/general/sub_general/Scac}"
+		selectionChange="onServiceChange" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{local>Scac}" text="{local>Scac} - {local>ScacDesc}"></core:Item>
+	</ComboBox>
+	<!--Converyance name-->
+	<Label text="{i18n>conveyanceName}"/>
+	<Input value="{local>/basic/general/sub_general/Vn}" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Vessel flag-->
+	<Label text="{i18n>vesselFlag}"/>
+	<ComboBox id="idVessalFalge" items="{ path: '/xSERPERPxCDS_VESSELFLAG', length: 9999 }" selectedKey="{local>/basic/general/sub_general/Vf}"
+		selectionChange="onServiceChange" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{Land1}" text="{Land1} - {Landx}"></core:Item>
+	</ComboBox>
+	<!--Inbond type-->
+	<Label text="{i18n>inbondType}"/>
+	<ComboBox id="idInboudType" items="{ path: '/xSERPERPxCDS_IBTYP', length: 9999 }" selectedKey="{local>/basic/general/sub_general/Ibt}"
+		selectionChange="onServiceChange" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{Ibt}" text="{IbtDesc}"></core:Item>
+	</ComboBox>
+	<!--Original itn number-->
+	<Label text="{i18n>originalITNNumber}"/>
+	<Input id="idOriginalIN" value="{local>/basic/general/sub_general/OrigItn}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+</core:FragmentDefinition>

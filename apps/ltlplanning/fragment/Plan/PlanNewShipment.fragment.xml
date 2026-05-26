@@ -1,0 +1,101 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="idPlanNewShipment" title="{i18n>newShipment}" contentWidth="650px" contentHeight="700px">
+		<!--Content-->
+		<content>
+			<Text text="{i18n>planNewShipmentText}" class="sapUiTinyMarginBegin sapUiSmallMarginTop"/>
+			<f:SimpleForm layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<VBox>
+						<!-- General Section -->
+						<Title text="{i18n>general}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Carrier / Service-->
+							<Label text="Carrier/ Service" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idCarrierPlan" change="onChangeCarrier" items="{path: '/xSERPERPxCDS_LTLPLAN_CARR'}"
+								selectedKey="{local>/PlanData/General_Data/Carrier}" class="sapUiTinyMarginEnd" width="14rem">
+								<core:Item key="{Code}" text="{Description}"/>
+							</ComboBox>
+							<ComboBox id="idServicePlan" change="onChangeServicePlan" items="{path: '/xSERPERPxCDS_LTLPLAN_SERVICES'}"
+								selectedKey="{local>/PlanData/General_Data/Service}" width="13rem">
+								<core:Item key="{Service}" text="{Description}"/>
+							</ComboBox>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Shipment Description-->
+							<Label text="{i18n>shipmentDescription}" class="sapUiTinyMarginEnd"/>
+							<Input id="idShipmentDescription" value="{local>/PlanData/General_Data/ShipmentDesc}" width="25rem"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Pallets-->
+							<Label text="{i18n>pallets}" class="sapUiTinyMarginEnd"/>
+							<Input id="idPallets" value="{local>/PlanData/General_Data/PalletCount}" width="5rem" class="sapUiTinyMarginEnd"/>
+							<!--Packages-->
+							<Label text="{i18n>packages}" class="sapUiTinyMarginEnd"/>
+							<Input id="idPackages" value="{local>/PlanData/General_Data/PieceCount}" width="5rem" class="sapUiTinyMarginEnd"/>
+							<!--Weight-->
+							<Label text="{i18n>weight}" class="sapUiTinyMarginEnd"/>
+							<Input id="idWeight" width="12rem" value="{local>/PlanData/General_Data/Weight}"/>
+						</HBox>
+						<!--Is Break Bulk-->
+						<CheckBox id="idIsBreakBulk" text="{i18n>isBreakBulk}" selected="{local>/PlanData/General_Data/Isbreakbulk}"/>
+						<!-- Payment Section -->
+						<Title text="{i18n>payment}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Billing Option-->
+							<Label text="{i18n>billingOption}" class="sapUiTinyMarginEnd"/>
+							<ComboBox id="idBillingOption" change="onChangeBillingOption" items="{path: '/xSERPERPxCDS_LTLPLAN_BILLOPT'}"
+								value="{local>/PlanData/Payment_Data/BillingOption}" selectedKey="{local>/PlanData/Payment_Data/BillingOption}">
+								<core:Item key="{Code}" text="{Code}"/>
+							</ComboBox>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Third Party Account-->
+							<Label text="{i18n>thirdPartyAccount}" class="sapUiTinyMarginEnd"/>
+							<Input id="idThirdPartyAccount" value="{local>/PlanData/Payment_Data/ThirdpartyAcct}" width="15rem"
+								enabled="{= (${local>/PlanData/Payment_Data/BillingOption} === '3PRTY') ? true : false }"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Third Party Zip-->
+							<Label text="{i18n>thirdPartyZip}" class="sapUiTinyMarginEnd"/>
+							<Input id="idThirdPartyZip" value="{local>/PlanData/Payment_Data/ThirdpartyZip}" width="17rem"
+								enabled="{= (${local>/PlanData/Payment_Data/BillingOption} === '3PRTY') ? true : false }"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Third Party Country-->
+							<Label text="{i18n>thirdPartyCountry}" class="sapUiTinyMarginEnd"/>
+							<Input id="idThirdPartyCountry" value="{local>/PlanData/Payment_Data/ThirdpartyCtry}" width="15rem"
+								enabled="{= (${local>/PlanData/Payment_Data/BillingOption} === '3PRTY') ? true : false }"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<!--Manual Update Billing-->
+							<CheckBox id="idManualUpdateBilling" text="{i18n>manualUpdateBilling}" selected="{local>/PlanData/Payment_Data/ManupdB}"
+								class="sapUiSmallMarginEnd"/>
+							<!--Manual Update Third Party-->
+							<CheckBox id="idManualUpdateThirdParty" text="{i18n>manualUpdateThirdParty}" selected="{local>/PlanData/Payment_Data/ManupdA}"/>
+						</HBox>
+						<!-- Additional Data Section -->
+						<Title text="{i18n>additionalData}" class="sapUiMediumMarginTop"/>
+						<HBox alignItems="Center">
+							<!--Sales Org-->
+							<Label text="{i18n>salesOrg}" class="sapUiTinyMarginEnd"/>
+							<Input id="idSalesOrg" value="{local>/PlanData/Additional_Data_Section/salesOrg}" width="5rem" class="sapUiSmallMarginEnd"/>
+							<!--Distribution Channel-->
+							<Label text="{i18n>distributionChannel}" class="sapUiTinyMarginEnd"/>
+							<Input id="idDistributionChannel" value="{local>/PlanData/Additional_Data_Section/distributionChannel}" width="5rem" class="sapUiSmallMarginEnd"/>
+							<!--Division-->
+							<Label text="{i18n>division}" class="sapUiTinyMarginEnd"/>
+							<Input id="idDivision" value="{local>/PlanData/Additional_Data_Section/division}" width="5rem"/>
+						</HBox>
+					</VBox>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<!-- Button -->
+		<beginButton>
+			<Button text="{i18n>btnCreateNewShipment}" press="onAcceptNewShipment" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>btnCancel}" press="onCancelNewShipment" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

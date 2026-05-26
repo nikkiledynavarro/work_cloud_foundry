@@ -1,0 +1,72 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<core:Title text="Clearance Requirements"></core:Title>
+	<Label text="Term of Sale"></Label>
+	<ComboBox id="cbUPSTermOfSale" tooltip="Term of Sale" selectedKey="{local>/basic/international/termofsale}" items="{/xSERPERPxCDS_SLTERM}">
+		<core:Item text="{Description}" key="{TermID}"></core:Item>
+	</ComboBox>
+	<Label text="Freight/Insurance Charge"/>
+	<Input placeholder="Freight Charge" value="{local>/basic/international/freightcharge}"/>
+	<Input placeholder="Insurance Charge" value="{local>/basic/international/insurancecharge}"/>
+	<Label text="Shipping Document"></Label>
+	<CheckBox text="Commercial Invoice" selected="{local>/basic/international/shipping_docs/cominv}"/>
+	<CheckBox text="USMCA Cert. of Origin" editable= "false" selected="{local>/basic/international/shipping_docs/ncoo}"/>
+	<Label></Label>
+	<CheckBox text="Certificate of Origin" selected="{local>/basic/international/shipping_docs/coo}"/>
+	<CheckBox text="Pro Forma Invoice" selected="{local>/basic/international/shipping_docs/pfinv}"/>
+	<Label></Label>
+	<CheckBox text="Shipper's Export Declaration" tooltip="Shipper's Export Declaration"
+		selected="{local>/basic/international/shipping_docs/sed}"/>
+	<CheckBox text="Send Paperless" selected="{local>/basic/international/shipping_docs/send_paperless}"/>
+	<Label></Label>
+	<Label text="Reason for Export"/>
+	<ComboBox selectedKey="{local>/basic/international/reasonexportcode}" items="{/xSERPERPxCDS_RSNEX}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Button type="Emphasized" text="USMCA Details" press="onNAFTAPress"/>
+	<Button type="Emphasized" text="Commercial Invoice" visible="{local>/basic/international/shipping_docs/cominv}" press="onComercialInvoicePress"/>
+	<Label></Label>
+	<Label text="Purpose of Sale"/>
+	<ComboBox id="cbUPSSalePurpose" selectedKey="{local>/basic/international/salepurpose}" items="{/xSERPERPxCDS_POSALE}">
+		<core:Item text="{Description}" key="{PurposeofSale}"></core:Item>
+	</ComboBox>
+	<Label text="Regulatory Control"/>
+	<ComboBox id="cbUPSRegulatoryControl" selectedKey="{local>/basic/international/regcontrol}" items="{/xSERPERPxCDS_REGCTRL}">
+		<core:Item text="{Description}" key="{Regcontrol}"></core:Item>
+	</ComboBox>
+	<core:Title text="SED/EEI Filling"></core:Title>
+	<Label text="Sender Tin Type"/>
+	<ComboBox id="cbUPSTinType" tooltip="Sender Tin Type" selectedKey="{local>/basic/international/sendertintype}"
+		items="{/xSERPERPxCDS_TINTYPE}">
+		<core:Item text="{Description}" key="{TinType}"></core:Item>
+	</ComboBox>
+	<Label text="ITN Number (AES)"/>
+	<Input placeholder="ITN Number (AES)" tooltip="ITN Number (AES)" value="{local>/basic/international/itnnumber}"/>
+	<Label text="Inbond type"/>
+	<ComboBox tooltip="Inbond type" selectedKey="{local>/basic/international/inboundtype}" items="{/xSERPERPxI_PCINBOUND}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Input placeholder="Entry Number" tooltip="Entry Number" value="{local>/basic/international/entrynumber}"/>
+	<Label text="Trans mode/Point.Orig" tooltip="Mode of Transport/Point of origin"/>
+	<ComboBox tooltip="Mode of Transport" selectedKey="{local>/basic/international/modeoftransport}" items="{/xSERPERPxCDS_MODETRA}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Input tooltip="Point of origin" placeholder="Point of origin" value="{local>/basic/international/pointoforigin}"/>
+	<Label text="Port of Export/Unloading"></Label>
+	<Input placeholder="Port of Export" tooltip="Port of Export" value="{local>/basic/international/portofexport}"/>
+	<Input placeholder="Port of Unloading" tooltip="Port of Unloading" value="{local>/basic/international/portofunloading}"/>
+	<Label text="Loading Pier"></Label>
+	<Input placeholder="Loading Pier" tooltip="Loading Pier" value="{local>/basic/international/loadingpier}"/>
+	<Label text="License"/>
+	<Input value="{local>/basic/international/license}"/>
+	<DatePicker placeholder="License Date" value="{local>/basic/international/licensedate}"/>
+	<Label text="LIC Exception Code"/>
+	<ComboBox tooltip="LIC Exception Code" selectedKey="{local>/basic/international/licenseexceptioncode}" items="{/xSERPERPxI_PCLICEXP}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label text="ECCN Number"/>
+	<Input value="{local>/basic/international/eccnnumber}"/>
+	<Label text=""/>
+	<CheckBox text="Routed Export Transaction" tooltip="Routed Export Transaction" selected="{local>/basic/international/routedexporttrans}"/>
+	<Label text=""/>
+	<CheckBox text="Containerized (vessel only)" tooltip="Containerized (vessel only)" selected="{local>/basic/international/containerized}"/>
+</core:FragmentDefinition>

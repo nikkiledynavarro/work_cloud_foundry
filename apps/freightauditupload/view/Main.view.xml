@@ -1,0 +1,102 @@
+<mvc:View controllerName="com.erpis.shiperp.freightauditupload.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:u="sap.ui.unified"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<VBox class="sapUiSmallMargin">
+				<!-- Radio -->
+				<RadioButtonGroup select=".onSelectDirType" visible="{local>/isDirTypeVisible}">
+					<buttons>
+						<RadioButton text="Local Directory">
+							<customData>
+								<core:CustomData key="mode" value="LocalDirectory"/>
+							</customData>
+						</RadioButton>
+						<RadioButton text="App Server Directory">
+							<customData>
+								<core:CustomData key="mode" value="ServerDirectory"/>
+							</customData>
+						</RadioButton>
+					</buttons>
+				</RadioButtonGroup>
+				<!-- screen 1: Local Directory -->
+				<VBox visible="{= ${local>/mode} === 'LocalDirectory' }" width="100%" class="sapUiSmallMarginTop">
+					<HBox width="100%" alignItems="Start" justifyContent="Start" wrap="Wrap">
+						<!-- Audit File Path -->
+						<VBox class="sapUiSmallMarginEnd" width="35%">
+							<Label text="Audit File Path" design="Bold" required="true"/>
+							<u:FileUploader width="100%" id="fuTemplateData" name="TemplateData" sameFilenameAllowed="true" tooltip="Import your Template Data"
+								placeholder="Import your Template Data" change="onImportDataFileChange" iconOnly="false"
+								mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+								<u:parameters>
+									<u:FileUploaderParameter name="Accept-CH" value="Width"/>
+								</u:parameters>
+							</u:FileUploader>
+							<!--<Button class="sapUiTinyMarginTop" press="onStartImportTemplates" tooltip="Start Import Data" type="Emphasized" text="Start Import"-->
+							<!--	width="100%"/>-->
+							<Label text=""/>
+							<!--  Header Row -->
+							<VBox class="sapUiSmallMarginEnd" width="35%">
+								<Label text="Header Row" design="Bold" required="true"/>
+								<CheckBox id="chkHeaderRowLocal" width="100%" selected="{local>/LocalDirectory/HeaderRow}"/>
+							</VBox>
+							<!-- Vendor -->
+							<VBox class="sapUiSmallMarginEnd" width="100%">
+								<Label text="Vendor" design="Bold" required="true"/>
+								<ComboBox id="inpVendorLocal" width="100%" items="{path: '/xSERPERPxFA_VENDOR'}" selectedKey="{local>/LocalDirectory/Vendor}">
+									<core:Item key="{Vendor}" text="{Vendor} - {Land1} - {Name1}"></core:Item>
+								</ComboBox>
+							</VBox>
+						</VBox>
+					</HBox>
+				</VBox>
+				<!-- screen 2: App Server Directory -->
+				<VBox visible="{= ${local>/isDirTypeVisible} &amp;&amp; ${local>/mode} === 'ServerDirectory' }" width="100%" class="sapUiSmallMarginTop">
+					<HBox width="100%" alignItems="Start" justifyContent="Start" wrap="Wrap">
+						<VBox class="sapUiSmallMarginEnd" width="35%">
+							<!-- Header Row -->
+							<VBox class="sapUiSmallMarginEnd" width="25%">
+								<Label text="Header Row" design="Bold" required="true"/>
+								<CheckBox id="chkHeaderRowServer" selected="{local>/ServerDirectory/HeaderRow}"/>
+							</VBox>
+							<!-- Vendor -->
+							<VBox class="sapUiSmallMarginEnd" width="100%">
+								<Label text="Vendor" design="Bold" required="true"/>
+								<ComboBox id="inpVendorServer" width="100%" items="{path: '/xSERPERPxFA_VENDOR'}" selectedKey="{local>/ServerDirectory/Vendor}">
+									<core:Item key="{Vendor}" text="{Vendor} - {Land1} - {Name1}"></core:Item>
+								</ComboBox>
+							</VBox>
+							<!-- Button -->
+							<VBox class="sapUiSmallMarginEnd" width="100%">
+								<Label text=" "/>
+								<Button press="onServerDirectoryConf" tooltip="Server Directory Configuration" type="Emphasized" text="Server Directory Configuration"
+									width="100%"/>
+							</VBox>
+						</VBox>
+					</HBox>
+				</VBox>
+			</VBox>
+		</f:content>
+		<!--DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar id="idToolbarFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="idShipmentBtn" press="onExecute" icon="sap-icon://shipping-status"
+					enabled="{= (${local>/basic} &amp;&amp; ${local>/Submit} === true) ? false : true }" type="Accept" text="{i18n>submit}"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

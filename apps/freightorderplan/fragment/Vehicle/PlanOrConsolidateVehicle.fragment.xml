@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>planOrConsolidateDialogTitle}">
+		<Text text="Do you want to plan or consolidate to an existing VEH?" class="sapUiTinyMarginBegin"/>
+		<Table class="sapUiTinyMargin border_lightgray_nobottom" width="500px" id="idPlanOrConsolidateVEH" selectionChange="onSelectionVehicleConsolidate" mode="MultiSelect"
+			items="{path:'local>/aAvailableVehicleList', sorter: { path: 'VehNumExt', descending: false }}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<SearchField width="90%" showSearchButton="true" search="onSearchConsolidateVehicle" class="sapUiTinyMarginBegin"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column hAlign="Center"></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Inactive">
+					<cells>
+						<Text text="{local>VehNumExt}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<buttons>
+			<Button text=" Plan to New VEH" press="onPlantoNewVehiclePressed" type="Accept"/>
+			<Button enabled="{=${local>/aAvailableVehicleList}.length >0 ?true:false}" text="Consolidate to Existing VEH" press="onAssignToVehiclePressed"
+				type="Emphasized"/>
+			<Button text="{i18n>planOrConsolidateDialogCancel}" press="onClosePlan" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table id="tblFreightUnitDetail" class="border_lightgray_nobottom" width="100%" mode="None" busyIndicatorDelay="99999"
+		growingScrollToLoad="true" items="{path: 'local>/FreightUnitItems', sorter: [{path: 'ItemNo', descending: false}] }" growing="true"
+		growingThreshold="100" fixedLayout="false">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Text text="{i18n>freightUnitDetailItem}"/>
+				<ToolbarSeparator/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column hAlign="Center">
+				<Text text="{i18n>freightUnitDetaillItemCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillProductCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillProdDesCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillQtyCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillUoMCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillGWCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillGWUomCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillGVCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>freightUnitDetaillGVUomCol}"/>
+			</Column>
+		</columns>
+		<ColumnListItem type="Inactive">
+			<cells>
+				<Text text="{local>ItemNo}"/>
+				<Text text="{local>Product}"/>
+				<Text text="{local>ProductDesc}"/>
+				<Text text="{path: 'local>Quantity', formatter: '.formatter.formatAmountQty'}"/>
+				<Text text="{local>UoM}"/>
+				<Text text="{path: 'local>GrossWeight', formatter: '.formatter.formatAmountQty'}"/>
+				<Text text="{local>GrossWeightUoM}"/>
+				<Text text="{path: 'local>GrossVolumn', formatter: '.formatter.formatAmountQty'}"/>
+				<Text text="{local>GrossVolumnUoM}"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

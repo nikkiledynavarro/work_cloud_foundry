@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+			singleContainerFullSize="false">
+			<f:content>
+				<core:Title text=" "></core:Title>
+				<Label text="Weight"/>
+				<ComboBox id="idWeightInput" selectedKey="{local>/basic/general/Weightoption}" enabled="true" change="onSelectionWeightOntion">
+					<core:Item key="1" text="Via External Scale"/>
+					<core:Item key="2" text="Via Hu"/>
+					<core:Item key="3" text="Via Manual Entry"/>
+					<core:Item key="4" text="Via Delivery"/>
+					<core:Item key="5" text="Via Custom Dims"/>
+				</ComboBox>
+				<Label text="Dimensions input"/>
+				<ComboBox id="idDimensions" selectedKey="{local>/basic/general/Dimoption}" enabled="true" change="onSelectionDimensionOntion">
+					<core:Item key="0" text="Via Hu"/>
+					<core:Item key="1" text="Via Man.Entry"/>
+					<core:Item key="2" text="Select Custom Dimension"/>
+					<core:Item key="3" text="Via Ext. Scale"/>
+				</ComboBox>
+				<Label text="Packaging Type"/>
+				<ComboBox id="idPackingMaterial" items="{ path: '/xSERPERPxCDS_QP_PACKAGTYPE', length: 9999 }" change="onChangePackageType"
+					selectedKey="{local>/basic/general/Packagetype}" enabled="true">
+					<core:Item key="{Packagetype}" text="{Description}"></core:Item>
+				</ComboBox>
+				<Button text="Update Package Type" width="80%" tooltip="Update Package Type on all HU’s" press="onUpdatePackageTypeAllHU" type="Default"
+					enabled="true"/>
+				<Label text="Declared Value"/>
+				<Input value="{local>/basic/general/Declaredvalue}" enabled="true"/>
+				<Label text="Insured Value"/>
+				<Input value="{local>/basic/general/Insuredvalue}" enabled="true"/>
+				<core:Title text=""></core:Title>
+				<Label text="Weight"/>
+				<Input value="{local>/basic/general/Weight}" enabled="{= (${local>/basic/general/Weightoption} === '3' ) ? true : false}"
+					submit="onSubmitWeight"/>
+				<Button text="Update All HU’s" tooltip="Update All HU’s" width="60%" press="onUpdateWeightAllHU" type="Default" enabled="true"/>
+				<Label text="Dimensions"/>
+				<Input value="{local>/basic/general/Dims}" enabled="false"/>
+				<Button icon="sap-icon://edit" width="10%" tooltip="Change Dimensions" press="onEditDimensions" type="Default"
+					enabled="{= (${local>/basic/general/Dimoption} === '1' ) ? true : false}"/>
+				<Label text="Total Weight"/>
+				<Input value="{local>/basic/general/Totalweight}" enabled="false"/>
+			</f:content>
+		</f:SimpleForm>
+		<!-- Handling Units Section -->
+		<Title text="Handling Units" class="sapUiMediumMarginTop sapUiSmallMarginBottom"/>
+		<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>
+	</VBox>
+</core:FragmentDefinition>

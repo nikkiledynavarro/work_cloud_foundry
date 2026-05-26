@@ -1,0 +1,135 @@
+<mvc:View controllerName="com.erpis.testfarptFA_RPT.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:chart="sap.suite.ui.microchart" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:uicommons="sap.suite.ui.commons"
+	xmlns:semantic="sap.m.semantic" >
+	<App>
+		<semantic:FullscreenPage id="pgInvoiceList" title="{i18n>title}" showFooter="false" busy="{mainViewModel>/busy}" busyIndicatorDelay="{mainViewModel>/delay}">
+			<semantic:content> 
+				<DateRangeSelection id="DRS1" delimiter="{path:'mainViewModel>/delimiterDRS1'}" dateValue="{path:'mainViewModel>/dateValueDRS1'}"
+					secondDateValue="{path:'mainViewModel>/secondDateValueDRS1'}" displayFormat="{path:'mainViewModel>/dateFormatDRS1'}" change="onDateChange"/>
+				<!--<l:HorizontalLayout>-->
+				<!--	<viz:VizFrame id="oVizFrame" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--		legendVisible="true"></viz:VizFrame>-->
+				<!--	<viz:VizFrame id="oVizFrame2" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="pie"-->
+				<!--		legendVisible="true"></viz:VizFrame>-->
+				<!--</l:HorizontalLayout>-->
+				<!--<l:HorizontalLayout>-->
+				<!--	<viz:VizFrame id="oVizFrame3" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="donut"-->
+				<!--		legendVisible="true"></viz:VizFrame>-->
+				<!--	<viz:VizFrame id="oVizFrame4" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--		legendVisible="true"></viz:VizFrame>-->
+				<!--</l:HorizontalLayout>-->
+				<l:BlockLayout id="BlockLayout" class="sapUiNoContentPadding">
+					<l:BlockLayoutRow accentCells="Accent1">
+						<l:BlockLayoutCell id="Accent1" width="4">
+							<uicommons:ChartContainer id="chartContainer1" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+								showSelectionDetails="true">
+								<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">
+									<uicommons:content>
+										<viz:VizFrame id="oVizFrame" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"
+											legendVisible="true" renderComplete="onRenderComplete"></viz:VizFrame>
+									</uicommons:content>
+								</uicommons:ChartContainerContent>
+							</uicommons:ChartContainer>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell id="Accent2" width="4">
+							<uicommons:ChartContainer id="chartContainer2" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+								showSelectionDetails="true">
+								<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">
+									<uicommons:content>
+										<viz:VizFrame id="oVizFrame2" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="pie"
+											legendVisible="true"></viz:VizFrame>
+									</uicommons:content>
+								</uicommons:ChartContainerContent>
+							</uicommons:ChartContainer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+					<l:BlockLayoutRow accentCells="Accent1">
+						<l:BlockLayoutCell id="Accent3" width="4">
+							<uicommons:ChartContainer id="chartContainer3" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+								showSelectionDetails="true">
+								<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">
+									<uicommons:content>
+										<viz:VizFrame id="oVizFrame3" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="donut"
+											legendVisible="true"></viz:VizFrame>
+									</uicommons:content>
+								</uicommons:ChartContainerContent>
+							</uicommons:ChartContainer>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell id="Accent4" width="4">
+							<uicommons:ChartContainer id="chartContainer4" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+								showSelectionDetails="true">
+								<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">
+									<uicommons:content>
+										<viz:VizFrame id="oVizFrame4" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"
+											legendVisible="true"></viz:VizFrame>
+									</uicommons:content>
+								</uicommons:ChartContainerContent>
+							</uicommons:ChartContainer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+				<!--Charts in separate containers-->
+				<!--<uicommons:ChartContainer id="chartContainer1" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" showSelectionDetails="true">-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--   </uicommons:ChartContainer>-->
+				<!--<uicommons:ChartContainer id="chartContainer2" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" showSelectionDetails="true">-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame2" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="pie"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--</uicommons:ChartContainer>-->
+				<!--<uicommons:ChartContainer id="chartContainer3" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" showSelectionDetails="true">-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame3" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="donut"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--</uicommons:ChartContainer>-->
+				<!--<uicommons:ChartContainer id="chartContainer4" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" showSelectionDetails="true">-->
+				<!--		<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame4" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--</uicommons:ChartContainer>-->
+				<!--All Charts in one Container-->
+				<!--<uicommons:ChartContainer id="chartContainer" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" showSelectionDetails="true">-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://bubble-chart" title="Bubble Chart">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame2" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="pie"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--	<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame3" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="donut"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--		<uicommons:ChartContainerContent icon="sap-icon://table-view" title="Table">-->
+				<!--		<uicommons:content>-->
+				<!--			<viz:VizFrame id="oVizFrame4" busy="false" busyIndicatorDelay="1000" visible="true" uiConfig="{ 'applicationSet': 'fiori' }" vizType="bar"-->
+				<!--				legendVisible="true"></viz:VizFrame>-->
+				<!--		</uicommons:content>-->
+				<!--	</uicommons:ChartContainerContent>-->
+				<!--</uicommons:ChartContainer>-->
+			</semantic:content>
+		</semantic:FullscreenPage>
+	</App>
+</mvc:View>

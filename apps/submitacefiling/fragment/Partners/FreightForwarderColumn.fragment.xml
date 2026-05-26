@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--ID type-->
+	<Label text="{i18n>idType}"/>
+	<ComboBox id="idType" selectedKey="{local>/basic/partners/usppi/Add3}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="E" text="E - EIN"/>
+		<core:Item key="D" text="D - DUNS"/>
+	</ComboBox>
+	<!--Name-->
+	<Label text="{i18n>name}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad33}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--ID number-->
+	<Label text="{i18n>idNumber}"/>
+	<Input value="{local>/basic/usppi/Ad34}" enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Contact name-->
+	<Label text="{i18n>contactName}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad35}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Contact phone-->
+	<Label text="{i18n>contactPhone}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad37}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Address Line 1-->
+	<Label text="{i18n>address1}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad38}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<core:Title text=""></core:Title>
+	<!--Address line 2-->
+	<Label text="{i18n>address2}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad39}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--City-->
+	<Label text="{i18n>city}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad310}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--State-->
+	<Label text="{i18n>state}"/>
+	<ComboBox id="iDState" items="{path: 'local>/States'}" selectedKey="{local>/basic/partners/freight_forwarder/Ad311}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }">
+		<core:Item key="{local>Bland}" text="{local>Bland} - {local>Bezei}"></core:Item>
+	</ComboBox>
+	<!--Country-->
+	<Label text="{i18n>country}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad312}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+	<!--Postal code-->
+	<Label text="{i18n>postalCode}"/>
+	<Input value="{local>/basic/partners/freight_forwarder/Ad313}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }"/>
+</core:FragmentDefinition>

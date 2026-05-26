@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="Harmonized" class="sapUiPopupWithPadding" items="{local>/ListHarmonizedcode}"
+		liveChange="HarmonizedValueHelpSearch" confirm="onHarmonizedConfirm" cancel="HarmonizedClose">
+		<StandardListItem title="{local>Stawn}" description="{local>Text1}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

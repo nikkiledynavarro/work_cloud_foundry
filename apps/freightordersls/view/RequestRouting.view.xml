@@ -1,0 +1,90 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" xmlns="sap.m" controllerName="com.erpis.shiperp.sls.freightordersls.controller.RequestRouting"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showFooter="true" showTitleInHeaderContent="false" upperCaseAnchorBar="false">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:expandedHeading>
+					<FlexBox alignItems="Center" fitContainer="true">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="{i18n>requestRoutingTitle}" wrapping="true"/>
+					</FlexBox>
+				</uxap:expandedHeading>
+				<uxap:snappedHeading>
+					<FlexBox alignItems="Center" fitContainer="true">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="{i18n>requestRoutingTitle}" wrapping="true"/>
+					</FlexBox>
+				</uxap:snappedHeading>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<VBox>
+				<form:SimpleForm id="SimpleFormHeader" editable="true" layout="ResponsiveGridLayout" title="" labelSpanXL="4" labelSpanL="3" labelSpanM="4"
+					labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+					singleContainerFullSize="false">
+					<form:content>
+						<!--<core:Title text=""/>-->
+						<!--<Label text="Freight Order Number testing label"/>-->
+						<!--<Text text="{local>/RequestRoutingHeaders/0/FreightOrderNumber}"/>-->
+						<core:Title text=""/>
+						<Label text="{i18n>requestRoutingEmailAddress}"/>
+						<Text text="{local>/RequestRoutingHeaders/0/EmailAddress}"/>
+						<Label text="{i18n>requestRoutingPhoneFax}"/>
+						<Text text="{local>/RequestRoutingHeaders/0/PhoneNumber}">
+							<layoutData>
+								<layout:GridData span="XL2 L1 M3 S4"/>
+							</layoutData>
+						</Text>
+						<Text text="/{local>/RequestRoutingHeaders/0/FaxNumber}"/>
+						<Label text="{i18n>requestRoutingURL}"/>
+						<Text text="{local>/RequestRoutingHeaders/0/URLEnabled}"/>
+						<Label text="{i18n>requestRoutingRoutingText}"/>
+						<Text text="{local>/RequestRoutingHeaders/0/RoutingText}"/>
+						<core:Title text=""/>
+						<Label text="{i18n>requestRoutingEDI}"/>
+						<CheckBox selected="{= ${local>/RequestRoutingHeaders/0/EDIEnabled} === true ? true : false}"/>
+						<Label text="{i18n>requestRoutingEarlyPickupDate}"/>
+						<DatePicker value="{local>/RequestRoutingHeaders/0/EarlyPickupDate}" placeholder="{i18n>requestRoutingEnterDatePLaceHolder}"
+							change="handleChange" class="sapUiSmallMarginBottom"/>
+					</form:content>
+				</form:SimpleForm>
+			</VBox>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection titleUppercase="false" title="Routing Request Details">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Freight Order Header Details" titleUppercase="false">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.sls.freightordersls.fragment.requestrouting.RequestRoutingFOHeaderDetails" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection titleUppercase="false" title="Partners">
+				<uxap:ObjectPageSubSection title="Partners" titleUppercase="false">
+					<uxap:blocks>
+						<core:Fragment fragmentName="com.erpis.shiperp.sls.freightordersls.fragment.requestrouting.RequestRoutingFOPartners" type="XML"/>
+					</uxap:blocks>
+				</uxap:ObjectPageSubSection>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection titleUppercase="false" title="Freight Order Content Details">
+				<uxap:ObjectPageSubSection title="Freight Order Content Details" titleUppercase="false">
+					<uxap:blocks>
+						<core:Fragment fragmentName="com.erpis.shiperp.sls.freightordersls.fragment.requestrouting.RequestRoutingFOContentDetail" type="XML"/>
+					</uxap:blocks>
+				</uxap:ObjectPageSubSection>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<!-- Footer-->
+		<uxap:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>backToFOScreenButton}" press="onNavBackToFreightOrderScreen" type="Emphasized"/>
+				<Button text="{i18n>sendMailButton}" icon="sap-icon://email" press="onSendEmailPressed" type="Emphasized"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>
