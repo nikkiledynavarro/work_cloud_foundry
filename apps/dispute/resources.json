@@ -1,0 +1,552 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "common/Utils-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "common/Utils.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/DisputeDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/DisputeDetail.controller.js"
+        },
+        {
+            "name": "controller/DisputeList-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/DisputeList.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/NotFound-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/NotFound.controller.js"
+        },
+        {
+            "name": "css/style-dbg.css",
+            "isDebug": true
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "fragment/CarrierValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/CompanyCodeValueHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/CreditAtmUpdate.fragment.xml"
+        },
+        {
+            "name": "fragment/DeletedListDispute.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeConsolListDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeDetailNoDataDialog.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/DisputeListColumnListItem.fragment.xml"
+        },
+        {
+            "name": "fragment/NoteAndAttachment.fragment.xml"
+        },
+        {
+            "name": "fragment/StatusUpdate.fragment.xml"
+        },
+        {
+            "name": "fragment/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "fragment/UpdateReasonAndNote.fragment.xml"
+        },
+        {
+            "name": "fragment/UploadCollectionItemTemplate.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "image/shiperp_logo.png"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "test/integration/AllJourneys-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/AllJourneys.js"
+        },
+        {
+            "name": "test/integration/NavigationJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "test/integration/NotFoundJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "test/integration/ObjectJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "test/integration/WorklistJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/WorklistJourney.js"
+        },
+        {
+            "name": "test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "test/integration/pages/App-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/App.js"
+        },
+        {
+            "name": "test/integration/pages/Browser-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Browser.js"
+        },
+        {
+            "name": "test/integration/pages/Common-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Common.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "test/integration/pages/Object-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Object.js"
+        },
+        {
+            "name": "test/integration/pages/Worklist-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "test/integration/pages/shareOptions-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "test/mockServer.html"
+        },
+        {
+            "name": "test/testsuite.qunit.html"
+        },
+        {
+            "name": "test/unit/allTests-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/allTests.js"
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/helper/FakeI18nModel.js"
+        },
+        {
+            "name": "test/unit/model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/formatter.js"
+        },
+        {
+            "name": "test/unit/model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/models.js"
+        },
+        {
+            "name": "test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "test.html"
+        },
+        {
+            "name": "tmp/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp/Component.js"
+        },
+        {
+            "name": "tmp/common/Utils.js"
+        },
+        {
+            "name": "tmp/controller/App.controller.js"
+        },
+        {
+            "name": "tmp/controller/BaseController.js"
+        },
+        {
+            "name": "tmp/controller/DisputeDetail.controller.js"
+        },
+        {
+            "name": "tmp/controller/DisputeList.controller.js"
+        },
+        {
+            "name": "tmp/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp/css/style.css"
+        },
+        {
+            "name": "tmp/fragment/CarrierValueHelp.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/CompanyCodeValueHelp.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/CreditAtmUpdate.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/DeletedListDispute.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/DisputeConsolListDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/DisputeDetailNoDataDialog.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/DisputeInfo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/DisputeListColumnListItem.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/NoteAndAttachment.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/StatusUpdate.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/TrackproInfo.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/UpdateReasonAndNote.fragment.xml"
+        },
+        {
+            "name": "tmp/fragment/UploadCollectionItemTemplate.fragment.xml"
+        },
+        {
+            "name": "tmp/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "tmp/image/shiperp_logo.png"
+        },
+        {
+            "name": "tmp/index.html"
+        },
+        {
+            "name": "tmp/localService/metadata.xml"
+        },
+        {
+            "name": "tmp/localService/mockserver.js"
+        },
+        {
+            "name": "tmp/manifest.json"
+        },
+        {
+            "name": "tmp/model/formatter.js"
+        },
+        {
+            "name": "tmp/model/models.js"
+        },
+        {
+            "name": "tmp/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/WorklistJourney.js"
+        },
+        {
+            "name": "tmp/test/integration/opaTests.qunit.html"
+        },
+        {
+            "name": "tmp/test/integration/pages/App.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/Browser.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/Common.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/Object.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "tmp/test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "tmp/test/mockServer.html"
+        },
+        {
+            "name": "tmp/test/testsuite.qunit.html"
+        },
+        {
+            "name": "tmp/test/unit/allTests.js"
+        },
+        {
+            "name": "tmp/test/unit/helper/FakeI18nModel.js"
+        },
+        {
+            "name": "tmp/test/unit/model/formatter.js"
+        },
+        {
+            "name": "tmp/test/unit/model/models.js"
+        },
+        {
+            "name": "tmp/test/unit/unitTests.qunit.html"
+        },
+        {
+            "name": "tmp/test.html"
+        },
+        {
+            "name": "tmp/view/App.view.xml"
+        },
+        {
+            "name": "tmp/view/DisputeDetail.view.xml"
+        },
+        {
+            "name": "tmp/view/DisputeList.view.xml"
+        },
+        {
+            "name": "tmp/view/NotFound.view.xml"
+        },
+        {
+            "name": "tmp/view/ObjectNotFound.view.xml"
+        },
+        {
+            "name": "tmp-dbg/Component.js"
+        },
+        {
+            "name": "tmp-dbg/common/Utils.js"
+        },
+        {
+            "name": "tmp-dbg/controller/App.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/BaseController.js"
+        },
+        {
+            "name": "tmp-dbg/controller/DisputeDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/DisputeList.controller.js"
+        },
+        {
+            "name": "tmp-dbg/controller/ErrorHandler.js"
+        },
+        {
+            "name": "tmp-dbg/controller/NotFound.controller.js"
+        },
+        {
+            "name": "tmp-dbg/css/style.css"
+        },
+        {
+            "name": "tmp-dbg/localService/mockserver.js"
+        },
+        {
+            "name": "tmp-dbg/model/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/model/models.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/AllJourneys.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NavigationJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/NotFoundJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/WorklistJourney.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/App.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/Browser.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/Common.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/Object.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "tmp-dbg/test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/allTests.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/helper/FakeI18nModel.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/model/formatter.js"
+        },
+        {
+            "name": "tmp-dbg/test/unit/model/models.js"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/DisputeDetail.view.xml"
+        },
+        {
+            "name": "view/DisputeList.view.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        }
+    ]
+}

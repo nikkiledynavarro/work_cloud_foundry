@@ -1,0 +1,187 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<core:Title text="Clearance Requirements"></core:Title>
+	<Label text="Term of Sale"></Label>
+	<ComboBox id="cbFedExTermOfSale" tooltip="Term of Sale" selectedKey="{local>/basic/termofsale}"
+		items="{/xSERPERPxCDS_SLTERM}">
+		<core:Item text="{Description}" key="{Description}"></core:Item>
+	</ComboBox>
+	
+	<Label text="Freight/Insurance Charge"/>
+	<Input placeholder="Freight Charge" value="{local>/basic/international/freightcharge}"/>
+	<Input placeholder="Insurance Charge" value="{local>/basic/international/insurancecharge}"/>
+	<Label text="Shipping Document"></Label>
+	<CheckBox text="Commercial Invoice" selected="{local>/basic/international/shipping_docs/cominv}"/>
+	<CheckBox text="USMCA Cert. of Origin" editable= "false" selected="{local>/basic/international/shipping_docs/ncoo}"/>
+	<Label></Label>
+	<CheckBox text="Certificate of Origin" selected="{local>/basic/international/shipping_docs/coo}"/>
+	<!--<CheckBox text="NAFTA" selected="{local>/basic/international/shipping_docs/ncoo}"/>-->
+	<CheckBox text="Pro Forma Invoice" selected="{local>/basic/international/shipping_docs/pfinv}"/>
+	<Label></Label>
+	<CheckBox text="Shipper's Export Declaration" tooltip="Shipper's Export Declaration"
+		selected="{local>/basic/international/shipping_docs/sed}"/>
+	<CheckBox text="Send Paperless" selected="{local>/basic/international/shipping_docs/send_paperless}"/>
+	<Label text="Reason for Export"/>
+	<ComboBox selectedKey="{local>/basic/international/reasonexportcode}" items="{/xSERPERPxCDS_RSNEX}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Button type="Emphasized" text="USMCA Details" press="onNAFTAPress"/>
+	<Button type="Emphasized" text="Commercial Invoice" visible="{local>/basic/international/shipping_docs/cominv}" press="onComercialInvoicePress"/>
+	<Label></Label>
+	<Label text="Purpose of Sale"/>
+	<ComboBox id="cbFedExSalePurpose" selectedKey="{local>/basic/international/salepurpose}" items="{/xSERPERPxCDS_POSALE}">
+		<core:Item text="{Description}" key="{PurposeofSale}"></core:Item>
+	</ComboBox>
+	<Label></Label>
+	<Label text="Regulatory Control"/>
+	<ComboBox id="cbFedExRegulatoryControl" selectedKey="{local>/basic/international/regcontrol}" items="{/xSERPERPxCDS_REGCTRL}">
+		<core:Item text="{Description}" key="{Regcontrol}"></core:Item>
+	</ComboBox>
+	
+	<Label text="Custom Option Type"></Label>
+	<ComboBox id="cbFedExCustomeOptionType" tooltip="Custom Option Type" selectedKey=""
+		items="{path: '/xSERPERPxCDS_FDX_CPTS', length: 999}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label text="Custom Description"/>
+	<Input placeholder="Custom Description" value=""/>
+	
+	
+	<core:Title text="SED/EEI Filling"></core:Title>
+	<Label text=""/>
+	<CheckBox text="Commence Licensed" tooltip="Commence Licensed" selected=""/>
+	<Label text="SED Number Type"/>
+	<ComboBox id="cbFedExNumberType" tooltip="SED Number Type" selectedKey=""
+		items="{/xSERPERPxI_SEDNUMBERTYPE}">
+		<core:Item text="{ValueKey}" key="{ValueKey}"></core:Item>
+	</ComboBox>
+	<Label text="Filling Type"/>
+	<ComboBox id="cbFedExFillingType" tooltip="Filling Type" selectedKey="{local>/basic/international/filingtype}"
+		items="{}">
+		<core:Item text="{Description}" key="{FillingType}"></core:Item>
+	</ComboBox>
+	
+	<Label text="Sender Tin Type"/>
+	<ComboBox id="cbFedExTinType" tooltip="Sender Tin Type" selectedKey="{local>/basic/international/sendertintype}"
+		items="{/xSERPERPxCDS_TINTYPE}">
+		<core:Item text="{Description}" key="{TinType}"></core:Item>
+	</ComboBox>
+	<Label text="ITN Number (AES)"/>
+	<Input placeholder="ITN Number (AES)" tooltip="ITN Number (AES)" value="{local>/basic/international/itnnumber}"/>
+	<Label text="Inbond type/Entry"/>
+	<Input placeholder="Inbond type" tooltip="Inbond type" value="{local>/basic/international/inboundtype}"/>
+	<Input placeholder="Entry Number" tooltip="Entry Number" value="{local>/basic/international/entrynumber}"/>
+	<Label text="Trans mode/Point.Orig" tooltip="Mode of Transport/Point of origin"/>
+	<ComboBox tooltip="Mode of Transport" selectedKey="{local>/basic/international/modeoftransport}" items="{/xSERPERPxCDS_MODETRA}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Input tooltip="Point of origin" placeholder="Point of origin" value="{local>/basic/international/pointoforigin}"/>
+	<Label text="Port of Export/Unloading"></Label>
+	<Input placeholder="Port of Export" tooltip="Port of Export" value="{local>/basic/international/portofexport}"/>
+	<Input placeholder="Port of Unloading" tooltip="Port of Unloading" value="{local>/basic/international/portofunloading}"/>
+	<Label text="Loading Pier"></Label>
+	<Input placeholder="Loading Pier" tooltip="Loading Pier" value="{local>/basic/international/loadingpier}"/>
+	<Label text="License"/>
+	<Input value="{local>/basic/international/license}"/>
+	<DatePicker placeholder="License Date" value="{local>/basic/international/licensedate}"/>
+	<Label text="LIC Exception Code"/>
+	<Input tooltip="LIC Exception Code" placeholder="LIC Exception Code" value="{local>/basic/international/licenseexceptioncode}"/>
+	<Label text="ECCN Number"/>
+	<Input value="{local>/basic/international/eccnnumber}"/>
+	<Label text=""/>
+	<CheckBox text="Routed Export Transaction" tooltip="Routed Export Transaction" selected="{local>/basic/international/routedexporttrans}"/>
+	<Label text=""/>
+	<CheckBox text="Containerized (vessel only)" tooltip="Containerized (vessel only)" selected="{local>/basic/international/containerized}"/>
+	<core:Title text="Broker Select"></core:Title>
+	<Label text="Broker Select"/>
+	<CheckBox selected="{local>/basic/international/customs_broker/broker_select}"/>
+	<Label text="Broker Acc/Type"/>
+	<Input placeholder="Acc Number" tooltip="Acc Number" value="{local>/basic/international/customs_broker/brokeracctnum}"
+		enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }"/>
+	<ComboBox tooltip="Broker Type" selectedKey="{local>/basic/international/customs_broker/brokertype}"
+		enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }"
+		items="{path: '/DomainTextSet', filters: [ {path: 'Domain', operator: 'EQ', value1: '/ERPIS/BROKERTYPE_DOM'} ]}">
+		<core:Item key="{Key}" text="{Key}"/>
+	</ComboBox>
+	<Label text="Broker TIN/Type"/>
+	<Input placeholder="Number" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Number"
+		value="{local>/basic/international/customs_broker/brokertin}"/>
+	<ComboBox id="cbBrokerTinType" tooltip="Broker Tin Type"
+		enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" 
+		selectedKey="{local>/basic/international/customs_broker/brokertintype}" items="{path: '/xSERPERPxCDS_BRTINTYPE', length: 999}">
+		<core:Item text="{Description}" key="{BrokerTINType}"></core:Item>
+	</ComboBox>
+	<Label text="Person/Company Name"/>
+	<Input placeholder="Person Name" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }"
+		tooltip="Person Name" value="{local>/basic/international/customs_broker/brokerpersonname}"/>
+	<Input placeholder="Company Name" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }"
+		tooltip="Company Name" value="{local>/basic/international/customs_broker/brokercompanynam}"/>
+	<Label text="Phone/Pager Number"/>
+	<Input placeholder="Phone" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Phone"
+		value="{local>/basic/international/customs_broker/brokerphonenum}"/>
+	<Input placeholder="Pager" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Pager"
+		value="{local>/basic/international/customs_broker/brokerpagernum}"/>
+	<Label text="Email/Fax"/>
+	<Input placeholder="Email" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" type="Email"
+		value="{local>/basic/international/customs_broker/brokeremail}"/>
+	<Input placeholder="Fax" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Fax"
+		value="{local>/basic/international/customs_broker/brokerfaxnumber}"/>
+	<Label text="Street 1"/>
+	<Input placeholder="Street1" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Street1"
+		value="{local>/basic/international/customs_broker/brokerstreet1}"/>
+	<Label text="Street 2"/>
+	<Input placeholder="Street2" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Street2"
+		value="{local>/basic/international/customs_broker/brokerstreet2}"/>
+	<Label text="Country"/>
+		<Input placeholder="Country Key" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Country Key"
+		value="{local>/basic/international/customs_broker/brokercountry}"/>
+	<ComboBox id="cbFedExInternationalCountry" selectedKey="{local>/basic/international/customs_broker/brokercountry}" tooltip="Country"
+		change="onUpdateDomestic" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }"
+		items="{path: '/xSERPERPxI_PCCNTR', length: 999}" app:nextUpdate="slFedExInternationalState">
+		<items>
+			<core:Item text="{Name}" key="{Country}"/>
+		</items>
+	</ComboBox>
+	
+	<Label text="Region"></Label>
+	<Input placeholder="Region" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Region"
+		value="{local>/basic/international/customs_broker/brokerstate}"/>
+	<ComboBox id="slFedExInternationalState" tooltip="State" change="onUpdateDomestic"
+		enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" items="{path: '/xSERPERPxI_PCSTATE', length: 999}">
+		<items>
+			<core:Item text="{Description}" key="{Region}"/>
+		</items>
+	</ComboBox>
+	<Label text="City/Zip"></Label>
+	<Input placeholder="City" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="City"
+		value="{local>/basic/international/customs_broker/brokercity}"/>
+	<Input placeholder="Zip" enabled="{= ${local>/basic/international/customs_broker/broker_select} ? true : false }" tooltip="Zip"
+		value="{local>/basic/international/customs_broker/brokerpostalcode}"/>
+	<core:Title text="Commercial Destination Control Coding"></core:Title>
+	<Label text="Statement Types"/>
+	<ComboBox id="cbStatementType" tooltip="Statement Types" items="{/xSERPERPxCDS_STATTYPE}">
+		<core:Item text="{StatementType}" key="{StatementType}"></core:Item>
+	</ComboBox>
+	<Label text="Destination Countries"/>
+	<Input value="{local>/basic/international/destcountries}"/>
+	<Label text="End User"/>
+	<Input value="{local>/basic/international/endUser}"/>
+	<!-- Shipfrom country CANADA -->
+	<Title text="Canada B13A Filling"></Title>
+	<Label text="B13A Filing Option"></Label>
+	<ComboBox id="cbBillingOption" items="{/xSERPERPxCDS_RSNEX}" enabled="{= ${local>/basic/partners/shipfrom/address/country} === 'CA' ? true : false }">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label text="Statement Data"></Label>
+	<Input enabled="{= ${local>/basic/partners/shipfrom/address/country} === 'CA' ? true : false }"></Input>
+	<Label text="Permit Number"></Label>
+	<Input enabled="{= ${local>/basic/partners/shipfrom/address/country} === 'CA' ? true : false }"></Input>
+	<!-- Shipfrom country CANADA -->
+	<core:Title text="Broker Additional Info"></core:Title>
+	<Label text="Broker Title"/>
+	<Input value="{local>/basic/international/forms/title}"/>
+	<Label text="Broker Contact ID"/>
+	<Input value="{local>/basic/international/forms/contact_id}"/>
+	<Label text="Broker Extension"/>
+	<Input value="{local>/basic/international/phone_extension}"/>
+</core:FragmentDefinition>

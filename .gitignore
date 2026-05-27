@@ -1,0 +1,26 @@
+## General
+.DS_Store
+Thumbs.db
+
+## Node / UI5 build artifacts
+**/node_modules/
+**/dist/
+**/.ui5/
+**/.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## MTA / build outputs
+mta_archives/
+resources/**/.zip
+resources/**/*.zip
+
+## Local / temp
+.tmp_*/
+.tmp_mtar_inspect/
+preview/
+
+## Secrets / generated keys (none expected, but keep safe)
+*.pem
+*.key

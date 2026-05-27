@@ -1,0 +1,84 @@
+<mvc:View controllerName="com.erpis.shiperp.sls.disputesls.controller.DisputeDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>disputeDetailTitle} {= ${ID} ? ${ID} : '' }"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderCompCode}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{CompanyCode}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderInvNo}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{InvoiceNo}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>detailHeaderAccNo}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{AccountNo}"/>
+						</HBox>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderCarrier}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{CarrierCode}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderTotalLineIt}:" class="sapUiSmallMarginEnd"/>
+							<ObjectNumber number="{local>/totalLineItem}" state="Success"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>detailHeaderTotalCreAmt}:" class="sapUiSmallMarginEnd"/>
+							<ObjectNumber unit="{Currency}"
+								number="{ parts:[{path:'TotalCreditAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								state="Success"/>
+						</HBox>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderDocStatus}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{path: 'Status',formatter: '.formatter.formatDisputeStatus'}"
+								state="{path: 'Status',formatter: '.formatter.formatDisputeStatusState'}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>InProcessDate}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{path: 'InProcessDate', formatter: '.formatter.formatDateString'}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>tableCompletedOnColumnTitle}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{path: 'CompletedDate', formatter: '.formatter.formatDateString'}"/>
+						</HBox>
+					</layout:VerticalLayout>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<core:Fragment fragmentName="com.erpis.shiperp.sls.disputesls.fragment.TrackproInfo" type="XML"/>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button enabled="{= ${Status} === 'CN' ? false : true }" id="popoverButton" icon="sap-icon://message-popup"
+					text="{messageModel>/messagesLength}" type="Emphasized" press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>detailGlobalActionPost}" press="onPostPress"
+					type="Accept"/>
+				<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>detailGlobalActionEDI}" press="onEDIPress"/>
+				<Button enabled="{= (${Status} === 'CN') ? false : true }" text="{i18n>detailGlobalActionPrint}" icon="sap-icon://print"
+					press="onPrintPress"/>
+				<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>detailGlobalActionEmail}"
+					icon="sap-icon://email" press="onEmailPress"/>
+				<Button visible="{= ${Status} === 'C' ? true : false }" text="{i18n>detailGlobalActionRevert}" press="onCompleteConfirm" app:status="IP"/>
+				<Button visible="{=(${Status} ==='C' || ${Status} ==='CN') ? false : true}" enabled="{= ${Status} === 'CN' ? false : true }"
+					text="{i18n>detailGlobalActionComplete}" press="onCompleteConfirm" app:status="C"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

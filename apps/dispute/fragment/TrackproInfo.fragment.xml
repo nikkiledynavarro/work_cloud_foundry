@@ -1,0 +1,106 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<ScrollContainer>
+		<Table class="border_lightgray_nobottom" id="idDisputeDetailTab" width="100%" mode="MultiSelect"
+			items="{path: 'toDTL', sorter: [{path: 'DisputeID', descending: false}] }" updateFinished="onDisputeDetailUpdateFinished" growing="true"
+			growingThreshold="100" busyIndicatorDelay="99999" growingScrollToLoad="true" fixedLayout="false">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Text text="{i18n>detailTabActAllItems}"/>
+					<ToolbarSpacer/>
+					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextUpdate}" press="onTabToolBarUpdate"/>
+					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextUpdateReason}"
+						press="onTabToolBarUpdateAndNote"/>
+					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextSplitMerge}"
+						press="onTabToolBarSplitMerge"/>
+					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C' || ${Status} === 'IP') ? false : true }" text="{i18n>toolbarTextReset}"
+						press="onTabToolBarReset"/>
+					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextDelete}" press="onTabToolBarDelete"/>
+					<ToolbarSeparator/>
+					<Button text="{i18n>toolbarTextDeleteLine}" press="onTabToolBarDeleteLine"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="1.5rem">
+					<Text text="{i18n>detailTabColItem}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColTrackNo}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Tablet" width="3.5rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColstatus}" tooltip="{i18n>detailTabColstatusFull}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Tablet" width="3.5rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColApprNote}" tooltip="{i18n>detailTabColApprNoteFull}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColCredit}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColDispute}" tooltip="{i18n>detailTabColDisputeTooltip}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColBill}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" hAlign="End" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColZerp}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" width="2rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColCur}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColDiff}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColDiffPerc}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" width="2.5rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColBillOpt}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" width="2.7rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColReasonCod}" tooltip="{i18n>detailTabColReasonCodTooltip}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" width="2rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColNote}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColChangeOn}" tooltip="{i18n>detailTabColChangeOnTooltip}" wrapping="false"/>
+				</Column>
+				<Column demandPopin="true" minScreenWidth="Desktop" width="5rem" popinDisplay="Inline">
+					<Text text="{i18n>detailTabColChangeBy}" tooltip="{i18n>detailTabColChangeByTooltip}" wrapping="false"/>
+				</Column>
+			</columns>
+			<ColumnListItem type="Inactive">
+				<cells>
+					<Text text="{= parseInt(${Item}) }"/>
+					<Text text="{Trackpro}" wrapping="false"/>
+					<ObjectStatus text="{path: 'Status',formatter: '.formatter.formatDisputeStatus'}"
+						state="{path: 'Status',formatter: '.formatter.formatDisputeStatusState'}"/>
+					<Button icon="sap-icon://crm-service-manager" type="Accept" press="onDisputeApprovalItemNotePressed" tooltip="{objkey}"
+						visible="{= ${IsCarrierApprovalNoteAvailable} === '' ? false : true }"/>
+					<Link text="{ parts:[{path:'CreditAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+						press="onCreditAmtPress" enabled="{= (${local>/Status} === 'IP' &amp;&amp; ${Status} !== 'DN') ? true : false }">
+						<customData>
+							<core:CustomData key="text-color" value="{=${local>/Status}==='C'?'gray':''}" writeToDom="true"/>
+						</customData>
+					</Link>
+					<Text text="{ parts:[{path:'DisputeAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+						wrapping="false"/>
+					<Text text="{ parts:[{path:'BilledAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+						wrapping="false"/>
+					<Text text="{ parts:[{path:'SERPAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+						wrapping="false"/>
+					<Text text="{Currency}"/>
+					<Text text="{ parts:[{path:'DiffAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"/>
+					<Text text="{DiffPer}"/>
+					<Text text="{BillOption}"/>
+					<Text text="{path: 'ChargeCode'}" tooltip="{path: 'ChargeCode', formatter: '.getReasonCodeDescription'}"/>
+					<Button visible="{= ${IsNoteAvailable} === '' ? false : true }" icon="sap-icon://crm-service-manager" type="Accept"
+						press="onDisputeItemNotePressed" tooltip="{objkey}"/>
+					<Text text="{path: 'ChangedDate', formatter: '.formatter.formatDateString'}" wrapping="false"/>
+					<Text text="{ChangedBy}" wrapping="false"/>
+				</cells>
+			</ColumnListItem>
+		</Table>
+	</ScrollContainer>
+</core:FragmentDefinition>

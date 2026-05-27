@@ -1,0 +1,240 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<core:Title text="Pickup / Delivery Service"></core:Title>
+	<Label text="Drop off Type" required="{= ${local>/OrientationsSet/8/required} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/8/visible} === '1' ? true : false}"/>
+	<ComboBox selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Dropoff}" items="{/xSERPERPxI_PCDROP}"
+		enabled="{= ${local>/OrientationsSet/8/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/8/visible} === '1' ? true : false}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label></Label>
+	<CheckBox text="Saturday Pickup" tooltip="Saturday Pickup" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Saturdaypick}"
+		enabled="{= ${local>/OrientationsSet/0/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/0/visible} === '1' ? true : false}"/>
+	<CheckBox text="Saturday Delivery" tooltip="Saturday Delivery"
+		selected="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Saturdaydeliv}"
+		enabled="{= ${local>/OrientationsSet/1/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/1/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="Residential Delivery" tooltip="Residential Delivery"
+		selected="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Carrierresid}"
+		enabled="{= ${local>/OrientationsSet/6/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/6/visible} === '1' ? true : false}"/>
+	<CheckBox text="FedEX priority Alert" tooltip="FedEX priority Alert"
+		selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/PrioAlert}"
+		enabled="{= ${local>/OrientationsSet/3/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/3/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="Inside Delivery" tooltip="Inside Delivery" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Insidedeliv}"
+		enabled="{= ${local>/OrientationsSet/9/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/9/visible} === '1' ? true : false}"/>
+	<CheckBox text="Inside Pickup" tooltip="Inside Pickup" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Insidepickup}"
+		enabled="{= ${local>/OrientationsSet/10/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/10/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="FedEX Priority Alert Plus" tooltip="FedEX Priority Alert Plus"
+		selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/PrioAlertPlus}"
+		enabled="{= ${local>/OrientationsSet/2/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/2/visible} === '1' ? true : false}"/>
+	<CheckBox text="Liftgate Delivery" tooltip="Liftgate Delivery" enabled="{= ${local>/OrientationsSet/11/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/11/visible} === '1' ? true : false}"
+		selected="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt02/liftgate_delv} === '' ? false : true}"/>
+	<Label></Label>
+	<CheckBox text="Hold at Location" tooltip="Hold at Location" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Holdatloc}"
+		select="onChangeFedExHoldLocationDetailCheckBox" enabled="{= ${local>/OrientationsSet/5/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/5/visible} === '1' ? true : false}"/>
+	<Button id="fedexHoldLocateButton" type="Emphasized" text="Hold At Location Details" press="onShowFDXEHoldLocationDetail"
+		enabled="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt01/Holdatloc} === true ? true : false}"
+		visible="{= ${local>/OrientationsSet/5/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<core:Title text="FedEx Collect on Delivery (C.O.D)"></core:Title>
+	<Label text="C.O.D Collection/Amount" tooltip="Collect On Delivery Collection/Amount"
+		required="{= ${local>/OrientationsSet/14/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/14/visible} === '1' ? true : false}"/>
+	<ComboBox selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Codtype}" items="{/xSERPERPxI_PCCOLL}" id="cbCollTypeFDXE"
+		enabled="{= ${local>/OrientationsSet/14/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/14/visible} === '1' ? true : false}">
+		<core:Item text="{Description}" key="{TenderType}"></core:Item>
+	</ComboBox>
+	<Input placeholder="C.O.D Amount" value="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Codamount}"
+		enabled="{= ${local>/OrientationsSet/14/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/14/visible} === '1' ? true : false}"></Input>
+	<Label></Label>
+	<Label text="FedEx (C.O.D) Reference Indicator" tooltip="FedEx (C.O.D) Reference Indicator"
+		required="{= ${local>/OrientationsSet/13/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/13/visible} === '1' ? true : false}"/>
+	<ComboBox items="{/xSERPERPxCDS_FDX_REFIN}" enabled="{= ${local>/OrientationsSet/13/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/13/visible} === '1' ? true : false}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label></Label>
+	<Button type="Emphasized" text="C.O.D Recipient" press="onShowFDXECODRecipientDetail"/>
+	<core:Title text="Return Service"></core:Title>
+	<Label text="Return Type" required="{= ${local>/OrientationsSet/15/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/15/visible} === '1' ? true : false}"/>
+	<ComboBox id="cbFedExReturnService" items="{/xSERPERPxI_PCRETURNSRV}" change="onChangeReturnService"
+		selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Returnsrv}"
+		enabled="{= ${local>/OrientationsSet/15/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/15/visible} === '1' ? true : false}">
+		<items>
+			<core:Item key="{Code}" text="{Description}"/>
+		</items>
+	</ComboBox>
+	<Label text="Return Service" required="{= ${local>/OrientationsSet/17/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/17/visible} === '1' ? true : false}"/>
+	<ComboBox items="{/xSERPERPxCDS_FDX_RSTYP}" enabled="{= ${local>/OrientationsSet/17/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/17/visible} === '1' ? true : false}">
+		<core:Item text="{Description}" key="{Code}"></core:Item>
+	</ComboBox>
+	<Label text="Reason" required="{= ${local>/OrientationsSet/16/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/16/visible} === '1' ? true : false}"/>
+	<Input placeholder="Reasons" value="{local>/basic/carrier_data/carrier_options/fdxe/opt01/ReturnReas}"
+		enabled="{= ${local>/OrientationsSet/16/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/16/visible} === '1' ? true : false}"/>
+	<Label text="Pickup Ready Date" required="{= ${local>/OrientationsSet/19/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/19/visible} === '1' ? true : false}"/>
+	<DatePicker placeholder="Date"
+		value="{path:'local>/basic/carrier_data/carrier_options/fdxe/opt01/Pickupreadydat', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yyyy'}}"
+		enabled="{= ${local>/OrientationsSet/19/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/19/visible} === '1' ? true : false}" id="fdxePickupReDate"/>
+	<Label text="Pickup Ready Time" required="{= ${local>/OrientationsSet/18/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/18/visible} === '1' ? true : false}"/>
+	<Input value="{path:'local>/basic/carrier_data/carrier_options/fdxe/opt01/Pickupreadytim/ms', formatter: '.formatter.formatJavascriptTime'}"
+		enabled="{= ${local>/OrientationsSet/18/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/18/visible} === '1' ? true : false}" id="fdxePickupReTime"/>
+	<Label text="Pickup Latest Time" required="{= ${local>/OrientationsSet/20/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/20/visible} === '1' ? true : false}"/>
+	<Input
+		value="{path:'local>/basic/carrier_data/carrier_options/fdxe/opt01/Pickuplatesttim/ms', formatter: '.formatter.formatJavascriptTime'}"
+		enabled="{= ${local>/OrientationsSet/20/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/20/visible} === '1' ? true : false}" id="fdxePickupLaTime"/>
+	<Label text="Courier Instruction" required="{= ${local>/OrientationsSet/21/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/21/visible} === '1' ? true : false}"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Courierins}"
+		enabled="{= ${local>/OrientationsSet/21/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/21/visible} === '1' ? true : false}"/>
+	<core:Title text="Hazardous Materials"></core:Title>
+	<Label text="Commodity Option Type" required="{= ${local>/OrientationsSet/34/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/34/visible} === '1' ? true : false}"/>
+	<ComboBox selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Hazcommopttype}" items="{/xSERPERPxI_PCHAZCOMM}"
+		enabled="{= ${local>/OrientationsSet/34/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/34/visible} === '1' ? true : false}">
+		<items>
+			<core:Item text="{Description}" key="{Code}"/>
+		</items>
+	</ComboBox>
+	<Label text="Accessibility" required="{= ${local>/OrientationsSet/33/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/33/visible} === '1' ? true : false}"/>
+	<ComboBox items="{path: '/DomainTextSet', filters: [ {path: 'Domain', operator: 'EQ', value1: '/ERPIS/HAZMATACCESSDOM'} ]}"
+		selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Hazmataccess}"
+		enabled="{= ${local>/OrientationsSet/33/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/33/visible} === '1' ? true : false}">
+		<items>
+			<core:Item text="{Description}" key="{= parseInt(${Key})}"/>
+		</items>
+	</ComboBox>
+	<Label text="Emergency Contact/Number" required="{= ${local>/OrientationsSet/35/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/35/visible} === '1' ? true : false}"/>
+	<Input placeholder="Name" value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Contactname}"
+		enabled="{= ${local>/OrientationsSet/36/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/36/visible} === '1' ? true : false}"/>
+	<Input placeholder="Number" value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Contactnumber}"
+		enabled="{= ${local>/OrientationsSet/35/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/35/visible} === '1' ? true : false}"/>
+	<Label text="Signatory Name/Title" required="{= ${local>/OrientationsSet/32/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/32/visible} === '1' ? true : false}"/>
+	<Input placeholder="Name" value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/SigContactname}"
+		enabled="{= ${local>/OrientationsSet/32/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/32/visible} === '1' ? true : false}"/>
+	<Input placeholder="Title" value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/SigTitle}"
+		enabled="{= ${local>/OrientationsSet/32/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/32/visible} === '1' ? true : false}"/>
+	<Label text="Place" required="{= ${local>/OrientationsSet/31/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/31/visible} === '1' ? true : false}"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/SigPlace}"
+		enabled="{= ${local>/OrientationsSet/31/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/31/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<Button text="{i18n>batteryDetail}" press="onBatteryDetailPress" type="Emphasized"
+		visible="{=${local>/basic/carrier_data/carrier_options/fdxe/opt02/Hazcommopttype}==='BATTERY' ? true : false}"/>
+	<core:Title text="Express Freight Detail"></core:Title>
+	<Label text="Booking Conf No" required="{= ${local>/OrientationsSet/39/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/39/visible} === '1' ? true : false}"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Bookcnfno}"
+		enabled="{= ${local>/OrientationsSet/39/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/39/visible} === '1' ? true : false}"/>
+	<Label text="No. of pallets" required="{= ${local>/OrientationsSet/38/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/38/visible} === '1' ? true : false}"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Palletcnt}"
+		enabled="{= ${local>/OrientationsSet/38/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/38/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<!--<CheckBox text="Ship Alert" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/ShipAlert}"/>-->
+	<!--<CheckBox text="Hold At FedEX location" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Holdatloc}"/>-->
+	<Label></Label>
+	<CheckBox text="Packing List Enclosed" tooltip="Packing List Enclosed"
+		enabled="{= ${local>/OrientationsSet/37/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/37/visible} === '1' ? true : false}"
+		selected="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt02/packinglist_enclosed} === '' ? false : true}"/>
+	<Label></Label>
+	<!--<CheckBox text="International Broker Select" tooltip="International Broker Select"-->
+	<!--	selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/IntlBrokerSel}"/>-->
+	<core:Title text="Additional Options"></core:Title>
+	<Label text="Signature Option" required="{= ${local>/OrientationsSet/22/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/22/visible} === '1' ? true : false}"/>
+	<ComboBox id="cbSignatureOpt" selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt01/Delyconfirm}"
+		items="{/xSERPERPxI_PCSIGNATURE}" enabled="{= ${local>/OrientationsSet/22/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/22/visible} === '1' ? true : false}">
+		<items>
+			<core:Item text="{Description}" key="{Code}"/>
+		</items>
+	</ComboBox>
+	<Label></Label>
+	<Label text="Signature Release Number" required="{= ${local>/OrientationsSet/27/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/27/visible} === '1' ? true : false}"/>
+	<Input enabled="{= ${local>/OrientationsSet/27/enable} === '1' ? true : false}"
+		value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/sig_num}"
+		visible="{= ${local>/OrientationsSet/27/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<Label text="Priority Alert Detail Content" required="{= ${local>/OrientationsSet/24/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/24/visible} === '1' ? true : false}"/>
+	<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt2/prio_cont}"
+		enabled="{= ${local>/OrientationsSet/24/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/24/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="Fedex Ground@ Electronic C.O.D (E.C.O.D)" tooltip="Ground Electronic C.O.D"
+		selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Ecod}"
+		enabled="{= ${local>/OrientationsSet/25/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/25/visible} === '1' ? true : false}"/>
+	<CheckBox text="Fedex One Rate" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/Flag}" tooltip="Fedex One Rate"
+		enabled="{= ${local>/OrientationsSet/23/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/23/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="Third Party Consignee"
+		selected="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt02/third_party_con} === '' ? false : true}" tooltip="Third Party Consignee"
+		enabled="{= ${local>/OrientationsSet/28/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/28/visible} === '1' ? true : false}"/>
+	<CheckBox text="Fedex ShipAlert" tooltip="Fedex ShipAlert" selected="{local>/basic/carrier_data/carrier_options/fdxe/opt02/ShipAlert}"
+		enabled="{= ${local>/OrientationsSet/26/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/26/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<CheckBox text="Call Before Delivery"
+		selected="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt02/call_delivery} === '' ? false : true}" tooltip="Call Before Delivery"
+		enabled="{= ${local>/OrientationsSet/7/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/7/visible} === '1' ? true : false}"/>
+	<CheckBox text="Non Standard Container"
+		selected="{= ${local>/basic/carrier_data/carrier_options/fdxe/opt02/nonstd_cont} === '' ? false : true}" tooltip="Non Standard Container"
+		enabled="{= ${local>/OrientationsSet/12/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/12/visible} === '1' ? true : false}"/>
+	<Label></Label>
+	<Label text="Physical Packaging Type" tooltip="Physical Packaging Type"
+		required="{= ${local>/OrientationsSet/4/require} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/4/visible} === '1' ? true : false}"/>
+	<ComboBox items="{/xSERPERPxCDS_FDXE_PTYP}" enabled="{= ${local>/OrientationsSet/4/enable} === '1' ? true : false}"
+		visible="{= ${local>/OrientationsSet/4/visible} === '1' ? true : false}"
+		selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/physical_packtyp}">
+		<items>
+			<core:Item text="{Description}" key="{Code}"/>
+		</items>
+	</ComboBox>
+</core:FragmentDefinition>

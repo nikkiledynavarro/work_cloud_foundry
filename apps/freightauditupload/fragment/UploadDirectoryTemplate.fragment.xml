@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table">
+	<Dialog title="Upload Directory" contentWidth="1200px" contentHeight="400px" >
+		<table:Table id="idLoadTemplate" selectionMode="MultiToggle" selectionBehavior="Row" rows="{local>/UploadDirectory}"
+			rowSelectionChange="onSelectionTemplate" width="auto" visibleRowCount="6" class="border_lightgray_nobottom">
+			<table:extension>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<ToolbarSeparator/>
+					<Button icon="sap-icon://add" press="onAddTemplate" type="Emphasized"/>
+					<Button icon="sap-icon://edit" press="onEditTemplate" type="Emphasized" enabled="{local>/RowSelected}"/>
+					<Button icon="sap-icon://decline" press="onDelete" type="Reject" enabled="{local>/RowSelected}"/>
+				</OverflowToolbar>
+			</table:extension>
+			<table:columns>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Carrier Code"/>
+					<table:template>
+						<Text text="{local>CarrierCode}"/>
+					</table:template>
+				</table:Column>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Program Name"/>
+					<table:template>
+						<Text text="{local>Program}"/>
+					</table:template>
+				</table:Column>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Directory Type"/>
+					<table:template>
+						<Text text="{local>DirectoryType}"/>
+					</table:template>
+				</table:Column>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Counter"/>
+					<table:template>
+						<Text text="{local>Counter}"/>
+					</table:template>
+				</table:Column>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Directory Name"/>
+					<table:template>
+						<Text text="{local>DirectoryName}"/>
+					</table:template>
+				</table:Column>
+				<table:Column hAlign="Center" resizable="false">
+					<Label text="Name of File"/>
+					<table:template>
+						<Text text="{local>FileName}"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+		<buttons>
+			<Button text="Save" press="onSaveData" type="Emphasized"/>
+			<Button text="Cancel" press="onCancelUpload" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

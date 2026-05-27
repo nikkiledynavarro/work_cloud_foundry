@@ -1,0 +1,78 @@
+<mvc:View controllerName="com.erpis.shiperp.sls.disputesls.controller.DisputeList" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:sv="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<sv:SmartVariantManagement id="smartVariant" persistencyKey="SERPERP_DisputeList_PKey"/>
+					</FlexBox>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"></Text>
+				</f:snappedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<smartFilterBar:SmartFilterBar entitySet="xSERPERPxI_DPHDR" id="idDisputeListSmartFilterBar" useToolbar="false" smartVariant="smartVariant"
+						initialized="onFBInitialized" persistencyKey="SERPERP_DisputeList_PKey.FilterBar" filterBarExpanded="true" showGoOnFB="false"
+						 beforeRebindTable="onBeforeTableRebind"
+						afterVariantLoad="onAfterVariantLoaded" beforeVariantFetch="onBeforeVariantFetched" assignedFiltersChanged="onAssignedFiltersChanged">
+						<smartFilterBar:controlConfiguration>
+							<smartFilterBar:ControlConfiguration index="1" visible="true" label="{i18n>createdOn}" key="CreatedDate" visibleInAdvancedArea="true"
+								controlType="date" filterType="interval"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="2" visible="true" label="{i18n>tableCarrierColumnTitle}" key="CarrierCode"
+								visibleInAdvancedArea="true" controlType="input" filterType="multiple" displayBehaviour="descriptionAndId" hasValueHelpDialog="true"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="3" visible="true" label="{i18n>tableCCodeColumnTitleFull}" key="CompanyCode"
+								visibleInAdvancedArea="true" controlType="input" filterType="multiple" displayBehaviour="descriptionAndId" hasValueHelpDialog="true"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="4" visible="true" label="{i18n>tableDisputeIDColumnTitle}" key="ID" visibleInAdvancedArea="true"
+								controlType="input" filterType="single"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="5" visible="true" label="{i18n>tableInvnumColumnTitleFull}" key="InvoiceNo"
+								visibleInAdvancedArea="true" controlType="input" filterType="single"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="6" visible="true" label="{i18n>tableAccountNoColumnTitleFull}" key="AccountNo"
+								visibleInAdvancedArea="true" controlType="input" filterType="single"></smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="7" visible="true" label="{i18n>tableDaysOpenColumnTitle}" key="DaysOpen"
+								visibleInAdvancedArea="true" controlType="input" filterType="single"></smartFilterBar:ControlConfiguration>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<IconTabBar id="idIconTabBar" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding" expandable="false">
+				<items>
+					<IconTabFilter id="iconAll" text="{i18n>Disputes}" showAll="true" key="All" tooltip="{i18n>disputeIconTabBarAll}" count="All"></IconTabFilter>
+					<IconTabSeparator/>
+					<IconTabFilter id="iconOpen" key="O" icon="sap-icon://open-folder" tooltip="{i18n>disputeIconTabBarOpen}" count="{local>/OpenDisputes}"
+						iconColor="Default" text="{i18n>Open}"></IconTabFilter>
+					<IconTabFilter id="iconInProgress" key="IP" icon="sap-icon://up" tooltip="{i18n>disputeIconTabBarInProgress}"
+						count="{local>/InProcessDisputes}" iconColor="Critical" text="{i18n>InProcess}"></IconTabFilter>
+					<IconTabFilter id="iconCompleted" key="C" icon="sap-icon://border" tooltip="{i18n>disputeIconTabBarCompleted}"
+						count="{local>/CompletedDisputes}" iconColor="Positive" text="{i18n>Completed}"></IconTabFilter>
+					<IconTabSeparator/>
+					<IconTabFilter id="iconCanceled" key="CN" icon="sap-icon://delete" tooltip="{i18n>disputeIconTabBarCanceled}"
+						count="{local>/CanceledDisputes}" iconColor="Negative" text="{i18n>Canceled}"></IconTabFilter>
+				</items>
+				<content>
+					<core:Fragment fragmentName="com.erpis.shiperp.sls.disputesls.fragment.DisputeInfo" type="XML"/>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="{i18n>postButtonText}" press="onPostButtonPressed"/>
+				<Button type="Reject" text="{i18n>cancelButtonText}" press="onCancelButtonPressed"/>
+				<Button text="{i18n>Edi}" press="onEDIButtonPressed"/>
+				<Button text="{i18n>printButtonText}" press="onPrintButtonPressed"/>
+				<Button text="{i18n>sendEmailButtonText}" press="onSendEmailButtonPressed"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

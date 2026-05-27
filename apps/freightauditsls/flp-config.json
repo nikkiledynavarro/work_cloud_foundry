@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.erpis.shiperp.sls.freightauditsls.freightauditsls",
+        "description": "Freight Audit, HR7",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#freightauditsls-Display",
+        "navigationComponentName": "com.erpis.shiperp.sls.freightauditsls",
+        "intentSemanticObject": "freightauditsls",
+        "intentAction": "Display",
+        "html5ApplicationName": "freightauditsls",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "87093038-912d-43d6-861e-87b34db81e26-1686555337839"
+        ],
+        "contentPackages": [
+            "b1df7a46-8c98-4988-bb5a-61b44be0063e-1686565170387"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Freight Audit SLS",
+        "subtitle": "SLS",
+        "searchKeywords": "Freight Audit SLS",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

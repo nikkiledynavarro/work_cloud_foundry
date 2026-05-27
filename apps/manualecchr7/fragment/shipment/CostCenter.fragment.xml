@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="Cost Center" class="sapUiPopupWithPadding" items="{/xSERPERPxI_CSKS}"
+		liveChange="handleShipToValueHelpSearch" confirm="onCostCenterConfirm" cancel="handleCostCeterValueHelpClose">
+		<StandardListItem title="{CostCenter}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

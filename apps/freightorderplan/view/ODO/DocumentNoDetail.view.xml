@@ -1,0 +1,174 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.ODO.DocumentNoDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<Page title="{i18n>documentNoDetailTitle} {path: 'local>/DocumentNo', formatter: '.formatter.validateDocNo'}">
+		<content>
+			<!-- Panel for TreeTable -->
+			<Panel>
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Document No Item" level="H2" titleStyle="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ui:TreeTable id="fuItemDetailTree" rows="{path:'local>/DocumentNoItem', parameters: {arrayNames:['noitems']}}" selectionMode="None"
+						enableSelectAll="false" ariaLabelledBy="title">
+						<ui:columns>
+							<!--Identification-->
+							<ui:Column width="25rem">
+								<Label text="{i18n>documentNoIdentification}"/>
+								<ui:template>
+									<ObjectStatus xmlns="sap.m" state="{path: 'local>Itemcat', formatter: '.formatter.formatDocNoItemCategoryState'}" text="{local>Itemid}"
+										icon="{path: 'local>Itemcat', formatter: '.formatter.formatDocNoItemCategoryIcon'}"/>
+								</ui:template>
+							</ui:Column>
+							<!--Product-->
+							<ui:Column>
+								<Label text="{i18n>documentNoProduct}"/>
+								<ui:template>
+									<Text text="{local>Productno}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Product Description-->
+							<ui:Column>
+								<Label text="{i18n>documentNoProductDesciptrion}"/>
+								<ui:template>
+									<Text text="{local>ProductDesc}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Quantity-->
+							<ui:Column >
+								<Label text="{i18n>documentNoQuantity}"/>
+								<ui:template>
+									<Text text="{path: 'local>Qty', formatter: '.formatter.formatAmountQty'}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Uom-->
+							<ui:Column>
+								<Label text="{i18n>documentNoUom}"/>
+								<ui:template>
+									<Text text="{local>Uom}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Warehouse No-->
+							<ui:Column>
+								<Label text="{i18n>documentNoWarehouseNo}"/>
+								<ui:template>
+									<Text text="{local>WarehouseNo}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Staging Area-->
+							<ui:Column>
+								<Label text="{i18n>documentNoStagingArea}"/>
+								<ui:template>
+									<Text text="{local>StagingArea}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Staging Area Group-->
+							<ui:Column>
+								<Label text="{i18n>documentNoStagingAreaGroup}"/>
+								<ui:template>
+									<Text text="{local>StagingAreaG}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Staging Bay-->
+							<ui:Column>
+								<Label text="{i18n>documentNoStagingBay}"/>
+								<ui:template>
+									<Text text="{local>StagingBay}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+						</ui:columns>
+					</ui:TreeTable>
+				</content>
+			</Panel>
+			<!-- Panel for Table -->
+			<Panel>
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Handling Units" level="H2" titleStyle="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<Table id="table" items="{path: 'local>/HandlingUnits'}">
+						<columns>
+							<!--Pack. Material-->
+							<Column>
+								<Label text="Pack. Material"/>
+							</Column>
+							<!--PackMat Text-->
+							<Column>
+								<Label text="PackMat Text"/>
+							</Column>
+							<!--Total Weight-->
+							<Column>
+								<Label text="Total Weight"/>
+							</Column>
+							<!--Weight Unit-->
+							<Column>
+								<Label text="Weight Unit"/>
+							</Column>
+							<!--Warehouse No.-->
+							<Column>
+								<Label text="Warehouse No."/>
+							</Column>
+							<!--Length-->
+							<Column>
+								<Label text="Length"/>
+							</Column>
+							<!--Width-->
+							<Column>
+								<Label text="Width"/>
+							</Column>
+							<!--Height-->
+							<Column>
+								<Label text="Height"/>
+							</Column>
+							<!--Unit-->
+							<Column>
+								<Label text="Unit"/>
+							</Column>
+							<!--Storage Type-->
+							<Column>
+								<Label text="Storage Type"/>
+							</Column>
+							<!--Storage Bin-->
+							<Column>
+								<Label text="Storage Bin"/>
+							</Column>
+							<!--Storage Section-->
+							<Column>
+								<Label text="Storage Section"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{local>Pmat}"/>
+									<Text text="{local>Pmtext}"/>
+									<Text text="{local>GWeight}"/>
+									<Text text="{local>UnitGw}"/>
+									<Text text="{local>Lgnum}"/>
+									<Text text="{local>Length}"/>
+									<Text text="{local>Width}"/>
+									<Text text="{local>Height}"/>
+									<Text text="{local>UnitLwh}"/>
+									<Text text="{local>Lgtyp}"/>
+									<Text text="{local>Lgpla}"/>
+									<Text text="{local>Lgber}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar id="idFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>backToODOScreenButton}" press="onNavBackToODOScreen" type="Emphasized"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

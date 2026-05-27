@@ -1,0 +1,228 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.TU.AvailableTus" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f" height="100%" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<MenuButton text="TU Screen" tooltip="TU Screen" class="sapUiSmallMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem text="Plan to TU Screen" press="onPlantoTUScreenPress"/>
+								<MenuItem text="TU Screen" press="onTUScreenPress"/>
+								<MenuItem text="Vehicle Screen" press="onVehicleScreenPress"/>
+							</Menu>
+						</menu>
+					</MenuButton>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<IconTabBar id="itbFreightUnit" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding" expandable="false">
+				<content>
+					<ScrollContainer horizontal="true" vertical="true">
+						<smartTable:SmartTable entitySet="TuHeaderSet" smartFilterId="DynamicFilter" tableType="ResponsiveTable" useExportToExcel="true"
+							useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SmartFilterPKey" enableAutoBinding="true" id="TUsTable"
+							header="{i18n>availableTUs}" showRowCount="true" showFullScreenButton="true" demandPopin="false" showOverlay="onShowOverlay"
+							initialise="onInitialise" beforeRebindTable="onBeforeTableRebind" tableBindingPath="oModelSmartTable>/" customData:useSmartToggle="true"
+							customData:useSmartField="false">
+							<smartTable:customToolbar>
+								<OverflowToolbar height="3rem" design="Transparent">
+									<ToolbarSpacer/>
+									<!--Load-->
+									<MenuButton text="Load" tooltip="Load">
+										<menu>
+											<Menu>
+												<MenuItem text="Start Loading" press="onStartLoadingPress"/>
+												<MenuItem text="Finish Loading" press="onFinishLoadingPress"/>
+												<MenuItem text="Reverse Loading Begin" press="onReverseLoadingBeginPress"/>
+												<MenuItem text="Reverse Loading End" press="onReverseLoadingEndPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Create Warehouse Task-->
+									<Button text="Create Warehouse Task" pressed="true" tooltip="Goods Movement" press="onCreateWTPress"/>
+									<!--Goods Movement-->
+									<MenuButton text="Goods Mvt" tooltip="Goods Movement">
+										<menu>
+											<Menu>
+												<MenuItem text="Goods Issue" press="onGoodsIssuePress"/>
+												<MenuItem text="Reverse Goods Issue" press="onReversegGoodsiIssuePress"/>
+												<MenuItem text="Goods Receipt" press="onGoodsReceiptPress"/>
+												<MenuItem text="Reverse Goods Receipt" press="onReverseGoodsReceiptPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Door-->
+									<MenuButton text="Door" tooltip="Door">
+										<menu>
+											<Menu>
+												<MenuItem text="Assign Door " press="onAssignDoorPress"/>
+												<MenuItem text="Arrival At Door " press="onArrivalatDoorPress"/>
+												<MenuItem text="Departure From Door " press="onDepartureFromDoorPress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<!--Assign Vehicle-->
+									<Button text="Assign Vehicle" press="onAssignVehiclePress"/>
+									<!--Checkpoint-->
+									<MenuButton text="Checkpt" tooltip="Checkpoint">
+										<menu>
+											<Menu>
+												<MenuItem text="Arrival " press="onArrivalPress"/>
+												<MenuItem text="Reverse Arrival " press="onReverseArrivalPress"/>
+												<MenuItem text="Departure " press="onDeparturePress"/>
+												<MenuItem text="Reverse Departure " press="onReverseDeparturePress"/>
+											</Menu>
+										</menu>
+									</MenuButton>
+									<ToolbarSeparator/>
+								</OverflowToolbar>
+							</smartTable:customToolbar>
+							<Table selectionChange="onSelectionChange" growing="true" growingThreshold="100" showOverlay="false" growingScrollToLoad="false"
+								mode="MultiSelect" fixedLayout="true">
+								<columns>
+									<!--Carrier Code-->
+									<Column>
+										<Text text="{i18n>carrierId}" wrapping="false" tooltip="{i18n>tooltipCarriedId}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "TspCurr", "columnIndex":"1", "leadingProperty": "TspCurr"}'/>
+										</customData>
+									</Column>
+									<!--Carrier Service ID-->
+									<Column>
+										<Text text="{i18n>shipERPCarrierServiceId}" wrapping="false" tooltip="{i18n>tooltipCarriedServiceId}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "TspCurrText", "columnIndex":"2", "leadingProperty": "TspCurrText"}'/>
+										</customData>
+									</Column>
+									<!--Internal TU Number-->
+									<Column>
+										<Text text="{i18n>internalTuNumber}" wrapping="false" tooltip="{i18n>tooltopInternalTuNumber}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "TuNum", "columnIndex":"3", "leadingProperty": "TuNum"}'/>
+										</customData>
+									</Column>
+									<!--SR Activity Number: TU	-->
+									<Column>
+										<Text text="{i18n>srActivityNumber}" wrapping="false" tooltip="{i18n>srActivityNumber}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "TuSrActNum", "columnIndex":"4", "leadingProperty": "TuSrActNum"}'/>
+										</customData>
+									</Column>
+									<!--Assigned Object Has Changed-->
+									<Column>
+										<Text text="{i18n>assignedObjectHasChanged}" wrapping="false" tooltip="{i18n>assignedObjectHasChanged}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "IconAsgnChanged", "columnIndex":"5", "leadingProperty": "IconAsgnChanged"}'/>
+										</customData>
+									</Column>
+									<!--Loading Started-->
+									<Column>
+										<Text text="{i18n>loadingStarted}" wrapping="false" tooltip="{i18n>loadingStarted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatLs", "columnIndex":"6", "leadingProperty": "StatLs"}'/>
+										</customData>
+									</Column>
+									<!--Loading Completed-->
+									<Column>
+										<Text text="{i18n>loadingCompleted}" wrapping="false" tooltip="{i18n>loadingCompleted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatLc", "columnIndex":"7", "leadingProperty": "StatLc"}'/>
+										</customData>
+									</Column>
+									<!--Arrival at Checkpoint-->
+									<Column >
+										<Text text="{i18n>arrivalAtCheckpoint}" wrapping="false" tooltip="{i18n>arrivalAtCheckpoint}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatChki", "columnIndex":"8", "leadingProperty": "StatChki"}'/>
+										</customData>
+									</Column>
+									<!--Departure from Checkpoint-->
+									<Column>
+										<Text text="{i18n>departureFromCheckpoint}" wrapping="false" tooltip="{i18n>departureFromCheckpoint}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatChko", "columnIndex":"9", "leadingProperty": "StatChko"}'/>
+										</customData>
+									</Column>
+									<!--Goods Issue Started-->
+									<Column>
+										<Text text="{i18n>goodsIssueStarted}" wrapping="false" tooltip="{i18n>goodsIssueStarted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatBgi", "columnIndex":"10", "leadingProperty": "StatBgi"}'/>
+										</customData>
+									</Column>
+									<!--Goods Issue Posted-->
+									<Column>
+										<Text text="{i18n>goodIssuePosted}" wrapping="false" tooltip="{i18n>goodIssuePosted}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "StatPgi", "columnIndex":"11", "leadingProperty": "StatPgi"}'/>
+										</customData>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem press="onNavigateDeliveryOrderDetail" vAlign="Middle">
+										<cells>
+											<!--Carrier Code-->
+											<Text text="{oModelSmartTable>TspCurr}"/>
+											<!--Carrier Service ID-->
+											<Text text="{oModelSmartTable>TspCurrText}"/>
+											<!--Internal TU Number-->
+											<Text text="{oModelSmartTable>TuNum}"/>
+											<!--SR Activity Number: TU	-->
+											<Text text="{oModelSmartTable>TuSrActNum}"/>
+											<!--Assigned Object Has Changed-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>IconAsgnChanged', formatter: '.formatter.validateAssignObjectIcon'}"
+												tooltip="{path: 'oModelSmartTable>IconAsgnChanged', formatter: '.formatter.validateAssignObjectTooltip'}"/>
+											<!--Loading Started-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatLs', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatLs', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatLs', formatter: '.formatter.validateTooltip'}"/>
+											<!--Loading Completed-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatLc', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatLc', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatLc', formatter: '.formatter.validateTooltip'}"/>
+											<!--Arrival at Checkpoint-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatChki', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatChki', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatChki', formatter: '.formatter.validateTooltip'}"/>
+											<!--Departure from Checkpoint-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatChko', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatChko', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatChko', formatter: '.formatter.validateTooltip'}"/>
+											<!--Goods Issue Started-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatBgi', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatBgi', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatBgi', formatter: '.formatter.validateTooltip'}"/>
+											<!--Goods Issue Posted-->
+											<ObjectStatus icon="{path: 'oModelSmartTable>StatPgi', formatter: '.formatter.validateIcon'}"
+												state="{path: 'oModelSmartTable>StatPgi', formatter: '.formatter.validateColor'}"
+												tooltip="{path: 'oModelSmartTable>StatPgi', formatter: '.formatter.validateTooltip'}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</ScrollContainer>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<!-- Footer -->
+		<f:footer>
+			<OverflowToolbar id="otbFooterEWM">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="btnPlanVehicle" text="{i18n>planButtonText}" enabled="false" press="onPlanVehiclePressed" type="Emphasized"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

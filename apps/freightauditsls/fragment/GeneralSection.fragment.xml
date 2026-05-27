@@ -1,0 +1,60 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<!--General -->
+			<core:Title text="{i18n>General}"/>
+			<Label text="{i18n>Invoice}"/>
+			<Text text="{InvoiceNo}"/>
+			<Label text="{i18n>Status}"/>
+			<Text text="{path: 'DetailStatus', formatter: '.formatter.releaseDtlStatusText'}"/>
+			<Label text="{i18n>CompanyCode}"/>
+			<Text text="{CompanyCode}"/>
+			<Label text="{i18n>CarrierName}"/>
+			<Text text="{CarrierName}"/>
+			<Label text="{i18n>AccountNo}"/>
+			<Text text="{AccountNo}"/>
+			<Label text="{i18n>VendorNo}"/>
+			<Text text="{Vendor}"/>
+			<Label text="{i18n>OriginalInvoice}"/>
+			<Text text="{OriginalInvoice}"/>
+			<Label text="{i18n>ActualMode}"/>
+			<Text text="{ActualMode}"/>
+			<Label text="{i18n>DomesticIntl}"/>
+			<Text text="{DomesInteFlag}"/>
+			<Label text="{i18n>InvoiceType}"/>
+			<Text text="{InvoiceType}"/>
+			<Label text="{i18n>DeliveryNo}"/>
+			<Text text="{Delivery}"/>
+			<!--System Data -->
+			<core:Title text="{i18n>SystemData}"/>
+			<Label text="{i18n>CreateDate}"/>
+			<Text text="{path: 'CreatedOn', formatter: '.formatter.formatDateString' }"/>
+			<Label text="{i18n>CreateTime}"/>
+			<Text text="{path: 'CreatedTime', formatter: '.formatter.formatJavascriptTime' }"/>
+			<Label text="{i18n>ChangedBy}"/>
+			<Text text="{ChangedBy}"/>
+			<Label text="{i18n>ChangedOn}"/>
+			<Text text="{path: 'ChangedOn', formatter: '.formatter.formatDateString' }"/>
+			<Label text="{i18n>ChangeTime}"/>
+			<Text text="{path: 'ChangedTime', formatter: '.formatter.formatJavascriptTime' }"/>
+			<Label text="{i18n>MatchObject}"/>
+			<Text text="{MatchObject}"/>
+			<Label text="{i18n>MatchObjectKey}"/>
+			<Text text="{MatchObjectKey}"/>
+			<!--Dates -->
+			<core:Title text="{i18n>Dates}"/>
+			<Label text="{i18n>InvoiceDate}"/>
+			<Text text="{path: 'InvoiceDate', formatter: '.formatter.formatDateString' }"/>
+			<Label text="{i18n>DeliveryDate}"/>
+			<Text text="{path: 'DeliveryDate', formatter: '.formatter.formatDateString' }"/>
+			<Label text="{i18n>DeliveryTime}"/>
+			<Text text="{path: 'DeliveryTime', formatter: '.formatter.formatJavascriptTime' }"/>
+			<Label text="{i18n>InvoiceDueDate}"/>
+			<Text text="{path: 'InvoiceDueDate', formatter: '.formatter.formatDateString' }"/>
+			<Label text="{i18n>PickingDate}"/>
+			<Text text="{path: 'PickingDate', formatter: '.formatter.formatDateString' }"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

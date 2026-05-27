@@ -1,0 +1,6 @@
+<mvc:View controllerName="com.erpis.shiperp.closedelivery.hr7.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.f"
+	xmlns:m="sap.m" height="100%">
+	<m:App id="app">
+		<FlexibleColumnLayout id="layout" layout="{appView>/layout}" backgroundDesign="Translucent"></FlexibleColumnLayout>
+	</m:App>
+</mvc:View>

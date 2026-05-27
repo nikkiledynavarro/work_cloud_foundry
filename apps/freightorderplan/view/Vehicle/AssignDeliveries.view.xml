@@ -1,0 +1,59 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.Vehicle.AssignDeliveries" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<Page>
+		<content>
+			<!-- Panel for TreeTable -->
+			<Panel>
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Transportation Unit: {path: 'local>/TransportationUnits'}" level="H2" titleStyle="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ui:TreeTable id="idDeliveriesTree" rows="{path:'local>/Veh_AssignedDeliveries', parameters: {arrayNames:['noitems']}}" selectionMode="None"
+						enableSelectAll="false" ariaLabelledBy="title">
+						<ui:columns>
+							<!--Deliveries-->
+							<ui:Column width="25rem">
+								<Label text="{i18n>deliveries}"/>
+								<ui:template>
+									<ObjectStatus xmlns="sap.m" state="{path: 'local>Refdocno_erp', formatter: '.formatter.formatState'}" text="{local>Refdocno_erp}"
+										icon="sap-icon://product"/>
+								</ui:template>
+							</ui:Column>
+							<!--Doc. Cat-->
+							<ui:Column>
+								<Label text="{i18n>docCat}"/>
+								<ui:template>
+									<Text text="{local>Doccat}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Doc. Type-->
+							<ui:Column>
+								<Label text="{i18n>docType}"/>
+								<ui:template>
+									<Text text="{local>Doctype}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+							<!--Whse. Number-->
+							<ui:Column>
+								<Label text="{i18n>whseNumber}"/>
+								<ui:template>
+									<Text text="{local>Lgnum}" wrapping="false"/>
+								</ui:template>
+							</ui:Column>
+						</ui:columns>
+					</ui:TreeTable>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar id="idFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://navigation-left-arrow" text="{i18n>backToVehicleScreenButton}" press="onNavBack" type="Emphasized"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>detailConfirmSplitMerTitle}" contentWidth="450px"
+		contentHeight="{= ${local>/disputeConsolList}.length > 0 ? '300px' : 'auto'}">
+		<l:VerticalLayout class="sapUiContentPadding">
+			<Text text="{i18n>detailConfirmSplitMerMsg}" class="sapUiSmallMarginBottom"/>
+			<Table id="tbDisputeConsolList" class="border_lightgray_nobottom sapUiTinyMarginBottom"
+				items="{ path: 'local>/disputeConsolList', sorter: [{path: 'local>ID'}] }" mode="SingleSelectLeft" includeItemInSelection="true"
+				visible="{= ${local>/disputeConsolList}.length>0}" growing="true" growingThreshold="20">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<SearchField liveChange="onDisputeConsolListSearch" width="100%" class="sapUiSmallMarginEnd"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column hAlign="Center"></Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Inactive">
+						<cells>
+							<Text text="{local>ID}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</l:VerticalLayout>
+		<buttons>
+			<Button type="Accept" text="{i18n>msgActNewAndSplit}" press="onDisputeSplit"/>
+			<Button type="Emphasized" text="{i18n>msgActMerge}" press="onDisputeMerge" enabled="{= ${local>/disputeConsolList}.length > 0 }"/>
+			<Button text="{i18n>Close}" press="onDisputeSplitMergeDialogCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

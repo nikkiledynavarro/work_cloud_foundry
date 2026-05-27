@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/base/Object","sap/m/MessageBox"],function(e,t){"use strict";return e.extend("com.erpis.shiperp.hr7.ltlplanning.controller.ErrorHandler",{constructor:function(e){this._oResourceBundle=e.getModel("i18n").getResourceBundle();this._oComponent=e;this._oModel=e.getModel();this._bMessageOpen=false;this._sErrorText=this._oResourceBundle.getText("errorText")}})});

@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Create new Handling Unit">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>PackMat}"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtPackMat" submit="onCreateHU" showValueHelp="true" valueHelpRequest="onPackMatValueRequested"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>NoHus}"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtHUNo" type="Number" submit="onCreateHU"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="OK" type="Emphasized" press="onCreateHU"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCloseNewHUDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

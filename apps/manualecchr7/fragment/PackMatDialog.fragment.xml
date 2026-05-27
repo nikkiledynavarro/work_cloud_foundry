@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>packmat}" class="sapUiPopupWithPadding" items="{/xSERPERPxCDS_PACKMAT}" liveChange="onPackMatValueHelpSearch"
+		confirm="onPackMatConfirm" cancel="onPackMatValueHelpClose">
+		<StandardListItem title="{Matnr}" description="{Maktx}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

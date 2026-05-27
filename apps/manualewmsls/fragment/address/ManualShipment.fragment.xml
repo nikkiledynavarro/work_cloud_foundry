@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text="Manual Shiment Category"/>
+	<Input editable="true" value="{local>/oAddProductDetail/ManShipCat}" liveChange="onChangeManualShimentCategory"></Input>
+</core:FragmentDefinition>

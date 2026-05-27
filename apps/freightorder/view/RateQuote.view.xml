@@ -1,0 +1,65 @@
+<mvc:View controllerName="com.erpis.shiperp.freightorder.controller.RateQuote" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title text="{i18n>foRateQuoteTitle}"/>
+					</FlexBox>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"></Text>
+				</f:snappedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<IconTabBar id="ictRateQuote" select="onSelectIconTab" headerMode="Inline" expanded="{device>/isNoPhone}">
+				<items>
+					<IconTabFilter text="{i18n>foRateQuoteRateTab}" key="Rate" count="{local>/RatesCount}">
+						<core:Fragment fragmentName="com.erpis.shiperp.freightorder.fragment.ratequote.RateQuoteItem" type="XML"/>
+					</IconTabFilter>
+					<!--<IconTabFilter text="{i18n>foRateQuoteFUTab}" key="FreightUnit" count="{local>/FreightUnitsCount}">-->
+					<!--	<core:Fragment fragmentName="com.erpis.shiperp.freightorder.fragment.ratequote.RateQuoteFreightUnitItem" type="XML"/>-->
+					<!--</IconTabFilter>-->
+					<IconTabFilter text="{i18n>foRateQuoteErrorTab}" key="Error" count="{local>/ErrorsCount}">
+						<Table id="tblRateQuoteError" class="border_lightgray_nobottom" width="100%" mode="None" busyIndicatorDelay="99999"
+							growingScrollToLoad="true" items="{path: 'local>/RateQuoteErrors'}" growing="true" growingThreshold="100" fixedLayout="true">
+							<columns>
+								<Column>
+									<Text text="{i18n>foRateQuotErrorTypeCol}"/>
+								</Column>
+								<Column demandPopin="true" minScreenWidth="Tablet">
+									<Text text="{i18n>foRateQuotErrorIDCol}"/>
+								</Column>
+								<Column demandPopin="true" minScreenWidth="Tablet">
+									<Text text="{i18n>foRateQuotErrorMsgNoCol}"/>
+								</Column>
+								<Column demandPopin="true" minScreenWidth="Tablet">
+									<Text text="{i18n>foRateQuotErrorTextCol}"/>
+								</Column>
+							</columns>
+							<ColumnListItem type="Inactive">
+								<cells>
+									<Text text="{local>Type}"/>
+									<Text text="{local>Id}"/>
+									<Text text="{local>LogMsgNo}"/>
+									<Text text="{local>Message}"/>
+								</cells>
+							</ColumnListItem>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>freightOrderBacktoFOScreenBtn}" press="onNavBackToFreightOrderScreen" type="Emphasized"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

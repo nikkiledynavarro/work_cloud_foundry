@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Importer"></core:Title>
+			<Label text="Name"/>
+			<Input placeholder="Name" tooltip="Name"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/name1} : ${local>/basic/partners/shipto/address/name1}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Input placeholder="Attention" tooltip="Attention"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/name2} : ${local>/basic/partners/shipto/address/name2}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Label text="Address 1/2"/>
+			<Input placeholder="Address 1" tooltip="Address 1"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/street1} : ${local>/basic/partners/shipto/address/street1}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Input placeholder="Address 2" tooltip="Address 2"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/street2} : ${local>/basic/partners/shipto/address/street2}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Label text="Address 3/4"/>
+			<Input placeholder="Address 3" tooltip="Address 3"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/street3} : ${local>/basic/partners/shipto/address/street3}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Input placeholder="Address 4" tooltip="Address 4"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/street4} : ${local>/basic/partners/shipto/address/street4}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Label text="Email"/>
+			<Input placeholder="Email" tooltip="Email"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/email} : ${local>/basic/partners/shipto/address/email}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Label text="Phone"/>
+			<Input placeholder="Phone" tooltip="Phone"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/telephone} : ${local>/basic/partners/shipto/address/telephone}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<core:Title text="Location"></core:Title>
+			<Label text="Country"/>
+			<ComboBox tooltip="Country"
+				selectedKey="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/country} : ${local>/basic/partners/shipto/address/country}}"
+				items="{path: '/xSERPERPxI_PCCNTR', length: 999}" change="onUpdateDomestic" app:nextUpdate="slImporterState"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }">
+				<items>
+					<core:Item text="{Name}" key="{Country}"/>
+				</items>
+			</ComboBox>
+			<Label text="State"/>
+			<ComboBox id="slImporterState" tooltip="State"
+				selectedKey="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/state} : ${local>/basic/partners/shipto/address/state}}"
+				items="{path: '/xSERPERPxI_PCSTATE', length: 999}" enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }">
+				<items>
+					<core:Item text="{Description}" key="{Region}"/>
+				</items>
+			</ComboBox>
+			<Label text="City"/>
+			<Input placeholder="City"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/city} : ${local>/basic/partners/shipto/address/city}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+			<Label text="Postal"/>
+			<Input placeholder="Postal Code"
+				value="{= ${local>/basic/payment/billing_option} === 'COLL' ? ${local>/basic/partners/importer/address/postalcode} : ${local>/basic/partners/shipto/address/postalcode}}"
+				enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

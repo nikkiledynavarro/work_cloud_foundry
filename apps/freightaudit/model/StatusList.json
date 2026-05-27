@@ -1,0 +1,16 @@
+{
+	"HDR": [{
+		"Name": "Approved",
+		"Code": "A"
+	}, {
+		"Name": "Reject",
+		"Code": "RE"
+	}],
+	"DTL": [{
+		"Name": "Approved",
+		"Code": "A"
+	}, {
+		"Name": "Dispute",
+		"Code": "D"
+	}]
+}

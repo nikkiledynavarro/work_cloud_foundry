@@ -1,0 +1,87 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<FlexBox fitContainer="true">
+		<items>
+			<Table headerText="{i18n>CarrierInvoiceDetails}" noDataText="{i18n>Nodata}" mode="None" showSeparators="All" growing="true"
+				busyIndicatorDelay="99999" growingThreshold="100" updateFinished="onCarrierUpdateFinished" growingScrollToLoad="true"
+				class="border_lightgray" items="{path:'toCND'}" id="tblCarrier">
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline">
+						<Text text="{i18n>CARRCode}" width="auto" maxLines="1" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>CARRDesc}" width="auto" maxLines="1" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>SERPCode}" width="auto" maxLines="1" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>SERPDesc}" width="auto" maxLines="1" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" width="15%" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>Amount}" width="auto" maxLines="1" wrapping="false"/>
+						<footer>
+							<Text text="{parts: [{path: 'OriginalPayAmt'}, {path: 'ExAmount'}], formatter: '.formatter.formatTotalCarrAmount'}"/>
+						</footer>
+					</Column>
+					<Column minScreenWidth="Tablet" width="10%" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>Curr}" width="auto" maxLines="1" wrapping="false"/>
+						<footer>
+							<Text text="{Currency}"/>
+						</footer>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Inactive" press="onPress">
+						<cells>
+							<ObjectIdentifier text="{CarrierChargeCode}"/>
+							<Text text="{CarrierChargeCodeDesc}" maxLines="1" tooltip="{CarrierChargeCodeDesc}"/>
+							<ObjectStatus text="{ChargeCode}" state="{= (${IsDifferent} === true &amp;&amp; ${ChargeCodeException} === false) ? 'Error' : 'None'}"/>
+							<ObjectIdentifier text="{SERPChargeCodeDesc}" tooltip="{SERPChargeCodeDesc}"/>
+							<FlexBox>
+								<ObjectStatus visible="{= ${ChargeCodeException} === true ? true : false}" text="{BilledAmount}" class="strike_through"
+									state="{= ${ChargeCodeException} === true ? 'Error' : 'None' }"/>
+								<ObjectIdentifier visible="{= ${ChargeCodeException} === true ? false : true}" text="{BilledAmount}"/>
+							</FlexBox>
+							<ObjectIdentifier text="{Currency}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<ToolbarSpacer width="20px"/>
+			<Table headerText="{i18n>ShipERPDetails}" updateFinished="onShipERPUpdateFinished" noDataText="No data" mode="None" showSeparators="All"
+				busyIndicatorDelay="99999" growing="true" id="tblShipERP" growingThreshold="100" growingScrollToLoad="true" class="border_lightgray"
+				items="{path:'toCHRG'}">
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>SERPCode}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>SERPDesc}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" width="20%" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>Amount}"/>
+						<footer>
+							<Text text="{path: 'SERPAmount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}"/>
+						</footer>
+					</Column>
+					<Column minScreenWidth="Tablet" width="10%" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>Curr}"/>
+						<footer>
+							<Text text="{Currency}"/>
+						</footer>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Inactive" press="onPress">
+						<cells>
+							<ObjectStatus text="{ChargeCode}" state="{= ${IsDifferent} === true ? 'Error' : 'None'}"/>
+							<Text text="{Description}" maxLines="1" tooltip="{Description}"/>
+							<ObjectIdentifier text="{Amount}"/>
+							<ObjectIdentifier text="{Currency}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</items>
+	</FlexBox>
+</core:FragmentDefinition>

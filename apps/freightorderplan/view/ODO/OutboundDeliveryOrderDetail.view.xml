@@ -1,0 +1,39 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.tuv.controller.ODO.OutboundDeliveryOrderDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>outboundDelivery} {path: 'local>/DocumentNo', formatter: '.formatter.validateDocNo'}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<form:SimpleForm id="SimpleFormHeader1" editable="false" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<form:content>
+					<Label text="{i18n>outboundDeliveryOrderDocumentID}"/>
+					<Input value="{ODODetails>/Docid}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderCreateBy}"/>
+					<Input value="{ODODetails>/Creusr}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderCarrier}"/>
+					<Input value="{ODODetails>/Carrier}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderService}"/>
+					<Input value="{ODODetails>/Service}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderBillOption}"/>
+					<Input value="{ODODetails>/BillingOption}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderIncoterm}"/>
+					<Input value="{ODODetails>/Inco1}" width="70%" editable="false"/>
+					<Label text="{i18n>outboundDeliveryOrderEccDelivery}"/>
+					<Input value="{ODODetails>/Delivery}" width="70%" editable="false"/>
+				</form:content>
+			</form:SimpleForm>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" text="{messageModel>/messagesLength}" icon="sap-icon://message-popup" type="Emphasized"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>backToODOScreenButton}" press="onNavBackToODOScreen"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,86 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="https://webidetesting5520948-da56ca735.dispatcher.us2.hana.ondemand.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+		<edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+	</edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="SERPTM.FRT_ORDER_SRV" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="xSERPTMxCDS_FOGENType" sap:label="Freight Order General Filters" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Vendor"/>
+				</Key>
+				<Property Name="Vendor" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="Vendor"
+					sap:label="Vendor" sap:quickinfo="Account Number of Vendor or Creditor" sap:value-list="fixed-values"/>
+				<Property Name="Name1" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
+			</EntityType>
+			<EntityType Name="xSERPTMxI_FOHDRType" sap:label="Freight Order Planning Header" sap:value-list="true" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="FreightUnit"/>
+				</Key>
+				<Property Name="FreightUnit" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Freight Unit"
+					sap:quickinfo="Carrier Invoice Number"/>
+				<Property Name="Vendor" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="to_statusfixedvalue/Vendor"
+					sap:label="Vendor" sap:quickinfo="Account Number of Vendor or Creditor" sap:value-list="fixed-values"/>
+				<Property Name="QQ" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
+				<Property Name="CreatedOn" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Created On"/>
+				<Property Name="SourceLocation" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"/>
+				<NavigationProperty Name="toVENDR" Relationship="SERPTM.FRT_ORDER_SRV.assoc_372F8080623FE3986CEC95DEDB937E81"
+					FromRole="FromRole_assoc_372F8080623FE3986CEC95DEDB937E81" ToRole="ToRole_assoc_372F8080623FE3986CEC95DEDB937E81"/>
+			</EntityType>
+			<EntityType Name="xSERPTMxI_FRTORDERType" sap:label="Freight Units" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="freightorder"/>
+				</Key>
+				<Property Name="freightorder" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="Document"/>
+				<Property Name="carrier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Carrier"/>
+				<Property Name="grossweight" Type="Edm.Decimal" Precision="10" Scale="3"/>
+				<Property Name="grossweightunit" Type="Edm.String" MaxLength="3" sap:label="Gr. Wt UoM" sap:quickinfo="Gross Weight Unit of Measure"
+					sap:semantics="unit-of-measure"/>
+				<Property Name="createdate" Type="Edm.Decimal" Precision="15" Scale="0" sap:label="Created On" sap:quickinfo="Created on"/>
+				<Property Name="doctype" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase"/>
+				<Property Name="sourceloc" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner"
+					sap:quickinfo="Business Partner Number"/>
+				<Property Name="destloc" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner"
+					sap:quickinfo="Business Partner Number"/>
+				<Property Name="departuredt" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase"/>
+				<Property Name="arrivaldt" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase"/>
+			</EntityType>
+			<EntityType Name="xSERPTMxI_FRTUNITType" sap:label="Freight Units" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="freightunit"/>
+				</Key>
+				<Property Name="freightunit" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="Document"/>
+				<Property Name="carrier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Carrier"/>
+				<Property Name="grossweight" Type="Edm.Decimal" Precision="10" Scale="3"/>
+				<Property Name="grossweightunit" Type="Edm.String" MaxLength="3" sap:label="Gr. Wt UoM" sap:quickinfo="Gross Weight Unit of Measure"
+					sap:semantics="unit-of-measure"/>
+				<Property Name="createdate" Type="Edm.Decimal" Precision="15" Scale="0" sap:label="Created On" sap:quickinfo="Created on"/>
+			</EntityType>
+			<Association Name="assoc_372F8080623FE3986CEC95DEDB937E81" sap:content-version="1">
+				<End Type="SERPTM.FRT_ORDER_SRV.xSERPTMxI_FOHDRType" Multiplicity="1" Role="FromRole_assoc_372F8080623FE3986CEC95DEDB937E81"/>
+				<End Type="SERPTM.FRT_ORDER_SRV.xSERPTMxCDS_FOGENType" Multiplicity="0..1" Role="ToRole_assoc_372F8080623FE3986CEC95DEDB937E81"/>
+			</Association>
+			<EntityContainer Name="SERPTM_FRT_ORDER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+				<EntitySet Name="xSERPTMxCDS_FOGEN" EntityType="SERPTM.FRT_ORDER_SRV.xSERPTMxCDS_FOGENType" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"/>
+				<EntitySet Name="xSERPTMxI_FOHDR" EntityType="SERPTM.FRT_ORDER_SRV.xSERPTMxI_FOHDRType" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1" sap:semantics="fixed-values"/>
+				<EntitySet Name="xSERPTMxI_FRTORDER" EntityType="SERPTM.FRT_ORDER_SRV.xSERPTMxI_FRTORDERType" sap:content-version="1"/>
+				<EntitySet Name="xSERPTMxI_FRTUNIT" EntityType="SERPTM.FRT_ORDER_SRV.xSERPTMxI_FRTUNITType" sap:content-version="1"/>
+				<AssociationSet Name="assoc_372F8080623FE3986CEC95DEDB937E81" Association="SERPTM.FRT_ORDER_SRV.assoc_372F8080623FE3986CEC95DEDB937E81"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+					<End EntitySet="xSERPTMxI_FOHDR" Role="FromRole_assoc_372F8080623FE3986CEC95DEDB937E81"/>
+					<End EntitySet="xSERPTMxCDS_FOGEN" Role="ToRole_assoc_372F8080623FE3986CEC95DEDB937E81"/>
+				</AssociationSet>
+			</EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SERPTM.FRT_ORDER_SRV.xSERPTMxI_FOHDRType/Vendor">
+				<Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+			</Annotations>
+			<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self"
+				href="https://webidetesting5520948-da56ca735.dispatcher.us2.hana.ondemand.com/sap/opu/odata/SERPTM/FRT_ORDER_SRV/$metadata"/>
+			<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version"
+				href="https://webidetesting5520948-da56ca735.dispatcher.us2.hana.ondemand.com/sap/opu/odata/SERPTM/FRT_ORDER_SRV/$metadata"/>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

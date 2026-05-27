@@ -1,0 +1,226 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<smartFilterBar:SmartFilterBar entitySet="HeaderFilterSet" id="DynamicFilter" smartVariant="smartVariant"
+		assignedFiltersChanged="onAssignedFiltersChanged" persistencyKey="DynamicFilterPKey" useToolbar="false" considerSelectionVariants="true"
+		beforeVariantFetch="onBeforeVariantFetched">
+		<!--Basic Filter -->
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="CreatedOn" label="{i18n>DynamicFilterCreatedOn}"
+				visibleInAdvancedArea="true" controlType="date" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="dateCreatedOn" delimiter="-" displayFormat="MM/dd/yyyy" change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--<smartFilterBar:ControlConfiguration index="1" visible="true" key="SearchFor" visibleInAdvancedArea="false"-->
+			<!--	label="{i18n>DynamicFilterSearchFor}" filterType="interval" groupId="_BASIC">-->
+			<!--	<smartFilterBar:customControl>-->
+			<!--		<ComboBox change=".onFilterChange" selectedKey="FreeDeliveries">-->
+			<!--			<core:Item text="Free Deliveries" key="FreeDeliveries"/>-->
+			<!--			<core:Item text="Free Delivery Items" key="FreeDeliveryItems"/>-->
+			<!--			<core:Item text="Free HUs" key="FreeHus"/>-->
+			<!--		</ComboBox>-->
+			<!--	</smartFilterBar:customControl>-->
+			<!--</smartFilterBar:ControlConfiguration>-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="WarehouseNumber" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterWarehouseNo}" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idLgnum" items="{path: 'local>/WarehouseNumberList' }">
+						<core:ListItem key="{local>Lgnum}" text="{local>Lgnum} - {local>Lnumt}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--General Filter-->
+		<!--<smartFilterBar:controlConfiguration >-->
+		<!--	<smartFilterBar:ControlConfiguration index="0" visible="true" key="ODONumber" visibleInAdvancedArea="false"-->
+		<!--		label="{i18n>DynamicFilterODONumber}" filterType="interval" groupId="GeneralFilter">-->
+		<!--		<smartFilterBar:customControl>-->
+		<!--			<Input value="{Service}"/>-->
+		<!--		</smartFilterBar:customControl>-->
+		<!--	</smartFilterBar:ControlConfiguration>-->
+		<!--</smartFilterBar:controlConfiguration>-->
+		<!--Document Filters-->
+		<smartFilterBar:controlConfiguration>
+			<!--Document number-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="DocumentNo" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterDocumentNo}" filterType="interval" groupId="DocumentFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idMulDocNo" items="{path: 'oModelODOTable>/' }">
+						<core:ListItem key="{oModelODOTable>DocumentNo}" text="{path: 'oModelODOTable>DocumentNo', formatter: '.formatter.validateDocNo'}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Document Type-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="DocumentType" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterDocumentType}">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_TDTYPE', length: 9999}">
+						<core:ListItem key="{Type}" text="{Type} - {Category} - {Description}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Product-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="Product" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterProduct}">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_PRODUCT', length: 9999}">
+						<core:ListItem key="{Matid}" text="{Matnr} - {Maktg}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Bill of Lading-->
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="BillOfLading" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterBillOfLading}">
+				<smartFilterBar:customControl>
+					<!--<Input value="{Service}"/>-->
+					<MultiInput id="mulBillOfLading" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--ERP Document-->
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="ERPDocument" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterERPDocument}">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_LIKP', length: 999}">
+						<core:ListItem key="{Vbeln}" text="{Vbeln}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Purchase Order-->
+			<smartFilterBar:ControlConfiguration index="5" visible="true" key="PurchaseOrder" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterPurchaseOrder}">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_EKKO', length: 999}">
+						<core:ListItem key="{Ebeln}" text="{Ebeln}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--RMA Number-->
+			<smartFilterBar:ControlConfiguration index="7" visible="true" key="RMANumber" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterRMANumber}">
+				<smartFilterBar:customControl>
+					<!--<Input value="{Service}"/>-->
+					<MultiInput id="mulRMANumber" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--PRO Number-->
+			<smartFilterBar:ControlConfiguration index="8" visible="true" key="PRONumber" visibleInAdvancedArea="false" groupId="DocumentFilter"
+				filterType="interval" label="{i18n>DynamicFilterPRONumber}">
+				<smartFilterBar:customControl>
+					<!--<Input value="{Service}"/>-->
+					<MultiInput id="mulPRONumber" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Handling Unit Filter-->
+		<smartFilterBar:controlConfiguration>
+			<!--Handling unit-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="HandlingUnit" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterHandlingUnit}" filterType="interval" groupId="HandlingUnitFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_HUHDR', length: 999}">
+						<core:ListItem key="{GuidHu}" text="{GuidHu}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Staging Area-->
+		<smartFilterBar:controlConfiguration>
+			<!--Staging Area-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="StagingArea" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterStagingArea}" filterType="interval" groupId="StagingAreaFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idtArea" items="{ path: 'local>/StagingArea' }">
+						<core:ListItem key="{local>Lgber}" text="{local>Lgber} - {local>Lbert}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Staging Area Group-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="StagingAreaGroup" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterStagingAreaGroup}" filterType="interval" groupId="StagingAreaFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idtAGroup" items="{ path: '/xSERPERPxCDS_AREA_G', length: 999}" selectionChange="onSelectionChangeAreaGroup">
+						<core:ListItem key="{Lgtyp}" text="{Lgtyp} - {Ltypt}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Warehouse Door-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="WarehouseDoor" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterWarehouseDoor}" filterType="interval" groupId="StagingAreaFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idDoorComboBox" items="{ path: '/xSERPERPxCDS_TDOOR', length: 999}" showSecondaryValues="true">
+						<core:ListItem key="{Door}" text="{Door}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Partners Filters-->
+		<smartFilterBar:controlConfiguration>
+			<!--Ship From-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="ShipFrom" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterShipFrom}" filterType="interval" groupId="PartnersFilter">
+				<smartFilterBar:customControl>
+					<!--<Input value="{Service}"/>-->
+					<MultiInput id="mulShipFrom" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Ship To-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="ShipTo" visibleInAdvancedArea="false" label="{i18n>DynamicFilterShipTo}"
+				filterType="interval" groupId="PartnersFilter">
+				<smartFilterBar:customControl>
+					<!--<Input value="{Service}"/>-->
+					<MultiInput id="mulShipTo" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Carrier-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="Carrier" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterCarrier}" filterType="interval" groupId="PartnersFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_CARR'}" id="idCarrier" selectionChange="onSelectionChangeCarrier" showSecondaryValues="true">
+						<core:ListItem key="{Partner}" text="{BuSort1} - {Partner}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Vendor-->
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="Vendor" visibleInAdvancedArea="false" label="{i18n>DynamicFilterVendor}"
+				filterType="interval" groupId="PartnersFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{ path: '/xSERPERPxCDS_LFA'}">
+						<core:ListItem key="{Lifnr}" text="{Lifnr}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Vehicle Filter-->
+		<smartFilterBar:controlConfiguration>
+			<!--Vehicle-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="Vehicle" visibleInAdvancedArea="false"
+				label="{i18n>DynamicFilterVehicle}" filterType="interval" groupId="VehicleFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="idVehicle" items="{ path: 'local>/VehicleList'}" selectionChange="onSelectionChangeVehicle">
+						<core:ListItem key="{local>VehNumExt}" text="{local>VehNumExt}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Route-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="Route" visibleInAdvancedArea="false" label="{i18n>DynamicFilterRoute}"
+				filterType="interval" groupId="VehicleFilter">
+				<smartFilterBar:customControl>
+					<MultiComboBox items="{path: '/xSERPERPxCDS_ROUTE', length: 999}" showSecondaryValues="true">
+						<core:ListItem key="{DgCategory}" text="{IdRoute}" additionalText="{DgCategory}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--end-->
+	</smartFilterBar:SmartFilterBar>
+</core:FragmentDefinition>

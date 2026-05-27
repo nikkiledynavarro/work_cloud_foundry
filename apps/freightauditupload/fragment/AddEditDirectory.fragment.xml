@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="idAddEditDialog" title="{= ${local>/Mode} === 'Add' ? 'Add Upload Directory' : 'Edit Upload Directory' }" contentWidth="800px"
+		stretchOnPhone="true" horizontalScrolling="false" verticalScrolling="true" contentPadding="true">
+		<content>
+			<VBox width="100%">
+				<!-- ===== General Information ===== -->
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" labelSpanXL="3" labelSpanL="3"
+					labelSpanM="4" labelSpanS="12">
+					<Label text="Carrier Code" required="true"/>
+					<!--<Input id="idCarr" value="{local>/Current/CarrierCode}"/>-->
+					<ComboBox id="idCarr" items="{path: '/xSERPERPxFA_CARR'}" selectedKey="{local>/Current/CarrierCode}">
+						<core:Item key="{CarrierCode}" text="{CarrierCode} - {Description}"></core:Item>
+					</ComboBox>
+					<Label text="Program Name" required="true"/>
+					<Input id="idProg" value="{local>/Current/Program}"/>
+					<Label text="Directory Type" required="true"/>
+					<Select id="idDirecType" selectedKey="{local>/Current/DirectoryType}">
+						<items>
+							<core:Item key="" text="-- Select --"/>
+							<core:Item key="01" text="AL11 Server"/>
+							<core:Item key="02" text="AL11 Archive"/>
+							<core:Item key="03" text="Local"/>
+						</items>
+					</Select>
+					<Label text="Counter" required="true"/>
+					<Input id="idCount" value="{local>/Current/Counter}" type="Number"/>
+				</f:SimpleForm>
+				<!-- ===== Upload Directory ===== -->
+				<Panel headerText="Upload Directory" expandable="false" width="100%">
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" labelSpanXL="3" labelSpanL="3"
+						labelSpanM="4" labelSpanS="12">
+						<Label text="Directory name"/>
+						<Input value="{local>/Current/DirectoryName}"/>
+						<Label text="Name of File"/>
+						<Input value="{local>/Current/FileName}"/>
+					</f:SimpleForm>
+				</Panel>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Save" type="Emphasized" press="onSaveDirectory"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onCancelDirectory"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

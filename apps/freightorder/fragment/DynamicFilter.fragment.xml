@@ -1,0 +1,301 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<smartFilterBar:SmartFilterBar entitySet="xSERPTMxFOHeaderFilterSet" id="foDynamicFilter" smartVariant="smartVariant"
+		assignedFiltersChanged="onAssignedFiltersChanged" persistencyKey="DynamicFilterPKey" useToolbar="false" considerSelectionVariants="true"
+		beforeVariantFetch="onBeforeVariantFetched">
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="CreatedOn" label="{i18n>foDynFilterCreatedOn}"
+				visibleInAdvancedArea="true" controlType="date" filterType="interval" groupId="_BASIC" mandatory="mandatory">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="dateRSFUCreatedOn" delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!-- General Filters-->
+		<smartFilterBar:controlConfiguration>
+			<!--<smartFilterBar:ControlConfiguration index="1" visible="true" key="ShippingProfile" visibleInAdvancedArea="false"-->
+			<!--	label="{i18n>foDynFilterGenShippingProfile}" filterType="interval" groupId="xSERPTMxFOGeneralFilter">-->
+			<!--	<smartFilterBar:customControl>-->
+			<!--		<ComboBox items="{ path: '/xSERPTMxCDS_FOGENPROF', sorter: { path: 'ProfileId' } }">-->
+			<!--			<core:ListItem key="{ProfileId}" text="{ProfileText}" additionalText="{ProfileText}"/>-->
+			<!--		</ComboBox>-->
+			<!--	</smartFilterBar:customControl>-->
+			<!--</smartFilterBar:ControlConfiguration>-->
+			<!--<smartFilterBar:ControlConfiguration index="2" visible="true" key="ShippingStation" visibleInAdvancedArea="false"-->
+			<!--	label="{i18n>foDynFilterGenShippingStation}" filterType="interval" groupId="xSERPTMxFOGeneralFilter">-->
+			<!--	<smartFilterBar:customControl>-->
+			<!--		<ComboBox items="{ path: '/xSERPTMxCDS_FOGENSTA', sorter: { path: 'StationName' } }">-->
+			<!--			<core:ListItem key="{StationName}" text="{StationName}" additionalText="{StationName}"/>-->
+			<!--		</ComboBox>-->
+			<!--	</smartFilterBar:customControl>-->
+			<!--</smartFilterBar:ControlConfiguration>-->
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="ShippingPoint" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterGenShippingPoint}" filterType="interval" groupId="xSERPTMxFOGeneralFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FOGENSP', sorter: { path: 'ShippingPoint' } }">
+						<core:ListItem key="{ShippingPoint}"
+							text="{parts: [{path: 'ShippingPoint'}, {path: 'ShippingPointText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{ShippingPointText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="RequestedDeliveryDate" visibleInAdvancedArea="false"
+				groupId="xSERPTMxFOGeneralFilter" controlType="date" filterType="interval" label="{i18n>foDynFilterGenReqDelDate}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Freight Unit Screen Filter-->
+		<smartFilterBar:controlConfiguration label="{i18n>foDynFilterFuFoFreightOrder}">
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="SourceLocation" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterFuFoSourceLoc}" filterType="interval" groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FUFOSL', sorter: { path: 'LocationId' } }">
+						<core:ListItem key="{LocationId}"
+							text="{parts: [{path: 'LocationId'}, {path: 'LocationText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{LocationText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="DestinationLocation" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterFuFoDestLoc}" filterType="interval" groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FUFODL', sorter: { path: 'LocationId' } }">
+						<core:ListItem key="{LocationId}"
+							text="{parts: [{path: 'LocationId'}, {path: 'LocationText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{LocationText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="ExecutionStatus" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterFuFoExeSts}" filterType="interval" groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxFUFOExecutionStatusSet', sorter: { path: 'ExecutionStatusKey' } }">
+						<core:ListItem key="{ExecutionStatusKey}"
+							text="{parts: [{path: 'ExecutionStatusKey'}, {path: 'ExecutionStatusText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{ExecutionStatusText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="PlanningStatus" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterFuFoPlnSts}" filterType="interval" groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxFUFOPlanningStatusSet', sorter: { path: 'PlanningStatusKey' } }">
+						<core:ListItem key="{PlanningStatusKey}"
+							text="{parts: [{path: 'PlanningStatusKey'}, {path: 'PlanningStatusText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{PlanningStatusText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="5" visible="true" key="LatestReqDelDate" label="{i18n>foDynFilterFuFoLateReqDelDate}"
+				visibleInAdvancedArea="false" controlType="date" filterType="interval" groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="dateFUFOLateReqDelDate" delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="6" visible="{= ${local>/screenId} === 'fu' ? true : false}" key="FreightUnitNumber"
+				label="{i18n>foDynFilterFuFoFreighUnit}" visibleInAdvancedArea="false" controlType="date" filterType="interval"
+				groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<Input value="{FreightUnitNumber}"/>
+					<!--<MultiInput id="mulFUFOFreightUnitNum" showValueHelp="false">-->
+					<!--	<core:Item key="{FreightUnitNumber}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Freight Order Screen Filter-->
+			<smartFilterBar:ControlConfiguration index="7" visible="{= ${local>/screenId} === 'fo' ? true : false}" key="FreightOrderNumber"
+				label="{i18n>foDynFilterFuFoFreightOrder}" visibleInAdvancedArea="false" controlType="date" filterType="interval"
+				groupId="xSERPTMxFUFODynamicFilter">
+				<smartFilterBar:customControl>
+					<Input value="{FreightOrderNumber}"/>
+					<!--<MultiInput id="mulFUFOFreightOrderNum" showValueHelp="false">-->
+					<!--	<core:Item key="{FreightOrderNumber}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!-- Sales Orders Filters-->
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="SaleDocument" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoSaleDoc}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{SaleDocument}"/>
+					<!--<MultiInput id="mulSOSaleDoc" showValueHelp="false">-->
+					<!--	<core:Item key="{SaleDocument}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="SaleOrganization" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoSaleOrg}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FOSOSO', sorter: { path: 'SaleOrg' } }">
+						<core:ListItem key="{SaleOrg}" text="{parts: [{path: 'SaleOrg'}, {path: 'SaleOrgText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{SaleOrgText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="Division" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoDivision}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{Division}"/>
+					<!--<MultiInput id="mulSODivision" showValueHelp="false">-->
+					<!--	<core:Item key="{Division}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="SaleDocumentType" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoSalDocType}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxSOSaleDocTypeSet', sorter: { path: 'SaleDocType' }, length:1000 }">
+						<core:ListItem key="{SaleDocType}"
+							text="{parts: [{path: 'SaleDocType'}, {path: 'SaleDocTypeText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{SaleDocTypeText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="5" visible="true" key="SOCreatedBy" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoCreatedBy}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{SOCreatedBy}"/>
+					<!--<MultiInput id="mulSOCreatedBy" showValueHelp="false">-->
+					<!--	<core:Item key="{CreatedBy}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="6" visible="true" key="ShippingCondition" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterSoShippingCond}" filterType="interval" groupId="xSERPTMxFOSaleOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{ShippingCondition}"/>
+					<!--<MultiInput id="mulSOShippingCondition" showValueHelp="false">-->
+					<!--	<core:Item key="{ShippingCondition}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="7" visible="true" key="SOCreatedOn" visibleInAdvancedArea="false"
+				groupId="xSERPTMxFOSaleOrderFilter" controlType="date" filterType="interval" label="{i18n>foDynFilterSOCreatedOn}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!-- Delivery Filters-->
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="DeliveryDocument" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterDelDoc}" filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<Input value="{DeliveryDocument}"/>
+					<!--<MultiInput id="mulDELDelDoc" showValueHelp="false">-->
+					<!--	<core:Item key="{DeliveryDocument}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="ShipToParty" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterDelShipTo}" filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<Input value="{ShipToParty}"/>
+					<!--<MultiInput id="mulDELShipto" showValueHelp="false">-->
+					<!--	<core:Item key="{ShipToParty}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="DeliveryDocumentType" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterDelDelDocType}" filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FODELDDT', sorter: { path: 'DeliveryDocType' } }">
+						<core:ListItem key="{DeliveryDocType}"
+							text="{parts: [{path: 'DeliveryDocType'}, {path: 'DeliveryDocTypeText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{DeliveryDocTypeText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="Route" visibleInAdvancedArea="false" label="{i18n>foDynFilterDelRoute}"
+				filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FODELR', sorter: { path: 'Route' } }">
+						<core:ListItem key="{Route}" text="{parts: [{path: 'Route'}, {path: 'RouteText'}], formatter: '.formatter.formatComboboxTwoText'}"
+							additionalText="{RouteText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="5" visible="true" key="SoldToParty" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterDelSoldTo}" filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<Input value="{SoldToParty}"/>
+					<!--<MultiInput id="mulDELSoldToParty" showValueHelp="false">-->
+					<!--	<core:Item key="{SoldToParty}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="6" visible="true" key="DelCreatedBy" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterDelCreatedBy}" filterType="interval" groupId="xSERPTMxFODeliveryFilter">
+				<smartFilterBar:customControl>
+					<Input value="{DelCreatedBy}"/>
+					<!--<MultiInput id="mulDELCreatedBy" showValueHelp="false">-->
+					<!--	<core:Item key="{CreatedBy}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="7" visible="true" key="DOCreatedOn" visibleInAdvancedArea="false"
+				groupId="xSERPTMxFODeliveryFilter" controlType="date" filterType="interval" label="{i18n>foDynFilterDelCreatedOn}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!-- Purchase Orders Filters-->
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="PurchasingDocument" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterPoPurDoc}" filterType="interval" groupId="xSERPTMxFOPurchaseOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{PurchasingDocument}"/>
+					<!--<MultiInput id="mulPODocument" showValueHelp="false">-->
+					<!--	<core:Item key="{PurchasingDocument}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="SupplyingPlant" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterPoSupPlant}" filterType="interval" groupId="xSERPTMxFOPurchaseOrderFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FOPOSP', sorter: { path: 'SupplyingPlant' } }">
+						<core:ListItem key="{SupplyingPlant}" text="{SupplyingPlantText}" additionalText="{SupplyingPlantText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="PurchaseOrderType" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterPoPurOrdType}" filterType="interval" groupId="xSERPTMxFOPurchaseOrderFilter">
+				<smartFilterBar:customControl>
+					<ComboBox items="{ path: '/xSERPTMxCDS_FOPOOT', sorter: { path: 'PurchaseOrderType' } }">
+						<core:ListItem key="{PurchaseOrderType}" text="{PurchaseOrderTypeText}" additionalText="{PurchaseOrderTypeText}"/>
+					</ComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="Material" visibleInAdvancedArea="false" label="{i18n>foDynFilterPoMat}"
+				filterType="interval" groupId="xSERPTMxFOPurchaseOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{Material}"/>
+					<!--<MultiInput id="mulPOMaterial" showValueHelp="false">-->
+					<!--	<core:Item key="{Material}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="5" visible="true" key="POCreatedBy" visibleInAdvancedArea="false"
+				label="{i18n>foDynFilterPoCreatedBy}" filterType="interval" groupId="xSERPTMxFOPurchaseOrderFilter">
+				<smartFilterBar:customControl>
+					<Input value="{POCreatedBy}"/>
+					<!--<MultiInput id="mulPOCreatedBy" showValueHelp="false">-->
+					<!--	<core:Item key="{CreatedBy}" text="{Name}"/>-->
+					<!--</MultiInput>-->
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration index="6" visible="true" key="POCreatedOn" visibleInAdvancedArea="false"
+				groupId="xSERPTMxFOPurchaseOrderFilter" controlType="date" filterType="interval" label="{i18n>foDynFilterPOCreatedOn}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection delimiter="-" displayFormat="MM/dd/yyyy"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--end PO-->
+	</smartFilterBar:SmartFilterBar>
+</core:FragmentDefinition>

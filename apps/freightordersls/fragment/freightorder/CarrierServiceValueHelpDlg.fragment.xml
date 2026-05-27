@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>freightOrderCarrSrvValueHelpTitle}" items="{local>/CarrierServices}" search="onCarrierSrvValueHelpSearch"
+		confirm="onCarrierSrvValueHelpClose" cancel="onCarrierSrvValueHelpClose">
+		<StandardListItem iconDensityAware="false" iconInset="false" title="{local>CarrierServiceId}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

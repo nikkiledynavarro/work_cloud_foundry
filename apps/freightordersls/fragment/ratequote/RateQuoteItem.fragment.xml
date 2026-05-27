@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table id="tblRateQuoteItem" class="border_lightgray_nobottom" width="100%" mode="SingleSelectLeft" busyIndicatorDelay="99999"
+		growingScrollToLoad="true" items="{path: 'local>/RateQuoteItems'}" growing="true" growingThreshold="100" fixedLayout="false">
+		<columns>
+			<Column hAlign="Center">
+				<Text text="{i18n>foRateQuoteCarrierCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteCarrierNameCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteSerivceCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteServiceNameCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteRateCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteListRateCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteTransitTimeCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteDeliveryDateCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuotePriorityCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteZoneCol}"/>
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Tablet">
+				<Text text="{i18n>foRateQuoteTransIDCol}"/>
+			</Column>
+		</columns>
+		<ColumnListItem type="Inactive">
+			<cells>
+				<Text text="{local>Carrier}"/>
+				<Text text="{local>CarrierName}"/>
+				<Text text="{local>Service}"/>
+				<Text text="{local>ServiceName}"/>
+				<Text text="{local>Rate}"/>
+				<Text text="{local>ListRate}"/>
+				<Text text="{local>BillRate}"/>
+				<Text text="{local>Currency}"/>
+				<Text text="{local>TransitTime}"/>
+				<Text text="{local>DeliveryDate}"/>
+				<Text text="{local>Priority}"/>
+				<Text text="{local>Zone}"/>
+				<Text text="{local>TransID}"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

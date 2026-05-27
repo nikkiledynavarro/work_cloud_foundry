@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified">
+	<table:Table id="table" selectionMode="None" visibleRowCount="7" enableSelectAll="false" rows="{ path: 'local>/FODetailItemPackageDetails'}"
+		threshold="15" enableBusyIndicator="true" ariaLabelledBy="title">
+		<table:noData>
+			<BusyIndicator class="sapUiMediumMargin"/>
+		</table:noData>
+		<table:columns>
+			<table:Column sortProperty="Pallet" filterProperty="Pallet" autoResizable="true" width="11rem">
+				<Label text="{i18n>foItemPackageDetailsPallet}"/>
+				<table:template>
+					<Text text="{local>Pallet}" wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column sortProperty="Weight" filterProperty="Weight" autoResizable="true" width="6rem">
+				<Label text="{i18n>foItemPackageDetailsWeight}"/>
+				<table:template>
+					<Text text="{local>Weight}" wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column filterProperty="WeightUnit" autoResizable="true" width="11rem">
+				<Label text="{i18n>foItemPackageDetailsWeightUnit}"/>
+				<table:template>
+					<Text text="{local>WeightUnit}"/>
+				</table:template>
+			</table:Column>
+			<table:Column sortProperty="Length" filterProperty="Length" autoResizable="true" width="12rem">
+				<Label text="{i18n>foItemPackageDetailsWeightLength}"/>
+				<table:template>
+					<Text text="{local>Length}" wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column sortProperty="Width" filterProperty="Width" width="9rem">
+				<Label text="{i18n>foItemPackageDetailsWidth}"/>
+				<table:template>
+					<Text text="{local>Width}" wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column sortProperty="Height" filterProperty="Height" autoResizable="true" width="9rem">
+				<Label text="{i18n>foItemPackageDetailsHeight}"/>
+				<table:template>
+					<Text text="{local>Height}" wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column filterProperty="Unit" autoResizable="true" width="11rem">
+				<Label text="{i18n>foItemPackageDetailsUnit}"/>
+				<table:template>
+					<Text text="{local>Unit}"/>
+				</table:template>
+			</table:Column>
+		</table:columns>
+		<table:footer>
+			<OverflowToolbar id="infobar">
+				<HBox class="sapUiLargeMarginEnd">
+					<Label text="{i18n>foItemPackageDetailsTotal}"/>
+				</HBox>
+				<HBox class="sapUiLargeMarginBegin sapUiLargeMarginEnd">
+					<Label class="sapUiLargeMarginEnd" text="{i18n>foItemPackageDetailsPallet}"/>
+					<Text text="{local>/TotalCounts/0/TotalPallet}"/>
+				</HBox>
+				<HBox class="sapUiLargeMarginBegin">
+					<Label class="sapUiLargeMarginEnd" text="{i18n>foItemPackageDetailsWeight}"/>
+					<Text text="{path:'local>/TotalCounts/0/TotalWeight'}"/>
+					<ToolbarSpacer width="40px"/>
+					<Text text="{local>/TotalCounts/0/TotalWeightUnit}"/>
+				</HBox>
+			</OverflowToolbar>
+		</table:footer>
+	</table:Table>
+</core:FragmentDefinition>

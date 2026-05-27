@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>planOrConsolidateDialogTitle}">
+		<Text text="{i18n>planOrConsolidateDialogQuestion}" class="sapUiTinyMarginBegin"/>
+		<Table class="sapUiTinyMargin border_lightgray_nobottom" width="500px" id="tblPlanOrConsolidate" mode="MultiSelect"
+			items="{path:'local>/aOpenFreightOrders', sorter: { path: 'FreightOrderNumber', descending: false }}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<SearchField width="90%" showSearchButton="true" search="handlePlanConsolidateSearch" class="sapUiTinyMarginBegin"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column hAlign="Center"></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Inactive">
+					<cells>
+						<Text text="{local>FreightOrderNumber}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<buttons>
+			<Button text="{i18n>planOrConsolidateDialogPlanNewFreight}" press="onPlanToNewFreightOrderPressed" type="Accept"/>
+			<Button enabled="{=${local>/aOpenFreightOrders}.length >0 ?true:false}" text="{i18n>planOrConsolidateDialogConsolidateFreightUnit}"
+				press="onAssignFreightUnitToFOPressed" type="Emphasized"/>
+			<Button text="{i18n>planOrConsolidateDialogCancel}" press="onClosePlanOrConsolidateDialog" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

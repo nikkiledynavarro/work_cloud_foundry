@@ -1,0 +1,142 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog class="sapUiContentPadding" contentWidth="800px" title="{= ${local>/CheckEditLineitem} ? 'Change line item' : 'Detail' }">
+		<content>
+			<f:SimpleForm layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+				emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+				<f:content>
+					<core:Title/>
+					<!--line Items Flag-->
+					<Label text="{i18n>lineItemsFlag}"/>
+					<!--<CheckBox  selected="{DetailLineItems>/Islinex}"/>-->
+					<Input value="{DetailLineItems>/Islinex}" editable="{local>/CheckEditLineitem}" id="idLineItem" liveChange="onValidateInput"/>
+					<!--delivery-->
+					<Label text="{i18n>delivery}"/>
+					<Input value="{DetailLineItems>/Vbeln}" editable="{local>/CheckEditLineitem}" id="idDelivery" liveChange="onValidateInput"/>
+					<!--delivery Item-->
+					<Label text="{i18n>deliveryItem}"/>
+					<Input value="{DetailLineItems>/Posnr}" editable="{local>/CheckEditLineitem}" id="idDeliveryItem" liveChange="onValidateInput"/>
+					<!--Material No-->
+					<Label text="{i18n>materialNo}"/>
+					<Input value="{DetailLineItems>/Matnr}" editable="{local>/CheckEditLineitem}" id="idMaterNo" liveChange="onValidateInput"/>
+					<!--MaterialDesc-->
+					<Label text="{i18n>materialDesc}"/>
+					<Input value="{DetailLineItems>/Maktx}" editable="{local>/CheckEditLineitem}" id="idMaterDes" liveChange="onValidateInput"/>
+					<!--exportCode-->
+					<Label text="{i18n>exportCode}"/>
+					<ComboBox selectedKey="{DetailLineItems>/Itx1}" items="{ path: '/xSERPERPxCDS_EXPORTCODE', length: 9999 }"
+						editable="{local>/CheckEditLineitem}" id="idExCode">
+						<core:Item key="{ExportCode}" text="{ExportCode}"></core:Item>
+					</ComboBox>
+					<!--Value in Whole US Dollars-->
+					<Label text="{i18n>valueWhole}"/>
+					<Input value="{DetailLineItems>/Itx2}" editable="{local>/CheckEditLineitem}" id="idUsDollar" liveChange="onValidateInput"/>
+					<!--first Quantity-->
+					<Label text="{i18n>firstQuantity}"/>
+					<Input value="{DetailLineItems>/Itx4}" editable="{local>/CheckEditLineitem}" id="idFirQuan" liveChange="onValidateInput"/>
+					<!--first Unit of Measure-->
+					<Label text="{i18n>firstUnitofMeasure}"/>
+					<Input value="{DetailLineItems>/Itx3}" editable="{local>/CheckEditLineitem}" id="idFirUnitMean" liveChange="onValidateInput"/>
+					<!--second Quantity-->
+					<Label text="{i18n>secondQuantity}"/>
+					<Input value="{DetailLineItems>/Itx6}" editable="{local>/CheckEditLineitem}" id="idSecQuan" liveChange="onValidateInput"/>
+					<!--second Unit of measure-->
+					<Label text="{i18n>secondUnitofmeasure}"/>
+					<Input value="{DetailLineItems>/Itx5}" editable="{local>/CheckEditLineitem}" id="idSecUnitMean" liveChange="onValidateInput"/>
+					<!--Weight-->
+					<Label text="{i18n>Weight}"/>
+					<Input value="{DetailLineItems>/Itx7}" editable="{local>/CheckEditLineitem}" id="idWeight" liveChange="onValidateInput"/>
+					<!--license Type-->
+					<Label text="{i18n>licenseType}"/>
+					<ComboBox selectedKey="{DetailLineItems>/Itx8}" items="{path: '/xSERPERPxCDS_AES_LICTY', length: 9999 }"
+						editable="{local>/CheckEditLineitem}" id="idLicenType">
+						<core:Item key="{LicType}" text="{LicDesc}"></core:Item>
+					</ComboBox>
+					<!--licenseNumber-->
+					<Label text="{i18n>licenseNumber}"/>
+					<Input value="{DetailLineItems>/Itx9}" editable="{local>/CheckEditLineitem}" id="idLicenNum" liveChange="onValidateInput"/>
+					<!--licenseValue-->
+					<Label text="{i18n>licenseValue}"/>
+					<Input value="{DetailLineItems>/Itx10}" editable="{local>/CheckEditLineitem}" id="idLicenVal" liveChange="onValidateInput"/>
+					<!--Description-->
+					<Label text="{i18n>Desc}"/>
+					<Input value="{DetailLineItems>/Itx12}" editable="{local>/CheckEditLineitem}" id="idDes" liveChange="onValidateInput"/>
+					<!--commodity Code-->
+					<Label text="{i18n>commodityCode}"/>
+					<Input value="{DetailLineItems>/Itx13}" editable="{local>/CheckEditLineitem}" id="idComCode" liveChange="onValidateInput"/>
+					<!--Country Of Origin-->
+					<Label text="{i18n>countryOfOrigin}"/>
+					<ComboBox selectedKey="{DetailLineItems>/countryOfOrigin}" items="{path: '/xSERPERPxCDS_CONTRYOFORIGIN', length: 9999 }"
+						editable="{local>/CheckEditLineitem}" id="idCountryOri">
+						<core:Item key="{Land1}" text="{Land1} - {Landx}"></core:Item>
+					</ComboBox>
+					<!--<Input value="{DetailLineItems>/countryOfOrigin}" editable="{local>/CheckEditLineitem}"/>-->
+					<core:Title/>
+					<!--Marks And Numbers-->
+					<Label text="{i18n>marksandNumbers}"/>
+					<Input value="{DetailLineItems>/Itx14}" editable="{local>/CheckEditLineitem}" id="idMarNum" liveChange="onValidateInput"/>
+					<!--Vehicle Flag-->
+					<Label text="{i18n>vehicleFlag}"/>
+					<Input value="{DetailLineItems>/Itx15}" editable="{local>/CheckEditLineitem}" id="idVehFlag" liveChange="onValidateInput"/>
+					<!--<CheckBox  selected="{DetailLineItems>/Itx15}"/>-->
+					<!--Vehicle ID Type-->
+					<Label text="{i18n>vehicleIDType}"/>
+					<ComboBox selectedKey="{DetailLineItems>/Itx16}" editable="{local>/CheckEditLineitem}">
+						<core:Item key="V" text="VIN Number"/>
+						<core:Item key="P" text="Product ID"/>
+					</ComboBox>
+					<!--Vehicle ID-->
+					<Label text="{i18n>vehicleID}"/>
+					<Input value="{DetailLineItems>/Itx17}" editable="{local>/CheckEditLineitem}" id="idVehId" liveChange="onValidateInput"/>
+					<!--Vehicle Title-->
+					<Label text="{i18n>vehicleTitle}"/>
+					<Input value="{DetailLineItems>/Itx18}" editable="{local>/CheckEditLineitem}" id="idVehTitle" liveChange="onValidateInput"/>
+					<!--Vehicle Title State-->
+					<Label text="{i18n>vehicleTitleState}"/>
+					<Input value="{DetailLineItems>/Itx19}" editable="{local>/CheckEditLineitem}" id="idVehTitleSta" liveChange="onValidateInput"/>
+					<!--eccn-->
+					<Label text="{i18n>eccn}"/>
+					<Input value="{DetailLineItems>/Itx20}" editable="{local>/CheckEditLineitem}" id="idEccn" liveChange="onValidateInput"/>
+					<!--origin-->
+					<Label text="{i18n>origin}"/>
+					<Input value="{DetailLineItems>/Itx21}" editable="{local>/CheckEditLineitem}" id="idOrigin" liveChange="onValidateInput"/>
+					<!--DDTC ITAR Exemption Number-->
+					<Label text="{i18n>exemptionNumber}"/>
+					<Input value="{DetailLineItems>/Odtcx1}" editable="{local>/CheckEditLineitem}" id="idExeNum" liveChange="onValidateInput"/>
+					<!--DDTC Registration Number-->
+					<Label text="{i18n>registrationNumber}"/>
+					<Input value="{DetailLineItems>/Odtcx2}" editable="{local>/CheckEditLineitem}" id="idRegisNum" liveChange="onValidateInput"/>
+					<!--DDTC Significant Military Equipment Indicator-->
+					<Label text="{i18n>signMilitaryEquipment}"/>
+					<Input value="{DetailLineItems>/Odtcx3}" editable="{local>/CheckEditLineitem}" id="idMiliEquip" liveChange="onValidateInput"/>
+					<!--DDTC Eligible Party Certification Indicator-->
+					<Label text="{i18n>eligiblePartyCertification}"/>
+					<Input value="{DetailLineItems>/Odtcx4}" editable="{local>/CheckEditLineitem}" id="idParCerti" liveChange="onValidateInput"/>
+					<!--DDTC USML Category Code-->
+					<Label text="{i18n>categoryCode}"/>
+					<Input value="{DetailLineItems>/Odtcx5}" editable="{local>/CheckEditLineitem}" id="idCateCode" liveChange="onValidateInput"/>
+					<!--DDTC Unit of Measure-->
+					<Label text="{i18n>ddtcunitofMeasure}"/>
+					<Input value="{DetailLineItems>/Odtcx6}" editable="{local>/CheckEditLineitem}" id="idUnitMean" liveChange="onValidateInput"/>
+					<!--DDTC Quantity-->
+					<Label text="{i18n>ddtcQuantity}"/>
+					<Input value="{DetailLineItems>/Odtcx7}" editable="{local>/CheckEditLineitem}" id="idDDTCQuantity" liveChange="onValidateInput"/>
+					<!--AES Item Group-->
+					<Label text="{i18n>itemGroup}"/>
+					<Input value="{DetailLineItems>/ItemGroup}" editable="{local>/CheckEditLineitem}" id="idItemGroup" liveChange="onValidateInput"/>
+					<!--currency-->
+					<Label text="{i18n>currency}"/>
+					<Input value="{DetailLineItems>/Currency}" editable="{local>/CheckEditLineitem}" id="idCurrency" liveChange="onValidateInput"/>
+					<!--Submitted From ShipAES-->
+					<Label text="{i18n>submittedFrom}"/>
+					<CheckBox selected="{DetailLineItems>/Submitted}" editable="{local>/CheckEditLineitem}"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="{i18n>OK}" type="Emphasized" visible="{local>/CheckEditLineitem}" press="onChangeLineItems"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseDetailLineItems" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

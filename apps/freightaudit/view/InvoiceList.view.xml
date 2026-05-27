@@ -1,0 +1,246 @@
+<mvc:View controllerName="com.erpis.shiperp.freightaudit.controller.InvoiceList" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:sv="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<sv:SmartVariantManagement id="smartVariant" persistencyKey="SmartFilterPKey"/>
+					</FlexBox>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"></Text>
+				</f:snappedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<smartFilterBar:SmartFilterBar entitySet="xSERPERPxI_FAHDR" id="smartFilterBar" smartVariant="smartVariant"
+						assignedFiltersChanged="onAssignedFiltersChanged" persistencyKey="SmartFilterPKey" useToolbar="false" considerSelectionVariants="true"
+						beforeVariantFetch="onBeforeVariantFetched">
+						<smartFilterBar:controlConfiguration>
+							<smartFilterBar:ControlConfiguration index="1" visible="true" key="InvoiceDate" visibleInAdvancedArea="true" controlType="date"
+								filterType="interval">
+								<smartFilterBar:customControl>
+									<DateRangeSelection delimiter="-" displayFormat="MM/dd/yyyy"/>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="6" key="toDTL/Delivery" visible="true" visibleInAdvancedArea="true" label="Delivery">
+								<smartFilterBar:customControl>
+									<Input id="txtDelivery"></Input>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="7" key="toDTL/TrackingNo" visible="true" visibleInAdvancedArea="true" label="Tracking Number">
+								<smartFilterBar:customControl>
+									<Input id="txtTrackingNo"></Input>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+							<smartFilterBar:ControlConfiguration index="8" key="MatchStatus" visible="true" visibleInAdvancedArea="true" label="Match">
+								<smartFilterBar:customControl>
+									<FlexBox fitContainer="true" justifyContent="Start" alignItems="Center">
+										<ToggleButton press="onFireSearch" id="idTgActionSuccess" icon="sap-icon://status-completed" type="Accept" tooltip="Success"
+											class="green_button">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+										<ToggleButton press="onFireSearch" id="idTgActionWarning" icon="sap-icon://settings" class="orange_button width-100-percent" type="Default"
+											tooltip="Charge code level unmatched">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+										<ToggleButton press="onFireSearch" id="idTgActionWarning2" icon="sap-icon://compare-2" class="orange_button width-100-percent"
+											type="Default" tooltip="Exceed configured tolerance">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+										<ToggleButton press="onFireSearch" id="idTgActionError" icon="sap-icon://settings" type="Reject" tooltip="Charge code level unmatched"
+											class="red_button">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+										<ToggleButton press="onFireSearch" id="idTgActionError2" icon="sap-icon://past" type="Reject" tooltip="Ship Date Delay" class="red_button">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+										<ToggleButton press="onFireSearch" id="idTgActionError3" icon="sap-icon://compare-2" type="Reject" tooltip="Exceed configured tolerance"
+											class="red_button">
+											<layoutData>
+												<FlexItemData growFactor="1"></FlexItemData>
+											</layoutData>
+										</ToggleButton>
+									</FlexBox>
+								</smartFilterBar:customControl>
+							</smartFilterBar:ControlConfiguration>
+						</smartFilterBar:controlConfiguration>
+					</smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<IconTabBar id="idIconTabBar" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding " expandable="false">
+				<items>
+					<IconTabFilter icon="sap-icon://my-sales-order" id="iconAll" text="{i18n>All}" key="All" tooltip="{i18n>invoiceIconTabBarAll}"
+						count="{local>/All}"></IconTabFilter>
+					<IconTabSeparator icon="sap-icon://vertical-grip"/>
+					<IconTabFilter id="iconOpen" text="{i18n>Open}" key="Open" icon="sap-icon://batch-payments" tooltip="{i18n>invoiceIconTabBarOpen}"
+						count="{local>/Open}" iconColor="Default"></IconTabFilter>
+					<IconTabFilter id="iconClosed" key="Released" icon="sap-icon://complete" text="{i18n>Released}" tooltip="{i18n>invoiceIconTabBarClosed}"
+						count="{local>/Released}" iconColor="Positive"></IconTabFilter>
+					<IconTabFilter id="iconRejected" key="Rejected" icon="sap-icon://decline" text="{i18n>Rejected}" tooltip="{i18n>invoiceIconTabBarRejected}"
+						count="{local>/Rejected}" iconColor="Negative"></IconTabFilter>
+					<IconTabSeparator icon="sap-icon://vertical-grip"/>
+					<IconTabFilter id="iconDisputed" key="Disputed" icon="sap-icon://message-warning" text="{i18n>Disputed}"
+						tooltip="{i18n>invoiceIconTabBarDisputed}" count="{local>/Disputed}" iconColor="Critical"></IconTabFilter>
+				</items>
+				<content>
+					<ScrollContainer horizontal="true" vertical="true">
+						<smartTable:SmartTable entitySet="xSERPERPxI_FAHDR" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="true"
+							useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SmartFilterPKey" enableAutoBinding="true" id="smartTable"
+							header="Invoices List" showRowCount="true" showFullScreenButton="true" demandPopin="false" showOverlay="onShowOverlay"
+							initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind">
+							<smartTable:customToolbar>
+								<OverflowToolbar height="3rem" design="Transparent">
+									<ToolbarSpacer/>
+								</OverflowToolbar>
+							</smartTable:customToolbar>
+							<Table noDataText="{local>/tableNoDataText}" growing="true" growingThreshold="100" showOverlay="false" growingScrollToLoad="false"
+								mode="MultiSelect" fixedLayout="true">
+								<columns>
+									<Column hAlign="Center" vAlign="Middle" width="2.5rem">
+										<Text text="{i18n>tableTrafficColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData"
+												value='\{"columnKey": "MatchStatus", "columnIndex":"1", "leadingProperty": "MatchStatus", "additionalProperty": "ChangedDateTime,Vendor"}'/>
+										</customData>
+									</Column>
+									<Column width="4rem">
+										<Text text="{i18n>tableInvnumColumnTitle}" wrapping="false" tooltip="{i18n>tableInvnumColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "InvoiceNo", "columnIndex":"2", "leadingProperty": "InvoiceNo"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="2rem">
+										<Text text="{i18n>tableCountColumnTitle}" wrapping="false" tooltip="{i18n>tableInvnumColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ShipmentCount", "columnIndex":"3", "leadingProperty": "ShipmentCount"}'/>
+										</customData>
+									</Column>
+									<Column width="3rem">
+										<Text text="{i18n>tableCarrierColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Carrier", "columnIndex":"4", "leadingProperty": "Carrier"}'/>
+										</customData>
+									</Column>
+									<Column width="7rem">
+										<Text text="{i18n>tableAccountColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "AccountNo", "columnIndex":"5", "leadingProperty": "AccountNo"}'/>
+										</customData>
+									</Column>
+									<Column width="4rem">
+										<Text text="{i18n>tableOverallStatusColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "OverallStatus", "columnIndex":"6", "leadingProperty": "OverallStatus"}'/>
+										</customData>
+									</Column>
+									<Column width="4rem">
+										<Text text="{i18n>tableApprovalStatusColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ApprovalStatus", "columnIndex":"7", "leadingProperty": "ApprovalStatus"}'/>
+										</customData>
+									</Column>
+									<Column width="5rem">
+										<Text text="{i18n>tableOrigPayamtColumnTitle}" wrapping="false" tooltip="{i18n>tableOrigPayamtColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "InvOriginalAmt", "columnIndex":"8", "leadingProperty": "InvOriginalAmt"}'/>
+										</customData>
+									</Column>
+									<Column width="5rem">
+										<Text text="{i18n>tableBilledAmtColumnTitle}" wrapping="false" tooltip="{i18n>tableBilledAmtColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "InvPayAmount", "columnIndex":"9", "leadingProperty": "InvPayAmount"}'/>
+										</customData>
+									</Column>
+									<Column width="5rem">
+										<Text text="{i18n>tableSerpAmtColumnTitle}" wrapping="false" tooltip="{i18n>tableSerpAmtColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "InvSERPAmount", "columnIndex":"10", "leadingProperty": "InvSERPAmount"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>tableBukrsColumnTitle}" wrapping="false" tooltip="tableBukrsColumnTitleFull"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "CompanyCode", "columnIndex":"11", "leadingProperty": "CompanyCode"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="2.5rem">
+										<Text text="{i18n>tableObjkeyColumnTitle}" wrapping="false"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Custom", "columnIndex":"12"}'/>
+										</customData>
+									</Column>
+									<Column hAlign="Center" vAlign="Middle" width="4rem">
+										<Text text="{i18n>tableBldatColumnTitle}" wrapping="false" tooltip="{i18n>tableBldatColumnTitleFull}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "InvoiceDate", "columnIndex":"13", "leadingProperty": "InvoiceDate"}'/>
+										</customData>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Inactive" vAlign="Middle">
+										<cells>
+											<ObjectStatus icon="{path: 'MatchStatus', formatter: '.formatter.trafficLight'}"
+												tooltip="{ parts: [{path: 'MatchStatus'}], formatter: '.formatter.trafficLightTooltip'}"
+												state="{path: 'MatchStatus', formatter: '.formatter.trafficLightState'}"/>
+											<Link text="{InvoiceNo}" press="onInvoiceNumberLinkPressed" tooltip="{InvoiceNo}"/>
+											<Text text="{ShipmentCount}"></Text>
+											<Text text="{Carrier}"/>
+											<Text text="{AccountNo}"/>
+											<ObjectStatus text="{path: 'OverallStatus', formatter: '.formatter.releaseHdrStatusText'}"
+												state="{path: 'OverallStatus', formatter: '.formatter.releaseHdrStatusState'}"/>
+											<ObjectStatus text="{path: 'ApprovalStatus', formatter: '.formatter.releaseHdrAStatusText'}"
+												state="{path: 'ApprovalStatus', formatter: '.formatter.releaseHdrAStatusState'}"/>
+											<ObjectNumber
+												number="{ parts:[{path:'InvOriginalAmt'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{Currency}" state="Success"/>
+											<ObjectNumber
+												number="{ parts:[{path:'InvPayAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{Currency}" state="Success"/>
+											<ObjectNumber
+												number="{ parts:[{path:'InvSERPAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{Currency}" state="Success"/>
+											<Text text="{CompanyCode}"/>
+											<Button icon="sap-icon://crm-service-manager" type="Emphasized" press="onAPInvoiceNumberButtonPressed"
+												visible="{parts: [{path: 'OverallStatus'}], formatter: '.formatter.formatButtonAPInvoiceNumberVisible'}"/>
+											<Text text="{path: 'InvoiceDate', formatter: '.formatter.formatDateString' }"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</ScrollContainer>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" press="handleMessagePopoverPress" text="{messageModel>/messagesLength}"
+					type="Emphasized"/>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="{i18n>releaseButtonText}" press="onReleaseButtonPressed"/>
+				<Button type="Reject" text="{i18n>cancelButtonText}" press="onCancelButtonPressed"/>
+				<Button text="{i18n>approveButtonText}" press="onApproveButtonPressed"/>
+				<Button text="{i18n>updateStatusButtonText}" press="onUpdateStatusButtonPressed"/>
+				<Button text="{i18n>simulateButtonText}" press="onSimulateButtonPressed"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

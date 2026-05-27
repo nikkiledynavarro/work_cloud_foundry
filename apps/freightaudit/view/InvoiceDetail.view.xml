@@ -1,0 +1,89 @@
+<mvc:View controllerName="com.erpis.shiperp.freightaudit.controller.InvoiceDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>invoiceDetailTitle} {InvoiceNo}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderCompCode}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{CompanyCode}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderCarrier}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{Carrier}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>detailHeaderVendor}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{Vendor}"/>
+						</HBox>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderInvoiceType}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{InvoiceType}"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>detailHeaderInvoiceDat}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{path: 'InvoiceDate', formatter: '.formatter.formatDateString' }"/>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>detailHeaderInvoiceDueDat}:" class="sapUiSmallMarginEnd"/>
+							<Text text="{path: 'ChangedOn', formatter: '.formatter.formatDateString' }"/>
+						</HBox>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>Success}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{statsModel>/results/0/Count}" state="Success"></ObjectStatus>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>Warning}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{statsModel>/results/1/Count}" state="Warning"></ObjectStatus>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>Error}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{statsModel>/results/2/Count}" state="Error"></ObjectStatus>
+						</HBox>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>Approved}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{= ${local>/approved} + ${local>/released}}" state="Success"></ObjectStatus>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+							<Text text="{i18n>Open}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{local>/open}" state="Warning"></ObjectStatus>
+						</HBox>
+						<HBox justifyContent="SpaceBetween">
+							<Text text="{i18n>Disputed}:" class="sapUiSmallMarginEnd"/>
+							<ObjectStatus text="{local>/disputed}" state="Error"></ObjectStatus>
+						</HBox>
+					</layout:VerticalLayout>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<core:Fragment fragmentName="com.erpis.shiperp.freightaudit.fragment.TrackproInfo" type="XML"/>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button enabled="{= ${OverallStatus} === 'RE' ? false : true }" type="Accept" text="{i18n>detailGlobalActionRelease}" press="onReleasePress"/>
+				<Button enabled="{= ${OverallStatus} === 'RE' ? false : true }" type="Reject" text="{i18n>detailGlobalActionCancel}" press="onCancelPress"/>
+				<Button enabled="{= ${OverallStatus} === 'RE' ? false : true }" text="{i18n>detailGlobalActionApprove}" press="onApprovePress"/>
+				<Button enabled="{= ${OverallStatus} === 'RE' ? false : true }" text="{i18n>detailGlobalActionDispute}" press="onDisputePress"/>
+				<Button enabled="{= ${OverallStatus} === 'RE' ? false : true }" text="{i18n>detailGlobalActionUpdateStatus}" press="onUpdateStatusPress"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>
