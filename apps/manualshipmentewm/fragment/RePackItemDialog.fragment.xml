@@ -1,0 +1,92 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Repack Outbound HU" resizable="true">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>PackMat}"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtPackMatRepack" value="{local>/PackScanner/DestPmatNo}" submit="onRepackOutboundHUConfirm" showValueHelp="true"
+										valueHelpRequest="onPackMatValueRequested"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Destination Bin"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtDestinationBinRepack" value="{local>/PackScanner/DestBin}" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Destination HU"/>
+								</form:label>
+								<form:fields>
+									<ComboBox width="10rem" id="cbDestinationHURepack" selectedKey="{local>/PackScanner/DestHu}" tooltip="Destination HU"
+										items="{local>/DestHU}">
+										<core:Item text="{local>Outbhu}" key="{local>Outbhu}"/>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Product Number"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtProductNumberRepack" value="{local>/PackScanner/DestPmatNo}" editable="false" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Quantity"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtQuantityRepack" value="{local>/PackScanner/Quantity}" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="UoM"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtUnitRepack" value="{local>/PackScanner/Unit}" editable="false" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Source HU"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtSourceHURepack" value="{path: 'local>/PackScanner/SourceId', formatter: '.formatter.removeLeadingZero'}"  editable="false" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Source Bin"/>
+								</form:label>
+								<form:fields>
+									<Input id="txtSourceBinRepack" value="{local>/PackScanner/SourceBin}" editable="false" submit="onRepackOutboundHUConfirm"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="OK" type="Emphasized" press="onRepackOutboundHUConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCloseRepackOutboundHUDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

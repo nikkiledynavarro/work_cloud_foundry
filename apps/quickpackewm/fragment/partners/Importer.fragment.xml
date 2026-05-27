@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<!--1st column-->
+			<core:Title text=""></core:Title>
+			<Label text="Name/Attention"/>
+			<Input enabled="false" placeholder="Name" tooltip="Name" value="{local>/basic/partners/importer/addr/Name1}"></Input>
+			<Input enabled="false" placeholder="Attention" tooltip="Attention"
+				value="{local>/basic/partners/importer/addr/Name2}"></Input>
+			<Label text="Address 1"/>
+			<Input enabled="false" placeholder="Address 1" tooltip="Address 1"
+				value="{local>/basic/partners/importer/addr/Stras}"></Input>
+			<Label text="Address 2"/>
+			<Input enabled="false" placeholder="Address 2" tooltip="Address 2"
+				value="{local>/basic/partners/importer/addr/Strs2}"></Input>
+			<Label text="Address 3"/>
+			<Input enabled="false" placeholder="Address 3" tooltip="Address 3"
+				value="{local>/basic/partners/importer/addr/StrSuppl2}"></Input>
+			<Label text="Address 4"/>
+			<Input enabled="false" placeholder="Address 4" tooltip="Address 4"
+				value="{local>/basic/partners/importer/addr/StrSuppl3}"></Input>
+			<Label text="House Number"/>
+			<Input enabled="false" tooltip="House Number" placeholder="House Number"
+				value="{local>/basic/partners/importer/addr/Hausn}"></Input>
+			<!--2nd column-->
+			<core:Title text=""></core:Title>
+			<Label text="Supplementary"/>
+			<Input enabled="false" tooltip="Supplementary" placeholder="Supplementary"
+				value="{local>/basic/partners/importer/addr/Haus2}"></Input>
+			<Label text="Building/Suburb"/>
+			<Input enabled="false" tooltip="Building" placeholder="Building"
+				value="{local>/basic/partners/importer/addr/Stock}"></Input>
+			<Input enabled="false" tooltip="Suburb" placeholder="Suburb"
+				value="{local>/basic/partners/importer/addr/Regio}"></Input>
+			<Label text="City/State"/>
+			<Input placeholder="City" value="{local>/basic/partners/importer/addr/Ort01}" enabled="false"></Input>
+			<ComboBox tooltip="State" items="{ path: 'xSERPERPxCDS_QP_STATE', length: 9999 }" selectedKey="{local>/basic/partners/importer/addr/Ort02}"
+				enabled="false">
+				<items>
+					<core:Item text="{Region} - {Description}" key="{Region}"/>
+				</items>
+			</ComboBox>
+			<Label text="Postal Code/Country"/>
+			<Input placeholder="Postal Code" value="{local>/basic/partners/importer/addr/Pstlz}" enabled="false"/>
+			<ComboBox selectedKey="{local>/basic/partners/importer/addr/Land1}" items="{ path: '/xSERPERPxCDS_QP_COUNTRY', length: 9999 }"
+				tooltip="Country" change="onUpdateDomestic" enabled="false" app:nextUpdate="slimporterState">
+				<items>
+					<core:Item text="{Country} - {Name}" key="{Country}"/>
+				</items>
+			</ComboBox>
+			<Label text="Phone/Fax"/>
+			<Input enabled="false" placeholder="Phone" tooltip="Phone" value="{local>/basic/partners/importer/addr/Telf1}"></Input>
+			<Input enabled="false" placeholder="Fax" tooltip="Fax" value="{local>/basic/partners/importer/addr/Telfx}"></Input>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

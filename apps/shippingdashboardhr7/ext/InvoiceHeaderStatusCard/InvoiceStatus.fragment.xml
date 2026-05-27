@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="idDialoForChartInvoice" title="Invoice List ({local>/countStatus})">
+		<content>
+			<Table noDataText="Invoice Detail" id="idTableChartInvoice" itemPress="handleNavigation" updateFinished="onStatusListUpdated">
+				<columns>
+					<Column >
+						<header>
+							<Text text="Invoice Number"/>
+						</header>
+					</Column>
+					<Column >
+						<header>
+							<Text text="Carrier"/>
+						</header>
+					</Column>
+					<Column >
+						<header>
+							<Text text="Invoice Date"/>
+						</header>
+					</Column>
+					<Column >
+						<header>
+							<Text text="Invoice Due Date"/>
+						</header>
+					</Column>
+					<Column visible="false">
+						<header>
+							<Text text="FAHeaderStatus"/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</content>
+		<endButton>
+			<Button text="Close" press="onCloseNewRule"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

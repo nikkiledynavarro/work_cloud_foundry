@@ -1,0 +1,127 @@
+<mvc:View controllerName="com.erpis.shiperp.trackshipmentewm.hr7.controller.EWM.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f" height="100%" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageIdEWM" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Select width="auto" class="margin_right_5px" id="cbInputType" change="onResetData"
+							items="{path: 'EWMService>/xSERPERPxI_PCSHIPID', filters: [ {path: 'Tracking', operator: 'EQ', value1: 'true'} ]}">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+							<items>
+								<core:Item text="{EWMService>Description}" key="{EWMService>ShipTypeID}"></core:Item>
+							</items>
+							<!--<items>-->
+							<!--	<core:Item text="Outbound Delivery Order" key="8"></core:Item>-->
+							<!--	<core:Item text="Tracking" key="3"></core:Item>-->
+							<!--</items>-->
+						</Select>
+						<MultiInput submit="onSubmit" editable="true" id="txtIdEWM" width="12rem" placeholder="Enter Number" class="margin_right_5px"
+							showValueHelp="false">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</MultiInput>
+						<Button icon="sap-icon://reset" tooltip="Reset Data" type="Emphasized" press="onResetData" class="margin_right_5px"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
+						app:crossNavigate="#shipewmhr7-Display"/>
+					<Button icon="sap-icon://sys-cancel" tooltip="Open Cancel App" type="Reject" press="onCrossNavigate" app:crossNavigate="#cancelhr7-Display"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<form:SimpleForm >
+				<form:toolbar>
+					<Toolbar>
+						<Title text="Track Shipment"></Title>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://print" text="Print POD" type="Emphasized" press="onPrintPOD"/>
+					</Toolbar>
+				</form:toolbar>
+				<form:content>
+					<VBox>
+						<Table id="idShipmentDetail" items="{path: 'local>/ShipmentFinalData'}" class="border_lightgray_nobottom" growing="true"
+							growingThreshold="100" width="100%" busyIndicatorDelay="99999" growingScrollToLoad="true" fixedLayout="false" mode="MultiSelect">
+							<headerToolbar>
+								<Toolbar>
+									<Label text="Show"></Label>
+									<ComboBox id="numSelected" items="{ path: 'pageModel>/modelData', sorter: { path: 'text' } }" selectedKey="{local>/Pagination/nPage}"
+										change="onChangeNum" width="70px">
+										<core:Item key="{pageModel>}" text="{pageModel>}"/>
+									</ComboBox>
+									<Label text="entries"></Label>
+									<ToolbarSpacer/>
+									<Label text="Search: " visible="false"></Label>
+									<SearchField placeholder="" showSearchButton="false" width="15rem" visible="false"/>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column >
+									<ObjectStatus text="Tracking Number"></ObjectStatus>
+								</Column>
+								<Column>
+									<ObjectStatus text="Master Tracking No."></ObjectStatus>
+								</Column>
+								<Column>
+									<ObjectStatus text="Carrier"></ObjectStatus>
+								</Column>
+								<Column>
+									<ObjectStatus text="Service"></ObjectStatus>
+								</Column>
+								<Column>
+									<ObjectStatus text="Latest Status"></ObjectStatus>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive" highlight="Success">
+									<cells>
+										<Link text="{local>trackingnum}" press="onOpenTrackingStatusDialog" id="trackNum"></Link>
+										<Text text="{local>mastertrack}"></Text>
+										<Text text="{local>carrier}"></Text>
+										<Text text="{local>service}"></Text>
+										<Text text="{local>status}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<FlexBox justifyContent="End" alignItems="Center" class="sapUiTinyMarginTop" visible="{local>/showPagination}">
+							<Button text="Previous" id="arrowBack" tooltip="Back" press="onNavBackButtonPress"
+								enabled="{=${local>/Pagination/ncurrNum} !== 0 &amp;&amp; ${local>/Pagination/ncurrNum} !== 1}">
+								<layoutData>
+									<FlexItemData growFactor="0" maxWidth="auto"/>
+								</layoutData>
+							</Button>
+							<Button type="Emphasized" text="{local>/Pagination/ncurrNum}" tooltip="Current Page">
+								<layoutData>
+									<FlexItemData growFactor="0" maxWidth="auto"/>
+								</layoutData>
+							</Button>
+							<Button text="Next" id="arrowNext" tooltip="Next" press="onNavNextButtonPress"
+								enabled="{=${local>/Pagination/ncurrNum} ===${local>/Pagination/Total} ? false : true }">
+								<layoutData>
+									<FlexItemData growFactor="0" maxWidth="auto"/>
+								</layoutData>
+							</Button>
+						</FlexBox>
+					</VBox>
+				</form:content>
+			</form:SimpleForm>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar id="otbFooterEWM">
+				<Button id="popoverButtonEWM" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,49 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="serp.so-shiperp-tab.controller.View1" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+					    <sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="form0">
+					        <sap.ui.layout.form:content>
+					            <Label text="Sales Order Number" width="100%" id="label0_1736147610960"/>
+					            <Input xmlns="sap.m" value="{SalesOrder}" id="input0" editable="false"/>
+					            <Label text="Carrier" id="label0"/>
+					            <Input xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" width="20%" id="input1" value="{xERPISxCARRCODE_SDH}"/>
+					            <Label text="TEST4" id="label1_1736069872167"/>
+					            <Input xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" width="20%" id="input3" value="{ZZ1_TEST4_SDH}"/>
+					            <Label xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" text="Carrier" id="label0_copy"/></sap.ui.layout.form:content>
+					    </sap.ui.layout.form:SimpleForm>
+					    <Button xmlns="sap.m" text="Rate Quote" id="button0"/>
+					    <Table noDataText="Drop column list items here and columns in the area above" id="table0">
+					        <items>
+					            <ColumnListItem type="Active" id="item0">
+					                <cells>
+					                    <Text text="Row 1 Cell 1" id="text0_1736069695635"/>
+					                    <Text text="Row 1 Cell 2" id="text1"/>
+					                    <Text text="Row 1 Cell 3" id="text2"/></cells>
+					            </ColumnListItem>
+					        </items>
+					        <columns>
+					            <Column id="column0">
+					                <header>
+					                    <Label text="Handling Unit" id="label0_1736069695635"/>
+					                </header>
+					            </Column>
+					            <Column id="column1">
+					                <header>
+					                    <Label text="Tracking Number" id="label1"/>
+					                </header>
+					            </Column>
+					            <Column id="column2">
+					                <header>
+					                    <Label text="Date" id="label2"/>
+					                </header>
+					            </Column></columns></Table>
+					    <FlexBox width="100%" id="box0"/>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>Materials}" class="sapUiPopupWithPadding" id="sltMaterial" items="{path : '/xSERPERPxI_MATNR'}"
+		liveChange="onMaterialValueHelpSearch" confirm="onMaterialConfirm">
+		<StandardListItem title="{Material}" description="{Description}" info="{SalesOrg}/{DistChannel}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

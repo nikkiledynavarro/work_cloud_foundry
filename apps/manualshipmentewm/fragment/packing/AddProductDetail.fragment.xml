@@ -1,0 +1,82 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Add product Details">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Product"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWProduct" submit = "onChangProductionDetailPress" value="{local>/oAddProductDetail/Productno}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Description"/>
+								</form:label>
+								<form:fields>
+									<Input id="idDescription" value="{local>/oAddProductDetail/ProductText}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Quantity/ UoM/ Weight/ Weight Unit"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWidthQuantity" value="{local>/oAddProductDetail/Qty}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWidthUoM" value="{local>/oAddProductDetail/Uom}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWidthWeight" value="{local>/oAddProductDetail/Weight}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWeightunit" value="{local>/oAddProductDetail/Weightunit}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="NeValue/ Unit Price/ Currency"/>
+								</form:label>
+								<form:fields>
+									<Input id="idHeightNeValue" value="{local>/oAddProductDetail/Netvalue}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idHeightUnit" value="{local>/oAddProductDetail/Unitprice}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idHeightCurrency" value="{local>/oAddProductDetail/Currency}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Harmonized Code/ COO"/>
+								</form:label>
+								<form:fields>
+									<Input id="idWeightHarmonized" value="{local>/oAddProductDetail/Harmonizedcode}"/>
+								</form:fields>
+								<form:fields>
+									<Input id="idWeightunitCOO" value="{local>/oAddProductDetail/Ctryoforigin}"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Emphasized" press="onProductionDetailPress"/>
+		</beginButton>
+		<endButton>
+			<Button press="onProductDetailsClose" text="Cancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

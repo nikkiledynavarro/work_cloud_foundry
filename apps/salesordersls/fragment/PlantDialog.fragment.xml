@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>Plant}" class="sapUiPopupWithPadding" id="sltPlant" items="{path : '/xSERPERPxI_PLANT'}"
+		liveChange="onPlantValueHelpSearch" confirm="onPlantConfirm">
+		<StandardListItem title="{Plant}" description="{Description}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

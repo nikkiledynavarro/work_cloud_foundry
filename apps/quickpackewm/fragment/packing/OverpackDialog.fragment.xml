@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Overpack" contentWidth="auto" contentHeight="auto">
+		<content>
+			<VBox alignItems="Center" class="sapUiSmallMargin">
+				<HBox alignItems="Center">
+					<Label text="Target HU:" width="auto" class="sapUiTinyMarginEnd sapUiTinyMarginBegin"/>
+					<ComboBox items="{local>/UnSelectdHUs}" id="MulTargetHU" selectedKey="{local>/targetHU}" width="20rem">
+						<core:ListItem key="{local>outbHu}" text="{path:'local>outbHu', formatter: '.formatter.removeLeadingZero'}"/>
+					</ComboBox>
+				</HBox>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Continue" icon="sap-icon://accept" type="Emphasized" press="onAcceptOverpack"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" type="Reject" press="onCloseOverpack"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

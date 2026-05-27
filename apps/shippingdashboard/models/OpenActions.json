@@ -1,0 +1,19 @@
+{
+	"list": [{
+			"Title": "Open SO",
+			"Icon": "sap-icon://create",
+			"SemanticObject": "SalesOrder",
+			"Action": "manage"
+		}, {
+			"Title": "Open Invoices",
+			"Icon": "sap-icon://decline",
+			"SemanticObject": "FreightAudit",
+			"Action": "manage"
+		}, {
+			"Title": "Open Disputes",
+			"Icon": "sap-icon://batch-payments",
+			"SemanticObject": "Dispute",
+			"Action": "manage"
+		}
+	]
+}

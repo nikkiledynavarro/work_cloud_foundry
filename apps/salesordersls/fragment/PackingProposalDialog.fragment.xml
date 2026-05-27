@@ -1,0 +1,170 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table"
+	xmlns:dnd="sap.ui.core.dnd">
+	<Dialog title="Packing Proposal" state="Success" stretch="true" class="sapUiContentPadding">
+		<content>
+			<table:TreeTable selectionMode="MultiToggle" class="sapUiSmallMarginBottom" id="idPackProposalTab"
+				rows="{path:'global>/PackingOverviewList', parameters: {arrayNames:['Children'], numberOfExpandedLevels: 4} }" enableSelectAll="false"
+				visibleRowCountMode="Interactive" visibleRowCount="8">
+				<table:extension>
+					<OverflowToolbar height="3rem">
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" tooltip="New HU" press="onAddNewHU"/>
+						<Button icon="sap-icon://delete" tooltip="Delete Selected HU" press="onDeleteHU"/>
+						<Button icon="sap-icon://sys-cancel" tooltip="Delete all" press="onDeleteAllHU"/>
+					</OverflowToolbar>
+				</table:extension>
+				<table:dragDropConfig>
+					<dnd:DragInfo groupName="available2selected" sourceAggregation="rows"/>
+					<dnd:DropInfo groupName="selected2available" drop="onPackHU" targetAggregation="rows"/>
+				</table:dragDropConfig>
+				<table:columns>
+					<table:Column width="15rem">
+						<Label text="Handling Unit"/>
+						<table:template>
+							<Text text="{path: 'global>NodeDesc', formatter: '.formatter.removeLeadingZero'}" tooltip="{path: 'global>NodeDesc'}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="10rem">
+						<Label text="HU"/>
+						<table:template>
+							<FlexBox wrap="Wrap" justifyContent="Center" alignItems="Center">
+								<ObjectStatus text="{path: 'global>Exidv', formatter: '.formatter.removeLeadingZero'}" tooltip="{path: 'global>Exidv'}"
+									class="sapUiSmallMarginEnd" state="Success"/>
+								<Button visible="{= ${global>Exidv} !== '' ? true : false }" icon="sap-icon://edit" tooltip="Edit HU Dimension" type="Emphasized"
+									press="onEditHUDimension" class="sapUiSizeCompact"/>
+							</FlexBox>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Gross"/>
+						<table:template>
+							<Text text="{global>Brgew}" tooltip="{global>Brgew}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="WeightUnit"/>
+						<table:template>
+							<Text text="{global>Gewei}" tooltip="{global>Gewei}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Quantity"/>
+						<table:template>
+							<Text text="{global>Sbqty}" tooltip="{global>Sbqty}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Unit" tooltip="Base unit of Measure"/>
+						<table:template>
+							<Text text="{global>Meins}" tooltip="{global>Meins}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="PackMatls" tooltip="Packaging materials"/>
+						<table:template>
+							<Text text="{global>Vhilm}" tooltip="{global>Vhilm}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Length"/>
+						<table:template>
+							<Text text="{global>Laeng}" tooltip="{global>Laeng}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Width"/>
+						<table:template>
+							<Text text="{global>Breit}" tooltip="{global>Breit}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Height"/>
+						<table:template>
+							<Text text="{global>Hoehe}" tooltip="{global>Hoehe}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="UoM"/>
+						<table:template>
+							<Text text="{global>Meabm}" tooltip="{global>Meabm}" wrapping="false"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:TreeTable>
+			<HBox class="sapUiSmallMarginBottom">
+				<Button icon="sap-icon://navigation-down-arrow" type="Reject" tooltip="Unpack" press="onUnpackButtonPress" class="sapUiSmallMarginEnd"
+					enabled="{= ${global>/PackingOverviewList}.length >0}"/>
+				<Button icon="sap-icon://navigation-up-arrow" type="Accept" tooltip="Pack" press="onPackButtonPress"
+					enabled="{= ${global>/UnPackItemSet/results}.length >0}"/>
+			</HBox>
+			<Table class="border_lightgray_nobottom" items="{global>/UnPackItemSet/results}" mode="MultiSelect" id="idUnPackProposalTab">
+				<dragDropConfig>
+					<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
+					<dnd:DropInfo groupName="available2selected" drop="onUnpackHU"/>
+				</dragDropConfig>
+				<columns>
+					<Column width="3rem">
+						<Text text="Item" wrapping="false" tooltip="Item"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Material" wrapping="false" tooltip="Material"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Partial Qty" wrapping="false" tooltip="Partial Qty"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Open Qty" wrapping="false" tooltip="Open Qty"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Base UoM" wrapping="false" tooltip="Base UoM"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Gross Weight" wrapping="false" tooltip="Gross Weight"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Weight Unit" wrapping="false" tooltip="Weight Unit"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Length" wrapping="false" tooltip="Length"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Width" wrapping="false" tooltip="Width"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Height" wrapping="false" tooltip="Height"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Unit" wrapping="false" tooltip="Unit"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline">
+						<Text text="Shipping Point" wrapping="false" tooltip="Shipping Point"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{= parseInt(${global>Posnr})}" wrapping="false" tooltip="{global>Posnr}"/>
+							<Text text="{global>Matnr}" wrapping="false" tooltip="{global>Matnr}"/>
+							<Input type="Number" value="{global>Sbqty}" tooltip="{global>Sbqty}"/>
+							<Text text="{global>Menge}" wrapping="false" tooltip="{global>Menge}"/>
+							<Text text="{global>Meins}" wrapping="false" tooltip="{global>Meins}"/>
+							<Text text="{global>Brgew}" wrapping="false" tooltip="{global>Brgew}"/>
+							<Text text="{global>Gewei}" wrapping="false" tooltip="{global>Gewei}"/>
+							<Text text="{global>LaengM}" wrapping="false" tooltip="{global>Laeng}"/>
+							<Text text="{global>BreitM}" wrapping="false" tooltip="{global>Breit}"/>
+							<Text text="{global>HoeheM}" wrapping="false" tooltip="{global>Hoehe}"/>
+							<Text text="{global>MeabmM}" wrapping="false" tooltip="{global>Meabm}"/>
+							<Text text="{global>Vstel}" wrapping="false" tooltip="{global>Vstel}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="Continue" type="Accept" press="onProposalDlgContinue"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onProposalDlgCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

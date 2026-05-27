@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text="Manual Shiment Category"/>
+	<Input editable="true" showValueHelp="true" value="{local>/oManualShipment/Category}" id="idManShipCat"
+		valueHelpRequest="onManShipCategory"></Input>
+	<Label text="Requestor"/>
+	<Input editable="true" value="{local>/oManualShipment/Requestor}" id="idRequestor" liveChange="onChangeManualShiment"></Input>
+	<Label text="Shipment Description"/>
+	<Input editable="true" value="{local>/oManualShipment/ShipDesc}" id="idshipdescipt"  liveChange="onChangeManualShiment"></Input>
+	<Label text="Cost Center"/>
+	<Input editable="true" showValueHelp="true" value="{local>/oManualShipment/CostCenter}" id="idCostcenter"
+		valueHelpRequest="onManCostCenter"></Input>
+	<Label text="Sales District"/>
+	<Input editable="true" showValueHelp="true" value="{local>/oManualShipment/Bzirk}" id="idSalesDistrict"
+		valueHelpRequest="onManSalesDistrict"></Input>
+</core:FragmentDefinition>

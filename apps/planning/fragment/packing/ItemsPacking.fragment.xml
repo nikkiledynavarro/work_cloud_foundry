@@ -1,0 +1,182 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<FlexBox justifyContent="SpaceBetween" alignItems="Start" renderType="Bare">
+		<!--<ScrollContainer height="500px" vertical="true" horizontal="false">-->
+		<Table id='tableFU' mode="MultiSelect" growing="true" class="border_lightgray_nobottom" fixedLayout="true" items="{path:'/xSERPTMxI_FRTUNIT',sorter:[{path:'createdate',descending:true}]}" growingThreshold="10">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Freight Units"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://add" tooltip="Create/Edit Freight Unit" press="onAddNewHU"/>
+					<Button icon="sap-icon://edit" tooltip="Create/Edit Freight Unit" press="onAddNewHU"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="3rem">
+					<Text text="Freight Unit"/>
+				</Column>
+				<Column width="3rem">
+					<Text text="Carrier"/>
+				</Column>
+				<Column width="3rem" hAlign="Center">
+					<Text text="Carrier Service" tooltip="Carrier Service"/>
+				</Column>
+				<!--<Column width="3.2rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Source Location" tooltip="Source Location"/>-->
+				<!--</Column>-->
+				<!--<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Des Loc" tooltip="Destination Location"/>-->
+				<!--</Column>-->
+				<!--<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Planning Stat" tooltip="Planning Status"/>-->
+				<!--</Column>-->
+				<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Tracking Numer" tooltip="Tracking Number"/>
+				</Column>
+				<!--<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Ship-to-Party" tooltip="Ship-to-Party"/>-->
+				<!--</Column>-->
+				<!--<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Earliest Requested Date" tooltip="Earliest Requested Date"/>-->
+				<!--</Column>-->
+				<!--<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Latest Requested Date" tooltip="Latest Requested Date" wrapping="false"/>-->
+				<!--</Column>-->
+				<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Gross Weight" tooltip="Gross Weight"/>
+				</Column>
+				<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Gross Weight UoM" tooltip="Gross Weight UoM"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{= parseInt(${freightunit}) }" tooltip="{local>deliveryitem}"/>
+						<!--<Text text="{path:'local>material', formatter: '.formatter.removeLeadingZero'}" wrapping="false" tooltip="{local>material}"/>-->
+						<!--<ObjectStatus text="{= parseInt(${local>totalqty}) }" state="Success"/>-->
+						<!--<ObjectStatus text="{= parseInt(${local>openqty}) }" state="Warning"/>-->
+						<!--<Input type="Number" value="{path: 'local>partialqty', type: 'sap.ui.model.type.Integer', constraints:{minimum:0}}"-->
+						<!--	liveChange="onValidateNumber"/>-->
+						<!--<Text text="{local>uom}"/>-->
+						<!--<Text text="{= parseFloat(${local>weight}) }"/>-->
+						<Text text="{carrier}"/>
+						<Text/>
+						<Text text="{= parseFloat(${local>weight}) }"/>
+						<Text text="{grossweight}"/>
+						<Text text="{grossweightunit}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--</ScrollContainer>-->
+		<FlexBox justifyContent="Center" direction="Column" width="auto" alignItems="Center">
+			<Button type="Accept" icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-right-arrow' : 'sap-icon://navigation-down-arrow' }" tooltip="Plan" press="onAssignFUToFO" class="margin_5px"/>
+			<Button type="Reject" icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-left-arrow' : 'sap-icon://navigation-up-arrow' }" tooltip="Unplan" press="onUnpack"/>
+		</FlexBox>
+		<!--<ScrollContainer height="500px" vertical="true" horizontal="false">-->
+		<Table id='tableFO' selectionChange="onSelectionChange" fixedLayout="true" mode="MultiSelect" growing="true" keyboardMode="Edit" growingThreshold="10" class="border_lightgray_nobottom" updateFinished="onHUTableUpdateFinished" items="{path:'/xSERPTMxI_FRTORDER',sorter:[{path:'createdate',descending:true}]}">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Freight Orders {= (${local>/basic/carrier_data/mps/mps} === 'X' &amp;&amp; ${local>/basic/carrier_data/mps/mpstype} === '02')? ' / Multi' : '' }"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://add" tooltip="Create Freight Order" press="onCreateFreightOrderDialog"/>
+					<Button icon="sap-icon://status-completed" tooltip="Set Execution Status"/>
+					<Button tooltip="Tender" text="Tender"/>
+					<Button icon="sap-icon://request" tooltip="Request Routing" press="onRequestRoutingDialog"/>
+					<Button icon="sap-icon://newspaper" tooltip="Update Routing" press="onUpdateRoutingDialog"/>
+					<Button text="Request for Pick up" tooltip="Request for Pick up" press="onRequestForPickupDialog"/>
+					<Button text="BOL Overwrite" tooltip="BOL Overwrite"/>
+					<Button icon="sap-icon://decline" type="Reject" tooltip="Close Freight Order"/>
+				<content>
+				    <Button xmlns="sap.m" icon="sap-icon://signature" tooltip="Digital Signature"/>
+				</content>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="5rem">
+					<Text text="Freight Order"/>
+				</Column>
+				<Column width="2.5rem" hAlign="Center">
+					<Text text="Carrier"/>
+				</Column>
+				<Column width="3rem">
+					<Text text="Carrier Service" tooltip="Carrier Service"/>
+				</Column>
+				<!--<Column hAlign="Center" width="3rem">-->
+				<!--	<Text text="Shipment Mode" tooltip="Shipment Mode"/>-->
+				<!--</Column>-->
+				<!--<Column hAlign="Center" width="2.5rem">-->
+				<!--	<Text text="Source Location" tooltip="Source Location"/>-->
+				<!--</Column>-->
+				<!--<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">-->
+				<!--	<Text text="Destination Location" tooltip="Destination Location"/>-->
+				<!--</Column>-->
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Gross Weight" tooltip="Gross Weight"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Gross Weight UoM" tooltip="Gross Weight UoM"/>
+				</Column>
+				<!--<Column hAlign="Center" width="2.5rem">-->
+				<!--	<Text text="Utilization" tooltip="Utilization"/>-->
+				<!--</Column>-->
+				<!--<Column hAlign="Center" width="3rem" visible="{= ${local>/UseScale} === '0001' || ${local>/UseScale} === '0002' ? true : false }">-->
+				<!--	<Text text="Dangerous Goods" tooltip="Dangerous Goods"/>-->
+				<!--</Column>-->
+				<!--<Column hAlign="Center" width="3rem" visible="{= ${local>/UseScale} === '0001' || ${local>/UseScale} === '0002' ? true : false }">-->
+				<!--	<Text text="Source Location" tooltip="Source Location"/>-->
+				<!--</Column>-->
+				<!--<Column hAlign="Center" width="3rem" visible="{= ${local>/UseScale} === '0001' || ${local>/UseScale} === '0002' ? true : false }">-->
+				<!--	<Text text="Destination Location" tooltip="Destination Location"/>-->
+				<!--</Column>-->
+			</columns>
+			<items>
+				<ColumnListItem xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+					<cells>
+						<Link press="onOpenHUItemsDialog" text="{path:'freightorder', formatter: '.formatter.removeLeadingZero'}" wrapping="false"/>
+						<Text xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.m" id="text25" text="{carrier}"/>
+						<Text tooltip="{local>packmat}" wrapping="false"/>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input type="Number" visible="{parts:['i18n>true','local&gt;freightunitkey','i18n&gt;weight'], formatter: '.editFreightUnit' }" value="{grossweight}" submit="onGoNextLineItem" change="onGoToLengthColumn" tooltip="{path: 'local>weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+							<Text visible="{parts:['i18n>false','local&gt;freightunitkey', 'i18n&gt;weight'], formatter: '.editFreightUnit' }" wrapping="false" class="display_inline" text="{path: 'grossweight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}" tooltip="{path: 'local>weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						</FlexBox>
+						<Text text="{grossweightunit}"/>
+						<!--<FlexBox justifyContent="Center" alignItems="Center" direction="Column">-->
+						<!--	<Input type="Number" visible="{parts:['i18n>true','local>freightunitkey'], formatter: '.editFreightUnit' }" value="{local>length}"-->
+						<!--		change="onGoToWidthColumn" submit="onGoNextLineItem"-->
+						<!--		tooltip="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>-->
+						<!--	<Text wrapping="false" visible="{parts:['i18n>false','local>freightunitkey'], formatter: '.editFreightUnit' }" class="display_inline"-->
+						<!--		text="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"-->
+						<!--		tooltip="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>-->
+						<!--</FlexBox>-->
+						<!--<FlexBox justifyContent="Center" alignItems="Center" direction="Column">-->
+						<!--	<Input type="Number" visible="{parts:['i18n>true','local>freightunitkey'], formatter: '.editFreightUnit' }" value="{path: 'local>width'}"-->
+						<!--		change="onGoToHeightColumn" submit="onGoNextLineItem"-->
+						<!--		tooltip="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>-->
+						<!--	<Text wrapping="false" visible="{parts:['i18n>false','local>freightunitkey'], formatter: '.editFreightUnit' }" class="display_inline"-->
+						<!--		text="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"-->
+						<!--		tooltip="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>-->
+						<!--</FlexBox>-->
+						<!--<FlexBox justifyContent="Center" alignItems="Center" direction="Column">-->
+						<!--	<CheckBox selected="true"/>-->
+						<!--</FlexBox>-->
+						<!--<FlexBox justifyContent="Center" alignItems="Center" direction="Column">-->
+						<!--	<Input visible="{parts:['i18n>true','local>freightunitkey','i18n>dims_unit'], formatter: '.editFreightUnit' }" value="{local>dims_unit}"-->
+						<!--		submit="onGoNextLineItem" tooltip="{local>dims_unit}"></Input>-->
+						<!--	<Text wrapping="false" visible="{parts:['i18n>false','local>freightunitkey','i18n>dims_unit'], formatter: '.editFreightUnit' }"-->
+						<!--		class="display_inline" text="{local>dims_unit}" tooltip="{local>dims_unit}"/>-->
+						<!--</FlexBox>-->
+						<!--<FlexBox justifyContent="Center" alignItems="Center">-->
+						<!--	<ToggleButton icon="sap-icon://edit"-->
+						<!--		visible="{= ( (${local>/UseScale} === '0002' || ${local>/UseScale} === '0001') &amp;&amp; ${local>trackingnumber} ==='') ? true : false }"-->
+						<!--		press="onEditItemPackingPress" pressed="{parts:['i18n>true','local>freightunitkey'], formatter: '.editFreightUnit' }"></ToggleButton>-->
+						<!--	<ToggleButton icon="sap-icon://activate"-->
+						<!--		visible="{= (${local>/UseScale} === '0001' &amp;&amp; ${local>trackingnumber} ==='') ? true : false }" press="onReupdateItemScalePress"></ToggleButton>-->
+						<!--</FlexBox>-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--</ScrollContainer>-->
+	</FlexBox>
+</core:FragmentDefinition>

@@ -1,0 +1,88 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
+	<Dialog title="Select Materials" contentWidth="1100px" contentHeight="auto" stretch="false" verticalScrolling="false"
+		horizontalScrolling="false">
+		<content>
+			<VBox class="sapUiSmallMargin sapUiResponsiveMargin">
+				<table:Table id="IdsMaterials" rows="{path: 'local>/MaterialsList'}" selectionMode="MultiToggle" visibleRowCount="5" columnHeaderVisible="true"
+					enableColumnReordering="true" enableCellFilter="false" enableSelectAll="true" selectionBehavior="Row" width="100%"
+					rowSelectionChange="onRowSelectionChange" rowsUpdated="onUpdateFinishedMaterials" class="border_lightgray_nobottom">
+					<table:columns>
+						<table:Column width="auto">
+							<Label text="Status" tooltip="Processing indicator of the item"/>
+							<table:template>
+								<ObjectStatus text="{path: 'local>icon', formatter: '.formatter.statusText'}" inverted="true"
+									tooltip="{path: 'local>icon', formatter: '.formatter.statusText'}" state="{path: 'local>icon', formatter: '.formatter.statusState'}"
+									icon="{path: 'local>icon', formatter: '.formatter.statusIcon'}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Tote ID" tooltip="Storage Bin"/>
+							<table:template>
+								<Text text="{local>toteID}" tooltip="{local>toteID}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Product" tooltip="Product Number"/>
+							<table:template>
+								<Text text="{local>matnr}" tooltip="{local>Material}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Description" tooltip="Product Description"/>
+							<table:template>
+								<Text text="{local>maktx}" tooltip="{local>maktx}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="Total Qty" tooltip="Total Quantity"/>
+							<table:template>
+								<ObjectStatus text="{path:'local>quan', formatter: '.formatter.formatdecimalplaces'}" state="Success"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="Base UoM" tooltip="Base Unit of Measure"/>
+							<table:template>
+								<Text text="{local>unit}" tooltip="{local>unit}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="Balance"/>
+							<table:template>
+								<ObjectStatus text="{path:'local>balance', formatter: '.formatter.formatdecimalplaces'}" state="Warning"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="Partial"/>
+							<table:template>
+								<Text text="{path: 'local>partialQty', formatter: '.formatter.formatdecimalplaces'}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="EAN/UPC"/>
+							<table:template>
+								<Text text="{local>ean11}" tooltip="{local>ean11}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto" hAlign="Center">
+							<Label text="Batch" tooltip="Batch Number"/>
+							<table:template>
+								<Text text="{local>batchNo}" tooltip="{local>batchNo}"/>
+							</table:template>
+						</table:Column>
+						<!--<table:Column width="auto" hAlign="Center">-->
+						<!--	<Label text="Serialized" tooltip="Serialized"/>-->
+						<!--	<table:template><CheckBox selected="{path:'local>sel', formatter: '.formatter.isSelected'}" enabled="false" tooltip="{local>sel}"/></table:template>-->
+						<!--</table:Column>-->
+					</table:columns>
+				</table:Table>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Continue" icon="sap-icon://accept" type="Emphasized" press="onSelectionChangeMaterial"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onCloseMaterial"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

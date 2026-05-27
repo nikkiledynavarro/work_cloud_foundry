@@ -1,0 +1,33 @@
+{
+    "welcomeFile":  "/index.html",
+    "authenticationMethod":  "route",
+    "routes":  [
+                   {
+                       "source":  "^/destinations/Northwind/(.*)$",
+                       "target":  "/V2/Northwind/$1",
+                       "destination":  "Northwind",
+                       "authenticationType":  "xsuaa",
+                       "csrfProtection":  false
+                   },
+                   {
+                       "source":  "^/sap/opu/odata/(.*)$",
+                       "target":  "/sap/opu/odata/$1",
+                       "destination":  "virtual-er8-destination",
+                       "authenticationType":  "xsuaa",
+                       "csrfProtection":  false
+                   },
+                   {
+                       "source":  "^/virtual-er8-destination/(.*)$",
+                       "target":  "/$1",
+                       "destination":  "virtual-er8-destination",
+                       "authenticationType":  "xsuaa",
+                       "csrfProtection":  false
+                   },
+                   {
+                       "source":  "^(.*)$",
+                       "target":  "$1",
+                       "service":  "html5-apps-repo-rt",
+                       "authenticationType":  "xsuaa"
+                   }
+               ]
+}

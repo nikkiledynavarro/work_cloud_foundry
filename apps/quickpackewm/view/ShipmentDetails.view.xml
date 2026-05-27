@@ -1,0 +1,87 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.quickpackewm.controller.ShipmentDetails" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true"
+		selectedSection="iconTabGeneral">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:heading>
+					<VBox>
+						<FlexBox alignItems="Center">
+							<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink'}" height="1.5rem" tooltip="logo"/>
+						</FlexBox>
+					</VBox>
+				</uxap:heading>
+				<uxap:navigationActions>
+					<OverflowToolbarButton icon="sap-icon://nav-back" tooltip="Back" type="Emphasized" press="onNavigationsBackPress"/>
+				</uxap:navigationActions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:sections>
+			<!--Tab General -->
+			<uxap:ObjectPageSection id="iconTabGeneral" visible="true">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="General">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.general.TabGeneral" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<!--Tab Partners -->
+			<uxap:ObjectPageSection id="iconTabPartners">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Partners">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.TabPartners" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<!--Tab Carrier | Render form -->
+			<uxap:ObjectPageSection id="iconTabCarrier" visible="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection id="iconTabCarrierSub">
+						<uxap:blocks></uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<!--Tab International Options | Render form -->
+			<uxap:ObjectPageSection id="iconTabInternational" visible="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection id="iconTabInternationSub">
+						<uxap:blocks></uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<!--Tab Handling Units -->
+			<!--<uxap:ObjectPageSection id="iconTabHandlingUnits" visible="true">-->
+			<!--	<uxap:subSections>-->
+			<!--		<uxap:ObjectPageSubSection title="Handling Units">-->
+			<!--			<uxap:blocks>-->
+			<!--				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>-->
+			<!--			</uxap:blocks>-->
+			<!--		</uxap:ObjectPageSubSection>-->
+			<!--	</uxap:subSections>-->
+			<!--</uxap:ObjectPageSection>-->
+			<!--Tab HTS -->
+			<uxap:ObjectPageSection id="iconHTS">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="HTS">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.HTS.HTSDisplay" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

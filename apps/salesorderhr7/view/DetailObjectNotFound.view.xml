@@ -1,0 +1,3 @@
+<mvc:View controllerName="com.erpis.shiperp.salesorder.hr7.controller.BaseController" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<MessagePage id="page" title="{i18n>detailTitle}" text="{i18n>noObjectFoundText}" icon="sap-icon://product" description=""></MessagePage>
+</mvc:View>

@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.erpis.shiperp.sls.salesordersls.salesordersls",
+        "description": "Sales Order, SLS",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#salesordersls-Display",
+        "navigationComponentName": "com.erpis.shiperp.sls.salesordersls",
+        "intentSemanticObject": "salesordersls",
+        "intentAction": "Display",
+        "html5ApplicationName": "salesordersls",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "87093038-912d-43d6-861e-87b34db81e26-1686555337839"
+        ],
+        "contentPackages": [
+            "0b3e4981-ac6c-4822-9889-4fe979e3f999-1686565918523"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Sales Order",
+        "subtitle": "SLS",
+        "searchKeywords": "Sales Order,SLS",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Please select the Delivery Number want to track" contentWidth="600px">
+		<content>
+			<Table id="idTrack" items="{local>/aTrackShimentList}" class="border_lightgray_nobottom" mode="SingleSelectLeft">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Label text="Search: "></Label>
+						<SearchField placeholder="Delivery" search="onSearchTrack" width="15rem"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column vAlign="Middle" hAlign="Center">
+						<Text text="Delivery Number"/>
+					</Column>
+					<Column vAlign="Middle" hAlign="Center">
+						<Text text="Delivery Type"/>
+					</Column>
+					<Column vAlign="Middle" hAlign="End">
+						<Text text="Ship To"/>
+					</Column>
+					<Column vAlign="Middle" hAlign="End">
+						<Text text="Delivery Type Description"/>
+					</Column>
+					<Column vAlign="Middle" hAlign="End">
+						<Text text="Created On"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{local>Delivery}"></Text>
+							<Text text="{local>DeliveryType}"></Text>
+							<Text text="{local>ShipTo}"></Text>
+							<Text text="{local>DeliveryTypeDescription}"></Text>
+							<Text text="{local>CreatedOn}"></Text>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="Ok" type="Accept" press="onTrackShipment"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" type="Reject" press="onCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

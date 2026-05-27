@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Carrier-->
+	<Label text="{i18n>carrier}"/>
+	<ComboBox id="idCarrierCode" selectedKey="{local>/basic/pickup_details/carrier}" items="{/xSERPERPxRFP_Carrier}" change="onChangeCarrier"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"
+		required="{= ( ${local>/Mandatory} === 'DeliveryDocument' || ${local>/Mandatory} === 'ShipmentDocument' ) ? true : false }">
+		<core:Item key="{CarrierCode}" text="{Description}"></core:Item>
+	</ComboBox>
+	<!--Carrier Email-->
+	<Label text="{i18n>carrierEmail}"/>
+	<Input value="{local>/basic/pickup_details/carrierEmail}" placeholder="Carrier Email"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Carrier Phone-->
+	<Label text="{i18n>carrierPhone}"/>
+	<Input value="{local>/basic/pickup_details/carrierPhone}" placeholder="Carrier Phone"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Service-->
+	<Label text="{i18n>service}"/>
+	<ComboBox id="idService" selectedKey="{local>/basic/pickup_details/carrierService}" items="{ path: '/xSERPERPxRFP_SERVICE', length: 999}"
+		change="onChangeService" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }">
+		<core:Item key="{Service}" text="{Description}"></core:Item>
+	</ComboBox>
+	<!--Billing Option-->
+	<Label text="{i18n>billingOption}"/>
+	<ComboBox id="idBillingOption" selectedKey="{local>/basic/pickup_details/billingOption}" items="{/xSERPERPxRPF_BILLOPT}"
+		change="onChangeBillingOption" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }">
+		<core:Item key="{Code}" text="{Description}"></core:Item>
+	</ComboBox>
+	<!--Text-->
+	<Label text="{i18n>text}"/>
+	<Input value="{local>/basic/pickup_details/text}" placeholder="Text"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+</core:FragmentDefinition>

@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
+	<Dialog title="Packing Overview" contentWidth="1100px" contentHeight="auto" stretch="false" verticalScrolling="false"
+		horizontalScrolling="false">
+		<content>
+			<VBox class="sapUiSmallMargin sapUiResponsiveMargin">
+				<table:TreeTable selectionMode="MultiToggle" id="idPackOverViewTab" visibleRowCount="5" columnHeaderVisible="true"
+					rows="{path:'local>/PackingOverviewList', parameters: {arrayNames:['Children'], numberOfExpandedLevels: 4} }" enableSelectAll="false"
+					visibleRowCountMode="Interactive" class="border_lightgray_nobottom">
+					<table:columns>
+						<table:Column width="10rem">
+							<Label text="Handling Unit"/>
+							<table:template>
+								<FlexBox direction="Column">
+									<Label text="{parts:['local>handlingUnit', 'local>itemNumber'], formatter: '.formatter.displayAndRemoveLeadingZero'}"
+										design="{= ${local>state} !== undefined ? ${local>state} : 'Standard' }" visible="{= ${local>outerMost} !== 'Success' ? true : false }"/>
+									<ObjectStatus text="{parts:['local>handlingUnit', 'local>item_number'], formatter: '.formatter.displayAndRemoveLeadingZero'}"
+										state="{local>outerMost}" visible="{= ${local>outerMost} === 'Success' ? true : false }" icon="sap-icon://product"/>
+								</FlexBox>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Material"/>
+							<table:template>
+								<Text text="{path: 'local>material', formatter: '.formatter.removeLeadingZero'}" wrapping="false" tooltip="{path: 'local>material'}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Material Desc"/>
+							<table:template>
+								<Text text="{local>materialDescription}" tooltip="{local>materialDescription}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Delivery"/>
+							<table:template>
+								<Text text="{local>documentNumber}" tooltip="{local>documentNumber}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Delivery Item"/>
+							<table:template>
+								<Text text="{path: 'local>itemNumber', formatter: '.formatter.displayEmptyIfZero'}" tooltip="{local>itemNumber}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Quantity"/>
+							<table:template>
+								<Text text="{path: 'local>quantity', formatter: '.formatter.displayEmptyIfZeroInt'}" tooltip="{local>quantity}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Unit"/>
+							<table:template>
+								<Text text="{local>unit}" tooltip="{local>unit}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="NMFC Code"/>
+							<table:template>
+								<Input id="idNMFCCode" value="{local>nmfcCode}"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="auto">
+							<Label text="Freight Class"/>
+							<table:template>
+								<Input id="idFreightClass" value="{local>freightClass}"/>
+							</table:template>
+						</table:Column>
+					</table:columns>
+				</table:TreeTable>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button id="btnUnpackItem" press="onUnpackItemPackingOverviewDialog" text="Unpack"/>
+		</beginButton>
+		<endButton>
+			<Button press="onClosePackingOverviewDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core">
+	<!--<DateRangeSelection id="DRS2" dateValue="" secondDateValue="" minDate="" maxDate="" change="handleChange"/>-->
+	<smartfilterbar:ControlConfiguration groupId="GlobalFilters" key="CustomerID" label="Sales Order ID (Extension)"
+		visibleInAdvancedArea="false">
+		<smartfilterbar:customControl>
+			<Input id="SalesOrderID" type="Text"/>
+		</smartfilterbar:customControl>
+	</smartfilterbar:ControlConfiguration>
+</core:FragmentDefinition>

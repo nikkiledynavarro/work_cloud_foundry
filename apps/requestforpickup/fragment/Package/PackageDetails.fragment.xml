@@ -1,0 +1,121 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<VBox>
+		<!--<Toolbar>-->
+		<!--	<ToolbarSpacer/>-->
+		<!--	<SearchField width="20%" showRefreshButton="true" id="searchInput" search="onSearchItem"/>-->
+		<!--</Toolbar>-->
+		<Table id="packageDetails" selectionChange="onSelectionChange" fixedLayout="true" items="{path: 'local>/PackageDetails'}"
+			mode="SingleSelectLeft" growing="true" keyboardMode="Edit" updateFinished="onUpdateTable" growingThreshold="99999"
+			class="border_lightgray_nobottom">
+			<headerToolbar>
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://add" tooltip="Add" class="sapUiTinyMarginEnd" press="onAddPress"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+					<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/EnabledButton} === true) ? true : false }" icon="sap-icon://edit" tooltip="Edit"
+						class="sapUiTinyMarginEnd" press="onEditPress"/>
+					<Button icon="sap-icon://delete" tooltip="Delete" class="sapUiTinyMarginEnd" press="onDeletePress"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/EnabledButton} === true) ? true : false }"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<!--Hu Number-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>huNumber}"/>
+					</HBox>
+				</Column>
+				<!--Packing Material-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>packingMaterial}"/>
+					</HBox>
+				</Column>
+				<!--Pallet Count-->
+				<!--<Column hAlign="Center" width="auto">-->
+				<!--	<HBox alignItems="Center">-->
+				<!--		<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>-->
+				<!--		<Text text="{i18n>palletCount}"/>-->
+				<!--	</HBox>-->
+				<!--</Column>-->
+				<!--Piece Count-->
+				<!--<Column hAlign="Center" width="auto">-->
+				<!--	<HBox alignItems="Center">-->
+				<!--		<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>-->
+				<!--		<Text text="{i18n>pieceCount}"/>-->
+				<!--	</HBox>-->
+				<!--</Column>-->
+				<!--Weight-->
+				<!--<Column hAlign="Center" width="auto">-->
+				<!--	<HBox alignItems="Center">-->
+				<!--		<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>-->
+				<!--		<Text text="{i18n>weight}"/>-->
+				<!--	</HBox>-->
+				<!--</Column>-->
+				<!--UOM-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>uom}"/>
+					</HBox>
+				</Column>
+				<!--Lenght-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>lenght}"/>
+					</HBox>
+				</Column>
+				<!--Width-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>width}"/>
+					</HBox>
+				</Column>
+				<!--Height-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>height}"/>
+					</HBox>
+				</Column>
+				<!-- UoM-->
+				<Column hAlign="Center" width="auto">
+					<HBox alignItems="Center">
+						<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+						<Text text="{i18n>uom}"/>
+					</HBox>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<!--hu Number-->
+						<Text text="{local>huNumber}" wrapping="false"/>
+						<!--packing Material-->
+						<Text text="{local>packingMaterial}" wrapping="false"/>
+						<!--pallet Count-->
+						<!--<Text text="{local>palletCount}" wrapping="false"/>-->
+						<!--piece Count-->
+						<!--<Text text="{local>pieceCount}" wrapping="false"/>-->
+						<!--weight-->
+						<!--<Text text="{local>weight}" wrapping="false"/>-->
+						<!-- Weight UoM-->
+						<Text text="{local>weightUoM}" wrapping="false"/>
+						<!--length-->
+						<Text text="{local>length}" wrapping="false"/>
+						<!--width-->
+						<Text text="{local>width}" wrapping="false"/>
+						<!--height-->
+						<Text text="{local>height}" wrapping="false"/>
+						<!--dimensions UoM-->
+						<Text text="{local>dimensionsUoM}" wrapping="false"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+</core:FragmentDefinition>

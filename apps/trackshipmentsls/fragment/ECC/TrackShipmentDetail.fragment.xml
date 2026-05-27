@@ -1,0 +1,127 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+	<Dialog contentWidth="100%" contentHeight="100%">
+		<customHeader class="sapUiContentPadding">
+			<Toolbar>
+				<Title text="Tracking Information"></Title>
+				<ToolbarSpacer></ToolbarSpacer>
+				<Button icon="sap-icon://sys-cancel" press="onButtonClose"></Button>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<HBox justifyContent="End" class="sapUiSmallMarginEnd">
+				<Button icon="sap-icon://print" text="POD" press="onPrintPODDetail"/>
+			</HBox>
+			<Popover contentWidth="100%" contentHeight="800px" class="sapUiSmallMargin sapUiContentPadding" showHeader="false" verticalScrolling="false">
+				<form:SimpleForm title="Tracking Details." visible="{=${local>/firstObject/Trktext} === 'Delivered' ? true : false }">
+					<form:toolbar>
+						<Toolbar>
+							<core:Icon src="sap-icon://shipping-status" size="25px" color="Contrast"/>
+							<Title text="Tracking Details"/>
+							<ToolbarSpacer/>
+							<Title text="Status: {local>/firstObject/Trktext}"></Title>
+						</Toolbar>
+					</form:toolbar>
+					<form:content>
+						<VBox width="200px">
+							<Label text="Status Details" design="Bold"></Label>
+							<ObjectStatus text="{local>/firstObject/Trktext}" visible="{=${local>/firstObject/Trktext} ? true : false }"></ObjectStatus>
+							<ObjectStatus text="{path: 'local>/firstObject/Datum', formatter: '.formatter.formatDate'}"
+								visible="{=${local>/firstObject/Datum} ? true : false }"></ObjectStatus>
+							<ObjectStatus text="{path: 'local>/firstObject/Deliverydate' , formatter: '.formatter.formatDeliverydate'}" visible="{=${local>/firstObject/Deliverydate} ? true : false }"></ObjectStatus>
+							<ObjectStatus title="At"
+								text="{path: 'local>/firstObject/Deliverytime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss' }}"
+								visible="{=${local>/firstObject/Deliverytime} ? true : false }"></ObjectStatus>
+						</VBox>
+						<VBox width="200px">
+							<Label text="Delivered To" design="Bold"></Label>
+							<ObjectStatus title="Received By" text="{local>/firstObject/Signedby}" visible="{=${local>/firstObject/Signedby} ? true : false }"></ObjectStatus>
+							<ObjectStatus text="30004 Alpharetta {local>/firstObject/Land1}" visible="{=${local>/firstObject/Land1} ? true : false }"></ObjectStatus>
+						</VBox>
+						<VBox>
+							<Label text="Tracking Information" design="Bold"></Label>
+							<ObjectStatus title="Tracking Number" text="{local>/firstObject/Trackingnum}" visible="{=${local>/firstObject/Trackingnum} ? true : false }"></ObjectStatus>
+							<ObjectStatus title="Carrier" text="{local>/firstObject/Carrier}" visible="{=${local>/firstObject/Carrier} ? true : false }"></ObjectStatus>
+							<ObjectStatus title="Service" text="{local>/firstObject/Service}" visible="{=${local>/firstObject/Service} ? true : false }"></ObjectStatus>
+							<ObjectStatus title="Shipped/ Billed On" text="{local>/firstObject/Deliverydate}"
+								visible="{=${local>/firstObject/Deliverydate} ? true : false }"></ObjectStatus>
+						</VBox>
+					</form:content>
+				</form:SimpleForm>
+				<form:SimpleForm >
+					<form:toolbar>
+						<Toolbar>
+							<core:Icon src="sap-icon://sys-find" size="25px" color="Contrast"/>
+							<Title text="Shipment Details"/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content>
+						<VBox>
+							<Table id="idShipmentDetail1" items="{path: 'local>/ShipmentDetailFinalData'}">
+								<headerToolbar>
+									<Toolbar>
+										<Label text="Show"></Label>
+										<ComboBox id="numSelected1" items="{ path: 'modelDetail>/shipmentDetail', sorter: { path: 'text' } }"
+											selectedKey="{local>/PaginationDetail/nPage}" change="onChangeNumDetail" width="70px">
+											<core:Item key="{modelDetail>}" text="{modelDetail>}"/>
+										</ComboBox>
+										<Label text="entries"></Label>
+										<ToolbarSpacer/>
+										<Label text="Search: " visible="false"></Label>
+										<SearchField placeholder="" showSearchButton="false" width="15rem" visible="false"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<ObjectStatus text="Status"></ObjectStatus>
+									</Column>
+									<Column hAlign="Center">
+										<ObjectStatus icon="sap-icon://sort" text="Date"></ObjectStatus>
+									</Column>
+									<Column hAlign="Center">
+										<ObjectStatus icon="sap-icon://sort" text="Time"></ObjectStatus>
+									</Column>
+									<Column hAlign="Center">
+										<ObjectStatus icon="sap-icon://sort" text="Location"></ObjectStatus>
+									</Column>
+									<Column hAlign="End">
+										<ObjectStatus icon="sap-icon://sort" text=""></ObjectStatus>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{local>Trktext}"></Text>
+											<Text text="{path: 'local>Datum' , formatter: '.formatter.formatDeliverydate'}"></Text>
+											<Text text="{path: 'local>Deliverytime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss' }}"></Text>
+											<Text text="{local>Ort01}"></Text>
+											<Text text="{local>Regio}"></Text>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<FlexBox justifyContent="End" alignItems="Center" class="sapUiTinyMarginTop" visible="{local>/showPaginationDetail}">
+								<Button text="Previous" tooltip="Back" press="onNavBackDetailButtonPress"
+									enabled="{=${local>/PaginationDetail/ncurrNum} !== 0 &amp;&amp; ${local>/PaginationDetail/ncurrNum} !== 1}">
+									<layoutData>
+										<FlexItemData growFactor="0" maxWidth="auto"/>
+									</layoutData>
+								</Button>
+								<Button type="Emphasized" text="{local>/PaginationDetail/ncurrNum}" tooltip="Current Page">
+									<layoutData>
+										<FlexItemData growFactor="0" maxWidth="auto"/>
+									</layoutData>
+								</Button>
+								<Button text="Next" tooltip="Next" press="onNavNextDetailButtonPress"
+									enabled="{=${local>/PaginationDetail/ncurrNum} ===${local>/PaginationDetail/Total} ? false : true }">
+									<layoutData>
+										<FlexItemData growFactor="0" maxWidth="auto"/>
+									</layoutData>
+								</Button>
+							</FlexBox>
+						</VBox>
+					</form:content>
+				</form:SimpleForm>
+			</Popover>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

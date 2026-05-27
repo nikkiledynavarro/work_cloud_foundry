@@ -1,0 +1,95 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified">
+	<Dialog title="{i18n>etdDialogTitle}" class="sapUiContentPadding" contentWidth="1200px">
+		<content>
+			<IconTabBar id="idIconTabBarFiori2" select="onSelectIconTabETDUpload" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="{i18n>etdUploadImageTab}" key="Image">
+						<Table class="sapUiMediumMarginBottom" fixedLayout="false" alternateRowColors="true" items="{local>/ETDImageIdList}" itemPress="onETDImagePress">
+							<columns>
+								<Column>
+									<Label text="Image ID"/>
+								</Column>
+								<Column>
+									<Label text="Usage"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Navigation">
+									<cells>
+										<Text text="{local>ImageID}"/>
+										<Text text="{local>Usage}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<Label text="{i18n>etdUploadImageImageID}" required="true"/>
+								<!--<Input value="{local>/ETDUpload/ImageID}" editable="false"/>-->
+								<Select items="{path:'local>/ETDImageIds',templateShareable: true}" selectedKey="{local>/ETDUpload/ImageID}"
+									change="onETDImageImageIDChange" forceSelection="false">
+									<items>
+										<core:Item key="{local>ImageID}" text="{local>ImageID}"/>
+									</items>
+								</Select>
+								<Label text="{i18n>etdUploadImageFile}" required="true"/>
+								<u:FileUploader id="imageUploader" fileType="jpg,png" fileSizeExceed="onCheckSizeImageUpload" typeMissmatch="onTypeMissMatchImage"
+									tooltip="{i18n>etdUploadImageFileTooltip}" change="handleChangeImage" uploadOnChange="false"/>
+								<Label text="{i18n>etdUploadImageUsage}" required="true"/>
+								<Select items="{path:'local>/ETDImageUsage',templateShareable: true}" selectedKey="{local>/ETDUpload/Usage}" change="onETDImageUsageChange"
+									forceSelection="false">
+									<items>
+										<core:Item key="{local>key}" text="{local>text}"/>
+									</items>
+								</Select>
+								<!-- comment out temporary-->
+								<!--<Label text="{i18n>etdUploadImageUploadType}" required="true"/>-->
+								<!--<Select items="{path:'local>/ETDImageUploadType',templateShareable: true}" selectedKey="{local>/ETDUpload/UploadType}"-->
+								<!--	change="onETDImageUploadTypeChange" forceSelection="false">-->
+								<!--	<items>-->
+								<!--		<core:Item key="{local>key}" text="{local>text}"/>-->
+								<!--	</items>-->
+								<!--</Select>-->
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+					<IconTabFilter text="{i18n>etdUploadDocTab}" key="Document">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<Label text="{i18n>etdUploadDocFile}" required="true"/>
+								<u:FileUploader id="docUploader" fileType="doc,docx,pdf,xls,xlsx" typeMissmatch="onTypeMissMatchDoc"
+									tooltip="{i18n>etdUploadDocFileTooltip}" change="handleChangeDoc"/>
+								<Label text="{i18n>etdUploadDocShippingPoint}" required="true"/>
+								<Select items="{/xSERPERPxI_TVST}" selectedKey="{local>/ETDUpload/ShippingPoint}" forceSelection="false">
+									<items>
+										<core:Item key="{Description}" text="{ShippingPoint}"/>
+									</items>
+								</Select>
+								<Label text="{i18n>etdUploadDocCustomerReference}" required="true"/>
+								<Input value="{local>/ETDUpload/CustomerReference}"/>
+								<Label text="{i18n>etdUploadDocShippingDocumentType}" required="true"/>
+								<Select items="{path:'local>/ETDDocShippingDocType',templateShareable: true}" selectedKey="{local>/ETDUpload/ShippingDocumentType}"
+									forceSelection="false">
+									<items>
+										<core:Item key="{local>key}" text="{local>text}"/>
+									</items>
+								</Select>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<beginButton>
+			<Button press="onSubmitDataETDUploadDialog" text="{i18n>etdDialogSubmitButton}"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseETDUploadDialog" text="{i18n>etdDialogCloseButton}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,115 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.requestforpickup.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:DynamicSideContent id="dsc" showSideContent="false" sideContentPosition="Begin" sideContentVisibility="ShowAboveL">
+		<App id="idAppControl">
+			<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
+				preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true" selectedSection="idTabSection">
+				<!-- uxap: Header Title -->
+				<uxap:headerTitle>
+					<uxap:ObjectPageDynamicHeaderTitle>
+						<uxap:heading>
+							<VBox>
+								<FlexBox alignItems="Center">
+									<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+									<Select id="idInputType" width="12rem" class="margin_right_5px" change="onChangeInputType">
+										<layoutData>
+											<OverflowToolbarLayoutData priority="NeverOverflow"/>
+										</layoutData>
+										<items>
+											<core:Item text="Delivery Document" key="DeliveryDocument"></core:Item>
+											<core:Item text="Shipment Document" key="ShipmentDocument"></core:Item>
+											<core:Item text="Manual" key="Manual"></core:Item>
+											<!--Enhancement to WOS-->
+											<core:Item text="PO/ STO" key="PO/STO"></core:Item>
+										</items>
+									</Select>
+									<!--Enhancement to WOS-->
+									<Input submit="onScanDocNumber" id="txtId" width="12rem" placeholder="Enter Number" class="margin_right_5px"/>
+									<Button icon="sap-icon://search" tooltip="Search" press="onScanDocNumber" class="margin_right_5px" width="70px" type="Emphasized"/>
+									<Button icon="sap-icon://example" tooltip="Consolidation"
+										enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? false : true }" press="onConsolidation"
+										class="margin_right_5px" width="30px" type="Accept"/>
+									<Button icon="sap-icon://synchronize" tooltip="Reset" press="onResetData" class="margin_right_5px" width="70px"/>
+								</FlexBox>
+							</VBox>
+						</uxap:heading>
+						<uxap:navigationActions>
+							<OverflowToolbarButton icon="sap-icon://sys-cancel" tooltip="Cancel Pickup Request" type="Reject" press="onCrossNavigateCancelPR"
+								app:crossNavigate="#cancelpickuprequest-Display"/>
+						</uxap:navigationActions>
+					</uxap:ObjectPageDynamicHeaderTitle>
+				</uxap:headerTitle>
+				<!-- uxap:section -->
+				<uxap:sections>
+					<!-- Pickup Details -->
+					<uxap:ObjectPageSection id="idPickup">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="{i18n>pickupDetails}">
+								<uxap:blocks>
+									<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.requestforpickup.fragment.TabPickupDetails" type="XML"/>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<!-- Pickup Address -->
+					<uxap:ObjectPageSection id="idTabPickupAddress">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="{i18n>pickupAddress}">
+								<uxap:blocks>
+									<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.requestforpickup.fragment.TabPickupAddress" type="XML"/>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<!-- Ship To Address -->
+					<uxap:ObjectPageSection id="idTabShipToAddress">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="{i18n>shipToAddress}">
+								<uxap:blocks>
+									<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.requestforpickup.fragment.TabShipToAddress" type="XML"/>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<!--Carrier more option-->
+					<uxap:ObjectPageSection id="iconTabCarMoreOpt" visible="false">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection id="iconTabCarMoreOptSub">
+								<uxap:blocks></uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<!-- Pickup Details -->
+					<uxap:ObjectPageSection id="idPackageDetails">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="{i18n>packageDetails}">
+								<uxap:blocks>
+									<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.requestforpickup.fragment.Package.PackageDetails" type="XML"/>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<!-- Total -->
+					<uxap:ObjectPageSection id="idTotal">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection>
+								<uxap:blocks>
+									<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.requestforpickup.fragment.Total.TotalFields" type="XML"/>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+				</uxap:sections>
+				<uxap:footer>
+					<OverflowToolbar id="otbFooter">
+						<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+							press="handleMessagePopoverPress"/>
+						<ToolbarSpacer/>
+						<Button id="idShipmentBtn" press="onSubmitRFP" enabled="true" type="Accept" text="RFP"/>
+					</OverflowToolbar>
+				</uxap:footer>
+			</uxap:ObjectPageLayout>
+		</App>
+	</l:DynamicSideContent>
+</mvc:View>

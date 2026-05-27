@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<IconTabBar id="idTabBarPartner" select="onSelectGeneral" class="sapUiResponsiveContentPadding">
+		<items>
+			<!--Ship-From -->
+			<IconTabFilter text="Ship-From" key="ShipFrom">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.ShipFrom" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+			<!--Ship-To-->
+			<IconTabFilter text="Ship-To" key="ShipTo">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.ShipTo" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+			<!--Sold-To-->
+			<IconTabFilter text="Sold-To" key="SoldTo">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.SoldTo" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator id="idTabSeparatorImporter" visible="false"/>
+			<!-- Importer-->
+			<IconTabFilter id="idTabImporterFilter" visible="false" text="Importer" key="Importer">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.Importer" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>

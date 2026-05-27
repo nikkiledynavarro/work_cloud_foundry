@@ -1,0 +1,167 @@
+<mvc:View controllerName="com.erpis.shiperp.parcel.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true"
+		selectedSection="iconTabPacking">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:heading>
+					<VBox>
+						<FlexBox alignItems="Center">
+							<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+							<Select items="{/xSERPERPxI_PCINPUT}" id="cbInputType" width="auto" class="margin_right_5px" change="onInputTypeChange">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+								<items>
+									<core:Item text="{Description}" key="{ShipTypeID}"></core:Item>
+								</items>
+							</Select>
+							<MultiInput type="Number" submit="onSubmit" id="txtId" width="12rem" placeholder="Enter Number" class="margin_right_5px"
+								showValueHelp="false">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</MultiInput>
+							<Button icon="sap-icon://reset" tooltip="Reset Data" type="Emphasized" press="onResetData" class="margin_right_5px"/>
+							<Button id="btnHTS" icon="sap-icon://status-critical" tooltip="HTS" type="Reject" press="onOpenHTS" class="margin_right_5px"/>
+							<CheckBox text="{i18n>isBreakBulk}" select="onCheckBreakBulk" enabled="{= ${local>/basic} ? true : false }"
+								selected="{local>/basic/shipment_flags/breakbulk}"/>
+						</FlexBox>
+						<FlexBox width="auto" justifyContent="Start" alignItems="Center">
+							<ObjectStatus visible="{= ${local>/basic/shipment_flags/HazmatExist} ? true : false }" text="Hazardous Material" state="Error"
+								icon="sap-icon://alert" class="hazardousTitle"/>
+						</FlexBox>
+					</VBox>
+				</uxap:heading>
+				<uxap:actions>
+					<OverflowToolbarButton icon="sap-icon://lead" enabled="{= ${local>/basic} ? true : false }" press="onSingleRateClick" tooltip="Single Rate"/>
+					<OverflowToolbarButton icon="sap-icon://collections-insight" enabled="{= ${local>/basic} ? true : false }" press="onRateShopClick"
+						tooltip="Rate Shop"/>
+					<OverflowToolbarButton icon="sap-icon://paid-leave" enabled="{= ${local>/basic} ? true : false }" press="onOptimizationClick"
+						tooltip="Optimization"/>
+					<OverflowToolbarButton id="idReprintBtn" press="onReprint" icon="sap-icon://print" tooltip="Reprint"/>
+					<OverflowToolbarButton enabled="{= ${local>/basic} ? true : false }" icon="sap-icon://full-screen"
+						tooltip="Open Packing Section in advance mode" press="onOpenAdvancedPackingDialog"/>
+				</uxap:actions>
+				<uxap:navigationActions>
+					<OverflowToolbarButton icon="sap-icon://bbyd-dashboard" tooltip="Open EOD App" type="Emphasized" press="onCrossNavigate"
+						app:crossNavigate="#EoD-maintain"/>
+					<OverflowToolbarButton icon="sap-icon://clinical-tast-tracker" tooltip="Open Track Shipment App" type="Accept" press="onCrossNavigate"
+						app:crossNavigate="#TrackShipment-track"/>
+					<OverflowToolbarButton icon="sap-icon://sys-cancel" tooltip="Open Cancel App" type="Reject" press="onCrossNavigate"
+						app:crossNavigate="#Cancel-display"/>
+				</uxap:navigationActions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<l:HorizontalLayout allowWrapping="true">
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<MessageStrip text="{local>/basic/carrier_data/CarrierName} - {local>/Header/ServiceName}" visible="{= ${local>/basic} ? true : false }"
+						id="mstripCarrier" type="Warning"></MessageStrip>
+				</l:VerticalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<MessageStrip visible="{= ${local>/basic} ? true : false }" id="mstripBilling" type="Warning"
+						text="{parts:['local>/basic/payment/billing_option', 'local>/Header/BillingOption', 'local>/basic/payment/thirdpartyacct/account', 'local>/basic/payment/thirdpartyacct/zip'], formatter: '.formatter.formatBillingHeader'}"></MessageStrip>
+				</l:VerticalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<MessageStrip visible="{= ${local>/basic} ? true : false }" type="Warning"
+						text="{local>/basic/partners/shipto/address/name1} - {local>/basic/partners/shipto/address/city} - {local>/Header/ShipToState} - {local>/basic/partners/shipto/address/postalcode} - {local>/Header/ShipToCountry}"></MessageStrip>
+				</l:VerticalLayout>
+			</l:HorizontalLayout>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection id="iconTabPacking">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Packing">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parcel.fragment.packing.ItemsPacking" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection>
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Parcel">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.TabParcel" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabCarrier" visible="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection id="iconTabCarrierSub">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.TabCarrier" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabInternational" visible="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="International">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.TabInternational" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection>
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Ship From">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressShipFrom" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection>
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Sold to">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressSoldTo" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabImporter" visible="false">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Importer">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressImporter" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabPreviousShipment">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Previous Shipment">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.TabPreviousShipment" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabUltimateConsignee">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Ultimate Consignee" visible="{= ${local>/basic/carrier_data/carrier_options/ups/opt01/Accesspoint} === true ? true : false }">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.TabUltimateConsignee" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="idShipmentBtn" press="onExecute" icon="sap-icon://shipping-status"
+					enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }" type="Accept" text="Ship"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

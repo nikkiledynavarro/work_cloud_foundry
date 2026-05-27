@@ -1,0 +1,46 @@
+{
+	"fileName": "id_1603925719412_71_moveActions",
+	"fileType": "change",
+	"changeType": "moveActions",
+	"moduleName": "",
+	"reference": "zfreightorders.Component",
+	"packageName": "$TMP",
+	"content": {
+		"movedElements": [{
+			"selector": {
+				"id": "zfreightorders::sap.suite.ui.generic.template.ListReport.view.ListReport::xSERPTMxI_FRTORDER--template::Share",
+				"idIsLocal": false
+			},
+			"sourceIndex": 1,
+			"targetIndex": 0
+		}]
+	},
+	"selector": {
+		"id": "zfreightorders::sap.suite.ui.generic.template.ListReport.view.ListReport::xSERPTMxI_FRTORDER--template:::ListReportPage:::DynamicPageTitle",
+		"idIsLocal": false
+	},
+	"layer": "CUSTOMER_BASE",
+	"texts": {},
+	"namespace": "apps/zfreightorders/changes/",
+	"projectId": "zfreightorders",
+	"creation": "2020-10-28T22:55:42.471Z",
+	"originalLanguage": "EN",
+	"support": {
+		"generator": "Change.createInitialFileContent",
+		"service": "",
+		"user": "",
+		"sapui5Version": "1.82.2",
+		"sourceChangeFileName": "",
+		"compositeCommand": ""
+	},
+	"oDataInformation": {},
+	"dependentSelector": {},
+	"validAppVersions": {
+		"creation": "1.0.0",
+		"from": "1.0.0",
+		"to": "1.0.0"
+	},
+	"jsOnly": false,
+	"variantReference": "",
+	"appDescriptorChange": false
+}

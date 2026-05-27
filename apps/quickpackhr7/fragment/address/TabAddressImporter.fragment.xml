@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Importer"></core:Title>
+			<Label text="Name"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Name" tooltip="Name" value="{local>/Address/IMPORTER/name1}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Attention" tooltip="Attention"
+				value="{local>/Address/IMPORTER/name2}"></Input>
+			<Label text="Address 1/2"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 1" tooltip="Address 1"
+				value="{local>/Address/IMPORTER/stras}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 2" tooltip="Address 2"
+				value="{local>/Address/IMPORTER/stras}"></Input>
+			<Label text="Address 3/4"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 3" tooltip="Address 3"
+				value="{local>/Address/IMPORTER/stras}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 4" tooltip="Address 4"
+				value="{local>/Address/IMPORTER/stras}"></Input>
+			<Label text="Email"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Email" tooltip="Email" value="{local>/Address/IMPORTER/email}"></Input>
+			<Label text="Phone"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Phone" tooltip="Phone" value="{local>/Address/IMPORTER/telf1}"></Input>
+			<core:Title text="Location"></core:Title>
+			<Label text="Country"/>
+			<ComboBox selectedKey="{local>/Address/IMPORTER/land1}" tooltip="Country" items="{path: '/xSERPERPxI_PCCNTR', length: 999}"
+				enabled="{= !${local>/isAllTrackShipped} ? true : false}" app:nextUpdate="slImporterState">
+				<items>
+					<core:Item text="{Name}" key="{Country}"/>
+				</items>
+			</ComboBox>
+			<Label text="State"/>
+			<ComboBox id="slImporterState" tooltip="State" selectedKey="{local>/Address/IMPORTER/regio}"
+				enabled="{= !${local>/isAllTrackShipped} ? true : false}" items="{path: '/xSERPERPxI_PCSTATE', length: 999}">
+				<items>
+					<core:Item text="{Description}" key="{Region}"/>
+				</items>
+			</ComboBox>
+			<Label text="City"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="City" value="{local>/Address/IMPORTER/ort01}"></Input>
+			<Label text="Postal"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Postal Code" value="{local>/Address/IMPORTER/pstlz}"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="General Info"></core:Title>
+			<Label text="Name / Attention"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Name" tooltip="Name" value="{local>/Address/SHIPTO/name1}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Attention" tooltip="Attention"
+				value="{local>/Address/SHIPTO/name2}"></Input>
+			<Label text="Address 1/2"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 1" tooltip="Address 1"
+				value="{local>/Address/SHIPTO/stras}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 2" tooltip="Address 2"
+				value="{local>/Address/SHIPTO/strs2}"></Input>
+			<Label text="Address 3/4"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 3" tooltip="Address 3"
+				value="{local>/Address/SHIPTO/street3}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Address 4" tooltip="Address 4"
+				value="{local>/Address/SHIPTO/street4}"></Input>
+			<Label text="Customer"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Customer ID" tooltip="Customer ID"
+				value="{local>/basic/partners/shipto/Customerid}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Email" tooltip="Email" value="{local>/Address/SHIPTO/email}"></Input>
+			<Label text="Phone/Fax"></Label>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Phone" tooltip="Phone" value="{local>/Address/SHIPTO/telf1}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Fax" tooltip="Fax" value="{local>/Address/SHIPTO/telfx}"></Input>
+			<Label text="Fed / State TaxID"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Fed TaxID" tooltip="Fed TaxID"
+				value="{local>/basic/partners/shipto/FedTaxId}"></Input>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="State TaxID" tooltip="State TaxID"
+				value="{local>/basic/partners/shipto/StateTaxId}"></Input>
+			<core:Title text="Location"></core:Title>
+			<Label text="Country / Region"/>
+			<ComboBox id="cbShipToCountry" selectedKey="{local>/Address/SHIPTO/land1}" tooltip="Country" change="onUpdateDomestic"
+				enabled="{= !${local>/isAllTrackShipped} ? true : false}" items="{path: '/xSERPERPxI_PCCNTR', length: 999}" app:nextUpdate="slShipToState">
+				<items>
+					<core:Item text="{Name}" key="{Country}"/>
+				</items>
+			</ComboBox>
+			<ComboBox id="slShipToState" tooltip="State" change="onUpdateDomestic" items="{path: '/xSERPERPxI_PCSTATE', length: 999}"
+				enabled="{= !${local>/isAllTrackShipped} ? true : false}" selectedKey="{local>/Address/SHIPTO/regio}">
+				<items>
+					<core:Item text="{Description}" key="{Region}"/>
+				</items>
+			</ComboBox>
+			<Label text="City"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="City" value="{local>/Address/SHIPTO/ort01}"></Input>
+			<Label text="Postal"/>
+			<Input enabled="{= !${local>/isAllTrackShipped} ? true : false}" placeholder="Postal Code" value="{local>/Address/SHIPTO/pstlz}"/>
+			<Label></Label>
+			<CheckBox text="Related Party" selected="{local>/basic/partners/shipto/related_party}"/>
+			<Label></Label>
+			<Button text="{i18n>validateAddr}" press="onValidateAddressPress" type="Emphasized" enabled="{= ${local>/basic} ? true : false }"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

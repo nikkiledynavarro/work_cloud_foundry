@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<core:Title text=""></core:Title>
+	<!--Created by-->
+	<Label text="Created By"/>
+	<Input id="idCreateBy" value="{local>/basic/general/additional_info/Ernam}"
+		enabled="false"/>
+	<!--Create Date-->
+	<Label text="Create Date"/>
+	<DatePicker id="idCreateDate" value="{path:'local>/basic/general/additional_info/Erdat', formatter: '.formatter.formatDateTime'}"
+		valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+	<!--Create time-->
+	<Label text="Create Time"/>
+	<TimePicker id="idCreateTime" value="{path:'local>/basic/general/additional_info/Erzet', formatter: '.formatter.formatTime'}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"
+		enabled="false"/>
+	<!--Last changed by-->
+	<Label text="Last Changed By"/>
+	<Input id="idLastChangedBy" value="{local>/basic/general/additional_info/Aenam}"
+		enabled="false"/>
+	<!--Last changed date-->
+	<Label text="Last Changed Date/ Last Changed Time"/>
+	<DatePicker id="idLastChangedDate" value="{path:'local>/basic/general/additional_info/Aedat', formatter: '.formatter.formatDateTime'}"
+		valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+	<!--Last changed time-->
+	<TimePicker id="idLastChangedTime" value="{path:'local>/basic/general/additional_info/Aezet', formatter: '.formatter.formatTime'}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"
+		enabled="false"/>
+	<!--Cancelled by-->
+	<Label text="Cancelled By"/>
+	<Input id="idCancelledBy" value="{local>/basic/general/additional_info/CancelBy}"
+		enabled="false"/>
+	<core:Title text=""></core:Title>
+	<!--Cancelled date-->
+	<Label text="Cancelled Date"/>
+	<DatePicker id="idCancelledDate" value="{path:'local>/basic/general/additional_info/CancelDate', formatter: '.formatter.formatDateTime'}"
+		valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+	<!--Cancel time-->
+	<Label text="Cancelled Time"/>
+	<TimePicker id="idCancelledTime" value="{path:'local>/basic/general/additional_info/CancelTime', formatter: '.formatter.formatTime'}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"
+		enabled="false"/>
+	<!--Filed by-->
+	<Label text="Filed By"/>
+	<Input id="idFiledBy" value="{local>/basic/general/additional_info/FileBy}"
+		enabled="false"/>
+	<!--Filing date-->
+	<Label text="Filing Date"/>
+	<DatePicker id="idFilingDate" value="{path:'local>/basic/general/additional_info/FileDate', formatter: '.formatter.formatDateTime'}"
+		valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+	<!--Filing time-->
+	<Label text="Filing Time"/>
+	<TimePicker id="idFilingTime" value="{path:'local>/basic/general/additional_info/FileTime', formatter: '.formatter.formatTime'}"
+		valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"
+		enabled="false"/>
+	<!--Filed by email-->
+	<Label text="Filled By Email"/>
+	<Input id="idFiledByEmail" value="{local>/basic/general/additional_info/FilerEmail}"
+		enabled="false"/>
+</core:FragmentDefinition>

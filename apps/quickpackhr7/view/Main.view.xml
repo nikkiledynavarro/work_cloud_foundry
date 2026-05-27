@@ -1,0 +1,166 @@
+<mvc:View controllerName="com.erpis.shiperp.quickpack.hr7.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true"
+		selectedSection="iconTabPacking">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:heading>
+					<VBox>
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem" tooltip="ShipErp Logo"/>
+						<FlexBox fitContainer="true" wrap="Wrap">
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="4"
+								class="formAlgLabelLeft" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1"
+								columnsM="1" singleContainerFullSize="false">
+								<f:content >
+									<Label text="{path:'settings>/DefaultProfileSetting/Scenario', formatter: '.formatter.getScenarioText'} / Packing Mat:"/>
+									<MultiInput type="Number" maxTokens="1" submit="onDocumentSubmit" id="txtId" placeholder="Enter Number" showValueHelp="false"></MultiInput>
+									<ComboBox items="{/xSERPERPxCDS_PACKMAT}" id="cbInputType" selectedKey="{settings>/DefaultProfileSetting/DefaultPackMat}"
+										enabled="{= !${local>/isAllTrackShipped} ? true : false}">
+										<core:ListItem key="{Matnr}" text="{Matnr}" tooltip="{Matnr} - {Maktx}"/>
+										<layoutData>
+											<l:GridData span="XL4 L3 M4 S4"/>
+										</layoutData>
+									</ComboBox>
+									<Label text="{= ${settings>/DefaultProfileSetting/ItemSelection}==='1'?'Material':'UPC'} / Quantity:"/>
+									<Input type="Text" submit="onItemSubmit" liveChange="onItemChange" placeholder="Enter Number" id="txtItem" showValueHelp="false"
+										enabled="{= !${local>/isAllTrackShipped} ? true : false}"></Input>
+									<Input enabled="false" editable="false" id="txtQty" submit="onQtySubmit" placeholder="Enter Quantity">
+										<layoutData>
+											<l:GridData span="XL4 L4 M4 S4"/>
+										</layoutData>
+									</Input>
+									<Label text="External HU: " visible="{= ${settings>/DefaultProfileSetting/UseExtHU}?true : false}"/>
+									<Input editable="true" id="txtExt" visible="{= ${settings>/DefaultProfileSetting/UseExtHU}?true : false}">
+										<layoutData>
+											<l:GridData span="XL4 L4 M4 S4"/>
+										</layoutData>
+									</Input>
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="4"
+								adjustLabelSpan="true" emptySpanXL="4" emptySpanL="3" emptySpanM="3" emptySpanS="3" columnsXL="2" columnsL="1" columnsM="1"
+								singleContainerFullSize="false" visible="{= ${local>/Address} &amp;&amp; ${local>/Address/SHIPFROM}? true : false}">
+								<f:content >
+									<Label text="Ship-From"/>
+									<Text text="{path:'local>/Address/SHIPFROM/name1'},{local>/Address/SHIPFROM/name2}"></Text>
+									<Text text="{local>/Address/SHIPFROM/ort01},{local>/Address/SHIPFROM/regio},{local>/Address/SHIPFROM/pstlz},{local>/Address/SHIPFROM/land1}">
+										<layoutData>
+											<l:GridData span="XL8 L9 M9 S8" indent="XL4 L3 M3 S4"/>
+										</layoutData>
+									</Text>
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="3" labelSpanS="3"
+								adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+								singleContainerFullSize="false" visible="{= ${local>/Address} &amp;&amp; ${local>/Address/SHIPTO}? true : false}">
+								<f:content >
+									<Label text="Ship-To"/>
+									<Text text="{local>/Address/SHIPTO/name1},{local>/Address/SHIPTO/name2}"/>
+									<Text text="{local>/Address/SHIPTO/ort01},{local>/Address/SHIPTO/regio},{local>/Address/SHIPTO/pstlz},{local>/Address/SHIPTO/land1}">
+										<layoutData>
+											<l:GridData span="XL8 L9 M9 S9" indent="XL4 L3 M3 S3"/>
+										</layoutData>
+									</Text>
+								</f:content>
+							</f:SimpleForm>
+						</FlexBox>
+					</VBox>
+				</uxap:heading>
+				<uxap:actions>
+					<OverflowToolbarButton icon="sap-icon://refresh" tooltip="Refresh - Shift+F5" type="Emphasized" press="onResetData" id="btnResetData">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</OverflowToolbarButton>
+					<OverflowToolbarButton icon="sap-icon://flag" id="btnCreateShipment" tooltip="Create Shipment - F8" type="Accept" press="onCreateShipment"
+						visible="{settings>/DefaultProfileSetting/CreateShipment}"
+						enabled="{= ${local>/HUs} &amp;&amp; ${local>/HUs}.length !== 0 &amp;&amp; !${local>/isAllTrackShipped} ? true : false}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</OverflowToolbarButton>
+				</uxap:actions>
+				<uxap:navigationActions></uxap:navigationActions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<l:HorizontalLayout allowWrapping="true">
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<MessageStrip text="Ship-From:" type="Warning"></MessageStrip>
+				</l:VerticalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<MessageStrip id="mstripBilling" text="Ship-To:"></MessageStrip>
+				</l:VerticalLayout>
+			</l:HorizontalLayout>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection id="iconTabPacking">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Quick Pack">
+						<uxap:blocks>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.ItemsPacking" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection visible="{settings>/DefaultProfileSetting/CreateShipment}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Carrier and Service">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.address.TabAddressCarrierService" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection visible="{settings>/DefaultProfileSetting/CreateShipment}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Ship From">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.address.TabAddressShipFrom" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection visible="{settings>/DefaultProfileSetting/CreateShipment}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Ship To">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.address.TabAddressShipTo" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection visible="{settings>/DefaultProfileSetting/CreateShipment}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Sold to">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.address.TabAddressSoldTo" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="iconTabImporter"
+				visible="{parts:['settings>/DefaultProfileSetting/CreateShipment','settings>/basic/shipment_flags/domestic'], formatter: '.formatter.isVisibleImporter'}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Importer">
+						<uxap:blocks>
+							<core:Fragment fragmentName="com.erpis.shiperp.quickpack.hr7.fragment.address.TabAddressImporter" type="XML"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="idShipmentBtn" press="onCreateShipment" icon="sap-icon://shipping-status"
+					enabled="{= ${settings>/DefaultProfileSetting/CreateShipment} &amp;&amp; ${local>/HUs} &amp;&amp; ${local>/HUs}.length !== 0 &amp;&amp; !${local>/isAllTrackShipped} ? true : false}"
+					type="Accept" text="Ship"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

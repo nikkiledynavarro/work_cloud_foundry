@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Rate Pricings" class="sapUiContentPadding" stretch="true">
+		<Table id="tblRatePricingList" mode="None" fixedLayout="false" class="border_lightgray_nobottom" showSeparators="All" growing="false">
+			<columns>
+				<Column>
+					<Text text="Carr"/>
+				</Column>
+				<Column>
+					<Text text="Serv"/>
+				</Column>
+				<Column>
+					<Text text="Delv"/>
+				</Column>
+				<Column>
+					<Text text="Cnter"/>
+				</Column>
+				<Column>
+					<Text text="App"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>Step}"/>
+				</Column>
+				<Column>
+					<Text text="Cond.Typ"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>From}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>To}"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="Bill Rate"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>Update}"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>Sum}"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="Usr.Ex"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="Det.Rate"/>
+				</Column>
+				<Column vAlign="Middle" hAlign="Center">
+					<Text text="WS.Rate"/>
+				</Column>
+				<Column>
+					<Text text="PP Add"/>
+				</Column>
+				<Column>
+					<Text text="Cd.Upd"/>
+				</Column>
+				<Column>
+					<Text text="Bse.Rt"/>
+				</Column>
+				<Column>
+					<Text text="Carr.Rt"/>
+				</Column>
+				<Column>
+					<Text text="%"/>
+				</Column>
+				<Column>
+					<Text text="Curr"/>
+				</Column>
+			</columns>
+		</Table>
+		<endButton>
+			<Button press="onCloseRatePricingDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

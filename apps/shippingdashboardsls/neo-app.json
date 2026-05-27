@@ -1,0 +1,50 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "preferLocal": true,
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/destinations/Northwind/",
+      "target": {
+        "type": "destination",
+        "name": "Northwind",
+        "entryPath": "/V2/Northwind/"
+      },
+      "description": "Northwind"
+    },
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "virtual-erps4sales-destination",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "virtual-erps4sales-destination"
+    },
+    {
+      "path": "/virtual-erps4sales-destination",
+      "target": {
+        "type": "destination",
+        "name": "virtual-erps4sales-destination"
+      },
+      "description": "virtual-erps4sales-destination"
+    }
+  ]
+}

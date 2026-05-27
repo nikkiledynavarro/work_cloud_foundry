@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Name/Attention-->
+	<Label text="{i18n>nameAttent}"/>
+	<Input value="{local>/basic/ship_to_address/name}" placeholder="Name"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/attention}" placeholder="Attention"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Address1/2-->
+	<Label text="{i18n>address1/2}"/>
+	<Input value="{local>/basic/ship_to_address/address1}" placeholder="Address 1"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/address2}" placeholder="Address 2"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Address3/4-->
+	<Label text="{i18n>address3/4}"/>
+	<Input value="{local>/basic/ship_to_address/address3}" placeholder="Address 3"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/address4}" placeholder="Address 4"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--CustomerID/Email-->
+	<Label text="{i18n>customerEmail}"/>
+	<Input value="{local>/basic/ship_to_address/customeID}" placeholder="CustomerID"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/email}" placeholder="Email"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Phone/Fax-->
+	<Label text="{i18n>phoneFax}"/>
+	<Input value="{local>/basic/ship_to_address/phone}" placeholder="Phone"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/fax}" placeholder="Fax"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Fed/State TaxID-->
+	<Label text="{i18n>fedTaxID}"/>
+	<Input value="{local>/basic/ship_to_address/fedTaxID}" placeholder="Fed TaxID"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/ship_to_address/stateTaxID}" placeholder="State TaxID"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+</core:FragmentDefinition>

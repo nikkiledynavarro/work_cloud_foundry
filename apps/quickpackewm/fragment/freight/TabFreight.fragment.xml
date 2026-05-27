@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<VBox>
+		<Toolbar>
+			<ToolbarSpacer/>
+			<SearchField width="20%" showRefreshButton="true" id="searchFreightDataInput" search="onSearchItem"/>
+		</Toolbar>
+		<Table id="FreightDataID" selectionChange="onSelectionChange" fixedLayout="true" items="{path: 'local>/LineItems'}" mode="{local>/Mode}"
+			growing="true" keyboardMode="Edit" growingThreshold="99999" class="border_lightgray_nobottom">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Freight ({= ${local>/LineItems} ? ${local>/LineItems}.length : 0})"/>
+					<ToolbarSpacer/>
+					<Button enabled="{= ${local>/basic} ? true : false }" icon="sap-icon://edit" tooltip="Edit"
+						class="sapUiTinyMarginEnd" press="onEditFreightData"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column hAlign="Center" width="auto">
+					<Text text="Freight Class"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Freight Code"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Freight Code Description"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<!--Fisrt UoM-->
+						<Text text="{local>Itx3}" wrapping="false"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+</core:FragmentDefinition>

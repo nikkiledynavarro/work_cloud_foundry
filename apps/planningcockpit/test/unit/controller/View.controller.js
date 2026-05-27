@@ -1,0 +1,1 @@
+sap.ui.define(["com/erpis/shiperp/planningcockpit/controller/View.controller"],function(e){"use strict";QUnit.module("View Controller");QUnit.test("I should test the View controller",function(n){var t=new e;t.onInit();n.ok(t)})});

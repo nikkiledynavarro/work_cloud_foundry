@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Output List" class="sapUiContentPadding" afterOpen="onReprintDialogAfterOpen">
+		<FlexBox fitContainer="true" justifyContent="SpaceBetween">
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Carrier"/>
+				<Input id="txtCarrierPrint" value="{local>/ReprintFilter/carrier}"/>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Delivery"/>
+				<MultiInput id="txtDeliveryPrint" tokens="{local>/ReprintFilter/delivery}" showValueHelp="false">
+					<tokens>
+						<Token key="{local>key}" text="{local>key}"/>
+					</tokens>
+				</MultiInput>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="HU"/>
+				<Input value="{local>/ReprintFilter/exidv}"/>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Created On"/>
+				<DatePicker id="dpCreatedOnPrint" value="{local>/ReprintFilter/erdat}" valueFormat="yyyy-MM-dd"/>
+			</FlexBox>
+			<FlexBox direction="Column" class="margin_right_5px">
+				<Label text="Tracking number"/>
+				<Input id="txtTrackNoPrint" value="{local>/ReprintFilter/trackingnumber}"/>
+			</FlexBox>
+		</FlexBox>
+		<Button text="Search" type="Emphasized" class="sapUiTinyMarginTop" press="onFilterReprintPress"/>
+		<Table id="tblReprintList" mode="SingleSelectLeft" class="sapUiTinyMarginTop border_lightgray_nobottom" showSeparators="All" growing="false">
+			<columns>
+				<Column width="10rem">
+					<Text text="{i18n>ObjectKey}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>ObjectType}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>Delivery}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>TrackingNo}"/>
+				</Column>
+			</columns>
+		</Table>
+		<beginButton>
+			<Button press="onConfirmReprint" text="Reprint" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseReprintDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

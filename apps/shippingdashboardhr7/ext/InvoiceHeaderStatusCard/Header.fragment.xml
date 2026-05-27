@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:ovp="sap.ovp.ui" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:common="sap.suite.ui.commons" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:template="http://schemas.sap.com/sapui5/extension/sap.ui.core.template/1">
+	<VBox class="sapUiContentPadding sapOvpCardHeader sapOvpCardHeaderBorder ovpNonNavigableItem">
+		<HBox>
+			<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
+				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent">
+				<Text text="{i18n>numberFHeaderStatus_title}" textDirection="Inherit" wrapping="true" textAlign="Begin" maxLines="3"
+					renderWhitespace="false" class="sapOvpCardTitle sapUiSmallMarginBottom"/>
+			</FlexBox>
+		</HBox>
+		<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
+			wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent">
+			<Text text="{i18n>Total}" textDirection="Inherit" wrapping="true" textAlign="Begin" maxLines="2" renderWhitespace="false"
+				class="sapOvpCardSubtitle sapUiSmallMarginBottom"/>
+		</FlexBox>
+		<VBox class="sapOVPKpiHeaderVbox">
+			<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
+				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent" class="sapOvpKPIHeaderAggregateNumber numericContentHbox">
+				<HBox class="innerNumericContentHbox sapOvpKpiContent">
+					<!--<ovp:OVPNumericContent class="kpiHeaderClass" value="{local>/kpiNumber}" withMargin="false"/>-->
+					<List id="headerTotalNumber" items="{ path : 'MainModel>/xSERPERPxI_SHDB_INV_STAT', parameters : { select : 'TotalOfHeaderStatus'}}"
+						class="innerNumericContentHbox sapOvpKpiContent">
+						<!--<StandardListItem title="{MainModel>NumberOfShipments}" class="kpiHeaderClass"/>-->
+						<core:Fragment fragmentName="com.erpis.shiperp.shippingdashboardhr7.ext.InvoiceHeaderStatusCard.HeaderTotalNumber" type="XML"/>
+					</List>
+				</HBox>
+			</FlexBox>
+			<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
+				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent" class="UOMFlexbox"/>
+		</VBox>
+		<HBox>
+			<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
+				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent">
+				<!--<DatePicker id="idDateTimeHeader" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom" valueFormat="MM/dd/yyyy"/>-->
+				<DateRangeSelection id="idDateTimeHeader" valueFormat="MM/dd/yyyy" displayFormat="long" change="handleChange"/>
+			</FlexBox>
+		</HBox>
+	</VBox>
+</core:FragmentDefinition>

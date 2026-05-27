@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ColumnListItem type="Inactive">
+		<cells>
+			<Text text="{Objectkey}"/>
+			<Text text="{Objecttype}"/>
+			<Text text="{Lineitem}"/>
+			<Text text="{Exidv}"/>
+			<!--<Text text="{erdat}"/>-->
+			<Text text="{path: 'Erdat', formatter: '.formatter.convertDateString'}"/>
+			<Text text="{Docno}"/>
+		</cells>
+	</ColumnListItem>
+</core:FragmentDefinition>

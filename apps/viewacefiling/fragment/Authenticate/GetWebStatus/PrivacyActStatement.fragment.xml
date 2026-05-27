@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog contentWidth="400px">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Title text="Application Privacy Act Statement"/>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" press="onCloseParivacyAct" type="Reject"/>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<VBox>
+				<CheckBox text="I read and accpet the Privacy Act Statement" selected="{local>/UserVerified/Authenticate/ContinueLogin}"/>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Privacy Act Statement" press="onConfirmAuthencation" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="Continue Log in" press="onContineuLogin" type="Emphasized" visible="{local>/UserVerified/Authenticate/ContinueLogin}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

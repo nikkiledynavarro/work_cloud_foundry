@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
+	<VBox>
+		<table:Table id="handlingunits"  rows="{path: 'local>/HUs', sorter: { path: 'unit', descending: false }}" width="auto" enableBusyIndicator="true"
+			selectionMode="Single" selectionBehavior="Row" rowSelectionChange="onSelectionChange" class="border_lightgray_nobottom" visibleRowCount="5">
+			<table:columns>
+				<table:Column width="auto" resizable="false">
+					<Label text="HU" tooltip="Handling Unit"/>
+					<table:template>
+						<ObjectIdentifier title="{path:'local>outbHu', formatter: '.formatter.removeLeadingZero'}"
+							titleActive="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Pack. Mat." tooltip="Packing Material"/>
+					<table:template><Text text="{local>pMat}" tooltip="{local>pMat}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Pack. Bin" tooltip="Packing Bin"/>
+					<table:template><Text text="{local>lgpLaPa}" tooltip="{local>lgpLaPa}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Length" tooltip="Length"/>
+					<table:template><Text text="{= parseInt(${local>length}) }" tooltip="{local>length}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Width" tooltip="Width"/>
+					<table:template><Text text="{= parseInt(${local>width}) }" tooltip="{local>width}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Height" tooltip="Height"/>
+					<table:template><Text text="{= parseInt(${local>height}) }" tooltip="{local>height}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Weight" tooltip="Weight"/>
+					<table:template><Text text="{local>weight}" tooltip="{local>weight}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="true">
+					<Label text="Weight UoM" tooltip="Weight UoM"/>
+					<table:template><Text text="{local>weightUnit}" tooltip="{local>weightUnit}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Track. Num" tooltip="Tracking Number"/>
+					<table:template><Text text="{local>trackingNumber}" tooltip="{local>trackingNumber}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Doc Num." tooltip="Document Number"/>
+					<table:template><Text text="{path:'local>docNo', formatter: '.formatter.removeLeadingZero'}" tooltip="{local>docNo}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Doc Cat." tooltip="Doc Cat."/>
+					<table:template><Text text="{local>docCat}" tooltip="{local>docCat}"/></table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+	</VBox>
+</core:FragmentDefinition>

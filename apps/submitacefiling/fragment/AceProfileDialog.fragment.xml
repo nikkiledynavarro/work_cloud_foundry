@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>profileDialogTitle}" class="sapUiPopupWithPadding" items="{/xSERPERPxCDS_AESGLOBAL}"
+		liveChange="handleProfileValueHelpSearch" confirm="onAceProfileConfirm" cancel="handleProfileValueHelpClose">
+		<StandardListItem title="{ProfileId}" description="{Parvw}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

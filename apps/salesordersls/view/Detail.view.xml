@@ -1,0 +1,67 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="com.erpis.shiperp.sls.salesordersls.controller.Detail" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:sf="sap.ui.layout.form" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" height="100%">
+	<f:DynamicPage id="dynamicPageId" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Order: {SalesNo}" wrapping="true" class="sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+				</f:heading>
+				<f:navigationActions>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+						press="onNavigateToExternal" icon="sap-icon://create" type="Emphasized" tooltip="Change Sales Order" text="VA02"/>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://full-screen" type="Transparent"/>
+					<OverflowToolbarButton visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+						press="onToggleFullScreen" icon="sap-icon://exit-full-screen" type="Transparent"/>
+					<OverflowToolbarButton press="onCloseDetailPress" icon="sap-icon://decline" type="Transparent" tooltip="Close"/>
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true" id="headerContent">
+				<f:content>
+					<layout:HorizontalLayout allowWrapping="true">
+						<layout:VerticalLayout class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+							<ObjectStatus state="Warning" text="Ship to Party" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="{global>/SalesOrderDetail/ShipToParty/name1}" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="{global>/SalesOrderDetail/ShipToParty/street} {global>/SalesOrderDetail/ShipToParty/city}"
+								class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute
+								text="{global>/SalesOrderDetail/ShipToParty/region} {global>/SalesOrderDetail/ShipToParty/country} {global>/SalesOrderDetail/ShipToParty/postalCode}"/>
+						</layout:VerticalLayout>
+						<layout:VerticalLayout class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+							<ObjectStatus state="Warning" text="Sold to Party" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="{global>/SalesOrderDetail/SoldToParty/name1}" class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute text="{global>/SalesOrderDetail/SoldToParty/street} {global>/SalesOrderDetail/SoldToParty/city}"
+								class="sapUiTinyMarginBottom"/>
+							<ObjectAttribute
+								text="{global>/SalesOrderDetail/SoldToParty/region} {global>/SalesOrderDetail/SoldToParty/country} {global>/SalesOrderDetail/SoldToParty/postalCode}"/>
+						</layout:VerticalLayout>
+						<layout:VerticalLayout>
+							<ObjectStatus state="Warning" class="sapUiTinyMarginBottom" text="Statuses"/>
+							<ObjectStatus title="Shipping Status" text="Open" state="Error" class="sapUiTinyMarginBottom"/>
+							<ObjectStatus title="Delivery Status" class="sapUiTinyMarginBottom" text="{DeliveryStatusText}"
+								state="{path: 'DeliveryStatus', formatter:'.formatter.formatDeliveryStatus'}"/>
+							<ObjectStatus id="deliveryBlock" title="Delivery Block" state="Error" press="onMultipleDeliveryPress"/>
+						</layout:VerticalLayout>
+					</layout:HorizontalLayout>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.sls.salesordersls.fragment.Shipsets" type="XML"/>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar >
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="Address Validation" press="onAddressValidation" type="Emphasized"
+					enabled="{= ${global>/AddrVal/Active} &amp;&amp; ${global>/AddrVal/Carrier} === 'FDXG' }"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

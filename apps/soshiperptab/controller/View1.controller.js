@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("serp.so-shiperp-tab.controller.View1",{onInit:function(){const e=jQuery.sap.getUriParameters().get("salesorder");console.log(e);let t=this.getView().getModel();this.getView().bindElement("/A_SalesOrder('"+e+"')");console.log(t)}})});

@@ -1,0 +1,173 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Update Routing" class="sapUiContentPadding" stretch="true">
+		<content>
+			<IconTabBar id="idIconTabBarMulti" expanded="true" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="General">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+							singleContainerFullSize="false">
+							<f:content>
+								<core:Title text=""/>
+								<Label text="Service Agent"/>
+								<Input type="Text" value=""/>
+								<Label text="Carrier"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Carrier Service"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Miscellaneous Carrier"/>
+								<Input type="Text" value=""/>
+								<Label text="Sequence Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Arrival Date/Time"/>
+								<DatePicker valueFormat="yyyy-MM-dd" displayFormat="long" displayFormatType="Islamic" change="handleChange" class="sapUiSmallMarginBottom"/>
+								<TimePicker value="19:15" valueFormat="HH:mm" displayFormat="HH:mm" change="handleChange" placeholder="Enter meeting start time"/>
+								<core:Title text=""/>
+								<Label text="External ID 1"/>
+								<Input type="Text" value=""/>
+								<Label text="External ID 2"/>
+								<Input type="Text" value=""/>
+								<Label text="FA Tracking ID"/>
+								<Input type="Text" value=""/>
+								<Label text="Transp Ref No."/>
+								<Input type="Text" value=""/>
+								<Label text="Load Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Tender Status"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<core:Title text=""/>
+								<Label text="Partner 1 Type"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Partner 1 Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Partner 2 Type"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Partner 2 Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Partner 3 Type"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Partner 3 Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Broker Name"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+					<IconTabFilter text="Address">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL=" 4" labelSpanL=" 4" labelSpanM=" 12" labelSpanS=" 12"
+							adjustLabelSpan=" false" emptySpanXL=" 0" emptySpanL=" 0" emptySpanM=" 0" emptySpanS=" 0" columnsXL=" 2" columnsL=" 2" columnsM=" 1"
+							singleContainerFullSize=" false">
+							<f:content>
+								<core:Title text=""/>
+								<Label text="Name"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Attention"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Address 1"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Address 2"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<core:Title text=""/>
+								<Label text="City"/>
+								<Input type="Tel" value=""/>
+								<Label text="Postal Code"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Country/Region"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Phone Number"/>
+								<Input type="Tel" value=""/>
+								<Label text="Fax Number"/>
+								<Input type="Text" value=""/>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+					<IconTabFilter text="Container">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<Label text="Container Type"/>
+								<ComboBox >
+									<items>
+										<core:Item text="" key=""/>
+									</items>
+								</ComboBox>
+								<Label text="Container ID"/>
+								<Input type="Text" value=""/>
+								<Label text="Seal Number"/>
+								<Input type="Text" value=""/>
+								<Label text="Shipper Owned"/>
+								<CheckBox selected="true"/>
+								<Label text="Container Full"/>
+								<CheckBox selected="true"/>
+							</f:content>
+						</f:SimpleForm>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<beginButton>
+			<Button text="Save" type="Emphasized" press="onCreateFreightOrder"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onUpdateUpdateRoutingClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

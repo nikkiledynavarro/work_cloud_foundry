@@ -1,0 +1,1 @@
+sap.ui.define(["com/erpis/shiperp/planningcockpit/test/unit/controller/View.controller"],function(){"use strict"});

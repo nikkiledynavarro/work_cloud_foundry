@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<!--<core:Title text=""></core:Title>-->
+			<Label text="Billing Option"/>
+			<ComboBox id="idBillingOption" selectedKey="{local>/basic/general/Billoption}" enabled="false">
+				<core:Item key="3PRTY" text="Third Party"/>
+				<core:Item key="COLL" text="Collect"/>
+				<core:Item key="CONS" text="Consignee"/>
+				<core:Item key="PPAID" text="Prepaid"/>
+			</ComboBox>
+			<Button text="Third Party Address" press="onThirdPartyAddrChange" type="Emphasized" enabled="false"/>
+			<Label text="3P COL/ZIP"/>
+			<Input value="{local>/basic/general/Thirdpartyzip}" enabled="false"/>
+			<Label text="Account"/>
+			<Input value="{local>/basic/general/Thirdpartyacct}" enabled="false"/>
+			<Label text="Country"/>
+			<ComboBox id="idCountry" items="{ path: '/xSERPERPxCDS_QP_COUNTRY', length: 9999 }" selectedKey="{local>/basic/general/Thirdpartyctry}" selectionChange="onPackingMaterial"
+				enabled="false">
+				<core:Item key="{Country}" text="{Country}"></core:Item>
+			</ComboBox>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

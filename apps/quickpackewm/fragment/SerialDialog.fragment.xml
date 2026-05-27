@@ -1,0 +1,62 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Serial Dialog" class="sapUiContentPadding" contentWidth="400px" contentHeight="100%">
+		<content>
+			<Carousel id="serialCarousel"
+				pages="{path: 'local>/MasterSerialList', sorter: [{path: 'itemNo', descending: false}, {path: 'docno', descending: false}]}"
+				pageChanged="onSerialItemChange" height="100%" pageIndicatorPlacement="Bottom">
+				<FlexBox direction="Column">
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="4"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<Label text="Delivery/Item"/>
+							<Input value="{local>docNo}" editable="false"/>
+							<Input value="{local>itemNo}" editable="false"></Input>
+							<Label text="Material"></Label>
+							<Input value="{local>matnr}" editable="false"></Input>
+							<Label text="Created/Total"></Label>
+							<Input value="{local>serialCount}" editable="false"></Input>
+							<Input value="{local>quantity}" editable="false"></Input>
+						</f:content>
+					</f:SimpleForm>
+					<Table id="serialTable" mode="None" class="sapUiTinyMarginTop border_lightgray_nobottom" showSeparators="All" growing="false"
+						items="{path: 'local>/SelectedSerial/serialItems/results', templateShareable: true}">
+						<headerToolbar>
+							<Toolbar>
+								<content>
+									<Label text="Scan"/>
+									<!--submit="onChangeSerialMultiInput"-->
+									<!--<Input liveChange="onAddEventSerialScan" submit="onChangeSerialInputText" showValueHelp="false" editable="true"/>-->
+									<MultiInput id="txtMulId" submit="onChangeSerialInputText" placeholder="Enter serial number and press Enter"
+										liveChange="onLiveChangeAddSerial" enableMultiLineMode="true" showValueHelp="false" editable="true"></MultiInput>
+									<ToolbarSpacer/>
+									<Button text="Clear All" press="onClearSerials" enabled="true"/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Center">
+								<Text text="Serial Number"/>
+							</Column>
+						</columns>
+						<ColumnListItem type="Active">
+							<cells>
+								<MultiInput showValueHelp="false" editable="true" valueState="None" tokens="{path: 'local>tokens', templateShareable: true}">
+									<tokens>
+										<Token key="{local>key}" text="{local>text}"/>
+									</tokens>
+								</MultiInput>
+							</cells>
+						</ColumnListItem>
+					</Table>
+				</FlexBox>
+			</Carousel>
+		</content>
+		<beginButton>
+			<Button text="Post" type="Emphasized" press="onPostSerialsPress"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseSerialDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
