@@ -9,6 +9,7 @@
 	jQuery.sap.require("sap.viz.ui5.api.env.Format");
 	jQuery.sap.require("sap.ui.model.Filter");
 	jQuery.sap.require("sap.ui.model.FilterOperator");
+
 	jQuery.sap.require("com.erpis.shiperp.shippingdashboard.models.formatter");
 
 	/*
@@ -59,7 +60,22 @@
 
 			this.oPopover = this.getView().byId("idPopOver");
 			this.oPopover.connect(this.oVizFrame.getVizUid());
-
+			var oDateRange = this.byId("idDateTimeHeader");
+			// var aMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+			var oDate = new Date();
+			var sCurrDate = oDate.getDate();
+			var sCurrMonth = oDate.getMonth();
+			var sPrevMonth = oDate.getMonth() - 1;
+			var sYear = oDate.getFullYear();
+			oDateRange.setDateValue(new Date(sYear, sPrevMonth, sCurrDate));
+			oDateRange.setSecondDateValue(new Date(sYear, sCurrMonth, sCurrDate));
+			var oFilter = new sap.ui.model.Filter({
+				path: "CreatedOn",
+				operator: sap.ui.model.FilterOperator.BT,
+				value1: new Date(sYear, sPrevMonth, sCurrDate),
+				value2: new Date(sYear, sCurrMonth, sCurrDate)
+			});
+			this._setInitialDataWithDateRange(oFilter);
 			// this.handleChange();
 			// 1. get data from backend.
 			// 2. set data to UI.
@@ -75,34 +91,43 @@
 				this._oInvoiceStatus = sap.ui.xmlfragment("com.erpis.shiperp.shippingdashboard.ext.InvoiceHeaderStatusCard.InvoiceStatus", this);
 				this.getView().addDependent(this._oInvoiceStatus);
 			}
-			var sSelectedDate = this.byId("idDateTimeHeader").getValue();
-
-			// var oFilter = new sap.ui.model.Filter("CreatedAt", sap.ui.model.FilterOperator.EQ, sSelectedDate);
+			var sFrom = this.byId("idDateTimeHeader").getFrom();
+			var sTo = this.byId("idDateTimeHeader").getTo();
+			var oDateRangeFilter = new sap.ui.model.Filter({
+				path: "CreatedOn",
+				operator: sap.ui.model.FilterOperator.BT,
+				value1: sFrom,
+				value2: sTo
+			});
+			// var oFilter = new sap.ui.model.Filter("CreatedOn", sap.ui.model.FilterOperator.EQ, sSelectedDate);
 			var sFAHeaderStatus = oEvent.getParameters("data").data[0].data.FAHeaderStatus;
 			var oItemTemplate = sap.ui.xmlfragment("com.erpis.shiperp.shippingdashboard.ext.InvoiceHeaderStatusCard.ColumnListItemTemplate",
 				this);
 			var oTable = sap.ui.getCore().byId("idTableChartInvoice");
-			oTable.bindItems({
-				path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
-				parameters: {
-					select: "InvoiceNo,Carrier,InvoiceDate,InvoiceDueDate,FAHeaderStatus"
-				},
-				template: oItemTemplate,
-				filters: [new sap.ui.model.Filter("FAHeaderStatus", "EQ", sFAHeaderStatus)],
-				sorter: new sap.ui.model.Sorter("InvoiceDueDate", false)
-			});
-			if (sSelectedDate) {
+
+			if (sFrom && sTo) {
 				oTable.bindItems({
 					path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
 					parameters: {
 						select: "InvoiceNo,Carrier,InvoiceDate,InvoiceDueDate,FAHeaderStatus"
 					},
 					template: oItemTemplate,
-					filters: [new sap.ui.model.Filter("FAHeaderStatus", "EQ", sFAHeaderStatus), new sap.ui.model.Filter("CreatedAt", sap.ui.model.FilterOperator
-						.EQ, sSelectedDate)],
+					filters: [new sap.ui.model.Filter("FAHeaderStatus", "EQ", sFAHeaderStatus), oDateRangeFilter],
+					sorter: new sap.ui.model.Sorter("InvoiceDueDate", false)
+				});
+			} else {
+				//Prevent sFrom && sTo are equal = null, or somecase filter in header of card does not work
+				oTable.bindItems({
+					path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
+					parameters: {
+						select: "InvoiceNo,Carrier,InvoiceDate,InvoiceDueDate,FAHeaderStatus"
+					},
+					template: oItemTemplate,
+					filters: [new sap.ui.model.Filter("FAHeaderStatus", "EQ", sFAHeaderStatus)],
 					sorter: new sap.ui.model.Sorter("InvoiceDueDate", false)
 				});
 			}
+
 			this._oInvoiceStatus.open();
 		},
 
@@ -135,8 +160,16 @@
 
 		handleChange: function (oEvent) {
 			//  handle filter data for selected.
-			var sSelectedDate = oEvent.getSource().getValue();
-			var oFilter = new sap.ui.model.Filter("CreatedAt", sap.ui.model.FilterOperator.EQ, sSelectedDate);
+			// var sSelectedDate = oEvent.getSource().getValue();
+			var sFrom = oEvent.getParameter("from");
+			var sTo = oEvent.getParameter("to");
+			var oFilter = new sap.ui.model.Filter({
+				path: "CreatedOn",
+				operator: sap.ui.model.FilterOperator.BT,
+				value1: sFrom,
+				value2: sTo
+			});
+			// var oFilter = new sap.ui.model.Filter("CreatedOn", sap.ui.model.FilterOperator.BT, sSelectedDate);
 
 			//  set dataset for vizframe.
 			var oVizFrame = this.getView().byId("idVizFrame");
@@ -151,10 +184,23 @@
 				}],
 				data: {
 					path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
-					filters: [oFilter]
+					filters: [oFilter],
+					parameters: {
+						select: "TotalOfHeaderStatus,FAHeaderStatus"
+					}
 				}
 			});
 			oVizFrame.setDataset(growthRatesDataSet);
+
+			var oListHeaderCard = this.byId("headerTotalNumber");
+			oListHeaderCard.bindItems({
+				path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
+				template: sap.ui.xmlfragment("com.erpis.shiperp.shippingdashboard.ext.InvoiceHeaderStatusCard.HeaderTotalNumber", this),
+				parameters: {
+					select: "TotalOfHeaderStatus"
+				},
+				filters: [oFilter]
+			});
 		},
 
 		onStatusListUpdated: function (oEvent) {
@@ -194,6 +240,39 @@
 				var sDate = sDateString.substring(6, 8);
 				return sMonth + "/" + sDate + "/" + sYear;
 			}
+		},
+
+		_setInitialDataWithDateRange: function (oFilter) {
+			//  set dataset for vizframe.
+			var oVizFrame = this.getView().byId("idVizFrame");
+			var growthRatesDataSet = new sap.viz.ui5.data.FlattenedDataset({
+				dimensions: [{
+					name: "FAHeaderStatus",
+					value: "{MainModel>FAHeaderStatus}"
+				}],
+				measures: [{
+					name: "Total of Status",
+					value: "{MainModel>TotalOfHeaderStatus}"
+				}],
+				data: {
+					path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
+					filters: [oFilter],
+					parameters: {
+						select: "TotalOfHeaderStatus,FAHeaderStatus"
+					}
+				}
+			});
+			oVizFrame.setDataset(growthRatesDataSet);
+
+			var oListHeaderCard = this.byId("headerTotalNumber");
+			oListHeaderCard.bindItems({
+				path: "MainModel>/xSERPERPxI_SHDB_INV_STAT",
+				template: sap.ui.xmlfragment("com.erpis.shiperp.shippingdashboard.ext.InvoiceHeaderStatusCard.HeaderTotalNumber", this),
+				parameters: {
+					select: "TotalOfHeaderStatus"
+				},
+				filters: [oFilter]
+			});
 		}
 	});
 })();

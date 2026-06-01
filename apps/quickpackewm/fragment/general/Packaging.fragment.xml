@@ -25,7 +25,7 @@
 					selectedKey="{local>/basic/general/Packagetype}" enabled="true">
 					<core:Item key="{Packagetype}" text="{Description}"></core:Item>
 				</ComboBox>
-				<Button text="Update Package Type" width="80%" tooltip="Update Package Type on all HU’s" press="onUpdatePackageTypeAllHU" type="Default"
+				<Button text="Update Package Type" width="80%" tooltip="Update Package Type on all HUâ€™s" press="onUpdatePackageTypeAllHU" type="Default"
 					enabled="true"/>
 				<Label text="Declared Value"/>
 				<Input value="{local>/basic/general/Declaredvalue}" enabled="true"/>
@@ -35,7 +35,7 @@
 				<Label text="Weight"/>
 				<Input value="{local>/basic/general/Weight}" enabled="{= (${local>/basic/general/Weightoption} === '3' ) ? true : false}"
 					submit="onSubmitWeight"/>
-				<Button text="Update All HU’s" tooltip="Update All HU’s" width="60%" press="onUpdateWeightAllHU" type="Default" enabled="true"/>
+				<Button text="Update All HUâ€™s" tooltip="Update All HUâ€™s" width="60%" press="onUpdateWeightAllHU" type="Default" enabled="true"/>
 				<Label text="Dimensions"/>
 				<Input value="{local>/basic/general/Dims}" enabled="false"/>
 				<Button icon="sap-icon://edit" width="10%" tooltip="Change Dimensions" press="onEditDimensions" type="Default"
@@ -46,6 +46,6 @@
 		</f:SimpleForm>
 		<!-- Handling Units Section -->
 		<Title text="Handling Units" class="sapUiMediumMarginTop sapUiSmallMarginBottom"/>
-		<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>
+		<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>
 	</VBox>
 </core:FragmentDefinition>

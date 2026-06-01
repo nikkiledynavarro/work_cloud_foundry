@@ -3,17 +3,17 @@
 		<items>
 			<!--Shipment -->
 			<IconTabFilter text="Shipment" key="Shipment">
-				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.general.Shipment" type="XML"/>
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Shipment" type="XML"/>
 			</IconTabFilter>
 			<IconTabSeparator/>
 			<!--Packaging-->
 			<IconTabFilter text="Packaging" key="Packaging">
-				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.general.Packaging" type="XML"/>
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Packaging" type="XML"/>
 			</IconTabFilter>
 			<IconTabSeparator/>
 			 <!--Payment-->
 			<IconTabFilter text="Payment" key="Payment">
-				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.general.Payment" type="XML"/>
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Payment" type="XML"/>
 			</IconTabFilter>
 			<IconTabSeparator/>
 		</items>

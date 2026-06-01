@@ -1,0 +1,2 @@
+sap.ui.define(["ccom/erpis/shiperp/carrierperformancereportecc/controller/BaseController","sap/ui/model/json/JSONModel"],function(e,r){"use strict";return e.extend("com.erpis.shiperp.carrierperformancereportecc.controller.App",{onInit:function(){var e=new r({});this.setModel(e,"appView");this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}})});
+//# sourceMappingURL=App.controller.js.map

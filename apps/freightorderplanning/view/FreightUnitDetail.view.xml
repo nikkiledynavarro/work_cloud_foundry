@@ -1,0 +1,84 @@
+<mvc:View controllerName="com.erpis.shiperp.freightorderplanning.controller.FreightUnitDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:ui="sap.ui.table">
+	<f:DynamicPage showFooter="true">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>freightUnitDetailTitle} {local>/FreightUnitNumber}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<!--<core:Fragment fragmentName="com.erpis.shiperp.freightorderplanning.fragment.freightunit.FreightUnitItem" type="XML"/>-->
+			<ui:TreeTable id="fuItemDetailTree" rows="{path:'local>/FreightUnitItem', parameters: {arrayNames:['unititems']}}" selectionMode="None"
+				enableSelectAll="false" ariaLabelledBy="title">
+				<ui:columns>
+					<ui:Column width="25rem">
+						<Label text="{i18n>freightUnitDetaillItemCol}"/>
+						<ui:template>
+							<ObjectStatus xmlns="sap.m" state="{path: 'local>ItemCat', formatter: '.formatter.formatFOItemCategoryState'}" text="{local>ItemId}"
+								icon="{path: 'local>ItemCat', formatter: '.formatter.formatFOItemCategoryIcon'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillProductCol}"/>
+						<ui:template>
+							<Text text="{local>Product}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillProdDesCol}"/>
+						<ui:template>
+							<Text text="{local>ProductDesc}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column >
+						<Label text="{i18n>freightUnitDetaillQtyCol}"/>
+						<ui:template>
+							<Text text="{path: 'local>Quantity', formatter: '.formatter.formatAmountQty'}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillUoMCol}"/>
+						<ui:template>
+							<Text text="{local>UoM}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillGWCol}"/>
+						<ui:template>
+							<Text text="{path: 'local>GrossWeight', formatter: '.formatter.formatAmountQty'}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillGWUomCol}"/>
+						<ui:template>
+							<Text text="{local>GrossWeightUoM}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillGVCol}"/>
+						<ui:template>
+							<Text text="{local>GrossVolumn}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="{i18n>freightUnitDetaillGVUomCol}"/>
+						<ui:template>
+							<Text text="{local>GrossVolumnUoM}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:TreeTable>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>backToFUScreenButton}" press="onNavBackToFreightUnitScreen"/>
+				<!--<Button text="ReloadTest" press="onReloadTest"/>-->
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

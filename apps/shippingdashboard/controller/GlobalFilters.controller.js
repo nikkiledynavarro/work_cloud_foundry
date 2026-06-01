@@ -59,7 +59,6 @@
 							value1: oLastMonth,
 							value2: oToday
 						}]
-
 					}
 				};
 
@@ -109,7 +108,7 @@
 })();
 
 // sap.ui.define([
-// 	"com/erpis/shiperp/shippingdashboard/controller/BaseController",
+// 	"com/erpis/shiperp/shippingdashboardhr7/controller/BaseController",
 // 	"sap/ui/model/json/JSONModel"
 // ], function (BaseController, JSONModel) {
 // 	"use strict";

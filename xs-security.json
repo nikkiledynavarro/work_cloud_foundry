@@ -1,0 +1,20 @@
+{
+  "_comment": "Root xs-security.json — not used by mta.yaml (each app references ./security/xs-security-{appname}.json). Kept as a reference template only.",
+  "xsappname": "comerpisshiperpfiori",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.User",
+      "description": "Access ShipERP Fiori App"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "User",
+      "description": "Access ShipERP Fiori App",
+      "scope-references": [
+        "$XSAPPNAME.User"
+      ]
+    }
+  ]
+}

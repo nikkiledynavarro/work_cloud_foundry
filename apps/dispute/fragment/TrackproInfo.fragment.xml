@@ -11,7 +11,7 @@
 					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextUpdate}" press="onTabToolBarUpdate"/>
 					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextUpdateReason}"
 						press="onTabToolBarUpdateAndNote"/>
-					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextSplitMerge}"
+					<Button enabled="{= (${Status} === 'IP' || ${Status} === 'C') ? false : true }" text="{i18n>toolbarTextSplitMerge}"
 						press="onTabToolBarSplitMerge"/>
 					<Button enabled="{= (${Status} === 'CN' || ${Status} === 'C' || ${Status} === 'IP') ? false : true }" text="{i18n>toolbarTextReset}"
 						press="onTabToolBarReset"/>

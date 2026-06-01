@@ -3,7 +3,7 @@ sap.ui.define([
 	], function (BaseController) {
 		"use strict";
 
-		return BaseController.extend("com.erpis.shiperp.trackshipmentewm.hr7.controller.NotFound", {
+		return BaseController.extend("com.erpis.shiperp.trackshipmentewm.controller.NotFound", {
 
 			/**
 			 * Navigates to the worklist when the link is pressed

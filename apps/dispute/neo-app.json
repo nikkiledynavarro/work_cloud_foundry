@@ -44,10 +44,10 @@
       "path": "/sap/opu/odata/",
       "target": {
         "type": "destination",
-        "name": "virtual-hd6-destination",
+        "name": "virtual-hr7-destination",
         "entryPath": "/sap/opu/odata/"
       },
-      "description": "virtual-hd6-destination"
+      "description": "virtual-hr7-destination"
     }
   ],
   "welcomeFile": "/index.html",

@@ -33,18 +33,18 @@
       "path": "/sap/opu/odata",
       "target": {
         "type": "destination",
-        "name": "virtual-hd6-destination",
+        "name": "virtual-hr7-destination",
         "entryPath": "/sap/opu/odata"
       },
-      "description": "virtual-hd6-destination"
+      "description": "virtual-hr7-destination"
     },
     {
-      "path": "/virtual-hd6-destination",
+      "path": "/virtual-hr7-destination",
       "target": {
         "type": "destination",
-        "name": "virtual-hd6-destination"
+        "name": "virtual-hr7-destination"
       },
-      "description": "virtual-hd6-destination"
+      "description": "virtual-hr7-destination"
     }
   ]
 }

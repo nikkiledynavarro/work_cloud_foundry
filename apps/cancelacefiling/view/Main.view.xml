@@ -1,0 +1,165 @@
+<mvc:View controllerName="com.erpis.shiperp.cancelacefiling.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Select items="{path: '/xSERPERPxCDS_CANCEL_INPUT_TYPE'}" id="idInputType" width="12rem" class="margin_right_5px" change="onInputTypeChange">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+							<items>
+								<core:Item text="{Description}" key="{Shiptypeinput}"></core:Item>
+							</items>
+						</Select>
+						<!--<SearchField id="idSearch" search="handleFilterChange" placeholder="Enter Number" width="12rem" class="margin_right_5px"/>-->
+						<Input width="12rem" submit="onCancel" id="idCancelNo" placeholder="Enter Number" class="margin_right_5px">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Input>
+						<!--<MultiInput type="Number" submit="onCancel" id="txtId" width="12rem" placeholder="Enter Number" class="margin_right_5px"-->
+						<!--	showValueHelp="false">-->
+						<!--	<layoutData>-->
+						<!--		<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+						<!--	</layoutData>-->
+						<!--</MultiInput>-->
+						<Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshPress" class="margin_right_5px"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<OverflowToolbarButton icon="sap-icon://synchronize" press="onRefreshClick" tooltip="Refresh" type="Emphasized"/>
+					<!--Submit ACE Filing-->
+					<OverflowToolbarButton icon="sap-icon://shipping-status" press="onCrossNavigate" tooltip="Submit ACE Filing" type="Emphasized"
+						app:crossNavigate="#submitacehr7-Display"/>
+					<!--View ACE Filing-->
+					<OverflowToolbarButton icon="sap-icon://zoom-in" press="onCrossNavigate" tooltip="View ACE Filing" type="Ghost"
+						app:crossNavigate="#viewacefiling-Display"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<VBox>
+				<Label text="Cancel ACE Filing"/>
+				<Table selectionChange="onSelectionChange" items="{path: 'local>/AceFilings'}" id="tableItem" mode="SingleSelectLeft" growing="false"
+					fixedLayout="true">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Label text="Show"></Label>
+							<ComboBox id="numSelected" items="{ path: 'local>/modelData', sorter: { path: 'text' } }" selectedKey="{local>/Pagination/nPage}"
+								change="onChangeNum" width="70px" class="sapUiSmallMarginEnd">
+								<core:Item key="{local>}" text="{local>}"/>
+							</ComboBox>
+							<Label text="entries"></Label>
+							<ToolbarSpacer/>
+							<!--<Label text="Search:" class="sapUiSmallMarginEnd" width="6rem" textAlign="End"/>-->
+							<!--<SearchField id="idSearchTable" search="handleFilterChange" width="12rem"/>-->
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<!--Id-->
+						<Column width="6rem">
+							<HBox alignItems="Center">
+								<Text text="{i18n>id}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Shipment Reference No.-->
+						<Column width="10rem">
+							<HBox alignItems="Center">
+								<Text text="{i18n>shipmentRefNo}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Status-->
+						<Column width="7rem">
+							<HBox alignItems="Center">
+								<Text text="{i18n>status}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--ITN-->
+						<Column width="7rem">
+							<HBox alignItems="Center">
+								<Text text="{i18n>itn}" tooltip="Total Quantity"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Delivery No.-->
+						<Column width="8rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>deliNo}" tooltip="Balance Quantity"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Invoice No.-->
+						<Column width="10rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>invoNo}" tooltip="Partial Quantity"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Shipment No.-->
+						<Column width="8rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>shipNo}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Created by-->
+						<Column width="8rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>createdBy}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Created on-->
+						<Column width="8rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>createdOn}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+						<!--Updated On-->
+						<Column width="10rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+							<HBox alignItems="Center">
+								<Text text="{i18n>upOn}"/>
+								<Button icon="sap-icon://sort" type="Transparent" enabled="false"/>
+							</HBox>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{local>Id}"/>
+								<Text text="{local>ShipmentRefNo}"/>
+								<Text text="{local>Status}"/>
+								<Text text="{local>Int}"/>
+								<Text text="{local>DeliveryNo}"/>
+								<Text text="{local>InvoiceNo}"/>
+								<Text text="{local>ShipmentNo}"/>
+								<Text text="{local>CreatedBy}"/>
+								<Text text="{path:'local>CreatedOn', formatter: '.formatter.formatDateTime'}"/>
+								<Text text="{path:'local>UpdateOn', formatter: '.formatter.formatDateTime'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button id="idCancelAce" press="onCancelAceFiling" icon="sap-icon://cancel" enabled="{local>/EnableButton}" type="Reject" text="Cancel"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

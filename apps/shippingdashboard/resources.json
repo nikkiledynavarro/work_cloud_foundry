@@ -5,6 +5,10 @@
             "isDebug": true
         },
         {
+            "name": "Component-preload-dbg.js",
+            "isDebug": true
+        },
+        {
             "name": "Component-preload.js",
             "merged": true
         },
@@ -43,6 +47,10 @@
             "isDebug": true
         },
         {
+            "name": "ext/InvoiceHeaderStatusCard/Component-preload-dbg.js",
+            "isDebug": true
+        },
+        {
             "name": "ext/InvoiceHeaderStatusCard/Component-preload.js",
             "merged": true
         },
@@ -56,6 +64,9 @@
             "name": "ext/InvoiceHeaderStatusCard/Header.fragment.xml"
         },
         {
+            "name": "ext/InvoiceHeaderStatusCard/HeaderTotalNumber.fragment.xml"
+        },
+        {
             "name": "ext/InvoiceHeaderStatusCard/InvoiceStatus.fragment.xml"
         },
         {
@@ -67,6 +78,10 @@
         },
         {
             "name": "ext/OpenActionCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/OpenActionCard/Component-preload-dbg.js",
             "isDebug": true
         },
         {
@@ -88,6 +103,10 @@
         },
         {
             "name": "ext/QuickLinkCard/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "ext/QuickLinkCard/Component-preload-dbg.js",
             "isDebug": true
         },
         {
@@ -115,6 +134,10 @@
             "isDebug": true
         },
         {
+            "name": "ext/TrackingShipmentCard/Component-preload-dbg.js",
+            "isDebug": true
+        },
+        {
             "name": "ext/TrackingShipmentCard/Component-preload.js",
             "merged": true
         },
@@ -132,9 +155,6 @@
         },
         {
             "name": "ext/readme.txt"
-        },
-        {
-            "name": "extended_runnable_file.html"
         },
         {
             "name": "fragment/GlobalFilters.fragment.xml"
@@ -223,6 +243,9 @@
             "name": "tmp/ext/InvoiceHeaderStatusCard/Header.fragment.xml"
         },
         {
+            "name": "tmp/ext/InvoiceHeaderStatusCard/HeaderTotalNumber.fragment.xml"
+        },
+        {
             "name": "tmp/ext/InvoiceHeaderStatusCard/InvoiceStatus.fragment.xml"
         },
         {
@@ -277,9 +300,6 @@
             "name": "tmp/ext/readme.txt"
         },
         {
-            "name": "tmp/extended_runnable_file.html"
-        },
-        {
             "name": "tmp/fragment/GlobalFilters.fragment.xml"
         },
         {
@@ -323,6 +343,10 @@
             "name": "tmp/test/testOVPwithMock.html"
         },
         {
+            "name": "tmp-dbg/Component-preload.js",
+            "merged": true
+        },
+        {
             "name": "tmp-dbg/Component.js"
         },
         {
@@ -335,10 +359,18 @@
             "name": "tmp-dbg/ext/InvoiceHeaderStatusCard/Chart.controller.js"
         },
         {
+            "name": "tmp-dbg/ext/InvoiceHeaderStatusCard/Component-preload.js",
+            "merged": true
+        },
+        {
             "name": "tmp-dbg/ext/InvoiceHeaderStatusCard/Component.js"
         },
         {
             "name": "tmp-dbg/ext/OpenActionCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/OpenActionCard/Component-preload.js",
+            "merged": true
         },
         {
             "name": "tmp-dbg/ext/OpenActionCard/Component.js"
@@ -347,10 +379,18 @@
             "name": "tmp-dbg/ext/QuickLinkCard/Chart.controller.js"
         },
         {
+            "name": "tmp-dbg/ext/QuickLinkCard/Component-preload.js",
+            "merged": true
+        },
+        {
             "name": "tmp-dbg/ext/QuickLinkCard/Component.js"
         },
         {
             "name": "tmp-dbg/ext/TrackingShipmentCard/Chart.controller.js"
+        },
+        {
+            "name": "tmp-dbg/ext/TrackingShipmentCard/Component-preload.js",
+            "merged": true
         },
         {
             "name": "tmp-dbg/ext/TrackingShipmentCard/Component.js"

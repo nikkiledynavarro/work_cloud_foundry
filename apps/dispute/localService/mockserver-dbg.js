@@ -4,7 +4,7 @@ sap.ui.define([
 		"use strict";
 
 		var oMockServer,
-			_sAppModulePath = "com/erpis/shiperp/dispute/",
+			_sAppModulePath = "com/erpis/shiperp/dispute/hr7/",
 			_sJsonFilesModulePath = _sAppModulePath + "localService/mockdata";
 
 		return {

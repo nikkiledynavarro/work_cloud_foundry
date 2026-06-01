@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.hr7.quickpackewm.controller.App", {
+	return BaseController.extend("com.erpis.shiperp.quickpackewm.controller.App", {
 		onInit: function () {
 			var oViewModel = new JSONModel({});
 

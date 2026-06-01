@@ -8,7 +8,7 @@ sap.ui.define([], function () {
 		 * @returns {string} sValue with 2 digits rounded
 		 */
 		getTransparentLogoLink: function (sDummy) {
-			var sRootPath = jQuery.sap.getModulePath("com.erpis.shiperp.hr7.quickpackewm");
+			var sRootPath = jQuery.sap.getModulePath("com.erpis.shiperp.quickpackewm");
 			return sRootPath + "/image/shiperp_logo.png";
 		},
 		formatDateString: function (sDateString) {

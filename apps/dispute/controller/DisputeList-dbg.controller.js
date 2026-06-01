@@ -1,8 +1,8 @@
 sap.ui.define([
-	"com/erpis/shiperp/dispute/controller/BaseController",
+	"com/erpis/shiperp/dispute/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/dispute/model/formatter",
+	"com/erpis/shiperp/dispute/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Sorter",
@@ -12,7 +12,7 @@ sap.ui.define([
 	"sap/m/MessagePopoverItem",
 	"sap/m/Link",
 	"sap/ui/core/MessageType",
-	"com/erpis/shiperp/dispute/common/Utils"
+	"com/erpis/shiperp/dispute/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, Sorter, MessageToast, MessageBox, MessagePopover,
 	MessagePopoverItem, Link, MessageType, Utils) {
 	"use strict";

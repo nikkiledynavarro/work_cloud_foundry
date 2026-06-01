@@ -8,7 +8,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, MessageBox, Utils, Filter) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.closedelivery.hr7.controller.Master", {
+	return BaseController.extend("com.erpis.shiperp.closedelivery.controller.Master", {
 
 		formatter: formatter,
 

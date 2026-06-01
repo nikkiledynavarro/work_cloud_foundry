@@ -4,7 +4,7 @@ sap.ui.define([
 	], function (BaseController, JSONModel) {
 		"use strict";
 
-		return BaseController.extend("com.erpis.shiperp.trackshipmentewm.hr7.controller.App", {
+		return BaseController.extend("com.erpis.shiperp.trackshipmentewm.controller.App", {
 
 			onInit : function () {
 				var oViewModel,

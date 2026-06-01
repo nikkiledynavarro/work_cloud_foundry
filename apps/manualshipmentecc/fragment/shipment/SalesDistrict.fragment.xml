@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="Sales District" class="sapUiPopupWithPadding" items="{/xSERPERPxI_BZIRK}"
+		liveChange="handleShipToValueHelpSearch" confirm="onSalesDistrictConfirm" cancel="handleSalesDistrictValueHelpClose">
+		<StandardListItem title="{Districtname}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

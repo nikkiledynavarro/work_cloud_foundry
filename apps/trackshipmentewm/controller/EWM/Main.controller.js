@@ -1,5 +1,5 @@
 /*global location*/
-jQuery.sap.require("com.erpis.shiperp.trackshipmentewm.hr7.common.jquery_hotkeys");
+jQuery.sap.require("com.erpis.shiperp.trackshipmentewm.common.jquery_hotkeys");
 sap.ui.define([
 	"com/erpis/shiperp/trackshipmentewm/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -14,9 +14,9 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Token, Filter, MessageBox, MessageToast, Utils, HotkeyInterface, MessageType) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.trackshipmentewm.hr7.controller.EWM.Main", {
+	return BaseController.extend("com.erpis.shiperp.trackshipmentewm.controller.EWM.Main", {
 
-		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.trackshipmentewm.hr7.controller.EWM.Main"),
+		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.trackshipmentewm.controller.EWM.Main"),
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
 		// Commonly used controller attributes

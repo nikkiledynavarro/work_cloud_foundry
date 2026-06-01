@@ -1,0 +1,136 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<FlexBox class="sapUiTinyMarginTop" justifyContent="SpaceBetween" alignItems="Start"
+		wrap="{= ${device>/system/desktop} ? 'NoWrap': 'Wrap' }" renderType="Bare">
+		<Table id="tableLeftHU" fixedLayout="true"
+			width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? 'auto' : 'auto' }"
+			items="{path: 'local>/Freightunits', sorter: { path: 'freightunitkey', descending: false }}" mode="MultiSelect" growing="true"
+			growingThreshold="99999" class="border_lightgray_nobottom">
+			<headerToolbar>
+				<Toolbar>
+					<Title
+						text="Freight Units {= (${local>/basic/carrier_data/mps/mps} === 'X' &amp;&amp; ${local>/basic/carrier_data/mps/mpstype} === '02')? ' / Multi' : '' }"/>
+					<ToolbarSpacer/>
+					<ComboBox id="cbFilterLeftTable" tooltip="Filter HU" class="sapUiTinyMarginEnd" width="10rem" selectionChange="onFilterAdvanceHUType">
+						<core:Item text="Delivery HU" key="01"/>
+						<core:Item text="Shipment HU" key="04"/>
+					</ComboBox>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="5rem">
+					<Text text="HU No."/>
+				</Column>
+				<Column width="2rem">
+					<Text text="Matl" wrapping="false"/>
+				</Column>
+				<Column hAlign="Center" width="3rem">
+					<Text text="Wgt"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="UoM"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="L"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="W"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="H"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="UoM"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{path:'local>freightunitkey', formatter: '.formatter.removeLeadingZero'}" tooltip="{local>freightunitkey}" wrapping="false"/>
+						<Text text="{local>packmat}" tooltip="{local>packmat}" wrapping="false"/>
+						<Input editable="false" value="{path: 'local>weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+							tooltip="{path: 'local>weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						<Input editable="false" value="{local>weight_unit}"/>
+						<Input editable="false" value="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+							tooltip="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						<Input editable="false" value="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+							tooltip="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						<Input editable="false" value="{path: 'local>height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+							tooltip="{path: 'local>height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						<Input editable="false" value="{local>dims_unit}" tooltip="{local>dims_unit}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<FlexBox justifyContent="Center" direction="{= ${device>/system/desktop} ? 'Column' : 'Row' }"
+			width="{= ${device>/system/desktop} ? 'auto' : '100%' }" alignItems="Center">
+			<Button enabled="{= ${local>/basic} ? true : false }" type="Accept"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-right-arrow' : 'sap-icon://navigation-down-arrow' }" tooltip="Pack HU to HU"
+				press="onPackHuToHU" class="margin_5px"/>
+			<Button enabled="{= ${local>/basic} ? true : false }" type="Reject"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-left-arrow' : 'sap-icon://navigation-up-arrow' }" tooltip="Unpack HU from HU"
+				press="onUnpackHUFromHU"/>
+		</FlexBox>
+		<Table id="tableRightHU" selectionChange="onSelectionChange" fixedLayout="true"
+			width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? 'auto' : 'auto' }"
+			items="{path: 'local>/FreightunitHeaders', sorter: { path: 'freightunitkey', descending: false }}" mode="SingleSelectLeft" growing="true"
+			keyboardMode="Edit" growingThreshold="99999" class="border_lightgray_nobottom">
+			<headerToolbar>
+				<Toolbar>
+					<Title
+						text="Freight Units {= (${local>/basic/carrier_data/mps/mps} === 'X' &amp;&amp; ${local>/basic/carrier_data/mps/mpstype} === '02')? ' / Multi' : '' }"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://tree" tooltip="Show Packing Overview" press="onShowPackingOverview" type="Emphasized"></Button>
+					<ToolbarSeparator/>
+					<Button icon="sap-icon://add" tooltip="New HU" press="onAddNewHU" enabled="{= ${local>/basic} ? true : false }" class="sapUiTinyMarginEnd"/>
+					<Button press="onDeleteHU" icon="sap-icon://delete" tooltip="Delete Selected HU" enabled="{= ${local>/basic} ? true : false }"
+						class="sapUiTinyMarginEnd"/>
+					<Button press="onDeleteAllHU" icon="sap-icon://sys-cancel" tooltip="Delete all" enabled="{= ${local>/basic} ? true : false }"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="5rem">
+					<Text text="HU No."/>
+				</Column>
+				<Column width="2rem">
+					<Text text="Matl" wrapping="false"/>
+				</Column>
+				<Column hAlign="Center" width="3rem">
+					<Text text="Wgt"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="UoM"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="L"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="W"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="H"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="UoM"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{path:'local>freightunitkey', formatter: '.formatter.removeLeadingZero'}" tooltip="{local>freightunitkey}" wrapping="false"/>
+						<Text text="{local>packmat}" tooltip="{local>packmat}" wrapping="false"/>
+						<Input type="Number" value="{path: 'local>weight'}" change="onChangeHUHeaderEditableFields"
+							tooltip="{path: 'local>weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+						<Input value="{local>weight_unit}" tooltip="{local>weight_unit}" change="onChangeHUHeaderEditableFields"></Input>
+						<Input type="Number" value="{local>length}" change="onChangeHUHeaderEditableFields"
+							tooltip="{path: 'local>length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+						<Input type="Number" value="{path: 'local>width'}" change="onChangeHUHeaderEditableFields"
+							tooltip="{path: 'local>width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+						<Input type="Number" value="{path: 'local>height'}" change="onChangeHUHeaderEditableFields"
+							tooltip="{path: 'local>height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+						<Input value="{local>dims_unit}" tooltip="{local>dims_unit}" change="onChangeHUHeaderEditableFields"></Input>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</FlexBox>
+</core:FragmentDefinition>

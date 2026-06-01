@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.shiperp.hr7.quickpackewm.controller.Home" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+<mvc:View controllerName="com.erpis.shiperp.quickpackewm.controller.Home" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
 	<Page showHeader="false">
 		<FlexBox width="auto" height="100%" wrap="Wrap" justifyContent="Center" alignItems="Center"

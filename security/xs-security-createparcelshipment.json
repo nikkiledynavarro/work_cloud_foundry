@@ -1,0 +1,19 @@
+﻿{
+    "xsappname":  "comerpisshiperpcreateparcelshipment",
+    "tenant-mode":  "dedicated",
+    "scopes":  [
+                   {
+                       "name":  "$XSAPPNAME.User",
+                       "description":  "Access createparcelshipment"
+                   }
+               ],
+    "role-templates":  [
+                           {
+                               "name":  "User",
+                               "description":  "Access createparcelshipment",
+                               "scope-references":  [
+                                                        "$XSAPPNAME.User"
+                                                    ]
+                           }
+                       ]
+}

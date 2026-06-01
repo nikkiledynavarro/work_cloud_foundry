@@ -1,0 +1,2 @@
+sap.ui.define(["com/erpis/shiperp/freightorderplanning/controller/BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.freightorderplanning.controller.NotFound",{onLinkPressed:function(){this.showBusy();this.getRouter().navTo("freightUnit")}})});
+//# sourceMappingURL=NotFound.controller.js.map

@@ -14,7 +14,7 @@ sap.ui.define([
 	BusyIndicator) {
 	"use strict";
 
-	return Controller.extend("com.erpis.shiperp.closedelivery.hr7.controller.BaseController", {
+	return Controller.extend("com.erpis.shiperp.closedelivery.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.

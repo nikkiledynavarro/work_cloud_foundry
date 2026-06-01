@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ColumnListItem type="Inactive">
+		<cells>
+			<Text text="{local>Carrier}"/>
+			<Text text="{local>Service}"/>
+			<Text text="{local>Chargetype}"/>
+			<Text text="{local>Chargecode}"/>
+			<Text text="{local>Kschl}"/>
+			<Text text="{local>Rate}"/>
+			<Text text="{local>Perc}"/>
+			<Text text="{local>Waers}"/>
+			<Text text="{local>Kpein}"/>
+			<Text text="{local>Kmein}"/>
+			<Text text="{local>Knega}"/>
+			<Text text="{local>Krech}"/>
+		</cells>
+	</ColumnListItem>
+</core:FragmentDefinition>

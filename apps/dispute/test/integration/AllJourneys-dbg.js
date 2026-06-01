@@ -7,13 +7,13 @@ QUnit.config.autostart = false;
 
 sap.ui.require([
 	"sap/ui/test/Opa5",
-	"com/erpis/shiperp/dispute/test/integration/pages/Common",
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/Common",
 	"sap/ui/test/opaQunit",
-	"com/erpis/shiperp/dispute/test/integration/pages/Worklist",
-	"com/erpis/shiperp/dispute/test/integration/pages/Object",
-	"com/erpis/shiperp/dispute/test/integration/pages/NotFound",
-	"com/erpis/shiperp/dispute/test/integration/pages/Browser",
-	"com/erpis/shiperp/dispute/test/integration/pages/App"
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/Worklist",
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/Object",
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/NotFound",
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/Browser",
+	"com/erpis/shiperp/dispute/hr7/test/integration/pages/App"
 ], function (Opa5, Common) {
 	"use strict";
 	Opa5.extendConfig({
@@ -22,10 +22,10 @@ sap.ui.require([
 	});
 
 	sap.ui.require([
-		"com/erpis/shiperp/dispute/test/integration/WorklistJourney",
-		"com/erpis/shiperp/dispute/test/integration/ObjectJourney",
-		"com/erpis/shiperp/dispute/test/integration/NavigationJourney",
-		"com/erpis/shiperp/dispute/test/integration/NotFoundJourney"
+		"com/erpis/shiperp/dispute/hr7/test/integration/WorklistJourney",
+		"com/erpis/shiperp/dispute/hr7/test/integration/ObjectJourney",
+		"com/erpis/shiperp/dispute/hr7/test/integration/NavigationJourney",
+		"com/erpis/shiperp/dispute/hr7/test/integration/NotFoundJourney"
 	], function () {
 		QUnit.start();
 	});

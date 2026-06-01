@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (MockServer) {
 	"use strict";
 	var oMockServer,
-		_sAppModulePath = "com.erpis.shiperp.shipping.dashboard.shippingdashboard.ShipmentReport.ShipmentReport/";
+		_sAppModulePath = "com.erpis.shiperp.shipping.dashboard.shippingdashboardhr7.ShipmentReport.ShipmentReport/";
 
 	return {
 		/**

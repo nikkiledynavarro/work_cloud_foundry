@@ -17,7 +17,7 @@ sap.ui.define([
 	"use strict";
 	var MessageType = library.MessageType;
 
-	return BaseController.extend("com.erpis.shiperp.hr7.quickpackewm.controller.ShipmentDetails", {
+	return BaseController.extend("com.erpis.shiperp.quickpackewm.controller.ShipmentDetails", {
 
 		/**
 		 * @override

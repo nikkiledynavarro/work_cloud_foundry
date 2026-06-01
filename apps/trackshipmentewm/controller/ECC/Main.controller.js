@@ -1,5 +1,5 @@
 /*global location*/
-jQuery.sap.require("com.erpis.shiperp.trackshipmentewm.hr7.common.jquery_hotkeys");
+jQuery.sap.require("com.erpis.shiperp.trackshipmentewm.common.jquery_hotkeys");
 sap.ui.define([
 	"com/erpis/shiperp/trackshipmentewm/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -13,9 +13,9 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Token, Filter, MessageBox, MessageToast, Utils, HotkeyInterface) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.trackshipmentewm.hr7.controller.ECC.Main", {
+	return BaseController.extend("com.erpis.shiperp.trackshipmentewm.controller.ECC.Main", {
 
-		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.trackshipmentewm.hr7.controller.ECC.Main"),
+		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.trackshipmentewm.controller.ECC.Main"),
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
 		// Commonly used controller attributes
@@ -112,7 +112,7 @@ sap.ui.define([
 							this.getModel("local").setProperty("/aTrackShimentList", oData.MultiDelivery.Deliveries.results);
 						}
 						if (!this.oValidateTrackDialog) {
-							this.oValidateTrackDialog = sap.ui.xmlfragment("com.erpis.shiperp.trackshipmentewm.hr7.fragment.ECC.ValidateTrackShipment",
+							this.oValidateTrackDialog = sap.ui.xmlfragment("com.erpis.shiperp.trackshipmentewm.fragment.ECC.ValidateTrackShipment",
 								this);
 							this.getView().addDependent(this.oValidateTrackDialog);
 						}
@@ -194,7 +194,7 @@ sap.ui.define([
 							this.getModel("local").setProperty("/aTrackShimentList", oData.MultiDelivery.Deliveries.results);
 						}
 						if (!this.oValidateTrackDialog) {
-							this.oValidateTrackDialog = sap.ui.xmlfragment("com.erpis.shiperp.trackshipmentewm.hr7.fragment.ECC.ValidateTrackShipment",
+							this.oValidateTrackDialog = sap.ui.xmlfragment("com.erpis.shiperp.trackshipmentewm.fragment.ECC.ValidateTrackShipment",
 								this);
 							this.getView().addDependent(this.oValidateTrackDialog);
 						}

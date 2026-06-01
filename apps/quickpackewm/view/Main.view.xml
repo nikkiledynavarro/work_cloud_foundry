@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.shiperp.hr7.quickpackewm.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="com.erpis.shiperp.quickpackewm.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
@@ -72,7 +72,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Contents">
 						<uxap:blocks>
-							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.packing.ItemsPacking" type="XML"/>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.packing.ItemsPacking" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>

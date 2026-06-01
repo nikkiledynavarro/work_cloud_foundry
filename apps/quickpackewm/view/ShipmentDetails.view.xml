@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.shiperp.hr7.quickpackewm.controller.ShipmentDetails" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="com.erpis.shiperp.quickpackewm.controller.ShipmentDetails" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
@@ -24,7 +24,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="General">
 						<uxap:blocks>
-							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.general.TabGeneral" type="XML"/>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.TabGeneral" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -34,7 +34,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Partners">
 						<uxap:blocks>
-							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.partners.TabPartners" type="XML"/>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.partners.TabPartners" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -60,7 +60,7 @@
 			<!--	<uxap:subSections>-->
 			<!--		<uxap:ObjectPageSubSection title="Handling Units">-->
 			<!--			<uxap:blocks>-->
-			<!--				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>-->
+			<!--				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.handlingunits.TabHandlingUnits" type="XML"/>-->
 			<!--			</uxap:blocks>-->
 			<!--		</uxap:ObjectPageSubSection>-->
 			<!--	</uxap:subSections>-->
@@ -70,7 +70,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="HTS">
 						<uxap:blocks>
-							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.hr7.quickpackewm.fragment.HTS.HTSDisplay" type="XML"/>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.HTS.HTSDisplay" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>

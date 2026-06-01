@@ -1,8 +1,8 @@
 sap.ui.define([
-	"com/erpis/shiperp/dispute/controller/BaseController",
+	"com/erpis/shiperp/dispute/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/dispute/model/formatter",
+	"com/erpis/shiperp/dispute/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Sorter",
@@ -12,7 +12,7 @@ sap.ui.define([
 	"sap/m/MessagePopoverItem",
 	"sap/m/Link",
 	"sap/ui/core/MessageType",
-	"com/erpis/shiperp/dispute/common/Utils"
+	"com/erpis/shiperp/dispute/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, Sorter, MessageToast, MessageBox, MessagePopover,
 	MessagePopoverItem, Link, MessageType, Utils) {
 	"use strict";
@@ -235,8 +235,16 @@ sap.ui.define([
 
 		onDisputeIDPressed: function (oEvent) {
 			var oItem = oEvent.getSource();
+			var oBindingContext = oItem.getBindingContext();
+			if (!oBindingContext) {
+				oBindingContext = oItem.getBindingContext("local");
+			}
+			if (!oBindingContext) {
+				MessageBox.error("Cannot get Dispute Please contact Administrator");
+			}
+			var disputeID = oBindingContext.getProperty("ID");
 			this.getRouter().navTo("disputeDetail", {
-				DisputeID: oItem.getBindingContext().getProperty("ID")
+				DisputeID: disputeID
 			}, false);
 		},
 
@@ -625,6 +633,7 @@ sap.ui.define([
 
 		// This method will read the number of disputes for each type of dispute status and put inside "local" model
 		_readTheCountsForEachDisputeStatus: function (aFilters) {
+			var oController = this;
 			var oLocalModel = this.getModel("local"),
 				i = 0,
 				aDisputeStatusFilters = this._prepareDisputeStatusFilters(aFilters);
@@ -639,6 +648,7 @@ sap.ui.define([
 					success: function (oData) {
 						var sPath = "/" + sKey;
 						oLocalModel.setProperty(sPath, oData);
+						oController.hideBusy(); //added by Tim 14/9/2021
 					},
 					error: function (oError) {
 						jQuery.sap.log.info("Odata Error occured: " + oError.toString());
@@ -742,7 +752,7 @@ sap.ui.define([
 			var aDisputes = this.byId("idTableDisputeList").getSelectedItems();
 			var oDispute;
 			for (var i = 0; i < aDisputes.length; i++) {
-				oDispute = aDisputes[i].getBindingContext().getObject();
+				oDispute = aDisputes[i].getBindingContext("local").getObject(); //Tim fixes Axo No.4706
 				this.getModel().callFunction("/CancelDisputeHeader", {
 					method: "POST",
 					urlParameters: {
@@ -784,7 +794,7 @@ sap.ui.define([
 			var aDisputes = this.byId("idTableDisputeList").getSelectedItems();
 			var oDispute;
 			for (var i = 0; i < aDisputes.length; i++) {
-				oDispute = aDisputes[i].getBindingContext().getObject();
+				oDispute = aDisputes[i].getBindingContext("local").getObject(); //fixes by Tim on 14/9/2021
 				this.getModel().callFunction("/ProcessDisputeHeader", {
 					method: "POST",
 					urlParameters: {

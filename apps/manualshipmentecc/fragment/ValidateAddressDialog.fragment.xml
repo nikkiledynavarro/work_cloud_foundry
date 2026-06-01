@@ -1,0 +1,103 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="{i18n>validateMailDialogTitle}" class="sapUiContentPadding" contentWidth="800px">
+		<content>
+			<FlexBox width="100%">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="{i18n>originalAddress}" level="H2"/>
+						<Label text="Name/Attention"/>
+						<Input placeholder="Name" tooltip="Name" value="{local>/basic/partners/shipto/address/name1}" editable="false"/>
+						<Input placeholder="Attention" tooltip="Attention" value="{local>/basic/partners/shipto/address/name2}" editable="false"></Input>
+						<Label text="Address 1/2"/>
+						<Input placeholder="Address 1" tooltip="Address 1" value="{local>/basic/partners/shipto/address/street1}" editable="false"></Input>
+						<Input placeholder="Address 2" tooltip="Address 2" value="{local>/basic/partners/shipto/address/street2}" editable="false"></Input>
+						<Label text="Address 3/4"/>
+						<Input placeholder="Address 3" tooltip="Address 3" value="{local>/basic/partners/shipto/address/street3}" editable="false"></Input>
+						<Input placeholder="Address 4" tooltip="Address 4" value="{local>/basic/partners/shipto/address/street4}" editable="false"></Input>
+						<Label text="Customer"/>
+						<Input placeholder="Customer ID" tooltip="Customer ID" value="{local>/basic/partners/shipto/Customerid}" editable="false"></Input>
+						<Input placeholder="Email" tooltip="Email" value="{local>/basic/partners/shipto/address/email}" editable="false"></Input>
+						<Label text="Phone/Fax"></Label>
+						<Input placeholder="Phone" tooltip="Phone" value="{local>/basic/partners/shipto/address/telephone}" editable="false"></Input>
+						<Input placeholder="Fax" tooltip="Fax" value="{local>/basic/partners/shipto/address/fax}" editable="false"></Input>
+						<Label text="Fed/State TaxID"/>
+						<Input placeholder="Fed TaxID" tooltip="Fed TaxID" value="{local>/basic/partners/shipto/FedTaxId}" editable="false"></Input>
+						<Input placeholder="State TaxID" tooltip="State TaxID" value="{local>/basic/partners/shipto/StateTaxId}" editable="false"></Input>
+						<Label text="Country"/>
+						<Input placeholder="Country" value="{local>/basic/partners/shipto/address/country}" editable="false"></Input>
+						<Label text="Region"></Label>
+						<Input placeholder="State" value="{local>/basic/partners/shipto/address/state}" editable="false"></Input>
+						<Label text="City"/>
+						<Input placeholder="City" value="{local>/basic/partners/shipto/address/city}" editable="false"></Input>
+						<Label text="Postal"/>
+						<Input placeholder="Postal Code" value="{local>/basic/partners/shipto/address/postalcode}" editable="false"/>
+						<Label></Label>
+						<CheckBox text="Related Party" selected="{local>/basic/partners/shipto/related_party}" editable="false"/>
+						<Label></Label>
+					</f:content>
+				</f:SimpleForm>
+				<!--second form-->
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text="{i18n>newAddressFormTitle}" level="H2"/>
+						<Label text="Name/Attention"/>
+						<Input placeholder="Name" tooltip="Name" value="{local>/NewAddress/address/name1}" editable="false"></Input>
+						<Input placeholder="Attention" tooltip="Attention" value="{local>/NewAddress/address/name2}" editable="false"></Input>
+						<Label text="Address 1/2"/>
+						<Input placeholder="Address 1" tooltip="Address 1" value="{local>/NewAddress/address/street1}" editable="false"></Input>
+						<Input placeholder="Address 2" tooltip="Address 2" value="{local>/NewAddress/address/street2}" editable="false"></Input>
+						<Label text="Address 3/4"/>
+						<Input placeholder="Address 3" tooltip="Address 3" value="{local>/NewAddress/address/street3}" editable="false"></Input>
+						<Input placeholder="Address 4" tooltip="Address 4" value="{local>/NewAddress/address/street4}" editable="false"></Input>
+						<Label text="Customer"/>
+						<Input placeholder="Customer ID" tooltip="Customer ID" value="{local>/NewAddress/Customerid}" editable="false"></Input>
+						<Input placeholder="Email" tooltip="Email" value="{local>/NewAddress/address/email}" editable="false"></Input>
+						<Label text="Phone/Fax"></Label>
+						<Input placeholder="Phone" tooltip="Phone" value="{local>/NewAddress/address/telephone}" editable="false"></Input>
+						<Input placeholder="Fax" tooltip="Fax" value="{local>/NewAddress/address/fax}" editable="false"></Input>
+						<Label text="Fed/State TaxID"/>
+						<Input placeholder="Fed TaxID" tooltip="Fed TaxID" value="{local>/NewAddress/FedTaxId}" editable="false"></Input>
+						<Input placeholder="State TaxID" tooltip="State TaxID" value="{local>/NewAddress/StateTaxId}" editable="false"></Input>
+						<Label text="Country"/>
+						<Input value="{local>/NewAddress/address/country}" editable="false"/>
+						<Label text="Region"></Label>
+						<Input value="{local>/NewAddress/address/state}" editable="false"/>
+						<Label text="City"/>
+						<Input placeholder="City" value="{local>/NewAddress/address/city}" editable="false"></Input>
+						<Label text="Postal"/>
+						<Input placeholder="Postal Code" value="{local>/NewAddress/address/postalcode}" editable="false"/>
+						<Label></Label>
+						<CheckBox text="Related Party" selected="{local>/NewAddress/related_party}" editable="false"/>
+					</f:content>
+				</f:SimpleForm>
+			</FlexBox>
+			<FlexBox>
+				<Table items="{local>/aMessagesValidate}" class="border_lightgray_nobottom" mode="None">
+					<columns>
+						<Column vAlign="Middle" hAlign="Begin">
+							<Text text="Message"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<ObjectStatus state="{path: 'local>type', formatter: '.formatter.trafficIconMessages'}" class="sapUiSmallMarginEnd"
+									icon="{path: 'local>type', formatter: '.formatter.formatmessage'}" text="{local>title}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</FlexBox>
+		</content>
+		<beginButton>
+			<Button text="Use Proposed Address" press="onValidateAddressConfirmPress" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button press="onValidateEmailDialogClose" text="Keep Original Address"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

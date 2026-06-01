@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";return{getTransparentLogoLink:function(e){var t=jQuery.sap.getModulePath("com.erpis.shiperp.cancelacefiling");return t+"/image/shiperp_logo.png"},formatDateTime:function(e){if(e){var t=sap.ui.core.format.DateFormat.getDateInstance({pattern:"MM/dd/yyyy"});return t.format(new Date(e))}else{return e}}}});
+//# sourceMappingURL=formatter.js.map

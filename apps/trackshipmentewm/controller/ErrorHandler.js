@@ -4,7 +4,7 @@ sap.ui.define([
 ], function(UI5Object, MessageBox) {
 	"use strict";
 
-	return UI5Object.extend("com.erpis.shiperp.trackshipmentewm.hr7.controller.ErrorHandler", {
+	return UI5Object.extend("com.erpis.shiperp.trackshipmentewm.controller.ErrorHandler", {
 
 		/**
 		 * Handles application errors by automatically attaching to the model events and displaying errors when needed.

@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:fiori="sap.f">
+	<Dialog id="dialogAdvancedPacking" title="{i18n>advancedPackingByMaterial}" stretch="true" beforeClose="onAdvancedPackingDialogBeforeClose">
+		<content>
+			<Carousel id="AdvancePackingCarousel" class="sapUiContentPadding" height="100%" width="100%" arrowsPlacement="PageIndicator"
+				pageChanged="onAdvancedPackingPageChanged">
+				<core:Fragment id="advancedModeMaterial" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.createparcelshipment.fragment.packing.ItemsPacking"
+					type="XML"/>
+				<core:Fragment id="advancedModeHU" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.createparcelshipment.fragment.packing.HUPacking" type="XML"/>
+			</Carousel>
+		</content>
+		<endButton>
+			<Button text="{i18n>Close}" press="onCloseAdvancedPackingDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

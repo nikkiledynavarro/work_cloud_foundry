@@ -1,15 +1,15 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/dispute/controller/BaseController",
+	"com/erpis/shiperp/dispute/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/dispute/model/formatter",
+	"com/erpis/shiperp/dispute/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/m/UploadCollectionParameter",
-	"com/erpis/shiperp/dispute/common/Utils"
+	"com/erpis/shiperp/dispute/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, UploadCollectionParameter,
 	Utils) {
 	"use strict";
@@ -272,6 +272,9 @@ sap.ui.define([
 			if (aDisputes.length === 1) {
 				var oSelectedDispute = aDisputes[0].getBindingContext().getObject();
 				sUpdateStatus = oSelectedDispute.Status;
+			}else if (aDisputes.length > 1){
+				MessageBox.warning(this.oBundle.getText("detailUploadApprovalWarningAction"));
+				return;
 			}
 
 			this.getModel("local").setProperty("/selectedDisputeStatus", sUpdateStatus);
@@ -650,8 +653,13 @@ sap.ui.define([
 		},
 
 		onUploadComplete: function (oEvent) {
-			var oStatus = oEvent.getParameter("status");
-			if (oStatus === 200) {
+			var statusCode = oEvent.getParameter("status");
+
+			//Tim Added 29/10/2021 fixes 4717
+			if (!statusCode || statusCode === undefined) {
+				statusCode = oEvent.getParameters().mParameters.status; //eslint-disable-line
+			}
+			if (statusCode === 200 || statusCode === 201) {
 				MessageToast.show(this.oBundle.getText("sbUploadSuccess"));
 			}
 			oEvent.getSource().getBinding("items").refresh();

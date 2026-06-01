@@ -3,7 +3,7 @@
     "authenticationMethod":  "route",
     "routes":  [
                    {
-                       "source":  "^/?sap/opu/odata/(.*)$",
+                       "source":  "^/sap/opu/odata/(.*)$",
                        "target":  "/sap/opu/odata/$1",
                        "destination":  "virtual-hr7-destination",
                        "authenticationType":  "xsuaa",

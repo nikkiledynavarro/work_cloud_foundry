@@ -4,7 +4,7 @@ sap.ui.define([
 		"use strict";
 
 		function getFrameUrl (sHash, sUrlParameters) {
-			var sUrl = jQuery.sap.getResourcePath("com/erpis/shiperp/dispute/app", ".html");
+			var sUrl = jQuery.sap.getResourcePath("com/erpis/shiperp/dispute/hr7/app", ".html");
 			sUrlParameters = sUrlParameters ? "?" + sUrlParameters : "";
 
 			if (sHash) {
@@ -56,7 +56,7 @@ sap.ui.define([
 
 			getMockServer : function () {
 				return new Promise(function (success) {
-					Opa5.getWindow().sap.ui.require(["com/erpis/shiperp/dispute/localService/mockserver"], function (mockserver) {
+					Opa5.getWindow().sap.ui.require(["com/erpis/shiperp/dispute/hr7/localService/mockserver"], function (mockserver) {
 						success(mockserver.getMockServer());
 					});
 				});

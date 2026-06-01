@@ -1,6 +1,12 @@
 {
     "resources": [
         {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
             "name": "Component-dbg.js",
             "isDebug": true
         },
@@ -10,6 +16,9 @@
         },
         {
             "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
         },
         {
             "name": "common/Utils-dbg.js",
@@ -71,6 +80,12 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
+        },
+        {
             "name": "fragment/CarrierValueHelp.fragment.xml"
         },
         {
@@ -130,6 +145,9 @@
             "name": "localService/mockserver.js"
         },
         {
+            "name": "manifest-bundle.zip"
+        },
+        {
             "name": "manifest.json"
         },
         {
@@ -148,6 +166,22 @@
         },
         {
             "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
         },
         {
             "name": "test/integration/AllJourneys-dbg.js",
@@ -275,263 +309,6 @@
         },
         {
             "name": "test.html"
-        },
-        {
-            "name": "tmp/Component-preload.js",
-            "merged": true
-        },
-        {
-            "name": "tmp/Component.js"
-        },
-        {
-            "name": "tmp/common/Utils.js"
-        },
-        {
-            "name": "tmp/controller/App.controller.js"
-        },
-        {
-            "name": "tmp/controller/BaseController.js"
-        },
-        {
-            "name": "tmp/controller/DisputeDetail.controller.js"
-        },
-        {
-            "name": "tmp/controller/DisputeList.controller.js"
-        },
-        {
-            "name": "tmp/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp/controller/NotFound.controller.js"
-        },
-        {
-            "name": "tmp/css/style.css"
-        },
-        {
-            "name": "tmp/fragment/CarrierValueHelp.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/CompanyCodeValueHelp.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/CreditAtmUpdate.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DeletedListDispute.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DisputeConsolListDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DisputeDetailNoDataDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DisputeInfo.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DisputeListColumnListItem.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/NoteAndAttachment.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/StatusUpdate.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/TrackproInfo.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/UpdateReasonAndNote.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/UploadCollectionItemTemplate.fragment.xml"
-        },
-        {
-            "name": "tmp/i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
-        },
-        {
-            "name": "tmp/image/shiperp_logo.png"
-        },
-        {
-            "name": "tmp/index.html"
-        },
-        {
-            "name": "tmp/localService/metadata.xml"
-        },
-        {
-            "name": "tmp/localService/mockserver.js"
-        },
-        {
-            "name": "tmp/manifest.json"
-        },
-        {
-            "name": "tmp/model/formatter.js"
-        },
-        {
-            "name": "tmp/model/models.js"
-        },
-        {
-            "name": "tmp/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/NotFoundJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/ObjectJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/WorklistJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/opaTests.qunit.html"
-        },
-        {
-            "name": "tmp/test/integration/pages/App.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Browser.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Common.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/NotFound.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Object.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Worklist.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/shareOptions.js"
-        },
-        {
-            "name": "tmp/test/mockServer.html"
-        },
-        {
-            "name": "tmp/test/testsuite.qunit.html"
-        },
-        {
-            "name": "tmp/test/unit/allTests.js"
-        },
-        {
-            "name": "tmp/test/unit/helper/FakeI18nModel.js"
-        },
-        {
-            "name": "tmp/test/unit/model/formatter.js"
-        },
-        {
-            "name": "tmp/test/unit/model/models.js"
-        },
-        {
-            "name": "tmp/test/unit/unitTests.qunit.html"
-        },
-        {
-            "name": "tmp/test.html"
-        },
-        {
-            "name": "tmp/view/App.view.xml"
-        },
-        {
-            "name": "tmp/view/DisputeDetail.view.xml"
-        },
-        {
-            "name": "tmp/view/DisputeList.view.xml"
-        },
-        {
-            "name": "tmp/view/NotFound.view.xml"
-        },
-        {
-            "name": "tmp/view/ObjectNotFound.view.xml"
-        },
-        {
-            "name": "tmp-dbg/Component.js"
-        },
-        {
-            "name": "tmp-dbg/common/Utils.js"
-        },
-        {
-            "name": "tmp-dbg/controller/App.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/BaseController.js"
-        },
-        {
-            "name": "tmp-dbg/controller/DisputeDetail.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/DisputeList.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp-dbg/controller/NotFound.controller.js"
-        },
-        {
-            "name": "tmp-dbg/css/style.css"
-        },
-        {
-            "name": "tmp-dbg/localService/mockserver.js"
-        },
-        {
-            "name": "tmp-dbg/model/formatter.js"
-        },
-        {
-            "name": "tmp-dbg/model/models.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/NotFoundJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/ObjectJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/WorklistJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/App.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Browser.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Common.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/NotFound.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Object.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Worklist.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/shareOptions.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/allTests.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/helper/FakeI18nModel.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/model/formatter.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/model/models.js"
         },
         {
             "name": "view/App.view.xml"

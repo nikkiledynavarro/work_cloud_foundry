@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (UIComponent, Device, models, ErrorHandler) {
 	"use strict";
 
-	return UIComponent.extend("com.erpis.shiperp.hr7.quickpackewm.Component", {
+	return UIComponent.extend("com.erpis.shiperp.quickpackewm.Component", {
 
 		metadata: {
 			manifest: "json"

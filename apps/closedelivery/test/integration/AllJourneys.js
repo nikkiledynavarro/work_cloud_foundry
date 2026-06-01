@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "com.erpis.shiperp.closedelivery.hr7.closedelivery.view.",
+		viewNamespace: "com.erpis.shiperp.closedelivery.closedelivery.view.",
 		autoWait: true
 	});
 });

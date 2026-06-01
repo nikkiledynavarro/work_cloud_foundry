@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>holdlocationDialogTitleFDXE}" class="sapUiContentPadding" contentWidth="900px">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="4"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1"
+					singleContainerFullSize="false">
+					<f:content>
+						<Label text="Person Name"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdname}"/>
+						<Label text="Phone Number"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdnumber}"/>
+						<Label text="Company Name"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdcompany}"/>
+						<Label text="Phone Number"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdnumber_c}"/>
+						<Label text="Address 1"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdaddr}"/>
+						<Label text="Address 2"/>
+						<Input value=""/>
+						<Label text="City"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdcity}"/>
+						<Label text="Postal Code/ State/ Country"/>
+						<Input value="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdpost}"/>
+						<ComboBox items="{path: '/xSERPERPxI_PCSTATE', length: 999}" id="slHoldAtLocationStateFDXE" change="onUpdateDomesticDialog">
+							<!--selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdstate}"-->
+							<items>
+								<core:Item text="{Description}" key="{Region}"/>
+							</items>
+						</ComboBox>
+						<ComboBox selectedKey="{local>/basic/carrier_data/carrier_options/fdxe/opt02/holdctry}" items="{path: '/xSERPERPxI_PCCNTR', length: 999}"
+							app:nextUpdate="slHoldAtLocationStateFDXE" change="onUpdateDomesticDialog">
+							<items>
+								<core:Item text="{Name}" key="{Country}"/>
+							</items>
+						</ComboBox>
+						<Label text="Loc. Type"/>
+						<ComboBox items="{/xSERPERPxCDS_FDXE_HLTYP}">
+							<core:Item key="{Code}" text="{Description}"/>
+						</ComboBox>
+						<Label text="Loc. ID"/>
+						<Input value=""/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</content>
+		<!--<beginButton>-->
+		<!--	<Button text="Continue" type="Emphasized" press="onHoldLocationDetailPress"/>-->
+		<!--</beginButton>-->
+		<endButton>
+			<Button press="onHoldFDXELocationDetailClose" text="{i18n>Cancel}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

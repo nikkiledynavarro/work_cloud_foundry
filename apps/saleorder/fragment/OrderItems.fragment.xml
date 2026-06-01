@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Table class="border_lightgray_nobottom" fixedLayout="false" width="auto" alternateRowColors="true" items="{global>/OrderItems}">
+		<layoutData>
+			<FlexItemData growFactor="5"></FlexItemData>
+		</layoutData>
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="Order Items"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://add" tooltip="Add item" type="Ghost" press="onAddItem"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="Item"/>
+			</Column>
+			<Column >
+				<Text text="Material" width="10rem"/>
+			</Column>
+			<Column>
+				<Text text="Quantity"/>
+			</Column>
+			<Column>
+				<Text text="UoM"/>
+			</Column>
+			<Column vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Block">
+				<Text text="Plant"/>
+			</Column>
+			<Column vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Block">
+				<Text text="Delivery Date"/>
+			</Column>
+			<Column vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Block">
+				<Text text="Shipping Point"/>
+			</Column>
+			<Column>
+				<Text text=""/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{global>Item}"/>
+					<Input value="{global>Material}" showValueHelp="true" valueHelpRequest="onMaterialValueHelp" change="onMaterialChange"/>
+					<Input value="{global>Quantity}" type="Number" width="4rem"/>
+					<Input value="{global>UoM}" width="6rem" showValueHelp="true" valueHelpRequest="onUoMValueHelp"/>
+					<Input value="{global>Plant}" width="6rem" showValueHelp="true" valueHelpRequest="onPlantValueHelp"/>
+					<DatePicker valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" width="8rem" value="{global>DeliveryDate}"/>
+					<Input value="{global>ShippingPoint}" width="6rem" showValueHelp="true" valueHelpRequest="onShippingPointValueHelp"/>
+					<Button icon="sap-icon://delete" type="Reject" press="onDeleteItem" tooltip="Delete"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

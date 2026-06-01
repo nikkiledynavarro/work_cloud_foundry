@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="com.erpis.shiperp.trackshipmentewm.hr7.controller.NotFound"
+	controllerName="com.erpis.shiperp.trackshipmentewm.controller.NotFound"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
 

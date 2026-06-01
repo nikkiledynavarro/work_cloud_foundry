@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "com.erpis.shiperp.trackshipmentewm.hr7.view.",
+		viewNamespace: "com.erpis.shiperp.trackshipmentewm.view.",
 		autoWait: true
 	});
 });

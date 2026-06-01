@@ -15,7 +15,7 @@ sap.ui.define([
 	"use strict";
 	var MessageType = library.MessageType;
 
-	return BaseController.extend("com.erpis.shiperp.hr7.quickpackewm.controller.Main", {
+	return BaseController.extend("com.erpis.shiperp.quickpackewm.controller.Main", {
 
 		/**
 		 * @override
@@ -214,7 +214,7 @@ sap.ui.define([
 					}
 					if (oData.displayTrackPro) {
 						if (!this.oDialogLTL) {
-							this.oDialogLTL = sap.ui.xmlfragment("com.erpis.shiperp.hr7.quickpackewm.fragment.CreateProNumber", this);
+							this.oDialogLTL = sap.ui.xmlfragment("com.erpis.shiperp.quickpackewm.fragment.CreateProNumber", this);
 							this.getView().addDependent(this.oDialogLTL);
 						}
 						this.oDialogLTL.open();
@@ -269,7 +269,7 @@ sap.ui.define([
 		/**** Serial ****/
 		onSerialPress: function () {
 			if (!this.oSerialDialog) {
-				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.hr7.quickpackewm.fragment.SerialDialog", this);
+				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.quickpackewm.fragment.SerialDialog", this);
 				this.getView().addDependent(this.oSerialDialog);
 			}
 
@@ -294,7 +294,7 @@ sap.ui.define([
 
 		_SerialDialog: function () {
 			if (!this.oSerialDialog) {
-				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.hr7.quickpackewm.fragment.SerialDialog", this);
+				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.quickpackewm.fragment.SerialDialog", this);
 				this.getView().addDependent(this.oSerialDialog);
 			}
 
@@ -1040,7 +1040,7 @@ sap.ui.define([
 			this.getModel("local").setProperty("/UnSelectdHUs", aUnselectedHUs);
 
 			if (!this.oOverpackDialog) {
-				this.oOverpackDialog = sap.ui.xmlfragment("com.erpis.shiperp.hr7.quickpackewm.fragment.packing.OverpackDialog", this);
+				this.oOverpackDialog = sap.ui.xmlfragment("com.erpis.shiperp.quickpackewm.fragment.packing.OverpackDialog", this);
 				this.getView().addDependent(this.oOverpackDialog);
 			}
 			this.oOverpackDialog.open();

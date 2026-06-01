@@ -1,0 +1,99 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
+	<Dialog title="Select Search Option" showHeader="true" state="Success">
+		<FlexBox height="auto" alignItems="Start" justifyContent="End">
+			<items>
+				<DateRangeSelection width="auto" displayFormat="MM/dd/yyyy" change="onSearchOptionDialogFilterChange"
+					id="idMasterDaterangeSelectOptionDialog" enabled="true" class="sapUiTinyMarginBottom"/>
+			</items>
+		</FlexBox>
+		<IconTabBar expanded="{device>/isNoPhone}" class="sapUiNoContentPadding">
+			<items>
+				<IconTabFilter text="By Customer">
+					<SearchField width="auto" liveChange="onCustomerSearch" id="customerSearch" placeholder="Enter Customer / Name" class="sapUiTinyMargin"/>
+					<table:Table id="customerTable" rows="{ path : '/xSERPERPxI_CUSTS', sorter : { path : 'Name1', descending : false } }"
+						selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onCustomerConfirm">
+						<table:columns>
+							<table:Column sortProperty="Customer" filterProperty="Customer" width="7rem">
+								<Label text="Customer"/>
+								<table:template>
+									<Text text="{Customer}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column filterProperty="Name1" sortProperty="Name1">
+								<Label text="Name"/>
+								<table:template>
+									<Text text="{Name1}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column sortProperty="SalesOrg" filterProperty="SalesOrg" width="5rem" hAlign="Center">
+								<Label text="Sales Org"/>
+								<table:template>
+									<Text text="{SalesOrg}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column sortProperty="DistChannel" filterProperty="DistChannel" width="7rem" hAlign="Center">
+								<Label text="Dist. Channel"/>
+								<table:template>
+									<Text text="{DistChannel}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column sortProperty="Division" filterProperty="Division" width="5rem" hAlign="Center">
+								<Label text="Division"/>
+								<table:template>
+									<Text text="{Division}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+						</table:columns>
+					</table:Table>
+				</IconTabFilter>
+				<IconTabFilter text="Created By">
+					<SearchField width="auto" liveChange="onUserSearch" id="userSearch" placeholder="Enter User ID / Name" class="sapUiTinyMargin"/>
+					<table:Table id="userTable" rows="{ path : '/xSERPERPxI_USER', sorter : { path : 'Username', descending : false } }" selectionMode="Single"
+						selectionBehavior="RowOnly" rowSelectionChange="onUserConfirm">
+						<table:columns>
+							<table:Column sortProperty="Username" filterProperty="Username">
+								<Label text="User"/>
+								<table:template>
+									<Text text="{Username}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column filterProperty="Name" sortProperty="Name">
+								<Label text="Name"/>
+								<table:template>
+									<Text text="{Name}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+						</table:columns>
+					</table:Table>
+				</IconTabFilter>
+				<IconTabFilter text="By Document Number">
+					<SearchField width="auto" search="onDocumentSearch" id="documentSearch" placeholder="Enter Document Number" class="sapUiTinyMargin"/>
+					<table:Table id="documentTable" selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onDocumentConfirm"
+						rows="{ path : 'local>/SalesOrderListSet' }">
+						<table:columns>
+							<table:Column filterProperty="SalesNo" sortProperty="SalesNo">
+								<Label text="Sales Order"/>
+								<table:template>
+									<Text text="{local>SalesNo}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+							<table:Column filterProperty="CustomerReference" sortProperty="CustomerReference">
+								<Label text="Customer Reference"/>
+								<table:template>
+									<Text text="{local>CustomerReference}" wrapping="true"/>
+								</table:template>
+							</table:Column>
+						</table:columns>
+					</table:Table>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		<beginButton>
+			<Button text="Simulate" press="onNavigateToCreateSO" tooltip="Simulate sales order" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="Close" press="onFilterOptionClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

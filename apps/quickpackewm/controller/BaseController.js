@@ -15,7 +15,7 @@ sap.ui.define([
 	"use strict";
 	var MessageType = library.MessageType;
 
-	return Controller.extend("com.erpis.shiperp.hr7.quickpackewm.controller.BaseController", {
+	return Controller.extend("com.erpis.shiperp.quickpackewm.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.

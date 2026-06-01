@@ -19,12 +19,10 @@
 				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent" class="sapOvpKPIHeaderAggregateNumber numericContentHbox">
 				<HBox class="innerNumericContentHbox sapOvpKpiContent">
 					<!--<ovp:OVPNumericContent class="kpiHeaderClass" value="{local>/kpiNumber}" withMargin="false"/>-->
-					<List items="{ path : 'MainModel>/xSERPERPxI_SHDB_INV_STAT', parameters : { select : 'TotalOfHeaderStatus'}}"
+					<List id="headerTotalNumber" items="{ path : 'MainModel>/xSERPERPxI_SHDB_INV_STAT', parameters : { select : 'TotalOfHeaderStatus'}}"
 						class="innerNumericContentHbox sapOvpKpiContent">
 						<!--<StandardListItem title="{MainModel>NumberOfShipments}" class="kpiHeaderClass"/>-->
-						<CustomListItem>
-							<NumericContent class="kpiHeaderClass" value="{MainModel>TotalOfHeaderStatus}" withMargin="false"/>
-						</CustomListItem>
+						<core:Fragment fragmentName="com.erpis.shiperp.shippingdashboard.ext.InvoiceHeaderStatusCard.HeaderTotalNumber" type="XML"/>
 					</List>
 				</HBox>
 			</FlexBox>
@@ -34,8 +32,8 @@
 		<HBox>
 			<FlexBox displayInline="false" direction="Row" fitContainer="false" renderType="Div" justifyContent="Start" alignItems="Stretch"
 				wrap="NoWrap" alignContent="Stretch" backgroundDesign="Transparent">
-				<DatePicker id="idDateTimeHeader" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom" valueFormat="MM/dd/yyyy"/>
-				<!--<DateRangeSelection id="idDateTimeHeader" change="handleChange" valueFormat="MM/dd/yyyy" displayFormat="long"/>-->
+				<!--<DatePicker id="idDateTimeHeader" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom" valueFormat="MM/dd/yyyy"/>-->
+				<DateRangeSelection id="idDateTimeHeader" valueFormat="MM/dd/yyyy" displayFormat="long" change="handleChange"/>
 			</FlexBox>
 		</HBox>
 	</VBox>

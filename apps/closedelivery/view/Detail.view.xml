@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" controllerName="com.erpis.shiperp.closedelivery.hr7.controller.Detail" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View xmlns:core="sap.ui.core" controllerName="com.erpis.shiperp.closedelivery.controller.Detail" xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m" xmlns:sf="sap.ui.layout.form" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" height="100%">
 	<f:DynamicPage id="dynamicPageId" showFooter="true">
 		<!-- DynamicPage Title -->
@@ -38,7 +38,7 @@
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.closedelivery.hr7.fragment.ListItems" type="XML"/>
+			<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.closedelivery.fragment.ListItems" type="XML"/>
 		</f:content>
 		<!-- DynamicPage Footer -->
 		<f:footer>

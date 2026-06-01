@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>stationDialogTitle}" class="sapUiPopupWithPadding" items="{/xSERPERPxCDS_SHIPSTAT}"
+		liveChange="handleStationValueHelpSearch" confirm="onShippingStationConfirm" cancel="handleStationValueHelpClose">
+		<StandardListItem title="{ShipStation}" description="{Description}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

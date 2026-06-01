@@ -2,7 +2,7 @@
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
 	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
 	<edmx:Reference
-		Uri="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hd6-destination/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"
+		Uri="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hr7-destination/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"
 		xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
 	<edmx:DataServices m:DataServiceVersion="2.0">
 		<Schema Namespace="SERPERP.SHIP_DASH_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -51,9 +51,9 @@
 				<AssociationSet Name="assoc_10A2EB9691FE6A7BE7F0915DC52D5D5A" Association="SERPERP.SHIP_DASH_SRV.assoc_10A2EB9691FE6A7BE7F0915DC52D5D5A"
 					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="xSERPERPxI_SHDB_FILTER" Role="FromRole_assoc_10A2EB9691FE6A7BE7F0915DC52D5D5A"/><End EntitySet="xSERPERPxCDS_CARRIER" Role="ToRole_assoc_10A2EB9691FE6A7BE7F0915DC52D5D5A"/></AssociationSet>
 			</EntityContainer><atom:link rel="self"
-				href="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hd6-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/$metadata"
+				href="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hr7-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/$metadata"
 				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
-				href="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hd6-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/$metadata"
+				href="https://webidecp-da56ca735.dispatcher.us2.hana.ondemand.com/destinations/virtual-hr7-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/$metadata"
 				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

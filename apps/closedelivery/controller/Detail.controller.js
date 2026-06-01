@@ -12,7 +12,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Device, Utils, MessageBox, MessageToast, History, Filter) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.closedelivery.hr7.controller.Detail", {
+	return BaseController.extend("com.erpis.shiperp.closedelivery.controller.Detail", {
 
 		formatter: formatter,
 		sSalesNo: "", // key for navigate from master to detail,

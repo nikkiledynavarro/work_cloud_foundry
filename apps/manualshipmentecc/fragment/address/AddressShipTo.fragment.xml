@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Label text="Name / Attention"/>
+	<Input placeholder="Name" tooltip="Name" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/name1}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="Attention" tooltip="Attention" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/name2}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Address 1/2"/>
+	<Input placeholder="Address 1" tooltip="Address 1" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/street1}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="Address 2" tooltip="Address 2" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/street2}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Address 3/4"/>
+	<Input placeholder="Address 3" tooltip="Address 3" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/street3}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="Address 4" tooltip="Address 4" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/street4}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Customer"/>
+	<Input placeholder="Customer ID" tooltip="Customer ID" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/Customerid}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="Email" tooltip="Email" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/email}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Phone/Fax"></Label>
+	<Input placeholder="Phone" tooltip="Phone" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/telephone}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="Fax" tooltip="Fax" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/fax}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Fed / State TaxID"/>
+	<Input placeholder="Fed TaxID" tooltip="Fed TaxID" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/FedTaxId}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Input placeholder="State TaxID" tooltip="State TaxID" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/StateTaxId}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Country / Region"/>
+	<ComboBox id="cbShipToCountry" selectedKey="{local>/basic/partners/shipto/address/country}" tooltip="Country" change="onUpdateDomestic"
+		items="{path: '/xSERPERPxI_PCCNTR', length: 999}" app:nextUpdate="slShipToState"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }">
+		<items>
+			<core:Item text="{Name}" key="{Country}"/>
+		</items>
+	</ComboBox>
+	<ComboBox id="slShipToState" selectedKey="{local>/basic/partners/shipto/address/state}" tooltip="State" change="onUpdateDomestic"
+		items="{path: '/xSERPERPxI_PCSTATE', length: 999}" enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }">
+		<items>
+			<core:Item text="{Description}" key="{Region}"/>
+		</items>
+	</ComboBox>
+	<Label text="City"/>
+	<Input placeholder="City" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/city}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"></Input>
+	<Label text="Postal"/>
+	<Input placeholder="Postal Code" submit="onCheckManShipTo" value="{local>/basic/partners/shipto/address/postalcode}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+	<Label></Label>
+	<CheckBox text="Related Party" selected="{local>/basic/partners/shipto/related_party}"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+	<Label></Label>
+	<Button text="{i18n>validateAddr}" press="onValidateAddressPress" type="Emphasized"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+</core:FragmentDefinition>

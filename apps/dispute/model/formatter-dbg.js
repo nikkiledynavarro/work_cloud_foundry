@@ -1,6 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/ValueState",
-	"com/erpis/shiperp/dispute/common/Utils"
+	"com/erpis/shiperp/dispute/hr7/common/Utils"
 ], function (ValueState, Utils) {
 	"use strict";
 

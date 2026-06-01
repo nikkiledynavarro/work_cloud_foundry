@@ -1,0 +1,2 @@
+sap.ui.define(["com/erpis/shiperp/manualshipmentecc/controller/BaseController","sap/ui/model/json/JSONModel"],function(e,n){"use strict";return e.extend("com.erpis.shiperp.manualshipmentecc.controller.App",{onInit:function(){var e=new n({});this.setModel(e,"appView");this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}})});
+//# sourceMappingURL=App.controller.js.map
