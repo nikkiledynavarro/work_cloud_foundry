@@ -5,7 +5,7 @@
                    {
                        "source":  "^/sap/opu/odata/(.*)$",
                        "target":  "/sap/opu/odata/$1",
-                       "destination":  "virtual-s23-destination",
+                       "destination":  "S23",
                        "authenticationType":  "xsuaa",
                        "csrfProtection":  false
                    },
