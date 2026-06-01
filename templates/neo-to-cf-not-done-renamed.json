@@ -1,0 +1,197 @@
+{
+    "mtaId":  "shiperp-fiori-neo-migration-not-done-renamed",
+    "mtaDescription":  "Migrated ShipERP Neo HTML5 apps from Not Done list with requested project names.",
+    "ui5Version":  "1.125.1",
+    "defaultDestination":  "virtual-hr7-destination",
+    "apps":  [
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "trackshipment",
+                     "neoZip":  "trackshipment.zip",
+                     "appName":  "trackshipment",
+                     "title":  "TrackShipment",
+                     "description":  "TrackShipment",
+                     "oldNamespace":  "com.erpis.shiperp.trackshipment",
+                     "newNamespace":  "com.erpis.shiperp.trackshipment",
+                     "sapAppId":  "com.erpis.shiperp.trackshipment",
+                     "sapCloudService":  "comerpisshiperptrackshipment",
+                     "semanticObject":  "TrackShipment",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hd6-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/track_shipment_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "trackshipmentewm",
+                     "neoZip":  "trackshipmentewm.zip",
+                     "appName":  "trackshipmentewm",
+                     "title":  "TrackShipmentEWM",
+                     "description":  "TrackShipmentEWM",
+                     "oldNamespace":  "com.erpis.shiperp.trackshipmentewm.hr7",
+                     "newNamespace":  "com.erpis.shiperp.trackshipmentewm",
+                     "sapAppId":  "com.erpis.shiperp.trackshipmentewm",
+                     "sapCloudService":  "comerpisshiperptrackshipmentewm",
+                     "semanticObject":  "TrackShipmentEWM",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/shipewm_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "disputehr7",
+                     "neoZip":  "disputehr7.zip",
+                     "appName":  "dispute",
+                     "title":  "Dispute",
+                     "description":  "Dispute",
+                     "oldNamespace":  "com.erpis.shiperp.dispute.hr7",
+                     "newNamespace":  "com.erpis.shiperp.dispute",
+                     "sapAppId":  "com.erpis.shiperp.dispute",
+                     "sapCloudService":  "comerpisshiperpdispute",
+                     "semanticObject":  "Dispute",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frta_disp_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "closedelivery",
+                     "neoZip":  "closedelivery.zip",
+                     "appName":  "closedelivery",
+                     "title":  "closedelivery",
+                     "description":  "closedelivery",
+                     "oldNamespace":  "com.erpis.shiperp.closedelivery.hr7",
+                     "newNamespace":  "com.erpis.shiperp.closedelivery",
+                     "sapAppId":  "com.erpis.shiperp.closedelivery",
+                     "sapCloudService":  "comerpisshiperpclosedelivery",
+                     "semanticObject":  "closedelivery",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/sap/zerpis_close_delivery_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "freightaudit",
+                     "neoZip":  "freightaudit.zip",
+                     "appName":  "freightaudit",
+                     "title":  "FreightAudit",
+                     "description":  "FreightAudit",
+                     "oldNamespace":  "com.erpis.shiperp.freightaudit",
+                     "newNamespace":  "com.erpis.shiperp.freightaudit",
+                     "sapAppId":  "com.erpis.shiperp.freightaudit",
+                     "sapCloudService":  "comerpisshiperpfreightaudit",
+                     "semanticObject":  "FreightAudit",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hd6-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frt_audit_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "saleorder",
+                     "neoZip":  "salesorderhr7.zip",
+                     "appName":  "saleorder",
+                     "title":  "SaleOrder",
+                     "description":  "SaleOrder",
+                     "oldNamespace":  "com.erpis.shiperp.salesorder.hr7",
+                     "newNamespace":  "com.erpis.shiperp.saleorder",
+                     "sapAppId":  "com.erpis.shiperp.saleorder",
+                     "sapCloudService":  "comerpisshiperpsaleorder",
+                     "semanticObject":  "SaleOrder",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/so_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "quickpackhr7",
+                     "neoZip":  "quickpackhr7.zip",
+                     "appName":  "quickpackecc",
+                     "title":  "QuickPackECC",
+                     "description":  "QuickPackECC",
+                     "oldNamespace":  "com.erpis.shiperp.quickpack.hr7",
+                     "newNamespace":  "com.erpis.shiperp.quickpackecc",
+                     "sapAppId":  "com.erpis.shiperp.quickpackecc",
+                     "sapCloudService":  "comerpisshiperpquickpackecc",
+                     "semanticObject":  "QuickPackECC",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/QUICK_PACK_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "quickpackewm",
+                     "neoZip":  "quickpackewm.zip",
+                     "appName":  "quickpackewm",
+                     "title":  "QuickPackEWM",
+                     "description":  "QuickPackEWM",
+                     "oldNamespace":  "com.erpis.shiperp.hr7.quickpackewm",
+                     "newNamespace":  "com.erpis.shiperp.quickpackewm",
+                     "sapAppId":  "com.erpis.shiperp.quickpackewm",
+                     "sapCloudService":  "comerpisshiperpquickpackewm",
+                     "semanticObject":  "QuickPackEWM",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/ewm_qp_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "oldAppProjectName":  "shippingdashboardhr7",
+                     "neoZip":  "shippingdashboardhr7.zip",
+                     "appName":  "shippingdashboard",
+                     "title":  "ShippingDashboard",
+                     "description":  "ShippingDashboard",
+                     "oldNamespace":  "com.erpis.shiperp.shippingdashboardhr7",
+                     "newNamespace":  "com.erpis.shiperp.shippingdashboard",
+                     "sapAppId":  "com.erpis.shiperp.shippingdashboard",
+                     "sapCloudService":  "comerpisshiperpshippingdashboard",
+                     "semanticObject":  "ShippingDashboard",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "Northwind",
+                     "odataPath":  "/virtual-hr7-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/",
+                     "routes":  [
+
+                                ]
+                 }
+             ]
+}

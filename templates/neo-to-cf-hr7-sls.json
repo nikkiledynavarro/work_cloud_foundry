@@ -1,0 +1,407 @@
+{
+    "mtaId":  "shiperp-fiori-neo-migration-hr7-sls",
+    "mtaDescription":  "Migrated ShipERP Neo HTML5 apps connected to HR7 and SLS.",
+    "ui5Version":  "1.125.1",
+    "defaultDestination":  "virtual-hr7-destination",
+    "apps":  [
+                 {
+                     "enabled":  true,
+                     "neoZip":  "cancelhr7.zip",
+                     "appName":  "cancelhr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.cancel.hr7",
+                     "newNamespace":  "com.erpis.shiperp.cancel.hr7",
+                     "sapCloudService":  "comerpisshiperpcancelhr7",
+                     "semanticObject":  "cancelhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/cancel_ship_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "disputehr7.zip",
+                     "appName":  "disputehr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.dispute.hr7",
+                     "newNamespace":  "com.erpis.shiperp.dispute.hr7",
+                     "sapCloudService":  "comerpisshiperpdisputehr7",
+                     "semanticObject":  "disputehr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frta_disp_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "disputesls.zip",
+                     "appName":  "disputesls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.disputesls",
+                     "newNamespace":  "com.erpis.shiperp.sls.disputesls",
+                     "sapCloudService":  "comerpisshiperpdisputesls",
+                     "semanticObject":  "disputesls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frta_disp_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "freightaudithr7.zip",
+                     "appName":  "freightaudithr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.freightaudit.hr7",
+                     "newNamespace":  "com.erpis.shiperp.freightaudit.hr7",
+                     "sapCloudService":  "comerpisshiperpfreightaudithr7",
+                     "semanticObject":  "freightaudithr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frt_audit_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "freightauditsls.zip",
+                     "appName":  "freightauditsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.freightauditsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.freightauditsls",
+                     "sapCloudService":  "comerpisshiperpfreightauditsls",
+                     "semanticObject":  "freightauditsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/frt_audit_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "freightordersls.zip",
+                     "appName":  "freightordersls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.freightordersls",
+                     "newNamespace":  "com.erpis.shiperp.sls.freightordersls",
+                     "sapCloudService":  "comerpisshiperpfreightordersls",
+                     "semanticObject":  "freightordersls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/SERPTM/FRT_ORDPL_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "manualecchr7.zip",
+                     "appName":  "manualecchr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.manualecc.hr7",
+                     "newNamespace":  "com.erpis.shiperp.manualecc.hr7",
+                     "sapCloudService":  "comerpisshiperpmanualecchr7",
+                     "semanticObject":  "manualecchr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/parcel_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "manualewmsls.zip",
+                     "appName":  "manualewmsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.manualewmsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.manualewmsls",
+                     "sapCloudService":  "comerpisshiperpmanualewmsls",
+                     "semanticObject":  "manualewmsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/shipewm_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "manualsls.zip",
+                     "appName":  "manualsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.manualsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.manualsls",
+                     "sapCloudService":  "comerpisshiperpmanualsls",
+                     "semanticObject":  "manualsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/parcel_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "parcelhr7.zip",
+                     "appName":  "parcelhr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.parcel.hr7",
+                     "newNamespace":  "com.erpis.shiperp.parcel.hr7",
+                     "sapCloudService":  "comerpisshiperpparcelhr7",
+                     "semanticObject":  "parcelhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/parcel_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "parcelsls.zip",
+                     "appName":  "parcelsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.parcelsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.parcelsls",
+                     "sapCloudService":  "comerpisshiperpparcelsls",
+                     "semanticObject":  "parcelsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/parcel_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "quickpackhr7.zip",
+                     "appName":  "quickpackhr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.quickpack.hr7",
+                     "newNamespace":  "com.erpis.shiperp.quickpack.hr7",
+                     "sapCloudService":  "comerpisshiperpquickpackhr7",
+                     "semanticObject":  "quickpackhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/QUICK_PACK_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "quickpacksls.zip",
+                     "appName":  "quickpacksls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.quickpacksls",
+                     "newNamespace":  "com.erpis.shiperp.sls.quickpacksls",
+                     "sapCloudService":  "comerpisshiperpquickpacksls",
+                     "semanticObject":  "quickpacksls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/QUICK_PACK_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "salesorderhr7.zip",
+                     "appName":  "salesorderhr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.salesorder.hr7",
+                     "newNamespace":  "com.erpis.shiperp.salesorder.hr7",
+                     "sapCloudService":  "comerpisshiperpsalesorderhr7",
+                     "semanticObject":  "salesorderhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/so_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "salesordersls.zip",
+                     "appName":  "salesordersls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.salesordersls",
+                     "newNamespace":  "com.erpis.shiperp.sls.salesordersls",
+                     "sapCloudService":  "comerpisshiperpsalesordersls",
+                     "semanticObject":  "salesordersls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/so_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "shipewmhr7.zip",
+                     "appName":  "shipewmhr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.shipewm.hr7",
+                     "newNamespace":  "com.erpis.shiperp.shipewm.hr7",
+                     "sapCloudService":  "comerpisshiperpshipewmhr7",
+                     "semanticObject":  "shipewmhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/shipewm_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "shipewmsls.zip",
+                     "appName":  "shipewmsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.shipewmsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.shipewmsls",
+                     "sapCloudService":  "comerpisshiperpshipewmsls",
+                     "semanticObject":  "shipewmsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/shipewm_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "shippingdashboardhr7.zip",
+                     "appName":  "shippingdashboardhr7",
+                     "title":  "{{app_title}}",
+                     "description":  "{{app_description}}",
+                     "oldNamespace":  "com.erpis.shiperp.shippingdashboardhr7",
+                     "newNamespace":  "com.erpis.shiperp.shippingdashboardhr7",
+                     "sapCloudService":  "comerpisshiperpshippingdashboardhr7",
+                     "semanticObject":  "shippingdashboardhr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "Northwind",
+                     "odataPath":  "/virtual-hr7-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "shippingdashboardsls.zip",
+                     "appName":  "shippingdashboardsls",
+                     "title":  "{{app_title}}",
+                     "description":  "{{app_description}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.shippingdashboardsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.shippingdashboardsls",
+                     "sapCloudService":  "comerpisshiperpshippingdashboardsls",
+                     "semanticObject":  "shippingdashboardsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "Northwind",
+                     "odataPath":  "/virtual-erps4sales-destination/sap/opu/odata/serperp/SHIP_DASH_SRV/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "trackshipmentsls.zip",
+                     "appName":  "trackshipmentsls",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.sls.trackshipmentsls",
+                     "newNamespace":  "com.erpis.shiperp.sls.trackshipmentsls",
+                     "sapCloudService":  "comerpisshiperptrackshipmentsls",
+                     "semanticObject":  "trackshipmentsls",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-erps4sales-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/shipewm_srv/",
+                     "routes":  [
+
+                                ]
+                 },
+                 {
+                     "enabled":  true,
+                     "neoZip":  "ztrackshipmenthr7.zip",
+                     "appName":  "ztrackshipmenthr7",
+                     "title":  "{{appTitle}}",
+                     "description":  "{{appDescription}}",
+                     "oldNamespace":  "com.erpis.shiperp.trackshipment.hr7",
+                     "newNamespace":  "com.erpis.shiperp.trackshipment.hr7",
+                     "sapCloudService":  "comerpisshiperpztrackshipmenthr7",
+                     "semanticObject":  "ztrackshipmenthr7",
+                     "action":  "display",
+                     "subTitle":  "",
+                     "icon":  "sap-icon://app",
+                     "destinationName":  "virtual-hr7-destination",
+                     "odataPath":  "/sap/opu/odata/serperp/track_shipment_srv/",
+                     "routes":  [
+
+                                ]
+                 }
+             ]
+}

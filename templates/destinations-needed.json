@@ -1,0 +1,91 @@
+﻿{
+    "generatedAt":  "2026-05-27T10:05:39",
+    "destinationNames":  [
+                             "ES5",
+                             "Northwind",
+                             "virtual-er8-destination",
+                             "virtual-erps4sales-destination",
+                             "virtual-hd6-destination",
+                             "virtual-hr7-destination",
+                             "virtual-s23-destination"
+                         ],
+    "destinations":  [
+                         {
+                             "Name":  "ES5",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "Northwind",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "virtual-er8-destination",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "virtual-erps4sales-destination",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "virtual-hd6-destination",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "virtual-hr7-destination",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         },
+                         {
+                             "Name":  "virtual-s23-destination",
+                             "Type":  "HTTP",
+                             "URL":  "",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "",
+                             "AdditionalProperties":  {
+
+                                                      }
+                         }
+                     ]
+}

@@ -1,0 +1,109 @@
+{
+    "generatedAt":  "2026-05-27T10:10:36",
+    "sourceInventory":  "C:\\Users\\nikki\\OneDrive\\Desktop\\AI\\Codex\\Work\\neo_to_cf\\neo-destination-inventory.md",
+    "notes":  [
+                  "Secrets cannot be exported back from Neo. Fill User/Password for BasicAuthentication destinations before applying.",
+                  "Fill CloudConnectorLocationId only if the CF subaccount uses a non-default Cloud Connector location."
+              ],
+    "missingFromInventory":  [
+
+                             ],
+    "destinations":  [
+                         {
+                             "Name":  "ES5",
+                             "Type":  "HTTP",
+                             "URL":  "https://sapes5.sapdevcenter.com",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         },
+                         {
+                             "Name":  "Northwind",
+                             "Type":  "HTTP",
+                             "URL":  "https://services.odata.org",
+                             "ProxyType":  "Internet",
+                             "Authentication":  "NoAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+
+                                                      },
+                             "SecretRequired":  false
+                         },
+                         {
+                             "Name":  "virtual-er8-destination",
+                             "Type":  "HTTP",
+                             "URL":  "https://virtual-erper8.erp-is.com:8443",
+                             "ProxyType":  "OnPremise",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+                                                          "CloudConnectorLocationId":  ""
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         },
+                         {
+                             "Name":  "virtual-erps4sales-destination",
+                             "Type":  "HTTP",
+                             "URL":  "https://virtual-erps4sales.erp-is.com:50000",
+                             "ProxyType":  "OnPremise",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+                                                          "CloudConnectorLocationId":  ""
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         },
+                         {
+                             "Name":  "virtual-hd6-destination",
+                             "Type":  "HTTP",
+                             "URL":  "http://virtual-s4hd6.erp-is.com:8000",
+                             "ProxyType":  "OnPremise",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+                                                          "CloudConnectorLocationId":  ""
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         },
+                         {
+                             "Name":  "virtual-hr7-destination",
+                             "Type":  "HTTP",
+                             "URL":  "http://virtual-s4hr7.erp-is.com:50000",
+                             "ProxyType":  "OnPremise",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+                                                          "CloudConnectorLocationId":  ""
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         },
+                         {
+                             "Name":  "virtual-s23-destination",
+                             "Type":  "HTTP",
+                             "URL":  "https://virtual-erps42023.erp-is.com:4430",
+                             "ProxyType":  "OnPremise",
+                             "Authentication":  "BasicAuthentication",
+                             "Description":  "Migrated from Neo destination inventory",
+                             "AdditionalProperties":  {
+                                                          "CloudConnectorLocationId":  ""
+                                                      },
+                             "User":  "",
+                             "Password":  "",
+                             "SecretRequired":  true
+                         }
+                     ]
+}
