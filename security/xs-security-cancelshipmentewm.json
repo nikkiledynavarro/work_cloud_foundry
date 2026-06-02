@@ -1,16 +1,16 @@
-{
-    "xsappname":  "comerpisshiperpfreightorderplan",
+﻿{
+    "xsappname": "comerpisshiperpcancelshipmentewm",
     "tenant-mode":  "dedicated",
     "scopes":  [
                    {
                        "name":  "$XSAPPNAME.User",
-                       "description":  "Access {{appTitle}}"
+                       "description": "Access cancelshipmentewm"
                    }
                ],
     "role-templates":  [
                            {
                                "name":  "User",
-                               "description":  "Access {{appTitle}}",
+                               "description": "Access cancelshipmentewm",
                                "scope-references":  [
                                                         "$XSAPPNAME.User"
                                                     ]

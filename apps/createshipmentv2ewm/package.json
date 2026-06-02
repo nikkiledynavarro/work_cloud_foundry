@@ -1,10 +1,10 @@
-{
-    "name":  "parcelewm",
+﻿{
+    "name": "createshipmentv2ewm",
     "version":  "1.0.0",
     "private":  true,
     "scripts":  {
                     "build":  "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-                    "package":  "cd dist \u0026\u0026 bestzip parcelewm.zip *"
+                    "package":  "cd dist \u0026\u0026 bestzip createshipmentv2ewm.zip *"
                 },
     "devDependencies":  {
                             "@ui5/cli":  "^3.11.0",

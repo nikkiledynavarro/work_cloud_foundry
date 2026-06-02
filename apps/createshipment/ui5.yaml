@@ -1,13 +1,13 @@
-specVersion: "3.0"
+﻿specVersion: "3.0"
 metadata:
-  name: cancelshipewm
+  name: createshipment
 type: application
 resources:
   configuration:
     paths:
       webapp: .
 framework:
-  name: SAPUI5
+  name: createshipment
   version: "1.125.1"
   libraries:
     - name: sap.ui.core

@@ -61,63 +61,7 @@ modules:
           existing_destinations_policy: update
     build-parameters:
       no-source: true
-  - name: carrierperformancereport
-    type: html5
-    path: apps/carrierperformancereport
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
 
-  - name: carrierperformancereport-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: carrierperformancereport-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/carrierperformancereport
-      requires:
-        - name: carrierperformancereport
-          artifacts:
-            - carrierperformancereport.zip
-          target-path: resources/carrierperformancereport/
-
-  - name: carrierperformancereport-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: carrierperformancereport-destination-service
-        parameters:
-          content-target: true
-      - name: carrierperformancereport-app-front-service
-        parameters:
-          service-key:
-            name: carrierperformancereport-app-front-service-key
-      - name: carrierperformancereport-xsuaa-service
-        parameters:
-          service-key:
-            name: carrierperformancereport-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: carrierperformancereport-app-front-service
-              ServiceInstanceName: carrierperformancereport-app-front-service
-              ServiceKeyName: carrierperformancereport-app-front-service-key
-              sap.cloud.service: comerpisshiperpcarrierperformancereport
-            - Name: carrierperformancereport-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: carrierperformancereport-xsuaa-service
-              ServiceKeyName: carrierperformancereport-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcarrierperformancereport
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
   - name: freightaudithr7
     type: html5
     path: apps/freightaudithr7
@@ -175,9 +119,10 @@ modules:
           existing_destinations_policy: update
     build-parameters:
       no-source: true
-  - name: freightorderplan
+
+  - name: createshipmentv2ewm
     type: html5
-    path: apps/freightorderplan
+    path: apps/createshipmentv2ewm
     build-parameters:
       builder: custom
       commands:
@@ -187,54 +132,54 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: freightorderplan-app-content
+  - name: createshipmentv2ewm-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: freightorderplan-app-front-service
+      - name: createshipmentv2ewm-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/freightorderplan
+      build-result: resources/createshipmentv2ewm
       requires:
-        - name: freightorderplan
+        - name: createshipmentv2ewm
           artifacts:
-            - freightorderplan.zip
-          target-path: resources/freightorderplan/
+            - createshipmentv2ewm.zip
+          target-path: resources/createshipmentv2ewm/
 
-  - name: freightorderplan-destination-content
+  - name: createshipmentv2ewm-destination-content
     type: com.sap.application.content
     requires:
-      - name: freightorderplan-destination-service
+      - name: createshipmentv2ewm-destination-service
         parameters:
           content-target: true
-      - name: freightorderplan-app-front-service
+      - name: createshipmentv2ewm-app-front-service
         parameters:
           service-key:
-            name: freightorderplan-app-front-service-key
-      - name: freightorderplan-xsuaa-service
+            name: createshipmentv2ewm-app-front-service-key
+      - name: createshipmentv2ewm-xsuaa-service
         parameters:
           service-key:
-            name: freightorderplan-xsuaa-service-key
+            name: createshipmentv2ewm-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: freightorderplan-app-front-service
-              ServiceInstanceName: freightorderplan-app-front-service
-              ServiceKeyName: freightorderplan-app-front-service-key
-              sap.cloud.service: comerpisshiperpfreightorderplan
-            - Name: freightorderplan-xsuaa-service
+            - Name: createshipmentv2ewm-app-front-service
+              ServiceInstanceName: createshipmentv2ewm-app-front-service
+              ServiceKeyName: createshipmentv2ewm-app-front-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentv2ewm
+            - Name: createshipmentv2ewm-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: freightorderplan-xsuaa-service
-              ServiceKeyName: freightorderplan-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpfreightorderplan
+              ServiceInstanceName: createshipmentv2ewm-xsuaa-service
+              ServiceKeyName: createshipmentv2ewm-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentv2ewm
           existing_destinations_policy: update
     build-parameters:
       no-source: true
-  - name: parcelewm
+  - name: createshipment
     type: html5
-    path: apps/parcelewm
+    path: apps/createshipment
     build-parameters:
       builder: custom
       commands:
@@ -244,219 +189,48 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: parcelewm-app-content
+  - name: createshipment-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: parcelewm-app-front-service
+      - name: createshipment-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/parcelewm
+      build-result: resources/createshipment
       requires:
-        - name: parcelewm
+        - name: createshipment
           artifacts:
-            - parcelewm.zip
-          target-path: resources/parcelewm/
+            - createshipment.zip
+          target-path: resources/createshipment/
 
-  - name: parcelewm-destination-content
+  - name: createshipment-destination-content
     type: com.sap.application.content
     requires:
-      - name: parcelewm-destination-service
+      - name: createshipment-destination-service
         parameters:
           content-target: true
-      - name: parcelewm-app-front-service
+      - name: createshipment-app-front-service
         parameters:
           service-key:
-            name: parcelewm-app-front-service-key
-      - name: parcelewm-xsuaa-service
+            name: createshipment-app-front-service-key
+      - name: createshipment-xsuaa-service
         parameters:
           service-key:
-            name: parcelewm-xsuaa-service-key
+            name: createshipment-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: parcelewm-app-front-service
-              ServiceInstanceName: parcelewm-app-front-service
-              ServiceKeyName: parcelewm-app-front-service-key
-              sap.cloud.service: comerpisshiperpparcelewm
-            - Name: parcelewm-xsuaa-service
+            - Name: createshipment-app-front-service
+              ServiceInstanceName: createshipment-app-front-service
+              ServiceKeyName: createshipment-app-front-service-key
+              sap.cloud.service: comerpisshiperpcreateshipment
+            - Name: createshipment-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: parcelewm-xsuaa-service
-              ServiceKeyName: parcelewm-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpparcelewm
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-  - name: parcelhr7
-    type: html5
-    path: apps/parcelhr7
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: parcelhr7-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: parcelhr7-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/parcelhr7
-      requires:
-        - name: parcelhr7
-          artifacts:
-            - parcelhr7.zip
-          target-path: resources/parcelhr7/
-
-  - name: parcelhr7-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: parcelhr7-destination-service
-        parameters:
-          content-target: true
-      - name: parcelhr7-app-front-service
-        parameters:
-          service-key:
-            name: parcelhr7-app-front-service-key
-      - name: parcelhr7-xsuaa-service
-        parameters:
-          service-key:
-            name: parcelhr7-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: parcelhr7-app-front-service
-              ServiceInstanceName: parcelhr7-app-front-service
-              ServiceKeyName: parcelhr7-app-front-service-key
-              sap.cloud.service: comerpisshiperpparcelhr7
-            - Name: parcelhr7-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: parcelhr7-xsuaa-service
-              ServiceKeyName: parcelhr7-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpparcelhr7
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-  - name: quickpackhr7
-    type: html5
-    path: apps/quickpackhr7
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: quickpackhr7-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: quickpackhr7-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/quickpackhr7
-      requires:
-        - name: quickpackhr7
-          artifacts:
-            - quickpackhr7.zip
-          target-path: resources/quickpackhr7/
-
-  - name: quickpackhr7-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: quickpackhr7-destination-service
-        parameters:
-          content-target: true
-      - name: quickpackhr7-app-front-service
-        parameters:
-          service-key:
-            name: quickpackhr7-app-front-service-key
-      - name: quickpackhr7-xsuaa-service
-        parameters:
-          service-key:
-            name: quickpackhr7-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: quickpackhr7-app-front-service
-              ServiceInstanceName: quickpackhr7-app-front-service
-              ServiceKeyName: quickpackhr7-app-front-service-key
-              sap.cloud.service: comerpisshiperpquickpackhr7
-            - Name: quickpackhr7-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: quickpackhr7-xsuaa-service
-              ServiceKeyName: quickpackhr7-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpquickpackhr7
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-  - name: shipewmhr7
-    type: html5
-    path: apps/shipewmhr7
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: shipewmhr7-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: shipewmhr7-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/shipewmhr7
-      requires:
-        - name: shipewmhr7
-          artifacts:
-            - shipewmhr7.zip
-          target-path: resources/shipewmhr7/
-
-  - name: shipewmhr7-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: shipewmhr7-destination-service
-        parameters:
-          content-target: true
-      - name: shipewmhr7-app-front-service
-        parameters:
-          service-key:
-            name: shipewmhr7-app-front-service-key
-      - name: shipewmhr7-xsuaa-service
-        parameters:
-          service-key:
-            name: shipewmhr7-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: shipewmhr7-app-front-service
-              ServiceInstanceName: shipewmhr7-app-front-service
-              ServiceKeyName: shipewmhr7-app-front-service-key
-              sap.cloud.service: comerpisshiperpshipewmhr7
-            - Name: shipewmhr7-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: shipewmhr7-xsuaa-service
-              ServiceKeyName: shipewmhr7-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpshipewmhr7
+              ServiceInstanceName: createshipment-xsuaa-service
+              ServiceKeyName: createshipment-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcreateshipment
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1299,21 +1073,9 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: cancelfiling
+  - name: cancelshipmentewm
     type: html5
-    path: apps/cancelfiling
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: cancelshipewm
-    type: html5
-    path: apps/cancelshipewm
+    path: apps/cancelshipmentewm
     build-parameters:
       builder: custom
       commands:
@@ -1669,94 +1431,48 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: cancelfiling-app-content
+  - name: cancelshipmentewm-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: cancelfiling-app-front-service
+      - name: cancelshipmentewm-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/cancelfiling
+      build-result: resources/cancelshipmentewm
       requires:
-        - name: cancelfiling
+        - name: cancelshipmentewm
           artifacts:
-            - cancelfiling.zip
-          target-path: resources/cancelfiling/
+            - cancelshipmentewm.zip
+          target-path: resources/cancelshipmentewm/
 
-  - name: cancelfiling-destination-content
+  - name: cancelshipmentewm-destination-content
     type: com.sap.application.content
     requires:
-      - name: cancelfiling-destination-service
+      - name: cancelshipmentewm-destination-service
         parameters:
           content-target: true
-      - name: cancelfiling-app-front-service
+      - name: cancelshipmentewm-app-front-service
         parameters:
           service-key:
-            name: cancelfiling-app-front-service-key
-      - name: cancelfiling-xsuaa-service
+            name: cancelshipmentewm-app-front-service-key
+      - name: cancelshipmentewm-xsuaa-service
         parameters:
           service-key:
-            name: cancelfiling-xsuaa-service-key
+            name: cancelshipmentewm-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: cancelfiling-app-front-service
-              ServiceInstanceName: cancelfiling-app-front-service
-              ServiceKeyName: cancelfiling-app-front-service-key
-              sap.cloud.service: comerpisshiperpcancelfiling
-            - Name: cancelfiling-xsuaa-service
+            - Name: cancelshipmentewm-app-front-service
+              ServiceInstanceName: cancelshipmentewm-app-front-service
+              ServiceKeyName: cancelshipmentewm-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentewm
+            - Name: cancelshipmentewm-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: cancelfiling-xsuaa-service
-              ServiceKeyName: cancelfiling-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcancelfiling
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: cancelshipewm-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: cancelshipewm-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/cancelshipewm
-      requires:
-        - name: cancelshipewm
-          artifacts:
-            - cancelshipewm.zip
-          target-path: resources/cancelshipewm/
-
-  - name: cancelshipewm-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: cancelshipewm-destination-service
-        parameters:
-          content-target: true
-      - name: cancelshipewm-app-front-service
-        parameters:
-          service-key:
-            name: cancelshipewm-app-front-service-key
-      - name: cancelshipewm-xsuaa-service
-        parameters:
-          service-key:
-            name: cancelshipewm-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: cancelshipewm-app-front-service
-              ServiceInstanceName: cancelshipewm-app-front-service
-              ServiceKeyName: cancelshipewm-app-front-service-key
-              sap.cloud.service: comerpisshiperpcancelshipewm
-            - Name: cancelshipewm-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: cancelshipewm-xsuaa-service
-              ServiceKeyName: cancelshipewm-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcancelshipewm
+              ServiceInstanceName: cancelshipmentewm-xsuaa-service
+              ServiceKeyName: cancelshipmentewm-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentewm
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2149,13 +1865,13 @@ resources:
       service-plan: application
       path: ./security/xs-security-carrierperformancereportewm.json
 
-  - name: cancelfiling-app-front-service
+  - name: cancelshipmentewm-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: cancelfiling-destination-service
+  - name: cancelshipmentewm-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2163,33 +1879,12 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: cancelfiling-xsuaa-service
+  - name: cancelshipmentewm-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-cancelfiling.json
-
-  - name: cancelshipewm-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: cancelshipewm-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: cancelshipewm-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-cancelshipewm.json
+      path: ./security/xs-security-cancelshipmentewm.json
 
   - name: planningcockpit-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2379,26 +2074,7 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-cancelhr7.json
-  - name: carrierperformancereport-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
 
-  - name: carrierperformancereport-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: carrierperformancereport-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-carrierperformancereport.json
   - name: freightaudithr7-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
@@ -2419,13 +2095,14 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-freightaudithr7.json
-  - name: freightorderplan-app-front-service
+
+  - name: createshipmentv2ewm-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: freightorderplan-destination-service
+  - name: createshipmentv2ewm-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2433,19 +2110,19 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: freightorderplan-xsuaa-service
+  - name: createshipmentv2ewm-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-freightorderplan.json
-  - name: parcelewm-app-front-service
+      path: ./security/xs-security-createshipmentv2ewm.json
+  - name: createshipment-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: parcelewm-destination-service
+  - name: createshipment-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2453,70 +2130,10 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: parcelewm-xsuaa-service
+  - name: createshipment-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-parcelewm.json
-  - name: parcelhr7-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: parcelhr7-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: parcelhr7-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-parcelhr7.json
-  - name: quickpackhr7-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: quickpackhr7-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: quickpackhr7-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-quickpackhr7.json
-  - name: shipewmhr7-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: shipewmhr7-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: shipewmhr7-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-shipewmhr7.json
+      path: ./security/xs-security-createshipment.json
 
