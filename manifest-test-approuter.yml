@@ -1,0 +1,33 @@
+applications:
+  - name: shiperp-fiori-test-hr7
+    path: approuter
+    memory: 256M
+    no-route: true
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - app-runtime-1779763944
+      - trackshipmentewm-xsuaa-service
+      - trackshipmentewm-destination-service
+
+  - name: shiperp-fiori-test-hd6
+    path: approuter
+    memory: 256M
+    no-route: true
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - app-runtime-1779763944
+      - trackshipment-xsuaa-service
+      - trackshipment-destination-service
+
+  - name: shiperp-fiori-test-shippingdashboard
+    path: approuter
+    memory: 256M
+    no-route: true
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - app-runtime-1779763944
+      - shippingdashboard-xsuaa-service
+      - shippingdashboard-destination-service
