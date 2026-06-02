@@ -461,18 +461,6 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: trackshipment
-    type: html5
-    path: apps/trackshipment
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: trackshipmentewm
     type: html5
     path: apps/trackshipmentewm
@@ -500,18 +488,6 @@ modules:
   - name: closedelivery
     type: html5
     path: apps/closedelivery
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: freightaudit
-    type: html5
-    path: apps/freightaudit
     build-parameters:
       builder: custom
       commands:
@@ -568,52 +544,6 @@ modules:
         - npm run package
       build-result: dist
       supported-platforms: []
-
-  - name: trackshipment-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: trackshipment-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/trackshipment
-      requires:
-        - name: trackshipment
-          artifacts:
-            - trackshipment.zip
-          target-path: resources/trackshipment/
-
-  - name: trackshipment-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: trackshipment-destination-service
-        parameters:
-          content-target: true
-      - name: trackshipment-app-front-service
-        parameters:
-          service-key:
-            name: trackshipment-app-front-service-key
-      - name: trackshipment-xsuaa-service
-        parameters:
-          service-key:
-            name: trackshipment-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: trackshipment-app-front-service
-              ServiceInstanceName: trackshipment-app-front-service
-              ServiceKeyName: trackshipment-app-front-service-key
-              sap.cloud.service: comerpisshiperptrackshipment
-            - Name: trackshipment-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: trackshipment-xsuaa-service
-              ServiceKeyName: trackshipment-xsuaa-service-key
-              sap.cloud.service: comerpisshiperptrackshipment
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
 
   - name: trackshipmentewm-app-content
     type: com.sap.application.content
@@ -749,52 +679,6 @@ modules:
               ServiceInstanceName: closedelivery-xsuaa-service
               ServiceKeyName: closedelivery-xsuaa-service-key
               sap.cloud.service: comerpisshiperpclosedelivery
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: freightaudit-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: freightaudit-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/freightaudit
-      requires:
-        - name: freightaudit
-          artifacts:
-            - freightaudit.zip
-          target-path: resources/freightaudit/
-
-  - name: freightaudit-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: freightaudit-destination-service
-        parameters:
-          content-target: true
-      - name: freightaudit-app-front-service
-        parameters:
-          service-key:
-            name: freightaudit-app-front-service-key
-      - name: freightaudit-xsuaa-service
-        parameters:
-          service-key:
-            name: freightaudit-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: freightaudit-app-front-service
-              ServiceInstanceName: freightaudit-app-front-service
-              ServiceKeyName: freightaudit-app-front-service-key
-              sap.cloud.service: comerpisshiperpfreightaudit
-            - Name: freightaudit-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: freightaudit-xsuaa-service
-              ServiceKeyName: freightaudit-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpfreightaudit
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -995,18 +879,6 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: createparcelshipment
-    type: html5
-    path: apps/createparcelshipment
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: freightorderplanning
     type: html5
     path: apps/freightorderplanning
@@ -1109,52 +981,6 @@ modules:
               ServiceInstanceName: cancelacefiling-xsuaa-service
               ServiceKeyName: cancelacefiling-xsuaa-service-key
               sap.cloud.service: comerpisshiperpcancelacefiling
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: createparcelshipment-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: createparcelshipment-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/createparcelshipment
-      requires:
-        - name: createparcelshipment
-          artifacts:
-            - createparcelshipment.zip
-          target-path: resources/createparcelshipment/
-
-  - name: createparcelshipment-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: createparcelshipment-destination-service
-        parameters:
-          content-target: true
-      - name: createparcelshipment-app-front-service
-        parameters:
-          service-key:
-            name: createparcelshipment-app-front-service-key
-      - name: createparcelshipment-xsuaa-service
-        parameters:
-          service-key:
-            name: createparcelshipment-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: createparcelshipment-app-front-service
-              ServiceInstanceName: createparcelshipment-app-front-service
-              ServiceKeyName: createparcelshipment-app-front-service-key
-              sap.cloud.service: comerpisshiperpcreateparcelshipment
-            - Name: createparcelshipment-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: createparcelshipment-xsuaa-service
-              ServiceKeyName: createparcelshipment-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcreateparcelshipment
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1473,33 +1299,9 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: productslist
-    type: html5
-    path: apps/productslist
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: cancelfiling
     type: html5
     path: apps/cancelfiling
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: farpt
-    type: html5
-    path: apps/farpt
     build-parameters:
       builder: custom
       commands:
@@ -1524,30 +1326,6 @@ modules:
   - name: planningcockpit
     type: html5
     path: apps/planningcockpit
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: parcel
-    type: html5
-    path: apps/parcel
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
-  - name: eod
-    type: html5
-    path: apps/eod
     build-parameters:
       builder: custom
       commands:
@@ -1903,52 +1681,6 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: productslist-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: productslist-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/productslist
-      requires:
-        - name: productslist
-          artifacts:
-            - productslist.zip
-          target-path: resources/productslist/
-
-  - name: productslist-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: productslist-destination-service
-        parameters:
-          content-target: true
-      - name: productslist-app-front-service
-        parameters:
-          service-key:
-            name: productslist-app-front-service-key
-      - name: productslist-xsuaa-service
-        parameters:
-          service-key:
-            name: productslist-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: productslist-app-front-service
-              ServiceInstanceName: productslist-app-front-service
-              ServiceKeyName: productslist-app-front-service-key
-              sap.cloud.service: comerpisshiperpproductslist
-            - Name: productslist-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: productslist-xsuaa-service
-              ServiceKeyName: productslist-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpproductslist
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
   - name: cancelfiling-app-content
     type: com.sap.application.content
     path: .
@@ -1991,52 +1723,6 @@ modules:
               ServiceInstanceName: cancelfiling-xsuaa-service
               ServiceKeyName: cancelfiling-xsuaa-service-key
               sap.cloud.service: comerpisshiperpcancelfiling
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: farpt-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: farpt-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/farpt
-      requires:
-        - name: farpt
-          artifacts:
-            - farpt.zip
-          target-path: resources/farpt/
-
-  - name: farpt-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: farpt-destination-service
-        parameters:
-          content-target: true
-      - name: farpt-app-front-service
-        parameters:
-          service-key:
-            name: farpt-app-front-service-key
-      - name: farpt-xsuaa-service
-        parameters:
-          service-key:
-            name: farpt-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: farpt-app-front-service
-              ServiceInstanceName: farpt-app-front-service
-              ServiceKeyName: farpt-app-front-service-key
-              sap.cloud.service: comerpisshiperpfarpt
-            - Name: farpt-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: farpt-xsuaa-service
-              ServiceKeyName: farpt-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpfarpt
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2129,98 +1815,6 @@ modules:
               ServiceInstanceName: planningcockpit-xsuaa-service
               ServiceKeyName: planningcockpit-xsuaa-service-key
               sap.cloud.service: comerpisshiperpplanningcockpit
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: parcel-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: parcel-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/parcel
-      requires:
-        - name: parcel
-          artifacts:
-            - parcel.zip
-          target-path: resources/parcel/
-
-  - name: parcel-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: parcel-destination-service
-        parameters:
-          content-target: true
-      - name: parcel-app-front-service
-        parameters:
-          service-key:
-            name: parcel-app-front-service-key
-      - name: parcel-xsuaa-service
-        parameters:
-          service-key:
-            name: parcel-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: parcel-app-front-service
-              ServiceInstanceName: parcel-app-front-service
-              ServiceKeyName: parcel-app-front-service-key
-              sap.cloud.service: comerpisshiperpparcel
-            - Name: parcel-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: parcel-xsuaa-service
-              ServiceKeyName: parcel-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpparcel
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
-  - name: eod-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: eod-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/eod
-      requires:
-        - name: eod
-          artifacts:
-            - eod.zip
-          target-path: resources/eod/
-
-  - name: eod-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: eod-destination-service
-        parameters:
-          content-target: true
-      - name: eod-app-front-service
-        parameters:
-          service-key:
-            name: eod-app-front-service-key
-      - name: eod-xsuaa-service
-        parameters:
-          service-key:
-            name: eod-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: eod-app-front-service
-              ServiceInstanceName: eod-app-front-service
-              ServiceKeyName: eod-app-front-service-key
-              sap.cloud.service: comerpisshiperpeod
-            - Name: eod-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: eod-xsuaa-service
-              ServiceKeyName: eod-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpeod
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2318,26 +1912,6 @@ modules:
       no-source: true
 
 resources:
-  - name: trackshipment-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: trackshipment-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: trackshipment-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-trackshipment.json
 
   - name: trackshipmentewm-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2401,27 +1975,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-closedelivery.json
-
-  - name: freightaudit-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: freightaudit-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: freightaudit-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-freightaudit.json
 
   - name: saleorder-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2654,27 +2207,6 @@ resources:
       service-plan: application
       path: ./security/xs-security-carrierperformancereportewm.json
 
-  - name: productslist-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: productslist-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: productslist-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-productslist.json
-
   - name: cancelfiling-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
@@ -2695,27 +2227,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-cancelfiling.json
-
-  - name: farpt-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: farpt-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: farpt-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-farpt.json
 
   - name: cancelshipewm-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2758,48 +2269,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-planningcockpit.json
-
-  - name: parcel-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: parcel-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: parcel-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-parcel.json
-
-  - name: eod-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: eod-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: eod-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-eod.json
 
   - name: soshiperptab-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2863,27 +2332,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-cancelacefiling.json
-
-  - name: createparcelshipment-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: createparcelshipment-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: createparcelshipment-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-createparcelshipment.json
 
   - name: freightorderplanning-app-front-service
     type: org.cloudfoundry.managed-service
