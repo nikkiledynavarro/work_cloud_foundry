@@ -1335,18 +1335,6 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: soshiperptab
-    type: html5
-    path: apps/soshiperptab
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: manualshipmentewm
     type: html5
     path: apps/manualshipmentewm
@@ -1819,52 +1807,6 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: soshiperptab-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: soshiperptab-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/soshiperptab
-      requires:
-        - name: soshiperptab
-          artifacts:
-            - soshiperptab.zip
-          target-path: resources/soshiperptab/
-
-  - name: soshiperptab-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: soshiperptab-destination-service
-        parameters:
-          content-target: true
-      - name: soshiperptab-app-front-service
-        parameters:
-          service-key:
-            name: soshiperptab-app-front-service-key
-      - name: soshiperptab-xsuaa-service
-        parameters:
-          service-key:
-            name: soshiperptab-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: soshiperptab-app-front-service
-              ServiceInstanceName: soshiperptab-app-front-service
-              ServiceKeyName: soshiperptab-app-front-service-key
-              sap.cloud.service: comerpisshiperpsoshiperptab
-            - Name: soshiperptab-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: soshiperptab-xsuaa-service
-              ServiceKeyName: soshiperptab-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpsoshiperptab
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
   - name: manualshipmentewm-app-content
     type: com.sap.application.content
     path: .
@@ -2269,27 +2211,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-planningcockpit.json
-
-  - name: soshiperptab-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: soshiperptab-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: soshiperptab-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-soshiperptab.json
 
   - name: manualshipmentewm-app-front-service
     type: org.cloudfoundry.managed-service
