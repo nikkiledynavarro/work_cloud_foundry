@@ -1,18 +1,18 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/ui/model/FilterOperator",
-	"com/erpis/shiperp/freightaudit/common/Utils"
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, MessageToast, MessageBox, FilterOperator, Utils) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.ConditionDetail", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.ConditionDetail", {
 
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
@@ -229,7 +229,7 @@ sap.ui.define([
 						return;
 					}
 					if (isRelease) {
-						this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog");
+						this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog");
 					} else {
 						this._cancel("00");
 					}
@@ -250,7 +250,7 @@ sap.ui.define([
 		onStatusClick: function () {
 			// Open the Table Setting dialog
 			if (!this._oDialog) { //=== undefined) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogDtl", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogDtl", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.getBinding("items").filter([]);

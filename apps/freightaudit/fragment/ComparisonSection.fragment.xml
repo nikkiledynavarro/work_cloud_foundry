@@ -32,7 +32,7 @@
 				</columns>
 				<items>
 					<ColumnListItem type="Inactive" press="onPress">
-						<cells>
+						<cells> 
 							<ObjectIdentifier text="{CarrierChargeCode}"/>
 							<Text text="{CarrierChargeCodeDesc}" maxLines="1" tooltip="{CarrierChargeCodeDesc}"/>
 							<ObjectStatus text="{ChargeCode}" state="{= (${IsDifferent} === true &amp;&amp; ${ChargeCodeException} === false) ? 'Error' : 'None'}"/>

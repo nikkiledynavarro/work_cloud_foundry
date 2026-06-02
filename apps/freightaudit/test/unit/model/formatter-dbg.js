@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-		"com/erpis/shiperp/freightaudit/model/formatter"
+		"com/erpis/shiperp/freightaudit/hr7/model/formatter"
 	], function (formatter) {
 		"use strict";
 

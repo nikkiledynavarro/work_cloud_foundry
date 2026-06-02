@@ -1,6 +1,12 @@
 {
     "resources": [
         {
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
+        },
+        {
             "name": "Component-dbg.js",
             "isDebug": true
         },
@@ -10,6 +16,9 @@
         },
         {
             "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
         },
         {
             "name": "common/Utils-dbg.js",
@@ -33,18 +42,11 @@
             "name": "controller/BaseController.js"
         },
         {
-            "name": "controller/ECC/CancelDetail-dbg.controller.js",
+            "name": "controller/CancelDetail-dbg.controller.js",
             "isDebug": true
         },
         {
-            "name": "controller/ECC/CancelDetail.controller.js"
-        },
-        {
-            "name": "controller/EWM/CancelDetail-dbg.controller.js",
-            "isDebug": true
-        },
-        {
-            "name": "controller/EWM/CancelDetail.controller.js"
+            "name": "controller/CancelDetail.controller.js"
         },
         {
             "name": "controller/ErrorHandler-dbg.js",
@@ -71,25 +73,19 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
-            "name": "fragment/ECC/ShippingProfileDialog.fragment.xml"
+            "name": "dist"
         },
         {
-            "name": "fragment/ECC/ShippingStationDialog.fragment.xml"
+            "name": "flp-config.json"
         },
         {
-            "name": "fragment/ECC/TrackproInfo.fragment.xml"
+            "name": "fragment/ShippingProfileDialog.fragment.xml"
         },
         {
-            "name": "fragment/EWM/ShippingProfileDialog.fragment.xml"
+            "name": "fragment/ShippingStationDialog.fragment.xml"
         },
         {
-            "name": "fragment/EWM/ShippingStationDialog.fragment.xml"
-        },
-        {
-            "name": "fragment/EWM/TrackproInfo.fragment.xml"
-        },
-        {
-            "name": "fragment/EWM/WarehouseNumberDialog.fragment.xml"
+            "name": "fragment/TrackproInfo.fragment.xml"
         },
         {
             "name": "i18n/i18n.properties",
@@ -100,6 +96,19 @@
         },
         {
             "name": "index.html"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
         },
         {
             "name": "manifest.json"
@@ -122,6 +131,22 @@
             "name": "neo-app.json"
         },
         {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
+        },
+        {
             "name": "test/integration/AllJourneys-dbg.js",
             "isDebug": true
         },
@@ -136,250 +161,123 @@
             "name": "test/integration/NavigationJourney.js"
         },
         {
-            "name": "test/integration/arrangements/Startup-dbg.js",
+            "name": "test/integration/NotFoundJourney-dbg.js",
             "isDebug": true
         },
         {
-            "name": "test/integration/arrangements/Startup.js"
+            "name": "test/integration/NotFoundJourney.js"
         },
         {
-            "name": "test/integration/opaTests.qunit-dbg.js",
+            "name": "test/integration/ObjectJourney-dbg.js",
             "isDebug": true
+        },
+        {
+            "name": "test/integration/ObjectJourney.js"
+        },
+        {
+            "name": "test/integration/WorklistJourney-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/WorklistJourney.js"
         },
         {
             "name": "test/integration/opaTests.qunit.html"
         },
         {
-            "name": "test/integration/opaTests.qunit.js"
-        },
-        {
-            "name": "test/integration/pages/View1-dbg.js",
+            "name": "test/integration/pages/App-dbg.js",
             "isDebug": true
         },
         {
-            "name": "test/integration/pages/View1.js"
+            "name": "test/integration/pages/App.js"
         },
         {
-            "name": "test/testsuite.qunit-dbg.js",
+            "name": "test/integration/pages/Browser-dbg.js",
             "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Browser.js"
+        },
+        {
+            "name": "test/integration/pages/Common-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Common.js"
+        },
+        {
+            "name": "test/integration/pages/NotFound-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/NotFound.js"
+        },
+        {
+            "name": "test/integration/pages/Object-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Object.js"
+        },
+        {
+            "name": "test/integration/pages/Worklist-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/Worklist.js"
+        },
+        {
+            "name": "test/integration/pages/shareOptions-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/integration/pages/shareOptions.js"
+        },
+        {
+            "name": "test/mockServer.html"
         },
         {
             "name": "test/testsuite.qunit.html"
         },
         {
-            "name": "test/testsuite.qunit.js"
-        },
-        {
-            "name": "test/unit/AllTests-dbg.js",
+            "name": "test/unit/allTests-dbg.js",
             "isDebug": true
         },
         {
-            "name": "test/unit/AllTests.js"
+            "name": "test/unit/allTests.js"
         },
         {
-            "name": "test/unit/controller/View1-dbg.controller.js",
+            "name": "test/unit/helper/FakeI18nModel-dbg.js",
             "isDebug": true
         },
         {
-            "name": "test/unit/controller/View1.controller.js"
+            "name": "test/unit/helper/FakeI18nModel.js"
         },
         {
-            "name": "test/unit/unitTests.qunit-dbg.js",
+            "name": "test/unit/model/formatter-dbg.js",
             "isDebug": true
+        },
+        {
+            "name": "test/unit/model/formatter.js"
+        },
+        {
+            "name": "test/unit/model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "test/unit/model/models.js"
         },
         {
             "name": "test/unit/unitTests.qunit.html"
         },
         {
-            "name": "test/unit/unitTests.qunit.js"
-        },
-        {
-            "name": "tmp/Component-preload.js",
-            "merged": true
-        },
-        {
-            "name": "tmp/Component.js"
-        },
-        {
-            "name": "tmp/common/Utils.js"
-        },
-        {
-            "name": "tmp/controller/App.controller.js"
-        },
-        {
-            "name": "tmp/controller/BaseController.js"
-        },
-        {
-            "name": "tmp/controller/ECC/CancelDetail.controller.js"
-        },
-        {
-            "name": "tmp/controller/EWM/CancelDetail.controller.js"
-        },
-        {
-            "name": "tmp/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp/controller/Login.controller.js"
-        },
-        {
-            "name": "tmp/css/style.css"
-        },
-        {
-            "name": "tmp/fragment/ECC/ShippingProfileDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/ECC/ShippingStationDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/ECC/TrackproInfo.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/EWM/ShippingProfileDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/EWM/ShippingStationDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/EWM/TrackproInfo.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/EWM/WarehouseNumberDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
-        },
-        {
-            "name": "tmp/image/shiperp_logo.png"
-        },
-        {
-            "name": "tmp/index.html"
-        },
-        {
-            "name": "tmp/manifest.json"
-        },
-        {
-            "name": "tmp/model/formatter.js"
-        },
-        {
-            "name": "tmp/model/models.js"
-        },
-        {
-            "name": "tmp/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/arrangements/Startup.js"
-        },
-        {
-            "name": "tmp/test/integration/opaTests.qunit.html"
-        },
-        {
-            "name": "tmp/test/integration/opaTests.qunit.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/View1.js"
-        },
-        {
-            "name": "tmp/test/testsuite.qunit.html"
-        },
-        {
-            "name": "tmp/test/testsuite.qunit.js"
-        },
-        {
-            "name": "tmp/test/unit/AllTests.js"
-        },
-        {
-            "name": "tmp/test/unit/controller/View1.controller.js"
-        },
-        {
-            "name": "tmp/test/unit/unitTests.qunit.html"
-        },
-        {
-            "name": "tmp/test/unit/unitTests.qunit.js"
-        },
-        {
-            "name": "tmp/view/App.view.xml"
-        },
-        {
-            "name": "tmp/view/ECC/CancelDetail.view.xml"
-        },
-        {
-            "name": "tmp/view/EWM/CancelDetail.view.xml"
-        },
-        {
-            "name": "tmp/view/Login.view.xml"
-        },
-        {
-            "name": "tmp-dbg/Component.js"
-        },
-        {
-            "name": "tmp-dbg/common/Utils.js"
-        },
-        {
-            "name": "tmp-dbg/controller/App.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/BaseController.js"
-        },
-        {
-            "name": "tmp-dbg/controller/ECC/CancelDetail.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/EWM/CancelDetail.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp-dbg/controller/Login.controller.js"
-        },
-        {
-            "name": "tmp-dbg/css/style.css"
-        },
-        {
-            "name": "tmp-dbg/model/formatter.js"
-        },
-        {
-            "name": "tmp-dbg/model/models.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/arrangements/Startup.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/opaTests.qunit.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/View1.js"
-        },
-        {
-            "name": "tmp-dbg/test/testsuite.qunit.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/AllTests.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/controller/View1.controller.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/unitTests.qunit.js"
+            "name": "test.html"
         },
         {
             "name": "view/App.view.xml"
         },
         {
-            "name": "view/ECC/CancelDetail.view.xml"
-        },
-        {
-            "name": "view/EWM/CancelDetail.view.xml"
+            "name": "view/CancelDetail.view.xml"
         },
         {
             "name": "view/Login.view.xml"

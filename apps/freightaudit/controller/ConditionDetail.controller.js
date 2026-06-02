@@ -1,18 +1,18 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/ui/model/FilterOperator",
-	"com/erpis/shiperp/freightaudit/common/Utils"
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, MessageToast, MessageBox, FilterOperator, Utils) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.ConditionDetail", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.ConditionDetail", {
 
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
@@ -109,11 +109,21 @@ sap.ui.define([
 		onApprovePress: function () {
 			var sMsg = this.oBundle.getText("confirmSetStatusOneDtlMsg");
 			var sTitle = this.oBundle.getText("confirmSetStatusTitle");
+			//Added by Tim 22/10/2021
+			//Check approve allows secenario Axo 4684
+			var data = this.getView().getBindingContext().getObject();
+			var aNotAlowed = this._getApproveActionNotAllowedData(data);
+			if (aNotAlowed && aNotAlowed.length > 0) {
+				this._addMessage(aNotAlowed);
+				MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+				return;
+			}
+
 			MessageBox.confirm(sMsg, {
 				title: sTitle,
 				onClose: function (oAction) {
 					if (oAction === MessageBox.Action.OK) {
-						this._updateStatus("A", this.getView().getBindingContext().getObject().ChangedDateTime);
+						this._updateStatus("A", data.ChangedDateTime);
 					}
 				}.bind(this)
 			});
@@ -217,10 +227,26 @@ sap.ui.define([
 		onCancelPress: function () {
 			var sMsg = this.oBundle.getText("confirmCancelOneDtlMsg");
 			var sTitle = this.oBundle.getText("confirmCancelTitle");
+			//Added by Tim 13/10/2021
+			//Checking not alowed cancel with condition
+			//approval status: Disputed
+			//overall status: Released, Partially Released,Rejected
+			var aNotAllowedCancelIds = [];
 			var isRelease = false;
 			var oData = this.getView().getBindingContext().getObject();
 			if (oData.ObjectKey !== "" && oData.ObjectKey !== undefined) {
 				isRelease = true;
+			}
+			//Checking cancel available
+			var bIsCancel = Utils.checkCancelAvailableBySreen("S", oData.ApprovalStatus, oData.OverallStatus);
+			if (!bIsCancel) {
+				aNotAllowedCancelIds.push(oData.TrackingNo);
+			}
+			//Block 
+			if (aNotAllowedCancelIds && aNotAllowedCancelIds.length > 0) {
+				var trackingIds = aNotAllowedCancelIds.toString();
+				MessageBox.error(this.oBundle.getText("cancelDetailSideBySideError", trackingIds));
+				return;
 			}
 			MessageBox.confirm(sMsg, {
 				title: sTitle,
@@ -229,7 +255,7 @@ sap.ui.define([
 						return;
 					}
 					if (isRelease) {
-						this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog");
+						this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog");
 					} else {
 						this._cancel("00");
 					}
@@ -250,7 +276,7 @@ sap.ui.define([
 		onStatusClick: function () {
 			// Open the Table Setting dialog
 			if (!this._oDialog) { //=== undefined) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogDtl", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogDtl", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.getBinding("items").filter([]);
@@ -266,6 +292,18 @@ sap.ui.define([
 			var sTitle = this.oBundle.getText("confirmSetStatusTitle");
 			var sStatusCode = oEvent.getParameters().selectedItem.getDescription();
 
+			//Added by Tim 22/10/2021
+			if (sStatusCode === "A") {
+
+				//Check approve allows secenario Axo 4684
+				var data = this.getView().getBindingContext().getObject();
+				var aNotAlowed = this._getApproveActionNotAllowedData(data);
+				if (aNotAlowed && aNotAlowed.length > 0) {
+					this._addMessage(aNotAlowed);
+					MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+					return;
+				}
+			}
 			// fire dispute press in case of Dispute status is selected.
 			if (sStatusCode === "D") {
 				this.onDisputePress();
@@ -562,6 +600,23 @@ sap.ui.define([
 			// Refresh FA Header
 			var sPath = "/xSERPERPxI_FAHDR(InvoiceNo='" + this.sInvoiceNo + "',Vendor='" + this.sVendor + "')";
 			this.getModel().read(sPath);
+		},
+		_getApproveActionNotAllowedData: function (data) {
+			var oCheck = Utils.checkApproveAvailableBySreen("S", data.DetailStatus);
+			var aNotAllowedApproveMsgs = [];
+			var oThis = this;
+			if (!oCheck.isAvailable) {
+				var sMsgTitle = oThis.oBundle.getText("actionNotAllowedDetail", [data.TrackingNo, oCheck.stateText]);
+
+				var oMessage = {
+					type: "Error",
+					title: sMsgTitle,
+					description: ""
+				};
+				aNotAllowedApproveMsgs.push(oMessage);
+			}
+			return aNotAllowedApproveMsgs;
+
 		}
 
 	});

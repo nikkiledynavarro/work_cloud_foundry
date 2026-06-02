@@ -6,7 +6,7 @@ sap.ui.define([
 	return {
 
 		getTransparentLogoLink: function (sDummy) {
-			var sRootPath = jQuery.sap.getModulePath("com.erpis.shiperp.freightaudit");
+			var sRootPath = jQuery.sap.getModulePath("com.erpis.shiperp.freightaudit.hr7");
 			return sRootPath + "/image/shiperp_logo.png";
 		},
 

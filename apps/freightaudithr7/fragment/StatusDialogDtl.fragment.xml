@@ -1,6 +1,0 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
-	<SelectDialog title="{i18n>SelectStatus}" confirm="onStatusChange" cancel="handleClose" search="handleStatusDtlSearch"
-		items="{path: 'statusList>/DTL' }" liveChange="handleStatusDtlSearch">
-		<StandardListItem title="{statusList>Name}" description="{statusList>Code}" type="Active"/>
-	</SelectDialog>
-</core:FragmentDefinition>

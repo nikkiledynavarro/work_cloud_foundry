@@ -1,18 +1,18 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"com/erpis/shiperp/freightaudit/common/Utils"
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, Utils) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.InvoiceDetail", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.InvoiceDetail", {
 
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
@@ -151,7 +151,7 @@ sap.ui.define([
 			this.oCurrentTracking = oSelectedTracking;
 
 			if (!this.oPayAmtDialog) {
-				this.oPayAmtDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.PayamtUpdate", this);
+				this.oPayAmtDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.PayamtUpdate", this);
 				this.getView().addDependent(this.oPayAmtDialog);
 			}
 			this.getModel().callFunction("/GetItemRemarks", {
@@ -421,7 +421,7 @@ sap.ui.define([
 						return;
 					}
 					if (isRelease) {
-						this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog");
+						this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog");
 					} else {
 						this._cancel("00");
 					}
@@ -431,7 +431,7 @@ sap.ui.define([
 
 		onOpenShippingPointDialog: function () {
 			if (!this.oShippingPointValueHelp) {
-				this.oShippingPointValueHelp = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.ShippingPointValueHelp", this);
+				this.oShippingPointValueHelp = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.ShippingPointValueHelp", this);
 				this.getView().addDependent(this.oShippingPointValueHelp);
 			}
 			this.oShippingPointValueHelp.getBinding("items").filter([]);
@@ -559,7 +559,7 @@ sap.ui.define([
 			}
 			// Open the Table Setting dialog
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogDtl", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogDtl", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.open();
@@ -613,7 +613,7 @@ sap.ui.define([
 					} else {
 						this.getModel("local").setProperty("/TrackingDeliveries", oData.results);
 						if (!this._oTrackingDeliveryDialog) {
-							this._oTrackingDeliveryDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.TrackingDeliveryDialog", this);
+							this._oTrackingDeliveryDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.TrackingDeliveryDialog", this);
 							this.getView().addDependent(this._oTrackingDeliveryDialog);
 						}
 						this._oTrackingDeliveryDialog.open();

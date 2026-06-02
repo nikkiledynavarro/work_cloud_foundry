@@ -1,8 +1,10 @@
 {
     "resources": [
         {
-            "name": "Component-dbg.js",
-            "isDebug": true
+            "name": ".che/project.json"
+        },
+        {
+            "name": ".gitignore"
         },
         {
             "name": "Component-preload.js",
@@ -10,6 +12,9 @@
         },
         {
             "name": "Component.js"
+        },
+        {
+            "name": "Gruntfile.js"
         },
         {
             "name": "annotations/annotations.xml"
@@ -79,6 +84,12 @@
         },
         {
             "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "dist"
+        },
+        {
+            "name": "flp-config.json"
         },
         {
             "name": "fragment/APInvoiceNumberDialog.fragment.xml"
@@ -152,6 +163,9 @@
             "name": "localService/mockserver.js"
         },
         {
+            "name": "manifest-bundle.zip"
+        },
+        {
             "name": "manifest.json"
         },
         {
@@ -173,6 +187,22 @@
         },
         {
             "name": "neo-app.json"
+        },
+        {
+            "name": "node_modules"
+        },
+        {
+            "name": "package-lock.json"
+        },
+        {
+            "name": "package.json"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "sap-ui-cachebuster-info.json"
         },
         {
             "name": "test/integration/AllJourneys-dbg.js",
@@ -300,290 +330,6 @@
         },
         {
             "name": "test.html"
-        },
-        {
-            "name": "tmp/Component-preload.js",
-            "merged": true
-        },
-        {
-            "name": "tmp/Component.js"
-        },
-        {
-            "name": "tmp/annotations/annotations.xml"
-        },
-        {
-            "name": "tmp/common/Utils.js"
-        },
-        {
-            "name": "tmp/controller/App.controller.js"
-        },
-        {
-            "name": "tmp/controller/BaseController.js"
-        },
-        {
-            "name": "tmp/controller/ConditionDetail.controller.js"
-        },
-        {
-            "name": "tmp/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp/controller/InvoiceDetail.controller.js"
-        },
-        {
-            "name": "tmp/controller/InvoiceList.controller.js"
-        },
-        {
-            "name": "tmp/controller/NotFound.controller.js"
-        },
-        {
-            "name": "tmp/css/style.css"
-        },
-        {
-            "name": "tmp/fragment/APInvoiceNumberDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/AddressSection.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/CarrierValueHelp.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/ComparisonSection.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/DisputeListDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/FreightSection.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/GeneralSection.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/MessagePopover.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/PayamtUpdate.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/ReversalReasonDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/ShippingPointValueHelp.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/SimulateGrid.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/StatusDialogDtl.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/StatusDialogHdr.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/TrackingDeliveryDialog.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/TrackproInfo.fragment.xml"
-        },
-        {
-            "name": "tmp/fragment/VendorValueHelp.fragment.xml"
-        },
-        {
-            "name": "tmp/i18n/i18n.properties",
-            "raw": "i18n/i18n.properties"
-        },
-        {
-            "name": "tmp/image/shiperp_logo.png"
-        },
-        {
-            "name": "tmp/index.html"
-        },
-        {
-            "name": "tmp/localService/metadata.xml"
-        },
-        {
-            "name": "tmp/localService/mockserver.js"
-        },
-        {
-            "name": "tmp/manifest.json"
-        },
-        {
-            "name": "tmp/model/StatusList.json"
-        },
-        {
-            "name": "tmp/model/formatter.js"
-        },
-        {
-            "name": "tmp/model/models.js"
-        },
-        {
-            "name": "tmp/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/NotFoundJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/ObjectJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/WorklistJourney.js"
-        },
-        {
-            "name": "tmp/test/integration/opaTests.qunit.html"
-        },
-        {
-            "name": "tmp/test/integration/pages/App.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Browser.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Common.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/NotFound.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Object.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/Worklist.js"
-        },
-        {
-            "name": "tmp/test/integration/pages/shareOptions.js"
-        },
-        {
-            "name": "tmp/test/mockServer.html"
-        },
-        {
-            "name": "tmp/test/testsuite.qunit.html"
-        },
-        {
-            "name": "tmp/test/unit/allTests.js"
-        },
-        {
-            "name": "tmp/test/unit/helper/FakeI18nModel.js"
-        },
-        {
-            "name": "tmp/test/unit/model/formatter.js"
-        },
-        {
-            "name": "tmp/test/unit/model/models.js"
-        },
-        {
-            "name": "tmp/test/unit/unitTests.qunit.html"
-        },
-        {
-            "name": "tmp/test.html"
-        },
-        {
-            "name": "tmp/view/App.view.xml"
-        },
-        {
-            "name": "tmp/view/ConditionDetail.view.xml"
-        },
-        {
-            "name": "tmp/view/InvoiceDetail.view.xml"
-        },
-        {
-            "name": "tmp/view/InvoiceList.view.xml"
-        },
-        {
-            "name": "tmp/view/NotFound.view.xml"
-        },
-        {
-            "name": "tmp/view/ObjectNotFound.view.xml"
-        },
-        {
-            "name": "tmp-dbg/Component.js"
-        },
-        {
-            "name": "tmp-dbg/common/Utils.js"
-        },
-        {
-            "name": "tmp-dbg/controller/App.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/BaseController.js"
-        },
-        {
-            "name": "tmp-dbg/controller/ConditionDetail.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/ErrorHandler.js"
-        },
-        {
-            "name": "tmp-dbg/controller/InvoiceDetail.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/InvoiceList.controller.js"
-        },
-        {
-            "name": "tmp-dbg/controller/NotFound.controller.js"
-        },
-        {
-            "name": "tmp-dbg/css/style.css"
-        },
-        {
-            "name": "tmp-dbg/localService/mockserver.js"
-        },
-        {
-            "name": "tmp-dbg/model/formatter.js"
-        },
-        {
-            "name": "tmp-dbg/model/models.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/AllJourneys.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/NavigationJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/NotFoundJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/ObjectJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/WorklistJourney.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/App.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Browser.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Common.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/NotFound.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Object.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/Worklist.js"
-        },
-        {
-            "name": "tmp-dbg/test/integration/pages/shareOptions.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/allTests.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/helper/FakeI18nModel.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/model/formatter.js"
-        },
-        {
-            "name": "tmp-dbg/test/unit/model/models.js"
         },
         {
             "name": "view/App.view.xml"

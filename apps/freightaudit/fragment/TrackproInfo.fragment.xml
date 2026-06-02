@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Table id="idInvoiceDetailTab" class="border_lightgray_nobottom" width="100%" mode="MultiSelect" updateFinished="onTrackProUpdateFinished"
-		busyIndicatorDelay="99999" growingScrollToLoad="true" items="{path: 'toDTL', sorter: [{path: 'TrackingNo', descending: false}] }"
+		busyIndicatorDelay="99999" growingScrollToLoad="true" items="{path: '/xSERPERPxI_FADTL', sorter: [{path: 'TrackingNo', descending: false}] }"
 		growing="true" growingThreshold="100" fixedLayout="false">
 		<headerToolbar>
 			<OverflowToolbar>

@@ -1,8 +1,8 @@
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
@@ -11,7 +11,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, Token) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.InvoiceList", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.InvoiceList", {
 
 		formatter: formatter,
 
@@ -257,7 +257,7 @@ sap.ui.define([
 						}
 
 						if (invoiceExists) {
-							this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog", "idInvoiceListReversalDialog");
+							this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog", "idInvoiceListReversalDialog");
 						} else {
 							this._cancelInvoice("00");
 						}
@@ -289,7 +289,7 @@ sap.ui.define([
 			}
 			// Open the Table Setting dialog
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogHdr", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogHdr", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.open();
@@ -372,7 +372,7 @@ sap.ui.define([
 					var oSimulateModel = new JSONModel();
 					oSimulateModel.setData(oData);
 					if (!this._oDialogSim) {
-						this._oDialogSim = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.SimulateGrid", this);
+						this._oDialogSim = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.SimulateGrid", this);
 						this.getView().addDependent(this._oDialogSim);
 					}
 					this._oDialogSim.setModel(oSimulateModel, "simulateModel");
@@ -409,7 +409,7 @@ sap.ui.define([
 		onAPInvoiceNumberButtonPressed: function (oEvent) {
 			// Open the Table Setting dialog
 			if (!this._oAPInvoiceNumberDialog) { //=== undefined) {
-				this._oAPInvoiceNumberDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.APInvoiceNumberDialog", this);
+				this._oAPInvoiceNumberDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.APInvoiceNumberDialog", this);
 				this._oAPInvoiceNumberDialog.setModel(this.getModel("i18n"), "i18n");
 			}
 

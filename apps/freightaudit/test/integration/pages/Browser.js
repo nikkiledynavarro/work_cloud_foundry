@@ -1,6 +1,6 @@
 sap.ui.define([
 		"sap/ui/test/Opa5",
-		"com/erpis/shiperp/freightaudit/test/integration/pages/Common"
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Common"
 	], function(Opa5, Common) {
 		"use strict";
 

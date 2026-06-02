@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-		"com/erpis/shiperp/freightaudit/model/models",
+		"com/erpis/shiperp/freightaudit/hr7/model/models",
 		"sap/ui/thirdparty/sinon",
 		"sap/ui/thirdparty/sinon-qunit"
 	], function (models) {

@@ -2,12 +2,12 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/erpis/shiperp/freightaudit/model/models",
-	"com/erpis/shiperp/freightaudit/controller/ErrorHandler"
+	"com/erpis/shiperp/freightaudit/hr7/model/models",
+	"com/erpis/shiperp/freightaudit/hr7/controller/ErrorHandler"
 ], function (UIComponent, Device, models, ErrorHandler) {
 	"use strict";
 
-	return UIComponent.extend("com.erpis.shiperp.freightaudit.Component", {
+	return UIComponent.extend("com.erpis.shiperp.freightaudit.hr7.Component", {
 
 		metadata: {
 			manifest: "json"

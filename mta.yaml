@@ -4,9 +4,9 @@ version: 0.0.1
 description: ShipERP Fiori HTML5 apps migrated from Neo to Cloud Foundry HTML5 Apps Repository.
 
 modules:
-  - name: cancelhr7
+  - name: cancelshipment
     type: html5
-    path: apps/cancelhr7
+    path: apps/cancelshipment
     build-parameters:
       builder: custom
       commands:
@@ -16,55 +16,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: cancelhr7-app-content
+  - name: cancelshipment-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: cancelhr7-app-front-service
+      - name: cancelshipment-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/cancelhr7
+      build-result: resources/cancelshipment
       requires:
-        - name: cancelhr7
+        - name: cancelshipment
           artifacts:
-            - cancelhr7.zip
-          target-path: resources/cancelhr7/
+            - cancelshipment.zip
+          target-path: resources/cancelshipment/
 
-  - name: cancelhr7-destination-content
+  - name: cancelshipment-destination-content
     type: com.sap.application.content
     requires:
-      - name: cancelhr7-destination-service
+      - name: cancelshipment-destination-service
         parameters:
           content-target: true
-      - name: cancelhr7-app-front-service
+      - name: cancelshipment-app-front-service
         parameters:
           service-key:
-            name: cancelhr7-app-front-service-key
-      - name: cancelhr7-xsuaa-service
+            name: cancelshipment-app-front-service-key
+      - name: cancelshipment-xsuaa-service
         parameters:
           service-key:
-            name: cancelhr7-xsuaa-service-key
+            name: cancelshipment-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: cancelhr7-app-front-service
-              ServiceInstanceName: cancelhr7-app-front-service
-              ServiceKeyName: cancelhr7-app-front-service-key
-              sap.cloud.service: comerpisshiperpcancelhr7
-            - Name: cancelhr7-xsuaa-service
+            - Name: cancelshipment-app-front-service
+              ServiceInstanceName: cancelshipment-app-front-service
+              ServiceKeyName: cancelshipment-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelshipment
+            - Name: cancelshipment-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: cancelhr7-xsuaa-service
-              ServiceKeyName: cancelhr7-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcancelhr7
+              ServiceInstanceName: cancelshipment-xsuaa-service
+              ServiceKeyName: cancelshipment-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelshipment
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: freightaudithr7
+  - name: freightaudit
     type: html5
-    path: apps/freightaudithr7
+    path: apps/freightaudit
     build-parameters:
       builder: custom
       commands:
@@ -74,48 +74,48 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: freightaudithr7-app-content
+  - name: freightaudit-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: freightaudithr7-app-front-service
+      - name: freightaudit-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/freightaudithr7
+      build-result: resources/freightaudit
       requires:
-        - name: freightaudithr7
+        - name: freightaudit
           artifacts:
-            - freightaudithr7.zip
-          target-path: resources/freightaudithr7/
+            - freightaudit.zip
+          target-path: resources/freightaudit/
 
-  - name: freightaudithr7-destination-content
+  - name: freightaudit-destination-content
     type: com.sap.application.content
     requires:
-      - name: freightaudithr7-destination-service
+      - name: freightaudit-destination-service
         parameters:
           content-target: true
-      - name: freightaudithr7-app-front-service
+      - name: freightaudit-app-front-service
         parameters:
           service-key:
-            name: freightaudithr7-app-front-service-key
-      - name: freightaudithr7-xsuaa-service
+            name: freightaudit-app-front-service-key
+      - name: freightaudit-xsuaa-service
         parameters:
           service-key:
-            name: freightaudithr7-xsuaa-service-key
+            name: freightaudit-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: freightaudithr7-app-front-service
-              ServiceInstanceName: freightaudithr7-app-front-service
-              ServiceKeyName: freightaudithr7-app-front-service-key
-              sap.cloud.service: comerpisshiperpfreightaudithr7
-            - Name: freightaudithr7-xsuaa-service
+            - Name: freightaudit-app-front-service
+              ServiceInstanceName: freightaudit-app-front-service
+              ServiceKeyName: freightaudit-app-front-service-key
+              sap.cloud.service: comerpisshiperpfreightaudit
+            - Name: freightaudit-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: freightaudithr7-xsuaa-service
-              ServiceKeyName: freightaudithr7-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpfreightaudithr7
+              ServiceInstanceName: freightaudit-xsuaa-service
+              ServiceKeyName: freightaudit-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpfreightaudit
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2054,13 +2054,13 @@ resources:
       service-plan: application
       path: ./security/xs-security-planshipment.json
 
-  - name: cancelhr7-app-front-service
+  - name: cancelshipment-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: cancelhr7-destination-service
+  - name: cancelshipment-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2068,20 +2068,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: cancelhr7-xsuaa-service
+  - name: cancelshipment-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-cancelhr7.json
+      path: ./security/xs-security-cancelshipment.json
 
-  - name: freightaudithr7-app-front-service
+  - name: freightaudit-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: freightaudithr7-destination-service
+  - name: freightaudit-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2089,12 +2089,12 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: freightaudithr7-xsuaa-service
+  - name: freightaudit-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-freightaudithr7.json
+      path: ./security/xs-security-freightaudit.json
 
   - name: createshipmentv2ewm-app-front-service
     type: org.cloudfoundry.managed-service

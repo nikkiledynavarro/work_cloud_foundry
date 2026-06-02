@@ -1,10 +1,10 @@
 {
-    "name":  "freightaudit",
+    "name":  "freightaudithr7",
     "version":  "1.0.0",
     "private":  true,
     "scripts":  {
                     "build":  "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-                    "package":  "cd dist \u0026\u0026 bestzip freightaudit.zip *"
+                    "package":  "cd dist \u0026\u0026 bestzip freightaudithr7.zip *"
                 },
     "devDependencies":  {
                             "@ui5/cli":  "^3.11.0",

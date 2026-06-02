@@ -1,7 +1,0 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<SelectDialog noDataText="{i18n>NoCarrierFound}" title="{i18n>CarrierDialogTitle}" search="handleCarrierSearch"
-		liveChange="handleCarrierSearch" confirm="onHandleCarrierSelect" cancel="handleClose" items="{ path: '/xSERPERPxCDS_CARRIER' }"
-		multiSelect="true">
-		<StandardListItem title="{Description}" description="{Code}" iconDensityAware="false" iconInset="false" type="Active"/>
-	</SelectDialog>
-</core:FragmentDefinition>

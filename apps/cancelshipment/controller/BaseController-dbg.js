@@ -14,7 +14,7 @@ sap.ui.define([
 	BusyIndicator) {
 	"use strict";
 
-	return Controller.extend("com.erpis.shiperp.sls.cancelshipment.controller.BaseController", {
+	return Controller.extend("com.erpis.shiperp.cancel.hr7.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.
@@ -168,42 +168,6 @@ sap.ui.define([
 		 * Logic of method is unclear yet
 		 * @public
 		 */
-		_generateMessages: function (aParamMessages) {
-			var aMessages = [];
-			for (var i = 0; i < aParamMessages.length; i++) {
-				var oMessage = this._generateMessageObject(aParamMessages[i]);
-				if (oMessage) {
-					aMessages.push(oMessage);
-				}
-			}
-			return aMessages;
-		},
-		_generateMessageObject: function (oPassMessage) {
-			var oMessage = {
-				type: "Warning",
-				title: oPassMessage.Message,
-				description: "",
-				counter: 0
-			};
-			switch (oPassMessage.Type) {
-			case "E":
-				oMessage.type = MessageType.Error;
-				break;
-			case "W":
-				oMessage.type = MessageType.Warning;
-				break;
-			case "I":
-				oMessage.type = MessageType.Information;
-				break;
-			case "S":
-				oMessage.type = MessageType.Success;
-				break;
-			default:
-				oMessage.type = MessageType.Warning;
-				break;
-			}
-			return oMessage;
-		},
 		_addMessage: function (aMsg) {
 			var aMessages = this.getModel("messageModel").getProperty("/aMessages");
 			var aNewMessages = aMsg.concat(aMessages);

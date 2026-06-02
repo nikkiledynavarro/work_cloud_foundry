@@ -7,25 +7,25 @@ QUnit.config.autostart = false;
 
 sap.ui.require([
 	"sap/ui/test/Opa5",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/Common",
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Common",
 	"sap/ui/test/opaQunit",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/Worklist",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/Object",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/NotFound",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/Browser",
-	"com/erpis/shiperp/freightaudit/test/integration/pages/App"
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Worklist",
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Object",
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/NotFound",
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Browser",
+	"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/App"
 ], function (Opa5, Common) {
 	"use strict";
 	Opa5.extendConfig({
 		arrangements: new Common(),
-		viewNamespace: "com.erpis.shiperp.freightaudit.view."
+		viewNamespace: "com.erpis.shiperp.freightaudit.hr7.view."
 	});
 
 	sap.ui.require([
-		"com/erpis/shiperp/freightaudit/test/integration/WorklistJourney",
-		"com/erpis/shiperp/freightaudit/test/integration/ObjectJourney",
-		"com/erpis/shiperp/freightaudit/test/integration/NavigationJourney",
-		"com/erpis/shiperp/freightaudit/test/integration/NotFoundJourney"
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/WorklistJourney",
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/ObjectJourney",
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/NavigationJourney",
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/NotFoundJourney"
 	], function () {
 		QUnit.start();
 	});

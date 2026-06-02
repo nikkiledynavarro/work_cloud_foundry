@@ -9,12 +9,13 @@ sap.ui.define([
 	"sap/m/Link",
 	"sap/ui/core/MessageType",
 	"sap/m/MessageBox",
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
 ], function (Controller, JSONModel, History, Filter, FilterOperator, MessagePopover, MessagePopoverItem, Link, MessageType, MessageBox,
-	BusyIndicator) {
+	BusyIndicator, Utils) {
 	"use strict";
 
-	return Controller.extend("com.erpis.shiperp.freightaudit.controller.BaseController", {
+	return Controller.extend("com.erpis.shiperp.freightaudit.hr7.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.
@@ -355,10 +356,86 @@ sap.ui.define([
 		 */
 		_getMessagePopover: function () {
 			if (!this._messagePopover) {
-				this._messagePopover = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.MessagePopover", this);
+				this._messagePopover = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.MessagePopover", this);
 			}
 			this._messagePopover.setModel(this.getModel("messageModel"), "messageModel");
 			return this._messagePopover;
+		},
+		//Added by Tim 21/10/2021
+		//Check approve allows secenario Axo 4684
+			//Check approve allows secenario Axo 4684
+		_getInvoiceNotAllowedApproveErrList: function (aInvoice, screen) {
+
+			var aSelectedInvoiceItems = [];
+
+			aInvoice.forEach(function (invoice) {
+				var oBindingContext = invoice.getBindingContext();
+				var oInvoice = oBindingContext.getObject();
+				aSelectedInvoiceItems.push(oInvoice);
+			});
+			var aNotAllowedApproveMsgs = [];
+			var oThis = this;
+			aSelectedInvoiceItems.forEach(function (record) {
+				var approval = record.ApprovalStatus;
+
+				//for detail & side by side screen
+				if (!record.ApprovalStatus) {
+					approval = record.DetailStatus;
+				}
+				var overrall = record.OverallStatus;
+				var oCheck = Utils.checkApproveAvailableBySreen(screen, approval, overrall);
+				if (!oCheck.isAvailable) {
+					var sMsgTitle = oThis.oBundle.getText("actionNotAllowedHeader", [record.InvoiceNo, oCheck.stateText]);
+					if (screen !== "H") {
+						sMsgTitle = oThis.oBundle.getText("actionNotAllowedDetail", [record.TrackingNo, oCheck.stateText]);
+					}
+					var oMessage = {
+						type: "Error",
+						title: sMsgTitle,
+						description: ""
+					};
+					aNotAllowedApproveMsgs.push(oMessage);
+				}
+			});
+			return aNotAllowedApproveMsgs;
+		},
+		//Added by Tim 21/10/2021
+		//Check approve allows secenario Axo 4687
+		_getInvoiceNotAllowedReleaseErrList: function (aInvoice, screen) {
+
+			var aSelectedInvoiceItems = [];
+
+			aInvoice.forEach(function (invoice) {
+				var oBindingContext = invoice.getBindingContext();
+				var oInvoice = oBindingContext.getObject();
+				aSelectedInvoiceItems.push(oInvoice);
+			});
+			var aNotAllowedReleaseMsgs = [];
+			var oThis = this;
+			aSelectedInvoiceItems.forEach(function (record) {
+				var approval = record.ApprovalStatus;
+
+				//for detail & side by side screen
+				if (!record.ApprovalStatus) {
+					approval = record.DetailStatus;
+				}
+				var overrall = record.OverallStatus;
+				var oCheck = Utils.checkReleaseAvailableBySreen(screen, approval, overrall);
+				if (!oCheck.isAvailable) {
+					var sMsgTitle = oThis.oBundle.getText("actionNotAllowedHeader", [record.InvoiceNo, oCheck.stateText]);
+					if (screen !== "H") {
+						sMsgTitle = oThis.oBundle.getText("actionNotAllowedDetail", [record.TrackingNo, oCheck.stateText]);
+					}
+					var oMessage = {
+						type: "Error",
+						title: sMsgTitle,
+						description: ""
+					};
+					aNotAllowedReleaseMsgs.push(oMessage);
+				}
+			});
+			return aNotAllowedReleaseMsgs;
+
 		}
 
 	});

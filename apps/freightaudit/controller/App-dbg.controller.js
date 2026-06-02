@@ -1,10 +1,10 @@
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel"
 ], function (BaseController, JSONModel) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.App", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.App", {
 
 		onInit: function () {
 			var oViewModel = new JSONModel({});

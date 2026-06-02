@@ -1,7 +1,7 @@
 sap.ui.require([
 		"sap/ui/test/Opa5",
 		"sap/ui/test/actions/Press",
-		"com/erpis/shiperp/freightaudit/test/integration/pages/Common"
+		"com/erpis/shiperp/freightaudit/hr7/test/integration/pages/Common"
 	], function(Opa5, Press, Common) {
 		"use strict";
 

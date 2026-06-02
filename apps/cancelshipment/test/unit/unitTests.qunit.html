@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Unit tests for com.erpis.shiperp.sls.cancelshipment</title>
+	<head>
+		<title>Unit tests for ShipERP - Cancel</title>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+		<meta charset="UTF-8">
 
-	<script id="sap-ui-bootstrap"
-		src="../../../resources/sap-ui-core.js"
-		data-sap-ui-resourceroots='{
-			"com/erpis/shiperp/sls/cancelshipment": "../../"			
-		}'>
-	</script>
+		<script id="sap-ui-bootstrap"
+			src="../../resources/sap-ui-core.js"
+			data-sap-ui-resourceroots='{
+				"com.erpis.shiperp.cancel.hr7": "../../",
+				"test.unit": "./"
+			}'>
+		</script>
 
-	<link rel="stylesheet" type="text/css" href="../../../resources/sap/ui/thirdparty/qunit-2.css">
+		<script>
+			jQuery.sap.require("sap.ui.qunit.qunit-css");
+			jQuery.sap.require("sap.ui.thirdparty.qunit");
+			jQuery.sap.require("sap.ui.qunit.qunit-junit");
+			jQuery.sap.require("sap.ui.qunit.qunit-coverage");
 
-	<script src="../../../resources/sap/ui/thirdparty/qunit-2.js"></script>
-	<script src="../../../resources/sap/ui/qunit/qunit-junit.js"></script>
-	<script src="../../../resources/sap/ui/qunit/qunit-coverage.js"></script>
+			QUnit.config.autostart = false;
 
-	<script src="unitTests.qunit.js"></script>
-</head>
-<body>
-	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
-</body>
+			sap.ui.require(
+				["test/unit/allTests"],
+					function () {
+						QUnit.start();
+					}
+			);
+		</script>
+
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+	</body>
 </html>

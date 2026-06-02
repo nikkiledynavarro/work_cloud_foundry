@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.shiperp.freightaudit.controller.InvoiceList" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="com.erpis.shiperp.freightaudit.hr7.controller.InvoiceList" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:sv="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable">
 	<f:DynamicPage showFooter="true">
@@ -105,7 +105,9 @@
 						<smartTable:SmartTable entitySet="xSERPERPxI_FAHDR" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="true"
 							useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SmartFilterPKey" enableAutoBinding="true" id="smartTable"
 							header="Invoices List" showRowCount="true" showFullScreenButton="true" demandPopin="false" showOverlay="onShowOverlay"
-							initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind">
+							initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind"
+							requestAtLeastFields="Currency"
+							>
 							<smartTable:customToolbar>
 								<OverflowToolbar height="3rem" design="Transparent">
 									<ToolbarSpacer/>
@@ -216,7 +218,8 @@
 												unit="{Currency}" state="Success"/>
 											<ObjectNumber
 												number="{ parts:[{path:'InvSERPAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-												unit="{Currency}" state="Success"/>
+												unit="{Currency}" state="Success"
+												tooltip="{Currency}"/>
 											<Text text="{CompanyCode}"/>
 											<Button icon="sap-icon://crm-service-manager" type="Emphasized" press="onAPInvoiceNumberButtonPressed"
 												visible="{parts: [{path: 'OverallStatus'}], formatter: '.formatter.formatButtonAPInvoiceNumberVisible'}"/>

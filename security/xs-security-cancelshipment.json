@@ -1,5 +1,5 @@
-{
-    "xsappname":  "comerpisshiperpcancelshipment",
+﻿{
+    "xsappname": "comerpisshiperpcancelshipment",
     "tenant-mode":  "dedicated",
     "scopes":  [
                    {

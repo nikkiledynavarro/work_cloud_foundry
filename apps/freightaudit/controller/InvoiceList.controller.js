@@ -1,17 +1,18 @@
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"sap/m/Token"
-], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, Token) {
+	"sap/m/Token",
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
+], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, Token, Utils) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.InvoiceList", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.InvoiceList", {
 
 		formatter: formatter,
 
@@ -40,13 +41,18 @@ sap.ui.define([
 			this.getRouter().getRoute("invoiceList").attachPatternMatched(this._onObjectMatched, this);
 		},
 		_onObjectMatched: function (oEvent) {
-		
+
 			var url = window.location.href;
 			// var url =
 			// 	"https://flpnwc-da56ca735.dispatcher.us2.hana.ondemand.com/sites?siteId=a4577ddc-ff44-41a6-b0c9-87437832bd34#FreightAudit-manage?InvoiceNo=12107";
 			var aPiece = url.split("?");
-			var sParam = aPiece[2].split("=");
-			this.sInvoice = sParam[1];
+
+			//added by Tim
+			this.sInvoice = "";
+			if (aPiece.length > 2) {
+				var sParam = aPiece[2].split("=");
+				this.sInvoice = sParam[1];
+			}
 
 		},
 		onAfterRendering: function () {
@@ -219,14 +225,23 @@ sap.ui.define([
 				MessageBox.error(this.oBundle.getText("noHdrSelectionMsg")); //"Please select an Invoice");
 				return;
 			}
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction === MessageBox.Action.OK) {
-						this._releaseInvoice();
-					}
-				}.bind(this)
-			});
+
+			//Added by Tim 22/10/2021 Axo 4687
+			var aNotAllowedReleaseMsgs = this._getInvoiceNotAllowedReleaseErrList(aInvoice, "H");
+			if (aNotAllowedReleaseMsgs && aNotAllowedReleaseMsgs.length > 0) {
+				// this._addMessage(aNotAllowedReleaseMsgs);
+				MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+				// return;
+			}
+			this._releaseInvoice();
+			// MessageBox.confirm(sMsg, {
+			// 	title: sTitle,
+			// 	onClose: function (oAction) {
+			// 		if (oAction === MessageBox.Action.OK) {
+			// 			this._releaseInvoice();
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		/**
@@ -236,34 +251,74 @@ sap.ui.define([
 		onCancelButtonPressed: function () {
 			var sMsg = this.oBundle.getText("confirmCancelMsg");
 			var sTitle = this.oBundle.getText("confirmCancelTitle");
-			var aInvoice = this.byId("smartTable").getTable().getSelectedItems();
+			var oInvoiceTable = this.byId("smartTable").getTable();
+			var aInvoice = oInvoiceTable.getSelectedItems();
 			if (aInvoice.length === 0) {
 				MessageBox.error(this.oBundle.getText("noHdrSelectionMsg"));
 				return;
 			}
+			// //Check dispute
+			// var aSelectedInvoiceItems = [];
 
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction === MessageBox.Action.OK) {
-						var invoiceExists = false;
-						for (var i = 0; i < aInvoice.length; i++) {
-							var oBindingContext = aInvoice[i].getBindingContext();
-							var oInvoice = oBindingContext.getObject();
-							if (oInvoice.OverallStatus === "R") {
-								invoiceExists = true;
-								break;
-							}
-						}
+			// aInvoice.forEach(function (invoice) {
+			// 	var oBindingContext = invoice.getBindingContext();
+			// 	var oInvoice = oBindingContext.getObject();
+			// 	aSelectedInvoiceItems.push(oInvoice);
+			// });
+			//Added by Tim 13/10/2021
+			//Checking not alowed cancel with condition
+			//approval status: Disputed
+			//overall status: Released, Partially Released,Rejected
+			// var aNotAllowedCancelIds = [];
+			// aSelectedInvoiceItems.forEach(function (record) {
+			// 	var bIsCancel = Utils.checkCancelAvailableBySreen("H", record.ApprovalStatus, record.OverallStatus);
+			// 	if (!bIsCancel) {
+			// 		aNotAllowedCancelIds.push(record.InvoiceNo);
+			// 	}
+			// });
 
-						if (invoiceExists) {
-							this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog", "idInvoiceListReversalDialog");
-						} else {
-							this._cancelInvoice("00");
-						}
-					}
-				}.bind(this)
-			});
+			// if (aNotAllowedCancelIds && aNotAllowedCancelIds.length > 0) {
+			// 	var invoiceIds = aNotAllowedCancelIds.toString();
+			// 	MessageBox.error(this.oBundle.getText("disputeSelectionError", invoiceIds));
+			// 	return;
+			// }
+			var invoiceExists = false;
+			for (var i = 0; i < aInvoice.length; i++) {
+				var oBindingContext = aInvoice[i].getBindingContext();
+				var oInvoice = oBindingContext.getObject();
+				if (oInvoice.OverallStatus === "R") {
+					invoiceExists = true;
+					break;
+				}
+			}
+
+			if (invoiceExists) {
+				this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog", "idInvoiceListReversalDialog");
+			} else {
+				this._cancelInvoice("00");
+			}
+			// MessageBox.confirm(sMsg, {
+			// 	title: sTitle,
+			// 	onClose: function (oAction) {
+			// 		if (oAction === MessageBox.Action.OK) {
+			// 			var invoiceExists = false;
+			// 			for (var i = 0; i < aInvoice.length; i++) {
+			// 				var oBindingContext = aInvoice[i].getBindingContext();
+			// 				var oInvoice = oBindingContext.getObject();
+			// 				if (oInvoice.OverallStatus === "R") {
+			// 					invoiceExists = true;
+			// 					break;
+			// 				}
+			// 			}
+
+			// 			if (invoiceExists) {
+			// 				this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog", "idInvoiceListReversalDialog");
+			// 			} else {
+			// 				this._cancelInvoice("00");
+			// 			}
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		/**
@@ -289,7 +344,7 @@ sap.ui.define([
 			}
 			// Open the Table Setting dialog
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogHdr", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogHdr", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.open();
@@ -303,7 +358,28 @@ sap.ui.define([
 			var sStatusCode = oEvent.getParameters().selectedItem.getDescription();
 			var sMsg = this.oBundle.getText("confirmSetStatusMsg");
 			var sTitle = this.oBundle.getText("confirmSetStatusTitle");
+			var aInvoice = this.byId("smartTable").getTable().getSelectedItems();
+			//Added by Tim 22/10/2021 Axo 4684,4688
 
+			//Checking approve action
+			if (sStatusCode === "A") {
+				var aNotAllowedApproveMsgs = this._getInvoiceNotAllowedApproveErrList(aInvoice, "H");
+				if (aNotAllowedApproveMsgs && aNotAllowedApproveMsgs.length > 0) {
+					this._addMessage(aNotAllowedApproveMsgs);
+					MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+					return;
+				}
+			}
+
+			//Checking reject action
+			if (sStatusCode === "RE") {
+				var aNotAllowedRejectMsgs = this._getInvoiceNotAllowedRejectErrList(aInvoice);
+				if (aNotAllowedRejectMsgs && aNotAllowedRejectMsgs.length > 0) {
+					this._addMessage(aNotAllowedRejectMsgs);
+					MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+					return;
+				}
+			}
 			MessageBox.confirm(sMsg, {
 				title: sTitle,
 				onClose: function (oAction) {
@@ -337,15 +413,22 @@ sap.ui.define([
 				MessageBox.error(this.oBundle.getText("noHdrSelectionMsg"));
 				return;
 			}
+			var aNotAllowedApproveMsgs = this._getInvoiceNotAllowedApproveErrList(aInvoice, "H");
+			//added by Tim 22/10/2021 Axo 4684
+			if (aNotAllowedApproveMsgs && aNotAllowedApproveMsgs.length > 0) {
+				// this._addMessage(aNotAllowedApproveMsgs);
+				MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+			}
 
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction === MessageBox.Action.OK) {
-						this._setInvoiceStatus("A");
-					}
-				}.bind(this)
-			});
+			this._setInvoiceStatus("A");
+			// MessageBox.confirm(sConfirmMessage , {
+			// 	title: sTitle,
+			// 	onClose: function (oAction) {
+			// 		if (oAction === MessageBox.Action.OK) {
+			// 			this._setInvoiceStatus("A");
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		/**
@@ -372,7 +455,7 @@ sap.ui.define([
 					var oSimulateModel = new JSONModel();
 					oSimulateModel.setData(oData);
 					if (!this._oDialogSim) {
-						this._oDialogSim = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.SimulateGrid", this);
+						this._oDialogSim = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.SimulateGrid", this);
 						this.getView().addDependent(this._oDialogSim);
 					}
 					this._oDialogSim.setModel(oSimulateModel, "simulateModel");
@@ -409,13 +492,25 @@ sap.ui.define([
 		onAPInvoiceNumberButtonPressed: function (oEvent) {
 			// Open the Table Setting dialog
 			if (!this._oAPInvoiceNumberDialog) { //=== undefined) {
-				this._oAPInvoiceNumberDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.APInvoiceNumberDialog", this);
+				this._oAPInvoiceNumberDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.APInvoiceNumberDialog", this);
 				this._oAPInvoiceNumberDialog.setModel(this.getModel("i18n"), "i18n");
 			}
 
 			var oTheTableRowThatContainsThisButton = oEvent.getSource().getParent();
-			var sBindingPath = oTheTableRowThatContainsThisButton.getBindingContext().getPath(); //sBindingPath should have format "/xSERPERPxI_FAHDR(InvoiceNo='xxx',Vendor='xxx')"
-			var sTrackingOrderPath = sBindingPath + "/toDTL";
+			//updated by Tim to prevent max_join_depth 23/9/2021
+
+			//old logic
+			// var sBindingPath = oTheTableRowThatContainsThisButton.getBindingContext().getPath(); //sBindingPath should have format "/xSERPERPxI_FAHDR(InvoiceNo='xxx',Vendor='xxx')"
+			// var sTrackingOrderPath = sBindingPath + "/toDTL";
+
+			//new logic
+			var oCurrRow = oTheTableRowThatContainsThisButton.getBindingContext().getObject();
+			// var sTrackingOrderPath= "xSERPERPxI_FADTL?$filter=InvoiceNo eq '"+oCurrRow.InvoiceNo+"' and Vendor eq '"+oCurrRow.Vendor+"'";
+			var sTrackingOrderPath = "/xSERPERPxI_FADTL";
+			var aTrackFilters = [];
+			aTrackFilters.push(new Filter("InvoiceNo", FilterOperator.EQ, oCurrRow.InvoiceNo));
+			aTrackFilters.push(new Filter("Vendor", FilterOperator.EQ, oCurrRow.Vendor));
+
 			var oTable = this._oAPInvoiceNumberDialog.getContent()[0];
 			oTable.setBusy(true);
 
@@ -432,6 +527,7 @@ sap.ui.define([
 
 			//Read data of Tracking Numbers
 			this.getModel().read(sTrackingOrderPath, {
+				filters: aTrackFilters,
 				success: function (oData) {
 					//"this" is now bound to oTable
 					var aReturnedResults = [];
@@ -578,6 +674,7 @@ sap.ui.define([
 		_setInvoiceStatus: function (sStatusCode) {
 			this.showBusy();
 			var aInvoice = this.byId("smartTable").getTable().getSelectedItems();
+
 			var oInvoice;
 			var sDatetime = "";
 			for (var i = 0; i < aInvoice.length; i++) {
@@ -811,6 +908,36 @@ sap.ui.define([
 				oMatchStatusFilter = new Filter(aFilters, false);
 			}
 			return oMatchStatusFilter;
+		},
+		//Added by Tim 21/10/2021
+		//Check approve allows secenario Axo 4688
+		_getInvoiceNotAllowedRejectErrList: function (aInvoice) {
+
+			var aSelectedInvoiceItems = [];
+
+			aInvoice.forEach(function (invoice) {
+				var oBindingContext = invoice.getBindingContext();
+				var oInvoice = oBindingContext.getObject();
+				aSelectedInvoiceItems.push(oInvoice);
+			});
+			var aNotAllowedRejectMsgs = [];
+			var oThis = this;
+			aSelectedInvoiceItems.forEach(function (record) {
+				var approval = record.ApprovalStatus;
+				var overrall = record.OverallStatus;
+				var oCheck = Utils.checkRejectAvailableBySreen("H", approval, overrall);
+				if (!oCheck.isAvailable) {
+					var sMsgTitle = oThis.oBundle.getText("actionNotAllowedHeader", [record.InvoiceNo, oCheck.stateText]);
+					var oMessage = {
+						type: "Error",
+						title: sMsgTitle,
+						description: ""
+					};
+					aNotAllowedRejectMsgs.push(oMessage);
+				}
+			});
+			return aNotAllowedRejectMsgs;
+
 		}
 
 	});

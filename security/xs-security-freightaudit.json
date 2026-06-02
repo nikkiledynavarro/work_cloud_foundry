@@ -1,16 +1,16 @@
-{
-    "xsappname":  "comerpisshiperpfreightaudit",
+﻿{
+    "xsappname": "comerpisshiperpfreightaudit",
     "tenant-mode":  "dedicated",
     "scopes":  [
                    {
                        "name":  "$XSAPPNAME.User",
-                       "description":  "Access FreightAudit"
+                       "description":  "Access {{appTitle}}"
                    }
                ],
     "role-templates":  [
                            {
                                "name":  "User",
-                               "description":  "Access FreightAudit",
+                               "description":  "Access {{appTitle}}",
                                "scope-references":  [
                                                         "$XSAPPNAME.User"
                                                     ]

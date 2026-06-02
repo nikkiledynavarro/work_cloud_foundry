@@ -2,12 +2,12 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/erpis/shiperp/sls/cancelshipment/model/models",
-	"com/erpis/shiperp/sls/cancelshipment/controller/ErrorHandler"
+	"com/erpis/shiperp/cancel/hr7/model/models",
+	"com/erpis/shiperp/cancel/hr7/controller/ErrorHandler"
 ], function (UIComponent, Device, models, ErrorHandler) {
 	"use strict";
 
-	return UIComponent.extend("com.erpis.shiperp.sls.cancelshipment.Component", {
+	return UIComponent.extend("com.erpis.shiperp.cancel.hr7.Component", {
 
 		metadata: {
 			manifest: "json"

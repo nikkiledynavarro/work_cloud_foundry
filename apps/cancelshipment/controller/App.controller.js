@@ -1,10 +1,10 @@
 sap.ui.define([
-	"com/erpis/shiperp/sls/cancelshipment/controller/BaseController",
+	"com/erpis/shiperp/cancel/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel"
 ], function (BaseController, JSONModel) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.sls.cancelshipment.controller.App", {
+	return BaseController.extend("com.erpis.shiperp.cancel.hr7.controller.App", {
 
 		onInit: function () {
 			var oViewModel = new JSONModel({});

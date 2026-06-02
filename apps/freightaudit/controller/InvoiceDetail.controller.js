@@ -1,18 +1,18 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/freightaudit/controller/BaseController",
+	"com/erpis/shiperp/freightaudit/hr7/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/freightaudit/model/formatter",
+	"com/erpis/shiperp/freightaudit/hr7/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"com/erpis/shiperp/freightaudit/common/Utils"
+	"com/erpis/shiperp/freightaudit/hr7/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, Utils) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.freightaudit.controller.InvoiceDetail", {
+	return BaseController.extend("com.erpis.shiperp.freightaudit.hr7.controller.InvoiceDetail", {
 
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
@@ -109,6 +109,11 @@ sap.ui.define([
 		 */
 		onTrackNumberLinkPressed: function (oEvent) {
 			var oItem = oEvent.getSource();
+			//Added by Tim AXO 4671
+			if (!this.sInvoiceNo || !this.sVendor || !this.sAccountNo || !this.sCompanyCode || !this.sCarrier) {
+				var errMsg = this.oBundle.getText("errorInvalidDataNavToSideBySide");
+				MessageBox.error(errMsg);
+			}
 			this.getRouter().navTo("conditionDetail", {
 				InvoiceNo: this.sInvoiceNo,
 				Vendor: this.sVendor,
@@ -127,9 +132,14 @@ sap.ui.define([
 		onDisputeIDLinkPressed: function (oEvent) {
 			var oNavService = sap.ushell && sap.ushell.Container && sap.ushell.Container.getService && sap.ushell.Container.getService(
 				"CrossApplicationNavigation");
+
+			//Have to change semantic Action when move to new server
+			var semanticAction = "disputehr7-Display"; //Tim added 26/10/2021 Axo 4672 
+			var disputeId = oEvent.getSource().getText();
+			var disputeDetailTarget = "#" + semanticAction + "&/DisputeDetail/" + disputeId;
 			oNavService.toExternal({
 				target: {
-					shellHash: "#Dispute-manage&/DisputeDetail/" + oEvent.getSource().getText()
+					shellHash: disputeDetailTarget
 				}
 			});
 		},
@@ -151,7 +161,7 @@ sap.ui.define([
 			this.oCurrentTracking = oSelectedTracking;
 
 			if (!this.oPayAmtDialog) {
-				this.oPayAmtDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.PayamtUpdate", this);
+				this.oPayAmtDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.PayamtUpdate", this);
 				this.getView().addDependent(this.oPayAmtDialog);
 			}
 			this.getModel().callFunction("/GetItemRemarks", {
@@ -366,30 +376,50 @@ sap.ui.define([
 				MessageBox.error(this.oBundle.getText("noDtlSelectMsg"));
 				return;
 			}
-
-			// Validate if one Tracking number is already approved/disputed. If yes, shouldn't allow dispute
-			var bFlag = false;
-			var oItem;
-			for (var i = 0; i < aInvoices.length; i++) {
-				oItem = aInvoices[i].getBindingContext().getObject();
-				if (oItem.DetailStatus === "D") {
-					bFlag = true;
-					break;
-				}
+			//Added by Tim 22/10/2021 Axo 4687
+			var aNotAllowedReleaseMsgs = this._getInvoiceNotAllowedReleaseErrList(aInvoices, "D");
+			if (aNotAllowedReleaseMsgs && aNotAllowedReleaseMsgs.length > 0) {
+				// this._addMessage(aNotAllowedReleaseMsgs);
+				MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+				// return;
 			}
-			if (bFlag) {
-				MessageBox.error(this.oBundle.getText("releaseActionNotAllowMessage"));
-				return;
-			}
+			//Added by Tim 25/10/2021 4687
+			// Validate if one Tracking number is already disputed. If yes, shouldn't allow release
+			// var aDisputes = [];
+			// var bFlag = false;
+			// var oItem;
+			// for (var i = 0; i < aInvoices.length; i++) {
+			// 	oItem = aInvoices[i].getBindingContext().getObject();
+			// 	if (oItem.DetailStatus === "D") {
+			// 		aDisputes.push(oItem.TrackingNo);
+			// 		bFlag = true;
+			// 		break;
+			// 	}
+			// }
+			// if (bFlag) {
+			// 	var aTrackIds = aDisputes.toString();
+			// 	sMsg = this.oBundle.getText("releaseActionWarningMessage", aTrackIds);
+			// 	MessageBox.confirm(sMsg, {
+			// 		title: sTitle,
+			// 		onClose: function (oAction) {
+			// 			if (oAction === MessageBox.Action.OK) {
+			// 				this._release(aInvoices);
+			// 			}
+			// 		}.bind(this)
+			// 	});
+			// 	return;
+			// } else {
+			// 	MessageBox.confirm(sMsg, {
+			// 		title: sTitle,
+			// 		onClose: function (oAction) {
+			// 			if (oAction === MessageBox.Action.OK) {
+			// 				this._release(aInvoices);
+			// 			}
+			// 		}.bind(this)
+			// 	});
+			// }
+			this._release(aInvoices);
 
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction === MessageBox.Action.OK) {
-						this._release(aInvoices);
-					}
-				}.bind(this)
-			});
 		},
 
 		onReasonSelected: function (oEvent) {
@@ -406,32 +436,52 @@ sap.ui.define([
 				MessageBox.error(this.oBundle.getText("noDtlSelectMsg"));
 				return;
 			}
-
+			//Added by Tim 13/10/2021
+			//Checking not alowed cancel with condition
+			//approval status: Disputed
+			//overall status: Released, Partially Released,Rejected
+			// var aNotAllowedCancelIds = [];
 			var isRelease = false;
 			aInvoices.forEach(function (item) {
 				var oData = item.getBindingContext().getObject();
 				if (oData.ObjectKey !== "" && oData.ObjectKey !== undefined) {
 					isRelease = true;
 				}
+				//Checking cancel available
+				// var bIsCancel = Utils.checkCancelAvailableBySreen("D", oData.DetailStatus);
+				// if (!bIsCancel) {
+				// 	aNotAllowedCancelIds.push(oData.TrackingNo);
+				// }
 			});
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction !== MessageBox.Action.OK) {
-						return;
-					}
-					if (isRelease) {
-						this._getReversalReason("com.erpis.shiperp.freightaudit.fragment.ReversalReasonDialog");
-					} else {
-						this._cancel("00");
-					}
-				}.bind(this)
-			});
+			//Block 
+			// if (aNotAllowedCancelIds && aNotAllowedCancelIds.length > 0) {
+			// 	var trackingIds = aNotAllowedCancelIds.toString();
+			// 	MessageBox.error(this.oBundle.getText("cancelDetailSideBySideError", trackingIds));
+			// 	// return;
+			// }
+			if (isRelease) {
+				this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog");
+			} else {
+				this._cancel("00");
+			}
+			// MessageBox.confirm(sMsg, {
+			// 	title: sTitle,
+			// 	onClose: function (oAction) {
+			// 		if (oAction !== MessageBox.Action.OK) {
+			// 			return;
+			// 		}
+			// 		if (isRelease) {
+			// 			this._getReversalReason("com.erpis.shiperp.freightaudit.hr7.fragment.ReversalReasonDialog");
+			// 		} else {
+			// 			this._cancel("00");
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		onOpenShippingPointDialog: function () {
 			if (!this.oShippingPointValueHelp) {
-				this.oShippingPointValueHelp = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.ShippingPointValueHelp", this);
+				this.oShippingPointValueHelp = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.ShippingPointValueHelp", this);
 				this.getView().addDependent(this.oShippingPointValueHelp);
 			}
 			this.oShippingPointValueHelp.getBinding("items").filter([]);
@@ -461,15 +511,22 @@ sap.ui.define([
 				MessageBox.error(this.oBundle.getText("noDtlSelectMsg"));
 				return;
 			}
-
-			MessageBox.confirm(sMsg, {
-				title: sTitle,
-				onClose: function (oAction) {
-					if (oAction === MessageBox.Action.OK) {
-						this._updateStatus("A");
-					}
-				}.bind(this)
-			});
+			//added by Tim 22/10/2021 Axo 4684
+			var aNotAllowedApproveMsgs = this._getInvoiceNotAllowedApproveErrList(aInvoices, "D");
+			if (aNotAllowedApproveMsgs && aNotAllowedApproveMsgs.length > 0) {
+				// this._addMessage(aNotAllowedApproveMsgs);
+				MessageBox.error(this.oBundle.getText("actionNotAllowed"));
+				// return;
+			}
+			this._updateStatus("A");
+			// MessageBox.confirm(sMsg, {
+			// 	title: sTitle,
+			// 	onClose: function (oAction) {
+			// 		if (oAction === MessageBox.Action.OK) {
+			// 			this._updateStatus("A");
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		onDisputeListDialogSelect: function () {
@@ -509,19 +566,19 @@ sap.ui.define([
 			}
 
 			// Validate if all Tracking numbers are already approved/disputed. If yes, shouldn't allow dispute
-			var bFlag = false;
-			var oItem;
-			for (var i = 0; i < aInvoices.length; i++) {
-				oItem = aInvoices[i].getBindingContext().getObject();
-				if (oItem.DetailStatus === "A" || oItem.DetailStatus === "D" || oItem.DetailStatus === "R") {
-					bFlag = true;
-					break;
-				}
-			}
-			if (bFlag) {
-				MessageBox.error(this.oBundle.getText("disputeActionNotAllowMessage"));
-				return;
-			}
+			// var bFlag = false;
+			// var oItem;
+			// for (var i = 0; i < aInvoices.length; i++) {
+			// 	oItem = aInvoices[i].getBindingContext().getObject();
+			// 	if (oItem.DetailStatus === "A" || oItem.DetailStatus === "D" || oItem.DetailStatus === "R") {
+			// 		bFlag = true;
+			// 		break;
+			// 	}
+			// }
+			// if (bFlag) {
+			// 	MessageBox.error(this.oBundle.getText("disputeActionNotAllowMessage"));
+			// 	// return;
+			// }
 
 			this.showBusy();
 			this.getModel().callFunction("/GetConsolList", {
@@ -559,7 +616,7 @@ sap.ui.define([
 			}
 			// Open the Table Setting dialog
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.StatusDialogDtl", this);
+				this._oDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.StatusDialogDtl", this);
 				this.getView().addDependent(this._oDialog);
 			}
 			this._oDialog.open();
@@ -613,7 +670,8 @@ sap.ui.define([
 					} else {
 						this.getModel("local").setProperty("/TrackingDeliveries", oData.results);
 						if (!this._oTrackingDeliveryDialog) {
-							this._oTrackingDeliveryDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.fragment.TrackingDeliveryDialog", this);
+							this._oTrackingDeliveryDialog = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hr7.fragment.TrackingDeliveryDialog",
+								this);
 							this.getView().addDependent(this._oTrackingDeliveryDialog);
 						}
 						this._oTrackingDeliveryDialog.open();
@@ -675,7 +733,13 @@ sap.ui.define([
 
 		_handleQuickFilter: function (aFilters) {
 			var oBinding = this.byId("idInvoiceDetailTab").getBinding("items");
-			oBinding.filter(aFilters);
+
+			//updated by Tim to prevent max_join_depth 
+			var aFinalFilters = aFilters;
+			if (this.TrackListBaseFilters) {
+				aFinalFilters = aFilters.concat(this.TrackListBaseFilters);
+			}
+			oBinding.filter(aFinalFilters);
 		},
 
 		/**
@@ -707,7 +771,13 @@ sap.ui.define([
 			this.sCarrier = this.getView().getBindingContext().getObject().Carrier;
 			this.sCompanyCode = this.getView().getBindingContext().getObject().CompanyCode;
 
-			this.byId("idInvoiceDetailTab").getBinding("items").refresh();
+			//updated by Tim to prevent max_join_depth 
+			// this.byId("idInvoiceDetailTab").getBinding("items").refresh();
+			this.TrackListBaseFilters = [];
+			this.TrackListBaseFilters.push(new Filter("InvoiceNo", FilterOperator.EQ, this.sInvoiceNo));
+			this.TrackListBaseFilters.push(new Filter("Vendor", FilterOperator.EQ, this.sVendor));
+			var oTrackList = this.byId("idInvoiceDetailTab").getBinding("items");
+			oTrackList.filter(this.TrackListBaseFilters);
 
 			this._getStats(this.sVendor, this.sInvoiceNo);
 			this._getAPVStatusCount();

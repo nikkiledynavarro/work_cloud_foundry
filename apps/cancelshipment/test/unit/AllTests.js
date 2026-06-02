@@ -1,5 +1,6 @@
 sap.ui.define([
-	"com/erpis/shiperp/sls/cancelshipment/test/unit/controller/View1.controller"
-], function () {
+	"test/unit/model/formatter",
+	"test/unit/model/models"
+], function() {
 	"use strict";
 });
