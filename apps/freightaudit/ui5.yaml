@@ -1,6 +1,6 @@
 specVersion: "3.0"
 metadata:
-  name: freightaudithr7
+  name: freightaudit
 type: application
 resources:
   configuration:
@@ -13,6 +13,7 @@ framework:
     - name: sap.ui.core
     - name: sap.m
     - name: sap.f
+    - name: sap.ui.layout
 builder:
   resources:
     excludes:

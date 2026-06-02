@@ -1,4 +1,4 @@
-﻿specVersion: "3.0"
+specVersion: "3.0"
 metadata:
   name: createshipmentv2ewm
 type: application
@@ -7,7 +7,7 @@ resources:
     paths:
       webapp: .
 framework:
-  name: createshipmentv2ewm
+  name: SAPUI5
   version: "1.125.1"
   libraries:
     - name: sap.ui.core
