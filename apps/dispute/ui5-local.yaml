@@ -1,0 +1,23 @@
+specVersion: "3.0"
+metadata:
+  name: dispute
+type: application
+framework:
+  name: SAPUI5
+  version: "1.125.1"
+  libraries:
+    - name: sap.ui.core
+    - name: sap.m
+    - name: sap.f
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        backend:
+          - path: /sap
+            url: http://10.10.1.76:8001
+            client: "100"
+            credentials:
+              username: NNAVARRO_AI
+              password: "Greenrose123!"

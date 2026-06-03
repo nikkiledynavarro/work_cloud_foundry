@@ -4,7 +4,9 @@
     "private":  true,
     "scripts":  {
                     "build":  "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-                    "package":  "cd dist \u0026\u0026 bestzip dispute.zip *"
+                    "package":  "cd dist \u0026\u0026 bestzip dispute.zip *",
+                    "start":  "fiori run --open index.html",
+                    "start:local":  "ui5 serve --config ui5-local.yaml --open index.html"
                 },
     "devDependencies":  {
                             "@ui5/cli":  "^3.11.0",

@@ -1,0 +1,731 @@
+{
+    "version":  "2.0.0",
+    "tasks":  [
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start HR7 Auth Proxy (port 5001)",
+                      "isBackground":  true,
+                      "command":  "node approuter/hr7-proxy.js",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "ShipERP",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                }
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start Local Approuter (port 5000)",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "ShipERP",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/approuter"
+                                  }
+                  },
+                  {
+                      "label":  "🚀 Start ShipERP (Proxy + Approuter)",
+                      "group":  {
+                                    "kind":  "build",
+                                    "isDefault":  true
+                                },
+                      "dependsOn":  [
+                                        "Start HR7 Auth Proxy (port 5001)",
+                                        "Start Local Approuter (port 5000)"
+                                    ],
+                      "problemMatcher":  [
+
+                                         ]
+                  },
+                  {
+                      "label":  "Stop All",
+                      "problemMatcher":  [
+
+                                         ],
+                      "command":  "taskkill /F /IM node.exe 2\u003enul \u0026 echo Stopped",
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                }
+                                  },
+                      "type":  "shell"
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start cancelacefiling locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/cancelacefiling"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start cancelpickuprequest locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/cancelpickuprequest"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start cancelshipment locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/cancelshipment"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start cancelshipmentewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/cancelshipmentewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start carrierperformancereportecc locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/carrierperformancereportecc"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start carrierperformancereportewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/carrierperformancereportewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start closedelivery locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/closedelivery"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start createshipment locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/createshipment"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start createshipmentewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/createshipmentewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start createshipmentv2ewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/createshipmentv2ewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start dispute locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/dispute"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start freightaudit locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/freightaudit"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start freightauditupload locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/freightauditupload"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start freightorderplanning locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/freightorderplanning"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start ltlplanning locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/ltlplanning"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start manualshipmentecc locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/manualshipmentecc"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start manualshipmentewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/manualshipmentewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start planningcockpit locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/planningcockpit"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start planshipment locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/planshipment"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start quickpackecc locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/quickpackecc"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start quickpackewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/quickpackewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start requestforpickup locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/requestforpickup"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start saleorder locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/saleorder"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start shippingdashboard locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/shippingdashboard"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start submitacefiling locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/submitacefiling"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start trackshipmentewm locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/trackshipmentewm"
+                                  }
+                  },
+                  {
+                      "problemMatcher":  [
+
+                                         ],
+                      "label":  "Start viewacefiling locally",
+                      "isBackground":  true,
+                      "command":  "npm.cmd start",
+                      "type":  "shell",
+                      "presentation":  {
+                                           "group":  "Local Source",
+                                           "reveal":  "always",
+                                           "panel":  "dedicated"
+                                       },
+                      "options":  {
+                                      "shell":  {
+                                                    "executable":  "cmd.exe",
+                                                    "args":  [
+                                                                 "/d",
+                                                                 "/c"
+                                                             ]
+                                                },
+                                      "cwd":  "${workspaceFolder}/apps/viewacefiling"
+                                  }
+                  }
+              ]
+}

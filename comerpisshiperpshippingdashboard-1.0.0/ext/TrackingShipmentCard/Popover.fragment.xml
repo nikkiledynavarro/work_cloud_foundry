@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<TableSelectDialog noDataText="No Tracking Number Found" title="List of Tracking Number" search="handleSearch" confirm="handleNavigation"
+		cancel="handleClose" id="idDialoForChart">
+		<columns>
+			<Column >
+				<header>
+					<Text text="Tracking No"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Status"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Tracking Date"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

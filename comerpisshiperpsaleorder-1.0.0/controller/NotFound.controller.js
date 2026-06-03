@@ -1,0 +1,2 @@
+sap.ui.define(["com/erpis/shiperp/salesorder/hr7/controller/BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.saleorder.controller.NotFound",{onInit:function(){this.getRouter().getTarget("notFound").attachDisplay(this._onNotFoundDisplayed,this)},_onNotFoundDisplayed:function(){this.getModel("appView").setProperty("/layout","OneColumn")}})});
+//# sourceMappingURL=NotFound.controller.js.map

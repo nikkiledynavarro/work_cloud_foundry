@@ -1,0 +1,80 @@
+<mvc:View controllerName="com.erpis.shiperp.saleorder.controller.Master" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:DynamicPage id="masterPage">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Start" wrap="Wrap">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Title visible="{= ${local>/SearchOption} === -1 ? true : false }" text="Select A Search Option" wrapping="true"/>
+						<Title visible="{= ${local>/SearchOption} === 0 ? true : false }" text="[Customer] {local>/selectedCustomer/Name1} {local>/title}"
+							wrapping="true"/>
+						<Title visible="{= ${local>/SearchOption} === 1 ? true : false }" text="[Created By] {local>/selectedCreatedBy/Username} {local>/title}"
+							wrapping="true"/>
+						<Title visible="{= ${local>/SearchOption} === 2 ? true : false }" text="[Document] {local>/selectedDocument/SalesNo} {local>/title}"
+							wrapping="true"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<Button icon="sap-icon://add" tooltip="Create Sales Order" type="Emphasized" press="onAddOrder"/>
+					<Button icon="sap-icon://filter" tooltip="Select a search option" type="Ghost" press="onFilterOptionPress"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<ScrollContainer width="100%" horizontal="true" vertical="false" focusable="true">
+					<l:VerticalLayout class="sapUiMediumMarginEnd" id="idMasterCreatedOnLayout" visible="false">
+						<Label text="{i18n>createon}" class="sapUiTinyMarginEnd"/>
+						<DateRangeSelection width="auto" displayFormat="MM/dd/yyyy" change="onMasterFilterChange" id="idMasterDaterange"
+							enabled="{= ${local>/SearchOption} === -1 ? false : true }" class="sapUiTinyMarginBottom"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout class="sapUiMediumMarginEnd" id="idMasterDocStatusLayout" visible="false">
+						<Label text="{i18n>documentstatus}" class="sapUiTinyMarginEnd"/>
+						<ComboBox width="auto" class="sapUiTinyMarginBottom" items="{/xSERPERPxI_STATV}" selectionChange="onMasterFilterChange"
+							enabled="{= ${local>/SearchOption} === -1 ? false : true }" id="idMasterDocStatus" showSecondaryValues="true">
+							<core:ListItem key="{FixedValue}" text="{Text}" additionalText="{FixedValue}"/>
+						</ComboBox>
+					</l:VerticalLayout>
+					<l:VerticalLayout class="sapUiMediumMarginEnd" id="idMasterDocTypeLayout" visible="false">
+						<Label text="{i18n>OrderType}" class="sapUiTinyMarginEnd"/>
+						<ComboBox class="sapUiTinyMarginBottom" width="auto" selectionChange="onMasterFilterChange" id="idMasterDocType" showSecondaryValues="true"/>
+						<!--<ComboBox class="sapUiTinyMarginBottom" width="auto" items="{/xSERPERPxI_AUART}" selectionChange="onMasterFilterChange" id="idMasterDocType"
+							showSecondaryValues="true">
+							<core:ListItem key="{SalesDocType}" text="{Description}" additionalText="{SalesDocType}"/>
+						</ComboBox>-->
+					</l:VerticalLayout>
+				</ScrollContainer>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<List id="list" width="auto" busyIndicatorDelay="{local>/delay}" noDataText="{local>/noDataText}" class="border_lightgray_nobottom"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true"
+				updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				<headerToolbar>
+					<OverflowToolbar visible="false" id="searchToolbar">
+						<SearchField id="searchField" showRefreshButton="true" tooltip="{i18n>masterSearchTooltip}" search="onSearch" width="auto"
+							enabled="{= ${local>/SearchOption} === -1 ? false : true }">
+							<layoutData>
+								<OverflowToolbarLayoutData shrinkable="true" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<ToolbarSpacer/>
+						<ToggleButton visible="false" press="onHandleMasterUISearch" id="idMasterShipto" icon="sap-icon://customer-and-supplier" type="Ghost"
+							tooltip="Ship To">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</ToggleButton>
+						<ToggleButton visible="false" press="onHandleMasterUISearch" id="idMasterSoldto" icon="sap-icon://customer-financial-fact-sheet" type="Ghost"
+							tooltip="Sold To">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</ToggleButton>
+					</OverflowToolbar>
+				</headerToolbar>
+			</List>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

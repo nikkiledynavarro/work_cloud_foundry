@@ -1,0 +1,246 @@
+{
+    "settings":  {
+                     "explorer.compactFolders":  false,
+                     "editor.fontSize":  13,
+                     "files.exclude":  {
+                                           "**/.ui5":  true,
+                                           "**/.cache":  true,
+                                           "**/node_modules":  true,
+                                           "**/dist":  true
+                                       }
+                 },
+    "folders":  [
+                    {
+                        "name":  "📁 ShipERP Neo→CF Project",
+                        "path":  "."
+                    },
+                    {
+                        "name":  "☁ cancelacefiling",
+                        "path":  "apps/cancelacefiling"
+                    },
+                    {
+                        "name":  "☁ cancelpickuprequest",
+                        "path":  "apps/cancelpickuprequest"
+                    },
+                    {
+                        "name":  "☁ cancelshipment",
+                        "path":  "apps/cancelshipment"
+                    },
+                    {
+                        "name":  "☁ cancelshipmentewm",
+                        "path":  "apps/cancelshipmentewm"
+                    },
+                    {
+                        "name":  "☁ carrierperformancereportecc",
+                        "path":  "apps/carrierperformancereportecc"
+                    },
+                    {
+                        "name":  "☁ carrierperformancereportewm",
+                        "path":  "apps/carrierperformancereportewm"
+                    },
+                    {
+                        "name":  "☁ closedelivery",
+                        "path":  "apps/closedelivery"
+                    },
+                    {
+                        "name":  "☁ createshipment",
+                        "path":  "apps/createshipment"
+                    },
+                    {
+                        "name":  "☁ createshipmentewm",
+                        "path":  "apps/createshipmentewm"
+                    },
+                    {
+                        "name":  "☁ createshipmentv2ewm",
+                        "path":  "apps/createshipmentv2ewm"
+                    },
+                    {
+                        "name":  "☁ dispute",
+                        "path":  "apps/dispute"
+                    },
+                    {
+                        "name":  "☁ freightaudit",
+                        "path":  "apps/freightaudit"
+                    },
+                    {
+                        "name":  "☁ freightauditupload",
+                        "path":  "apps/freightauditupload"
+                    },
+                    {
+                        "name":  "☁ freightorderplanning",
+                        "path":  "apps/freightorderplanning"
+                    },
+                    {
+                        "name":  "☁ ltlplanning",
+                        "path":  "apps/ltlplanning"
+                    },
+                    {
+                        "name":  "☁ manualshipmentecc",
+                        "path":  "apps/manualshipmentecc"
+                    },
+                    {
+                        "name":  "☁ manualshipmentewm",
+                        "path":  "apps/manualshipmentewm"
+                    },
+                    {
+                        "name":  "☁ planningcockpit",
+                        "path":  "apps/planningcockpit"
+                    },
+                    {
+                        "name":  "☁ planshipment",
+                        "path":  "apps/planshipment"
+                    },
+                    {
+                        "name":  "☁ quickpackecc",
+                        "path":  "apps/quickpackecc"
+                    },
+                    {
+                        "name":  "☁ quickpackewm",
+                        "path":  "apps/quickpackewm"
+                    },
+                    {
+                        "name":  "☁ requestforpickup",
+                        "path":  "apps/requestforpickup"
+                    },
+                    {
+                        "name":  "☁ saleorder",
+                        "path":  "apps/saleorder"
+                    },
+                    {
+                        "name":  "☁ shippingdashboard",
+                        "path":  "apps/shippingdashboard"
+                    },
+                    {
+                        "name":  "☁ submitacefiling",
+                        "path":  "apps/submitacefiling"
+                    },
+                    {
+                        "name":  "☁ trackshipmentewm",
+                        "path":  "apps/trackshipmentewm"
+                    },
+                    {
+                        "name":  "☁ viewacefiling",
+                        "path":  "apps/viewacefiling"
+                    },
+                    {
+                        "name":  "🌐 acesubmitfiling (Neo)",
+                        "path":  "apps/acesubmitfiling"
+                    },
+                    {
+                        "name":  "🌐 cancel (Neo)",
+                        "path":  "apps/cancel"
+                    },
+                    {
+                        "name":  "🌐 disputehr7 (Neo)",
+                        "path":  "apps/disputehr7"
+                    },
+                    {
+                        "name":  "🌐 disputesls (Neo)",
+                        "path":  "apps/disputesls"
+                    },
+                    {
+                        "name":  "🌐 eod (Neo)",
+                        "path":  "apps/eod"
+                    },
+                    {
+                        "name":  "🌐 farpt (Neo)",
+                        "path":  "apps/farpt"
+                    },
+                    {
+                        "name":  "🌐 freightauditsls (Neo)",
+                        "path":  "apps/freightauditsls"
+                    },
+                    {
+                        "name":  "🌐 freightorder (Neo)",
+                        "path":  "apps/freightorder"
+                    },
+                    {
+                        "name":  "🌐 freightordersls (Neo)",
+                        "path":  "apps/freightordersls"
+                    },
+                    {
+                        "name":  "🌐 manualecchr7 (Neo)",
+                        "path":  "apps/manualecchr7"
+                    },
+                    {
+                        "name":  "🌐 manualewmsls (Neo)",
+                        "path":  "apps/manualewmsls"
+                    },
+                    {
+                        "name":  "🌐 manualsls (Neo)",
+                        "path":  "apps/manualsls"
+                    },
+                    {
+                        "name":  "🌐 parcel (Neo)",
+                        "path":  "apps/parcel"
+                    },
+                    {
+                        "name":  "🌐 parceldemo (Neo)",
+                        "path":  "apps/parceldemo"
+                    },
+                    {
+                        "name":  "🌐 parcelsls (Neo)",
+                        "path":  "apps/parcelsls"
+                    },
+                    {
+                        "name":  "🌐 productslist (Neo)",
+                        "path":  "apps/productslist"
+                    },
+                    {
+                        "name":  "🌐 quickpacksls (Neo)",
+                        "path":  "apps/quickpacksls"
+                    },
+                    {
+                        "name":  "🌐 salesorderhr7 (Neo)",
+                        "path":  "apps/salesorderhr7"
+                    },
+                    {
+                        "name":  "🌐 salesordersls (Neo)",
+                        "path":  "apps/salesordersls"
+                    },
+                    {
+                        "name":  "🌐 shipewmsls (Neo)",
+                        "path":  "apps/shipewmsls"
+                    },
+                    {
+                        "name":  "🌐 shippingdashboarder8 (Neo)",
+                        "path":  "apps/shippingdashboarder8"
+                    },
+                    {
+                        "name":  "🌐 shippingdashboarder8sidel (Neo)",
+                        "path":  "apps/shippingdashboarder8sidel"
+                    },
+                    {
+                        "name":  "🌐 shippingdashboardhr7 (Neo)",
+                        "path":  "apps/shippingdashboardhr7"
+                    },
+                    {
+                        "name":  "🌐 shippingdashboardsls (Neo)",
+                        "path":  "apps/shippingdashboardsls"
+                    },
+                    {
+                        "name":  "🌐 soshiperptab (Neo)",
+                        "path":  "apps/soshiperptab"
+                    },
+                    {
+                        "name":  "🌐 trackshipment (Neo)",
+                        "path":  "apps/trackshipment"
+                    },
+                    {
+                        "name":  "🌐 trackshipmentsls (Neo)",
+                        "path":  "apps/trackshipmentsls"
+                    },
+                    {
+                        "name":  "🌐 zfreightorders (Neo)",
+                        "path":  "apps/zfreightorders"
+                    },
+                    {
+                        "name":  "🌐 zpkwporeport (Neo)",
+                        "path":  "apps/zpkwporeport"
+                    },
+                    {
+                        "name":  "🌐 ztrackshipmenthr7 (Neo)",
+                        "path":  "apps/ztrackshipmenthr7"
+                    }
+                ]
+}

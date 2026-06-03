@@ -1,0 +1,189 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:fiori="sap.f">
+	<Dialog title="Carrier Rates" class="sapUiContentPadding" stretch="true" state="Success">
+		<content>
+			<IconTabBar class="border_lightgray_nobottom sapUiNoContentPadding">
+				<items>
+					<IconTabFilter text="Rates">
+						<ScrollContainer horizontal="true">
+							<Table id="tableRates" items="{path: 'global>/RatesSet', sorter: { path: 'carrierid', descending: true } }" mode="SingleSelectLeft">
+								<headerToolbar>
+									<Toolbar>
+										<Button icon="sap-icon://paid-leave" text="Pricing" tooltip="Pricing" press="onShowRatePricingDetail"/>
+										<Button icon="sap-icon://restart" text="Analysis" tooltip="Analysis" press="onShowRateAnalysisDetail"/>
+										<Button icon="sap-icon://detail-view" text="Details" tooltip="Details" press="onShowRateDetail"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column width="3rem">
+										<Text text="Carrier" wrapping="false" tooltip="Carrier"/>
+									</Column>
+									<Column width="9rem">
+										<Text text="Name" wrapping="false" tooltip="Carrier Name"/>
+									</Column>
+									<Column width="3rem">
+										<Text text="Service" wrapping="false" tooltip="Service"/>
+									</Column>
+									<Column width="10rem">
+										<Text text="Name" wrapping="false" tooltip="Service Name"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Rate" wrapping="false" tooltip="Rate"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="List Rate" wrapping="false" tooltip="List Rate"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Bill Rate" wrapping="false" tooltip="Bill Rate"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Curr" wrapping="false" tooltip="Currency"/>
+									</Column>
+									<Column width="6rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Transit Time" wrapping="false" tooltip="Transit Time"/>
+									</Column>
+									<Column width="6rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Delivery Date" wrapping="false" tooltip="Delivery Date"/>
+									</Column>
+									<Column width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Priority" wrapping="false" tooltip="Priority"/>
+									</Column>
+									<Column width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Zone" wrapping="false" tooltip="Zone"/>
+									</Column>
+									<Column width="4rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+										<Text text="Trans ID" wrapping="false" tooltip="Transit ID"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{global>Code}" wrapping="false" tooltip="{global>Code}"/>
+											<Text text="{global>Name}" wrapping="false" tooltip="{global>Name}"/>
+											<Text text="{global>Service}" wrapping="false" tooltip="{global>Service}"/>
+											<Text text="{global>Description}" wrapping="false" tooltip="{global>Description}"/>
+											<ObjectNumber number="{global>Rate}" state="Success"/>
+											<ObjectNumber number="{global>Listrate}" state="Warning"/>
+											<ObjectNumber number="{global>Billablerate}" state="None"/>
+											<Text text="{global>Currency}"/>
+											<Text text="{global>Timeintransit}"/>
+											<Text text="{path:'global>Deliverydate', formatter: '.formatter.formatDateString'}"/>
+											<Text text="{= parseInt(${global>Priority})}" textAlign="Center"/>
+											<Text text="{global>Zone}"/>
+											<Text text="{global>Transactionid}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</IconTabFilter>
+					<IconTabFilter text="Freight Units">
+						<Table id="tableFreightUnits" items="{path: 'global>/FreightUnitsSet'}" mode="None">
+							<columns>
+								<Column>
+									<Text text="Weight" wrapping="false" tooltip="Weight"/>
+								</Column>
+								<Column>
+									<Text text="Total Weight" wrapping="false" tooltip="Total Weight"/>
+								</Column>
+								<Column>
+									<Text text="Total Dim Wght" wrapping="false" tooltip="Total Dim Weight"/>
+								</Column>
+								<Column>
+									<Text text="Dim Weight" wrapping="false" tooltip="Dim Weight"/>
+								</Column>
+								<Column>
+									<Text text="UoM" wrapping="false" tooltip="Weight UoM"/>
+								</Column>
+								<Column>
+									<Text text="Length" wrapping="false" tooltip="Length"/>
+								</Column>
+								<Column>
+									<Text text="Width" wrapping="false" tooltip="Width"/>
+								</Column>
+								<Column>
+									<Text text="Height" wrapping="false" tooltip="Height"/>
+								</Column>
+								<Column>
+									<Text text="UoM" wrapping="false" tooltip="Dimension UoM"/>
+								</Column>
+								<Column>
+									<Text text="Quantity" wrapping="false" tooltip="Quantity"/>
+								</Column>
+								<Column>
+									<Text text="Base UoM" wrapping="false" tooltip="Base UoM"/>
+								</Column>
+								<Column>
+									<Text text="Net Value" wrapping="false" tooltip="Net Value"/>
+								</Column>
+								<Column>
+									<Text text="Unit Price" wrapping="false" tooltip="Unit Price"/>
+								</Column>
+								<Column>
+									<Text text="Currency" wrapping="false" tooltip="Currency"/>
+								</Column>
+								<Column>
+									<Text text="HU No" wrapping="false" tooltip="HU No"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{global>Weight}" wrapping="false" tooltip="{global>Weight}"/>
+										<Text text="{global>Totalweight}" wrapping="false" tooltip="{global>Totalweight}"/>
+										<Text text="{global>Totaldimweight}" wrapping="false" tooltip="{global>Totaldimweight}"/>
+										<Text text="{global>Dimweight}" wrapping="false" tooltip="{global>Dimweight}"/>
+										<Text text="{global>Weightunit}" wrapping="false" tooltip="{global>Weightunit}"/>
+										<Text text="{global>Laeng}" wrapping="false" tooltip="{global>Laeng}"/>
+										<Text text="{global>Breit}" wrapping="false" tooltip="{global>Breit}"/>
+										<Text text="{global>Hoehe}" wrapping="false" tooltip="{global>Hoehe}"/>
+										<Text text="{global>Meabm}" wrapping="false" tooltip="{global>Meabm}"/>
+										<Text text="{global>Qty}" wrapping="false" tooltip="{global>Qty}"/>
+										<Text text="{global>Uom}" wrapping="false" tooltip="{global>Uom}"/>
+										<Text text="{global>Netvalue}" wrapping="false" tooltip="{global>Netvalue}"/>
+										<Text text="{global>Unitprice}" wrapping="false" tooltip="{global>Unitprice}"/>
+										<Text text="{global>Currency}" wrapping="false" tooltip="{global>Currency}"/>
+										<Text text="{path:'global>Exidv', formatter: '.formatter.removeLeadingZero'}" wrapping="false" tooltip="{global>Exidv}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabFilter text="Errors ({global>/RateErrorSet/length})">
+						<Table id="tableRateErrors" items="{path: 'global>/RateErrorSet'}" mode="None">
+							<columns>
+								<Column width="3rem">
+									<Text text="Type"/>
+								</Column>
+								<Column width="6rem">
+									<Text text="ID"/>
+								</Column>
+								<Column width="4rem">
+									<Text text="Msg.No"/>
+								</Column>
+								<Column>
+									<Text text="Text"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectStatus text="{global>Type}" state="{= ${global>Type} === 'E' ? 'Error' : 'Warning' }" tooltip="{global>Type}"/>
+										<Text text="{global>Id}" wrapping="false" tooltip="{global>Id}"/>
+										<Text text="{global>Number}" wrapping="false" tooltip="{global>Number}"/>
+										<Text text="{global>Message}" wrapping="false" tooltip="{global>Message}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<beginButton>
+			<Button text="{i18n>OK}" type="Emphasized" press="onRateSelected"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" press="onCloseRateDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

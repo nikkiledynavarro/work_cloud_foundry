@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Panel width="auto" class="border_lightgray_nobottom sapUiNoPaddingContent" expandable="false">
+		<layoutData>
+			<FlexItemData growFactor="1"></FlexItemData>
+		</layoutData>
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Order Details"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</headerToolbar>
+		<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+			singleContainerFullSize="false">
+			<f:content>
+				<Label text="Sold To"/>
+				<Input showValueHelp="true" valueHelpRequest="onSoldToValueHelp" id="txtSoldTo"/>
+				<Label text="Ship To"/>
+				<Input showValueHelp="true" valueHelpRequest="onShipToValueHelp" id="txtShipTo"></Input>
+				<Label text="Required Delivery Date"/>
+				<DatePicker valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" width="auto" id="dpDelDate"/>
+			</f:content>
+		</f:SimpleForm>
+	</Panel>
+</core:FragmentDefinition>

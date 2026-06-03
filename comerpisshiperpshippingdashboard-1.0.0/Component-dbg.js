@@ -1,0 +1,2 @@
+(function(){"use strict";jQuery.sap.declare("com.erpis.shiperp.shippingdashboard.Component");jQuery.sap.require("sap.ovp.app.Component");sap.ovp.app.Component.extend("com.erpis.shiperp.shippingdashboard.Component",{metadata:{manifest:"json"}})})();
+//# sourceMappingURL=Component-dbg.js.map
