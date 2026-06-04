@@ -1569,17 +1569,6 @@ modules:
     build-parameters:
       no-source: true
 
-  # ─── Standalone CF Approuter (serves all 27 apps from CF HTML5 Repo) ────────
-  - name: shiperp-fiori-approuter
-    type: approuter.nodejs
-    path: approuter
-    parameters:
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: shiperp-html5-runtime
-      - name: shiperp-approuter-destination
-
 resources:
 
   - name: trackshipmentewm-app-front-service
@@ -2148,33 +2137,4 @@ resources:
       service-plan: application
       path: ./security/xs-security-createshipment.json
 
-  # ─── Shared standalone CF approuter ───────────────────────────────────────
-  - name: shiperp-html5-runtime
-    type: org.cloudfoundry.existing-service
-    parameters:
-      service-name: app-runtime-1779763944
-
-  - name: shiperp-approuter-destination
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-        init_data:
-          instance:
-            existing_destinations_policy: update
-            destinations:
-              - Name: ui5cdn
-                Description: SAP UI5 CDN
-                URL: https://ui5.sap.com
-                Type: HTTP
-                ProxyType: Internet
-                Authentication: NoAuthentication
-              - Name: virtual-hr7-destination
-                Description: HR7 via Cloud Connector
-                URL: http://10.10.1.76:8001
-                Type: HTTP
-                ProxyType: OnPremise
-                Authentication: NoAuthentication
 
