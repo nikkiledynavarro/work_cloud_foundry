@@ -517,7 +517,18 @@ kill $(lsof -ti:5001)
 
 ### 15.2 Testing via VS Code
 
-VS Code uses the same local approuter underneath but opens each app directly from the Run menu. It gives you the ability to debug the JavaScript in the browser while testing.
+> **Key insight:** VS Code IS the same as BAS — BAS is literally VS Code running in your browser.
+> Both have the same Simple Browser feature, the same terminal, and the same extension support.
+> The difference is: VS Code runs locally (no port-forwarding OAuth issues, VPN works),
+> while BAS runs in SAP's cloud.
+
+VS Code supports **three ways to view apps**, identical to BAS:
+
+| Method | How |
+|--------|-----|
+| **Simple Browser** (inside VS Code) | `Ctrl+Shift+P` → Simple Browser: Show → enter URL |
+| **Launch Config** (new Chrome tab) | Run menu → select app → press F5 |
+| **Manual URL** (any browser) | Paste `http://localhost:5000/{appId}/index.html` in Chrome |
 
 #### Prerequisites
 - Local approuter must already be running (see Section 15.1)
@@ -531,7 +542,23 @@ C:\Users\nikki\OneDrive\Desktop\AI\Codex\Work\neo_to_cf\shiperp-hr7.code-workspa
 
 This loads all 27 CF apps (and 30 Neo backup apps) into a single workspace.
 
-#### Running an app
+#### Method A: Simple Browser (same as BAS)
+
+This is the same experience as BAS — app renders **inside VS Code** without opening a new tab.
+
+1. Make sure the approuter is running on port 5000
+2. Press `Ctrl+Shift+P` → type **Simple Browser: Show** → Enter
+3. Type the URL and press Enter:
+```
+http://localhost:5000/comerpisshiperpdispute/index.html
+```
+4. The Fiori app renders inside VS Code — you stay in your editor
+
+> Why VS Code Simple Browser works but BAS Simple Browser sometimes doesn't:
+> In VS Code, `localhost:5000` connects directly to YOUR machine — no OAuth needed.
+> In BAS, `localhost:5000` goes through SAP's port-forwarding service which requires BTP auth.
+
+#### Method B: Running an app via Launch Config
 1. Open VS Code
 2. Go to **Run and Debug** (Ctrl+Shift+D or the bug icon in the left sidebar)
 3. In the dropdown at the top, select the app you want to test.
@@ -647,11 +674,17 @@ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c
 
 | Test Method | Where | Setup Required | Live HR7 Data | Best For |
 |-------------|--------|----------------|---------------|----------|
-| Local Approuter | Your PC browser | VPN + `bash setup.sh` + `node server.js` | ✅ Yes (with VPN) | Full end-to-end testing |
-| VS Code | Your PC (Chrome debugger) | Same as local + open workspace | ✅ Yes (with VPN) | Debugging JS issues |
-| BAS - BTP Cockpit | Cloud browser | CF login + `bash setup.sh` + `node server.js` | ❌ No (no VPN) | UI rendering check |
-| BAS - Direct CF URL | Cloud browser | Just CF login (no approuter needed!) | ❌ No (no VPN) | Quickest UI check |
-| Work Zone (future) | Cloud browser | Work Zone tile setup | ❌ No (until Cloud Connector fixed) | Production testing |
+| Local Approuter | PC browser (`localhost:5000`) | VPN + `bash setup.sh` + `node server.js` | ✅ Yes (with VPN) | Full end-to-end testing with data |
+| VS Code Simple Browser | Inside VS Code panel | Same as above + open workspace | ✅ Yes (with VPN) | App in editor without leaving VS Code |
+| VS Code Launch Config (F5) | New Chrome tab | Same as above | ✅ Yes (with VPN) | Debugging JS with DevTools attached |
+| BAS Simple Browser | Inside BAS panel | CF login + `bash setup.sh` + `node server.js` | ❌ No VPN in cloud | UI rendering check inside BAS |
+| BAS - BTP Cockpit | New browser tab | Just BTP login (no approuter needed) | ❌ No VPN in cloud | Quickest CF test — click app name |
+| BAS - Direct CF URL | Any browser tab | Just BTP login (no approuter needed) | ❌ No VPN in cloud | Share URL with team |
+| Work Zone (future) | Any browser tab | Work Zone tile setup | ❌ (until Cloud Connector fixed) | Production launchpad testing |
+
+> **VS Code = BAS for testing.** Both use the same Simple Browser, same terminal commands,
+> same localhost URLs. The only difference: VS Code has direct localhost access (no OAuth
+> for port-forwarding), so `Ctrl+Shift+P → Simple Browser` always works in VS Code.
 
 ---
 
