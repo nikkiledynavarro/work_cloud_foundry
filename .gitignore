@@ -24,3 +24,19 @@ preview/
 ## Secrets / generated keys (none expected, but keep safe)
 *.pem
 *.key
+
+## Credentials & local runtime config (NEVER commit these)
+approuter/default-env.json
+approuter/hr7-proxy.js
+.env
+*.env
+VCAP_SERVICES
+**/default-env.json
+**/default-services.json
+
+## CF downloaded app folders (from cf html5-get)
+comerpisshiperp*/
+!comerpisshiperp*/**
+
+## Approuter local state
+approuter/manifest.yml

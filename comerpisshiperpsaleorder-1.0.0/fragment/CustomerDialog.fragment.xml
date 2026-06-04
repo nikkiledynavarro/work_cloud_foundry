@@ -1,7 +1,0 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<SelectDialog title="{i18n>Customers}" class="sapUiPopupWithPadding" id="sltCustomer"
-		items="{ path : '/xSERPERPxI_CUSTS', sorter : { path : 'Name1', descending : false } }" liveChange="onCustomerValueHelpSearch"
-		confirm="onCustomerConfirm">
-		<StandardListItem title="{Customer}" description="{Name1}" info="{SalesOrg}/{DistChannel}/{Division}"/>
-	</SelectDialog>
-</core:FragmentDefinition>

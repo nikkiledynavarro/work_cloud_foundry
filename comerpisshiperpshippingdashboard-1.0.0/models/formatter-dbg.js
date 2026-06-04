@@ -1,2 +1,0 @@
-sap.ui.define(["sap/ui/core/ValueState"],function(r){"use strict";return{formatDateString:function(r){if(!r||r.length!==8||r==="00000000"){return""}else{var t=r.substring(0,4);var n=r.substring(4,6);var e=r.substring(6,8);return n+"/"+e+"/"+t}},formatJavascriptTime:function(r){if(!r||r.length!==6||r==="000000"){return""}else{var t=r.substring(0,2);var n=r.substring(2,4);var e=r.substring(4,6);return t+":"+n+":"+e}}}});
-//# sourceMappingURL=formatter-dbg.js.map

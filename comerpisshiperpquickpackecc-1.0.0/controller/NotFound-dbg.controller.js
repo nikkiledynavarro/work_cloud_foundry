@@ -1,2 +1,0 @@
-sap.ui.define(["./BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.quickpackecc.controller.NotFound",{onLinkPressed:function(){this.getRouter().navTo("worklist")}})});
-//# sourceMappingURL=NotFound-dbg.controller.js.map

@@ -241,6 +241,26 @@
                     {
                         "name":  "🌐 ztrackshipmenthr7 (Neo)",
                         "path":  "apps/ztrackshipmenthr7"
+                    },
+                    {
+                        "path":  "apps/createparcelshipment",
+                        "name":  "📦 createparcelshipment (Neo/Backup)"
+                    },
+                    {
+                        "path":  "apps/planning",
+                        "name":  "📦 planning (Neo/Backup)"
+                    },
+                    {
+                        "path":  "apps/rulesmanager",
+                        "name":  "📦 rulesmanager (Neo/Backup)"
+                    },
+                    {
+                        "path":  "apps/rulesmanager2",
+                        "name":  "📦 rulesmanager2 (Neo/Backup)"
+                    },
+                    {
+                        "path":  "apps/rulesmanagertony",
+                        "name":  "📦 rulesmanagertony (Neo/Backup)"
                     }
                 ]
 }

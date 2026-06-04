@@ -1,2 +1,0 @@
-sap.ui.define([],function(){"use strict";var e="com.erpis.shiperp.quickpackecc.fragment.";return{getFragment:function(r,n,t){var a=t.getView();if(!t.hasOwnProperty("fragments")){t.fragments={}}var i=t.fragments[n];if(i===undefined){var f="";if(r){f=a.createId(r)}else{f=a.getId()}i=sap.ui.xmlfragment(f,e+n,t);t.fragments[n]=i;a.addDependent(i)}return i}}});
-//# sourceMappingURL=Utils-dbg.js.map
