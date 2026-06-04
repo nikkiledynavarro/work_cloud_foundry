@@ -1,1 +1,145 @@
-{"_version":"1.12.0","sap.app":{"id":"com.erpis.shiperp.hr7.carrierperformancereportewm","type":"application","title":"{{appTitle}}","description":"{{appDescription}}","applicationVersion":{"version":"1.0.0"},"dataSources":{"Service":{"uri":"sap/opu/odata/serperp/ewm_cp_srv","type":"OData","settings":{"odataVersion":"2.0","localUri":"localService/metadata.xml"}}},"sourceTemplate":{"id":"sap.ui.ui5-template-plugin.1worklist","version":"1.40.12"},"crossNavigation":{"inbounds":{"carrierperformancereportewmDisplay":{"action":"display","icon":"sap-icon://app","signature":{"additionalParameters":"allowed","parameters":{}},"semanticObject":"carrierperformancereportewm","subTitle":"","title":"{{appTitle}}"}}}},"sap.ui":{"technology":"UI5","icons":{"icon":"sap-icon://task","favIcon":"","phone":"","phone@2":"","tablet":"","tablet@2":""},"deviceTypes":{"desktop":true,"tablet":true,"phone":true},"fullWidth":true},"sap.ui5":{"resources":{"css":[{"uri":"css/style.css","id":"stylecss"}]},"rootView":{"viewName":"com.erpis.shiperp.hr7.carrierperformancereportewm.view.App","type":"XML","async":true,"id":"app"},"dependencies":{"minUI5Version":"1.103.0","libs":{"sap.ui.layout":{},"sap.ui.core":{},"sap.m":{},"sap.f":{}}},"contentDensities":{"compact":true,"cozy":true},"models":{"i18n":{"type":"sap.ui.model.resource.ResourceModel","settings":{"bundleName":"com.erpis.shiperp.hr7.carrierperformancereportewm.i18n.i18n","supportedLocales":["en"],"fallbackLocale":"en"}},"":{"dataSource":"Service","preload":true}},"routing":{"config":{"routerClass":"sap.m.routing.Router","viewType":"XML","async":true,"viewPath":"com.erpis.shiperp.hr7.carrierperformancereportewm.view","controlAggregation":"pages","controlId":"app","bypassed":{"target":"notFound"}},"routes":[{"pattern":"","name":"main","target":["main"]}],"targets":{"main":{"viewName":"Main","transition":"slide","viewId":"main","viewLevel":1},"notFound":{"viewName":"NotFound","viewId":"notFound"}}}},"sap.platform.hcp":{"uri":"","_version":"1.1.0"},"sap.cloud":{"public":true,"service":"comerpisshiperpcarrierperformancereportewm"}}
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "comerpisshiperpcarrierperformancereportewm",
+    "type": "application",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "Service": {
+        "uri": "sap/opu/odata/serperp/ewm_cp_srv",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "sourceTemplate": {
+      "id": "sap.ui.ui5-template-plugin.1worklist",
+      "version": "1.40.12"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "carrierperformancereportewmDisplay": {
+          "action": "display",
+          "icon": "sap-icon://app",
+          "signature": {
+            "additionalParameters": "allowed",
+            "parameters": {}
+          },
+          "semanticObject": "carrierperformancereportewm",
+          "subTitle": "",
+          "title": "{{appTitle}}"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css",
+          "id": "stylecss"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "com.erpis.shiperp.hr7.carrierperformancereportewm.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.103.0",
+      "libs": {
+        "sap.ui.layout": {},
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.erpis.shiperp.hr7.carrierperformancereportewm.i18n.i18n",
+          "supportedLocales": [
+            "en"
+          ],
+          "fallbackLocale": "en"
+        }
+      },
+      "": {
+        "dataSource": "Service",
+        "preload": true
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.erpis.shiperp.hr7.carrierperformancereportewm.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "main",
+          "target": [
+            "main"
+          ]
+        }
+      ],
+      "targets": {
+        "main": {
+          "viewName": "Main",
+          "transition": "slide",
+          "viewId": "main",
+          "viewLevel": 1
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        }
+      }
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": "",
+    "_version": "1.1.0"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comerpisshiperpcarrierperformancereportewm"
+  }
+}

@@ -1,1 +1,201 @@
-{"_version":"1.9.0","sap.app":{"id":"com.erpis.shiperp.cancelshipewm.hr7","type":"application","i18n":"i18n/i18n.properties","title":"{{appTitle}}","description":"{{appDescription}}","applicationVersion":{"version":"1.0.0"},"dataSources":{"cancelEWMService":{"uri":"sap/opu/odata/serperp/shipewm_srv/","type":"OData","settings":{"odataVersion":"2.0","localUri":"localService/metadata.xml"}},"cancelECCService":{"uri":"/sap/opu/odata/serperp/cancel_ship_srv/","type":"OData","settings":{"odataVersion":"2.0","localUri":"localService/ECC/metadata.xml"}}},"sourceTemplate":{"id":"sap.ui.ui5-template-plugin.1worklist","version":"1.52.7"},"crossNavigation":{"inbounds":{"cancelshipewmDisplay":{"action":"display","icon":"sap-icon://app","signature":{"additionalParameters":"allowed","parameters":{}},"semanticObject":"cancelshipewm","subTitle":"","title":"{{appTitle}}"}}}},"sap.ui":{"technology":"UI5","icons":{"icon":"sap-icon://task","favIcon":"","phone":"","phone@2":"","tablet":"","tablet@2":""},"deviceTypes":{"desktop":true,"tablet":true,"phone":true},"fullWidth":true},"sap.ui5":{"resources":{"css":[{"uri":"css/style.css","id":"stylecss"}]},"rootView":{"viewName":"com.erpis.shiperp.cancelshipewm.hr7.view.App","type":"XML","async":true,"id":"app"},"dependencies":{"minUI5Version":"1.42.0","libs":{"sap.ui.core":{},"sap.m":{},"sap.f":{}}},"contentDensities":{"compact":true,"cozy":true},"models":{"i18n":{"type":"sap.ui.model.resource.ResourceModel","settings":{"bundleName":"com.erpis.shiperp.cancelshipewm.hr7.i18n.i18n"}},"":{"dataSource":"cancelEWMService","settings":{"useBatch":true,"refreshAfterChange":false},"preload":true},"cancelEWMService":{"dataSource":"cancelEWMService","settings":{"useBatch":true,"refreshAfterChange":false},"preload":true},"cancelECCService":{"dataSource":"cancelECCService","settings":{"useBatch":true,"refreshAfterChange":false},"preload":true}},"routing":{"config":{"routerClass":"sap.m.routing.Router","viewType":"XML","viewPath":"com.erpis.shiperp.cancelshipewm.hr7.view","controlId":"app","controlAggregation":"pages","bypassed":{"target":["notFound"]},"async":true},"routes":[{"pattern":"","name":"login","target":["login"]},{"pattern":"CancelDetailECC/{ShipStation}/{Profile}","name":"cancelDetailECC","target":["cancelDetailECC"]},{"pattern":"CancelDetailEWM/{ShipStation}/{Profile}/{WarehouseNumber}","name":"cancelDetailEWM","target":["cancelDetailEWM"]}],"targets":{"login":{"viewName":"Login","viewId":"login","viewLevel":1,"title":"{i18n\u003eloginViewTitle}"},"cancelDetailECC":{"viewName":"ECC.CancelDetail","viewId":"cancelECC","viewLevel":1,"title":"{i18n\u003elcancelDetailTitle}"},"cancelDetailEWM":{"viewName":"EWM.CancelDetail","viewId":"cancelEWM","viewLevel":1,"title":"{i18n\u003elcancelDetailTitle}"},"objectNotFound":{"viewName":"ObjectNotFound","viewId":"objectNotFound"},"notFound":{"viewName":"NotFound","viewId":"notFound"}}}},"sap.platform.hcp":{"uri":"","_version":"1.1.0"},"sap.cloud":{"public":true,"service": "comerpisshiperpcancelshipmentewm"}}
+{
+  "_version": "1.9.0",
+  "sap.app": {
+    "id": "comerpisshiperpcancelshipmentewm",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "cancelEWMService": {
+        "uri": "sap/opu/odata/serperp/shipewm_srv/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      },
+      "cancelECCService": {
+        "uri": "/sap/opu/odata/serperp/cancel_ship_srv/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/ECC/metadata.xml"
+        }
+      }
+    },
+    "sourceTemplate": {
+      "id": "sap.ui.ui5-template-plugin.1worklist",
+      "version": "1.52.7"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "cancelshipewmDisplay": {
+          "action": "display",
+          "icon": "sap-icon://app",
+          "signature": {
+            "additionalParameters": "allowed",
+            "parameters": {}
+          },
+          "semanticObject": "cancelshipewm",
+          "subTitle": "",
+          "title": "{{appTitle}}"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css",
+          "id": "stylecss"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "com.erpis.shiperp.cancelshipewm.hr7.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.42.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.erpis.shiperp.cancelshipewm.hr7.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "cancelEWMService",
+        "settings": {
+          "useBatch": true,
+          "refreshAfterChange": false
+        },
+        "preload": true
+      },
+      "cancelEWMService": {
+        "dataSource": "cancelEWMService",
+        "settings": {
+          "useBatch": true,
+          "refreshAfterChange": false
+        },
+        "preload": true
+      },
+      "cancelECCService": {
+        "dataSource": "cancelECCService",
+        "settings": {
+          "useBatch": true,
+          "refreshAfterChange": false
+        },
+        "preload": true
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "com.erpis.shiperp.cancelshipewm.hr7.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "login",
+          "target": [
+            "login"
+          ]
+        },
+        {
+          "pattern": "CancelDetailECC/{ShipStation}/{Profile}",
+          "name": "cancelDetailECC",
+          "target": [
+            "cancelDetailECC"
+          ]
+        },
+        {
+          "pattern": "CancelDetailEWM/{ShipStation}/{Profile}/{WarehouseNumber}",
+          "name": "cancelDetailEWM",
+          "target": [
+            "cancelDetailEWM"
+          ]
+        }
+      ],
+      "targets": {
+        "login": {
+          "viewName": "Login",
+          "viewId": "login",
+          "viewLevel": 1,
+          "title": "{i18n>loginViewTitle}"
+        },
+        "cancelDetailECC": {
+          "viewName": "ECC.CancelDetail",
+          "viewId": "cancelECC",
+          "viewLevel": 1,
+          "title": "{i18n>lcancelDetailTitle}"
+        },
+        "cancelDetailEWM": {
+          "viewName": "EWM.CancelDetail",
+          "viewId": "cancelEWM",
+          "viewLevel": 1,
+          "title": "{i18n>lcancelDetailTitle}"
+        },
+        "objectNotFound": {
+          "viewName": "ObjectNotFound",
+          "viewId": "objectNotFound"
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        }
+      }
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": "",
+    "_version": "1.1.0"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comerpisshiperpcancelshipmentewm"
+  }
+}
