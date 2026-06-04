@@ -1,990 +1,1449 @@
 {
-    "version":  "0.2.0",
-    "configurations":  [
-                           {
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "request":  "launch",
-                               "console":  "internalConsole",
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Write-Host \u0027Services starting...\u0027"
-                                               ],
-                               "type":  "node",
-                               "name":  "🚀 Start ShipERP (Services Only)",
-                               "runtimeExecutable":  "powershell.exe",
-                               "internalConsoleOptions":  "neverOpen"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpcancelacefiling/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ cancelacefiling (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start cancelacefiling locally",
-                               "name":  "🌐 cancelacefiling (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7cancelpickuprequest/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ cancelpickuprequest (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start cancelpickuprequest locally",
-                               "name":  "🌐 cancelpickuprequest (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpcancelhr7/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ cancelshipment (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start cancelshipment locally",
-                               "name":  "🌐 cancelshipment (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpcancelshipewmhr7/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ cancelshipmentewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start cancelshipmentewm locally",
-                               "name":  "🌐 cancelshipmentewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ carrierperformancereportecc (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start carrierperformancereportecc locally",
-                               "name":  "🌐 carrierperformancereportecc (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7carrierperformancereportewm/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ carrierperformancereportewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start carrierperformancereportewm locally",
-                               "name":  "🌐 carrierperformancereportewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpclosedelivery/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ closedelivery (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start closedelivery locally",
-                               "name":  "🌐 closedelivery (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpparcelhr7/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ createshipment (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start createshipment locally",
-                               "name":  "🌐 createshipment (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ createshipmentewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start createshipmentewm locally",
-                               "name":  "🌐 createshipmentewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7parcelewm/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ createshipmentv2ewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start createshipmentv2ewm locally",
-                               "name":  "🌐 createshipmentv2ewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpdispute/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ dispute (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start dispute locally",
-                               "name":  "🌐 dispute (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpfreightaudithr7/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ freightaudit (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start freightaudit locally",
-                               "name":  "🌐 freightaudit (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpfreightauditupload/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ freightauditupload (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start freightauditupload locally",
-                               "name":  "🌐 freightauditupload (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpfreightorderplanning/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ freightorderplanning (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start freightorderplanning locally",
-                               "name":  "🌐 freightorderplanning (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7ltlplanning/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ ltlplanning (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start ltlplanning locally",
-                               "name":  "🌐 ltlplanning (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ manualshipmentecc (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start manualshipmentecc locally",
-                               "name":  "🌐 manualshipmentecc (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpmanualshipmentewmhr7/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ manualshipmentewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start manualshipmentewm locally",
-                               "name":  "🌐 manualshipmentewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpplanningcockpit/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ planningcockpit (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start planningcockpit locally",
-                               "name":  "🌐 planningcockpit (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpplanshipment/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ planshipment (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start planshipment locally",
-                               "name":  "🌐 planshipment (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpquickpackecc/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ quickpackecc (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start quickpackecc locally",
-                               "name":  "🌐 quickpackecc (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpquickpackewm/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ quickpackewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start quickpackewm locally",
-                               "name":  "🌐 quickpackewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7requestforpickup/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ requestforpickup (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start requestforpickup locally",
-                               "name":  "🌐 requestforpickup (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpsaleorder/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ saleorder (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start saleorder locally",
-                               "name":  "🌐 saleorder (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpshippingdashboard/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ shippingdashboard (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start shippingdashboard locally",
-                               "name":  "🌐 shippingdashboard (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperpsubmitacefiling/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ submitacefiling (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start submitacefiling locally",
-                               "name":  "🌐 submitacefiling (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperptrackshipmentewm/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ trackshipmentewm (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start trackshipmentewm locally",
-                               "name":  "🌐 trackshipmentewm (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:5000/comerpisshiperphr7viewacefiling/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "🚀 Start ShipERP (Proxy + Approuter)",
-                               "name":  "☁ viewacefiling (CF)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "☁ CF Apps",
-                                                    "order":  1
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           },
-                           {
-                               "runtimeArgs":  [
-                                                   "-Command",
-                                                   "Start-Process \u0027http://localhost:8080/index.html\u0027"
-                                               ],
-                               "type":  "node",
-                               "internalConsoleOptions":  "neverOpen",
-                               "preLaunchTask":  "Start viewacefiling locally",
-                               "name":  "🌐 viewacefiling (Local Source)",
-                               "presentation":  {
-                                                    "hidden":  false,
-                                                    "group":  "🌐 Local Source",
-                                                    "order":  2
-                                                },
-                               "runtimeExecutable":  "powershell.exe",
-                               "console":  "internalConsole",
-                               "request":  "launch"
-                           }
-                       ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "request": "launch",
+            "console": "internalConsole",
+            "runtimeArgs": [
+                "-Command",
+                "Write-Host 'Services starting...'"
+            ],
+            "type": "node",
+            "name": "🚀 Start ShipERP (Services Only)",
+            "runtimeExecutable": "powershell.exe",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelacefiling locally",
+            "name": "🌐 cancelacefiling (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelpickuprequest locally",
+            "name": "🌐 cancelpickuprequest (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelshipment locally",
+            "name": "🌐 cancelshipment (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelshipmentewm locally",
+            "name": "🌐 cancelshipmentewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start carrierperformancereportecc locally",
+            "name": "🌐 carrierperformancereportecc (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start carrierperformancereportewm locally",
+            "name": "🌐 carrierperformancereportewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start closedelivery locally",
+            "name": "🌐 closedelivery (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipment locally",
+            "name": "🌐 createshipment (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipmentewm locally",
+            "name": "🌐 createshipmentewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipmentv2ewm locally",
+            "name": "🌐 createshipmentv2ewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start dispute locally",
+            "name": "🌐 dispute (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightaudit locally",
+            "name": "🌐 freightaudit (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightauditupload locally",
+            "name": "🌐 freightauditupload (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightorderplanning locally",
+            "name": "🌐 freightorderplanning (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start ltlplanning locally",
+            "name": "🌐 ltlplanning (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start manualshipmentecc locally",
+            "name": "🌐 manualshipmentecc (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start manualshipmentewm locally",
+            "name": "🌐 manualshipmentewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start planningcockpit locally",
+            "name": "🌐 planningcockpit (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start planshipment locally",
+            "name": "🌐 planshipment (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start quickpackecc locally",
+            "name": "🌐 quickpackecc (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start quickpackewm locally",
+            "name": "🌐 quickpackewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start requestforpickup locally",
+            "name": "🌐 requestforpickup (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start saleorder locally",
+            "name": "🌐 saleorder (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start shippingdashboard locally",
+            "name": "🌐 shippingdashboard (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start submitacefiling locally",
+            "name": "🌐 submitacefiling (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start trackshipmentewm locally",
+            "name": "🌐 trackshipmentewm (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start viewacefiling locally",
+            "name": "🌐 viewacefiling (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelacefiling/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelacefiling (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 1
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelpickuprequest (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipment/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelshipment (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 3
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelshipmentewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 4
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ carrierperformancereportecc (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 5
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ carrierperformancereportewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 6
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpclosedelivery/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ closedelivery (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 7
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipment/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ createshipment (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 8
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ createshipmentewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 9
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentv2ewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ createshipmentv2ewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 10
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpdispute/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ dispute (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 11
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudit/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ freightaudit (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 12
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfreightauditupload/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ freightauditupload (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 13
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfreightorderplanning/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ freightorderplanning (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 14
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpltlplanning/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ ltlplanning (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 15
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ manualshipmentecc (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 16
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmentewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ manualshipmentewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 17
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpplanningcockpit/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ planningcockpit (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 18
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpplanshipment/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ planshipment (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 19
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackecc/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ quickpackecc (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 20
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ quickpackewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 21
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperprequestforpickup/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ requestforpickup (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 22
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpsaleorder/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ saleorder (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 23
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpshippingdashboard/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ shippingdashboard (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 24
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpsubmitacefiling/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ submitacefiling (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 25
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmentewm/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ trackshipmentewm (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 26
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpviewacefiling/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ viewacefiling (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 27
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelacefiling (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 1
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelpickuprequest.comerpisshiperpcancelpickuprequest-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelpickuprequest (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelshipment.comerpisshiperpcancelshipment-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelshipment (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 3
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelshipmentewm.comerpisshiperpcancelshipmentewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelshipmentewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 4
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcarrierperformancereportecc.comerpisshiperpcarrierperformancereportecc-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ carrierperformancereportecc (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 5
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcarrierperformancereportewm.comerpisshiperpcarrierperformancereportewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ carrierperformancereportewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 6
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpclosedelivery.comerpisshiperpclosedelivery-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ closedelivery (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 7
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcreateshipment.comerpisshiperpcreateshipment-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ createshipment (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 8
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcreateshipmentewm.comerpisshiperpcreateshipmentewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ createshipmentewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 9
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcreateshipmentv2ewm.comerpisshiperpcreateshipmentv2ewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ createshipmentv2ewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 10
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ dispute (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 11
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpfreightaudit.comerpisshiperpfreightaudit-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ freightaudit (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 12
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpfreightauditupload.comerpisshiperpfreightauditupload-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ freightauditupload (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 13
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpfreightorderplanning.comerpisshiperpfreightorderplanning-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ freightorderplanning (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 14
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpltlplanning.comerpisshiperpltlplanning-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ ltlplanning (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 15
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpmanualshipmentecc.comerpisshiperpmanualshipmentecc-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ manualshipmentecc (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 16
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpmanualshipmentewm.comerpisshiperpmanualshipmentewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ manualshipmentewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 17
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpplanningcockpit.comerpisshiperpplanningcockpit-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ planningcockpit (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 18
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpplanshipment.comerpisshiperpplanshipment-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ planshipment (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 19
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpquickpackecc.comerpisshiperpquickpackecc-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ quickpackecc (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 20
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpquickpackewm.comerpisshiperpquickpackewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ quickpackewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 21
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperprequestforpickup.comerpisshiperprequestforpickup-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ requestforpickup (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 22
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpsaleorder.comerpisshiperpsaleorder-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ saleorder (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 23
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpshippingdashboard.comerpisshiperpshippingdashboard-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ shippingdashboard (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 24
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpsubmitacefiling.comerpisshiperpsubmitacefiling-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ submitacefiling (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 25
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperptrackshipmentewm.comerpisshiperptrackshipmentewm-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ trackshipmentewm (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 26
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpviewacefiling.comerpisshiperpviewacefiling-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ viewacefiling (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 27
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        }
+    ]
 }
