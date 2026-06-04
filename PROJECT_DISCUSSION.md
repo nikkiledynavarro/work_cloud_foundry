@@ -703,5 +703,159 @@ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c
 
 ---
 
+## 16. VS Code vs BAS — Why They Are Different for Testing
+
+### 16.1 BAS is VS Code in the browser
+
+SAP Business Application Studio (BAS) is built on VS Code. They share the same UI, same terminal, same Simple Browser feature, and same extension support. From a features perspective, they are the same tool.
+
+However, for **testing apps**, there is one fundamental difference:
+
+| | VS Code (local) | BAS (cloud) |
+|---|---|---|
+| Runs on | Your PC | SAP's cloud server |
+| `localhost:5000` means | Your machine's port 5000 | BAS container's port 5000 |
+| Accessing localhost | Direct — no auth needed | Goes through **SAP port-forwarding** → requires BTP OAuth |
+
+---
+
+### 16.2 Why VS Code Simple Browser works but BAS Simple Browser often doesn't
+
+**VS Code Simple Browser:**
+```
+Browser (your PC) → iframe → http://localhost:5000 → YOUR machine directly
+No middleman, no OAuth, always works
+```
+
+**BAS Simple Browser:**
+```
+Browser (your PC) → iframe → SAP port-forwarding (https://port5000-ws-XXXX.us11cf.applicationstudio.cloud.sap)
+                                          ↓
+                              Requires BTP OAuth (XSUAA)
+                                          ↓
+                              Sometimes: "URL does not reference a valid account" → BROKEN
+```
+
+The BAS port-forwarding OAuth is tied to the workspace session and can expire or become invalid. This is a BTP infrastructure limitation — not a code issue.
+
+---
+
+### 16.3 Can BAS use CF URLs in Simple Browser?
+
+No — for a different reason. CF Launchpad URLs return `X-Frame-Options: SAMEORIGIN` in the response headers.
+
+```
+BAS Simple Browser (iframe on btp-cf-8qsdli3e.us11cf.applicationstudio.cloud.sap)
+    → tries to load CF URL (btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com)
+    → Different origins → X-Frame-Options: SAMEORIGIN → BLOCKED
+```
+
+Our `server.js` (local approuter wrapper) strips this header, which is why the local approuter approach can work in VS Code Simple Browser. But we cannot strip this header from SAP's managed launchpad.
+
+**The best BAS testing approach:** Use **BTP Cockpit → HTML5 Applications → click app name** — this opens a new tab (not an iframe), so X-Frame-Options doesn't matter.
+
+---
+
+### 16.4 VS Code Run & Debug — 3 Groups Explained
+
+The `.vscode/launch.json` now has 3 groups in the Run & Debug dropdown:
+
+#### Group 1: ☁ CF Apps (e.g., `☁ cancelacefiling (CF)`)
+- **URL:** `http://localhost:5000/comerpisshiperpcancelacefiling/index.html`
+- App HTML/JS/CSS is **fetched from CF HTML5 Repository** by the local approuter
+- The approuter runs on your PC and authenticates to CF to get the app content
+- OData calls: `browser → approuter → hr7-proxy.js → HR7` (needs VPN)
+- **Requires:** `node server.js` running + VPN connected
+- **Best for:** Full end-to-end testing with live HR7 data
+
+#### Group 2: ☁ CF Direct (e.g., `☁ cancelacefiling (CF Direct)`)
+- **URL:** `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html`
+- App loads **directly from SAP's managed launchpad** — no local server needed at all
+- OData calls go through Cloud Connector to HR7 (requires Cloud Connector setup)
+- **Requires:** BTP login in browser only
+- **Best for:** Quick UI check, testing the actual deployed version, no setup needed
+
+#### Group 3: 🌐 Local Source (e.g., `🌐 cancelacefiling (Local Source)`)
+- **URL:** `http://localhost:8080/index.html`
+- App runs **directly from your local source files** — no CF, no deployment
+- Uses `ui5 serve` in the app folder (hot reload — see changes instantly)
+- **Requires:** `npx ui5 serve` in the app folder + VPN
+- **Best for:** Active development — editing code and seeing changes immediately
+
+#### Quick comparison
+
+| | ☁ CF Apps | ☁ CF Direct | 🌐 Local Source |
+|---|---|---|---|
+| App source | CF HTML5 Repo | CF HTML5 Repo | Your PC files |
+| Local server needed | `node server.js` | **None** | `npx ui5 serve` |
+| VPN needed for data | Yes | Yes (+ Cloud Connector) | Yes |
+| See code changes immediately | No (redeploy needed) | No (redeploy needed) | **Yes** |
+| Use case | Full local test | Quick CF test | Active development |
+
+---
+
+### 16.5 How the CF Direct URL was discovered
+
+The CF Direct URL has 4 parts:
+
+```
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/
+  11387043-4c6f-4c9a-94d6-10e084b8b2d2.    ← Part 2: Site UUID
+  comerpisshiperpcancelacefiling.            ← Part 3: sap.cloud.service
+  comerpisshiperpcancelacefiling-1.0.0/     ← Part 4: sap.app.id + version
+index.html
+```
+
+**Part 1 — Host:**
+`btp-cf-8qsdli3e` is your BTP subaccount subdomain (same as in your BAS URL).
+`launchpad.cfapps.us11.hana.ondemand.com` is SAP's standard managed launchpad domain for the `us11` region.
+
+**Part 2 — Site UUID (`11387043-4c6f-4c9a-94d6-10e084b8b2d2`):**
+Discovered by accident — when clicking the Error Log icon for `comerpisshiperpdispute` in BTP Cockpit → HTML5 Applications, the dialog title showed:
+```
+11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0 - Error Log
+```
+This revealed the full app key including the site UUID. This UUID represents the "Managed Application Router provided by SAP Build Work Zone, standard edition" which is automatically created when you subscribe to SAP Build Work Zone.
+
+**Part 3 & 4 — App ID (appears twice):**
+Both `sap.cloud.service` and `sap.app.id` from `manifest.json`. This is why we fixed both to the same no-dots value (`comerpisshiperp{appname}`) — if `sap.app.id` contained dots (like `com.erpis.shiperp.cancelacefiling`), the URL routing would break because the launchpad uses `.` as a separator between parts.
+
+**Version (`1.0.0`):**
+Comes from the MTA deployment. The HTML5 Apps Repository stores each deployed version.
+
+---
+
+### 16.6 The Launch Config Generator Script
+
+**File:** `scripts/generate-launch-configs.js`
+
+**Why it exists:** The CF Direct URL contains the site UUID (`11387043-...`), which could change if the subaccount is recreated. Having it in 27 separate launch configs would mean updating 27 places manually.
+
+**How it works:**
+1. Reads the 27 CF app names from `mta.yaml` (source of truth for which apps are in CF)
+2. Reads each app's `sap.cloud.service` from its `manifest.json`
+3. Generates both `☁ CF Apps` (local) and `☁ CF Direct` (CF URL) sections
+4. Merges into `launch.json` preserving all other configs unchanged
+
+**The CF config is in ONE place at the top of the script:**
+```js
+const CF_CONFIG = {
+    host:     'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com',
+    siteUuid: '11387043-4c6f-4c9a-94d6-10e084b8b2d2',
+    version:  '1.0.0'
+};
+```
+
+**To regenerate after a CF environment change:**
+```bash
+node scripts/generate-launch-configs.js
+# → Updates launch.json automatically
+# → Zero impact on BAS, CF apps, local approuter, or mta.yaml
+```
+
+**Impact on other environments:** None. `launch.json` only controls how VS Code opens the browser. It has no effect on deployed CF apps, BAS, or the local approuter.
+
+---
+
 *Document generated: 2026-06-04*
 *Next session: Configure Cloud Connector for HR7, then set up Work Zone tiles*
