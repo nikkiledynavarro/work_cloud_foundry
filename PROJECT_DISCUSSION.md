@@ -417,5 +417,258 @@ When you open an app and see the UI but no records (or an OData error), it means
 
 ---
 
+## 15. How to Test the Apps
+
+### 15.1 Testing via Local Approuter (on your PC)
+
+The local approuter runs on your Windows PC, fetches the app HTML/JS from the CF HTML5 Apps Repository, and serves it at `http://localhost:5000`. This is the best option for testing with **live HR7 data** because you can connect to VPN.
+
+#### Prerequisites
+- VPN connected (required for HR7 OData data)
+- Node.js installed
+- CF CLI installed and logged in
+- Git Bash or similar terminal
+
+#### One-time setup (first time only)
+```bash
+# 1. Open Git Bash and navigate to the project
+cd "C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter"
+
+# 2. Install dependencies
+npm install
+```
+
+#### Every session
+```bash
+# 1. Navigate to the approuter folder
+cd "C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter"
+
+# 2. Log in to CF (if not already logged in)
+cf login -a https://api.cf.us11.hana.ondemand.com --sso
+# Get passcode at: https://login.cf.us11.hana.ondemand.com/passcode
+
+# 3. Run setup to generate credentials file
+bash setup.sh
+# This creates: default-env.json (CF credentials) and server.js (X-Frame-Options fix)
+
+# 4. Start the HR7 backend proxy (separate terminal window)
+node hr7-proxy.js
+# This runs on port 5001 and forwards OData calls to HR7 (10.10.1.76:8001)
+# NOTE: You must have VPN on for this to reach HR7
+
+# 5. Start the approuter (separate terminal window or background)
+node server.js
+# Listens on port 5000
+```
+
+#### Opening an app
+Open your Chrome browser and go to:
+```
+http://localhost:5000/comerpisshiperpdispute/index.html
+```
+
+Replace `comerpisshiperpdispute` with any of the 27 app IDs. Full list:
+
+| App | URL |
+|-----|-----|
+| Cancel ACE Filing | `http://localhost:5000/comerpisshiperpcancelacefiling/index.html` |
+| Cancel Pickup Request | `http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html` |
+| Cancel Shipment (ECC) | `http://localhost:5000/comerpisshiperpcancelshipment/index.html` |
+| Cancel Shipment (EWM) | `http://localhost:5000/comerpisshiperpcancelshipmentewm/index.html` |
+| Carrier Performance (ECC) | `http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html` |
+| Carrier Performance (EWM) | `http://localhost:5000/comerpisshiperpcarrierperformancereportewm/index.html` |
+| Close Delivery | `http://localhost:5000/comerpisshiperpclosedelivery/index.html` |
+| Create Shipment (ECC) | `http://localhost:5000/comerpisshiperpcreateshipment/index.html` |
+| Create Shipment (EWM) | `http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html` |
+| Create Shipment V2 (EWM) | `http://localhost:5000/comerpisshiperpcreateshipmentv2ewm/index.html` |
+| Dispute | `http://localhost:5000/comerpisshiperpdispute/index.html` |
+| Freight Audit | `http://localhost:5000/comerpisshiperpfreightaudit/index.html` |
+| Freight Audit Upload | `http://localhost:5000/comerpisshiperpfreightauditupload/index.html` |
+| Freight Order Planning | `http://localhost:5000/comerpisshiperpfreightorderplanning/index.html` |
+| LTL Planning | `http://localhost:5000/comerpisshiperpltlplanning/index.html` |
+| Manual Shipment (ECC) | `http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html` |
+| Manual Shipment (EWM) | `http://localhost:5000/comerpisshiperpmanualshipmentewm/index.html` |
+| Planning Cockpit | `http://localhost:5000/comerpisshiperpplanningcockpit/index.html` |
+| Plan Shipment | `http://localhost:5000/comerpisshiperpplanshipment/index.html` |
+| Quick Pack (ECC) | `http://localhost:5000/comerpisshiperpquickpackecc/index.html` |
+| Quick Pack (EWM) | `http://localhost:5000/comerpisshiperpquickpackewm/index.html` |
+| Request for Pickup | `http://localhost:5000/comerpisshiperprequestforpickup/index.html` |
+| Sale Order | `http://localhost:5000/comerpisshiperpsaleorder/index.html` |
+| Shipping Dashboard | `http://localhost:5000/comerpisshiperpshippingdashboard/index.html` |
+| Submit ACE Filing | `http://localhost:5000/comerpisshiperpsubmitacefiling/index.html` |
+| Track Shipment (EWM) | `http://localhost:5000/comerpisshiperptrackshipmentewm/index.html` |
+| View ACE Filing | `http://localhost:5000/comerpisshiperpviewacefiling/index.html` |
+
+#### What to expect
+- **App loads with live data** → VPN is connected and hr7-proxy.js is running ✅
+- **App loads but "No data"** → VPN is off or hr7-proxy.js is not running
+- **App is blank/white** → Approuter not running, or setup.sh not run
+
+#### Stopping
+```bash
+# Kill port 5000 (approuter)
+kill $(lsof -ti:5000)
+
+# Kill port 5001 (hr7-proxy)
+kill $(lsof -ti:5001)
+```
+
+---
+
+### 15.2 Testing via VS Code
+
+VS Code uses the same local approuter underneath but opens each app directly from the Run menu. It gives you the ability to debug the JavaScript in the browser while testing.
+
+#### Prerequisites
+- Local approuter must already be running (see Section 15.1)
+- VS Code installed with the workspace file `shiperp-hr7.code-workspace`
+
+#### Opening the workspace
+```
+File → Open Workspace from File → 
+C:\Users\nikki\OneDrive\Desktop\AI\Codex\Work\neo_to_cf\shiperp-hr7.code-workspace
+```
+
+This loads all 27 CF apps (and 30 Neo backup apps) into a single workspace.
+
+#### Running an app
+1. Open VS Code
+2. Go to **Run and Debug** (Ctrl+Shift+D or the bug icon in the left sidebar)
+3. In the dropdown at the top, select the app you want to test.
+   - Apps prefixed with `☁` are CF apps (e.g., `☁ Dispute`)
+   - Apps prefixed with `🌐` are the old Neo versions (for comparison)
+4. Click the green ▶ **Play** button (or press F5)
+5. Chrome opens automatically with the app URL
+
+#### What the launch config does
+Each VS Code launch config:
+- Opens `http://localhost:5000/{appId}/index.html` in Chrome
+- Attaches Chrome DevTools so you can set breakpoints
+- Shows console errors directly in VS Code
+
+#### Comparing Neo vs CF
+In VS Code you can run the **Neo version** side by side with the **CF version** to compare functionality:
+- `🌐 Dispute (Neo)` → old Neo version from backup
+- `☁ Dispute` → new CF version
+
+#### Important: approuter must be running first
+If the approuter is not running, Chrome will show "This site can't be reached". Start the approuter first (Section 15.1 steps 3-5), then use VS Code.
+
+---
+
+### 15.3 Testing in BAS (SAP Business Application Studio)
+
+BAS testing uses the same approuter concept but runs entirely in the cloud (inside the BAS container). The approuter in BAS fetches apps from CF HTML5 Repo — **no VPN needed** to see the app UI, but OData data will not load (no VPN in cloud).
+
+#### Prerequisites
+- BAS dev space `Fiori_App` is running
+- CF logged in (via SSO passcode)
+
+#### Step-by-step
+
+**Step 1: Open BAS**
+Navigate to your BAS workspace:
+```
+https://btp-cf-8qsdli3e.us11cf.applicationstudio.cloud.sap
+```
+Open the `Fiori_App` dev space.
+
+**Step 2: Open a terminal in the project**
+In BAS, open a new terminal (`Terminal → New Terminal`).
+Make sure it shows `user: work_cloud_foundry $` as the prompt.
+If not, click the correct terminal or run:
+```bash
+cd /home/user/projects/work_cloud_foundry
+```
+
+**Step 3: Pull latest code**
+```bash
+git pull origin main
+```
+
+**Step 4: Log in to CF**
+```bash
+cf login -a https://api.cf.us11.hana.ondemand.com --sso
+```
+When prompted for "Temporary Authentication Code", go to:
+```
+https://login.cf.us11.hana.ondemand.com/passcode
+```
+Copy the code and paste it into the terminal.
+
+**Step 5: Run setup and start approuter**
+```bash
+cd approuter
+bash setup.sh
+node server.js &
+```
+You should see:
+```
+✅ default-env.json created successfully
+✅ server.js created (strips X-Frame-Options for BAS/iframe preview)
+Application router is listening on port: 5000
+```
+
+**Step 6: Open an app**
+
+**Option A — Via BTP Cockpit (Recommended, works with your BTP session)**
+1. Go to BTP Cockpit: `https://apac.cockpit.btp.cloud.sap`
+2. Navigate to: `btp_cf subaccount → HTML5 Applications`
+3. Find the app you want (e.g., `comerpisshiperpdispute`)
+4. Click the app name → it opens in a new tab with the full Fiori UI
+
+**Option B — Direct CF URL (paste in your browser)**
+Use this URL pattern with the site UUID `11387043-4c6f-4c9a-94d6-10e084b8b2d2`:
+```
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/
+  11387043-4c6f-4c9a-94d6-10e084b8b2d2.{appId}.{appId}-1.0.0/index.html
+```
+
+Example for Dispute:
+```
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html
+```
+
+**Option C — BAS Simple Browser (if port-forwarding OAuth works)**
+1. Press `Ctrl+Shift+P` in BAS
+2. Type `Simple Browser: Show` → Enter
+3. Enter: `http://localhost:5000/comerpisshiperpdispute/index.html`
+
+> ⚠️ Note: Simple Browser may not work if the BAS workspace's port-forwarding OAuth is broken. Use Option A or B instead.
+
+#### What to expect in BAS
+- **App renders with Fiori UI** ✅ (tabs, buttons, table columns visible)
+- **"No data" or OData 403 error** → Expected! BAS has no VPN so HR7 is unreachable
+- **Blank white page** → Check that `bash setup.sh` ran and `node server.js` is running
+
+---
+
+### 15.4 Testing Summary Table
+
+| Test Method | Where | Setup Required | Live HR7 Data | Best For |
+|-------------|--------|----------------|---------------|----------|
+| Local Approuter | Your PC browser | VPN + `bash setup.sh` + `node server.js` | ✅ Yes (with VPN) | Full end-to-end testing |
+| VS Code | Your PC (Chrome debugger) | Same as local + open workspace | ✅ Yes (with VPN) | Debugging JS issues |
+| BAS - BTP Cockpit | Cloud browser | CF login + `bash setup.sh` + `node server.js` | ❌ No (no VPN) | UI rendering check |
+| BAS - Direct CF URL | Cloud browser | Just CF login (no approuter needed!) | ❌ No (no VPN) | Quickest UI check |
+| Work Zone (future) | Cloud browser | Work Zone tile setup | ❌ No (until Cloud Connector fixed) | Production testing |
+
+---
+
+### 15.5 Troubleshooting Common Issues
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| App is blank/white | Approuter not running | Run `node server.js` |
+| "Cannot find module server.js" | setup.sh not run yet | Run `bash setup.sh` first |
+| "CF not logged in" | setup.sh fails early | Run `cf login --sso` first |
+| "No data" in app | VPN not connected | Connect VPN, restart hr7-proxy.js |
+| OData 403 error in BAS | No VPN in cloud | Expected — only UI check possible in BAS |
+| "FAILED: Routes quota exceeded" | CF org has routes: 0 | Cannot deploy CF apps in btp_cf subaccount |
+| Blank in CF Launchpad URL | Old URL (wrong site UUID) | Use `11387043-4c6f-4c9a-94d6-10e084b8b2d2` not `560d5bf2` |
+| "URL does not reference valid account" | BAS port-forwarding broken | Use BTP Cockpit HTML5 Applications instead |
+
+---
+
 *Document generated: 2026-06-04*
 *Next session: Configure Cloud Connector for HR7, then set up Work Zone tiles*
