@@ -719,7 +719,156 @@ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c
 
 ---
 
-## 16. VS Code vs BAS — Why They Are Different for Testing
+## 16. How the Local Approuter Connects to CF
+
+### 16.0 Architecture Overview
+
+The local approuter is a **bridge** between your browser and CF. It runs on your PC and does two things:
+1. Fetches the app HTML/JS/CSS from CF HTML5 Repository (using OAuth tokens)
+2. Proxies OData calls to the HR7 SAP backend (via hr7-proxy.js on port 5001)
+
+---
+
+### 16.1 Local Approuter Flow (localhost:5000)
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        YOUR PC                                       │
+│                                                                       │
+│   ┌──────────┐    ①  open URL    ┌──────────────────────────────┐   │
+│   │  Chrome  │ ──────────────── ▶│  node server.js              │   │
+│   │ Browser  │                   │  (approuter on port 5000)     │   │
+│   └──────────┘                   └──────────────────────────────┘   │
+│        ▲                                  │            │             │
+│        │  ④ HTML+JS+CSS                   │ ② fetch    │ ③ OData     │
+│        │  rendered in browser             │   app      │   calls     │
+│        │                                  ▼            ▼             │
+│        │                         ┌──────────┐  ┌──────────────┐     │
+│        └─────────────────────────│  CF HTML5│  │ hr7-proxy.js │     │
+│          (app content + data)     │   Repo   │  │  port 5001   │     │
+│                                   │ (cloud)  │  └──────────────┘     │
+└───────────────────────────────────┼──────────┼────────┼──────────────┘
+                                    │          │        │ ⑤ via VPN
+                              OAuth │          │        ▼
+                              token │          │  ┌──────────────┐
+                                    │          │  │  HR7 System  │
+                                    ▼          │  │ 10.10.1.76   │
+                          ┌──────────────────┐ │  │  :8001       │
+                          │  SAP BTP         │ │  └──────────────┘
+                          │  html5-apps-repo │ │
+                          │  app-runtime     │◀┘
+                          │  service         │
+                          └──────────────────┘
+```
+
+**What each step does:**
+1. You open `http://localhost:5000/{appId}/index.html` in Chrome
+2. `server.js` (approuter) authenticates to CF using credentials from `default-env.json` and fetches the app's HTML/JS/CSS files from CF HTML5 Repository
+3. App's OData calls (e.g., `GET /sap/opu/odata/...`) are forwarded to `hr7-proxy.js` on port 5001
+4. App content is returned and rendered in your browser
+5. `hr7-proxy.js` forwards the OData calls to HR7 (`10.10.1.76:8001`) via your VPN connection
+
+---
+
+### 16.2 CF Direct Flow (CF Launchpad URL)
+
+When you use the CF Direct URL (BTP Cockpit → HTML5 Applications), there is **no local server** at all:
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  YOUR PC (just a browser)                                         │
+│                                                                    │
+│   ┌──────────┐   open CF URL                                      │
+│   │  Chrome  │ ─────────────────────────────────────────────────▶│
+│   │ Browser  │                                                     │
+│   └──────────┘                                                     │
+│        ▲                                                           │
+│        │  HTML+JS+CSS rendered                                     │
+└────────┼───────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  SAP BTP Cloud                                                       │
+│                                                                       │
+│  ┌────────────────────────┐       ┌──────────────────────────────┐  │
+│  │  SAP Managed Approuter │──────▶│  CF HTML5 Apps Repository    │  │
+│  │  (launchpad.cfapps...) │       │  (your deployed app files)   │  │
+│  └────────────────────────┘       └──────────────────────────────┘  │
+│              │                                                        │
+│              │ OData calls via                                        │
+│              ▼ Cloud Connector                                        │
+│  ┌─────────────────────────┐                                         │
+│  │  virtual-hr7-destination│──── needs Cloud Connector ────▶ HR7    │
+│  │  (BTP Destination svc)  │     (not yet fully configured)          │
+│  └─────────────────────────┘                                         │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+**Key difference:** SAP hosts everything — their managed approuter fetches the app from CF HTML5 Repo and serves it to your browser. No local server needed. OData calls to HR7 need Cloud Connector (not VPN).
+
+---
+
+### 16.3 Side-by-Side Comparison
+
+```
+LOCAL APPROUTER                          CF DIRECT
+──────────────────────────               ──────────────────────────────────
+Browser                                  Browser
+   │                                        │
+   ▼                                        ▼
+localhost:5000                          btp-cf-8qsdli3e.launchpad.cfapps...
+(node server.js on YOUR PC)             (SAP's managed approuter in cloud)
+   │                                        │
+   ├── GET app files ──────────────────────▶┤
+   │   (via OAuth token from               │── GET app files ──────────────▶
+   │    default-env.json)                  │   (authenticated via BTP session)
+   │                                       │
+   ▼                                       ▼
+CF HTML5 Repository ◀────────────── CF HTML5 Repository
+(same source!)                       (same source!)
+   │                                       │
+   ├── OData calls ──────────────────      ├── OData calls ──────────────
+   │   via hr7-proxy.js:5001              │   via Cloud Connector
+   │   via VPN to 10.10.1.76:8001         │   via virtual-hr7-destination
+   │                                       │
+   ▼                                       ▼
+HR7 System ✅ (VPN works)             HR7 System ⚠️ (needs Cloud Connector)
+```
+
+---
+
+### 16.4 What `setup.sh` Does
+
+`bash setup.sh` prepares the local approuter to connect to CF by creating two files:
+
+```
+setup.sh
+   │
+   ├── calls: cf service-key app-runtime-1779763944 html5-runtime-test-key
+   │          (gets OAuth credentials from CF)
+   │
+   ├── creates: default-env.json
+   │            ┌─────────────────────────────────────────────────┐
+   │            │ PORT: 5000                                       │
+   │            │ destinations:                                    │
+   │            │   - ui5cdn → https://ui5.sap.com                │
+   │            │   - virtual-hr7-destination → localhost:5001     │
+   │            │ VCAP_SERVICES:                                   │
+   │            │   html5-apps-repo credentials (OAuth tokens)    │
+   │            └─────────────────────────────────────────────────┘
+   │
+   └── creates: server.js
+                ┌─────────────────────────────────────────────────┐
+                │ Starts approuter + strips X-Frame-Options header │
+                │ (allows iframe embedding in VS Code/BAS)         │
+                └─────────────────────────────────────────────────┘
+```
+
+`default-env.json` is **gitignored** — it contains your CF service key credentials. Running `setup.sh` regenerates it fresh each session using your current CF login.
+
+---
+
+
 
 ### 16.1 BAS is VS Code in the browser
 
