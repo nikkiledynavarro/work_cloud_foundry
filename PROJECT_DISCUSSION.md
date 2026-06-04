@@ -440,38 +440,66 @@ npm install
 
 #### Every session
 
-> **Terminal tip:** Use **Git Bash** for these commands. If you can't paste (`Ctrl+V` doesn't work in Git Bash),
-> use **right-click → Paste** or open the terminal inside **VS Code** (`Ctrl+\``) where `Ctrl+V` works normally.
+> **Before you start:** Make sure **OpenVPN is connected** to `erp-is`. You need both OpenVPN AND
+> hr7-proxy.js running for live HR7 data. OpenVPN opens the network tunnel; hr7-proxy.js handles
+> the authentication and forwards the calls.
 
+> **Terminal tip:** Use **Git Bash** for these commands. `Ctrl+V` does not work in Git Bash —
+> use **right-click → Paste** instead. Or use VS Code terminal (`Ctrl+\``) where `Ctrl+V` works normally.
+
+**Window 1 — Open Git Bash and run:**
 ```bash
-# 1. Navigate to the approuter folder
+# Step 1: Navigate to the approuter folder
 cd C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter
 
-# 2. Log in to CF with your BTP email and password
+# Step 2: Log in to CF with your BTP email and password
 cf login -a https://api.cf.us11.hana.ondemand.com
 # Enter: nnavarro@erp-is.com
 # Enter: your password when prompted
 # You should see: Targeted org ... Targeted space DEV
 
-# 3. Run setup to generate credentials file
+# Step 3: Run setup — this generates default-env.json AND starts hr7-proxy.js automatically
 bash setup.sh
-# This creates: default-env.json (CF credentials) and server.js (X-Frame-Options fix)
-
-# 4. Start the HR7 backend proxy (separate terminal window)
-node hr7-proxy.js
-# This runs on port 5001 and forwards OData calls to HR7 (10.10.1.76:8001)
-# NOTE: You must have VPN on for this to reach HR7
-
-# 5. Start the approuter (same or separate terminal window)
-node server.js
-# Listens on port 5000 — wait for: "Application router is listening on port: 5000"
 ```
 
-> **About CF login options:**
-> - `cf login -a ... ` (email + password) → simplest, works in any terminal ✅
-> - `cf login -a ... --sso` → prompts for one-time passcode from `https://login.cf.us11.hana.ondemand.com/passcode`
-> - `--sso-passcode YOUR_CODE` flag → can have paste issues in Git Bash due to bracketed paste mode
-> - **Recommended:** Use email/password login — it's straightforward and avoids paste problems
+> ⚠️ After `bash setup.sh` you will see:
+> ```
+> ✅ default-env.json created successfully
+> HR7 Auth Proxy running on port 5001
+> Forwarding to http://10.10.1.76:8001 as NNAVARRO_AI
+> ```
+> The terminal is now **"stuck"** — this is normal! hr7-proxy.js is running in the foreground.
+> **Do NOT close this window.** Open a second Git Bash window for the next step.
+
+**Window 2 — Open a NEW Git Bash window and run:**
+```bash
+# Step 4: Navigate to the approuter folder
+cd C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter
+
+# Step 5: Start the approuter
+node server.js
+# Wait for: "Application router is listening on port: 5000"
+```
+
+**You now have 2 Git Bash windows running:**
+
+| Window | Command | Port | Purpose |
+|--------|---------|------|---------|
+| Window 1 | `bash setup.sh` (hr7-proxy inside) | 5001 | Forwards OData calls to HR7 with Basic Auth |
+| Window 2 | `node server.js` | 5000 | Approuter — serves app from CF HTML5 Repo |
+
+**Why both are needed for live HR7 data:**
+
+| | What it does | Without it |
+|---|---|---|
+| **OpenVPN** | Opens network tunnel from PC to `10.10.1.76` | hr7-proxy.js can't reach HR7 |
+| **hr7-proxy.js** (port 5001) | Adds `Authorization: Basic` header, forwards to HR7 | Approuter has nowhere to send OData calls |
+| **node server.js** (port 5000) | Fetches app from CF, routes browser requests | `localhost:5000` connection refused |
+
+> **CF login options:**
+> - `cf login -a ...` with **email + password** → simplest, works in any terminal ✅ (recommended)
+> - `cf login -a ... --sso` → prompts for one-time passcode (can have paste issues in Git Bash)
+> - Use email/password to avoid bracketed paste mode problems in Git Bash
 
 #### Opening an app
 Open your Chrome browser and go to:
