@@ -51,6 +51,7 @@ cat > "$OUT" << ENVEOF
         "tags": ["html5appsrepo"],
         "credentials": {
           "grant_type": "client_credentials",
+          "sap.cloud.service": "html5-apps-repo-rt",
           "uri": "$HTML5_URI",
           "uaa": {
             "clientid": "$HTML5_CLIENTID",
@@ -68,9 +69,29 @@ ENVEOF
 
 echo "✅ default-env.json created successfully"
 echo ""
+# Write server.js — strips X-Frame-Options so BAS Simple Browser (iframe) can render apps
+SERVER_JS="$SCRIPT_DIR/server.js"
+cat > "$SERVER_JS" << 'JSEOF'
+'use strict';
+var approuter = require('@sap/approuter');
+var ar = approuter();
+// Strip X-Frame-Options so BAS Simple Browser (iframe) can render apps
+ar.first.use(function(req, res, next) {
+  var orig = res.setHeader.bind(res);
+  res.setHeader = function(name, value) {
+    if (name.toLowerCase() !== 'x-frame-options') orig(name, value);
+  };
+  next();
+});
+ar.start({ workingDir: './' });
+JSEOF
+
+echo "default-env.json created"
+echo "server.js created (strips X-Frame-Options for BAS/iframe preview)"
+echo ""
 echo "=== Next steps ==="
-echo "1. Start approuter:  npm start"
-echo "2. Open port 5000 in BAS → click 'Open in New Tab'"
-echo "3. Test any app:  /comerpisshiperpdispute/index.html"
+echo "1. Start approuter:  node server.js"
+echo "2. In BAS: Simple Browser -> http://localhost:5000/{appId}/index.html"
+echo "3. On PC:  open http://localhost:5000/{appId}/index.html"
 echo ""
 echo "Note: HR7 live data requires VPN (not available in BAS)"
