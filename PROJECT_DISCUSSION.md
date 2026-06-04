@@ -439,13 +439,19 @@ npm install
 ```
 
 #### Every session
+
+> **Terminal tip:** Use **Git Bash** for these commands. If you can't paste (`Ctrl+V` doesn't work in Git Bash),
+> use **right-click → Paste** or open the terminal inside **VS Code** (`Ctrl+\``) where `Ctrl+V` works normally.
+
 ```bash
 # 1. Navigate to the approuter folder
-cd "C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter"
+cd C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter
 
-# 2. Log in to CF (if not already logged in)
-cf login -a https://api.cf.us11.hana.ondemand.com --sso
-# Get passcode at: https://login.cf.us11.hana.ondemand.com/passcode
+# 2. Log in to CF with your BTP email and password
+cf login -a https://api.cf.us11.hana.ondemand.com
+# Enter: nnavarro@erp-is.com
+# Enter: your password when prompted
+# You should see: Targeted org ... Targeted space DEV
 
 # 3. Run setup to generate credentials file
 bash setup.sh
@@ -456,10 +462,16 @@ node hr7-proxy.js
 # This runs on port 5001 and forwards OData calls to HR7 (10.10.1.76:8001)
 # NOTE: You must have VPN on for this to reach HR7
 
-# 5. Start the approuter (separate terminal window or background)
+# 5. Start the approuter (same or separate terminal window)
 node server.js
-# Listens on port 5000
+# Listens on port 5000 — wait for: "Application router is listening on port: 5000"
 ```
+
+> **About CF login options:**
+> - `cf login -a ... ` (email + password) → simplest, works in any terminal ✅
+> - `cf login -a ... --sso` → prompts for one-time passcode from `https://login.cf.us11.hana.ondemand.com/passcode`
+> - `--sso-passcode YOUR_CODE` flag → can have paste issues in Git Bash due to bracketed paste mode
+> - **Recommended:** Use email/password login — it's straightforward and avoids paste problems
 
 #### Opening an app
 Open your Chrome browser and go to:
@@ -700,6 +712,10 @@ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c
 | "FAILED: Routes quota exceeded" | CF org has routes: 0 | Cannot deploy CF apps in btp_cf subaccount |
 | Blank in CF Launchpad URL | Old URL (wrong site UUID) | Use `11387043-4c6f-4c9a-94d6-10e084b8b2d2` not `560d5bf2` |
 | "URL does not reference valid account" | BAS port-forwarding broken | Use BTP Cockpit HTML5 Applications instead |
+| Can't paste in Git Bash (`Ctrl+V` does nothing) | MinTTY doesn't support Ctrl+V | Use right-click → Paste, or use VS Code terminal |
+| `bash: $'\E[200~cd': command not found` | Bracketed paste mode wrapping pasted text in escape codes | Type `printf '\e[?2004l'` to disable, then paste again |
+| `unknown flag 'sso-passcode VALUE'` | Paste merged flag name and value into one string | Use `cf login` with email/password instead of `--sso-passcode` |
+| `User authentication failed` (first attempt) | Wrong password typed | Re-enter the correct password — CF allows retry |
 
 ---
 
