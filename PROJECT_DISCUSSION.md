@@ -575,12 +575,28 @@ VS Code supports **three ways to view apps**, identical to BAS:
 - VS Code installed with the workspace file `shiperp-hr7.code-workspace`
 
 #### Opening the workspace
+
+**Option A — From the VS Code Welcome page (quickest)**
+When VS Code opens, check the **Recent** section on the Welcome tab.
+Click **`shiperp-hr7 (Workspace)`** — it loads everything automatically.
+
+**Option B — From the menu (if not in Recent)**
 ```
-File → Open Workspace from File → 
+File → Open Workspace from File →
+C:\Users\nikki\OneDrive\Desktop\AI\Codex\Work\neo_to_cf\shiperp-hr7.code-workspace
+```
+
+**Option C — From File Explorer**
+Double-click the file directly:
+```
 C:\Users\nikki\OneDrive\Desktop\AI\Codex\Work\neo_to_cf\shiperp-hr7.code-workspace
 ```
 
 This loads all 27 CF apps (and 30 Neo backup apps) into a single workspace.
+
+> **If you don't see the apps in the Explorer panel** after opening VS Code, it means the workspace
+> file is not loaded — use one of the options above. The Explorer should show
+> **SHIPERP-HR7 (WORKSPACE)** at the top with all app folders listed below it.
 
 #### Method A: Simple Browser (same as BAS)
 
