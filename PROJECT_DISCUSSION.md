@@ -598,6 +598,33 @@ This loads all 27 CF apps (and 30 Neo backup apps) into a single workspace.
 > file is not loaded — use one of the options above. The Explorer should show
 > **SHIPERP-HR7 (WORKSPACE)** at the top with all app folders listed below it.
 
+#### Does VS Code need the Git Bash steps?
+
+The VS Code `F5` task automatically starts both `hr7-proxy.js` (port 5001) and the approuter
+(`npm start`, port 5000). However it does **NOT** run `bash setup.sh` — so `default-env.json`
+must already exist on your PC.
+
+| Situation | Git Bash needed? |
+|-----------|-----------------|
+| **First time ever** (no `default-env.json` yet) | ✅ Yes — run `cf login` + `bash setup.sh` once |
+| **Every day after that** | ❌ No — just press F5 in VS Code |
+| **If CF credentials expire or stop working** | ✅ Yes — run `bash setup.sh` again |
+
+**One-time Git Bash setup (do this once):**
+```bash
+cd C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/approuter
+cf login -a https://api.cf.us11.hana.ondemand.com
+bash setup.sh
+```
+After this, `default-env.json` stays on your PC permanently (gitignored — not deleted by git pull).
+
+**Daily VS Code workflow (after first-time setup):**
+1. Connect **OpenVPN** to `erp-is`
+2. Open `shiperp-hr7 (Workspace)` in VS Code
+3. Press **F5** → select any `☁ CF Apps` config → Chrome opens with the app ✅
+
+---
+
 #### Method A: Simple Browser (same as BAS)
 
 This is the same experience as BAS — app renders **inside VS Code** without opening a new tab.
