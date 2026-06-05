@@ -625,10 +625,13 @@ After this, `default-env.json` stays on your PC permanently (gitignored — not 
 
 ---
 
-#### Method A: Simple Browser (same as BAS)
+#### Method A: Simple Browser (inside VS Code — if available)
 
-This is the same experience as BAS — app renders **inside VS Code** without opening a new tab.
+> ⚠️ **Note:** `Simple Browser: Show` is a built-in VS Code command but may not appear in the
+> command palette on all VS Code setups. If `Ctrl+Shift+P` → typing "Simple" only shows
+> "Ask in Chat: Simple" (GitHub Copilot), then Simple Browser is not available — skip to Method B.
 
+If it IS available:
 1. Make sure the approuter is running on port 5000
 2. Press `Ctrl+Shift+P` → type **Simple Browser: Show** → Enter
 3. Type the URL and press Enter:
@@ -637,11 +640,7 @@ http://localhost:5000/comerpisshiperpdispute/index.html
 ```
 4. The Fiori app renders inside VS Code — you stay in your editor
 
-> Why VS Code Simple Browser works but BAS Simple Browser sometimes doesn't:
-> In VS Code, `localhost:5000` connects directly to YOUR machine — no OAuth needed.
-> In BAS, `localhost:5000` goes through SAP's port-forwarding service which requires BTP auth.
-
-#### Method B: Running an app via Launch Config
+#### Method B: Running an app via Launch Config (Recommended)
 1. Open VS Code
 2. Go to **Run and Debug** (Ctrl+Shift+D or the bug icon in the left sidebar)
 3. In the dropdown at the top, select the app you want to test.
