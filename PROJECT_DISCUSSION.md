@@ -625,20 +625,23 @@ After this, `default-env.json` stays on your PC permanently (gitignored — not 
 
 ---
 
-#### Method A: Simple Browser (inside VS Code — if available)
+#### Method A: Integrated Browser (inside VS Code)
 
-> ⚠️ **Note:** `Simple Browser: Show` is a built-in VS Code command but may not appear in the
-> command palette on all VS Code setups. If `Ctrl+Shift+P` → typing "Simple" only shows
-> "Ask in Chat: Simple" (GitHub Copilot), then Simple Browser is not available — skip to Method B.
+VS Code has a built-in browser panel. Use **`Browser: Open Integrated Browser`**:
 
-If it IS available:
-1. Make sure the approuter is running on port 5000
-2. Press `Ctrl+Shift+P` → type **Simple Browser: Show** → Enter
-3. Type the URL and press Enter:
+1. Make sure the approuter is running on port 5000 (`node server.js`)
+2. Press `Ctrl+Shift+P` → type **`brow`** → select **`Browser: Open Integrated Browser`** → Enter
+3. In the browser panel that opens, click the URL bar and type:
 ```
 http://localhost:5000/comerpisshiperpdispute/index.html
 ```
-4. The Fiori app renders inside VS Code — you stay in your editor
+4. The Fiori app renders inside VS Code
+
+> ⚠️ If you see **"Failed to Load Page — ERR_CONNECTION_REFUSED"**, it means the approuter
+> is not running. Start `node server.js` first, then reload the browser panel.
+
+> **Note:** `Simple Browser: Show` is an alternative command but may not appear if GitHub Copilot
+> Chat overrides it. Use `Browser: Open Integrated Browser` instead — it always works.
 
 #### Method B: Running an app via Launch Config (Recommended)
 1. Open VS Code
