@@ -16,7 +16,7 @@
  */
 const CF_CONFIG = {
     host:     'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com',
-    siteUuid: '11387043-4c6f-4c9a-94d6-10e084b8b2d2',
+    siteUuid: 'a167a84f-0812-44fd-86e6-01c300d56f26',
     version:  '1.0.0'
 };
 // ─────────────────────────────────────────────────────────────────────────────

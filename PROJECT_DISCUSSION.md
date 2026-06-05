@@ -386,7 +386,7 @@ The dropdown has **3 groups**:
 - **Needs:** OpenVPN on | **Best for:** Full testing with live HR7 data
 
 #### ☁ CF Direct (e.g., `☁ cancelacefiling (CF Direct)`)
-- **URL:** `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html`
+- **URL:** `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html`
 - App loads **directly from CF** — no local server needed
 - **Needs:** BTP login in browser only | **Best for:** Quick UI check, no setup required
 
@@ -411,13 +411,13 @@ Instead of opening Chrome, you can view apps inside VS Code:
 The CF Direct URL has 4 parts:
 ```
 https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/
-  11387043-4c6f-4c9a-94d6-10e084b8b2d2.   ← Site UUID (from BTP HTML5 Applications)
+  a167a84f-0812-44fd-86e6-01c300d56f26.   ← Site UUID (from BTP HTML5 Applications)
   comerpisshiperpcancelacefiling.           ← sap.cloud.service
   comerpisshiperpcancelacefiling-1.0.0/    ← sap.app.id + version
 index.html
 ```
 
-The **Site UUID** (`11387043-4c6f-4c9a-94d6-10e084b8b2d2`) was found by clicking the Error Log icon on an app in BTP Cockpit → HTML5 Applications. The dialog title revealed the full app key including the UUID.
+The **Site UUID** (`a167a84f-0812-44fd-86e6-01c300d56f26`) was found by clicking the Error Log icon on an app in BTP Cockpit → HTML5 Applications. The dialog title revealed the full app key including the UUID.
 
 ### 7.7 The Launch Config Generator Script
 If the CF environment changes (new site UUID, different host), update `scripts/generate-launch-configs.js`:
@@ -425,7 +425,7 @@ If the CF environment changes (new site UUID, different host), update `scripts/g
 ```js
 const CF_CONFIG = {
     host:     'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com',
-    siteUuid: '11387043-4c6f-4c9a-94d6-10e084b8b2d2',
+    siteUuid: 'a167a84f-0812-44fd-86e6-01c300d56f26',
     version:  '1.0.0'
 };
 ```
@@ -452,11 +452,11 @@ No approuter needed at all:
 ### 8.2 CF Direct URL in Browser
 Paste directly in your Chrome browser (you must be logged in to BTP):
 ```
-https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.{appId}.{appId}-1.0.0/index.html
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.{appId}.{appId}-1.0.0/index.html
 ```
 Example for Dispute:
 ```
-https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html
 ```
 
 ### 8.3 BAS Approuter (if port-forwarding OAuth works)
@@ -518,7 +518,7 @@ Then open a URL in your browser:
 | `App loads but no data` | VPN not connected | Connect OpenVPN to `erp-is` |
 | `ERR_CONNECTION_REFUSED` in VS Code browser | Approuter not started | Press F5 first or run `node server.js` |
 | `Blank white page` | Approuter not running or setup.sh not run | Run `bash setup.sh` then `node server.js` |
-| `Not Found` on CF URL | Wrong site UUID | Use `11387043-4c6f-4c9a-94d6-10e084b8b2d2` not `560d5bf2` |
+| `Not Found` on CF URL | Wrong site UUID | Use `a167a84f-0812-44fd-86e6-01c300d56f26` not `560d5bf2` |
 | `URL does not reference valid account` | BAS port-forwarding broken | Use BTP Cockpit HTML5 Applications instead |
 | `Ctrl+V` doesn't paste in Git Bash | MinTTY doesn't support Ctrl+V | Use right-click → Paste |
 | `bash: $'\E[200~cd': command not found` | Bracketed paste mode | Type `printf '\e[?2004l'` to disable, then paste |
@@ -572,7 +572,7 @@ git add .vscode/launch.json && git commit -m "chore: regenerate CF launch config
 
 ### 11.2 CF Direct URL Pattern (All 27 Apps)
 
-Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.`
+Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.`
 
 | App | Append to base |
 |-----|---------------|
