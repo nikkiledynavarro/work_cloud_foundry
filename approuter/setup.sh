@@ -89,9 +89,7 @@ JSEOF
 echo "default-env.json created"
 echo "server.js created (strips X-Frame-Options for BAS/iframe preview)"
 echo ""
-echo "=== Next steps ==="
-echo "1. Start approuter:  node server.js"
-echo "2. In BAS: Simple Browser -> http://localhost:5000/{appId}/index.html"
-echo "3. On PC:  open http://localhost:5000/{appId}/index.html"
+echo "=== Starting HR7 Auth Proxy on port 5001 ==="
+echo "Keep this terminal open — open a NEW terminal and run: node server.js"
 echo ""
-echo "Note: HR7 live data requires VPN (not available in BAS)"
+node hr7-proxy.js
