@@ -1,7 +1,14 @@
 # ShipERP Neo to Cloud Foundry Migration — Project Discussion
-**Date:** 2026-06-04 | **Author:** Nikki Navarro (nnavarro@erp-is.com)
+**Date:** 2026-06-07 | **Author:** Nikki Navarro (nnavarro@erp-is.com)
 **Repository:** https://github.com/nikkiledynavarro/work_cloud_foundry
 **BTP Subaccount:** btp_cf (us11 region)
+
+> **Recent Updates (2026-06-07):**
+> - Removed `planningcockpit` (was TM, not HR7 ECC/EWM)
+> - Renamed all paired ECC apps to use explicit `ecc` suffix matching EWM convention:
+>   `cancelshipment` → `cancelshipmentecc`, `createshipment` → `createshipmentecc`, `trackshipment` → `trackshipmentecc`
+> - All 27 apps deployed to CF as `public` and visible via direct URLs
+> - Fixed mislabel: `planshipment` is **EWM** (uses `ewm_tuv_srv`), not ECC
 
 ---
 
@@ -72,6 +79,20 @@ Out of 62 Neo apps, we focused on **27 HR7 Apps** (ECC + EWM) because:
 | trackshipmentecc | comerpisshiperptrackshipmentecc | ECC |
 | trackshipmentewm | comerpisshiperptrackshipmentewm | **EWM** |
 | viewacefiling | comerpisshiperpviewacefiling | ECC |
+
+**Totals:** 17 ECC + 10 EWM = 27 apps
+
+### 2.1 ECC ↔ EWM Symmetry
+Six business functions exist in both ECC and EWM flavors. Naming follows the explicit `ecc` / `ewm` suffix convention:
+
+| ECC version | EWM counterpart |
+|-------------|----------------|
+| cancelshipmentecc | cancelshipmentewm |
+| carrierperformancereportecc | carrierperformancereportewm |
+| createshipmentecc | createshipmentewm + createshipmentv2ewm |
+| manualshipmentecc | manualshipmentewm |
+| quickpackecc | quickpackewm |
+| trackshipmentecc | trackshipmentewm |
 
 ---
 
@@ -234,6 +255,26 @@ Added `ui5cdn` destination to BTP Cockpit (`btp_cf` subaccount → Connectivity 
 - URL: `https://ui5.sap.com`, Type: HTTP, Proxy: Internet, Auth: NoAuthentication
 
 This is a backup for apps served via managed launchpad routes that reference `ui5cdn`.
+
+### 5.8 ECC Suffix Naming Convention (2026-06-07)
+**Problem:** Some Neo apps had a plain name for the ECC version and an explicit `ewm` suffix for the EWM counterpart, creating ambiguous naming:
+- `cancelshipment` (ECC, no suffix) vs `cancelshipmentewm` (EWM, explicit)
+- `createshipment` (ECC, no suffix) vs `createshipmentewm` / `createshipmentv2ewm` (EWM, explicit)
+- `trackshipment` (ECC, no suffix — was deployed as `trackshipmenterp`) vs `trackshipmentewm`
+
+**Fix:** When an EWM counterpart exists, the ECC version now uses an explicit `ecc` suffix to mirror the EWM convention. This matches what `manualshipmentecc`/`manualshipmentewm` and `quickpackecc`/`quickpackewm` already did. Apps WITHOUT an EWM counterpart (`dispute`, `saleorder`, `shippingdashboard`, `closedelivery`, etc.) keep their plain names.
+
+**Renamed apps:**
+| Old name | New name | CF App ID |
+|----------|----------|-----------|
+| cancelshipment | **cancelshipmentecc** | comerpisshiperpcancelshipmentecc |
+| createshipment | **createshipmentecc** | comerpisshiperpcreateshipmentecc |
+| trackshipment / trackshipmenterp | **trackshipmentecc** | comerpisshiperptrackshipmentecc |
+
+Each rename touched: folder name, `manifest.json` (sap.app.id, sap.cloud.service, semanticObject), `package.json`, `ui5.yaml`, `xs-app.json`, `mta.yaml` modules and resources, `xs-security-*.json` file, `.vscode/launch.json` + `tasks.json`, workspace file.
+
+### 5.9 Removed: planningcockpit (Wrong Classification)
+Originally migrated as an "ECC" app, but `planningcockpit` actually uses `serptm/PLANNING_SRV` — a **Transportation Management (TM)** service, not ECC or EWM. Since the Neo launchpad never had a tile for it, and HR7 doesn't run TM, it was removed entirely from CF, mta.yaml, project files, and security descriptors.
 
 ---
 
@@ -638,11 +679,13 @@ neo_to_cf/
 
 | Item | Status | What's Needed |
 |------|--------|--------------|
+| All 27 apps deployed to CF | ✅ Done | Verified via `cf html5-list` |
+| Apps accessible via CF Direct URL | ✅ Done | See section 11.2 |
 | HR7 live data in CF | ❌ OData 502/403 | Configure Cloud Connector to expose `virtual-s4hr7.erp-is.com` |
-| Work Zone tiles | ❌ Not configured | Work Zone admin access → add 27 apps as tiles |
+| Work Zone Site tiles | ⚠️ Partial | Some tiles still missing — see section 9 for known cases |
 | shippingdashboard full OVP | ⚠️ Partial | Needs Work Zone for Overview Page library |
 | BAS port-forwarding | ⚠️ May not work | BTP subaccount port-forwarding config |
 
 ---
 
-*Last updated: 2026-06-05*
+*Last updated: 2026-06-07 — ECC suffix rename + planningcockpit removal*
