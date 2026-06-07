@@ -1,6 +1,6 @@
 specVersion: "3.0"
 metadata:
-  name: createshipment
+  name: cancelshipmentecc
 type: application
 resources:
   configuration:

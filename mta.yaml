@@ -4,9 +4,9 @@ version: 0.0.1
 description: ShipERP Fiori HTML5 apps migrated from Neo to Cloud Foundry HTML5 Apps Repository.
 
 modules:
-  - name: cancelshipment
+  - name: cancelshipmentecc
     type: html5
-    path: apps/cancelshipment
+    path: apps/cancelshipmentecc
     build-parameters:
       builder: custom
       commands:
@@ -16,48 +16,48 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: cancelshipment-app-content
+  - name: cancelshipmentecc-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: cancelshipment-app-front-service
+      - name: cancelshipmentecc-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/cancelshipment
+      build-result: resources/cancelshipmentecc
       requires:
-        - name: cancelshipment
+        - name: cancelshipmentecc
           artifacts:
-            - cancelshipment.zip
-          target-path: resources/cancelshipment/
+            - cancelshipmentecc.zip
+          target-path: resources/cancelshipmentecc/
 
-  - name: cancelshipment-destination-content
+  - name: cancelshipmentecc-destination-content
     type: com.sap.application.content
     requires:
-      - name: cancelshipment-destination-service
+      - name: cancelshipmentecc-destination-service
         parameters:
           content-target: true
-      - name: cancelshipment-app-front-service
+      - name: cancelshipmentecc-app-front-service
         parameters:
           service-key:
-            name: cancelshipment-app-front-service-key
-      - name: cancelshipment-xsuaa-service
+            name: cancelshipmentecc-app-front-service-key
+      - name: cancelshipmentecc-xsuaa-service
         parameters:
           service-key:
-            name: cancelshipment-xsuaa-service-key
+            name: cancelshipmentecc-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: cancelshipment-app-front-service
-              ServiceInstanceName: cancelshipment-app-front-service
-              ServiceKeyName: cancelshipment-app-front-service-key
-              sap.cloud.service: comerpisshiperpcancelshipment
-            - Name: cancelshipment-xsuaa-service
+            - Name: cancelshipmentecc-app-front-service
+              ServiceInstanceName: cancelshipmentecc-app-front-service
+              ServiceKeyName: cancelshipmentecc-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentecc
+            - Name: cancelshipmentecc-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: cancelshipment-xsuaa-service
-              ServiceKeyName: cancelshipment-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcancelshipment
+              ServiceInstanceName: cancelshipmentecc-xsuaa-service
+              ServiceKeyName: cancelshipmentecc-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentecc
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -177,9 +177,9 @@ modules:
           existing_destinations_policy: update
     build-parameters:
       no-source: true
-  - name: createshipment
+  - name: createshipmentecc
     type: html5
-    path: apps/createshipment
+    path: apps/createshipmentecc
     build-parameters:
       builder: custom
       commands:
@@ -189,48 +189,48 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: createshipment-app-content
+  - name: createshipmentecc-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: createshipment-app-front-service
+      - name: createshipmentecc-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/createshipment
+      build-result: resources/createshipmentecc
       requires:
-        - name: createshipment
+        - name: createshipmentecc
           artifacts:
-            - createshipment.zip
-          target-path: resources/createshipment/
+            - createshipmentecc.zip
+          target-path: resources/createshipmentecc/
 
-  - name: createshipment-destination-content
+  - name: createshipmentecc-destination-content
     type: com.sap.application.content
     requires:
-      - name: createshipment-destination-service
+      - name: createshipmentecc-destination-service
         parameters:
           content-target: true
-      - name: createshipment-app-front-service
+      - name: createshipmentecc-app-front-service
         parameters:
           service-key:
-            name: createshipment-app-front-service-key
-      - name: createshipment-xsuaa-service
+            name: createshipmentecc-app-front-service-key
+      - name: createshipmentecc-xsuaa-service
         parameters:
           service-key:
-            name: createshipment-xsuaa-service-key
+            name: createshipmentecc-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: createshipment-app-front-service
-              ServiceInstanceName: createshipment-app-front-service
-              ServiceKeyName: createshipment-app-front-service-key
-              sap.cloud.service: comerpisshiperpcreateshipment
-            - Name: createshipment-xsuaa-service
+            - Name: createshipmentecc-app-front-service
+              ServiceInstanceName: createshipmentecc-app-front-service
+              ServiceKeyName: createshipmentecc-app-front-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentecc
+            - Name: createshipmentecc-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: createshipment-xsuaa-service
-              ServiceKeyName: createshipment-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcreateshipment
+              ServiceInstanceName: createshipmentecc-xsuaa-service
+              ServiceKeyName: createshipmentecc-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentecc
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2054,13 +2054,13 @@ resources:
       service-plan: application
       path: ./security/xs-security-planshipment.json
 
-  - name: cancelshipment-app-front-service
+  - name: cancelshipmentecc-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: cancelshipment-destination-service
+  - name: cancelshipmentecc-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2068,12 +2068,12 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: cancelshipment-xsuaa-service
+  - name: cancelshipmentecc-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-cancelshipment.json
+      path: ./security/xs-security-cancelshipmentecc.json
 
   - name: freightaudit-app-front-service
     type: org.cloudfoundry.managed-service
@@ -2116,13 +2116,13 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-createshipmentv2ewm.json
-  - name: createshipment-app-front-service
+  - name: createshipmentecc-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: createshipment-destination-service
+  - name: createshipmentecc-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -2130,11 +2130,11 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: createshipment-xsuaa-service
+  - name: createshipmentecc-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-createshipment.json
+      path: ./security/xs-security-createshipmentecc.json
 
 

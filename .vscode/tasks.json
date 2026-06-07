@@ -131,7 +131,7 @@
                       "problemMatcher":  [
 
                                          ],
-                      "label":  "Start cancelshipment locally",
+                      "label":  "Start cancelshipmentecc locally",
                       "isBackground":  true,
                       "command":  "npm.cmd start",
                       "type":  "shell",
@@ -148,7 +148,7 @@
                                                                  "/c"
                                                              ]
                                                 },
-                                      "cwd":  "${workspaceFolder}/apps/cancelshipment"
+                                      "cwd":  "${workspaceFolder}/apps/cancelshipmentecc"
                                   }
                   },
                   {
@@ -251,7 +251,7 @@
                       "problemMatcher":  [
 
                                          ],
-                      "label":  "Start createshipment locally",
+                      "label":  "Start createshipmentecc locally",
                       "isBackground":  true,
                       "command":  "npm.cmd start",
                       "type":  "shell",
@@ -268,7 +268,7 @@
                                                                  "/c"
                                                              ]
                                                 },
-                                      "cwd":  "${workspaceFolder}/apps/createshipment"
+                                      "cwd":  "${workspaceFolder}/apps/createshipmentecc"
                                   }
                   },
                   {

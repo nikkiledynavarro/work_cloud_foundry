@@ -1,7 +1,7 @@
 {
-  "_version": "1.9.0",
+  "_version": "1.12.0",
   "sap.app": {
-    "id": "comerpisshiperpcancelshipment",
+    "id": "comerpisshiperpcreateshipmentecc",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "title": "{{appTitle}}",
@@ -11,7 +11,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "sap/opu/odata/serperp/cancel_ship_srv/",
+        "uri": "sap/opu/odata/serperp/parcel_srv/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
@@ -25,14 +25,14 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "cancelhr7Display": {
+        "parcelhr7Display": {
           "action": "display",
           "icon": "sap-icon://app",
           "signature": {
             "additionalParameters": "allowed",
             "parameters": {}
           },
-          "semanticObject": "cancelhr7",
+          "semanticObject": "parcelhr7ECC",
           "subTitle": "",
           "title": "{{appTitle}}"
         }
@@ -66,7 +66,7 @@
       ]
     },
     "rootView": {
-      "viewName": "com.erpis.shiperp.cancel.hr7.view.App",
+      "viewName": "com.erpis.shiperp.parcel.hr7.view.App",
       "type": "XML",
       "async": true,
       "id": "app"
@@ -87,15 +87,11 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.erpis.shiperp.cancel.hr7.i18n.i18n"
+          "bundleName": "com.erpis.shiperp.parcel.hr7.i18n.i18n"
         }
       },
       "": {
         "dataSource": "mainService",
-        "settings": {
-          "useBatch": true,
-          "refreshAfterChange": false
-        },
         "preload": true
       }
     },
@@ -103,7 +99,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
-        "viewPath": "com.erpis.shiperp.cancel.hr7.view",
+        "viewPath": "com.erpis.shiperp.parcel.hr7.view",
         "controlId": "app",
         "controlAggregation": "pages",
         "bypassed": {
@@ -116,35 +112,29 @@
       "routes": [
         {
           "pattern": "",
-          "name": "login",
+          "name": "home",
           "target": [
-            "login"
+            "home"
           ]
         },
         {
-          "pattern": "CancelDetail/{ShipStation}/{Profile}",
-          "name": "cancelDetail",
+          "pattern": "Profile/{Station}/{Profile}/{InputType}/:Delivery:",
+          "name": "main",
           "target": [
-            "cancelDetail"
+            "main"
           ]
         }
       ],
       "targets": {
-        "login": {
-          "viewName": "Login",
-          "viewId": "login",
-          "viewLevel": 1,
-          "title": "{i18n>loginViewTitle}"
+        "home": {
+          "viewName": "Home",
+          "viewId": "home",
+          "viewLevel": 1
         },
-        "cancelDetail": {
-          "viewName": "CancelDetail",
-          "viewId": "cancel",
-          "viewLevel": 1,
-          "title": "{i18n>lcancelDetailTitle}"
-        },
-        "objectNotFound": {
-          "viewName": "ObjectNotFound",
-          "viewId": "objectNotFound"
+        "main": {
+          "viewName": "Main",
+          "viewId": "main",
+          "viewLevel": 2
         },
         "notFound": {
           "viewName": "NotFound",
@@ -159,6 +149,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "comerpisshiperpcancelshipment"
+    "service": "comerpisshiperpcreateshipmentecc"
   }
 }

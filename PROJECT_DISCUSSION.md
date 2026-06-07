@@ -47,12 +47,12 @@ Out of 62 Neo apps, we focused on **27 HR7 Apps** (ECC + EWM) because:
 |-----------|-----------|------|
 | cancelacefiling | comerpisshiperpcancelacefiling | ECC |
 | cancelpickuprequest | comerpisshiperpcancelpickuprequest | ECC |
-| cancelshipment | comerpisshiperpcancelshipment | ECC |
+| cancelshipmentecc | comerpisshiperpcancelshipmentecc | ECC |
 | cancelshipmentewm | comerpisshiperpcancelshipmentewm | **EWM** |
 | carrierperformancereportecc | comerpisshiperpcarrierperformancereportecc | ECC |
 | carrierperformancereportewm | comerpisshiperpcarrierperformancereportewm | **EWM** |
 | closedelivery | comerpisshiperpclosedelivery | ECC |
-| createshipment | comerpisshiperpcreateshipment | ECC |
+| createshipmentecc | comerpisshiperpcreateshipmentecc | ECC |
 | createshipmentewm | comerpisshiperpcreateshipmentewm | **EWM** |
 | createshipmentv2ewm | comerpisshiperpcreateshipmentv2ewm | **EWM** |
 | dispute | comerpisshiperpdispute | ECC |
@@ -222,8 +222,8 @@ comerpisshiperpdispute.com.erpis.shiperp.disputepkw-1.0.0  ← broken ❌
 
 ### 5.5 ECC vs EWM Separation
 Critical requirement: ECC and EWM apps serve different SAP modules and must never be mixed.
-- `cancelshipment` (ECC) ≠ `cancelshipmentewm` (EWM)
-- `createshipment` (ECC) ≠ `createshipmentewm` / `createshipmentv2ewm` (EWM)
+- `cancelshipmentecc` (ECC) ≠ `cancelshipmentewm` (EWM)
+- `createshipmentecc` (ECC) ≠ `createshipmentewm` / `createshipmentv2ewm` (EWM)
 - `manualshipmentecc` (ECC) ≠ `manualshipmentewm` (EWM)
 
 ### 5.6 XSUAA AppId Fix
@@ -299,12 +299,12 @@ Open Chrome and go to any of these URLs:
 |-----|-----|
 | Cancel ACE Filing | `http://localhost:5000/comerpisshiperpcancelacefiling/index.html` |
 | Cancel Pickup Request | `http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html` |
-| Cancel Shipment (ECC) | `http://localhost:5000/comerpisshiperpcancelshipment/index.html` |
+| Cancel Shipment (ECC) | `http://localhost:5000/comerpisshiperpcancelshipmentecc/index.html` |
 | Cancel Shipment (EWM) | `http://localhost:5000/comerpisshiperpcancelshipmentewm/index.html` |
 | Carrier Performance (ECC) | `http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html` |
 | Carrier Performance (EWM) | `http://localhost:5000/comerpisshiperpcarrierperformancereportewm/index.html` |
 | Close Delivery | `http://localhost:5000/comerpisshiperpclosedelivery/index.html` |
-| Create Shipment (ECC) | `http://localhost:5000/comerpisshiperpcreateshipment/index.html` |
+| Create Shipment (ECC) | `http://localhost:5000/comerpisshiperpcreateshipmentecc/index.html` |
 | Create Shipment (EWM) | `http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html` |
 | Create Shipment V2 (EWM) | `http://localhost:5000/comerpisshiperpcreateshipmentv2ewm/index.html` |
 | Dispute | `http://localhost:5000/comerpisshiperpdispute/index.html` |
@@ -578,12 +578,12 @@ Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-
 |-----|---------------|
 | cancelacefiling | `comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html` |
 | cancelpickuprequest | `comerpisshiperpcancelpickuprequest.comerpisshiperpcancelpickuprequest-1.0.0/index.html` |
-| cancelshipment | `comerpisshiperpcancelshipment.comerpisshiperpcancelshipment-1.0.0/index.html` |
+| cancelshipmentecc | `comerpisshiperpcancelshipmentecc.comerpisshiperpcancelshipmentecc-1.0.0/index.html` |
 | cancelshipmentewm | `comerpisshiperpcancelshipmentewm.comerpisshiperpcancelshipmentewm-1.0.0/index.html` |
 | carrierperformancereportecc | `comerpisshiperpcarrierperformancereportecc.comerpisshiperpcarrierperformancereportecc-1.0.0/index.html` |
 | carrierperformancereportewm | `comerpisshiperpcarrierperformancereportewm.comerpisshiperpcarrierperformancereportewm-1.0.0/index.html` |
 | closedelivery | `comerpisshiperpclosedelivery.comerpisshiperpclosedelivery-1.0.0/index.html` |
-| createshipment | `comerpisshiperpcreateshipment.comerpisshiperpcreateshipment-1.0.0/index.html` |
+| createshipmentecc | `comerpisshiperpcreateshipmentecc.comerpisshiperpcreateshipmentecc-1.0.0/index.html` |
 | createshipmentewm | `comerpisshiperpcreateshipmentewm.comerpisshiperpcreateshipmentewm-1.0.0/index.html` |
 | createshipmentv2ewm | `comerpisshiperpcreateshipmentv2ewm.comerpisshiperpcreateshipmentv2ewm-1.0.0/index.html` |
 | dispute | `comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html` |

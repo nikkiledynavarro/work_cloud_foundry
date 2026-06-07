@@ -57,8 +57,8 @@
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "Start cancelshipment locally",
-            "name": "🌐 cancelshipment (Local Source)",
+            "preLaunchTask": "Start cancelshipmentecc locally",
+            "name": "🌐 cancelshipmentecc (Local Source)",
             "presentation": {
                 "hidden": false,
                 "group": "🌐 Local Source",
@@ -147,8 +147,8 @@
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "Start createshipment locally",
-            "name": "🌐 createshipment (Local Source)",
+            "preLaunchTask": "Start createshipmentecc locally",
+            "name": "🌐 createshipmentecc (Local Source)",
             "presentation": {
                 "hidden": false,
                 "group": "🌐 Local Source",
@@ -521,12 +521,12 @@
         {
             "runtimeArgs": [
                 "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipment/index.html'"
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentecc/index.html'"
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
-            "name": "☁ cancelshipment (CF)",
+            "name": "☁ cancelshipmentecc (CF)",
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
@@ -611,12 +611,12 @@
         {
             "runtimeArgs": [
                 "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipment/index.html'"
+                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentecc/index.html'"
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
-            "name": "☁ createshipment (CF)",
+            "name": "☁ createshipmentecc (CF)",
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
@@ -1005,11 +1005,11 @@
         {
             "runtimeArgs": [
                 "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelshipment.comerpisshiperpcancelshipment-1.0.0/index.html'"
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelshipmentecc.comerpisshiperpcancelshipmentecc-1.0.0/index.html'"
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
-            "name": "☁ cancelshipment (CF Direct)",
+            "name": "☁ cancelshipmentecc (CF Direct)",
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
@@ -1090,11 +1090,11 @@
         {
             "runtimeArgs": [
                 "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcreateshipment.comerpisshiperpcreateshipment-1.0.0/index.html'"
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcreateshipmentecc.comerpisshiperpcreateshipmentecc-1.0.0/index.html'"
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
-            "name": "☁ createshipment (CF Direct)",
+            "name": "☁ createshipmentecc (CF Direct)",
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",

@@ -23,8 +23,8 @@
                         "path":  "apps/cancelpickuprequest"
                     },
                     {
-                        "name":  "☁ cancelshipment",
-                        "path":  "apps/cancelshipment"
+                        "name":  "☁ cancelshipmentecc",
+                        "path":  "apps/cancelshipmentecc"
                     },
                     {
                         "name":  "☁ cancelshipmentewm",
@@ -43,8 +43,8 @@
                         "path":  "apps/closedelivery"
                     },
                     {
-                        "name":  "☁ createshipment",
-                        "path":  "apps/createshipment"
+                        "name":  "☁ createshipmentecc",
+                        "path":  "apps/createshipmentecc"
                     },
                     {
                         "name":  "☁ createshipmentewm",
