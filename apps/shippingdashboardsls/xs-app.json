@@ -5,7 +5,7 @@
                    {
                        "source":  "^/destinations/Northwind/(.*)$",
                        "target":  "/V2/Northwind/$1",
-                       "destination":  "Northwind",
+                       "destination":  "virtual-erps4sales-destination",
                        "authenticationType":  "xsuaa",
                        "csrfProtection":  false
                    },

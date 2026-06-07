@@ -4,13 +4,13 @@
     "scopes":  [
                    {
                        "name":  "$XSAPPNAME.User",
-                       "description":  "Access {{appTitle}}"
+                       "description":  "Access Shipewm SLS"
                    }
                ],
     "role-templates":  [
                            {
                                "name":  "User",
-                               "description":  "Access {{appTitle}}",
+                               "description":  "Access Shipewm SLS",
                                "scope-references":  [
                                                         "$XSAPPNAME.User"
                                                     ]

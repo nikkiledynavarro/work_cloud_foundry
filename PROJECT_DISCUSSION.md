@@ -7,8 +7,10 @@
 > - Removed `planningcockpit` (was TM, not HR7 ECC/EWM)
 > - Renamed all paired ECC apps to use explicit `ecc` suffix matching EWM convention:
 >   `cancelshipment` → `cancelshipmentecc`, `createshipment` → `createshipmentecc`, `trackshipment` → `trackshipmentecc`
-> - All 27 apps deployed to CF as `public` and visible via direct URLs
+> - All 27 HR7 apps deployed to CF as `public` and visible via direct URLs
 > - Fixed mislabel: `planshipment` is **EWM** (uses `ewm_tuv_srv`), not ECC
+> - **Deployed 11 SLS apps** targeting the ERP S4 SALES system at `erps4sales.erp-is.com` — same pattern as HR7. Created `virtual-erps4sales-destination` in btp_cf.
+> - **Total CF apps now: 38** (27 HR7 + 11 SLS)
 
 ---
 
@@ -81,7 +83,29 @@ Out of 62 Neo apps, we focused on **27 HR7 Apps** (ECC + EWM) because:
 | trackshipmentewm | comerpisshiperptrackshipmentewm | **EWM** |
 | viewacefiling | comerpisshiperpviewacefiling | ECC |
 
-**Totals:** 17 ECC + 10 EWM = 27 apps
+**HR7 Totals:** 17 ECC + 10 EWM = 27 apps
+
+### 2.2 SLS Apps Inventory (11 Apps)
+
+Targeting the **ERP S4 SALES** system (`erps4sales.erp-is.com`, system ID `SLS`) via the `virtual-erps4sales-destination` destination.
+
+| App Folder | CF App ID | OData Service |
+|-----------|-----------|---------------|
+| disputesls | comerpisshiperpdisputesls | frta_disp_srv |
+| freightauditsls | comerpisshiperpfreightauditsls | frt_audit_srv |
+| freightordersls | comerpisshiperpfreightordersls | FRT_ORDPL_SRV (TM namespace) |
+| manualewmsls | comerpisshiperpmanualewmsls | shipewm_srv (EWM) |
+| manualsls | comerpisshiperpmanualsls | parcel_srv (ECC) |
+| parcelsls | comerpisshiperpparcelsls | parcel_srv (ECC) |
+| quickpacksls | comerpisshiperpquickpacksls | QUICK_PACK_SRV |
+| salesordersls | comerpisshiperpsalesordersls | so_srv |
+| shipewmsls | comerpisshiperpshipewmsls | shipewm_srv (EWM) |
+| shippingdashboardsls | comerpisshiperpshippingdashboardsls | SHIP_DASH_SRV |
+| trackshipmentsls | comerpisshiperptrackshipmentsls | shipewm_srv + track_shipment_srv |
+
+**SLS Total:** 11 apps
+
+**Grand Total in CF:** 27 HR7 + 11 SLS = **38 apps**
 
 ### 2.1 ECC ↔ EWM Symmetry
 Six business functions exist in both ECC and EWM flavors. Naming follows the explicit `ecc` / `ewm` suffix convention:
@@ -865,4 +889,4 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — §7.6/§11.2 clarified that the URL "site UUID" is a destination-service GUID, not a Work Zone Site; §8 BAS section updated to reflect UI-only reality until §12.2 is resolved; §9 testing summary updated*
+*Last updated: 2026-06-07 — §2 expanded with new §2.2 SLS Apps Inventory; 11 SLS apps deployed to btp_cf following the same MTA pattern as HR7; `virtual-erps4sales-destination` created in btp_cf pointing at `erps4sales.erp-is.com:50000`. SLS apps will need same Cloud Connector mapping as HR7 (rsantos), but apps are deployed and accessible via direct URLs today.*
