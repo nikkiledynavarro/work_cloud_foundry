@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="PkgDels" contentWidth="800px">
+		<content>
+			<f:SimpleForm layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<!--Hu Number-->
+					<Label text="{i18n>huNumber}"/>
+					<!--<Input id="idPackingMaterial" value="{local>/packingMaterial}" editable="true" width="60%"/>-->
+					<ComboBox id="idHUnit" value="{local>/huNumber}" width="60%" items="{ path: '/xSERPERPxRFP_HandlingUnit'}" change="onChangeHuNumber">
+						<core:Item key="{Exidv}" text="{Exidv}"></core:Item>
+					</ComboBox>
+					<!--Packing Material-->
+					<Label text="{i18n>packingMaterial}"/>
+					<!--<Input id="idPackingMaterial" value="{local>/packingMaterial}" editable="true" width="60%"/>-->
+					<ComboBox id="idPackingMaterial" value="{local>/packingMaterial}" width="60%" items="{ path: '/xSERPERPxRFP_PackagingMaterial'}"
+						change="onChangePackagingMaterial">
+						<core:Item key="{Matnr}" text="{Matnr}"></core:Item>
+					</ComboBox>
+					<!--Pallet Count-->
+					<Label text="{i18n>palletCount}"/>
+					<Input id="idPalletCount" value="{local>/palletCount}" editable="true" width="40%"/>
+					<!--Piece Count-->
+					<Label text="{i18n>pieceCount}"/>
+					<Input id="idPieceCount" value="{local>/pieceCount}" editable="true" width="40%"/>
+					<!--Weight-->
+					<Label text="{i18n>weight}"/>
+					<Input id="idWeight" value="{local>/weight}" editable="true" width="20%"/>
+					<!--Weight UOM-->
+					<Label text="{i18n>weightUoM}"/>
+					<!--<Input id="idHUWUoM" value="{local>/weightUoM}" editable="true" width="30%"/>-->
+					<ComboBox id="idWeightUoM" selectedKey="{local>/weightUoM}" width="30%" items="{path: 'local>/ListUoM'}">
+						<core:Item key="{local>Msehi}" text="{local>Msehi} - {local>Msehl}"></core:Item>
+					</ComboBox>
+					<!--Length-->
+					<Label text="{i18n>length}"/>
+					<Input id="idLength" value="{local>/length}" editable="true" width="20%"/>
+					<!--Width-->
+					<Label text="{i18n>width}"/>
+					<Input id="idWidth" value="{local>/width}" editable="true" width="20%"/>
+					<!--Height-->
+					<Label text="{i18n>height}"/>
+					<Input id="idHeight" value="{local>/height}" editable="true" width="20%"/>
+					<!--Dimensions UoM-->
+					<Label text="{i18n>dimensionsUoM}"/>
+					<!--<Input id="idDimensionsUoM" value="{local>/dimensionsUoM}" editable="true" width="30%"/>-->
+					<ComboBox id="idDimensionsUoM" selectedKey ="{local>/dimensionsUoM}" width="30%" items="{path: 'local>/ListUoM'}">
+						<core:Item key="{local>Msehi}" text="{local>Msehi} - {local>Msehl}"></core:Item>
+					</ComboBox>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button icon="sap-icon://accept" press="onUpdatePress" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button icon="sap-icon://decline" press="onClosePress" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

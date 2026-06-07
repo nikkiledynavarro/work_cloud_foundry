@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";return{getTransparentLogoLink:function(r){var e=jQuery.sap.getModulePath("com.erpis.shiperp.carrierperformancereportecc");return e+"/image/shiperp_logo.png"},_formatDateObject:function(r){var e=r.substring(0,4);var t=r.substring(4,6);var n=r.substring(6,8);return r=e+"-"+t+"-"+n}}});
+//# sourceMappingURL=formatter.js.map

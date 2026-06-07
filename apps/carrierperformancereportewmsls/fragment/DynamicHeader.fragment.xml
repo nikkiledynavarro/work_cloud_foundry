@@ -1,0 +1,115 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<smartFilterBar:SmartFilterBar entitySet="SelectionSet" id="DynamicFilter" assignedFiltersChanged="onAssignedFiltersChanged"
+		persistencyKey="DynamicFilterPKey" useToolbar="false" considerSelectionVariants="true" beforeVariantFetch="onBeforeVariantFetched">
+		<!--Basic Filter -->
+		<smartFilterBar:controlConfiguration>
+			<!--FreightUnit Key-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="FreightUnitKey" label="{i18n>freightUnitKey}"
+				visibleInAdvancedArea="true" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiInput id="freightUnitKey" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--ShipERP Carrier Code-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="CarrierCode" visibleInAdvancedArea="true"
+				label="{i18n>shipERPCarrierCode}" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiInput id="carrierCode" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Tracking Number-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="TrackingNumber" visibleInAdvancedArea="true"
+				label="{i18n>trackingNumber}" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiInput id="trackingNumber" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Warehouse Number-->
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="Lgnum" visibleInAdvancedArea="true" label="{i18n>warehouseNumber}"
+				filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="warehouseNumber" items="{path: '/xSERPERPxC_WAREHOUSENUMBER', length: 9999 }">
+						<core:ListItem key="{warehouseNumber}" text="{warehouseNumber} - {warehouseNumberDescription}"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Transaction Type-->
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="TransactionType" visibleInAdvancedArea="true"
+				label="{i18n>transactionType}" filterType="interval" groupId="_BASIC">
+				<smartFilterBar:customControl>
+					<MultiComboBox id="transactionType" showValueHelp="false">
+						<core:Item key="SP" text="Small Parcel"/>
+						<core:Item key="MS" text="Manual Shipment"/>
+						<core:Item key="TU" text="Transportation Unit"/>
+						<core:Item key="VEH" text="Vehicle Unit"/>
+					</MultiComboBox>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Dates Filter-->
+		<smartFilterBar:controlConfiguration>
+			<!--Request Delivery Date-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="RequestDeliveryDate" visibleInAdvancedArea="false"
+				label="{i18n>requestDeliveryDate}" filterType="interval" groupId="Dates">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="requestDeliveryDate" delimiter="-" valueFormat="yyyy-MM-dd HH:mm:ss" displayFormat="MM/dd/yyyy"
+						change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Estimated Arrival Date-->
+			<smartFilterBar:ControlConfiguration index="1" visible="true" key="EstimatedArrivalDate" visibleInAdvancedArea="false" groupId="Dates"
+				filterType="interval" label="{i18n>estimatedArrivalDate}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="estimatedArrivalDate" delimiter="-" valueFormat="yyyy-MM-dd HH:mm:ss" displayFormat="MM/dd/yyyy"
+						change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Pickup Date-->
+			<smartFilterBar:ControlConfiguration index="2" visible="true" key="PickupDate" visibleInAdvancedArea="false" groupId="Dates"
+				filterType="interval" label="{i18n>pickupDate}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="pickupDate" delimiter="-" valueFormat="yyyy-MM-dd HH:mm:ss" displayFormat="MM/dd/yyyy"
+						change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Actual Delivery Date-->
+			<smartFilterBar:ControlConfiguration index="3" visible="true" key="ActualDeliveryDate" visibleInAdvancedArea="false" groupId="Dates"
+				filterType="interval" label="{i18n>actualDeliveryDate}">
+				<smartFilterBar:customControl>
+					<DateRangeSelection id="actualDeliveryDate" delimiter="-" valueFormat="yyyy-MM-dd HH:mm:ss" displayFormat="MM/dd/yyyy"
+						change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<!--Goods Issue Date-->
+			<smartFilterBar:ControlConfiguration index="4" visible="true" key="GoodsIssueDate" visibleInAdvancedArea="false" groupId="Dates"
+				filterType="interval" label="{i18n>goodsIssueDate}">
+				<smartFilterBar:customControl>
+					<!--<MultiInput id="goodsIssueDate" submit="onSubmit" showValueHelp="false">-->
+					<!--	<core:Item key="{key}" text="{text}"/>-->
+					<!--</MultiInput>-->
+					<DateRangeSelection id="goodsIssueDate" delimiter="-" valueFormat="yyyy-MM-dd HH:mm:ss" displayFormat="MM/dd/yyyy"
+						change="ChangeDateRangeSelection"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+		<!--Recipient Filter-->
+		<smartFilterBar:controlConfiguration>
+			<!--Emails-->
+			<smartFilterBar:ControlConfiguration index="0" visible="true" key="Emails" visibleInAdvancedArea="false" label="{i18n>emails}"
+				filterType="interval" groupId="Recipient">
+				<smartFilterBar:customControl>
+					<MultiInput id="emails" submit="onSubmit" showValueHelp="false">
+						<core:Item key="{key}" text="{text}"/>
+					</MultiInput>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+	</smartFilterBar:SmartFilterBar>
+</core:FragmentDefinition>

@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="{i18n>VehicleCockpit}" contentWidth="1000px">
+		<content>
+			<f:SimpleForm layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<!--Vehicle-->
+					<Label text="{i18n>Vehicle}"/>
+					<ComboBox id="idVehNumExt" items="{ path: '/xSERPERPxCDS_VEHICLE' }" selectedKey="{Vehicle>/VehNumExt}" width="50%">
+						<core:Item key="{VehNumExt}" text="{VehNumExt}"/>
+					</ComboBox>
+					<!--Carrier-->
+					<Label text="{i18n>Carrier}"/>
+					<ComboBox id="idCarrier" items="{ path: '/xSERPERPxCDS_CARR' }" selectedKey="{Vehicle>/Carrier}" width="40%">
+						<core:Item key="{Partner}" text="{Partner} - {BuSort1}"/>
+					</ComboBox>
+					<!--SCAC-->
+					<Label text="{i18n>SCAC}"/>
+					<Input id="idSCAC" value="{Vehicle>/ScacCurr}" editable="true" width="20%"/>
+					<!--Means Of Transport-->
+					<Label text="{i18n>MeansOfTransport}" required="true"/>
+					<ComboBox id="idMTR" items="{ path: '/xSERPERPxCDS_MTR', filters: [ { path: 'SrDocType', operator: 'EQ', value1: 'VEH' } ] }"
+						selectedKey="{Vehicle>/Mtr}" width="30%">
+						<core:Item key="{Mtr}" text="{Mtr}"/>
+					</ComboBox>
+					<!--Activity Start Date-->
+					<Label text="{i18n>ActivityStartDate}" required="true"/>
+					<!--<DatePicker id="idStartActD" value="{Vehicle>/StartActD}" width="30%" valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>-->
+					<DatePicker id="idStartActD" editable="true" value="{path:'Vehicle>/StartActD', formatter: '.formatter.formatDateTime'}"
+						valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>
+					<!--Activity Start Time-->
+					<Label text="{i18n>ActivityStartTime}" required="true"/>
+					<!--<TimePicker id="idStartActT" value="{Vehicle>/StartActT}" width="30%" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>-->
+					<TimePicker id="idStartActT" editable="true" value="{path: 'Vehicle>/StartActT', formatter: '.formatter.formatTime'}"
+						valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+					<!--Activity End Date-->
+					<Label text="{i18n>ActivityEndDate}" required="true"/>
+					<!--<DatePicker id="idEndActD" value="{Vehicle>/EndActD}" width="30%" valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>-->
+					<DatePicker id="idEndActD" editable="true" value="{path:'Vehicle>/EndActD', formatter: '.formatter.formatDateTime'}"
+						valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>
+					<!--Activity End Time-->
+					<Label text="{i18n>ActivityEndTime}" required="true"/>
+					<!--<TimePicker id="idEndActT" value="{Vehicle>/EndActT}" width="30%" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>-->
+					<TimePicker id="idEndActT" editable="true" value="{path: 'Vehicle>/EndActT', formatter: '.formatter.formatTime'}" valueFormat="HH:mm:ss"
+						displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+					<!--Carrier Code-->
+					<Label text="{i18n>CarrierCode}"/>
+					<!--<Input id="idCarrierCode" value="{Vehicle>/tusrcarrier}" editable="true" width="70%"/>-->
+					<ComboBox id="idCarrierCode" items="{ path: '/xSERPERPxCDS_CARR_COD' }" selectedKey="{Vehicle>/CarrierCode}" width="40%"
+						change="onChangeCarrCod">
+						<core:Item key="{CarrierCode}" text="{CarrierCode}"/>
+					</ComboBox>
+					<!--Carrier Service Id-->
+					<Label text="{i18n>CarrierService}"/>
+					<ComboBox id="idCarrierService" items="{ path: 'local>/ServiceList' }" selectedKey="{Vehicle>/Service}" width="40%">
+						<core:Item key="{local>Service}" text="{local>Service}"/>
+					</ComboBox>
+					<!--<Input id="idCarrierService" value="{Vehicle>/Service}" editable="true" width="90%"/>-->
+					<!--Misc Carrier-->
+					<Label text="{i18n>MiscCarrier}"/>
+					<Input id="idMiscCarrier" value="{Vehicle>/Misccarr}" editable="true" width="60%"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button icon="sap-icon://accept" press="onAcceptCreateNewVehicleDialog" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button icon="sap-icon://decline" press="onCloseCreateNewVehicleDialog" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

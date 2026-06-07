@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Pickup Date /Pickup Time-->
+	<Label text="{i18n>pickupDatePickupTime}" required="true"/>
+	<DatePicker id="idPickupDate" placeholder="Pickup Date" required="true"
+		value="{ path: 'local>/basic/pickup_details/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy', UTC: true }, parseOptions: { UTC: true } }"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }" valueFormat="ddMMyyyy"
+		displayFormat="dd/MM/yyyy"/>
+	<TimePicker id="idPickupTime" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"
+		value="{path: 'local>/basic/pickup_details/pickupTime', formatter: '.formatter.formatTime'}" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss"
+		placeholder="HH:mm:ss"/>
+	<!--Dock Open Time/ Door Close Time-->
+	<Label text="{i18n>dockOpenTimeDoorCloseTime}"/>
+	<TimePicker id="idOpenTime" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"
+		value="{path: 'local>/basic/pickup_details/dockOpenTime', formatter: '.formatter.formatTime'}" valueFormat="HH:mm:ss"
+		displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+	<TimePicker id="idCloseTime" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"
+		value="{path: 'local>/basic/pickup_details/doorCloseTime', formatter: '.formatter.formatTime'}" valueFormat="HH:mm:ss"
+		displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+	<!--Company Close Time-->
+	<!--<Label text="{i18n>companyCloseTime}"/>-->
+	<!--<DatePicker placeholder="Arrival Date"-->
+	<!--	value="{path:'local>/basic/pickup_details//', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM/dd/yyyy'}}"-->
+	<!--	enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>-->
+</core:FragmentDefinition>

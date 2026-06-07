@@ -1,0 +1,162 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
+	<FlexBox justifyContent="SpaceBetween" alignItems="Start" wrap="{= ${device>/system/desktop} ? 'NoWrap': 'Wrap' }" renderType="Bare">
+		<table:Table id="tableTotes" rows="{path: 'local>/Contents', sorter: { path: 'Item', descending: false }}" selectionMode="MultiToggle"
+			visibleRowCount="10" width="auto" rowSelectionChange="onSelectionChangeTotes" enableBusyIndicator="true" class="border_lightgray_nobottom"
+			rowsUpdated="onUpdateFinishedTotes">
+			<table:toolbar>
+				<Toolbar>
+					<Title text="Totes"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://bar-code" tooltip="Serial Number"
+						enabled="{= ${local>/MasterSerialList} &amp;&amp; ${local>/MasterSerialList}.length > 0 }" press="onSerialPress"/>
+				</Toolbar>
+			</table:toolbar>
+			<table:columns>
+				<table:Column width="auto" resizable="false">
+					<Label text="Status" tooltip="Status"/>
+					<table:template>
+						<ObjectStatus text="{path: 'local>icon', formatter: '.formatter.statusText'}" inverted="true"
+							tooltip="{path: 'local>icon', formatter: '.formatter.statusText'}" state="{path: 'local>icon', formatter: '.formatter.statusState'}"
+							icon="{path: 'local>icon', formatter: '.formatter.statusIcon'}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Tote ID" tooltip="Tote ID"/>
+					<table:template>
+						<Text text="{local>toteID}" tooltip="{local>toteID}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Product" tooltip="Product"/>
+					<table:template>
+						<Text text="{local>matnr}" tooltip="{local>Material}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="7rem" resizable="false">
+					<Label text="Description" tooltip="Description"/>
+					<table:template>
+						<Text text="{local>maktx}" tooltip="{local>maktx}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center" resizable="false">
+					<Label text="Total Qty" tooltip="Total Qty"/>
+					<table:template>
+						<ObjectStatus text="{path:'local>quan', formatter: '.formatter.formatdecimalplaces'}" state="Success"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center" resizable="false">
+					<Label text="Base UoM" tooltip="Base UoM"/>
+					<table:template>
+						<Text text="{local>unit}" tooltip="{local>unit}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center" resizable="false">
+					<Label text="Balance" tooltip="Balance"/>
+					<table:template>
+						<ObjectStatus text="{path:'local>balance', formatter: '.formatter.formatdecimalplaces'}" state="Warning"/>
+					</table:template>
+				</table:Column>
+				<!-- Optional column (EAN/UPC) -->
+				<table:Column width="auto" hAlign="Center" resizable="false">
+					<Label text="EAN/UPC" tooltip="EAN/UPC"/>
+					<table:template>
+						<Text text="{local>ean11}" tooltip="{local>ean11}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center" resizable="false">
+					<Label text="Batch" tooltip="Batch"/>
+					<table:template>
+						<Text text="{local>batchNo}" tooltip="{local>batchNo}"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+		<FlexBox justifyContent="Center" direction="{= ${device>/system/desktop} ? 'Column' : 'Row' }"
+			width="{= ${device>/system/desktop} ? 'auto' : '100%' }" alignItems="Center">
+			<Button  enabled="{= (${local>/isOnlyOneSelectedTotes} &amp;&amp; ${local>/Shipped} === true) ? true : false }" type="Emphasized"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://open-command-field' : 'sap-icon://expand-group' }" id="btnPackPartial"
+				tooltip="Pack partial - Shift + F6" press="onPackPartial" class="margin_5px"/>
+			<Button  enabled="{= (${local>/isOnlyOneSelectedTotes} &amp;&amp; ${local>/Shipped} === true) ? true : false }" type="Accept" id="btnPack"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-right-arrow' : 'sap-icon://navigation-down-arrow' }"
+				tooltip="Pack material - F6" press="onPackMaterial" class="margin_5px"/>
+			<Button enabled="{= (${local>/isOnlyOneSelected} &amp;&amp; ${local>/Shipped} === true) ? true : false }"  type="Reject"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-left-arrow' : 'sap-icon://navigation-up-arrow' }" tooltip="Unpack"
+				press="onUnpack"/>
+		</FlexBox>
+		<table:Table id="tableHU" rows="{path: 'local>/HUs', sorter: { path: 'unit', descending: false }}" visibleRowCount="10" width="auto"
+			selectionMode="MultiToggle" rowSelectionChange="onSelectionChangeHandlingUnits"
+			enableBusyIndicator="true" class="border_lightgray_nobottom" rowsUpdated="onUpdateFinishedHandlingUnits">
+			<table:toolbar>
+				<Toolbar>
+					<Title text="HUs"/>
+					<ToolbarSpacer/>
+					<Button id="idShipDetailsButton" press="onNavigationShipmentDetails" icon="sap-icon://detail-view" text="Shipment Details"
+						tooltip="Shipment Details" enabled="{= !!${local>/general} }" visible="true"/>
+					<Button press="onOverpacking" icon="sap-icon://add-product" text="Overpack" tooltip="Over Packing"
+						enabled="{= ${local>/isOnlyOneSelected} &amp;&amp; (${local>/HUs}.length > 0) ? true : false }"/>
+					<ToolbarSeparator/>
+					<Button icon="sap-icon://add" tooltip="New Package" press="onAddNewHU" id="btnAddHU"
+						enabled="{= (${local>/general} &amp;&amp; ${local>/Shipped} === true) ? true : false }"/>
+					<Button icon="sap-icon://complete" tooltip="Complete Packing" press="onCompletePack" id="btnCompletePack"
+						enabled="{= (${local>/isOnlyOneSelected} &amp;&amp; ${local>/Shipped} === true &amp;&amp; ${local>/HUS}.length > 0) ? true : false }"/>
+					<Button press="onDeleteHU" icon="sap-icon://delete" tooltip="Delete Package" id="btnDeleteHU"
+				     	enabled="{= (${local>/isOnlyOneSelected} &amp;&amp; !${local>/HasTracking}) }"/>
+				</Toolbar>
+			</table:toolbar>
+			<table:columns>
+				<table:Column width="7rem" resizable="false">
+					<Label text="HU" tooltip="Handling Unit"/>
+					<table:template>
+						<ObjectIdentifier title="{path:'local>outbHu', formatter: '.formatter.removeLeadingZero'}" titlePress="onOpenPackingOverviewDialog"
+							titleActive="{parts:['local>huPackDetails', 'local>trackingNumber'], formatter: '.formatter.enabledHu'}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="7rem" resizable="false">
+					<Label text="Pack. Mat." tooltip="Packing Material"/>
+					<table:template><Text text="{local>pMat}" tooltip="{local>pMat}"/></table:template>
+				</table:Column>
+				<table:Column width="5rem" resizable="false">
+					<Label text="Pack. Bin" tooltip="Packing Bin"/>
+					<table:template><Text text="{local>lgpLaPa}" tooltip="{local>lgpLaPa}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Length" tooltip="Length"/>
+					<table:template><Text text="{= parseInt(${local>length}) }" tooltip="{local>length}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Width" tooltip="Width"/>
+					<table:template><Text text="{= parseInt(${local>width}) }" tooltip="{local>width}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Height" tooltip="Height"/>
+					<table:template><Text text="{= parseInt(${local>height}) }" tooltip="{local>height}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Weight" tooltip="Weight"/>
+					<table:template><Text text="{local>weight}" tooltip="{local>weight}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="true">
+					<Label text="Weight UoM" tooltip="Weight UoM"/>
+					<table:template><Text text="{local>weightUnit}" tooltip="{local>weightUnit}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Track. Num" tooltip="Tracking Number"/>
+					<table:template><Text text="{local>trackingNumber}" tooltip="{local>trackingNumber}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Doc Num." tooltip="Document Number"/>
+					<table:template><Text text="{path:'local>docNo', formatter: '.formatter.removeLeadingZero'}" tooltip="{local>docNo}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Doc Cat." tooltip="Doc Cat."/>
+					<table:template><Text text="{local>docCat}" tooltip="{local>docCat}"/></table:template>
+				</table:Column>
+				<table:Column width="auto" resizable="false">
+					<Label text="Overpack" tooltip="Overpack"/>
+					<table:template><CheckBox selected="{local>overPack}" enabled="false" tooltip="{local>overPack}"/></table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+	</FlexBox>
+</core:FragmentDefinition>

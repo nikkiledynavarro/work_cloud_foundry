@@ -1,0 +1,155 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "comerpisshiperpltlplanningsls",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "Service": {
+        "uri": "sap/opu/odata/serperp/ltlplan_srv/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "sourceTemplate": {
+      "id": "ui5template.basicSAPUI5ApplicationProject",
+      "version": "1.40.12"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ltlplanningDisplay": {
+          "action": "display",
+          "icon": "sap-icon://app",
+          "signature": {
+            "additionalParameters": "allowed",
+            "parameters": {}
+          },
+          "semanticObject": "ltlplanningSLS",
+          "subTitle": "",
+          "title": "{{appTitle}}"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "com.erpis.shiperp.hr7.ltlplanning.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.65.6",
+      "libs": {
+        "sap.ui.layout": {},
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.erpis.shiperp.hr7.ltlplanning.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "Service",
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.erpis.shiperp.hr7.ltlplanning.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": [
+            "home"
+          ]
+        },
+        {
+          "pattern": "Profile/{ShipStation}/{Profile}",
+          "name": "main",
+          "target": [
+            "main"
+          ]
+        }
+      ],
+      "targets": {
+        "home": {
+          "viewName": "Home",
+          "viewId": "home",
+          "viewLevel": 1
+        },
+        "main": {
+          "viewName": "Main",
+          "transition": "slide",
+          "viewId": "main",
+          "viewLevel": 2
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        }
+      }
+    }
+  },
+  "sap.platform.hcp": {
+    "uri": "webapp",
+    "_version": "1.1.0"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comerpisshiperpltlplanningsls"
+  }
+}

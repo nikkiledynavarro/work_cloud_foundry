@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text=""></core:Title>
+			<Label text="Carrier"/>
+			<ComboBox id="idCarrier" items="{ path: '/xSERPERPxCDS_QP_CARR', length: 9999 }" selectedKey="{local>/basic/general/Carrier}"
+				selectionChange="onServiceCarrier" enabled="false">
+				<core:Item key="{CarrierCode}" text="{CarrierName}"></core:Item>
+			</ComboBox>
+			<Label text="Service"/>
+			<ComboBox id="idService" items="{ path: '/xSERPERPxCDS_QP_SERV' , length: 9999 }" selectedKey="{local>/basic/general/Service}"
+				selectionChange="onServiceService" enabled="false">
+				<core:Item key="{Service}" text="{Description}"></core:Item>
+			</ComboBox>
+			<core:Title text=""></core:Title>
+			<Label text="Ship Date"/>
+			<DatePicker id="idShipDate" value="{ path:' local>/basic/general/Shipdate', formatter: '.formatter.formatDateTime'}" valueFormat="yyyyMMdd"
+				displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+			<Label text="Arrival Date"/>
+			<DatePicker id="idArrivalDate" value="{ path:'local>/basic/general/Deliverydate', formatter: '.formatter.formatDateTime'}"
+				valueFormat="yyyyMMdd" displayFormat="MM/dd/yyyy" enabled="false"></DatePicker>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

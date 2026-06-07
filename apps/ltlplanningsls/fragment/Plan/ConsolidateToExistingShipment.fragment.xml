@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Plan to Existing Shipment">
+		<Text text="Do you want to consolidate your Delivery to an existing Shipment?" class="sapUiTinyMarginBegin"/>
+		<!--Table -->
+		<Table class="sapUiTinyMargin" width="500px" selectionChange="onSelectionConsolidate" id="idConsSelectedShip" mode="SingleSelectLeft" items="{path:'local>/ExistingShipment'}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<SearchField width="90%" showSearchButton="true" search="onSearchPlanShipment" class="sapUiTinyMarginBegin"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column hAlign="Center"></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Inactive">
+					<cells>
+						<Text text="{local>Tknum}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--Buton -->
+		<buttons>
+			<Button text="{i18n>btnConsolidateSelectedShipment}" press="onProcessConsolidation" type="Emphasized"/>
+			<Button text="{i18n>btnCancel}" press="onCloseConsSelectShipment" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

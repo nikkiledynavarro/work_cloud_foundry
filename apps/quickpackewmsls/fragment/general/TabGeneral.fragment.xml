@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<IconTabBar id="idTabBarGeneral" select="onSelectGeneral" class="sapUiResponsiveContentPadding">
+		<items>
+			<!--Shipment -->
+			<IconTabFilter text="Shipment" key="Shipment">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Shipment" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+			<!--Packaging-->
+			<IconTabFilter text="Packaging" key="Packaging">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Packaging" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+			 <!--Payment-->
+			<IconTabFilter text="Payment" key="Payment">
+				<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.quickpackewm.fragment.general.Payment" type="XML"/>
+			</IconTabFilter>
+			<IconTabSeparator/>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>

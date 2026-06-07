@@ -1,0 +1,44 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.cancelpickuprequest.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPage" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<OverflowToolbarButton app:crossNavigate="#requestforpickup-Display" type="Emphasized" icon="sap-icon://shipping-status"
+						press="onNavRequestForPickup" tooltip="Request For Pickup"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<VBox>
+				<HBox alignItems="Center">
+					<Label text="{i18n>pickupId}" width="4rem" class="sapUiSmallMarginEnd"/>
+					<ComboBox id="PickupId" items="{ path: '/xSERPERPxRFP_PICKUP'}" change="onChangePickupRegion">
+						<core:Item key="{Pickupid}" text="{Pickupid}"></core:Item>
+					</ComboBox>
+				</HBox>
+				<HBox alignItems="Center">
+					<Label text="{i18n>remarks}" width="4rem" class="sapUiSmallMarginEnd"/>
+					<Input id="RemarkId" placeholder="Enter remarks" width="40rem"/>
+				</HBox>
+			</VBox>
+		</f:content>
+		<!--DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar id="idToolbarFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>cancel}" id="btnEmail" icon="sap-icon://cancel" enabled="{local>/EnableEmailButton}" press="onCancelPickupRequest" type="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

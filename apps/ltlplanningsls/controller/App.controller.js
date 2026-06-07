@@ -1,0 +1,1 @@
+sap.ui.define(["com/erpis/shiperp/hr7/ltlplanning/controller/BaseController","sap/ui/model/json/JSONModel"],function(e,n){"use strict";return e.extend("com.erpis.shiperp.hr7.ltlplanning.controller.App",{onInit:function(){var e=new n({});this.setModel(e,"appView");this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}})});

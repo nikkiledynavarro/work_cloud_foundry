@@ -1,0 +1,224 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<FlexBox justifyContent="SpaceBetween" alignItems="Start" wrap="{= ${device>/system/desktop} ? 'NoWrap': 'Wrap' }" renderType="Bare">
+		<!--<ScrollContainer height="500px" vertical="true" horizontal="false">-->
+		<Table width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? 'auto' : 'auto' }"
+			items="{path: 'local>/Contents', sorter: { path: 'deliveryitem', descending: false }}" id="tableItem" mode="MultiSelect" growing="false"
+			class="border_lightgray_nobottom" fixedLayout="true">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Totes"/>
+					<ToolbarSeparator/>
+					<SearchField id="txtMaterial" liveChange="onSearchMaterial" width="8rem"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }" placeholder="Material"></SearchField>
+					<ToolbarSpacer/>
+					<CheckBox text="Doc Only" tooltip="Document Only" enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+					<Button icon="sap-icon://bar-code" tooltip="Serial Number"
+						enabled="{= ${local>/MasterSerialList} &amp;&amp; ${local>/MasterSerialList}.length > 0 ? true : false }" press="onSerialPress"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="3rem">
+					<Text text="Item"/>
+				</Column>
+				<Column width="5rem">
+					<Text text="Mat.No."/>
+				</Column>
+				<Column width="5rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="ToteID"/>
+				</Column>
+				<Column width="2rem" hAlign="Center">
+					<Text text="Total" tooltip="Total Quantity"/>
+				</Column>
+				<Column width="3.2rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Balance" tooltip="Balance Quantity"/>
+				</Column>
+				<Column width="3rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Partial" tooltip="Partial Quantity"/>
+				</Column>
+				<Column width="2rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="UoM"/>
+				</Column>
+				<Column width="2rem" hAlign="Center" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="Doc.No"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{= parseInt(${local>Itemno}) }" wrapping="false" tooltip="{local>Itemno}"/>
+						<Text text="{path:'local>Matnr', formatter: '.formatter.removeLeadingZero'}" wrapping="false" tooltip="{local>Matnr}"/>
+						<Text text="{local>Toteid}"/>
+						<ObjectStatus text="{path:'local>Quan', formatter: '.formatter.formatdecimalplaces'}" state="Success"/>
+						<ObjectStatus text="{path:'local>Balance', formatter: '.formatter.formatdecimalplaces'}" state="Warning"/>
+						<Input type="Number"
+							value="{path: 'local>Partialqty', formatter: '.formatter.formatdecimalplaces'}"
+							liveChange="onValidateNumber"/>
+						<Text text="{local>Unit}"/>
+						<Text text="{= parseFloat(${local>Docno}) }"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--</ScrollContainer>-->
+		<FlexBox justifyContent="Center" direction="{= ${device>/system/desktop} ? 'Column' : 'Row' }"
+			width="{= ${device>/system/desktop} ? 'auto' : '100%' }" alignItems="Center">
+			<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }" type="Emphasized"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://open-command-field' : 'sap-icon://expand-group' }" tooltip="Pack partial"
+				press="onPackPartial"/>
+			<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }" type="Accept"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-right-arrow' : 'sap-icon://navigation-down-arrow' }" tooltip="Pack material"
+				press="onPackMaterial" class="margin_5px"/>
+			<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/CanDelShip} === true) ? true : false }" type="Reject"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://navigation-left-arrow' : 'sap-icon://navigation-up-arrow' }" tooltip="Unpack"
+				press="onUnpack"/>
+			<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/CanDelShip} === true &amp;&amp; ${local>/HUs}.length > 0) ? true : false }"
+				visible="true" type="Emphasized" icon="{= ${device>/system/desktop} ? 'sap-icon://product' : 'sap-icon://product' }" tooltip="Pack Bundle"
+				press="onPackBundle"/>
+			<Button enabled="{= (${local>/basic} &amp;&amp; ${local>/CanDelShip} === true) ? true : false }" type="Emphasized"
+				icon="{= ${device>/system/desktop} ? 'sap-icon://action' : 'sap-icon://action' }" tooltip="Repack" press="onRepack"/>
+		</FlexBox>
+		<!--<ScrollContainer height="500px" vertical="true" horizontal="false">-->
+		<Table id="tableHU" selectionChange="onSelectionChange" fixedLayout="true"
+			width="{= ${device>/system/desktop} || (${device>/system/tablet} &amp;&amp; ${device>/orientation/landscape} ) ? 'auto' : 'auto' }"
+			items="{path: 'local>/HandlingUnitLists', sorter: { path: 'Outbhu', descending: false }}" mode="MultiSelect" growing="true" keyboardMode="Edit"
+			growingThreshold="99999" class="border_lightgray_nobottom" updateFinished="onHUTableUpdateFinished">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Handling Units {= (${local>/basic/carrier_data/mps/mpstype} === '02')? ' / Multi' : '' }"/>
+					<ToolbarSpacer/>
+					<ComboBox width="10rem" id="cbWeightScale" selectedKey="{local>/UseScale}" tooltip="Weight Scale Options"
+						selectionChange="onChangeScaleOption" enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"
+						items="{path: '/DomainTextSet', filters: [ {path: 'Domain', operator: 'EQ', value1: '/ERPIS/SCALEINTEGRATIONDOM'} ]}">
+						<core:Item text="{Key} - {Description}" key="{Key}"/>
+					</ComboBox>
+					<Button icon="sap-icon://multiselect-all" tooltip="Update weight scale of all items" press="onMassUpdateScales"
+						enabled="{= ${local>/basic} &amp;&amp; ${local>/CanShip} === true &amp;&amp; ${local>/UseScale} !== '1' ? true : false }"/>
+					<ToolbarSeparator/>
+					<Button icon="sap-icon://alert" tooltip="Hazardous"
+						enabled="{= ${local>/basic} &amp;&amp; ${local>/CanShip} === true &amp;&amp; ${local>/basic/shipment_flags/hazmatflag} === true ? true : false }"
+						press="onHazardousPress"/>
+					<Button press="onPrintShipLabel" icon="sap-icon://print" tooltip="Print Shipping Label"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ||(${local>/printEnabled}) ? true : false }"/>
+					<Button icon="sap-icon://add" tooltip="New HU" press="onAddNewHU"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+					<Button press="onDeleteHU" icon="sap-icon://delete" tooltip="Delete Selected HU"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/CanDelShip} === true) ? true : false }"/>
+					<Button press="onDeleteAllHU" icon="sap-icon://sys-cancel" tooltip="Delete all"
+						enabled="{= (${local>/basic} &amp;&amp; ${local>/CanShip} === true) ? true : false }"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="2rem">
+					<Text text="DG"/>
+				</Column>
+				<Column width="4rem">
+					<Text text="HU No."/>
+				</Column>
+				<Column width="2rem" hAlign="Center">
+					<Text text="Track"/>
+				</Column>
+				<Column width="5rem">
+					<Text text="Matl" wrapping="false"/>
+				</Column>
+				<Column hAlign="Center" width="3rem">
+					<Text text="StBin"/>
+				</Column>
+				<Column hAlign="Center" width="3rem">
+					<Text text="Wgt"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="WUnit"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="L"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="W"/>
+				</Column>
+				<Column hAlign="Center" width="3rem" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+					<Text text="H"/>
+				</Column>
+				<Column hAlign="Center" width="2.5rem">
+					<Text text="UoM"/>
+				</Column>
+				<Column hAlign="Center" width="3rem"
+					visible="{= ${local>/UseScale} === '1' || ${local>/UseScale} === '2' || ${local>/UseScale} === '4' ? true : false }">
+					<Text text="Action"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="onHandleItemsPackingMoreOption">
+					<cells>
+						<ObjectStatus state="{path: 'local>Statusdg', formatter: '.formatter.trafficIconDG'}" class="sapUiSmallMarginEnd"
+							icon="{path: 'local>Statusdg', formatter: '.formatter.trafficDisplayIcon'}"
+							tooltip="{path: 'local>Statusdg', formatter: '.formatter.trafficToopTipDG'}"/>
+						<Link press="onOpenHUItemsDialog" enabled="{parts:['local>HandlingUnitItems', 'local>Trackingnumber'], formatter: '.formatter.enabledHu'}"
+							text="{path:'local>Outbhu', formatter: '.formatter.removeLeadingZero'}" tooltip="{local>Outbhu}" wrapping="false"/>
+						<core:Icon press="onShowTrackingnumberPress" color="green" src="sap-icon://accept"
+							visible="{= ${local>Trackingnumber}.length > 0 ? true: false}" tooltip="{local>Trackingnumber}"/>
+						<Text text="{local>PackMaterial}" tooltip="{local>PackMaterial}" wrapping="false"/>
+						<Text text="{local>LgplaPa}" tooltip="{local>LgplaPa}" wrapping="false"/>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input type="Number" visible="{parts:['i18n>true','local>Outbhu','i18n>weight'], formatter: '.editFreightUnit' }"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='' ) ? true : false}"
+								value="{path: 'local>Weight'}" submit="onGoNextLineItem" change="onGoToSetWeightDimColumn"
+								tooltip="{path: 'local>Weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+							<Text visible="{parts:['i18n>false','local>Outbhu', 'i18n>weight'], formatter: '.editFreightUnit' }" wrapping="false" class="display_inline"
+								text="{path: 'local>Weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+								tooltip="{path: 'local>Weight', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input visible="{parts:['i18n>true','local>Outbhu','i18n>DimsUnit'], formatter: '.editFreightUnit' }" value="{local>WeightUnit}"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='' &amp;&amp; ${local>/UseScale} === '3') ? true : false}"
+								submit="onGoNextLineItem" tooltip="{local>WeightUnit}"></Input>
+							<Text wrapping="false" visible="{parts:['i18n>false','local>Outbhu','i18n>DimsUnit'], formatter: '.editFreightUnit' }"
+								class="display_inline" text="{local>WeightUnit}" tooltip="{local>WeightUnit}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input type="Number" visible="{parts:['i18n>true','local>Outbhu'], formatter: '.editFreightUnit' }" value="{local>Length}"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='') ? true : false}"
+								change="onGoToSetWeightDimColumn" submit="onGoNextLineItem"
+								tooltip="{path: 'local>Length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+							<Text wrapping="false" visible="{parts:['i18n>false','local>Outbhu'], formatter: '.editFreightUnit' }" class="display_inline"
+								text="{path: 'local>Length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+								tooltip="{path: 'local>Length', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input type="Number" visible="{parts:['i18n>true','local>Outbhu'], formatter: '.editFreightUnit' }" value="{path: 'local>Width'}"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='') ? true : false}"
+								change="onGoToSetWeightDimColumn" submit="onGoNextLineItem"
+								tooltip="{path: 'local>Width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+							<Text wrapping="false" visible="{parts:['i18n>false','local>Outbhu'], formatter: '.editFreightUnit' }" class="display_inline"
+								text="{path: 'local>Width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+								tooltip="{path: 'local>Width', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input type="Number" visible="{parts:['i18n>true','local>Outbhu'], formatter: '.editFreightUnit' }" value="{path: 'local>Height'}"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='') ? true : false}"
+								change="onGoToSetWeightDimColumn" submit="onGoNextLineItem"
+								tooltip="{path: 'local>Height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"></Input>
+							<Text wrapping="false" visible="{parts:['i18n>false','local>Outbhu'], formatter: '.editFreightUnit' }" class="display_inline"
+								text="{path: 'local>Height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"
+								tooltip="{path: 'local>Height', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 1}}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center" direction="Column">
+							<Input visible="{parts:['i18n>true','local>Outbhu','i18n>dims_unit'], formatter: '.editFreightUnit' }" value="{local>DimsUnit}"
+								enabled="{= (${path: 'local>Trackingnumber', formatter: '.formatter.removeLeadingZero'} ==='' &amp;&amp; ${local>/UseScale} === '3') ? true : false}"
+								submit="onGoNextLineItem" tooltip="{local>DimsUnit}"></Input>
+							<Text wrapping="false" visible="{parts:['i18n>false','local>Outbhu','i18n>dims_unit'], formatter: '.editFreightUnit' }"
+								class="display_inline" text="{local>DimsUnit}" tooltip="{local>DimsUnit}"/>
+						</FlexBox>
+						<FlexBox justifyContent="Center" alignItems="Center">
+							<ToggleButton icon="sap-icon://edit"
+								visible="{= ( (${local>/UseScale} === '2' || ${local>/UseScale} === '4' || ${local>/UseScale} === '1' ) &amp;&amp; ${local>Trackingnumber} ==='') ? true : false }"
+								press="onEditItemPackingPress" pressed="{parts:['i18n>true','local>Outbhu'], formatter: '.editFreightUnit' }"></ToggleButton>
+							<ToggleButton icon="sap-icon://activate"
+								visible="{= (${local>/UseScale} === '1' &amp;&amp; ${local>Trackingnumber} ==='') ? true : false }" press="onReupdateItemScalePress"></ToggleButton>
+						</FlexBox>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--</ScrollContainer>-->
+	</FlexBox>
+</core:FragmentDefinition>

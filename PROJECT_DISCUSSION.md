@@ -102,11 +102,30 @@ Targeting the **ERP S4 SALES** system (`erps4sales.erp-is.com`, system ID `SLS`)
 | shipewmsls | comerpisshiperpshipewmsls | shipewm_srv (EWM) |
 | shippingdashboardsls | comerpisshiperpshippingdashboardsls | SHIP_DASH_SRV |
 | trackshipmentsls | comerpisshiperptrackshipmentsls | shipewm_srv + track_shipment_srv |
-| **cancelsls** 🆕 | comerpisshiperpcancelsls | cancel_ship_srv |
+| cancelsls | comerpisshiperpcancelsls | cancel_ship_srv |
 
-**SLS Total:** 12 apps (Create + **Cancel** + Track trio complete)
+**Plus 14 SLS variants of remaining HR7 apps** (deployed as placeholders pending SLS backend import):
 
-**Grand Total in CF:** 27 HR7 + 12 SLS = **39 apps**
+| App Folder | CF App ID | Source HR7 App |
+|-----------|-----------|----------------|
+| cancelacefilingsls | comerpisshiperpcancelacefilingsls | cancelacefiling |
+| submitacefilingsls | comerpisshiperpsubmitacefilingsls | submitacefiling |
+| viewacefilingsls | comerpisshiperpviewacefilingsls | viewacefiling |
+| cancelshipmentewmsls | comerpisshiperpcancelshipmentewmsls | cancelshipmentewm |
+| cancelpickuprequestsls | comerpisshiperpcancelpickuprequestsls | cancelpickuprequest |
+| requestforpickupsls | comerpisshiperprequestforpickupsls | requestforpickup |
+| carrierperformancereporteccsls | comerpisshiperpcarrierperformancereporteccsls | carrierperformancereportecc |
+| carrierperformancereportewmsls | comerpisshiperpcarrierperformancereportewmsls | carrierperformancereportewm |
+| closedeliverysls | comerpisshiperpclosedeliverysls | closedelivery |
+| ltlplanningsls | comerpisshiperpltlplanningsls | ltlplanning |
+| planshipmentsls | comerpisshiperpplanshipmentsls | planshipment |
+| createshipmentv2ewmsls | comerpisshiperpcreateshipmentv2ewmsls | createshipmentv2ewm |
+| freightaudituploadsls | comerpisshiperpfreightaudituploadsls | freightauditupload |
+| quickpackewmsls | comerpisshiperpquickpackewmsls | quickpackewm |
+
+**SLS Total:** 26 apps (12 with active OData + 14 placeholders awaiting backend)
+
+**Grand Total in CF:** 27 HR7 + 26 SLS = **53 apps**
 
 ### 2.1 ECC ↔ EWM Symmetry
 Six business functions exist in both ECC and EWM flavors. Naming follows the explicit `ecc` / `ewm` suffix convention:
@@ -890,4 +909,4 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — §2 expanded with new §2.2 SLS Apps Inventory; 12 SLS apps deployed to btp_cf following the same MTA pattern as HR7 (Create+Cancel+Track trio complete with cancelsls added); `virtual-erps4sales-destination` created in btp_cf pointing at `erps4sales.erp-is.com:50000`. SLS apps will need same Cloud Connector mapping as HR7 (rsantos), but apps are deployed and accessible via direct URLs today. Grand total: 39 CF apps (27 HR7 + 12 SLS).*
+*Last updated: 2026-06-07 — Deployed 14 more SLS variants of remaining HR7 apps as placeholders (UI loads, OData calls 404 until SLS backend imports the matching services). Grand total: 53 CF apps (27 HR7 + 26 SLS). Same Cloud Connector mapping blocker applies (rsantos).*

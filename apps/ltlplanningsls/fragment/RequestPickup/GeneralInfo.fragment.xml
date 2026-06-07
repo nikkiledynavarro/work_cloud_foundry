@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Customer Contact-->
+	<Label text="Customer Contact"/>
+	<Input value="{local>/PickupRequestInfo/Dname1}" placeholder="Customer Contact"/>
+	<!--Customer Email-->
+	<Label text="Customer Email"/>
+	<Input value="{local>/PickupRequestInfo/Demail}" placeholder="Customer Email"/>
+	<!--Customer Phone-->
+	<Label text="Customer Phone"/>
+	<Input value="{local>/PickupRequestInfo/Dtelf1}" placeholder="Customer Phone"/>
+	<!--Carrier Contact-->
+	<Label text="Carrier Contact"/>
+	<Input value="{local>/PickupRequestInfo/Cname1}" placeholder="Carrier Contact"/>
+	<!--Carrier Email-->
+	<Label text="Carrier Email"/>
+	<Input value="{local>/PickupRequestInfo/Cemail}" placeholder="Carrier Email"/>
+	<!--Carrier Phone-->
+	<Label text="Carrier Phone"/>
+	<Input value="{local>/PickupRequestInfo/Ctelf1}" placeholder="Carrier Phone"/>
+</core:FragmentDefinition>

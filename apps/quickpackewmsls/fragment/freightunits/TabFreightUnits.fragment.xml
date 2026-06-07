@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<VBox>
+		<Toolbar>
+			<ToolbarSpacer/>
+			<SearchField width="20%" showRefreshButton="true" id="searchFreightUnitsInput" search="onSearchItem"/>
+		</Toolbar>
+		<Table id="FreightUnitsID" selectionChange="onSelectionChange" fixedLayout="true" items="{path: 'local>/LineItems'}" mode="{local>/Mode}"
+			growing="true" keyboardMode="Edit" growingThreshold="99999" class="border_lightgray_nobottom">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Freight Units ({= ${local>/LineItems} ? ${local>/LineItems}.length : 0})"/>
+					<ToolbarSpacer/>
+					<Button enabled="{= ${local>/basic} ? true : false }" icon="sap-icon://edit" tooltip="Edit"
+						class="sapUiTinyMarginEnd" press="onEditFreightUnits"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column hAlign="Center" width="auto">
+					<Text text="Outbound HU"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Packaging Material"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Weight"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="UoM"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Length"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Width"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Height"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Weight"/>
+				</Column>
+				<Column hAlign="Center" width="auto">
+					<Text text="Tracking Number"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<!--Fisrt UoM-->
+						<Text text="{local>Itx3}" wrapping="false"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+</core:FragmentDefinition>

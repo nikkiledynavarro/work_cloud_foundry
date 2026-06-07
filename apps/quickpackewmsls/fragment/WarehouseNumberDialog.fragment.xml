@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="{i18n>loginWarehouseNumber}" class="sapUiPopupWithPadding" items="{/xSERPERPxCDS_QP_WHOUSENUMBER}"
+		liveChange="handleWarehouseNumberValueHelpSearch" confirm="onWarehouseNumberConfirm" cancel="handleWarehouseNumberValueHelpClose">
+		<StandardListItem title="{Lgnum}" description="{Lnumt}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

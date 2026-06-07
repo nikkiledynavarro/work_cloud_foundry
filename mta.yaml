@@ -2266,6 +2266,805 @@ modules:
     build-parameters:
       no-source: true
 
+  - name: cancelacefilingsls
+    type: html5
+    path: apps/cancelacefilingsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: cancelacefilingsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cancelacefilingsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/cancelacefilingsls
+      requires:
+        - name: cancelacefilingsls
+          artifacts:
+            - cancelacefilingsls.zip
+          target-path: resources/cancelacefilingsls/
+
+  - name: cancelacefilingsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: cancelacefilingsls-destination-service
+        parameters:
+          content-target: true
+      - name: cancelacefilingsls-app-front-service
+        parameters:
+          service-key:
+            name: cancelacefilingsls-app-front-service-key
+      - name: cancelacefilingsls-xsuaa-service
+        parameters:
+          service-key:
+            name: cancelacefilingsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: cancelacefilingsls-app-front-service
+              ServiceInstanceName: cancelacefilingsls-app-front-service
+              ServiceKeyName: cancelacefilingsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelacefilingsls
+            - Name: cancelacefilingsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: cancelacefilingsls-xsuaa-service
+              ServiceKeyName: cancelacefilingsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelacefilingsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: submitacefilingsls
+    type: html5
+    path: apps/submitacefilingsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: submitacefilingsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: submitacefilingsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/submitacefilingsls
+      requires:
+        - name: submitacefilingsls
+          artifacts:
+            - submitacefilingsls.zip
+          target-path: resources/submitacefilingsls/
+
+  - name: submitacefilingsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: submitacefilingsls-destination-service
+        parameters:
+          content-target: true
+      - name: submitacefilingsls-app-front-service
+        parameters:
+          service-key:
+            name: submitacefilingsls-app-front-service-key
+      - name: submitacefilingsls-xsuaa-service
+        parameters:
+          service-key:
+            name: submitacefilingsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: submitacefilingsls-app-front-service
+              ServiceInstanceName: submitacefilingsls-app-front-service
+              ServiceKeyName: submitacefilingsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpsubmitacefilingsls
+            - Name: submitacefilingsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: submitacefilingsls-xsuaa-service
+              ServiceKeyName: submitacefilingsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpsubmitacefilingsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: viewacefilingsls
+    type: html5
+    path: apps/viewacefilingsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: viewacefilingsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: viewacefilingsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/viewacefilingsls
+      requires:
+        - name: viewacefilingsls
+          artifacts:
+            - viewacefilingsls.zip
+          target-path: resources/viewacefilingsls/
+
+  - name: viewacefilingsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: viewacefilingsls-destination-service
+        parameters:
+          content-target: true
+      - name: viewacefilingsls-app-front-service
+        parameters:
+          service-key:
+            name: viewacefilingsls-app-front-service-key
+      - name: viewacefilingsls-xsuaa-service
+        parameters:
+          service-key:
+            name: viewacefilingsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: viewacefilingsls-app-front-service
+              ServiceInstanceName: viewacefilingsls-app-front-service
+              ServiceKeyName: viewacefilingsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpviewacefilingsls
+            - Name: viewacefilingsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: viewacefilingsls-xsuaa-service
+              ServiceKeyName: viewacefilingsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpviewacefilingsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: cancelshipmentewmsls
+    type: html5
+    path: apps/cancelshipmentewmsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: cancelshipmentewmsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cancelshipmentewmsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/cancelshipmentewmsls
+      requires:
+        - name: cancelshipmentewmsls
+          artifacts:
+            - cancelshipmentewmsls.zip
+          target-path: resources/cancelshipmentewmsls/
+
+  - name: cancelshipmentewmsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: cancelshipmentewmsls-destination-service
+        parameters:
+          content-target: true
+      - name: cancelshipmentewmsls-app-front-service
+        parameters:
+          service-key:
+            name: cancelshipmentewmsls-app-front-service-key
+      - name: cancelshipmentewmsls-xsuaa-service
+        parameters:
+          service-key:
+            name: cancelshipmentewmsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: cancelshipmentewmsls-app-front-service
+              ServiceInstanceName: cancelshipmentewmsls-app-front-service
+              ServiceKeyName: cancelshipmentewmsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentewmsls
+            - Name: cancelshipmentewmsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: cancelshipmentewmsls-xsuaa-service
+              ServiceKeyName: cancelshipmentewmsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelshipmentewmsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: cancelpickuprequestsls
+    type: html5
+    path: apps/cancelpickuprequestsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: cancelpickuprequestsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cancelpickuprequestsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/cancelpickuprequestsls
+      requires:
+        - name: cancelpickuprequestsls
+          artifacts:
+            - cancelpickuprequestsls.zip
+          target-path: resources/cancelpickuprequestsls/
+
+  - name: cancelpickuprequestsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: cancelpickuprequestsls-destination-service
+        parameters:
+          content-target: true
+      - name: cancelpickuprequestsls-app-front-service
+        parameters:
+          service-key:
+            name: cancelpickuprequestsls-app-front-service-key
+      - name: cancelpickuprequestsls-xsuaa-service
+        parameters:
+          service-key:
+            name: cancelpickuprequestsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: cancelpickuprequestsls-app-front-service
+              ServiceInstanceName: cancelpickuprequestsls-app-front-service
+              ServiceKeyName: cancelpickuprequestsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelpickuprequestsls
+            - Name: cancelpickuprequestsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: cancelpickuprequestsls-xsuaa-service
+              ServiceKeyName: cancelpickuprequestsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelpickuprequestsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: requestforpickupsls
+    type: html5
+    path: apps/requestforpickupsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: requestforpickupsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: requestforpickupsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/requestforpickupsls
+      requires:
+        - name: requestforpickupsls
+          artifacts:
+            - requestforpickupsls.zip
+          target-path: resources/requestforpickupsls/
+
+  - name: requestforpickupsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: requestforpickupsls-destination-service
+        parameters:
+          content-target: true
+      - name: requestforpickupsls-app-front-service
+        parameters:
+          service-key:
+            name: requestforpickupsls-app-front-service-key
+      - name: requestforpickupsls-xsuaa-service
+        parameters:
+          service-key:
+            name: requestforpickupsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: requestforpickupsls-app-front-service
+              ServiceInstanceName: requestforpickupsls-app-front-service
+              ServiceKeyName: requestforpickupsls-app-front-service-key
+              sap.cloud.service: comerpisshiperprequestforpickupsls
+            - Name: requestforpickupsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: requestforpickupsls-xsuaa-service
+              ServiceKeyName: requestforpickupsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperprequestforpickupsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: carrierperformancereporteccsls
+    type: html5
+    path: apps/carrierperformancereporteccsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: carrierperformancereporteccsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: carrierperformancereporteccsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/carrierperformancereporteccsls
+      requires:
+        - name: carrierperformancereporteccsls
+          artifacts:
+            - carrierperformancereporteccsls.zip
+          target-path: resources/carrierperformancereporteccsls/
+
+  - name: carrierperformancereporteccsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: carrierperformancereporteccsls-destination-service
+        parameters:
+          content-target: true
+      - name: carrierperformancereporteccsls-app-front-service
+        parameters:
+          service-key:
+            name: carrierperformancereporteccsls-app-front-service-key
+      - name: carrierperformancereporteccsls-xsuaa-service
+        parameters:
+          service-key:
+            name: carrierperformancereporteccsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: carrierperformancereporteccsls-app-front-service
+              ServiceInstanceName: carrierperformancereporteccsls-app-front-service
+              ServiceKeyName: carrierperformancereporteccsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcarrierperformancereporteccsls
+            - Name: carrierperformancereporteccsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: carrierperformancereporteccsls-xsuaa-service
+              ServiceKeyName: carrierperformancereporteccsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcarrierperformancereporteccsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: carrierperformancereportewmsls
+    type: html5
+    path: apps/carrierperformancereportewmsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: carrierperformancereportewmsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: carrierperformancereportewmsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/carrierperformancereportewmsls
+      requires:
+        - name: carrierperformancereportewmsls
+          artifacts:
+            - carrierperformancereportewmsls.zip
+          target-path: resources/carrierperformancereportewmsls/
+
+  - name: carrierperformancereportewmsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: carrierperformancereportewmsls-destination-service
+        parameters:
+          content-target: true
+      - name: carrierperformancereportewmsls-app-front-service
+        parameters:
+          service-key:
+            name: carrierperformancereportewmsls-app-front-service-key
+      - name: carrierperformancereportewmsls-xsuaa-service
+        parameters:
+          service-key:
+            name: carrierperformancereportewmsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: carrierperformancereportewmsls-app-front-service
+              ServiceInstanceName: carrierperformancereportewmsls-app-front-service
+              ServiceKeyName: carrierperformancereportewmsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcarrierperformancereportewmsls
+            - Name: carrierperformancereportewmsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: carrierperformancereportewmsls-xsuaa-service
+              ServiceKeyName: carrierperformancereportewmsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcarrierperformancereportewmsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: closedeliverysls
+    type: html5
+    path: apps/closedeliverysls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: closedeliverysls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: closedeliverysls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/closedeliverysls
+      requires:
+        - name: closedeliverysls
+          artifacts:
+            - closedeliverysls.zip
+          target-path: resources/closedeliverysls/
+
+  - name: closedeliverysls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: closedeliverysls-destination-service
+        parameters:
+          content-target: true
+      - name: closedeliverysls-app-front-service
+        parameters:
+          service-key:
+            name: closedeliverysls-app-front-service-key
+      - name: closedeliverysls-xsuaa-service
+        parameters:
+          service-key:
+            name: closedeliverysls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: closedeliverysls-app-front-service
+              ServiceInstanceName: closedeliverysls-app-front-service
+              ServiceKeyName: closedeliverysls-app-front-service-key
+              sap.cloud.service: comerpisshiperpclosedeliverysls
+            - Name: closedeliverysls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: closedeliverysls-xsuaa-service
+              ServiceKeyName: closedeliverysls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpclosedeliverysls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: ltlplanningsls
+    type: html5
+    path: apps/ltlplanningsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: ltlplanningsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: ltlplanningsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/ltlplanningsls
+      requires:
+        - name: ltlplanningsls
+          artifacts:
+            - ltlplanningsls.zip
+          target-path: resources/ltlplanningsls/
+
+  - name: ltlplanningsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: ltlplanningsls-destination-service
+        parameters:
+          content-target: true
+      - name: ltlplanningsls-app-front-service
+        parameters:
+          service-key:
+            name: ltlplanningsls-app-front-service-key
+      - name: ltlplanningsls-xsuaa-service
+        parameters:
+          service-key:
+            name: ltlplanningsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: ltlplanningsls-app-front-service
+              ServiceInstanceName: ltlplanningsls-app-front-service
+              ServiceKeyName: ltlplanningsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpltlplanningsls
+            - Name: ltlplanningsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: ltlplanningsls-xsuaa-service
+              ServiceKeyName: ltlplanningsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpltlplanningsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: planshipmentsls
+    type: html5
+    path: apps/planshipmentsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: planshipmentsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: planshipmentsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/planshipmentsls
+      requires:
+        - name: planshipmentsls
+          artifacts:
+            - planshipmentsls.zip
+          target-path: resources/planshipmentsls/
+
+  - name: planshipmentsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: planshipmentsls-destination-service
+        parameters:
+          content-target: true
+      - name: planshipmentsls-app-front-service
+        parameters:
+          service-key:
+            name: planshipmentsls-app-front-service-key
+      - name: planshipmentsls-xsuaa-service
+        parameters:
+          service-key:
+            name: planshipmentsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: planshipmentsls-app-front-service
+              ServiceInstanceName: planshipmentsls-app-front-service
+              ServiceKeyName: planshipmentsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpplanshipmentsls
+            - Name: planshipmentsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: planshipmentsls-xsuaa-service
+              ServiceKeyName: planshipmentsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpplanshipmentsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: createshipmentv2ewmsls
+    type: html5
+    path: apps/createshipmentv2ewmsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: createshipmentv2ewmsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: createshipmentv2ewmsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/createshipmentv2ewmsls
+      requires:
+        - name: createshipmentv2ewmsls
+          artifacts:
+            - createshipmentv2ewmsls.zip
+          target-path: resources/createshipmentv2ewmsls/
+
+  - name: createshipmentv2ewmsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: createshipmentv2ewmsls-destination-service
+        parameters:
+          content-target: true
+      - name: createshipmentv2ewmsls-app-front-service
+        parameters:
+          service-key:
+            name: createshipmentv2ewmsls-app-front-service-key
+      - name: createshipmentv2ewmsls-xsuaa-service
+        parameters:
+          service-key:
+            name: createshipmentv2ewmsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: createshipmentv2ewmsls-app-front-service
+              ServiceInstanceName: createshipmentv2ewmsls-app-front-service
+              ServiceKeyName: createshipmentv2ewmsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentv2ewmsls
+            - Name: createshipmentv2ewmsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: createshipmentv2ewmsls-xsuaa-service
+              ServiceKeyName: createshipmentv2ewmsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcreateshipmentv2ewmsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: freightaudituploadsls
+    type: html5
+    path: apps/freightaudituploadsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: freightaudituploadsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: freightaudituploadsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/freightaudituploadsls
+      requires:
+        - name: freightaudituploadsls
+          artifacts:
+            - freightaudituploadsls.zip
+          target-path: resources/freightaudituploadsls/
+
+  - name: freightaudituploadsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: freightaudituploadsls-destination-service
+        parameters:
+          content-target: true
+      - name: freightaudituploadsls-app-front-service
+        parameters:
+          service-key:
+            name: freightaudituploadsls-app-front-service-key
+      - name: freightaudituploadsls-xsuaa-service
+        parameters:
+          service-key:
+            name: freightaudituploadsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: freightaudituploadsls-app-front-service
+              ServiceInstanceName: freightaudituploadsls-app-front-service
+              ServiceKeyName: freightaudituploadsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpfreightaudituploadsls
+            - Name: freightaudituploadsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: freightaudituploadsls-xsuaa-service
+              ServiceKeyName: freightaudituploadsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpfreightaudituploadsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+  - name: quickpackewmsls
+    type: html5
+    path: apps/quickpackewmsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: quickpackewmsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: quickpackewmsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/quickpackewmsls
+      requires:
+        - name: quickpackewmsls
+          artifacts:
+            - quickpackewmsls.zip
+          target-path: resources/quickpackewmsls/
+
+  - name: quickpackewmsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: quickpackewmsls-destination-service
+        parameters:
+          content-target: true
+      - name: quickpackewmsls-app-front-service
+        parameters:
+          service-key:
+            name: quickpackewmsls-app-front-service-key
+      - name: quickpackewmsls-xsuaa-service
+        parameters:
+          service-key:
+            name: quickpackewmsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: quickpackewmsls-app-front-service
+              ServiceInstanceName: quickpackewmsls-app-front-service
+              ServiceKeyName: quickpackewmsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpquickpackewmsls
+            - Name: quickpackewmsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: quickpackewmsls-xsuaa-service
+              ServiceKeyName: quickpackewmsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpquickpackewmsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
 resources:
 
   - name: trackshipmentewm-app-front-service
@@ -3084,3 +3883,283 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-cancelsls.json
+  - name: cancelacefilingsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cancelacefilingsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: cancelacefilingsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-cancelacefilingsls.json
+  - name: submitacefilingsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: submitacefilingsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: submitacefilingsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-submitacefilingsls.json
+  - name: viewacefilingsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: viewacefilingsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: viewacefilingsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-viewacefilingsls.json
+  - name: cancelshipmentewmsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cancelshipmentewmsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: cancelshipmentewmsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-cancelshipmentewmsls.json
+  - name: cancelpickuprequestsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cancelpickuprequestsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: cancelpickuprequestsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-cancelpickuprequestsls.json
+  - name: requestforpickupsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: requestforpickupsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: requestforpickupsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-requestforpickupsls.json
+  - name: carrierperformancereporteccsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: carrierperformancereporteccsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: carrierperformancereporteccsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-carrierperformancereporteccsls.json
+  - name: carrierperformancereportewmsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: carrierperformancereportewmsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: carrierperformancereportewmsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-carrierperformancereportewmsls.json
+  - name: closedeliverysls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: closedeliverysls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: closedeliverysls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-closedeliverysls.json
+  - name: ltlplanningsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: ltlplanningsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: ltlplanningsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-ltlplanningsls.json
+  - name: planshipmentsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: planshipmentsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: planshipmentsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-planshipmentsls.json
+  - name: createshipmentv2ewmsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: createshipmentv2ewmsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: createshipmentv2ewmsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-createshipmentv2ewmsls.json
+  - name: freightaudituploadsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: freightaudituploadsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: freightaudituploadsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-freightaudituploadsls.json
+  - name: quickpackewmsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: quickpackewmsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: quickpackewmsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-quickpackewmsls.json

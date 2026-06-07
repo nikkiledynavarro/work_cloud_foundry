@@ -1,0 +1,193 @@
+<mvc:View controllerName="com.erpis.shiperp.hr7.carrierperformancereportewm.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.f" height="100%" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageCarrier" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!--DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+				<f:snappedContent>
+					<Text id="statusText"></Text>
+				</f:snappedContent>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!--DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<core:Fragment fragmentName="com.erpis.shiperp.hr7.carrierperformancereportewm.fragment.DynamicHeader" type="XML"/>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!--Dynamic table-->
+		<f:content>
+			<IconTabBar id="carrierPerformanceIconId" select="onQuickFilter" class="border_lightblue_nobottom width_auto sapUiNoContentPadding"
+				expandable="false">
+				<content>
+					<ScrollContainer horizontal="true" vertical="true">
+						<smartTable:SmartTable entitySet="CarrierPerformanceSet" smartFilterId="DynamicFilter" tableType="ResponsiveTable" useExportToExcel="true"
+							useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SmartFilterPKey" enableAutoBinding="true" id="performanceTable"
+							header="{i18n>ewmcarrierPerformance}" showRowCount="true" showFullScreenButton="true" demandPopin="false" showOverlay="onShowOverlay"
+							initialise="onTableInitialise" beforeRebindTable="onBeforeTableRebind" tableBindingPath="data>/" customData:useSmartToggle="true"
+							customData:useSmartField="false">
+							<Table growing="true" growingThreshold="100" showOverlay="false" growingScrollToLoad="false" fixedLayout="true">
+								<columns>
+									<!--Status-->
+									<Column>
+										<Text text="{i18n>status}" wrapping="false" tooltip="{i18n>status}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Status", "columnIndex":"1", "leadingProperty": "Status"}'/>
+										</customData>
+									</Column>
+									<!--Freight Unit Key-->
+									<Column>
+										<Text text="{i18n>freightunitkey}" wrapping="false" tooltip="{i18n>freightunitkey}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "FreightUnitKey", "columnIndex":"2", "leadingProperty": "FreightUnitKey"}'/>
+										</customData>
+									</Column>
+									<!--Carrier ID-->
+									<Column>
+										<Text text="{i18n>carrierID}" wrapping="false" tooltip="{i18n>carrierID}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "CarrierCode", "columnIndex":"3", "leadingProperty": "CarrierCode"}'/>
+										</customData>
+									</Column>
+									<!--Tracking Number-->
+									<Column>
+										<Text text="{i18n>trackingNumber}" wrapping="false" tooltip="{i18n>trackingNumber}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "TrackingNumber", "columnIndex":"4", "leadingProperty": "TrackingNumber"}'/>
+										</customData>
+									</Column>
+									<!--Create By-->
+									<Column>
+										<Text text="{i18n>createdBy}" wrapping="false" tooltip="{i18n>createdBy}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "CreatedBy", "columnIndex":"5", "leadingProperty": "CreatedBy"}'/>
+										</customData>
+									</Column>
+									<!--Creation Date-->
+									<Column>
+										<Text text="{i18n>creationDate}" wrapping="false" tooltip="{i18n>creationDate}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "CreatedOn", "columnIndex":"6", "leadingProperty": "CreatedOn"}'/>
+										</customData>
+									</Column>
+									<!--Ship ERP Carrier Service ID-->
+									<Column>
+										<Text text="{i18n>shipERPCarrierServiceID}" wrapping="false" tooltip="{i18n>shipERPCarrierServiceID}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "Service", "columnIndex":"7", "leadingProperty": "Service"}'/>
+										</customData>
+									</Column>
+									<!--Ext Billing Option-->
+									<Column >
+										<Text text="{i18n>billingOption}" wrapping="false" tooltip="{i18n>billingOption}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ExtbillOption", "columnIndex":"8", "leadingProperty": "ExtbillOption"}'/>
+										</customData>
+									</Column>
+									<!--Requested Delivery Date-->
+									<Column>
+										<Text text="{i18n>requestedDeliveryDate}" wrapping="false" tooltip="{i18n>requestedDeliveryDate}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "RequestDeliveryDate", "columnIndex":"9", "leadingProperty": "RequestDeliveryDate"}'/>
+										</customData>
+									</Column>
+									<!--Estimated Arrival Date-->
+									<Column>
+										<Text text="{i18n>estimatedArrivalDate}" wrapping="false" tooltip="{i18n>estimatedArrivalDate}"/>
+										<customData>
+											<core:CustomData key="p13nData"
+												value='\{"columnKey": "EstimatedArrivalDate", "columnIndex":"10", "leadingProperty": "EstimatedArrivalDate"}'/>
+										</customData>
+									</Column>
+									<!--Pickup Date-->
+									<Column>
+										<Text text="{i18n>pickupDate}" wrapping="false" tooltip="{i18n>pickupDate}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "PickupDate", "columnIndex":"11", "leadingProperty": "PickupDate"}'/>
+										</customData>
+									</Column>
+									<!--Actual Delivery Date-->
+									<Column>
+										<Text text="{i18n>actualDeliveryDate}" wrapping="false" tooltip="{i18n>actualDeliveryDate}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ActualDeliveryDate", "columnIndex":"12", "leadingProperty": "ActualDeliveryDate"}'/>
+										</customData>
+									</Column>
+									<!--Actual Delivery Time-->
+									<Column>
+										<Text text="{i18n>actualDeliveryTime}" wrapping="false" tooltip="{i18n>actualDeliveryTime}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "ActualDeliveryTime", "columnIndex":"13", "leadingProperty": "ActualDeliveryTime"}'/>
+										</customData>
+									</Column>
+									<!--Goods Issue Date-->
+									<Column>
+										<Text text="{i18n>goodsIssueDate}" wrapping="false" tooltip="{i18n>goodsIssueDate}"/>
+										<customData>
+											<core:CustomData key="p13nData" value='\{"columnKey": "GoodsIssueDate", "columnIndex":"14", "leadingProperty": "GoodsIssueDate"}'/>
+										</customData>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<!--Status-->
+											<!--<Text text="{data>Status}" tooltip="{data>Status}"/>-->
+											<ObjectStatus text="{path: 'data>Status', formatter: '.formatter.statusText'}"  inverted="true"
+												tooltip="{path: 'data>Status', formatter: '.formatter.statusText'}" state="{path: 'data>Status', formatter: '.formatter.statusState'}"
+												icon="{path: 'data>Status', formatter: '.formatter.statusIcon'}"/>
+											<!--Freight Unit Key-->
+											<Text text="{data>FreightUnitKey}" tooltip="{data>FreightUnitKey}"/>
+											<!--Carrier ID-->
+											<Text text="{data>CarrierCode}" tooltip="{data>CarrierCode}"/>
+											<!--Tracking Number-->
+											<Text text="{data>TrackingNumber}" tooltip="{data>TrackingNumber}"/>
+											<!--Created By-->
+											<Text text="{data>CreatedBy}" tooltip="{data>CreatedBy}"/>
+											<!--Creation Date-->
+											<Text text="{path:'data>CreatedOn', formatter: '.formatter.formatDateTime'}"/>
+											<!--Ship ERP Carrier Service ID-->
+											<Text text="{data>Service}" tooltip="{data>Service}"/>
+											<!--Ext Billing Option-->
+											<Text text="{data>ExtbillOption}" tooltip="{data>ExtbillOption}"/>
+											<!--Requested Delivery Date-->
+											<Text text="{path:'data>RequestDeliveryDate', formatter: '.formatter.formatDateTime'}"/>
+											<!--Estimated Arrival Date-->
+											<Text text="{path:'data>EstimatedArrivalDate', formatter: '.formatter.formatDateTime'}"/>
+											<!--Pickup Date-->
+											<Text text="{path:'data>PickupDate', formatter: '.formatter.formatDateTime'}"/>
+											<!--Actual Delivery Date-->
+											<Text text="{path:'data>ActualDeliveryDate', formatter: '.formatter.formatDateTime'}"/>
+											<!--Actual Delivery Time-->
+											<Text text="{path:'data>ActualDeliveryTime', formatter: '.formatter.formatTime'}"/>
+											<!--Goods Issue Date-->
+											<Text text="{path:'data>GoodsIssueDate', formatter: '.formatter.formatDateTime'}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</ScrollContainer>
+				</content>
+			</IconTabBar>
+		</f:content>
+		<!--DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar id="idToolbarFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>exportviaEmail}" id="btnEmail" enabled="{local>/EnableEmailButton}" press="onExportviaEmail" type="Emphasized"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

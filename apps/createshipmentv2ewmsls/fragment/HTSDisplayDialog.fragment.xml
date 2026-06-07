@@ -1,0 +1,104 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Harmonized Tariff Schedule" class="sapUiContentPadding" contentWidth="1300px">
+		<content>
+			<Table id="idHTSList" mode="SingleSelectLeft" class="border_lightgray_nobottom" showSeparators="All" growing="false"
+				selectionChange="onHTSSelectionChange" items="{path: 'local>/HTS', templateShareable:false}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" text="Add" tooltip="Add" press="onAddHTS"/>
+						<Button icon="sap-icon://delete" text="Delete" tooltip="Delete" press="onDeleteHTS"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="8rem">
+						<Text text="{i18n>Code}"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="{i18n>ctryOrigin}"/>
+					</Column>
+					<Column width="8rem">
+						<Text text="{i18n>Description}"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="{i18n>Value}"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="{i18n>Currency}"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="{i18n>Weight}"/>
+					</Column>
+					<Column width="4.5rem">
+						<Text text="{i18n>WeightUnit}" wrapping="true"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="{i18n>Quantity}"/>
+					</Column>
+					<Column width="4.5rem">
+						<Text text="{i18n>Unit}"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="{i18n>Quantity}"/>
+					</Column>
+					<Column width="4.5rem">
+						<Text text="{i18n>Unit}"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="{i18n>expControlClass}"/>
+					</Column>
+				</columns>
+				<items >
+					<ColumnListItem type="Active">
+						<cells>
+							<Input id="idHTSCode" showSuggestion="true" showValueHelp="true" valueHelpRequest="onSelectCommCodeService" valueHelpOnly="true"
+								value="{local>htscode}" suggestionItems="{path: '/xSERPERPxI_PCCNTR'}">
+								<suggestionItems>
+									<core:Item text="{Name}"/>
+								</suggestionItems>
+							</Input>
+							<Input value="{local>ctryoforigin}" editable="false"/>
+							<TextArea value="{local>description}" editable="false" width="100%" rows="4"/>
+							<Input value="{local>netvalue}" editable="true"/>
+							<ComboBox selectedKey="{local>currency}" tooltip="Currency" items="{path: '/CurrencySet', length: 999}">
+								<items>
+									<core:Item text="{Waers}" key="{Waers}"/>
+								</items>
+							</ComboBox>
+							<Input value="{local>weight}" editable="true"/>
+							<ComboBox selectedKey="{local>weight_unit}" tooltip="Weight Unit" items="{path: '/WeightUnitSet', length: 999}">
+								<items>
+									<core:Item text="{Msehi}" key="{Msehi}"/>
+								</items>
+							</ComboBox>
+							<Input value="{local>qty}" editable="true"/>
+							<ComboBox selectedKey="{local>uom}" tooltip="Unit" items="{path: '/UnitSet', length: 999}">
+								<items>
+									<core:Item text="{Msehi}" key="{Msehi}"/>
+								</items>
+							</ComboBox>
+							<Input value="{local>qty2}" editable="true"/>
+							<!--<Input value="{local>uom2}" editable="true"/>-->
+							<ComboBox selectedKey="{local>uom2}" tooltip="Unit" items="{path: '/UnitSet', length: 999}">
+								<items>
+									<core:Item text="{Msehi}" key="{Msehi}"/>
+								</items>
+							</ComboBox>
+							<ComboBox selectedKey="{local>alumn}" tooltip="Export Ctrol Class" items="{path: '/ExportCtrlClassSet', length: 999}">
+								<items>
+									<core:Item text="{Alnum}" key="{Alnum}"/>
+								</items>
+							</ComboBox>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button type="Emphasized" press="onContinueHTSDialog" text="Continue"/>
+		</beginButton>
+		<endButton>
+			<Button press="onCloseHTSDialog" text="Close"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

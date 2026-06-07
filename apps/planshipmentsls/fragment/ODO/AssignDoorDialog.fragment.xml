@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="{i18n>AssignDoor}" contentWidth="800px">
+		<content>
+			<f:SimpleForm layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<!--Warehouse No.-->
+					<Label text="{i18n>warehouseno}"/>
+					<ComboBox id="idLgnum" items="{ path: '/xSERPERPxCDS_WHOUSENO' }" selectedKey="{AssignDoor>/Lgnum}" width="50%">
+						<core:Item key="{Lgnum}" text="{Lgnum} - {Lnumt}"/>
+					</ComboBox>
+					<!--Warehouse Door-->
+					<Label text="{i18n>warehouseDoor}"/>
+					<ComboBox id="idDoor" items="{ path: '/xSERPERPxCDS_TDOOR' }" selectedKey="{AssignDoor>/Door}" width="40%" required="true">
+						<core:Item key="{Door}" text="{Door} - {Lgnum}"/>
+					</ComboBox>
+					<!--only Free Objects-->
+					<Label text="{i18n>onlyFreeObject}"/>
+					<CheckBox id="idFlgFreeOnly" editable="true" selected="{AssignDoor>/FlgFreeOnly}"/>
+					<!--Star Date of S&R-->
+					<Label text="{i18n>DateOfS}"/>
+					<!--<DatePicker id="idDoorStartActD" value="{AssignDoor>/StartActD}" width="30%" valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy" required="true"></DatePicker>-->
+					<DatePicker id="idDoorStartActD" editable="true" value="{path:'AssignDoor>/StartActD', formatter: '.formatter.formatDateTime'}"
+						valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>
+					<!--S&R Acty Start Time-->
+					<Label text="{i18n>ActyStartTime}"/>
+					<!--<TimePicker id="idDoorStartActT" value="{AssignDoor>/StartActT}" width="30%" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss"-->
+					<!--	placeholder="HH:mm:ss" required="true"/>-->
+					<TimePicker id="idDoorStartActT" editable="true" value="{path: 'AssignDoor>/StartActT', formatter: '.formatter.formatTime'}"
+						valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+					<!--S&R Acty End Date-->
+					<Label text="{i18n>ActyEndDate}"/>
+					<!--<DatePicker id="idDoorEndActD" value="{AssignDoor>/EndActD}" width="30%" valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy" required="true"></DatePicker>-->
+					<DatePicker id="idDoorEndActD" editable="true" value="{path:'AssignDoor>/EndActD', formatter: '.formatter.formatDateTime'}"
+						valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"></DatePicker>
+					<!--S&R Acty End Time-->
+					<Label text="{i18n>ActyEndTime}"/>
+					<!--<TimePicker id="idDoorEndActT" value="{AssignDoor>/EndActT}" width="30%" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss"-->
+					<!--	placeholder="HH:mm:ss" required="true"/>-->
+					<TimePicker id="idDoorEndActT" editable="true" value="{path: 'AssignDoor>/EndActT', formatter: '.formatter.formatTime'}"
+						valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" placeholder="HH:mm:ss"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button icon="sap-icon://accept" press="onAcceptAssignDoor" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button icon="sap-icon://decline" press="onCloseAssignDoorDialog" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

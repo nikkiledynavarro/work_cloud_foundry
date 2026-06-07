@@ -503,6 +503,24 @@
         {
             "runtimeArgs": [
                 "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelacefilingsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelacefilingsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
                 "Start-Process 'http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html'"
             ],
             "type": "node",
@@ -512,7 +530,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 2
+                "order": 3
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelpickuprequestsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelpickuprequestsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 4
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -530,7 +566,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 3
+                "order": 5
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -548,7 +584,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 4
+                "order": 6
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentewmsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelshipmentewmsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 7
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -566,7 +620,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 5
+                "order": 8
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -584,7 +638,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 6
+                "order": 9
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereporteccsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ carrierperformancereporteccsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 10
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -602,7 +674,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 7
+                "order": 11
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportewmsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ carrierperformancereportewmsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 12
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -620,7 +710,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 8
+                "order": 13
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpclosedeliverysls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ closedeliverysls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 14
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -638,7 +746,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 9
+                "order": 15
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -656,7 +764,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 10
+                "order": 16
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -674,7 +782,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 11
+                "order": 17
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentv2ewmsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ createshipmentv2ewmsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 18
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -692,7 +818,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 12
+                "order": 19
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -710,7 +836,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 13
+                "order": 20
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -728,7 +854,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 14
+                "order": 21
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -746,7 +872,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 15
+                "order": 22
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -764,7 +890,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 16
+                "order": 23
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudituploadsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ freightaudituploadsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 24
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -782,7 +926,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 17
+                "order": 25
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -800,7 +944,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 18
+                "order": 26
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -818,7 +962,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 19
+                "order": 27
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpltlplanningsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ ltlplanningsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 28
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -836,7 +998,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 20
+                "order": 29
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -854,7 +1016,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 21
+                "order": 30
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -872,7 +1034,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 22
+                "order": 31
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -890,7 +1052,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 23
+                "order": 32
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -908,7 +1070,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 24
+                "order": 33
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -926,7 +1088,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 25
+                "order": 34
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpplanshipmentsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ planshipmentsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 35
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -944,7 +1124,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 26
+                "order": 36
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -962,7 +1142,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 27
+                "order": 37
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackewmsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ quickpackewmsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 38
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -980,7 +1178,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 28
+                "order": 39
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -998,7 +1196,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 29
+                "order": 40
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperprequestforpickupsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ requestforpickupsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 41
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1016,7 +1232,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 30
+                "order": 42
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1034,7 +1250,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 31
+                "order": 43
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1052,7 +1268,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 32
+                "order": 44
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1070,7 +1286,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 33
+                "order": 45
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1088,7 +1304,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 34
+                "order": 46
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1106,7 +1322,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 35
+                "order": 47
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpsubmitacefilingsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ submitacefilingsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 48
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1124,7 +1358,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 36
+                "order": 49
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1142,7 +1376,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 37
+                "order": 50
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1160,7 +1394,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 38
+                "order": 51
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1178,7 +1412,25 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 39
+                "order": 52
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpviewacefilingsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ viewacefilingsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 53
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1204,6 +1456,23 @@
         {
             "runtimeArgs": [
                 "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelacefilingsls.comerpisshiperpcancelacefilingsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelacefilingsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
                 "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelpickuprequest.comerpisshiperpcancelpickuprequest-1.0.0/index.html'"
             ],
             "type": "node",
@@ -1212,7 +1481,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 2
+                "order": 3
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelpickuprequestsls.comerpisshiperpcancelpickuprequestsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelpickuprequestsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 4
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1229,7 +1515,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 3
+                "order": 5
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1246,7 +1532,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 4
+                "order": 6
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelshipmentewmsls.comerpisshiperpcancelshipmentewmsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelshipmentewmsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 7
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1263,7 +1566,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 5
+                "order": 8
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1280,7 +1583,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 6
+                "order": 9
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcarrierperformancereporteccsls.comerpisshiperpcarrierperformancereporteccsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ carrierperformancereporteccsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 10
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1297,7 +1617,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 7
+                "order": 11
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcarrierperformancereportewmsls.comerpisshiperpcarrierperformancereportewmsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ carrierperformancereportewmsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 12
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1314,7 +1651,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 8
+                "order": 13
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpclosedeliverysls.comerpisshiperpclosedeliverysls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ closedeliverysls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 14
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1331,7 +1685,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 9
+                "order": 15
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1348,7 +1702,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 10
+                "order": 16
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1365,7 +1719,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 11
+                "order": 17
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcreateshipmentv2ewmsls.comerpisshiperpcreateshipmentv2ewmsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ createshipmentv2ewmsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 18
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1382,7 +1753,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 12
+                "order": 19
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1399,7 +1770,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 13
+                "order": 20
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1416,7 +1787,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 14
+                "order": 21
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1433,7 +1804,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 15
+                "order": 22
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1450,7 +1821,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 16
+                "order": 23
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpfreightaudituploadsls.comerpisshiperpfreightaudituploadsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ freightaudituploadsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 24
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1467,7 +1855,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 17
+                "order": 25
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1484,7 +1872,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 18
+                "order": 26
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1501,7 +1889,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 19
+                "order": 27
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpltlplanningsls.comerpisshiperpltlplanningsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ ltlplanningsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 28
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1518,7 +1923,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 20
+                "order": 29
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1535,7 +1940,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 21
+                "order": 30
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1552,7 +1957,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 22
+                "order": 31
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1569,7 +1974,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 23
+                "order": 32
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1586,7 +1991,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 24
+                "order": 33
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1603,7 +2008,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 25
+                "order": 34
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpplanshipmentsls.comerpisshiperpplanshipmentsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ planshipmentsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 35
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1620,7 +2042,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 26
+                "order": 36
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1637,7 +2059,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 27
+                "order": 37
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpquickpackewmsls.comerpisshiperpquickpackewmsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ quickpackewmsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 38
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1654,7 +2093,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 28
+                "order": 39
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1671,7 +2110,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 29
+                "order": 40
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperprequestforpickupsls.comerpisshiperprequestforpickupsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ requestforpickupsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 41
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1688,7 +2144,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 30
+                "order": 42
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1705,7 +2161,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 31
+                "order": 43
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1722,7 +2178,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 32
+                "order": 44
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1739,7 +2195,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 33
+                "order": 45
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1756,7 +2212,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 34
+                "order": 46
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1773,7 +2229,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 35
+                "order": 47
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpsubmitacefilingsls.comerpisshiperpsubmitacefilingsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ submitacefilingsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 48
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1790,7 +2263,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 36
+                "order": 49
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1807,7 +2280,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 37
+                "order": 50
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1824,7 +2297,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 38
+                "order": 51
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1841,7 +2314,24 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 39
+                "order": 52
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpviewacefilingsls.comerpisshiperpviewacefilingsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ viewacefilingsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 53
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",

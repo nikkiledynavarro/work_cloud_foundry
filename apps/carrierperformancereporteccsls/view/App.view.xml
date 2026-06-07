@@ -1,0 +1,4 @@
+<mvc:View controllerName="com.erpis.shiperp.carrierperformancereportecc.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App id="app" busy="{appView>/busy}" busyIndicatorDelay="{appView>/delay}"/>
+</mvc:View>

@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<!--Country-->
+	<Label text="{i18n>country}"/>
+	<ComboBox id="RfpCountry" items="{ path: '/xSERPERPxRFP_Country', length: 999}" selectedKey="{local>/basic/pickup_address/coutry}"
+		change="onChangePickupCountry" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }">
+		<core:Item key="{Land1}" text=" {Natio}"></core:Item>
+	</ComboBox>
+	<!--Region-->
+	<Label text="{i18n>region}"/>
+	<ComboBox id="RfpRegion" items="{ path: '/xSERPERPxRFP_Region', length: 999}" selectedKey="{local>/basic/pickup_address/region}"
+		change="onChangePickupRegion" enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }">
+		<core:Item key="{Land1}" text="{Bezei}"></core:Item>
+	</ComboBox>
+	<!--City-->
+	<Label text="{i18n>city}"/>
+	<Input value="{local>/basic/pickup_address/city}" placeholder="City"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<!--Postal-->
+	<Label text="{i18n>postal}"/>
+	<Input value="{local>/basic/pickup_address/postal}" placeholder="Postal"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+</core:FragmentDefinition>

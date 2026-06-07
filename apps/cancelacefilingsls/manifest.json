@@ -1,0 +1,139 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "comerpisshiperpcancelacefilingsls",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "Service": {
+        "uri": "sap/opu/odata/serperp/ace_srv/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "sourceTemplate": {
+      "id": "sap.ui.ui5-template-plugin.1worklist",
+      "version": "1.52.7",
+      "toolsId": "70bb135b-0469-438b-8d02-63185e634fc0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css",
+          "id": "stylecss"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "com.erpis.shiperp.cancelacefiling.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.103.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.erpis.shiperp.cancelacefiling.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "Service",
+        "preload": true
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.f.routing.Router",
+        "viewType": "XML",
+        "viewPath": "com.erpis.shiperp.cancelacefiling.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": "notFound"
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": [
+            "home"
+          ]
+        },
+        {
+          "pattern": "ProfileId/{ProfileId}/:InputType:",
+          "name": "main",
+          "target": [
+            "main"
+          ]
+        }
+      ],
+      "targets": {
+        "home": {
+          "viewName": "Home",
+          "viewId": "home",
+          "viewLevel": 1
+        },
+        "main": {
+          "viewName": "Main",
+          "viewId": "main",
+          "viewLevel": 2
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        }
+      }
+    },
+    "flexBundle": false
+  },
+  "sap.platform.hcp": {
+    "uri": "webapp",
+    "_version": "1.1.0"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comerpisshiperpcancelacefilingsls"
+  }
+}

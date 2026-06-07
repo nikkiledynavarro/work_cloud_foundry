@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="{i18n>AssignVehicle}" contentWidth="800px">
+		<content>
+			<f:SimpleForm id="SimpleForm" layout="ResponsiveGridLayout" singleContainerFullSize="false">
+				<f:content>
+					<!--Vehicle-->
+					<Label text="{i18n>Vehicle}"/>
+					<ComboBox id="idVehicle" items="{ path: '/xSERPERPxCDS_VEHICLE'}" selectedKey="{AssignVehicle>/VehNumExt}" width="40%"
+						change="onchangeVehicle">
+						<core:Item key="{VehNum}" text="{VehNum}"/>
+					</ComboBox>
+					<!--Carrier-->
+					<Label text="{i18n>Carrier}"/>
+					<ComboBox id="idAssignCarrier" items="{ path: 'local>/CarrierList'}" width="40%">
+						<core:Item key="{local>vehcarrier}" text="{local>vehcarrier}"/>
+					</ComboBox>
+					<!--SCAC-->
+					<Label text="{i18n>SCAC}"/>
+					<ComboBox items="{ path: '/xSERPERPxCDS_VEHICLE' }" selectedKey="{AssignVehicle>/ScacCurr}" value="{AssignVehicle>/ScacCurr}" width="40%">
+						<core:Item key="{Scac}" text="{Scac}"/>
+					</ComboBox>
+					<!--S&R Acty: Veh-->
+					<Label text="{i18n>ActyVehicle}"/>
+					<!--<Input value="{AssignVehicle>/VehSrActNum}" editable="true" width="40%"/>-->
+					<ComboBox id="idActyVehicle" items="{ path: 'local>/CarrierList'}" width="40%" change="onchangeActyVehicle">
+						<core:Item key="{local>VehSrActNum}" text="{local>VehSrActNum}"/>
+					</ComboBox>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button icon="sap-icon://accept" press="onAcceptAssignVehicle" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button icon="sap-icon://decline" press="onCloseAssignVehicleDialog" type="Reject"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,57 @@
+<mvc:View controllerName="com.erpis.shiperp.closedelivery.controller.Master" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:DynamicPage id="masterPage">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center" justifyContent="Start" wrap="Wrap">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+					</FlexBox>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<FlexBox>
+						<VBox justifyContent="SpaceBetween" class="sapUiTinyMarginBegin">
+							<HBox renderType="Bare" justifyContent="SpaceBetween" alignItems="Center" class="sapUiTinyMarginBottom">
+								<Title titleStyle="H4" text="Open Send Sales Deliveries"/>
+							</HBox>
+							<Text text="Created On:"/>
+							<HBox renderType="Bare" justifyContent="SpaceBetween" alignItems="Center" class="sapUiTinyMarginBottom">
+								<DateRangeSelection width="200px" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange"/>
+							</HBox>
+							<Text text="Store Number:"/>
+							<HBox renderType="Bare" justifyContent="SpaceBetween" alignItems="Center" class="sapUiTinyMarginBottom">
+								<ComboBox width="200px" class="sapUiTinyMarginEnd" selectedKey="{local>/ObjectTypeKey}" change="handleChange" items="{user>/objectTypes}">
+									<core:Item key="{user>objectType}" text="{user>description}"></core:Item>
+								</ComboBox>
+							</HBox>
+							<Text text="Shipment Status:"/>
+							<HBox renderType="Bare" justifyContent="SpaceBetween" alignItems="Center" class="sapUiTinyMarginBottom">
+								<ComboBox width="200px" class="sapUiTinyMarginEnd" selectedKey="{local>/ObjectTypeKey}" change="handleChange" items="{user>/objectTypes}">
+									<core:Item key="{user>objectType}" text="{user>description}"></core:Item>
+								</ComboBox>
+							</HBox>
+						</VBox>
+					</FlexBox>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<List id="list" width="auto" busyIndicatorDelay="{local>/delay}" noDataText="" class="border_lightgray_nobottom" growing="true"
+				growingScrollToLoad="true" updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				<headerToolbar>
+					<OverflowToolbar visible="true" id="searchToolbar">
+						<SearchField id="searchField" showRefreshButton="true" tooltip="{i18n>masterSearchTooltip}" search="onSearch" width="auto">
+							<layoutData>
+								<OverflowToolbarLayoutData shrinkable="true" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+			</List>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

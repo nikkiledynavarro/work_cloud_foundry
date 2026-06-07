@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Label text=""/>
+	<ComboBox id="idWeightInput" selectedKey="{local>/basic/pickup_address/shipfromtype}"
+		enabled="{= (${local>/SCanNumber} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }">
+		<core:Item key="1" text="1 Shipping Point"/>
+		<core:Item key="2" text="2 Customer"/>
+		<core:Item key="3" text="3 Vendor"/>
+		<core:Item key="4" text="4 ManShipFrom"/>
+	</ComboBox>
+	<Input value="{local>/basic/pickup_address/shipfromnum}" placeholder="Ship from number"
+		enabled="{= (${local>/SCanNumber} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>nameAttent}"/>
+	<Input value="{local>/basic/pickup_address/name}" placeholder="Name"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/attention}" placeholder="Attention"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>address1/2}"/>
+	<Input value="{local>/basic/pickup_address/address1}" placeholder="Address 1"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/address2}" placeholder="Address 2"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>address3/4}"/>
+	<Input value="{local>/basic/pickup_address/address3}" placeholder="Address 3"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/address4}" placeholder="Address 4"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>customerEmail}"/>
+	<Input value="{local>/basic/pickup_address/customeID}" placeholder="CustomerID"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/email}" placeholder="Email"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>phoneFax}"/>
+	<Input value="{local>/basic/pickup_address/phone}" placeholder="Phone"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/fax}" placeholder="Fax"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Label text="{i18n>fedTaxID}"/>
+	<Input value="{local>/basic/pickup_address/fedTaxID}" placeholder="Fed"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+	<Input value="{local>/basic/pickup_address/stateTaxID}" placeholder="State TaxID"
+		enabled="{= (${local>/basic} &amp;&amp; ${local>/ShipmentManual} === true) ? true : false }"/>
+</core:FragmentDefinition>
