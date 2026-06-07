@@ -24,6 +24,7 @@
 9. [Testing Summary and Troubleshooting](#9-testing-summary-and-troubleshooting)
 10. [CF Deployment Process](#10-cf-deployment-process)
 11. [Reference](#11-reference)
+12. [Runbooks — Manual UI Steps](#12-runbooks--manual-ui-steps)
 
 ---
 
@@ -688,4 +689,79 @@ neo_to_cf/
 
 ---
 
-*Last updated: 2026-06-07 — ECC suffix rename + planningcockpit removal*
+## 12. Runbooks — Manual UI Steps
+
+### 12.1 Add Renamed Apps to Work Zone Site
+
+When you rename an app (e.g., `cancelshipment` → `cancelshipmentecc`), the CF deployment is automated but the **Work Zone Site tile** must be added manually because:
+- Work Zone Site tile editing requires user-context tokens (not service credentials)
+- The Site config is owned by SAP Build Work Zone Standard subscription
+- No CF CLI command exists for tile assignment
+
+**When to run this runbook:**
+- After renaming an app (today: `cancelshipmentecc`, `createshipmentecc`, `trackshipmentecc`)
+- After deploying a brand-new app
+- After deleting an app (to remove the stale tile)
+
+**Step-by-step:**
+
+1. **Open BTP Cockpit** → https://apac.cockpit.btp.cloud.sap
+2. Navigate to **btp_cf** subaccount (us11 region)
+3. Left sidebar → **Services** → **Instances and Subscriptions**
+4. Find **SAP Build Work Zone, Standard Edition** → click the link/Go to Application
+5. You're now in Work Zone Site Director. Left sidebar has:
+   - **Site Directory** (sites you've created)
+   - **Channel Manager** (where HTML5 apps are registered)
+   - **Content Manager** (where tiles/catalogs/groups are configured)
+6. Open **Channel Manager** → **HTML5 Apps**
+   - Verify your renamed apps appear here. If missing, click **+ Add Channel** and re-sync from html5-apps-repo
+7. Open **Content Manager** → **Apps**
+   - Search for the renamed app (e.g., `comerpisshiperpcancelshipmentecc`)
+   - If it's NOT in the list, click **+ New App** → Type: SAP Fiori → pick from Channel Manager
+   - Set: Title (`Cancel Shipment ECC`), Subtitle (`HR7`), Icon, Semantic Object (`cancelshipecc`), Action (`display`)
+8. Open **Content Manager** → **Catalogs**
+   - Find the catalog used by your site (likely "HR7 Apps")
+   - Click it → **+ Add Apps** → select your renamed app → Save
+9. Open **Content Manager** → **Groups** (if your Site uses groups)
+   - Add the app to the relevant group (e.g., "HR7 ECC Apps")
+10. Open **Site Directory** → click your Site (UUID `a167a84f-0812-44fd-86e6-01c300d56f26`)
+11. **Publish** the site (top right) → wait ~30s for cache to update
+12. Open the launchpad URL → verify the new tile appears
+
+**Remove stale tile** (for the OLD `cancelshipment` etc.):
+- Content Manager → Apps → search OLD name (e.g., `cancelshipment`) → Delete
+- Then re-publish the Site
+
+### 12.2 Cloud Connector for HR7 Live Data
+
+When apps need to call OData against HR7 (`10.10.1.76:8001`), the Cloud Connector must expose the HR7 system to BTP via a virtual host.
+
+**Prerequisite:** Cloud Connector must already be installed on a machine that has network access to HR7 (typically inside ShipERP's corporate network with VPN access).
+
+**Step-by-step:**
+
+1. Open Cloud Connector admin → typically https://localhost:8443 on the CC host
+2. Login as the CC admin (default user `Administrator`)
+3. **Connector → Subaccount** → confirm subaccount `btp_cf` (us11) is connected (green)
+4. **Subaccount → Cloud To On-Premise** → **+ Add System Mapping**:
+   - Back-end type: `ABAP System`
+   - Protocol: `HTTP`
+   - Internal Host: `10.10.1.76`
+   - Internal Port: `8001`
+   - Virtual Host: `virtual-s4hr7.erp-is.com` (this is what destinations will reference)
+   - Virtual Port: `8001`
+   - Principal Type: `None` (or `X.509` if mutual TLS)
+   - Save
+5. **Resources** → **+ Add Resource** to the system you just added:
+   - URL Path: `/sap/opu/odata/` (gives access to all OData services)
+   - Access policy: `Path and all subpaths`
+   - Save
+6. **Test connection** — green dot means CC can reach HR7
+7. In BTP Cockpit → btp_cf → Connectivity → **Cloud Connectors** → verify your Cloud Connector appears as connected
+8. Update each app's `xs-app.json` destination if needed (currently all 27 apps reference `virtual-hr7-destination` — check that destination's URL points to `https://virtual-s4hr7.erp-is.com:8001` and Proxy Type is `OnPremise`)
+
+After this, OData calls from CF apps → BTP Destination Service → Cloud Connector → HR7 will work.
+
+---
+
+*Last updated: 2026-06-07 — Added §12 runbooks for Work Zone tile management + Cloud Connector setup*
