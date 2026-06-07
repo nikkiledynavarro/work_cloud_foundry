@@ -32,7 +32,7 @@ Migrate ShipERP's 62 Fiori HTML5 apps from SAP BTP **Neo** to SAP BTP **Cloud Fo
 - Work Zone provides a unified launchpad for all Fiori apps
 
 ### Scope
-Out of 62 Neo apps, we focused on **27 HR7 apps** (ECC + EWM) because:
+Out of 62 Neo apps, we focused on **27 HR7 Apps** (ECC + EWM) because:
 - HR7 is ShipERP's main production-like system (`10.10.1.76:8001`)
 - Other destinations (HD6, SLS, S23) have fewer apps and different complexity
 - All 27 apps use the same `virtual-hr7-destination` backend
@@ -62,14 +62,14 @@ Out of 62 Neo apps, we focused on **27 HR7 apps** (ECC + EWM) because:
 | ltlplanning | comerpisshiperpltlplanning | **EWM** |
 | manualshipmentecc | comerpisshiperpmanualshipmentecc | ECC |
 | manualshipmentewm | comerpisshiperpmanualshipmentewm | **EWM** |
-| planningcockpit | comerpisshiperpplanningcockpit | ECC |
-| planshipment | comerpisshiperpplanshipment | ECC |
+| planshipment | comerpisshiperpplanshipment | **EWM** |
 | quickpackecc | comerpisshiperpquickpackecc | ECC |
 | quickpackewm | comerpisshiperpquickpackewm | **EWM** |
 | requestforpickup | comerpisshiperprequestforpickup | **EWM** |
 | saleorder | comerpisshiperpsaleorder | ECC |
 | shippingdashboard | comerpisshiperpshippingdashboard | ECC |
 | submitacefiling | comerpisshiperpsubmitacefiling | ECC |
+| trackshipmentecc | comerpisshiperptrackshipmentecc | ECC |
 | trackshipmentewm | comerpisshiperptrackshipmentewm | **EWM** |
 | viewacefiling | comerpisshiperpviewacefiling | ECC |
 
@@ -182,7 +182,7 @@ Resources (per app):
   {app}-xsuaa-service       → XSUAA application plan     (authentication)
 ```
 
-Total CF service instances created: **91** (27 apps × 3 + app-runtime-1779763944)
+Total CF service instances created: **82** (27 apps × 3 + app-runtime-1779763944)
 
 ---
 
@@ -204,7 +204,7 @@ This works in ALL environments (local, VS Code, BAS, Work Zone) without any dest
 ```
 Dots inside the app ID break URL routing → "Not Found".
 
-**Fix:** Set `sap.app.id = sap.cloud.service` for all 27 apps (no dots):
+**Fix:** Set `sap.app.id = sap.cloud.service` for All 27 apps (no dots):
 ```
 comerpisshiperpdispute.comerpisshiperpdisputepkw-1.0.0  ← works ✅
 comerpisshiperpdispute.com.erpis.shiperp.disputepkw-1.0.0  ← broken ❌
@@ -314,7 +314,6 @@ Open Chrome and go to any of these URLs:
 | LTL Planning | `http://localhost:5000/comerpisshiperpltlplanning/index.html` |
 | Manual Shipment (ECC) | `http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html` |
 | Manual Shipment (EWM) | `http://localhost:5000/comerpisshiperpmanualshipmentewm/index.html` |
-| Planning Cockpit | `http://localhost:5000/comerpisshiperpplanningcockpit/index.html` |
 | Plan Shipment | `http://localhost:5000/comerpisshiperpplanshipment/index.html` |
 | Quick Pack (ECC) | `http://localhost:5000/comerpisshiperpquickpackecc/index.html` |
 | Quick Pack (EWM) | `http://localhost:5000/comerpisshiperpquickpackewm/index.html` |
@@ -322,6 +321,7 @@ Open Chrome and go to any of these URLs:
 | Sale Order | `http://localhost:5000/comerpisshiperpsaleorder/index.html` |
 | Shipping Dashboard | `http://localhost:5000/comerpisshiperpshippingdashboard/index.html` |
 | Submit ACE Filing | `http://localhost:5000/comerpisshiperpsubmitacefiling/index.html` |
+| Track Shipment (ECC) | `http://localhost:5000/comerpisshiperptrackshipmentecc/index.html` |
 | Track Shipment (EWM) | `http://localhost:5000/comerpisshiperptrackshipmentewm/index.html` |
 | View ACE Filing | `http://localhost:5000/comerpisshiperpviewacefiling/index.html` |
 
@@ -570,7 +570,7 @@ git add .vscode/launch.json && git commit -m "chore: regenerate CF launch config
 | GitHub Repo | https://github.com/nikkiledynavarro/work_cloud_foundry |
 | CF API | https://api.cf.us11.hana.ondemand.com |
 
-### 11.2 CF Direct URL Pattern (All 27 Apps)
+### 11.2 CF Direct URL Pattern (All 27 apps)
 
 Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.`
 
@@ -593,7 +593,6 @@ Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-
 | ltlplanning | `comerpisshiperpltlplanning.comerpisshiperpltlplanning-1.0.0/index.html` |
 | manualshipmentecc | `comerpisshiperpmanualshipmentecc.comerpisshiperpmanualshipmentecc-1.0.0/index.html` |
 | manualshipmentewm | `comerpisshiperpmanualshipmentewm.comerpisshiperpmanualshipmentewm-1.0.0/index.html` |
-| planningcockpit | `comerpisshiperpplanningcockpit.comerpisshiperpplanningcockpit-1.0.0/index.html` |
 | planshipment | `comerpisshiperpplanshipment.comerpisshiperpplanshipment-1.0.0/index.html` |
 | quickpackecc | `comerpisshiperpquickpackecc.comerpisshiperpquickpackecc-1.0.0/index.html` |
 | quickpackewm | `comerpisshiperpquickpackewm.comerpisshiperpquickpackewm-1.0.0/index.html` |
@@ -601,6 +600,7 @@ Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-
 | saleorder | `comerpisshiperpsaleorder.comerpisshiperpsaleorder-1.0.0/index.html` |
 | shippingdashboard | `comerpisshiperpshippingdashboard.comerpisshiperpshippingdashboard-1.0.0/index.html` |
 | submitacefiling | `comerpisshiperpsubmitacefiling.comerpisshiperpsubmitacefiling-1.0.0/index.html` |
+| trackshipmentecc | `comerpisshiperptrackshipmentecc.comerpisshiperptrackshipmentecc-1.0.0/index.html` |
 | trackshipmentewm | `comerpisshiperptrackshipmentewm.comerpisshiperptrackshipmentewm-1.0.0/index.html` |
 | viewacefiling | `comerpisshiperpviewacefiling.comerpisshiperpviewacefiling-1.0.0/index.html` |
 

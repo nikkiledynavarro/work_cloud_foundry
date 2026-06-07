@@ -83,10 +83,6 @@
                         "path":  "apps/manualshipmentewm"
                     },
                     {
-                        "name":  "☁ planningcockpit",
-                        "path":  "apps/planningcockpit"
-                    },
-                    {
                         "name":  "☁ planshipment",
                         "path":  "apps/planshipment"
                     },
@@ -113,6 +109,10 @@
                     {
                         "name":  "☁ submitacefiling",
                         "path":  "apps/submitacefiling"
+                    },
+                    {
+                        "name":  "☁ trackshipmentecc",
+                        "path":  "apps/trackshipmentecc"
                     },
                     {
                         "name":  "☁ trackshipmentewm",
@@ -221,10 +221,6 @@
                     {
                         "name":  "🌐 soshiperptab (Neo)",
                         "path":  "apps/soshiperptab"
-                    },
-                    {
-                        "name":  "🌐 trackshipment (Neo)",
-                        "path":  "apps/trackshipment"
                     },
                     {
                         "name":  "🌐 trackshipmentsls (Neo)",

@@ -491,30 +491,6 @@
                       "problemMatcher":  [
 
                                          ],
-                      "label":  "Start planningcockpit locally",
-                      "isBackground":  true,
-                      "command":  "npm.cmd start",
-                      "type":  "shell",
-                      "presentation":  {
-                                           "group":  "Local Source",
-                                           "reveal":  "always",
-                                           "panel":  "dedicated"
-                                       },
-                      "options":  {
-                                      "shell":  {
-                                                    "executable":  "cmd.exe",
-                                                    "args":  [
-                                                                 "/d",
-                                                                 "/c"
-                                                             ]
-                                                },
-                                      "cwd":  "${workspaceFolder}/apps/planningcockpit"
-                                  }
-                  },
-                  {
-                      "problemMatcher":  [
-
-                                         ],
                       "label":  "Start planshipment locally",
                       "isBackground":  true,
                       "command":  "npm.cmd start",

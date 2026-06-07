@@ -1,1 +1,0 @@
-sap.ui.define([],function(){"use strict";var e="com.erpis.shiperp.planningcockpit.fragment.";return{getFragment:function(n,r,t){var a=t.getView();if(!t.hasOwnProperty("fragments")){t.fragments={}}var i=t.fragments[r];if(i===undefined){var f="";if(n){f=a.createId(n)}else{f=a.getId()}i=sap.ui.xmlfragment(f,e+r,t);t.fragments[r]=i;a.addDependent(i)}return i}}});

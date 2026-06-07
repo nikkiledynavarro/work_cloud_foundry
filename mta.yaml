@@ -247,6 +247,18 @@ modules:
       build-result: dist
       supported-platforms: []
 
+  - name: trackshipmentecc
+    type: html5
+    path: apps/trackshipmentecc
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
   - name: dispute
     type: html5
     path: apps/dispute
@@ -361,6 +373,52 @@ modules:
               ServiceInstanceName: trackshipmentewm-xsuaa-service
               ServiceKeyName: trackshipmentewm-xsuaa-service-key
               sap.cloud.service: comerpisshiperptrackshipmentewm
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: trackshipmentecc-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: trackshipmentecc-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/trackshipmentecc
+      requires:
+        - name: trackshipmentecc
+          artifacts:
+            - trackshipmentecc.zip
+          target-path: resources/trackshipmentecc/
+
+  - name: trackshipmentecc-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: trackshipmentecc-destination-service
+        parameters:
+          content-target: true
+      - name: trackshipmentecc-app-front-service
+        parameters:
+          service-key:
+            name: trackshipmentecc-app-front-service-key
+      - name: trackshipmentecc-xsuaa-service
+        parameters:
+          service-key:
+            name: trackshipmentecc-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: trackshipmentecc-app-front-service
+              ServiceInstanceName: trackshipmentecc-app-front-service
+              ServiceKeyName: trackshipmentecc-app-front-service-key
+              sap.cloud.service: comerpisshiperptrackshipmentecc
+            - Name: trackshipmentecc-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: trackshipmentecc-xsuaa-service
+              ServiceKeyName: trackshipmentecc-xsuaa-service-key
+              sap.cloud.service: comerpisshiperptrackshipmentecc
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1085,18 +1143,6 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: planningcockpit
-    type: html5
-    path: apps/planningcockpit
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: manualshipmentewm
     type: html5
     path: apps/manualshipmentewm
@@ -1477,52 +1523,6 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: planningcockpit-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: planningcockpit-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/planningcockpit
-      requires:
-        - name: planningcockpit
-          artifacts:
-            - planningcockpit.zip
-          target-path: resources/planningcockpit/
-
-  - name: planningcockpit-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: planningcockpit-destination-service
-        parameters:
-          content-target: true
-      - name: planningcockpit-app-front-service
-        parameters:
-          service-key:
-            name: planningcockpit-app-front-service-key
-      - name: planningcockpit-xsuaa-service
-        parameters:
-          service-key:
-            name: planningcockpit-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: planningcockpit-app-front-service
-              ServiceInstanceName: planningcockpit-app-front-service
-              ServiceKeyName: planningcockpit-app-front-service-key
-              sap.cloud.service: comerpisshiperpplanningcockpit
-            - Name: planningcockpit-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: planningcockpit-xsuaa-service
-              ServiceKeyName: planningcockpit-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpplanningcockpit
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
   - name: manualshipmentewm-app-content
     type: com.sap.application.content
     path: .
@@ -1591,6 +1591,27 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-trackshipmentewm.json
+
+  - name: trackshipmentecc-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: trackshipmentecc-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: trackshipmentecc-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-trackshipmentecc.json
 
   - name: dispute-app-front-service
     type: org.cloudfoundry.managed-service
@@ -1885,27 +1906,6 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-cancelshipmentewm.json
-
-  - name: planningcockpit-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: planningcockpit-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: planningcockpit-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-planningcockpit.json
 
   - name: manualshipmentewm-app-front-service
     type: org.cloudfoundry.managed-service

@@ -1,6 +1,6 @@
 specVersion: "3.0"
 metadata:
-  name: planningcockpit
+  name: trackshipmentecc
 type: application
 resources:
   configuration:
@@ -13,8 +13,6 @@ framework:
     - name: sap.ui.core
     - name: sap.m
     - name: sap.f
-    - name: sap.ushell
-    - name: sap.collaboration
 builder:
   resources:
     excludes:
