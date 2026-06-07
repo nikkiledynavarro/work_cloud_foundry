@@ -102,10 +102,11 @@ Targeting the **ERP S4 SALES** system (`erps4sales.erp-is.com`, system ID `SLS`)
 | shipewmsls | comerpisshiperpshipewmsls | shipewm_srv (EWM) |
 | shippingdashboardsls | comerpisshiperpshippingdashboardsls | SHIP_DASH_SRV |
 | trackshipmentsls | comerpisshiperptrackshipmentsls | shipewm_srv + track_shipment_srv |
+| **cancelsls** 🆕 | comerpisshiperpcancelsls | cancel_ship_srv |
 
-**SLS Total:** 11 apps
+**SLS Total:** 12 apps (Create + **Cancel** + Track trio complete)
 
-**Grand Total in CF:** 27 HR7 + 11 SLS = **38 apps**
+**Grand Total in CF:** 27 HR7 + 12 SLS = **39 apps**
 
 ### 2.1 ECC ↔ EWM Symmetry
 Six business functions exist in both ECC and EWM flavors. Naming follows the explicit `ecc` / `ewm` suffix convention:
@@ -889,4 +890,4 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — §2 expanded with new §2.2 SLS Apps Inventory; 11 SLS apps deployed to btp_cf following the same MTA pattern as HR7; `virtual-erps4sales-destination` created in btp_cf pointing at `erps4sales.erp-is.com:50000`. SLS apps will need same Cloud Connector mapping as HR7 (rsantos), but apps are deployed and accessible via direct URLs today.*
+*Last updated: 2026-06-07 — §2 expanded with new §2.2 SLS Apps Inventory; 12 SLS apps deployed to btp_cf following the same MTA pattern as HR7 (Create+Cancel+Track trio complete with cancelsls added); `virtual-erps4sales-destination` created in btp_cf pointing at `erps4sales.erp-is.com:50000`. SLS apps will need same Cloud Connector mapping as HR7 (rsantos), but apps are deployed and accessible via direct URLs today. Grand total: 39 CF apps (27 HR7 + 12 SLS).*

@@ -2208,6 +2208,64 @@ modules:
     build-parameters:
       no-source: true
 
+  - name: cancelsls
+    type: html5
+    path: apps/cancelsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: cancelsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cancelsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/cancelsls
+      requires:
+        - name: cancelsls
+          artifacts:
+            - cancelsls.zip
+          target-path: resources/cancelsls/
+
+  - name: cancelsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: cancelsls-destination-service
+        parameters:
+          content-target: true
+      - name: cancelsls-app-front-service
+        parameters:
+          service-key:
+            name: cancelsls-app-front-service-key
+      - name: cancelsls-xsuaa-service
+        parameters:
+          service-key:
+            name: cancelsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: cancelsls-app-front-service
+              ServiceInstanceName: cancelsls-app-front-service
+              ServiceKeyName: cancelsls-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelsls
+            - Name: cancelsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: cancelsls-xsuaa-service
+              ServiceKeyName: cancelsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
 resources:
 
   - name: trackshipmentewm-app-front-service
@@ -3006,3 +3064,23 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-trackshipmentsls.json
+  - name: cancelsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cancelsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: cancelsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-cancelsls.json

@@ -557,6 +557,24 @@
         {
             "runtimeArgs": [
                 "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelsls/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelsls (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 5
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
                 "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html'"
             ],
             "type": "node",
@@ -566,7 +584,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 5
+                "order": 6
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -584,7 +602,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 6
+                "order": 7
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -602,7 +620,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 7
+                "order": 8
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -620,7 +638,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 8
+                "order": 9
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -638,7 +656,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 9
+                "order": 10
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -656,7 +674,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 10
+                "order": 11
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -674,7 +692,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 11
+                "order": 12
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -692,7 +710,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 12
+                "order": 13
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -710,7 +728,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 13
+                "order": 14
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -728,7 +746,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 14
+                "order": 15
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -746,7 +764,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 15
+                "order": 16
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -764,7 +782,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 16
+                "order": 17
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -782,7 +800,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 17
+                "order": 18
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -800,7 +818,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 18
+                "order": 19
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -818,7 +836,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 19
+                "order": 20
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -836,7 +854,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 20
+                "order": 21
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -854,7 +872,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 21
+                "order": 22
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -872,7 +890,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 22
+                "order": 23
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -890,7 +908,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 23
+                "order": 24
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -908,7 +926,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 24
+                "order": 25
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -926,7 +944,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 25
+                "order": 26
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -944,7 +962,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 26
+                "order": 27
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -962,7 +980,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 27
+                "order": 28
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -980,7 +998,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 28
+                "order": 29
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -998,7 +1016,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 29
+                "order": 30
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1016,7 +1034,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 30
+                "order": 31
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1034,7 +1052,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 31
+                "order": 32
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1052,7 +1070,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 32
+                "order": 33
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1070,7 +1088,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 33
+                "order": 34
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1088,7 +1106,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 34
+                "order": 35
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1106,7 +1124,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 35
+                "order": 36
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1124,7 +1142,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 36
+                "order": 37
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1142,7 +1160,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 37
+                "order": 38
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1160,7 +1178,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Apps",
-                "order": 38
+                "order": 39
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1237,6 +1255,23 @@
         {
             "runtimeArgs": [
                 "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelsls.comerpisshiperpcancelsls-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelsls (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 5
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
                 "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcarrierperformancereportecc.comerpisshiperpcarrierperformancereportecc-1.0.0/index.html'"
             ],
             "type": "node",
@@ -1245,7 +1280,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 5
+                "order": 6
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1262,7 +1297,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 6
+                "order": 7
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1279,7 +1314,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 7
+                "order": 8
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1296,7 +1331,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 8
+                "order": 9
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1313,7 +1348,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 9
+                "order": 10
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1330,7 +1365,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 10
+                "order": 11
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1347,7 +1382,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 11
+                "order": 12
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1364,7 +1399,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 12
+                "order": 13
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1381,7 +1416,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 13
+                "order": 14
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1398,7 +1433,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 14
+                "order": 15
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1415,7 +1450,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 15
+                "order": 16
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1432,7 +1467,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 16
+                "order": 17
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1449,7 +1484,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 17
+                "order": 18
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1466,7 +1501,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 18
+                "order": 19
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1483,7 +1518,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 19
+                "order": 20
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1500,7 +1535,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 20
+                "order": 21
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1517,7 +1552,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 21
+                "order": 22
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1534,7 +1569,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 22
+                "order": 23
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1551,7 +1586,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 23
+                "order": 24
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1568,7 +1603,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 24
+                "order": 25
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1585,7 +1620,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 25
+                "order": 26
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1602,7 +1637,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 26
+                "order": 27
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1619,7 +1654,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 27
+                "order": 28
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1636,7 +1671,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 28
+                "order": 29
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1653,7 +1688,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 29
+                "order": 30
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1670,7 +1705,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 30
+                "order": 31
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1687,7 +1722,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 31
+                "order": 32
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1704,7 +1739,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 32
+                "order": 33
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1721,7 +1756,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 33
+                "order": 34
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1738,7 +1773,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 34
+                "order": 35
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1755,7 +1790,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 35
+                "order": 36
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1772,7 +1807,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 36
+                "order": 37
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1789,7 +1824,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 37
+                "order": 38
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
@@ -1806,7 +1841,7 @@
             "presentation": {
                 "hidden": false,
                 "group": "☁ CF Direct",
-                "order": 38
+                "order": 39
             },
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
