@@ -732,36 +732,97 @@ When you rename an app (e.g., `cancelshipment` → `cancelshipmentecc`), the CF 
 - Content Manager → Apps → search OLD name (e.g., `cancelshipment`) → Delete
 - Then re-publish the Site
 
-### 12.2 Cloud Connector for HR7 Live Data
+### 12.2 Cloud Connector for HR7 Live Data — Investigation & Status
 
-When apps need to call OData against HR7 (`10.10.1.76:8001`), the Cloud Connector must expose the HR7 system to BTP via a virtual host.
+#### Background: Two Different "HR7" Systems
 
-**Prerequisite:** Cloud Connector must already be installed on a machine that has network access to HR7 (typically inside ShipERP's corporate network with VPN access).
+A critical clarification surfaced during this investigation: there are **two different SAP systems** both called "HR7" in different contexts.
 
-**Step-by-step:**
+| System | Where referenced | What it is |
+|--------|------------------|------------|
+| **ECC HR7** at `10.10.1.76:8001` | Your CLAUDE.md, local hr7-proxy.js, VPN-only access | Classic NetWeaver/ECC system. Used for your personal dev testing via local approuter. User: `NNAVARRO_AI`. |
+| **S/4HANA HR7** at `virtual-s4hr7.erp-is.com:50000` | Both Neo and CF `virtual-hr7-destination` | Modern S/4HANA system. What all 27 deployed apps actually targeted in production. User: `PWANGDALI`. |
 
-1. Open Cloud Connector admin → typically https://localhost:8443 on the CC host
-2. Login as the CC admin (default user `Administrator`)
-3. **Connector → Subaccount** → confirm subaccount `btp_cf` (us11) is connected (green)
-4. **Subaccount → Cloud To On-Premise** → **+ Add System Mapping**:
-   - Back-end type: `ABAP System`
-   - Protocol: `HTTP`
-   - Internal Host: `10.10.1.76`
-   - Internal Port: `8001`
-   - Virtual Host: `virtual-s4hr7.erp-is.com` (this is what destinations will reference)
-   - Virtual Port: `8001`
-   - Principal Type: `None` (or `X.509` if mutual TLS)
+The Neo apps have been running against the **S/4HANA HR7** (port 50000), not the ECC HR7 (port 8001). The local approuter happens to use the ECC HR7 because that's what VPN access is convenient for.
+
+> **For CF production:** the destination already points at S/4HANA HR7. You do NOT need to change this — it matches what Neo used.
+
+#### Investigation Findings (2026-06-07)
+
+**Cloud Connector Setup**
+- Connector ID `643440000B8211E898F8D9F60A0A0136` — **one physical CC** serves both Neo and btp_cf
+- Connection initiated by `rsantos@erp-is.com`
+- CC Version `2.18.0`, single instance (HA inactive)
+
+**Per-subaccount system mappings (in the CC):**
+| Subaccount Connection | Exposes `virtual-s4hr7.erp-is.com:50000`? | Notes |
+|----------------------|-------------------------------------------|-------|
+| Neo (`Fiori Development Apps`) | ✅ Yes — Neo apps work | Mapping created when Neo apps were deployed |
+| **btp_cf (us11)** | ❌ **No** | Only `erps42023`, `erps42023cd`, `s4std21` are mapped |
+
+**Destination comparison:**
+| Property | Neo `virtual-hr7-destination` | CF `virtual-hr7-destination` |
+|----------|------------------------------|------------------------------|
+| URL | `https://virtual-s4hr7.erp-is.com:50000` | `http://virtual-s4hr7.erp-is.com:50000` (server normalizes to http even when set to https) |
+| User | (Neo creds) | `PWANGDALI` |
+| Password | (Neo creds) | `ERPPassword1` |
+| ProxyType | `OnPremise` | `OnPremise` |
+| ProxyProtocol | (HTTPS) | `HTTPS` (fixed 2026-06-07) |
+| CloudConnectorLocationId | (default) | (cleared 2026-06-07 — was `a`) |
+
+#### Fixes Already Applied to btp_cf Destination
+
+Applied via Destination Service API (Python script using subaccount destination service credentials):
+
+1. **Removed `CloudConnectorLocationId=a`** — was pointing at a non-existent location, since the connected CC has Location ID `(default)`.
+2. **Changed `ProxyProtocol` from `HTTP` to `HTTPS`** — matches what Neo's working configuration uses.
+3. **Attempted URL `http://`→`https://` change** — API accepts the change (returns `Count: 1`) but the server normalizes the URL back to `http://`. This is likely a server-side rule (perhaps requiring a destination trust certificate). It probably doesn't matter for runtime since `ProxyProtocol` controls the CC-to-backend protocol; the URL field is mostly informational at this point.
+
+#### The Remaining Blocker — Action Needed from `rsantos`
+
+The Cloud Connector has the HR7 system mapping for Neo but NOT for btp_cf. `rsantos` needs to extend the existing mapping (no new mapping to create):
+
+**Step-by-step for rsantos:**
+
+1. Open Cloud Connector admin UI on the CC host (typically `https://localhost:8443`)
+2. Switch to **Configuration → Cloud → Subaccounts**
+3. Confirm both connections are listed:
+   - Neo: subdomain `da56ca735` (Fiori Development Apps)
+   - btp_cf: subaccount ID `eecc9986-a678-4206-b6b5-4a486cd0a4fe`
+4. Click the **Neo subaccount connection** → **Cloud To On-Premise** → find the `virtual-s4hr7.erp-is.com:50000` system mapping
+5. Note the **Internal Host** and **Internal Port** it points at (this is the actual S/4 HR7 endpoint)
+6. Switch to the **btp_cf subaccount connection** → **Cloud To On-Premise** → **+ Add System Mapping**
+   - Back-end Type: `ABAP System` (or whatever Neo's mapping uses)
+   - Protocol: `HTTPS` (match Neo)
+   - Internal Host: *(same as step 5)*
+   - Internal Port: *(same as step 5)*
+   - Virtual Host: `virtual-s4hr7.erp-is.com`
+   - Virtual Port: `50000`
+   - Principal Type: `None` (or whatever Neo uses)
    - Save
-5. **Resources** → **+ Add Resource** to the system you just added:
-   - URL Path: `/sap/opu/odata/` (gives access to all OData services)
-   - Access policy: `Path and all subpaths`
+7. Under the new system mapping → **Resources** → **+ Add**
+   - URL Path: `/sap/opu/odata/`
+   - Access Policy: `Path And All Sub-Paths`
    - Save
-6. **Test connection** — green dot means CC can reach HR7
-7. In BTP Cockpit → btp_cf → Connectivity → **Cloud Connectors** → verify your Cloud Connector appears as connected
-8. Update each app's `xs-app.json` destination if needed (currently all 27 apps reference `virtual-hr7-destination` — check that destination's URL points to `https://virtual-s4hr7.erp-is.com:8001` and Proxy Type is `OnPremise`)
+8. Verify: in BTP Cockpit → btp_cf → Connectivity → Cloud Connectors, the `(default)` location now lists `virtual-s4hr7.erp-is.com:50000` as **Available**
 
-After this, OData calls from CF apps → BTP Destination Service → Cloud Connector → HR7 will work.
+After this, OData calls from CF apps will route correctly: `CF app → BTP destination service → Cloud Connector → S/4 HR7`.
+
+#### Verification Test (after rsantos is done)
+
+1. Open BTP Cockpit → btp_cf → Connectivity → Destinations → `virtual-hr7-destination`
+2. Click **Check Connection** — should return HTTP 200 or 401 (both mean network path works; 401 just means auth was checked at the backend)
+3. Open any deployed CF app (e.g., `comerpisshiperpdispute`) via direct URL
+4. Open browser DevTools → Network tab — OData calls to `/sap/opu/odata/...` should return real data (not 502/403)
+
+#### Known Limitations Still Open
+
+| Item | Status | What's needed |
+|------|--------|---------------|
+| `rsantos` adds HR7 system mapping for btp_cf | ⏳ Pending external action | Message rsantos with §12.2 steps above |
+| HTTPS URL "stickiness" in CF destination | ⚠️ Server normalizes to http | May need destination trust cert uploaded; not blocking if ProxyProtocol is HTTPS |
+| Whether ECC HR7 (10.10.1.76:8001) should ALSO have a CF destination | ❓ Decision | Only needed if apps want ECC data, not S/4 data |
 
 ---
 
-*Last updated: 2026-06-07 — Added §12 runbooks for Work Zone tile management + Cloud Connector setup*
+*Last updated: 2026-06-07 — §12.2 expanded with Cloud Connector investigation findings, fixes applied, and remaining action items*
