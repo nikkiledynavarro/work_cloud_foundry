@@ -459,18 +459,34 @@ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/
 index.html
 ```
 
-The **Site UUID** (`a167a84f-0812-44fd-86e6-01c300d56f26`) was found by clicking the Error Log icon on an app in BTP Cockpit → HTML5 Applications. The dialog title revealed the full app key including the UUID.
+The **UUID** in the CF Direct URL (`a167a84f-0812-44fd-86e6-01c300d56f26`) is **NOT a Work Zone Site UUID** — despite the variable name in the launch config script. It's actually the **GUID of one app's destination-service instance** (in our case, `cancelacefiling-destination-service`). The CF managed launchpad uses it to establish the auth/route context, then serves whatever app is named in the next URL segment.
+
+Each of the 27 apps has its OWN destination-service GUID. Any of them works equivalently as the URL prefix. The launch config script just picks one and reuses it across all apps for consistency. Verified via:
+```bash
+cf curl /v3/service_instances/a167a84f-0812-44fd-86e6-01c300d56f26
+# → name: cancelacefiling-destination-service
+```
 
 ### 7.7 The Launch Config Generator Script
-If the CF environment changes (new site UUID, different host), update `scripts/generate-launch-configs.js`:
+If the CF environment changes (new destination GUID, different host), update `scripts/generate-launch-configs.js`:
 
 ```js
 const CF_CONFIG = {
     host:     'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com',
-    siteUuid: 'a167a84f-0812-44fd-86e6-01c300d56f26',
+    siteUuid: 'a167a84f-0812-44fd-86e6-01c300d56f26',  // misnomer — actually a destination-service GUID
     version:  '1.0.0'
 };
 ```
+
+> **Heads-up:** The variable is named `siteUuid` for historical reasons but is actually any one app's destination-service GUID. To find a current valid one if this stops working, run:
+> ```bash
+> cf curl '/v3/service_instances?per_page=300' | python3 -c "
+>   import sys,json
+>   for r in json.load(sys.stdin)['resources']:
+>     if r['name'].endswith('-destination-service') and 'comerpisshiperp' in r['name']:
+>       print(r['name'], r['guid']); break
+> "
+> ```
 
 Then run:
 ```bash
@@ -483,23 +499,31 @@ node scripts/generate-launch-configs.js
 
 ## 8. How to Test — BAS (Cloud)
 
-BAS (SAP Business Application Studio) is VS Code running in SAP's cloud. It cannot access `localhost` the same way VS Code can — `localhost` in BAS goes through SAP's port-forwarding service which requires BTP OAuth.
+BAS (SAP Business Application Studio) is VS Code running in SAP's cloud.
 
-### 8.1 Best Option — BTP Cockpit HTML5 Applications (Recommended)
+> **⚠️ Important reality check (2026-06-07):** Until the Cloud Connector exposes the HR7 system to the btp_cf subaccount (see §12.2), BAS testing is **UI-rendering only** — OData calls will fail with 502 because the CC tunnel from BTP cloud → on-premise HR7 isn't configured. BAS has no VPN and can't use the local approuter, so this is a hard blocker for data-dependent testing.
+>
+> For **live data testing** today, use **Local Approuter** (§6 or VS Code F5 `☁ CF Apps`). That path uses your laptop's VPN directly to ECC HR7 — completely bypasses the CC.
+
+### 8.1 Best Option — BTP Cockpit HTML5 Applications (UI Review)
 No approuter needed at all:
 1. Go to `https://apac.cockpit.btp.cloud.sap`
 2. Navigate to: `btp_cf subaccount → HTML5 Applications`
 3. Click any app name (e.g., `comerpisshiperpdispute`) → opens in a new tab ✅
 
-### 8.2 CF Direct URL in Browser
+The UI loads from CF HTML5 Apps Repository — works without VPN or CC. OData calls within the app will fail until §12.2 is resolved.
+
+### 8.2 CF Direct URL in Browser (UI Review)
 Paste directly in your Chrome browser (you must be logged in to BTP):
 ```
-https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.{appId}.{appId}-1.0.0/index.html
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/{anyDestServiceGuid}.{appId}.{appId}-1.0.0/index.html
 ```
 Example for Dispute:
 ```
 https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html
 ```
+
+> The first UUID segment is any deployed app's destination-service GUID (see §7.6). Same caveat — UI loads, OData fails until §12.2 is resolved.
 
 ### 8.3 BAS Approuter (if port-forwarding OAuth works)
 If you want to run the approuter inside BAS:
@@ -528,12 +552,17 @@ Then open a URL in your browser:
 `http://localhost:5000/{appId}/index.html`
 
 > ⚠️ **BAS port-forwarding may not work** — this depends on the BTP subaccount configuration.
-> If you get "URL does not reference a valid account", use **Option 8.1** instead.
+> Even when it does work, OData still fails because BAS's hr7-proxy has no VPN to reach `10.10.1.76`. Use **Option 8.1** for UI review instead.
 
-### 8.4 What to Expect in BAS
-- **App renders with Fiori UI** ✅ (tabs, buttons, table headers visible)
-- **"No data" or OData error** ❌ Expected — BAS has no VPN so HR7 is unreachable
-- **Blank white page** — Check setup.sh ran and node server.js is running
+### 8.4 What to Expect in BAS Today
+- ✅ **App renders with Fiori UI** (tabs, buttons, table headers, dialogs)
+- ✅ **Click navigation works** (route changes, view transitions)
+- ❌ **Tables / lists are empty** (OData 502 — CC tunnel for HR7 not configured for btp_cf)
+- ❌ **Error popups about failed OData calls** (expected)
+- ❌ **Blank white page** = setup.sh didn't run OR node server.js isn't running
+
+### 8.5 When BAS Testing WILL Have Data
+Once §12.2 is resolved (rsantos adds HR7 system mapping to btp_cf in Cloud Connector), BAS testing will get real data automatically — no app changes needed. The current `virtual-hr7-destination` config is correct; the only missing piece is the CC mapping.
 
 ---
 
@@ -541,15 +570,17 @@ Then open a URL in your browser:
 
 ### 9.1 Summary Table
 
-| Method | App Source | Local Server | VPN for Data | Best For |
-|--------|-----------|-------------|-------------|----------|
-| Local Approuter (Chrome) | CF HTML5 Repo | `node server.js` + hr7-proxy | ✅ Yes | Full end-to-end with live data |
-| VS Code F5 `☁ CF Apps` | CF HTML5 Repo | Auto-started by F5 | ✅ Yes | Same as above, easier start |
-| VS Code F5 `☁ CF Direct` | CF HTML5 Repo | **None** | ✅ + Cloud Connector | Quick CF test, no setup |
-| VS Code Integrated Browser | CF HTML5 Repo | `node server.js` needed | ✅ Yes | App inside VS Code editor |
-| BAS → BTP Cockpit HTML5 Apps | CF HTML5 Repo | **None** | ❌ No (no VPN in cloud) | Quickest cloud check |
-| BAS → CF Direct URL | CF HTML5 Repo | **None** | ❌ No | Share URL with team |
-| Work Zone (future) | CF HTML5 Repo | **None** | ❌ (until CC fixed) | Production launchpad |
+| Method | App Source | Local Server | OData Path | Has Live Data Today? | Best For |
+|--------|-----------|-------------|-----------|---------------------|----------|
+| Local Approuter (Chrome) | CF HTML5 Repo | `node server.js` + hr7-proxy | hr7-proxy → VPN → 10.10.1.76:8001 (ECC) | ✅ Yes | Full end-to-end with live ECC data |
+| VS Code F5 `☁ CF Apps` | CF HTML5 Repo | Auto-started by F5 | Same as above | ✅ Yes | Same as above, easier start |
+| VS Code F5 `☁ CF Direct` | CF HTML5 Repo | **None** | BTP destination → CC → S/4 HR7 | ❌ Until §12.2 | UI review only (today) |
+| VS Code Integrated Browser | CF HTML5 Repo | `node server.js` needed | hr7-proxy → VPN | ✅ Yes | App inside VS Code editor |
+| BAS → BTP Cockpit HTML5 Apps | CF HTML5 Repo | **None** | BTP destination → CC → S/4 HR7 | ❌ Until §12.2 | UI review only (today) |
+| BAS → CF Direct URL | CF HTML5 Repo | **None** | BTP destination → CC → S/4 HR7 | ❌ Until §12.2 | Share URL with team for UI review |
+| Work Zone (future) | CF HTML5 Repo | **None** | BTP destination → CC → S/4 HR7 | ❌ Until §12.2 | Production launchpad |
+
+> **Why two HR7 data paths?** Local Approuter targets the **ECC HR7** at `10.10.1.76:8001` via your laptop's VPN. All cloud-based paths (CF Direct, BAS, Work Zone) target the **S/4HANA HR7** at `virtual-s4hr7.erp-is.com:50000` via the BTP destination service + Cloud Connector. They're two different production systems — see §12.2 for the full breakdown.
 
 ### 9.2 Troubleshooting
 
@@ -613,6 +644,15 @@ git add .vscode/launch.json && git commit -m "chore: regenerate CF launch config
 | CF API | https://api.cf.us11.hana.ondemand.com |
 
 ### 11.2 CF Direct URL Pattern (All 27 apps)
+
+The URL structure is:
+```
+{launchpad-host}/{destination-service-guid}.{sap.cloud.service}.{sap.app.id}-{version}/index.html
+```
+
+The first UUID segment is the GUID of **any** deployed app's `*-destination-service` instance — it's NOT a Work Zone Site UUID. The CF managed launchpad uses it to establish the auth/route context, then serves whatever app is named in the next URL segment. All 27 destination-service GUIDs are interchangeable in this position.
+
+We use `cancelacefiling-destination-service`'s GUID (`a167a84f-0812-44fd-86e6-01c300d56f26`) by convention for all 27 URLs.
 
 Base: `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.`
 
@@ -825,4 +865,4 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — §12.2 expanded with Cloud Connector investigation findings, fixes applied, and remaining action items*
+*Last updated: 2026-06-07 — §7.6/§11.2 clarified that the URL "site UUID" is a destination-service GUID, not a Work Zone Site; §8 BAS section updated to reflect UI-only reality until §12.2 is resolved; §9 testing summary updated*
