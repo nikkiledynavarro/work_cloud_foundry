@@ -1686,9 +1686,9 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: freightordersls
+  - name: freightorderplanningsls
     type: html5
-    path: apps/freightordersls
+    path: apps/freightorderplanningsls
     build-parameters:
       builder: custom
       commands:
@@ -1698,55 +1698,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: freightordersls-app-content
+  - name: freightorderplanningsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: freightordersls-app-front-service
+      - name: freightorderplanningsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/freightordersls
+      build-result: resources/freightorderplanningsls
       requires:
-        - name: freightordersls
+        - name: freightorderplanningsls
           artifacts:
-            - freightordersls.zip
-          target-path: resources/freightordersls/
+            - freightorderplanningsls.zip
+          target-path: resources/freightorderplanningsls/
 
-  - name: freightordersls-destination-content
+  - name: freightorderplanningsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: freightordersls-destination-service
+      - name: freightorderplanningsls-destination-service
         parameters:
           content-target: true
-      - name: freightordersls-app-front-service
+      - name: freightorderplanningsls-app-front-service
         parameters:
           service-key:
-            name: freightordersls-app-front-service-key
-      - name: freightordersls-xsuaa-service
+            name: freightorderplanningsls-app-front-service-key
+      - name: freightorderplanningsls-xsuaa-service
         parameters:
           service-key:
-            name: freightordersls-xsuaa-service-key
+            name: freightorderplanningsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: freightordersls-app-front-service
-              ServiceInstanceName: freightordersls-app-front-service
-              ServiceKeyName: freightordersls-app-front-service-key
+            - Name: freightorderplanningsls-app-front-service
+              ServiceInstanceName: freightorderplanningsls-app-front-service
+              ServiceKeyName: freightorderplanningsls-app-front-service-key
               sap.cloud.service: comerpisshiperpfreightordersls
-            - Name: freightordersls-xsuaa-service
+            - Name: freightorderplanningsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: freightordersls-xsuaa-service
-              ServiceKeyName: freightordersls-xsuaa-service-key
+              ServiceInstanceName: freightorderplanningsls-xsuaa-service
+              ServiceKeyName: freightorderplanningsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpfreightordersls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: manualewmsls
+  - name: manualshipmentewmsls
     type: html5
-    path: apps/manualewmsls
+    path: apps/manualshipmentewmsls
     build-parameters:
       builder: custom
       commands:
@@ -1756,55 +1756,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: manualewmsls-app-content
+  - name: manualshipmentewmsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: manualewmsls-app-front-service
+      - name: manualshipmentewmsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/manualewmsls
+      build-result: resources/manualshipmentewmsls
       requires:
-        - name: manualewmsls
+        - name: manualshipmentewmsls
           artifacts:
-            - manualewmsls.zip
-          target-path: resources/manualewmsls/
+            - manualshipmentewmsls.zip
+          target-path: resources/manualshipmentewmsls/
 
-  - name: manualewmsls-destination-content
+  - name: manualshipmentewmsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: manualewmsls-destination-service
+      - name: manualshipmentewmsls-destination-service
         parameters:
           content-target: true
-      - name: manualewmsls-app-front-service
+      - name: manualshipmentewmsls-app-front-service
         parameters:
           service-key:
-            name: manualewmsls-app-front-service-key
-      - name: manualewmsls-xsuaa-service
+            name: manualshipmentewmsls-app-front-service-key
+      - name: manualshipmentewmsls-xsuaa-service
         parameters:
           service-key:
-            name: manualewmsls-xsuaa-service-key
+            name: manualshipmentewmsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: manualewmsls-app-front-service
-              ServiceInstanceName: manualewmsls-app-front-service
-              ServiceKeyName: manualewmsls-app-front-service-key
+            - Name: manualshipmentewmsls-app-front-service
+              ServiceInstanceName: manualshipmentewmsls-app-front-service
+              ServiceKeyName: manualshipmentewmsls-app-front-service-key
               sap.cloud.service: comerpisshiperpmanualewmsls
-            - Name: manualewmsls-xsuaa-service
+            - Name: manualshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: manualewmsls-xsuaa-service
-              ServiceKeyName: manualewmsls-xsuaa-service-key
+              ServiceInstanceName: manualshipmentewmsls-xsuaa-service
+              ServiceKeyName: manualshipmentewmsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpmanualewmsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: manualsls
+  - name: manualshipmenteccsls
     type: html5
-    path: apps/manualsls
+    path: apps/manualshipmenteccsls
     build-parameters:
       builder: custom
       commands:
@@ -1814,55 +1814,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: manualsls-app-content
+  - name: manualshipmenteccsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: manualsls-app-front-service
+      - name: manualshipmenteccsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/manualsls
+      build-result: resources/manualshipmenteccsls
       requires:
-        - name: manualsls
+        - name: manualshipmenteccsls
           artifacts:
-            - manualsls.zip
-          target-path: resources/manualsls/
+            - manualshipmenteccsls.zip
+          target-path: resources/manualshipmenteccsls/
 
-  - name: manualsls-destination-content
+  - name: manualshipmenteccsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: manualsls-destination-service
+      - name: manualshipmenteccsls-destination-service
         parameters:
           content-target: true
-      - name: manualsls-app-front-service
+      - name: manualshipmenteccsls-app-front-service
         parameters:
           service-key:
-            name: manualsls-app-front-service-key
-      - name: manualsls-xsuaa-service
+            name: manualshipmenteccsls-app-front-service-key
+      - name: manualshipmenteccsls-xsuaa-service
         parameters:
           service-key:
-            name: manualsls-xsuaa-service-key
+            name: manualshipmenteccsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: manualsls-app-front-service
-              ServiceInstanceName: manualsls-app-front-service
-              ServiceKeyName: manualsls-app-front-service-key
+            - Name: manualshipmenteccsls-app-front-service
+              ServiceInstanceName: manualshipmenteccsls-app-front-service
+              ServiceKeyName: manualshipmenteccsls-app-front-service-key
               sap.cloud.service: comerpisshiperpmanualsls
-            - Name: manualsls-xsuaa-service
+            - Name: manualshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: manualsls-xsuaa-service
-              ServiceKeyName: manualsls-xsuaa-service-key
+              ServiceInstanceName: manualshipmenteccsls-xsuaa-service
+              ServiceKeyName: manualshipmenteccsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpmanualsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: parcelsls
+  - name: createshipmenteccsls
     type: html5
-    path: apps/parcelsls
+    path: apps/createshipmenteccsls
     build-parameters:
       builder: custom
       commands:
@@ -1872,55 +1872,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: parcelsls-app-content
+  - name: createshipmenteccsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: parcelsls-app-front-service
+      - name: createshipmenteccsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/parcelsls
+      build-result: resources/createshipmenteccsls
       requires:
-        - name: parcelsls
+        - name: createshipmenteccsls
           artifacts:
-            - parcelsls.zip
-          target-path: resources/parcelsls/
+            - createshipmenteccsls.zip
+          target-path: resources/createshipmenteccsls/
 
-  - name: parcelsls-destination-content
+  - name: createshipmenteccsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: parcelsls-destination-service
+      - name: createshipmenteccsls-destination-service
         parameters:
           content-target: true
-      - name: parcelsls-app-front-service
+      - name: createshipmenteccsls-app-front-service
         parameters:
           service-key:
-            name: parcelsls-app-front-service-key
-      - name: parcelsls-xsuaa-service
+            name: createshipmenteccsls-app-front-service-key
+      - name: createshipmenteccsls-xsuaa-service
         parameters:
           service-key:
-            name: parcelsls-xsuaa-service-key
+            name: createshipmenteccsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: parcelsls-app-front-service
-              ServiceInstanceName: parcelsls-app-front-service
-              ServiceKeyName: parcelsls-app-front-service-key
+            - Name: createshipmenteccsls-app-front-service
+              ServiceInstanceName: createshipmenteccsls-app-front-service
+              ServiceKeyName: createshipmenteccsls-app-front-service-key
               sap.cloud.service: comerpisshiperpparcelsls
-            - Name: parcelsls-xsuaa-service
+            - Name: createshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: parcelsls-xsuaa-service
-              ServiceKeyName: parcelsls-xsuaa-service-key
+              ServiceInstanceName: createshipmenteccsls-xsuaa-service
+              ServiceKeyName: createshipmenteccsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpparcelsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: quickpacksls
+  - name: quickpackeccsls
     type: html5
-    path: apps/quickpacksls
+    path: apps/quickpackeccsls
     build-parameters:
       builder: custom
       commands:
@@ -1930,55 +1930,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: quickpacksls-app-content
+  - name: quickpackeccsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: quickpacksls-app-front-service
+      - name: quickpackeccsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/quickpacksls
+      build-result: resources/quickpackeccsls
       requires:
-        - name: quickpacksls
+        - name: quickpackeccsls
           artifacts:
-            - quickpacksls.zip
-          target-path: resources/quickpacksls/
+            - quickpackeccsls.zip
+          target-path: resources/quickpackeccsls/
 
-  - name: quickpacksls-destination-content
+  - name: quickpackeccsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: quickpacksls-destination-service
+      - name: quickpackeccsls-destination-service
         parameters:
           content-target: true
-      - name: quickpacksls-app-front-service
+      - name: quickpackeccsls-app-front-service
         parameters:
           service-key:
-            name: quickpacksls-app-front-service-key
-      - name: quickpacksls-xsuaa-service
+            name: quickpackeccsls-app-front-service-key
+      - name: quickpackeccsls-xsuaa-service
         parameters:
           service-key:
-            name: quickpacksls-xsuaa-service-key
+            name: quickpackeccsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: quickpacksls-app-front-service
-              ServiceInstanceName: quickpacksls-app-front-service
-              ServiceKeyName: quickpacksls-app-front-service-key
+            - Name: quickpackeccsls-app-front-service
+              ServiceInstanceName: quickpackeccsls-app-front-service
+              ServiceKeyName: quickpackeccsls-app-front-service-key
               sap.cloud.service: comerpisshiperpquickpacksls
-            - Name: quickpacksls-xsuaa-service
+            - Name: quickpackeccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: quickpacksls-xsuaa-service
-              ServiceKeyName: quickpacksls-xsuaa-service-key
+              ServiceInstanceName: quickpackeccsls-xsuaa-service
+              ServiceKeyName: quickpackeccsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpquickpacksls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: salesordersls
+  - name: saleordersls
     type: html5
-    path: apps/salesordersls
+    path: apps/saleordersls
     build-parameters:
       builder: custom
       commands:
@@ -1988,55 +1988,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: salesordersls-app-content
+  - name: saleordersls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: salesordersls-app-front-service
+      - name: saleordersls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/salesordersls
+      build-result: resources/saleordersls
       requires:
-        - name: salesordersls
+        - name: saleordersls
           artifacts:
-            - salesordersls.zip
-          target-path: resources/salesordersls/
+            - saleordersls.zip
+          target-path: resources/saleordersls/
 
-  - name: salesordersls-destination-content
+  - name: saleordersls-destination-content
     type: com.sap.application.content
     requires:
-      - name: salesordersls-destination-service
+      - name: saleordersls-destination-service
         parameters:
           content-target: true
-      - name: salesordersls-app-front-service
+      - name: saleordersls-app-front-service
         parameters:
           service-key:
-            name: salesordersls-app-front-service-key
-      - name: salesordersls-xsuaa-service
+            name: saleordersls-app-front-service-key
+      - name: saleordersls-xsuaa-service
         parameters:
           service-key:
-            name: salesordersls-xsuaa-service-key
+            name: saleordersls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: salesordersls-app-front-service
-              ServiceInstanceName: salesordersls-app-front-service
-              ServiceKeyName: salesordersls-app-front-service-key
+            - Name: saleordersls-app-front-service
+              ServiceInstanceName: saleordersls-app-front-service
+              ServiceKeyName: saleordersls-app-front-service-key
               sap.cloud.service: comerpisshiperpsalesordersls
-            - Name: salesordersls-xsuaa-service
+            - Name: saleordersls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: salesordersls-xsuaa-service
-              ServiceKeyName: salesordersls-xsuaa-service-key
+              ServiceInstanceName: saleordersls-xsuaa-service
+              ServiceKeyName: saleordersls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpsalesordersls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: shipewmsls
+  - name: createshipmentewmsls
     type: html5
-    path: apps/shipewmsls
+    path: apps/createshipmentewmsls
     build-parameters:
       builder: custom
       commands:
@@ -2046,47 +2046,47 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: shipewmsls-app-content
+  - name: createshipmentewmsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: shipewmsls-app-front-service
+      - name: createshipmentewmsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/shipewmsls
+      build-result: resources/createshipmentewmsls
       requires:
-        - name: shipewmsls
+        - name: createshipmentewmsls
           artifacts:
-            - shipewmsls.zip
-          target-path: resources/shipewmsls/
+            - createshipmentewmsls.zip
+          target-path: resources/createshipmentewmsls/
 
-  - name: shipewmsls-destination-content
+  - name: createshipmentewmsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: shipewmsls-destination-service
+      - name: createshipmentewmsls-destination-service
         parameters:
           content-target: true
-      - name: shipewmsls-app-front-service
+      - name: createshipmentewmsls-app-front-service
         parameters:
           service-key:
-            name: shipewmsls-app-front-service-key
-      - name: shipewmsls-xsuaa-service
+            name: createshipmentewmsls-app-front-service-key
+      - name: createshipmentewmsls-xsuaa-service
         parameters:
           service-key:
-            name: shipewmsls-xsuaa-service-key
+            name: createshipmentewmsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: shipewmsls-app-front-service
-              ServiceInstanceName: shipewmsls-app-front-service
-              ServiceKeyName: shipewmsls-app-front-service-key
+            - Name: createshipmentewmsls-app-front-service
+              ServiceInstanceName: createshipmentewmsls-app-front-service
+              ServiceKeyName: createshipmentewmsls-app-front-service-key
               sap.cloud.service: comerpisshiperpshipewmsls
-            - Name: shipewmsls-xsuaa-service
+            - Name: createshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: shipewmsls-xsuaa-service
-              ServiceKeyName: shipewmsls-xsuaa-service-key
+              ServiceInstanceName: createshipmentewmsls-xsuaa-service
+              ServiceKeyName: createshipmentewmsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpshipewmsls
           existing_destinations_policy: update
     build-parameters:
@@ -2150,9 +2150,9 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: trackshipmentsls
+  - name: trackshipmentewmsls
     type: html5
-    path: apps/trackshipmentsls
+    path: apps/trackshipmentewmsls
     build-parameters:
       builder: custom
       commands:
@@ -2162,55 +2162,55 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: trackshipmentsls-app-content
+  - name: trackshipmentewmsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: trackshipmentsls-app-front-service
+      - name: trackshipmentewmsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/trackshipmentsls
+      build-result: resources/trackshipmentewmsls
       requires:
-        - name: trackshipmentsls
+        - name: trackshipmentewmsls
           artifacts:
-            - trackshipmentsls.zip
-          target-path: resources/trackshipmentsls/
+            - trackshipmentewmsls.zip
+          target-path: resources/trackshipmentewmsls/
 
-  - name: trackshipmentsls-destination-content
+  - name: trackshipmentewmsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: trackshipmentsls-destination-service
+      - name: trackshipmentewmsls-destination-service
         parameters:
           content-target: true
-      - name: trackshipmentsls-app-front-service
+      - name: trackshipmentewmsls-app-front-service
         parameters:
           service-key:
-            name: trackshipmentsls-app-front-service-key
-      - name: trackshipmentsls-xsuaa-service
+            name: trackshipmentewmsls-app-front-service-key
+      - name: trackshipmentewmsls-xsuaa-service
         parameters:
           service-key:
-            name: trackshipmentsls-xsuaa-service-key
+            name: trackshipmentewmsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: trackshipmentsls-app-front-service
-              ServiceInstanceName: trackshipmentsls-app-front-service
-              ServiceKeyName: trackshipmentsls-app-front-service-key
+            - Name: trackshipmentewmsls-app-front-service
+              ServiceInstanceName: trackshipmentewmsls-app-front-service
+              ServiceKeyName: trackshipmentewmsls-app-front-service-key
               sap.cloud.service: comerpisshiperptrackshipmentsls
-            - Name: trackshipmentsls-xsuaa-service
+            - Name: trackshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: trackshipmentsls-xsuaa-service
-              ServiceKeyName: trackshipmentsls-xsuaa-service-key
+              ServiceInstanceName: trackshipmentewmsls-xsuaa-service
+              ServiceKeyName: trackshipmentewmsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperptrackshipmentsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
 
-  - name: cancelsls
+  - name: cancelshipmenteccsls
     type: html5
-    path: apps/cancelsls
+    path: apps/cancelshipmenteccsls
     build-parameters:
       builder: custom
       commands:
@@ -2220,47 +2220,47 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: cancelsls-app-content
+  - name: cancelshipmenteccsls-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: cancelsls-app-front-service
+      - name: cancelshipmenteccsls-app-front-service
         parameters:
           content-target: true
     build-parameters:
-      build-result: resources/cancelsls
+      build-result: resources/cancelshipmenteccsls
       requires:
-        - name: cancelsls
+        - name: cancelshipmenteccsls
           artifacts:
-            - cancelsls.zip
-          target-path: resources/cancelsls/
+            - cancelshipmenteccsls.zip
+          target-path: resources/cancelshipmenteccsls/
 
-  - name: cancelsls-destination-content
+  - name: cancelshipmenteccsls-destination-content
     type: com.sap.application.content
     requires:
-      - name: cancelsls-destination-service
+      - name: cancelshipmenteccsls-destination-service
         parameters:
           content-target: true
-      - name: cancelsls-app-front-service
+      - name: cancelshipmenteccsls-app-front-service
         parameters:
           service-key:
-            name: cancelsls-app-front-service-key
-      - name: cancelsls-xsuaa-service
+            name: cancelshipmenteccsls-app-front-service-key
+      - name: cancelshipmenteccsls-xsuaa-service
         parameters:
           service-key:
-            name: cancelsls-xsuaa-service-key
+            name: cancelshipmenteccsls-xsuaa-service-key
     parameters:
       content:
         instance:
           destinations:
-            - Name: cancelsls-app-front-service
-              ServiceInstanceName: cancelsls-app-front-service
-              ServiceKeyName: cancelsls-app-front-service-key
+            - Name: cancelshipmenteccsls-app-front-service
+              ServiceInstanceName: cancelshipmenteccsls-app-front-service
+              ServiceKeyName: cancelshipmenteccsls-app-front-service-key
               sap.cloud.service: comerpisshiperpcancelsls
-            - Name: cancelsls-xsuaa-service
+            - Name: cancelshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: cancelsls-xsuaa-service
-              ServiceKeyName: cancelsls-xsuaa-service-key
+              ServiceInstanceName: cancelshipmenteccsls-xsuaa-service
+              ServiceKeyName: cancelshipmenteccsls-xsuaa-service-key
               sap.cloud.service: comerpisshiperpcancelsls
           existing_destinations_policy: update
     build-parameters:
@@ -3065,6 +3065,64 @@ modules:
     build-parameters:
       no-source: true
 
+  - name: trackshipmenteccsls
+    type: html5
+    path: apps/trackshipmenteccsls
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: trackshipmenteccsls-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: trackshipmenteccsls-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/trackshipmenteccsls
+      requires:
+        - name: trackshipmenteccsls
+          artifacts:
+            - trackshipmenteccsls.zip
+          target-path: resources/trackshipmenteccsls/
+
+  - name: trackshipmenteccsls-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: trackshipmenteccsls-destination-service
+        parameters:
+          content-target: true
+      - name: trackshipmenteccsls-app-front-service
+        parameters:
+          service-key:
+            name: trackshipmenteccsls-app-front-service-key
+      - name: trackshipmenteccsls-xsuaa-service
+        parameters:
+          service-key:
+            name: trackshipmenteccsls-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: trackshipmenteccsls-app-front-service
+              ServiceInstanceName: trackshipmenteccsls-app-front-service
+              ServiceKeyName: trackshipmenteccsls-app-front-service-key
+              sap.cloud.service: comerpisshiperptrackshipmenteccsls
+            - Name: trackshipmenteccsls-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: trackshipmenteccsls-xsuaa-service
+              ServiceKeyName: trackshipmenteccsls-xsuaa-service-key
+              sap.cloud.service: comerpisshiperptrackshipmenteccsls
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
 resources:
 
   - name: trackshipmentewm-app-front-service
@@ -3675,13 +3733,13 @@ resources:
       service-plan: application
       path: ./security/xs-security-freightauditsls.json
 
-  - name: freightordersls-app-front-service
+  - name: freightorderplanningsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: freightordersls-destination-service
+  - name: freightorderplanningsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3689,20 +3747,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: freightordersls-xsuaa-service
+  - name: freightorderplanningsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-freightordersls.json
+      path: ./security/xs-security-freightorderplanningsls.json
 
-  - name: manualewmsls-app-front-service
+  - name: manualshipmentewmsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: manualewmsls-destination-service
+  - name: manualshipmentewmsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3710,20 +3768,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: manualewmsls-xsuaa-service
+  - name: manualshipmentewmsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-manualewmsls.json
+      path: ./security/xs-security-manualshipmentewmsls.json
 
-  - name: manualsls-app-front-service
+  - name: manualshipmenteccsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: manualsls-destination-service
+  - name: manualshipmenteccsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3731,20 +3789,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: manualsls-xsuaa-service
+  - name: manualshipmenteccsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-manualsls.json
+      path: ./security/xs-security-manualshipmenteccsls.json
 
-  - name: parcelsls-app-front-service
+  - name: createshipmenteccsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: parcelsls-destination-service
+  - name: createshipmenteccsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3752,20 +3810,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: parcelsls-xsuaa-service
+  - name: createshipmenteccsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-parcelsls.json
+      path: ./security/xs-security-createshipmenteccsls.json
 
-  - name: quickpacksls-app-front-service
+  - name: quickpackeccsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: quickpacksls-destination-service
+  - name: quickpackeccsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3773,20 +3831,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: quickpacksls-xsuaa-service
+  - name: quickpackeccsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-quickpacksls.json
+      path: ./security/xs-security-quickpackeccsls.json
 
-  - name: salesordersls-app-front-service
+  - name: saleordersls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: salesordersls-destination-service
+  - name: saleordersls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3794,20 +3852,20 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: salesordersls-xsuaa-service
+  - name: saleordersls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-salesordersls.json
+      path: ./security/xs-security-saleordersls.json
 
-  - name: shipewmsls-app-front-service
+  - name: createshipmentewmsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: shipewmsls-destination-service
+  - name: createshipmentewmsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3815,12 +3873,12 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: shipewmsls-xsuaa-service
+  - name: createshipmentewmsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-shipewmsls.json
+      path: ./security/xs-security-createshipmentewmsls.json
 
   - name: shippingdashboardsls-app-front-service
     type: org.cloudfoundry.managed-service
@@ -3843,13 +3901,13 @@ resources:
       service-plan: application
       path: ./security/xs-security-shippingdashboardsls.json
 
-  - name: trackshipmentsls-app-front-service
+  - name: trackshipmentewmsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: trackshipmentsls-destination-service
+  - name: trackshipmentewmsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3857,19 +3915,19 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: trackshipmentsls-xsuaa-service
+  - name: trackshipmentewmsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-trackshipmentsls.json
-  - name: cancelsls-app-front-service
+      path: ./security/xs-security-trackshipmentewmsls.json
+  - name: cancelshipmenteccsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
 
-  - name: cancelsls-destination-service
+  - name: cancelshipmenteccsls-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -3877,12 +3935,12 @@ resources:
       config:
         HTML5Runtime_enabled: true
 
-  - name: cancelsls-xsuaa-service
+  - name: cancelshipmenteccsls-xsuaa-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
-      path: ./security/xs-security-cancelsls.json
+      path: ./security/xs-security-cancelshipmenteccsls.json
   - name: cancelacefilingsls-app-front-service
     type: org.cloudfoundry.managed-service
     parameters:
@@ -4163,3 +4221,23 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-quickpackewmsls.json
+  - name: trackshipmenteccsls-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: trackshipmenteccsls-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: trackshipmenteccsls-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-trackshipmenteccsls.json

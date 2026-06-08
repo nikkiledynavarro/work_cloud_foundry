@@ -1,0 +1,16 @@
+{
+    "name": "manualshipmenteccsls",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
+        "package": "cd dist && bestzip manualshipmenteccsls.zip *"
+    },
+    "devDependencies": {
+        "@ui5/cli": "^3.11.0",
+        "bestzip": "^2.2.1"
+    },
+    "ui5": {
+        "dependencies": []
+    }
+}

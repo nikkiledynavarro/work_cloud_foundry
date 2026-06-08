@@ -85,47 +85,45 @@ Out of 62 Neo apps, we focused on **27 HR7 Apps** (ECC + EWM) because:
 
 **HR7 Totals:** 17 ECC + 10 EWM = 27 apps
 
-### 2.2 SLS Apps Inventory (11 Apps)
+### 2.2 SLS Apps Inventory (27 Apps)
 
 Targeting the **ERP S4 SALES** system (`erps4sales.erp-is.com`, system ID `SLS`) via the `virtual-erps4sales-destination` destination.
 
-| App Folder | CF App ID | OData Service |
-|-----------|-----------|---------------|
-| disputesls | comerpisshiperpdisputesls | frta_disp_srv |
-| freightauditsls | comerpisshiperpfreightauditsls | frt_audit_srv |
-| freightordersls | comerpisshiperpfreightordersls | FRT_ORDPL_SRV (TM namespace) |
-| manualewmsls | comerpisshiperpmanualewmsls | shipewm_srv (EWM) |
-| manualsls | comerpisshiperpmanualsls | parcel_srv (ECC) |
-| parcelsls | comerpisshiperpparcelsls | parcel_srv (ECC) |
-| quickpacksls | comerpisshiperpquickpacksls | QUICK_PACK_SRV |
-| salesordersls | comerpisshiperpsalesordersls | so_srv |
-| shipewmsls | comerpisshiperpshipewmsls | shipewm_srv (EWM) |
-| shippingdashboardsls | comerpisshiperpshippingdashboardsls | SHIP_DASH_SRV |
-| trackshipmentsls | comerpisshiperptrackshipmentsls | shipewm_srv + track_shipment_srv |
-| cancelsls | comerpisshiperpcancelsls | cancel_ship_srv |
+**Naming convention:** Each SLS app name = matching HR7 app name + `sls` suffix. One SLS app per HR7 app, no exceptions.
 
-**Plus 14 SLS variants of remaining HR7 apps** (deployed as placeholders pending SLS backend import):
+| # | HR7 App | SLS App | CF App ID |
+|---|---------|---------|-----------|
+| 1 | cancelacefiling | cancelacefilingsls | comerpisshiperpcancelacefilingsls |
+| 2 | cancelpickuprequest | cancelpickuprequestsls | comerpisshiperpcancelpickuprequestsls |
+| 3 | cancelshipmentecc | cancelshipmenteccsls | comerpisshiperpcancelshipmenteccsls |
+| 4 | cancelshipmentewm | cancelshipmentewmsls | comerpisshiperpcancelshipmentewmsls |
+| 5 | carrierperformancereportecc | carrierperformancereporteccsls | comerpisshiperpcarrierperformancereporteccsls |
+| 6 | carrierperformancereportewm | carrierperformancereportewmsls | comerpisshiperpcarrierperformancereportewmsls |
+| 7 | closedelivery | closedeliverysls | comerpisshiperpclosedeliverysls |
+| 8 | createshipmentecc | createshipmenteccsls | comerpisshiperpcreateshipmenteccsls |
+| 9 | createshipmentewm | createshipmentewmsls | comerpisshiperpcreateshipmentewmsls |
+| 10 | createshipmentv2ewm | createshipmentv2ewmsls | comerpisshiperpcreateshipmentv2ewmsls |
+| 11 | dispute | disputesls | comerpisshiperpdisputesls |
+| 12 | freightaudit | freightauditsls | comerpisshiperpfreightauditsls |
+| 13 | freightauditupload | freightaudituploadsls | comerpisshiperpfreightaudituploadsls |
+| 14 | freightorderplanning | freightorderplanningsls | comerpisshiperpfreightorderplanningsls |
+| 15 | ltlplanning | ltlplanningsls | comerpisshiperpltlplanningsls |
+| 16 | manualshipmentecc | manualshipmenteccsls | comerpisshiperpmanualshipmenteccsls |
+| 17 | manualshipmentewm | manualshipmentewmsls | comerpisshiperpmanualshipmentewmsls |
+| 18 | planshipment | planshipmentsls | comerpisshiperpplanshipmentsls |
+| 19 | quickpackecc | quickpackeccsls | comerpisshiperpquickpackeccsls |
+| 20 | quickpackewm | quickpackewmsls | comerpisshiperpquickpackewmsls |
+| 21 | requestforpickup | requestforpickupsls | comerpisshiperprequestforpickupsls |
+| 22 | saleorder | saleordersls | comerpisshiperpsaleordersls |
+| 23 | shippingdashboard | shippingdashboardsls | comerpisshiperpshippingdashboardsls |
+| 24 | submitacefiling | submitacefilingsls | comerpisshiperpsubmitacefilingsls |
+| 25 | trackshipmentecc | trackshipmenteccsls | comerpisshiperptrackshipmenteccsls |
+| 26 | trackshipmentewm | trackshipmentewmsls | comerpisshiperptrackshipmentewmsls |
+| 27 | viewacefiling | viewacefilingsls | comerpisshiperpviewacefilingsls |
 
-| App Folder | CF App ID | Source HR7 App |
-|-----------|-----------|----------------|
-| cancelacefilingsls | comerpisshiperpcancelacefilingsls | cancelacefiling |
-| submitacefilingsls | comerpisshiperpsubmitacefilingsls | submitacefiling |
-| viewacefilingsls | comerpisshiperpviewacefilingsls | viewacefiling |
-| cancelshipmentewmsls | comerpisshiperpcancelshipmentewmsls | cancelshipmentewm |
-| cancelpickuprequestsls | comerpisshiperpcancelpickuprequestsls | cancelpickuprequest |
-| requestforpickupsls | comerpisshiperprequestforpickupsls | requestforpickup |
-| carrierperformancereporteccsls | comerpisshiperpcarrierperformancereporteccsls | carrierperformancereportecc |
-| carrierperformancereportewmsls | comerpisshiperpcarrierperformancereportewmsls | carrierperformancereportewm |
-| closedeliverysls | comerpisshiperpclosedeliverysls | closedelivery |
-| ltlplanningsls | comerpisshiperpltlplanningsls | ltlplanning |
-| planshipmentsls | comerpisshiperpplanshipmentsls | planshipment |
-| createshipmentv2ewmsls | comerpisshiperpcreateshipmentv2ewmsls | createshipmentv2ewm |
-| freightaudituploadsls | comerpisshiperpfreightaudituploadsls | freightauditupload |
-| quickpackewmsls | comerpisshiperpquickpackewmsls | quickpackewm |
+**SLS Total:** 27 apps (perfect 1:1 pairing with HR7)
 
-**SLS Total:** 26 apps (12 with active OData + 14 placeholders awaiting backend)
-
-**Grand Total in CF:** 27 HR7 + 26 SLS = **53 apps**
+**Grand Total in CF:** 27 HR7 + 27 SLS = **54 apps**
 
 ### 2.1 ECC ↔ EWM Symmetry
 Six business functions exist in both ECC and EWM flavors. Naming follows the explicit `ecc` / `ewm` suffix convention:
@@ -909,4 +907,4 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — Deployed 14 more SLS variants of remaining HR7 apps as placeholders (UI loads, OData calls 404 until SLS backend imports the matching services). Grand total: 53 CF apps (27 HR7 + 26 SLS). Same Cloud Connector mapping blocker applies (rsantos).*
+*Last updated: 2026-06-07 — Standardized SLS naming convention: each SLS app name = HR7 app name + sls. Renamed 9 SLS apps (cancelsls→cancelshipmenteccsls, parcelsls→createshipmenteccsls, shipewmsls→createshipmentewmsls, freightordersls→freightorderplanningsls, manualsls→manualshipmenteccsls, manualewmsls→manualshipmentewmsls, quickpacksls→quickpackeccsls, salesordersls→saleordersls, trackshipmentsls→trackshipmentewmsls) and added trackshipmenteccsls to complete the 1:1 HR7-SLS pairing. Grand total: 54 CF apps (27 HR7 + 27 SLS).*
