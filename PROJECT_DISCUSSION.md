@@ -987,4 +987,65 @@ The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has
 
 ---
 
-*Last updated: 2026-06-08 — Ran full MTA deploy registering all 54 apps with Managed Application Router (no longer "Not Found" via cockpit click). Fixed relative UI5 CDN URL → absolute in 11 apps. Verified disputesls and cancelacefilingsls load fully in BAS (UI renders, OData fails as expected). Added §13 Pending Issues with 6 known gaps. Grand total: 54 CF apps (27 HR7 + 27 SLS). The migration is functionally complete; remaining work is environmental (rsantos for Cloud Connector) and cosmetic (titles, Work Zone Site).*
+## 14. Recovery — "I opened BAS and can't find the apps"
+
+If BAS shows **"NO FOLDER OPENED"** and Explorer is empty, the workspace just isn't pointing at the project folder. The repo is still on disk. Do this:
+
+### 14.1 Re-open the existing folder (most common case)
+
+1. In BAS, click **File → Open Workspace** (or the **Open Folder** button in the empty Explorer panel).
+2. Navigate to `/home/user/projects/neo_to_cf` and click **Open**.
+   - If that path doesn't exist, the dev space may have been reset — go to §14.2.
+3. Once the folder opens, the 54 `apps/`, `mta.yaml`, `PROJECT_DISCUSSION.md`, `.vscode/`, etc. should all be visible.
+4. Open a terminal (**Terminal → New Terminal**) and run `git status` to confirm you're on `main` and clean.
+5. Run `git pull origin main` to pick up any commits made from the Windows side (e.g. the §13.2 fix in commit `484f3d6`).
+
+### 14.2 Dev space was reset / folder is gone — re-clone
+
+If `/home/user/projects/neo_to_cf` no longer exists (BAS dev space was rebuilt, storage wiped, or you're on a fresh dev space):
+
+```bash
+cd ~/projects
+git clone https://github.com/nikkiledynavarro/work_cloud_foundry.git neo_to_cf
+cd neo_to_cf
+```
+
+Then **File → Open Workspace** → pick `/home/user/projects/neo_to_cf`.
+
+After cloning, BAS-local files that aren't tracked in git will be missing:
+- `.env` (CF credentials) — re-paste from the Windows copy at `C:/Users/nikki/OneDrive/Desktop/AI/Codex/Work/neo_to_cf/.env`
+- `node_modules/` — run `npm install` in the project root if you need to build locally
+- Cloud Foundry CLI is already pre-installed in BAS dev spaces — log in with `cf login -a https://api.cf.us11.hana.ondemand.com --sso`
+
+### 14.3 Folder is open but apps look stale / empty
+
+If the folder is open but you see fewer than 54 apps under `apps/`, or files look like an old branch:
+
+```bash
+git status                    # see what branch / dirty state
+git fetch origin
+git log --oneline -5           # confirm latest commit matches GitHub
+git pull origin main           # pull latest
+```
+
+If there are conflicts from BAS-local edits to `.vscode/launch.json` or `.vscode/tasks.json`:
+```bash
+git stash
+git pull origin main
+git stash drop                 # discard BAS-local edits; canonical configs come from git
+```
+
+### 14.4 Quick sanity check
+
+Once the folder is open, run these to confirm you have the full migration state:
+```bash
+ls apps/ | wc -l               # should be 54+ (27 HR7 + 27 SLS, plus a few legacy)
+grep -c "^  - name:.*-app-content$" mta.yaml   # should be 54
+git log --oneline -5           # should show 484f3d6 (sap.cloud.service fix) at top
+```
+
+If any of those don't match, you're not on `main` HEAD — `git pull` again.
+
+---
+
+*Last updated: 2026-06-09 — Fixed §13.2 (sap.cloud.service mismatch on 9 renamed SLS apps) by correcting mta.yaml `destinations:` blocks AND adding missing `index.html` for `quickpackeccsls` + `saleordersls`. Verified `quickpackeccsls` now serves UI5 bootstrap via Managed Application Router. Commit `484f3d6`, pushed to origin/main. Added §14 BAS recovery runbook for "can't find the apps" situations. Grand total: 54 CF apps deployed. Remaining work is environmental (rsantos for Cloud Connector) and cosmetic (titles, Work Zone Site).*
