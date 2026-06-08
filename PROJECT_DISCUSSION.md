@@ -27,6 +27,7 @@
 10. [CF Deployment Process](#10-cf-deployment-process)
 11. [Reference](#11-reference)
 12. [Runbooks — Manual UI Steps](#12-runbooks--manual-ui-steps)
+13. [Pending Issues — Known Gaps to Close](#13-pending-issues--known-gaps-to-close)
 
 ---
 
@@ -907,4 +908,65 @@ After this, OData calls from CF apps will route correctly: `CF app → BTP desti
 
 ---
 
-*Last updated: 2026-06-07 — Standardized SLS naming convention: each SLS app name = HR7 app name + sls. Renamed 9 SLS apps (cancelsls→cancelshipmenteccsls, parcelsls→createshipmenteccsls, shipewmsls→createshipmentewmsls, freightordersls→freightorderplanningsls, manualsls→manualshipmenteccsls, manualewmsls→manualshipmentewmsls, quickpacksls→quickpackeccsls, salesordersls→saleordersls, trackshipmentsls→trackshipmentewmsls) and added trackshipmenteccsls to complete the 1:1 HR7-SLS pairing. Grand total: 54 CF apps (27 HR7 + 27 SLS).*
+## 13. Pending Issues — Known Gaps to Close
+
+These are the remaining items to fix or wait on. None block the deployment itself — all 54 apps are live and accessible via the BTP Cockpit HTML5 Applications page click-through. The list below is what stands between "deployed" and "production-ready end-user experience."
+
+### 13.1 BLOCKER — Cloud Connector mappings missing for `btp_cf`
+
+| System | Destination in BTP | CC mapping for btp_cf? |
+|--------|-------------------|------------------------|
+| HR7 (S/4HANA) | `virtual-hr7-destination` → `virtual-s4hr7.erp-is.com:50000` | ❌ Not added |
+| SLS (ERP S4 SALES) | `virtual-erps4sales-destination` → `erps4sales.erp-is.com:50000` | ❌ Not added |
+
+**Result today:** Every app's UI loads correctly but OData calls fail with the standard "Sorry, a technical error occurred!" popup because the Cloud Connector tunnel from CF cloud → on-premise back-end isn't extended to the `btp_cf` subaccount yet.
+
+**Action needed:** `rsantos@erp-is.com` to add BOTH system mappings to the btp_cf subaccount connection in the same Cloud Connector that already serves Neo. See §12.2 for full step-by-step.
+
+### 13.2 sap.cloud.service mismatch on 9 renamed SLS apps
+
+When we renamed `quickpacksls` → `quickpackeccsls` and similar (see §2.2), the cleanup-then-redeploy cycle left some destination-content registrations pointing at the OLD `sap.cloud.service`. Symptom: clicking the app in BTP Cockpit HTML5 Applications generates a URL like `…/{destGuid}.comerpisshiperpquickpacksls.comerpisshiperpquickpackeccsls-1.0.0/index.html` — `sap.cloud.service` segment is the old name but `sap.app.id` segment is the new name, and the launchpad returns "File not found."
+
+**Affected apps (9):**
+- `cancelshipmenteccsls` (was `cancelsls`)
+- `createshipmenteccsls` (was `parcelsls`)
+- `createshipmentewmsls` (was `shipewmsls`)
+- `freightorderplanningsls` (was `freightordersls`)
+- `manualshipmenteccsls` (was `manualsls`)
+- `manualshipmentewmsls` (was `manualewmsls`)
+- `quickpackeccsls` (was `quickpacksls`)
+- `saleordersls` (was `salesordersls`)
+- `trackshipmentewmsls` (was `trackshipmentsls`)
+
+**Not affected** (deployed fresh, no rename):
+- All other 18 SLS apps + `trackshipmenteccsls` (new clone)
+- All 27 HR7 apps
+
+**Fix path** (any one works):
+1. Delete the 9 destination-content registrations via Destination Service API, then re-run `cf deploy` for those 9 modules only
+2. Edit each app's destination service instance to update the sap.cloud.service value
+3. Delete the 9 destination-service instances entirely, re-create them, re-run cf deploy
+
+### 13.3 Cosmetic — i18n appTitle still says "Cancel" / "Parcel" etc.
+
+When apps render in the launchpad header, the title comes from `i18n/i18n.properties` `appTitle=…`. The original Neo titles like "Cancel", "Parcel", "TrackShipment" are still there for several apps. These look unfinished next to the otherwise clean `Cancel Shipment ECC SLS` naming.
+
+**Affected:** Most renamed and cloned apps still have their original Neo `appTitle`. The 9 SLS apps in §13.2 have proper titles ("Cancel Shipment ECC SLS"); the other 18 still have the original.
+
+**Effort:** Low — sed across `i18n/i18n.properties` files, rebuild, redeploy. Deferred until Work Zone tiles are configured (because that's when titles actually become user-visible).
+
+### 13.4 BAS Source Control panel doesn't recognize the workspace as a git repo
+
+When clicking the Source Control icon in BAS sidebar, it shows "The folder currently open doesn't have a Git repository" even though `git pull` works fine in the terminal at the same path. This is purely a BAS UI quirk — git operations all work via the terminal. Not blocking anything.
+
+### 13.5 BAS terminal occasionally drops typed input via Chrome remote control
+
+The xterm.js terminal in BAS sometimes ignores keyboard events when driven via Chrome MCP. Manual typing always works. Workaround: paste commands directly or click into the terminal more precisely before typing. Not blocking, just an automation friction point.
+
+### 13.6 Work Zone Site Directory is empty
+
+The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has been created yet. This means there's no branded launchpad with tile grouping/roles. Users access apps via the BTP Cockpit HTML5 Applications page click-through or direct CF launchpad URLs. See §12.1 for the runbook to set up a Site when you want one.
+
+---
+
+*Last updated: 2026-06-08 — Ran full MTA deploy registering all 54 apps with Managed Application Router (no longer "Not Found" via cockpit click). Fixed relative UI5 CDN URL → absolute in 11 apps. Verified disputesls and cancelacefilingsls load fully in BAS (UI renders, OData fails as expected). Added §13 Pending Issues with 6 known gaps. Grand total: 54 CF apps (27 HR7 + 27 SLS). The migration is functionally complete; remaining work is environmental (rsantos for Cloud Connector) and cosmetic (titles, Work Zone Site).*
