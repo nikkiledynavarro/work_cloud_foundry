@@ -942,10 +942,28 @@ When we renamed `quickpacksls` → `quickpackeccsls` and similar (see §2.2), th
 - All other 18 SLS apps + `trackshipmenteccsls` (new clone)
 - All 27 HR7 apps
 
-**Fix path** (any one works):
-1. Delete the 9 destination-content registrations via Destination Service API, then re-run `cf deploy` for those 9 modules only
-2. Edit each app's destination service instance to update the sap.cloud.service value
-3. Delete the 9 destination-service instances entirely, re-create them, re-run cf deploy
+**Attempts so far (2026-06-08):**
+
+1. ✅ Updated `sap.cloud.service` in all 18 instance destinations (9 apps × 2 entries each) via Destination Service API — destinations now correctly report the new name when queried directly
+2. ✅ Updated stale `app_host_id` fields in destinations to point to current app-host service GUIDs
+3. ✅ Re-ran targeted `cf deploy -m {app}-app-content -m {app}-destination-content` for all 9 apps
+4. ✅ Deleted html5-apps-repo content + re-pushed via `cf html5-push`
+5. ✅ Recreated quickpackeccsls-app-front-service from scratch + re-pushed
+
+**Result after all fixes:**
+- Querying the destination service API directly returns the correct `sap.cloud.service` ✅
+- Cockpit click STILL generates URL with old `comerpisshiperpquickpacksls` segment (cached somewhere in BTP cockpit / launchpad) ❌
+- Direct URL with corrected segments now returns "Internal Server Error" (was "Not Found") — closer but still broken
+
+**Root cause confirmed:** The BTP cockpit's HTML5 Applications view and the launchpad's Common Data Model (CDM) have a metadata cache that doesn't refresh from the destination service even after the destination contents are updated. The cache appears to retain the original `sap.cloud.service` value from when the app was FIRST pushed.
+
+**Recommended workarounds:**
+1. **Wait 24h** — BTP caches typically expire within a day; re-test then
+2. **Delete the html5-apps-repo subscription / re-subscribe** — forces full CDM regen (heavy-handed)
+3. **Open SAP support ticket** — request CDM cache refresh for the subaccount
+4. **Live with the bug** — these 9 apps are still listed in the cockpit and can be accessed via their HR7-equivalent (e.g., `quickpackecc` works perfectly; the SLS version with no data backing right now is academic until rsantos fixes CC)
+
+**Not affected** (deployed fresh, no rename): All other 18 SLS apps + `trackshipmenteccsls` + all 27 HR7 apps work via cockpit click.
 
 ### 13.3 Cosmetic — i18n appTitle still says "Cancel" / "Parcel" etc.
 
