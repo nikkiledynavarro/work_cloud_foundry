@@ -1734,12 +1734,12 @@ modules:
             - Name: freightorderplanningsls-app-front-service
               ServiceInstanceName: freightorderplanningsls-app-front-service
               ServiceKeyName: freightorderplanningsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpfreightordersls
+              sap.cloud.service: comerpisshiperpfreightorderplanningsls
             - Name: freightorderplanningsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: freightorderplanningsls-xsuaa-service
               ServiceKeyName: freightorderplanningsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpfreightordersls
+              sap.cloud.service: comerpisshiperpfreightorderplanningsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1792,12 +1792,12 @@ modules:
             - Name: manualshipmentewmsls-app-front-service
               ServiceInstanceName: manualshipmentewmsls-app-front-service
               ServiceKeyName: manualshipmentewmsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpmanualewmsls
+              sap.cloud.service: comerpisshiperpmanualshipmentewmsls
             - Name: manualshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: manualshipmentewmsls-xsuaa-service
               ServiceKeyName: manualshipmentewmsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpmanualewmsls
+              sap.cloud.service: comerpisshiperpmanualshipmentewmsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1850,12 +1850,12 @@ modules:
             - Name: manualshipmenteccsls-app-front-service
               ServiceInstanceName: manualshipmenteccsls-app-front-service
               ServiceKeyName: manualshipmenteccsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpmanualsls
+              sap.cloud.service: comerpisshiperpmanualshipmenteccsls
             - Name: manualshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: manualshipmenteccsls-xsuaa-service
               ServiceKeyName: manualshipmenteccsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpmanualsls
+              sap.cloud.service: comerpisshiperpmanualshipmenteccsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1908,12 +1908,12 @@ modules:
             - Name: createshipmenteccsls-app-front-service
               ServiceInstanceName: createshipmenteccsls-app-front-service
               ServiceKeyName: createshipmenteccsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpparcelsls
+              sap.cloud.service: comerpisshiperpcreateshipmenteccsls
             - Name: createshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: createshipmenteccsls-xsuaa-service
               ServiceKeyName: createshipmenteccsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpparcelsls
+              sap.cloud.service: comerpisshiperpcreateshipmenteccsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -1966,12 +1966,12 @@ modules:
             - Name: quickpackeccsls-app-front-service
               ServiceInstanceName: quickpackeccsls-app-front-service
               ServiceKeyName: quickpackeccsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpquickpacksls
+              sap.cloud.service: comerpisshiperpquickpackeccsls
             - Name: quickpackeccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: quickpackeccsls-xsuaa-service
               ServiceKeyName: quickpackeccsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpquickpacksls
+              sap.cloud.service: comerpisshiperpquickpackeccsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2024,12 +2024,12 @@ modules:
             - Name: saleordersls-app-front-service
               ServiceInstanceName: saleordersls-app-front-service
               ServiceKeyName: saleordersls-app-front-service-key
-              sap.cloud.service: comerpisshiperpsalesordersls
+              sap.cloud.service: comerpisshiperpsaleordersls
             - Name: saleordersls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: saleordersls-xsuaa-service
               ServiceKeyName: saleordersls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpsalesordersls
+              sap.cloud.service: comerpisshiperpsaleordersls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2082,12 +2082,12 @@ modules:
             - Name: createshipmentewmsls-app-front-service
               ServiceInstanceName: createshipmentewmsls-app-front-service
               ServiceKeyName: createshipmentewmsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpshipewmsls
+              sap.cloud.service: comerpisshiperpcreateshipmentewmsls
             - Name: createshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: createshipmentewmsls-xsuaa-service
               ServiceKeyName: createshipmentewmsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpshipewmsls
+              sap.cloud.service: comerpisshiperpcreateshipmentewmsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2198,12 +2198,12 @@ modules:
             - Name: trackshipmentewmsls-app-front-service
               ServiceInstanceName: trackshipmentewmsls-app-front-service
               ServiceKeyName: trackshipmentewmsls-app-front-service-key
-              sap.cloud.service: comerpisshiperptrackshipmentsls
+              sap.cloud.service: comerpisshiperptrackshipmentewmsls
             - Name: trackshipmentewmsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: trackshipmentewmsls-xsuaa-service
               ServiceKeyName: trackshipmentewmsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperptrackshipmentsls
+              sap.cloud.service: comerpisshiperptrackshipmentewmsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -2256,12 +2256,12 @@ modules:
             - Name: cancelshipmenteccsls-app-front-service
               ServiceInstanceName: cancelshipmenteccsls-app-front-service
               ServiceKeyName: cancelshipmenteccsls-app-front-service-key
-              sap.cloud.service: comerpisshiperpcancelsls
+              sap.cloud.service: comerpisshiperpcancelshipmenteccsls
             - Name: cancelshipmenteccsls-xsuaa-service
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: cancelshipmenteccsls-xsuaa-service
               ServiceKeyName: cancelshipmenteccsls-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpcancelsls
+              sap.cloud.service: comerpisshiperpcancelshipmenteccsls
           existing_destinations_policy: update
     build-parameters:
       no-source: true
