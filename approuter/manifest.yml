@@ -4,18 +4,8 @@ applications:
     memory: 256M
     buildpacks:
       - nodejs_buildpack
-    routes:
-      - route: shiperp-fiori-test.cfapps.us11.hana.ondemand.com
+    no-route: true
     services:
       - app-runtime-1779763944
       - closedelivery-xsuaa-service
-      - closedelivery-destination-service
-    env:
-      destinations: >
-        [
-          {
-            "name": "virtual-hr7-destination",
-            "url": "http://virtual-s4hr7.erp-is.com:50000",
-            "forwardAuthToken": true
-          }
-        ]
+      - shiperp-approuter-destination

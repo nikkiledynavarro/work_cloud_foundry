@@ -20,6 +20,10 @@ resources/**/*.zip
 .tmp_*/
 .tmp_mtar_inspect/
 preview/
+.playwright-mcp/
+mta-logs/
+mta-op-*/
+/*.png
 
 ## Secrets / generated keys (none expected, but keep safe)
 *.pem

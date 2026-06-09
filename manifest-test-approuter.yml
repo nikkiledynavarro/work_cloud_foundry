@@ -10,7 +10,7 @@ applications:
       - trackshipmentewm-xsuaa-service
       - trackshipmentewm-destination-service
 
-  - name: shiperp-fiori-test-hd6
+  - name: shiperp-fiori-test-sls
     path: approuter
     memory: 256M
     no-route: true
@@ -18,8 +18,8 @@ applications:
       - nodejs_buildpack
     services:
       - app-runtime-1779763944
-      - trackshipment-xsuaa-service
-      - trackshipment-destination-service
+      - trackshipmentewmsls-xsuaa-service
+      - trackshipmentewmsls-destination-service
 
   - name: shiperp-fiori-test-shippingdashboard
     path: approuter
