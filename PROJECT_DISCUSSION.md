@@ -1326,3 +1326,35 @@ For each of the 54 scoped apps, the GUID below identifies its `*-destination-ser
 ---
 
 *Last updated: 2026-06-10 — §17 logs the post-deploy audit. xs-security audit found 2 HR7 typos (`carrierperformancereportewm`, `freightorderplanning`) — documented as §13.9, not auto-fixed because deployed XSUAA services already encoded the typos. §13.7 orphan banner confirmed to be CF-side cached cruft (both stale GUIDs return `CF-NotFound`) — will auto-clear. §17.3 records all 54 destination-service GUIDs for future reference.*
+
+---
+
+## 18. Neo "SLS Apps" tile gap analysis (2026-06-10)
+
+User shared a Neo Fiori launchpad screenshot showing the curated "SLS Apps" tile panel — 21 tiles total. Cross-checked against our 27 CF SLS apps to identify what (if anything) is missing.
+
+### Result
+
+15 of the 21 Neo SLS tiles map cleanly to one of our 27 CF SLS apps. The 6 unmapped tiles are all SAP standard transaction-code wrappers:
+
+| Neo tile | SAP tcode | Migration path |
+|---|---|---|
+| Create Sales Order — SLS VA01 | VA01 | Work Zone Standard tile config (§13.6) |
+| Change Sales Order — SLS VA02 | VA02 | Work Zone Standard tile config (§13.6) |
+| Display Sales Order — SLS VA03 | VA03 | Work Zone Standard tile config (§13.6) |
+| Create Delivery — SLS VL01N | VL01N | Work Zone Standard tile config (§13.6) |
+| Change Delivery — SLS VL02N | VL02N | Work Zone Standard tile config (§13.6) |
+| Display Delivery — SLS VL03N | VL03N | Work Zone Standard tile config (§13.6) |
+
+These have **no custom HTML5 source** in the Neo inventory — `neo_list_apps` returned 0 matches for `va0` and `vl0`. They're launchpad tile configurations that opened SAP GUI for HTML on the SLS backend via `~transaction=` URL parameters. On CF Work Zone Standard they're added as static URL tiles, not deployed as `apps/` directories.
+
+The 21st tile, "Tracking information report — SLS" (backed by Neo HTML5 app `zpkwporeport` v1.0.0), was identified by the user as a test-only app and intentionally excluded from migration scope.
+
+### Action
+
+- **No HTML5 source code is missing from our CF deployment.** All custom Fiori apps in the Neo SLS Apps panel that the user wants migrated are already in CF.
+- The 6 SAP standard tcode tiles will be re-created as Work Zone tiles once §13.6 (Work Zone Site setup) is unblocked — they're a Work Zone-layer concern, not an `apps/` or `mta.yaml` concern.
+
+---
+
+*Last updated: 2026-06-10 — §18 records the Neo SLS Apps tile gap analysis. 15/21 Neo SLS tiles already mapped to our 27 CF SLS apps. 6 unmapped tiles are SAP standard tcode wrappers (VA01/02/03, VL01N/02N/03N) with no HTML5 source — they migrate as Work Zone tile configurations under §13.6, not as new apps. The 21st tile (`zpkwporeport` / "Tracking information report - SLS") is a test-only app, excluded from scope by user.*
