@@ -1003,7 +1003,11 @@ This GUID predates the per-app destination service split — each app now has it
 
 The cockpit click-through path is unaffected because the cockpit dynamically looks up each app's destination service GUID at click time (proved in §15.3 — all 9 renamed apps loaded fine via cockpit). The `(CF)` group (the `localhost:5000` entries that go via the local approuter) is also unaffected.
 
-Fix: regenerate the `☁ CF Direct` URLs from `cf service {app}-destination-service --guid` per app. Tracked as future cleanup; not blocking because the cockpit click is the recommended quick-launch path anyway.
+Fix: regenerate the `☁ CF Direct` URLs from `cf service {app}-destination-service --guid` per app. Tracked as future cleanup; not blocking because the cockpit click is the recommended quick-launch path anyway. **Status (2026-06-10):** ✅ closed — `scripts/regen-cf-direct-urls.js` ran with active CF login (commit `f6bdb7c`); 53 of 54 URLs rewritten, 1 unchanged because `cancelacefiling` legitimately holds the old "shared" GUID `a167a84f-...`.
+
+### 13.9 Two HR7 xs-security xsappname typos
+
+Found during the §17.1 audit. `security/xs-security-carrierperformancereportewm.json` has `xsappname=comerpisshiperpewmcarrierperformancereport` (words flipped) and `security/xs-security-freightorderplanning.json` has `xsappname=comerpisshiperfreightorderPlanning` (missing `p` + camelCase). The deployed XSUAA service instances encode these strings as-is. Apps load and run; the only side-effect is role-collection assignment scripts that derive role refs from the canonical `comerpisshiperp{app}` pattern will miss them. Cleanup needs XSUAA service recreate + app-content + destination-content redeploy per app — not urgent, deferred.
 
 ---
 
@@ -1216,3 +1220,94 @@ The expected definition recorded from Neo is:
 - Authentication: `BasicAuthentication`
 
 The exported inventory does not contain the HD6 backend secret. Do not reuse HR7 or SLS credentials. Runtime backend calls will remain unavailable until the HD6 destination is created with valid credentials and its Cloud Connector mapping is verified.
+
+---
+
+## 17. Post-deploy audit + reference (2026-06-10)
+
+### 17.1 xs-security audit — 2 HR7 typos found (not auto-fixed)
+
+`scripts/audit-xs-security.js`-style check across all 54 `security/xs-security-{app}.json`: 52 pass; 2 have `xsappname` mismatches against the canonical `comerpisshiperp{app}` pattern:
+
+| App | Current `xsappname` | Expected |
+|---|---|---|
+| `carrierperformancereportewm` | `comerpisshiperpewmcarrierperformancereport` | `comerpisshiperpcarrierperformancereportewm` |
+| `freightorderplanning` | `comerpisshiperfreightorderPlanning` | `comerpisshiperpfreightorderplanning` |
+
+Both are HR7 apps. Their XSUAA service instances on CF were deployed with these strings, so the deployed scope/role names follow the wrong xsappname. Apps load and run fine — the side-effect is only that any role-collection assignment script that builds role refs from the canonical name will miss them. **Not fixed in this pass** because correcting it requires recreating the XSUAA service instance + redeploying app-content + destination-content for each, which is non-trivial. Track as §13.9 if you decide to clean these up.
+
+### 17.2 §13.7 orphan destination — auto-clears, no action
+
+Looked up both stale GUIDs from the cockpit's "1 Configuration issue" banner:
+
+- Destination service `560d5bf2-cb58-41b1-9ef6-c3620a69f9f4` → `CF-NotFound`
+- html5-apps-repo instance `5e7a8a82-f190-485c-9050-4b194afc2256` → `CF-NotFound`
+
+Both are already deleted at the CF API level. The banner is cached metadata that hasn't refreshed yet — it will clear on the cockpit's next destination registry sync (typically within a few hours of normal traffic) or by a SAP support ticket if it persists. **No code/action needed**; §13.7 is closed.
+
+### 17.3 Destination-service GUID reference
+
+For each of the 54 scoped apps, the GUID below identifies its `*-destination-service` instance — i.e. the first hostname segment of any direct launchpad URL (`https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/{GUID}.{cloudService}.{cloudService}-1.0.0/index.html`). Collected with `cf service {app}-destination-service --guid`. Recorded here so future maintenance doesn't have to re-derive them.
+
+| App | Destination service GUID |
+|---|---|
+| `cancelacefiling` | `a167a84f-0812-44fd-86e6-01c300d56f26` |
+| `cancelpickuprequest` | `62a00323-d594-4b75-a301-5a072e6a4f43` |
+| `cancelshipmentecc` | `bdded39b-e990-4f80-8daa-9d1b24805f6f` |
+| `cancelshipmentewm` | `6cea36c0-a554-4b48-b1fa-32899d98fb6d` |
+| `carrierperformancereportecc` | `a197c2ae-aa10-4bb1-b5d8-cf3e6d97bde7` |
+| `carrierperformancereportewm` | `f5af55e1-329f-49b8-8988-20a176ee1b12` |
+| `closedelivery` | `0b862fac-0cf8-4714-81e1-a72b6c3e0b67` |
+| `createshipmentecc` | `184628b3-acf8-4099-a3ac-438ea1c373f7` |
+| `createshipmentewm` | `0bead808-b76a-41bf-97f8-29589fcf9936` |
+| `createshipmentv2ewm` | `1bca7250-5614-4e8a-ab63-214a116c039f` |
+| `dispute` | `11387043-4c6f-4c9a-94d6-10e084b8b2d2` |
+| `freightaudit` | `97b62891-2307-4d6d-980b-285ed3da8d52` |
+| `freightauditupload` | `cb9cfcf9-375d-441b-af64-13c19ac7ce52` |
+| `freightorderplanning` | `5691af39-944e-45fe-a633-7834d4a2ab59` |
+| `ltlplanning` | `7c91ee35-3751-405b-8229-f5a877d0623a` |
+| `manualshipmentecc` | `0812fc71-b035-49fd-a9f3-b2b77098f3da` |
+| `manualshipmentewm` | `3ca8f1f4-84bf-4e65-9d57-ddcd86735dd4` |
+| `planshipment` | `6634ed2b-663e-4d29-99b8-d11c65b0e302` |
+| `quickpackecc` | `1e17abef-4475-48af-b88a-255af9fc868b` |
+| `quickpackewm` | `4a7f943c-e1d5-4a54-92a9-7a4b0bd3112b` |
+| `requestforpickup` | `d8fca036-3f06-4f7a-beeb-5290ea84cdce` |
+| `saleorder` | `bfce2327-f7ee-4558-84a1-14112ccf0638` |
+| `shippingdashboard` | `9cdc4545-6b36-4c74-96ab-b6a3ec6b51c4` |
+| `submitacefiling` | `c84fa881-eebd-4602-bdbb-c24b4ac6318f` |
+| `trackshipmentecc` | `cb4c87a5-eccf-48a1-a368-961a435f8d95` |
+| `trackshipmentewm` | `a4a44fe8-281d-48d6-81bc-4239963e8d19` |
+| `viewacefiling` | `6e19bea4-614a-4fea-9e45-9bee6fd5544b` |
+| `cancelacefilingsls` | `811ab968-37f9-468d-814e-805ba8ec3630` |
+| `cancelpickuprequestsls` | `b3403b0c-f2df-4c8c-8204-b06064c2b77f` |
+| `cancelshipmenteccsls` | `b837b085-ac64-4c3d-a399-36edcd18e035` |
+| `cancelshipmentewmsls` | `53b3b031-557c-4aea-a6f4-2a78f184c2d8` |
+| `carrierperformancereporteccsls` | `ba3e4954-2540-4bb4-ac63-9d4e4a30b230` |
+| `carrierperformancereportewmsls` | `76986626-1af7-419c-89c9-2f8c8756f06a` |
+| `closedeliverysls` | `90855868-3524-491a-9484-697c48b21383` |
+| `createshipmenteccsls` | `bca220c4-1def-45ec-85fc-b3ac7c9d2fb1` |
+| `createshipmentewmsls` | `c782b074-4646-4a2c-9c13-f6f34c967fc8` |
+| `createshipmentv2ewmsls` | `ad2fffa3-61fe-48ea-9f84-6757c5fc29a9` |
+| `disputesls` | `4f4f9a8b-a414-495d-b5b9-89e094682c24` |
+| `freightauditsls` | `dfb526fd-aaab-4236-aaa5-d431bb852d6e` |
+| `freightaudituploadsls` | `fa8c660d-9d31-4662-9212-8465dcbeb86b` |
+| `freightorderplanningsls` | `142c95cd-b24b-4ba4-90b7-2ac1783f4029` |
+| `ltlplanningsls` | `8c27c0ba-e2bf-4e46-b9ce-4627232903bb` |
+| `manualshipmenteccsls` | `84954229-37eb-4023-a0af-90289d252183` |
+| `manualshipmentewmsls` | `9840ffa6-d316-463a-a457-cc756910972f` |
+| `planshipmentsls` | `d12f2598-c0fa-4fd0-9ab3-7385bf9e0dbf` |
+| `quickpackeccsls` | `524c354f-f246-44b8-84dd-d49e3a15aded` |
+| `quickpackewmsls` | `e8ce2396-3c89-443c-b5e8-93390881be2d` |
+| `requestforpickupsls` | `8cfc5357-8de8-4ebd-8310-f2d4efcaa1eb` |
+| `saleordersls` | `772af4b0-f410-4e8a-8566-9aa75f429dd5` |
+| `shippingdashboardsls` | `3b97bd8f-12dd-494f-9e64-1f8477415dae` |
+| `submitacefilingsls` | `3d12fd7a-8af8-4dc0-b6ca-b4b83bb4b8d1` |
+| `trackshipmenteccsls` | `ebc3ddc0-72e3-4c47-abfe-902330f57144` |
+| `trackshipmentewmsls` | `f38890e5-c74b-4ff1-abaf-8b48ec610d04` |
+| `viewacefilingsls` | `4895c8e5-011b-4adc-b552-3bc2ed1a16ad` |
+
+*Re-derive with:* `node -e 'for (const app of ["cancelacefiling", /* ... */]) console.log(app, require("child_process").execSync("cf service "+app+"-destination-service --guid").toString().trim());'` or simply re-run `node scripts/regen-cf-direct-urls.js` (which uses them internally).
+
+---
+
+*Last updated: 2026-06-10 — §17 logs the post-deploy audit. xs-security audit found 2 HR7 typos (`carrierperformancereportewm`, `freightorderplanning`) — documented as §13.9, not auto-fixed because deployed XSUAA services already encoded the typos. §13.7 orphan banner confirmed to be CF-side cached cruft (both stale GUIDs return `CF-NotFound`) — will auto-clear. §17.3 records all 54 destination-service GUIDs for future reference.*
