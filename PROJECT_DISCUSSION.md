@@ -989,6 +989,22 @@ The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has
 
 Cockpit → HTML5 Applications shows one yellow banner: a destination (`560d5bf2-cb58-41b1-9ef6-c3620a69f9f4`) still points to a deleted html5-apps-repo instance (`5e7a8a82-f190-485c-9050-4b194afc2256`). This is residue from the §13.2 quickpackeccsls-app-front-service recreate. No live app depends on it. Cleanup is just an API delete of the orphan destination entry — non-blocking, can be batched with the next maintenance pass.
 
+### 13.8 VS Code `☁ CF Direct` launch entries all share one stale destination service GUID
+
+All 108 entries in the `☁ CF Direct` launch group (`.vscode/launch.json`) hardcode the destination service GUID `a167a84f-0812-44fd-86e6-01c300d56f26` into their launchpad URLs:
+
+```
+https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/
+  a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperp{app}.comerpisshiperp{app}-1.0.0/
+  index.html
+```
+
+This GUID predates the per-app destination service split — each app now has its own destination service with its own GUID (e.g. `quickpackeccsls = 524c354f-...`, `cancelshipmenteccsls = b837b085-...`, `freightorderplanningsls = 142c95cd-...`, see §15.3). The Managed Application Router resolves URLs by `{destinationServiceGUID}.{sap.cloud.service}.{sap.app.id}-{version}` and a mismatched GUID returns 404 / "File not found". So almost every "CF Direct" F5 entry is broken on click.
+
+The cockpit click-through path is unaffected because the cockpit dynamically looks up each app's destination service GUID at click time (proved in §15.3 — all 9 renamed apps loaded fine via cockpit). The `(CF)` group (the `localhost:5000` entries that go via the local approuter) is also unaffected.
+
+Fix: regenerate the `☁ CF Direct` URLs from `cf service {app}-destination-service --guid` per app. Tracked as future cleanup; not blocking because the cockpit click is the recommended quick-launch path anyway.
+
 ---
 
 ## 14. Recovery — "I opened BAS and can't find the apps"
@@ -1116,6 +1132,25 @@ The BTP Cockpit → HTML5 Applications page shows a single yellow "1 Configurati
 
 The referenced html5-apps-repo instance GUID no longer exists — this is residue from the earlier `quickpackeccsls-app-front-service` recreate cycle during §13.2 troubleshooting. The instance was deleted but a destination still points at it. None of the 54 live apps depend on this. Tracked as §13.7.
 
+### 15.5 VS Code F5 launch configuration audit
+
+`.vscode/launch.json` inventory after this audit:
+
+| Group | Count | Mechanism | Status |
+|---|---|---|---|
+| `🚀 Services Only` | 1 | Local proxy + approuter, no app open | OK |
+| `🌐 Local Source` | 27 | `npm.cmd start` in `apps/{app}`, opens `localhost:8080/index.html` | OK (was 26; added `trackshipmentecc` this audit) |
+| `☁ CF Apps` | 54 | Local approuter at `localhost:5000/comerpisshiperp{app}/index.html` | OK — all 54 apps covered, no stale renamed-app refs |
+| `☁ CF Direct` | 54 | Direct managed-launchpad URL with hardcoded destination service GUID | **Broken** — all 54 share `a167a84f-...` which is stale (see §13.8) |
+
+`.vscode/tasks.json` inventory: 4 infrastructure tasks (proxy, approuter, combined, stop) + 27 `Start {app} locally` tasks — one per HR7 app. `Start trackshipmentecc locally` was added in this audit to match the new launch entry; both reference `${workspaceFolder}/apps/trackshipmentecc` which exists.
+
+Both `launch.json` and `tasks.json` parse as valid JSON after the edits (`node -e 'JSON.parse(require("fs").readFileSync(...))'` for each).
+
+Platform note: all entries use `runtimeExecutable: powershell.exe` and tasks use `cmd.exe` — Windows VS Code only. BAS (Linux) can't use F5; BAS uses the cockpit click-through path documented in §11.2 / §15.3.
+
+End-to-end F5 runtime tests for both `🌐 Local Source` and `☁ CF Apps` groups still require VPN connectivity to `virtual-s4hr7.erp-is.com:50000` (HR7) and the equivalent SLS endpoint — same §13.1 Cloud Connector blocker as the BAS runtime path.
+
 ---
 
-*Last updated: 2026-06-09 — §15.3 records runtime verification of all 9 renamed SLS apps via cockpit click; each loads its manifest (non-default tab title). Added §13.7 (orphan destination causing the cockpit's '1 Configuration issue' banner, non-blocking). Approuter standalone refactored to use html5-apps-repo-rt pattern (commit 60a1b24).*
+*Last updated: 2026-06-09 — §15.5 records the VS Code F5 audit (launch.json + tasks.json). Added missing `trackshipmentecc` Local Source entry + matching task. Found §13.8: all 54 `☁ CF Direct` launch URLs hardcode a stale destination service GUID (`a167a84f-...`) from before the per-app split — they'll 404 on click. Cockpit click path (§15.3) and `☁ CF Apps` localhost path are unaffected.*

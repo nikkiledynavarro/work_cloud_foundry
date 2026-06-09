@@ -471,6 +471,24 @@
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start trackshipmentecc locally",
+            "name": "🌐 trackshipmentecc (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 2
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start viewacefiling locally",
             "name": "🌐 viewacefiling (Local Source)",
             "presentation": {
