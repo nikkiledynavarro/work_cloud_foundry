@@ -1366,3 +1366,41 @@ The 21st tile, "Tracking information report — SLS" (backed by Neo HTML5 app `z
 ---
 
 *Last updated: 2026-06-10 — §18 records the Neo SLS Apps tile gap analysis. 15/21 Neo SLS tiles already mapped to our 27 CF SLS apps. 6 unmapped tiles are SAP standard tcode wrappers (VA01/02/03, VL01N/02N/03N) with no HTML5 source — they migrate as Work Zone tile configurations under §13.6, not as new apps. The 21st tile (`zpkwporeport` / "Tracking information report - SLS") is a test-only app, excluded from scope by user.*
+
+---
+
+## 19. HD6 review + fix pass (2026-06-10)
+
+User asked for HR7/SLS-style audit of the 8-app HD6 deployment.
+
+### 19.1 Audit findings
+
+| Check | Result |
+|---|---|
+| mta-hd6.yaml destination-content `sap.cloud.service` consistency (§13.2-style) | ✅ all 8 consistent — no bug |
+| xs-security `xsappname` for all 8 (§17.1-style) | ✅ all match `comerpisshiperp{app}` — no bug |
+| index.html `<title>` | ❌ 8/8 wrong — all inherited Neo titles (`ShipERP - Cancel`, `Parcel - Create Shipment`, etc.) |
+| i18n `appTitle` | ❌ 8/8 wrong — missing `HD6` suffix |
+| VS Code F5 launch.json entries | ❌ 0 HD6 entries existed |
+| **`farpthd6` manifest `sap.app.id`** | ⚠️ legacy `com.erpis.testfarptFA_RPT.hd6` — see §19.3 |
+
+### 19.2 Fixes applied (deployed)
+
+- `scripts/fix-hd6-titles.js` rewrote all 8 HD6 `index.html` titles to the canonical `{App} HD6` form and synced `appTitle` / `appDescription` in `i18n.properties` (+ `i18n_en_US.properties` for `farpthd6`).
+- Rebuilt MTA (`mbt build -p cf -f mta-hd6.yaml --mtar shiperp-fiori-hd6_0.0.1.mtar`) and deployed all 8 `-app-content` + `-destination-content` modules via `cf deploy`.
+- Added 16 launch.json entries — 8 in the `☁ CF Apps` group (localhost:5000 path) and 8 in the `☁ CF Direct` group (per-app destination-service GUID + correct sap.app.id for each app, including the legacy `farpthd6` id).
+- Sample verification in browser (tabs returned the new titles):
+  - `cancelhd6` → **"Cancel HD6"** ✅
+  - `farpthd6` → **"Freight Audit Report HD6"** ✅ (via legacy id URL)
+  - `eodhd6` → **"End of Day HD6"** ✅
+
+Validator status after the pass: `scripts/validate-hd6-apps.js` → "HD6 validation passed. HD6 apps: 8". `scripts/validate-deployed-apps.js` still passes for HR7+SLS.
+
+### 19.3 §13.10 — `farpthd6` manifest sap.app.id legacy form (not fixed)
+
+The Neo source for `farpthd6` ships with `sap.app.id = com.erpis.testfarptFA_RPT.hd6`. Component.js, Component-preload.js, the controller class, and the view XML's `controllerName` all reference the same `com.erpis.testfarptFA_RPT.hd6.*` namespace. Renaming `sap.app.id` to the canonical `com.erpis.shiperp.farpt.hd6` requires also renaming every UI5 namespace declaration in the source files and rebuilding the preload bundle — a deep refactor that risks regressions in a working app.
+
+Initial automated rewrite of just the manifest was reverted to keep the app loading. Side effect: `cf html5-list` shows the entry as `comerpistestfarptFA_RPThd6` (id with dots stripped), and the launchpad URL for `farpthd6` uses the legacy id: `{guid}.comerpisshiperpfarpthd6.comerpistestfarptFA_RPThd6-1.0.0/index.html`. The `☁ farpthd6 (CF Direct)` launch entry already encodes this correctly.
+
+Cleanup work logged as **§13.10**, deferred.
+

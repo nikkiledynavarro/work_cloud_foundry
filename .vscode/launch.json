@@ -2389,6 +2389,286 @@
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
             "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpcancelhd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ cancelhd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 56
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpdisputehd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ disputehd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 57
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpeodhd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ eodhd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 58
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfarpthd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ farpthd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 59
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudithd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ freightaudithd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 60
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpparceldemohd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ parceldemohd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 61
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperpparcelhd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ parcelhd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 62
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmenthd6/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
+            "name": "☁ trackshipmenthd6 (CF)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Apps",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d403ded5-fc13-4647-b5e5-681f80e352cf.comerpisshiperpcancelhd6.comerpisshiperpcancelhd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ cancelhd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c83c398e-33f4-48b2-9214-b35015671239.comerpisshiperpdisputehd6.comerpisshiperpdisputehd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ disputehd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9aba6d0a-1598-4301-82af-015563ac20de.comerpisshiperpeodhd6.comerpisshiperpeodhd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ eodhd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/276433b8-5e2c-4072-90c7-e974915b8cf2.comerpisshiperpfarpthd6.comerpistestfarptFA_RPThd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ farpthd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9f1ff735-4223-4adb-abe7-2a8180ba4072.comerpisshiperpfreightaudithd6.comerpisshiperpfreightaudithd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ freightaudithd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9e2be96c-73c2-4629-ae37-dfd306e500d9.comerpisshiperpparceldemohd6.comerpisshiperpparceldemohd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ parceldemohd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a27513c8-979d-46ec-817c-19d3006612e1.comerpisshiperpparcelhd6.comerpisshiperpparcelhd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ parcelhd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6dd1fb23-92c0-4c78-9fae-1e76a837653e.comerpisshiperptrackshipmenthd6.comerpisshiperptrackshipmenthd6-1.0.0/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "name": "☁ trackshipmenthd6 (CF Direct)",
+            "presentation": {
+                "hidden": false,
+                "group": "☁ CF Direct",
+                "order": 63
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
         }
     ]
 }
