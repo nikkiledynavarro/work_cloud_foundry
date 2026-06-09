@@ -985,6 +985,10 @@ The xterm.js terminal in BAS sometimes ignores keyboard events when driven via C
 
 The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has been created yet. This means there's no branded launchpad with tile grouping/roles. Users access apps via the BTP Cockpit HTML5 Applications page click-through or direct CF launchpad URLs. See §12.1 for the runbook to set up a Site when you want one.
 
+### 13.7 Orphan destination registration causing "1 Configuration issue" in cockpit
+
+Cockpit → HTML5 Applications shows one yellow banner: a destination (`560d5bf2-cb58-41b1-9ef6-c3620a69f9f4`) still points to a deleted html5-apps-repo instance (`5e7a8a82-f190-485c-9050-4b194afc2256`). This is residue from the §13.2 quickpackeccsls-app-front-service recreate. No live app depends on it. Cleanup is just an API delete of the orphan destination entry — non-blocking, can be batched with the next maintenance pass.
+
 ---
 
 ## 14. Recovery — "I opened BAS and can't find the apps"
@@ -1085,6 +1089,33 @@ If any of those don't match, you're not on `main` HEAD — `git pull` again.
 
 No application source files or deployed CF resources were changed during this verification.
 
+### 15.3 Runtime verification of the 9 renamed SLS apps (2026-06-09, post-§13.2 fix)
+
+After landing commit `484f3d6` (mta.yaml `destinations:` fix + missing `index.html` for `quickpackeccsls`/`saleordersls`), each of the 9 renamed SLS apps was launched via the BTP Cockpit → HTML5 Applications → "Run the active version" click and the resulting browser tab title recorded:
+
+| App | Tab title | Status |
+|---|---|---|
+| `quickpackeccsls` | ShipERP | ✅ |
+| `cancelshipmenteccsls` | ShipERP - Cancel | ✅ |
+| `createshipmenteccsls` | Parcel - Create Shipment | ✅ |
+| `manualshipmenteccsls` | manual - Manual Shipment ECC | ✅ |
+| `createshipmentewmsls` | Parcel - Create Shipment | ✅ |
+| `manualshipmentewmsls` | manual - Manual Shipment EMM | ✅ |
+| `trackshipmentewmsls` | Track Shipment | ✅ |
+| `saleordersls` | ShipERP | ✅ |
+| `freightorderplanningsls` | ShipERP - Freight Order Planning | ✅ |
+
+A non-default tab title proves the Managed Application Router resolved the route, the html5-apps-repo served `index.html`, UI5 bootstrapped, and `manifest.json` was read. Page bodies are blank because the OData backend is still unreachable from `btp_cf` — that is the §13.1 Cloud Connector blocker, not a deploy bug. Title spellings ("manual", "EMM", "Parcel") reflect §13.3 — the manifest titles were copied from the HR7 source apps without rebranding.
+
+### 15.4 Configuration issue found in cockpit during audit
+
+The BTP Cockpit → HTML5 Applications page shows a single yellow "1 Configuration issue" banner:
+
+> Failed to get metadata, response status code: 400. Please check the service instance exists..
+> Destination: `560d5bf2-cb58-41b1-9ef6-c3620a69f9f4`, html5-apps-repo instance: `5e7a8a82-f190-485c-9050-4b194afc2256`
+
+The referenced html5-apps-repo instance GUID no longer exists — this is residue from the earlier `quickpackeccsls-app-front-service` recreate cycle during §13.2 troubleshooting. The instance was deleted but a destination still points at it. None of the 54 live apps depend on this. Tracked as §13.7.
+
 ---
 
-*Last updated: 2026-06-09 — Added §15 with BAS/CF verification results and pending runtime tests. All 54 scoped apps build successfully, configuration validation passes, all 54 are present in the CF HTML5 Application Repository, and CF services show no failed or pending states. Runtime launch, Work Zone, standalone approuter, and backend functional testing remain pending.*
+*Last updated: 2026-06-09 — §15.3 records runtime verification of all 9 renamed SLS apps via cockpit click; each loads its manifest (non-default tab title). Added §13.7 (orphan destination causing the cockpit's '1 Configuration issue' banner, non-blocking). Approuter standalone refactored to use html5-apps-repo-rt pattern (commit 60a1b24).*
