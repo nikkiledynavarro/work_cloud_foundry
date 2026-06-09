@@ -981,9 +981,17 @@ When clicking the Source Control icon in BAS sidebar, it shows "The folder curre
 
 The xterm.js terminal in BAS sometimes ignores keyboard events when driven via Chrome MCP. Manual typing always works. Workaround: paste commands directly or click into the terminal more precisely before typing. Not blocking, just an automation friction point.
 
-### 13.6 Work Zone Site Directory is empty
+### 13.6 Work Zone Site Directory is empty — no end-user tiles exist anywhere
 
-The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has been created yet. This means there's no branded launchpad with tile grouping/roles. Users access apps via the BTP Cockpit HTML5 Applications page click-through or direct CF launchpad URLs. See §12.1 for the runbook to set up a Site when you want one.
+The `btp_cf` subaccount has Build Work Zone Standard subscribed, but no Site has been created yet. This means there's no branded launchpad with tile grouping/roles. End-users currently have **no tile experience at all** — apps are only reachable through developer paths (BTP Cockpit click-through, direct CF launchpad URLs, or local approuter).
+
+**Full scope of tile work, once Work Zone access is granted:**
+
+1. **27 HR7 app tiles** — one per HR7 app in `apps/`. URL = the Managed Application Router URL we already use (per-app destination service GUID + cloud service + version + `index.html`).
+2. **27 SLS app tiles** — same pattern, SLS variants.
+3. **6 SAP standard tcode tiles for SLS** (see §18) — VA01 / VA02 / VA03 / VL01N / VL02N / VL03N. These have no HTML5 source; they're static URL tiles pointing at the SLS backend via the SLS destination (`https://{sls-host}/sap/bc/gui/sap/its/webgui?~transaction=VA0X`).
+
+Total: **60 tiles** plus the catalog and role-collection wiring. See §12.1 for the runbook. Also depends on §13.1 Cloud Connector mappings being live, otherwise the tiles open but can't fetch backend data.
 
 ### 13.7 Orphan destination registration causing "1 Configuration issue" in cockpit
 
