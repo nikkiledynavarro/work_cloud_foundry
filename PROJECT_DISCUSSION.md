@@ -1151,6 +1151,24 @@ Platform note: all entries use `runtimeExecutable: powershell.exe` and tasks use
 
 End-to-end F5 runtime tests for both `🌐 Local Source` and `☁ CF Apps` groups still require VPN connectivity to `virtual-s4hr7.erp-is.com:50000` (HR7) and the equivalent SLS endpoint — same §13.1 Cloud Connector blocker as the BAS runtime path.
 
+### 15.6 §13.3 + §13.8 cleanup pass (2026-06-09)
+
+Two cleanup scripts added under `scripts/`:
+
+**`scripts/fix-sls-titles.js`** — §13.3 source fix. Walks every `apps/*sls/` and:
+1. Sets `<title>` in `index.html` to the canonical `"{App Name} SLS"` form (was a mix of inherited Neo titles like `ShipERP - Cancel`, `Parcel - Create Shipment`, `TUV`, `ltlplanning`, etc.).
+2. Adds `appTitle=` to `i18n/i18n.properties` for any SLS app missing it.
+
+Ran once; 27 `index.html` titles rewritten, 1 `appTitle` added (`shippingdashboardsls`). Hand-edited 4 stragglers the script couldn't reach automatically:
+- `carrierperformancereporteccsls/i18n/i18n_en.properties` — uses `_en` suffix.
+- `disputesls/i18n/i18n.properties` — appTitle was `Freight Audit Dispute App` (Neo legacy); now `Dispute SLS`.
+- `freightauditsls/i18n/i18n.properties` — appTitle was just `Freight Audit`; now `Freight Audit SLS`.
+- `carrierperformancereportewmsls/i18n/i18n_en.properties` — was `EWM Carrier Performance Report`; now `Carrier Performance Report EWM SLS`.
+
+The fix is source-only — the CF launchpad will keep showing the old titles until each app is rebuilt + redeployed (`mbt build -p cf && cf deploy mta_archives/*.mtar -f -m '<sls>-app-content'` per app, or the full MTA redeploy of the 27 SLS app-content modules). HR7 apps were intentionally not touched (out of scope for this round, and a few share the same Neo-era titles that look "wrong" but are baseline-correct).
+
+**`scripts/regen-cf-direct-urls.js`** — §13.8 source fix. Walks every `☁ {app} (CF Direct)` entry in `.vscode/launch.json`, calls `cf service {app}-destination-service --guid` for each, and rewrites the launchpad URL with the correct per-app GUID. Requires `cf login` before running; aborts with a non-zero exit code if any app's GUID can't be resolved. Not executed in this commit because the Windows CF session was expired — the user runs it after `cf login -a https://api.cf.us11.hana.ondemand.com --sso`.
+
 ---
 
-*Last updated: 2026-06-09 — §15.5 records the VS Code F5 audit (launch.json + tasks.json). Added missing `trackshipmentecc` Local Source entry + matching task. Found §13.8: all 54 `☁ CF Direct` launch URLs hardcode a stale destination service GUID (`a167a84f-...`) from before the per-app split — they'll 404 on click. Cockpit click path (§15.3) and `☁ CF Apps` localhost path are unaffected.*
+*Last updated: 2026-06-09 — §15.6 records the §13.3 + §13.8 cleanup pass. `scripts/fix-sls-titles.js` applied: 27 index.html titles + 1 missing appTitle + 4 hand-fixed stragglers. `scripts/regen-cf-direct-urls.js` ready to run after `cf login`. HR7 source untouched. CF redeploy of the SLS apps is deferred — source is correct, launchpad still serves the old titles until then.*
