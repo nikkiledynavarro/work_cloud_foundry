@@ -1,0 +1,19 @@
+{
+    "xsappname":  "comerpisshiperpparceldemohd6",
+    "tenant-mode":  "dedicated",
+    "scopes":  [
+                   {
+                       "name":  "$XSAPPNAME.User",
+                       "description":  "Access Parcel Demo HD6"
+                   }
+               ],
+    "role-templates":  [
+                           {
+                               "name":  "User",
+                               "description":  "Access Parcel Demo HD6",
+                               "scope-references":  [
+                                                        "$XSAPPNAME.User"
+                                                    ]
+                           }
+                       ]
+}

@@ -1,0 +1,718 @@
+_schema-version: "3.2"
+ID: shiperp-fiori-hd6
+version: 0.0.1
+description: Migrated ShipERP Neo HTML5 applications connected to HD6.
+
+modules:
+  - name: cancelhd6
+    type: html5
+    path: apps/cancelhd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: disputehd6
+    type: html5
+    path: apps/disputehd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: eodhd6
+    type: html5
+    path: apps/eodhd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: farpthd6
+    type: html5
+    path: apps/farpthd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: freightaudithd6
+    type: html5
+    path: apps/freightaudithd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: parcelhd6
+    type: html5
+    path: apps/parcelhd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: parceldemohd6
+    type: html5
+    path: apps/parceldemohd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: trackshipmenthd6
+    type: html5
+    path: apps/trackshipmenthd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: zpkwporeporthd6
+    type: html5
+    path: apps/zpkwporeporthd6
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+        - npm run package
+      build-result: dist
+      supported-platforms: []
+
+  - name: cancelhd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: cancelhd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/cancelhd6
+      requires:
+        - name: cancelhd6
+          artifacts:
+            - cancelhd6.zip
+          target-path: resources/cancelhd6/
+
+  - name: cancelhd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: cancelhd6-destination-service
+        parameters:
+          content-target: true
+      - name: cancelhd6-app-front-service
+        parameters:
+          service-key:
+            name: cancelhd6-app-front-service-key
+      - name: cancelhd6-xsuaa-service
+        parameters:
+          service-key:
+            name: cancelhd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: cancelhd6-app-front-service
+              ServiceInstanceName: cancelhd6-app-front-service
+              ServiceKeyName: cancelhd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpcancelhd6
+            - Name: cancelhd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: cancelhd6-xsuaa-service
+              ServiceKeyName: cancelhd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpcancelhd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: disputehd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: disputehd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/disputehd6
+      requires:
+        - name: disputehd6
+          artifacts:
+            - disputehd6.zip
+          target-path: resources/disputehd6/
+
+  - name: disputehd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: disputehd6-destination-service
+        parameters:
+          content-target: true
+      - name: disputehd6-app-front-service
+        parameters:
+          service-key:
+            name: disputehd6-app-front-service-key
+      - name: disputehd6-xsuaa-service
+        parameters:
+          service-key:
+            name: disputehd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: disputehd6-app-front-service
+              ServiceInstanceName: disputehd6-app-front-service
+              ServiceKeyName: disputehd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpdisputehd6
+            - Name: disputehd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: disputehd6-xsuaa-service
+              ServiceKeyName: disputehd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpdisputehd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: eodhd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: eodhd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/eodhd6
+      requires:
+        - name: eodhd6
+          artifacts:
+            - eodhd6.zip
+          target-path: resources/eodhd6/
+
+  - name: eodhd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: eodhd6-destination-service
+        parameters:
+          content-target: true
+      - name: eodhd6-app-front-service
+        parameters:
+          service-key:
+            name: eodhd6-app-front-service-key
+      - name: eodhd6-xsuaa-service
+        parameters:
+          service-key:
+            name: eodhd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: eodhd6-app-front-service
+              ServiceInstanceName: eodhd6-app-front-service
+              ServiceKeyName: eodhd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpeodhd6
+            - Name: eodhd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: eodhd6-xsuaa-service
+              ServiceKeyName: eodhd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpeodhd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: farpthd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: farpthd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/farpthd6
+      requires:
+        - name: farpthd6
+          artifacts:
+            - farpthd6.zip
+          target-path: resources/farpthd6/
+
+  - name: farpthd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: farpthd6-destination-service
+        parameters:
+          content-target: true
+      - name: farpthd6-app-front-service
+        parameters:
+          service-key:
+            name: farpthd6-app-front-service-key
+      - name: farpthd6-xsuaa-service
+        parameters:
+          service-key:
+            name: farpthd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: farpthd6-app-front-service
+              ServiceInstanceName: farpthd6-app-front-service
+              ServiceKeyName: farpthd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpfarpthd6
+            - Name: farpthd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: farpthd6-xsuaa-service
+              ServiceKeyName: farpthd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpfarpthd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: freightaudithd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: freightaudithd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/freightaudithd6
+      requires:
+        - name: freightaudithd6
+          artifacts:
+            - freightaudithd6.zip
+          target-path: resources/freightaudithd6/
+
+  - name: freightaudithd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: freightaudithd6-destination-service
+        parameters:
+          content-target: true
+      - name: freightaudithd6-app-front-service
+        parameters:
+          service-key:
+            name: freightaudithd6-app-front-service-key
+      - name: freightaudithd6-xsuaa-service
+        parameters:
+          service-key:
+            name: freightaudithd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: freightaudithd6-app-front-service
+              ServiceInstanceName: freightaudithd6-app-front-service
+              ServiceKeyName: freightaudithd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpfreightaudithd6
+            - Name: freightaudithd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: freightaudithd6-xsuaa-service
+              ServiceKeyName: freightaudithd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpfreightaudithd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: parcelhd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: parcelhd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/parcelhd6
+      requires:
+        - name: parcelhd6
+          artifacts:
+            - parcelhd6.zip
+          target-path: resources/parcelhd6/
+
+  - name: parcelhd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: parcelhd6-destination-service
+        parameters:
+          content-target: true
+      - name: parcelhd6-app-front-service
+        parameters:
+          service-key:
+            name: parcelhd6-app-front-service-key
+      - name: parcelhd6-xsuaa-service
+        parameters:
+          service-key:
+            name: parcelhd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: parcelhd6-app-front-service
+              ServiceInstanceName: parcelhd6-app-front-service
+              ServiceKeyName: parcelhd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpparcelhd6
+            - Name: parcelhd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: parcelhd6-xsuaa-service
+              ServiceKeyName: parcelhd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpparcelhd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: parceldemohd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: parceldemohd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/parceldemohd6
+      requires:
+        - name: parceldemohd6
+          artifacts:
+            - parceldemohd6.zip
+          target-path: resources/parceldemohd6/
+
+  - name: parceldemohd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: parceldemohd6-destination-service
+        parameters:
+          content-target: true
+      - name: parceldemohd6-app-front-service
+        parameters:
+          service-key:
+            name: parceldemohd6-app-front-service-key
+      - name: parceldemohd6-xsuaa-service
+        parameters:
+          service-key:
+            name: parceldemohd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: parceldemohd6-app-front-service
+              ServiceInstanceName: parceldemohd6-app-front-service
+              ServiceKeyName: parceldemohd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpparceldemohd6
+            - Name: parceldemohd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: parceldemohd6-xsuaa-service
+              ServiceKeyName: parceldemohd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpparceldemohd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: trackshipmenthd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: trackshipmenthd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/trackshipmenthd6
+      requires:
+        - name: trackshipmenthd6
+          artifacts:
+            - trackshipmenthd6.zip
+          target-path: resources/trackshipmenthd6/
+
+  - name: trackshipmenthd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: trackshipmenthd6-destination-service
+        parameters:
+          content-target: true
+      - name: trackshipmenthd6-app-front-service
+        parameters:
+          service-key:
+            name: trackshipmenthd6-app-front-service-key
+      - name: trackshipmenthd6-xsuaa-service
+        parameters:
+          service-key:
+            name: trackshipmenthd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: trackshipmenthd6-app-front-service
+              ServiceInstanceName: trackshipmenthd6-app-front-service
+              ServiceKeyName: trackshipmenthd6-app-front-service-key
+              sap.cloud.service: comerpisshiperptrackshipmenthd6
+            - Name: trackshipmenthd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: trackshipmenthd6-xsuaa-service
+              ServiceKeyName: trackshipmenthd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperptrackshipmenthd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+  - name: zpkwporeporthd6-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: zpkwporeporthd6-app-front-service
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/zpkwporeporthd6
+      requires:
+        - name: zpkwporeporthd6
+          artifacts:
+            - zpkwporeporthd6.zip
+          target-path: resources/zpkwporeporthd6/
+
+  - name: zpkwporeporthd6-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: zpkwporeporthd6-destination-service
+        parameters:
+          content-target: true
+      - name: zpkwporeporthd6-app-front-service
+        parameters:
+          service-key:
+            name: zpkwporeporthd6-app-front-service-key
+      - name: zpkwporeporthd6-xsuaa-service
+        parameters:
+          service-key:
+            name: zpkwporeporthd6-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: zpkwporeporthd6-app-front-service
+              ServiceInstanceName: zpkwporeporthd6-app-front-service
+              ServiceKeyName: zpkwporeporthd6-app-front-service-key
+              sap.cloud.service: comerpisshiperpzpkwporeporthd6
+            - Name: zpkwporeporthd6-xsuaa-service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: zpkwporeporthd6-xsuaa-service
+              ServiceKeyName: zpkwporeporthd6-xsuaa-service-key
+              sap.cloud.service: comerpisshiperpzpkwporeporthd6
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+resources:
+  - name: cancelhd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: cancelhd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: cancelhd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-cancelhd6.json
+
+  - name: disputehd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: disputehd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: disputehd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-disputehd6.json
+
+  - name: eodhd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: eodhd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: eodhd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-eodhd6.json
+
+  - name: farpthd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: farpthd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: farpthd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-farpthd6.json
+
+  - name: freightaudithd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: freightaudithd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: freightaudithd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-freightaudithd6.json
+
+  - name: parcelhd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: parcelhd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: parcelhd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-parcelhd6.json
+
+  - name: parceldemohd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: parceldemohd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: parceldemohd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-parceldemohd6.json
+
+  - name: trackshipmenthd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: trackshipmenthd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: trackshipmenthd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-trackshipmenthd6.json
+
+  - name: zpkwporeporthd6-app-front-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: zpkwporeporthd6-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+
+  - name: zpkwporeporthd6-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./security/xs-security-zpkwporeporthd6.json
+

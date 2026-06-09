@@ -1,0 +1,52 @@
+* {
+    outline: none !important;
+}
+
+.width_auto {
+    width: auto !important;
+}
+
+.display_inline {
+	display: inline !important;
+}
+
+.margin_5px {
+    margin: 5px !important;
+}
+
+.margin_right_5px {
+    margin-right: 5px !important;
+}
+
+.border_lightgray {
+    border: 1px solid #e5e5e5 !important;
+}
+
+.border_lightgray_nobottom {
+    border: 1px solid #e5e5e5 !important;
+    border-bottom: none !important;
+}
+
+.border_lightblue_nobottom {
+    border: 1px solid #d1e0ee !important;
+    border-bottom: none !important;
+}
+
+.custom_login .sapUiFormTitle {
+    background: #428bca !important;
+    border: 0 !important;
+    text-align: center !important;
+    color: white !important;
+}
+
+.no_padding .sapUiBlockCellContent {
+    padding: 0 !important;
+}
+
+.main_tab .sapMITBHead {
+    margin-top: 0.5rem !important;
+}
+
+html.sap-phone .main_tab .sapMITBContent {
+    padding: 0.5rem !important;
+}

@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";return{shiptypeDesc:function(e){switch(e){case"01":return"Parcel";case"02":return"LTL";case"03":return"TL";case"04":return"LCL";case"05":return"Air Freight";case"06":return"FCL";case"07":return"Rail";default:return"Other"}}}});
+//# sourceMappingURL=formatter.js.map

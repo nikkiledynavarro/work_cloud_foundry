@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog title="Update Scale">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>Weight}"/>
+								</form:label>
+								<form:fields>
+									<Input type="Number" value="{local>/oMassUpdateScale/weight}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>Length}"/>
+								</form:label>
+								<form:fields>
+									<Input type="Number" value="{local>/oMassUpdateScale/length}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>Width}"/>
+								</form:label>
+								<form:fields>
+									<Input type="Number" value="{local>/oMassUpdateScale/width}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="{i18n>Height}"/>
+								</form:label>
+								<form:fields>
+									<Input type="Number" value="{local>/oMassUpdateScale/height}"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<beginButton>
+			<Button text="{i18n>OK}" type="Emphasized" press="onConfirmMassUpdateScale"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" press="onCloseMassScaleUpdateDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

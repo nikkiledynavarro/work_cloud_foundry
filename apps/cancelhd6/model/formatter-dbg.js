@@ -1,0 +1,2 @@
+sap.ui.define(["com/erpis/shiperp/cancel/common/Utils"],function(e){"use strict";return{getTransparentLogoLink:function(e){var n=jQuery.sap.getModulePath("com.erpis.shiperp.cancel.hd6");return n+"/image/shiperp_logo.png"}}});
+//# sourceMappingURL=formatter-dbg.js.map

@@ -1,0 +1,170 @@
+<mvc:View controllerName="com.erpis.shiperp.trackshipment.hd6.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:f="sap.f" height="100%" xmlns:form="sap.ui.layout.form" xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage id="dynamicPageId" preserveHeaderStateOnScroll="true" headerExpanded="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<FlexBox alignItems="Center">
+						<Image class="sapUiSmallMarginEnd" src="{path: '', formatter: '.formatter.getTransparentLogoLink' }" height="1.5rem"/>
+						<Select width="auto" class="margin_right_5px" id="cbInputType" change="onResetData">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+							<items>
+								<core:Item text="HU" key="8"></core:Item>
+								<core:Item text="Delivery" key="3"></core:Item>
+								<core:Item text="Tracking Number" key="7"></core:Item>
+							</items>
+						</Select>
+						<MultiInput submit="onSubmit" id="txtId" width="12rem" placeholder="Enter Number" class="margin_right_5px" showValueHelp="false">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</MultiInput>
+						<Button icon="sap-icon://reset" tooltip="Reset Data" type="Emphasized" press="onResetData" class="margin_right_5px"/>
+					</FlexBox>
+				</f:heading>
+				<f:actions>
+					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
+						app:crossNavigate="#parcelhr7-Display"/>
+					<Button icon="sap-icon://sys-cancel" tooltip="Open Cancel App" type="Reject" press="onCrossNavigate" app:crossNavigate="#Cancel-display"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:content>
+			<table:TreeTable id="hierarchyTable" rowSelectionChange="onRowSelectionChange" selectionMode="Single"
+				rows="{path:'local>/Shipments', parameters: {arrayNames:['Children'],numberOfExpandedLevels:3}}" enableSelectAll="false">
+				<table:extension>
+					<Toolbar height="3rem">
+						<Title text="Tracking Information"/>
+						<ToolbarSpacer/>
+						<Button text="Proof Of Delivery" enabled="{= ${local>/Shipments}.length > 0 ? true : false}" press="onProofDeliveryPress"/>
+					</Toolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column width="15rem">
+						<Label text="Hierarchy Header" tooltip="Hierarchy Header"/>
+						<table:template>
+							<ObjectStatus text="{local>NodeDesc}" tooltip="{path: 'local>NodeDesc'}"
+								state="{path: 'local>', formatter: '.formatter.getStateForParentNode'}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+						<Label text="ExpDlvFld" tooltip="ExpDlvFld"/>
+						<table:template>
+							<Text text="{path: 'local>Vlabdata', formatter: '.formatter.removeLeadingZero'}" wrapping="false" tooltip="{local>Vlabdata}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Quantity" tooltip="Quantity"/>
+						<table:template>
+							<Text text="{= parseInt(${local>Vemng}) }" wrapping="false" tooltip="{local>Vemng}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="HuItemUoM" tooltip="HuItemUoM"/>
+						<table:template>
+							<Text text="{local>Vemeh}" wrapping="false" tooltip="{local>Vemeh}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Weight" tooltip="Weight"/>
+						<table:template>
+							<Text text="{local>Weight}" wrapping="false" tooltip="{local>Weight}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="UOM" tooltip="UOM"/>
+						<table:template>
+							<Text text="{local>Weightunit}" wrapping="false" tooltip="{local>Weightunit}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+						<Label text="Tracking" tooltip="Tracking"/>
+						<table:template>
+							<ObjectStatus text="{path: 'local>Trackingnum', formatter: '.formatter.removeLeadingZero'}" tooltip="{path: 'local>Trackingnum'}"
+								state="Warning"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Master Track" tooltip="Master Track"/>
+						<table:template>
+							<Text text="{local>Mastertrack}" wrapping="false" tooltip="{local>Mastertrack}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Ship Date" tooltip="Ship Date"/>
+						<table:template>
+							<Text text="{local>Shipdate}" wrapping="false" tooltip="{local>Shipdate}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+						<Label text="Status" tooltip="Status"/>
+						<table:template>
+							<Text text="{local>Trktext}" wrapping="false" tooltip="{local>Trktext}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Signed by" tooltip="Signed by"/>
+						<table:template>
+							<Text text="{local>Signedby}" wrapping="false" tooltip="{local>Signedby}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Carrier" tooltip="Carrier"/>
+						<table:template>
+							<Text text="{local>Carrier}" wrapping="false" tooltip="{local>Carrier}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Service" tooltip="Service"/>
+						<table:template>
+							<Text text="{local>Service}" wrapping="false" tooltip="{local>Service}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+						<Label text="Serv.Desc" tooltip="Serv.Desc"/>
+						<table:template>
+							<Text text="{local>Servicedesc}" wrapping="false" tooltip="{local>Servicedesc}"/>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+						<Label text="City" tooltip="City"/>
+						<table:template>
+							<Text text="{local>Ort01}" wrapping="false" tooltip="{local>Ort01}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Region" tooltip="Region"/>
+						<table:template>
+							<Text text="{local>Regio}" wrapping="false" tooltip="{local>Regio}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Country" tooltip="Country"/>
+						<table:template>
+							<Text text="{local>Land1}" wrapping="false" tooltip="{local>Land1}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Resp Party" tooltip="Responsible Party"/>
+						<table:template>
+							<Text text="{local>Respparty}" wrapping="false" tooltip="{local>Respparty}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:TreeTable>
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="popoverButton" icon="sap-icon://message-popup" text="{messageModel>/messagesLength}" type="Emphasized"
+					press="handleMessagePopoverPress"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

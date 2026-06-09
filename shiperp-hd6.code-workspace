@@ -1,0 +1,50 @@
+{
+  "folders": [
+    {
+      "name": "HD6 Migration",
+      "path": "."
+    },
+    {
+      "name": "Cancel Shipment HD6",
+      "path": "apps/cancelhd6"
+    },
+    {
+      "name": "Dispute HD6",
+      "path": "apps/disputehd6"
+    },
+    {
+      "name": "End of Day HD6",
+      "path": "apps/eodhd6"
+    },
+    {
+      "name": "Freight Audit Report HD6",
+      "path": "apps/farpthd6"
+    },
+    {
+      "name": "Freight Audit HD6",
+      "path": "apps/freightaudithd6"
+    },
+    {
+      "name": "Create Parcel Shipment HD6",
+      "path": "apps/parcelhd6"
+    },
+    {
+      "name": "Parcel Demo HD6",
+      "path": "apps/parceldemohd6"
+    },
+    {
+      "name": "Track Shipment HD6",
+      "path": "apps/trackshipmenthd6"
+    },
+    {
+      "name": "Purchase Order Report HD6",
+      "path": "apps/zpkwporeporthd6"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    }
+  }
+}

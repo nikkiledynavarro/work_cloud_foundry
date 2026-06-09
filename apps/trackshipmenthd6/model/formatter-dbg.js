@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";return{getTransparentLogoLink:function(e){var r=jQuery.sap.getModulePath("com.erpis.shiperp.trackshipment.hd6");return r+"/image/shiperp_logo.png"},numberUnit:function(e){if(!e){return""}return parseFloat(e).toFixed(2)},removeLeadingZero:function(e){try{if(!!e.trim()&&e*0===0){return parseInt(e,10)}return e}catch(e){return""}},getStateForParentNode:function(e){if(e&&e.Children.length>0){return"Success"}return"None"}}});
+//# sourceMappingURL=formatter-dbg.js.map

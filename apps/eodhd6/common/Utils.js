@@ -1,0 +1,2 @@
+sap.ui.define([],function(){"use strict";var e="com.erpis.shiperp.eod.hd6.fragment.";return{getFragment:function(r,n,t){var a=t.getView();if(!t.hasOwnProperty("fragments")){t.fragments={}}var f=t.fragments[n];if(f===undefined){var i="";if(r){i=a.createId(r)}else{i=a.getId()}f=sap.ui.xmlfragment(i,e+n,t);t.fragments[n]=f;a.addDependent(f)}return f}}});
+//# sourceMappingURL=Utils.js.map

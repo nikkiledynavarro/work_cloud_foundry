@@ -1172,3 +1172,47 @@ The fix is source-only — the CF launchpad will keep showing the old titles unt
 ---
 
 *Last updated: 2026-06-09 — §15.6 records the §13.3 + §13.8 cleanup pass. `scripts/fix-sls-titles.js` applied: 27 index.html titles + 1 missing appTitle + 4 hand-fixed stragglers. `scripts/regen-cf-direct-urls.js` ready to run after `cf login`. HR7 source untouched. CF redeploy of the SLS apps is deferred — source is correct, launchpad still serves the old titles until then.*
+
+## 16. HD6 Migration (2026-06-10)
+
+Nine Neo applications that use HD6 were converted and deployed as an isolated MTA. Existing HR7 and SLS application files and deployments were not changed.
+
+| Neo project | Cloud Foundry app |
+|---|---|
+| `cancel` | `cancelhd6` |
+| `dispute` | `disputehd6` |
+| `eod` | `eodhd6` |
+| `farpt` | `farpthd6` |
+| `freightaudit` | `freightaudithd6` |
+| `parcel` | `parcelhd6` |
+| `parceldemo` | `parceldemohd6` |
+| `trackshipment` | `trackshipmenthd6` |
+| `zpkwporeport` | `zpkwporeporthd6` |
+
+### 16.1 Deployment result
+
+- CF target: API `https://api.cf.us11.hana.ondemand.com`
+- Organization: `ERP Integrated Solutions, LLC   dba ShipERP._btp-cf-8qsdli3e`
+- Space: `DEV`
+- MTA: `shiperp-fiori-hd6`, version `0.0.1`
+- HTML5 applications deployed: 9
+- Service instances created: 27
+  - 9 `html5-apps-repo` `app-host`
+  - 9 `destination` `lite`
+  - 9 `xsuaa` `application`
+- All 27 service operations report `create succeeded`.
+- `scripts/validate-hd6-apps.js` passes.
+- The existing validator still passes for 27 HR7 and 27 SLS definitions.
+
+### 16.2 Pending HD6 runtime dependency
+
+All nine apps route backend requests through `virtual-hd6-destination`.
+The destination is not present in the target subaccount as of 2026-06-10.
+The expected definition recorded from Neo is:
+
+- URL: `http://virtual-s4hd6.erp-is.com:8000`
+- Type: `HTTP`
+- Proxy type: `OnPremise`
+- Authentication: `BasicAuthentication`
+
+The exported inventory does not contain the HD6 backend secret. Do not reuse HR7 or SLS credentials. Runtime backend calls will remain unavailable until the HD6 destination is created with valid credentials and its Cloud Connector mapping is verified.

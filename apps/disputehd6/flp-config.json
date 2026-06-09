@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.erpis.shiperp.dispute.hd6.disputehr7",
+        "description": "Dispute, HR7",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#disputehr7-Display",
+        "navigationComponentName": "com.erpis.shiperp.dispute.hd6",
+        "intentSemanticObject": "disputehr7",
+        "intentAction": "Display",
+        "html5ApplicationName": "disputehr7",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "994bb97b-2c67-4377-be96-112ce547ad12-1625804227417"
+        ],
+        "contentPackages": [
+            "2194ea50-66e6-4cbf-a869-a936fa03a6f2-1625804098378"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Dispute",
+        "subtitle": "HR7",
+        "searchKeywords": "Dispute,HR7",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("z.zpkw_poreport.hd6.controller.V_POHeader",{onInit:function(){},GoToPODetail:function(e){var t=e.getSource().getBindingContext().getProperty("Ebeln");var n=sap.ui.core.UIComponent.getRouterFor(this);n.navTo("Route_PODetail",{SelectedItem:t})},OnItemChange:function(e){}})});
+//# sourceMappingURL=V_POHeader-dbg.controller.js.map
