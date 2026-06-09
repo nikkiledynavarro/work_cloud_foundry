@@ -87,7 +87,7 @@ for (const app of config.apps.filter((entry) => entry.enabled !== false)) {
   }
 }
 
-check(config.apps.length === 9, `Expected 9 HD6 apps, found ${config.apps.length}`);
+check(config.apps.length === 8, `Expected 8 active HD6 apps, found ${config.apps.length}`);
 check(
   !mta.includes("virtual-hr7-destination") &&
     !mta.includes("virtual-erps4sales-destination"),
@@ -100,5 +100,5 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   console.log("HD6 validation passed.");
-  console.log("HD6 apps: 9");
+  console.log("HD6 apps: 8");
 }

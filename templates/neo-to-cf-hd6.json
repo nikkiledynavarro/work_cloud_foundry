@@ -145,22 +145,6 @@
       "icon": "sap-icon://map-2",
       "destinationName": "virtual-hd6-destination",
       "odataPath": "/sap/opu/odata/serperp/track_shipment_srv/"
-    },
-    {
-      "enabled": true,
-      "neoZip": "zpkwporeport/zpkwporeport.zip",
-      "appName": "zpkwporeporthd6",
-      "title": "Purchase Order Report HD6",
-      "description": "ShipERP - Purchase Order Report HD6",
-      "oldNamespace": "z.zpkw_poreport",
-      "newNamespace": "z.zpkw_poreport.hd6",
-      "sapCloudService": "comerpisshiperpzpkwporeporthd6",
-      "semanticObject": "PurchaseOrderReportHD6",
-      "action": "display",
-      "subTitle": "ShipERP",
-      "icon": "sap-icon://report",
-      "destinationName": "virtual-hd6-destination",
-      "odataPath": "/sap/opu/odata/sap/ZPKW_TEST1_SRV/"
     }
   ]
 }

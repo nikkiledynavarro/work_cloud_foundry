@@ -100,18 +100,6 @@ modules:
       build-result: dist
       supported-platforms: []
 
-  - name: zpkwporeporthd6
-    type: html5
-    path: apps/zpkwporeporthd6
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-        - npm run package
-      build-result: dist
-      supported-platforms: []
-
   - name: cancelhd6-app-content
     type: com.sap.application.content
     path: .
@@ -480,52 +468,6 @@ modules:
     build-parameters:
       no-source: true
 
-  - name: zpkwporeporthd6-app-content
-    type: com.sap.application.content
-    path: .
-    requires:
-      - name: zpkwporeporthd6-app-front-service
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources/zpkwporeporthd6
-      requires:
-        - name: zpkwporeporthd6
-          artifacts:
-            - zpkwporeporthd6.zip
-          target-path: resources/zpkwporeporthd6/
-
-  - name: zpkwporeporthd6-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: zpkwporeporthd6-destination-service
-        parameters:
-          content-target: true
-      - name: zpkwporeporthd6-app-front-service
-        parameters:
-          service-key:
-            name: zpkwporeporthd6-app-front-service-key
-      - name: zpkwporeporthd6-xsuaa-service
-        parameters:
-          service-key:
-            name: zpkwporeporthd6-xsuaa-service-key
-    parameters:
-      content:
-        instance:
-          destinations:
-            - Name: zpkwporeporthd6-app-front-service
-              ServiceInstanceName: zpkwporeporthd6-app-front-service
-              ServiceKeyName: zpkwporeporthd6-app-front-service-key
-              sap.cloud.service: comerpisshiperpzpkwporeporthd6
-            - Name: zpkwporeporthd6-xsuaa-service
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: zpkwporeporthd6-xsuaa-service
-              ServiceKeyName: zpkwporeporthd6-xsuaa-service-key
-              sap.cloud.service: comerpisshiperpzpkwporeporthd6
-          existing_destinations_policy: update
-    build-parameters:
-      no-source: true
-
 resources:
   - name: cancelhd6-app-front-service
     type: org.cloudfoundry.managed-service
@@ -694,25 +636,4 @@ resources:
       service: xsuaa
       service-plan: application
       path: ./security/xs-security-trackshipmenthd6.json
-
-  - name: zpkwporeporthd6-app-front-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  - name: zpkwporeporthd6-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-
-  - name: zpkwporeporthd6-xsuaa-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./security/xs-security-zpkwporeporthd6.json
 

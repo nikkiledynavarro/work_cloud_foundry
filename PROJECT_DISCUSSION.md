@@ -1221,6 +1221,21 @@ The expected definition recorded from Neo is:
 
 The exported inventory does not contain the HD6 backend secret. Do not reuse HR7 or SLS credentials. Runtime backend calls will remain unavailable until the HD6 destination is created with valid credentials and its Cloud Connector mapping is verified.
 
+### 16.3 HD6 catalog correction
+
+On 2026-06-10, the Neo HD6 catalog screenshot was compared with the initial
+destination-based migration selection. The catalog contains 23 tiles and the
+initial nine-app selection is not a complete catalog migration.
+
+`zpkwporeporthd6` was removed from Cloud Foundry because it is not present in
+the supplied HD6 catalog. Its app-host, destination, and XSUAA service
+instances were deleted from the approved US11 `DEV` space. It was also removed
+from the active HD6 MTA, conversion template, workspace, and validator so it
+cannot be recreated by a future HD6 deployment. Its source folder remains in
+the repository for audit history.
+
+Active HD6 migration definitions after this correction: 8.
+
 ---
 
 ## 17. Post-deploy audit + reference (2026-06-10)

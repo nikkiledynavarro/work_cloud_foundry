@@ -35,10 +35,6 @@
     {
       "name": "Track Shipment HD6",
       "path": "apps/trackshipmenthd6"
-    },
-    {
-      "name": "Purchase Order Report HD6",
-      "path": "apps/zpkwporeporthd6"
     }
   ],
   "settings": {
