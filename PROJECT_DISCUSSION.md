@@ -1048,4 +1048,43 @@ If any of those don't match, you're not on `main` HEAD — `git pull` again.
 
 ---
 
-*Last updated: 2026-06-09 — Fixed §13.2 (sap.cloud.service mismatch on 9 renamed SLS apps) by correcting mta.yaml `destinations:` blocks AND adding missing `index.html` for `quickpackeccsls` + `saleordersls`. Verified `quickpackeccsls` now serves UI5 bootstrap via Managed Application Router. Commit `484f3d6`, pushed to origin/main. Added §14 BAS recovery runbook for "can't find the apps" situations. Grand total: 54 CF apps deployed. Remaining work is environmental (rsantos for Cloud Connector) and cosmetic (titles, Work Zone Site).*
+## 15. BAS and CF Test Status (2026-06-09)
+
+### 15.1 Completed verification
+
+- BAS dev space `ws-dha3l` is accessible and `WORK_CLOUD_FOUNDRY` is open.
+- The repository is on branch `main`.
+- All 54 scoped applications compile successfully: 27 HR7 and 27 SLS.
+- `scripts/validate-deployed-apps.js` passes for all 54 application definitions.
+- `cf html5-list` reports exactly 54 deployed HTML5 applications: 27 HR7 and 27 SLS.
+- No CF service instances are reported as failed, pending, or in progress.
+- The BAS locale warnings for `en_US.UTF-8` are non-blocking.
+- §13.2 runtime bug fixed in commit `484f3d6` (also pushed to origin/main): nine renamed SLS apps had stale `sap.cloud.service` values inside `mta.yaml` destination-content blocks, and `quickpackeccsls` + `saleordersls` were missing `index.html` entirely. After redeploying their `-app-content` and `-destination-content` modules, destination metadata is fully populated (correct `sap.cloud.service`, `app_host_id`, `clientId`, etc.) and `quickpackeccsls` now serves the SAP UI5 bootstrap via the Managed Application Router (tab title `ShipERP` instead of `File not found`). This means a successful `cf html5-list` count alone is **not** sufficient to declare an app working — the destination registration and the zip's `index.html` both have to be present too.
+
+### 15.2 Pending verification
+
+1. **Runtime UI launch test for all 54 applications**
+   - Successful builds and HTML5 Repository deployment do not prove that every application opens and renders correctly.
+   - Each application still needs an authenticated browser launch test.
+
+2. **SAP Build Work Zone test**
+   - Work Zone authoring remains on hold because the current user cannot create or change the required site content.
+   - Tiles, roles, catalogs, spaces/pages, and navigation cannot yet be verified.
+
+3. **Standalone CF approuter test**
+   - The temporary app `shiperp-fiori-test-approuter` is stopped.
+   - The current CF org quota allows `0 MB` application memory, `0` application instances, and `0` routes.
+   - An administrator must assign runtime memory, instance, and route quota before this approuter can start.
+
+4. **Backend functional tests**
+   - HR7 and SLS destination routing must still be tested from running applications.
+   - Test authentication, OData/service calls, Cloud Connector reachability, authorization, and application-specific actions.
+
+5. **End-to-end acceptance test**
+   - After either Work Zone access or CF approuter quota becomes available, smoke-test all 54 applications and record per-app pass/fail results.
+
+No application source files or deployed CF resources were changed during this verification.
+
+---
+
+*Last updated: 2026-06-09 — Added §15 with BAS/CF verification results and pending runtime tests. All 54 scoped apps build successfully, configuration validation passes, all 54 are present in the CF HTML5 Application Repository, and CF services show no failed or pending states. Runtime launch, Work Zone, standalone approuter, and backend functional testing remain pending.*
