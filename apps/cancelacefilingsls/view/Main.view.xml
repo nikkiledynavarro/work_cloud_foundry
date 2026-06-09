@@ -35,7 +35,7 @@
 					<OverflowToolbarButton icon="sap-icon://synchronize" press="onRefreshClick" tooltip="Refresh" type="Emphasized"/>
 					<!--Submit ACE Filing-->
 					<OverflowToolbarButton icon="sap-icon://shipping-status" press="onCrossNavigate" tooltip="Submit ACE Filing" type="Emphasized"
-						app:crossNavigate="#submitacehr7-Display"/>
+						app:crossNavigate="#submitacefilingsls-display"/>
 					<!--View ACE Filing-->
 					<OverflowToolbarButton icon="sap-icon://zoom-in" press="onCrossNavigate" tooltip="View ACE Filing" type="Ghost"
 						app:crossNavigate="#viewacefiling-Display"/>

@@ -46,7 +46,7 @@
 							<OverflowToolbarButton enabled="{= (${local>/basic} &amp;&amp; ${local>/AceSubmit} === true) ? false : true }" icon="sap-icon://database"
 								press="onRetrieveDatabase" tooltip="Retrieve from Database" type="Emphasized"/>
 							<OverflowToolbarButton icon="sap-icon://sys-cancel" press="onCrossNavigate" tooltip="Cancel Request" type="Reject"
-								app:crossNavigate="#cancelacehr7-Display"/>
+								app:crossNavigate="#cancelacefilingsls-display"/>
 							<OverflowToolbarButton icon="sap-icon://zoom-in" press="onCrossNavigate" tooltip="View ACE Filing" type="Emphasized"
 								app:crossNavigate="#viewacefiling-Display"/>
 						</uxap:navigationActions>

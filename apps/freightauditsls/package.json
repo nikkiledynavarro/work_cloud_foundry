@@ -1,16 +1,17 @@
 {
-    "name": "freightauditsls",
-    "version": "1.0.0",
-    "private": true,
-    "scripts": {
-        "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-        "package": "cd dist && bestzip freightauditsls.zip *"
-    },
-    "devDependencies": {
-        "@ui5/cli": "^3.11.0",
-        "bestzip": "^2.2.1"
-    },
-    "ui5": {
-        "dependencies": []
-    }
+  "name": "freightauditsls",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
+    "package": "cd dist && bestzip freightauditsls.zip *",
+    "start": "ui5 serve --config=ui5.yaml --port 8080 --open index.html"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^3.11.0",
+    "bestzip": "^2.2.1"
+  },
+  "ui5": {
+    "dependencies": []
+  }
 }

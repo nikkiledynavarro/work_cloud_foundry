@@ -44,10 +44,10 @@
       "path": "/sap/opu/odata/",
       "target": {
         "type": "destination",
-        "name": "virtual-hr7-destination",
+        "name": "virtual-erps4sales-destination",
         "entryPath": "/sap/opu/odata/"
       },
-      "description": "virtual-hr7-destination"
+      "description": "virtual-erps4sales-destination"
     }
   ],
   "welcomeFile": "/index.html",

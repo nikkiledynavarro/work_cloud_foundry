@@ -1,257 +1,272 @@
 {
-  "_version": "1.9.0",
-  "sap.app": {
-    "id": "comerpisshiperpfreightorderplanning",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "applicationVersion": {
-      "version": "1.0.0"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "sap/opu/odata/SERPTM/FRT_ORDPL_SRV/",
-        "type": "OData",
-        "settings": {
-          "odataVersion": "2.0",
-          "localUri": "localService/metadata.xml",
-          "annotations": [
-            "annotations"
-          ]
+    "_version": "1.9.0",
+    "sap.app": {
+        "id": "comerpisshiperpfreightorderplanning",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "sap/opu/odata/SERPTM/FRT_ORDPL_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml",
+                    "annotations": [
+                        "annotations"
+                    ]
+                }
+            },
+            "annotations": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotations.xml",
+                "settings": {
+                    "localUri": "annotations/annotations.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.1worklist",
+            "version": "1.52.7",
+            "toolsId": "aee6d7c8-5fc0-42f8-801f-74482d240728"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "freightorderhr7-Display": {
+                    "action": "Display",
+                    "icon": "sap-icon://app",
+                    "signature": {
+                        "additionalParameters": "allowed",
+                        "parameters": {}
+                    },
+                    "semanticObject": "freightorderhr7",
+                    "subTitle": "",
+                    "title": "{{appTitle}}"
+                }
+            }
         }
-      },
-      "annotations": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotations.xml",
-        "settings": {
-          "localUri": "annotations/annotations.xml"
-        }
-      }
     },
-    "sourceTemplate": {
-      "id": "sap.ui.ui5-template-plugin.1worklist",
-      "version": "1.52.7",
-      "toolsId": "aee6d7c8-5fc0-42f8-801f-74482d240728"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "fullWidth": true
+    },
+    "sap.ui5": {
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css",
+                    "id": "stylecss"
+                }
+            ]
+        },
+        "rootView": {
+            "viewName": "com.erpis.shiperp.freightorderplanning.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.52.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.erpis.shiperp.freightorderplanning.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "useBatch": true,
+                    "refreshAfterChange": false,
+                    "countMode": "Inline"
+                }
+            },
+            "statusList": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {},
+                "uri": "model/StatusList.json",
+                "preload": true
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.erpis.shiperp.freightorderplanning.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "home",
+                    "target": [
+                        "home"
+                    ]
+                },
+                {
+                    "pattern": "FreightUnit/{Station}/{Profile}",
+                    "name": "freightUnit",
+                    "target": [
+                        "freightUnit"
+                    ]
+                },
+                {
+                    "pattern": "FreightUnitDetail/{FreightUnitNumber}/{Station}/{Profile}",
+                    "name": "freightUnitDetail",
+                    "target": [
+                        "freightUnitDetail"
+                    ]
+                },
+                {
+                    "pattern": "FreightOrder/{Station}/{Profile}",
+                    "name": "freightOrder",
+                    "target": [
+                        "freightOrder"
+                    ]
+                },
+                {
+                    "pattern": "FreightOrderDetail/{FreightOrderNumber}/{Station}/{Profile}",
+                    "name": "freightOrderDetail",
+                    "target": [
+                        "freightOrderDetail"
+                    ]
+                },
+                {
+                    "pattern": "FreightOrderDetailItem/{FreightOrderNumber}/{Station}/{Profile}",
+                    "name": "freightOrderDetailItem",
+                    "target": [
+                        "freightOrderDetailItem"
+                    ]
+                },
+                {
+                    "pattern": "RateQuote/{Station}/{Profile}",
+                    "name": "rateQuote",
+                    "target": [
+                        "rateQuote"
+                    ]
+                },
+                {
+                    "pattern": "RequestRouting/{Station}/{Profile}",
+                    "name": "requestRouting",
+                    "target": [
+                        "requestRouting"
+                    ]
+                },
+                {
+                    "pattern": "RequestForPickup/{Station}/{Profile}",
+                    "name": "requestForPickup",
+                    "target": [
+                        "requestForPickup"
+                    ]
+                }
+            ],
+            "targets": {
+                "home": {
+                    "viewType": "XML",
+                    "viewName": "Home",
+                    "viewId": "home",
+                    "viewLevel": 1
+                },
+                "freightUnit": {
+                    "viewName": "FreightUnit",
+                    "viewId": "freightUnit",
+                    "viewLevel": 1,
+                    "title": "{i18n>worklistViewTitle}"
+                },
+                "freightUnitDetail": {
+                    "viewName": "FreightUnitDetail",
+                    "viewId": "freightUnitDetail",
+                    "viewLevel": 2,
+                    "title": "{i18n>objectViewTitle}"
+                },
+                "freightOrder": {
+                    "viewName": "FreightOrder",
+                    "viewId": "freightOrder",
+                    "viewLevel": 1,
+                    "title": "{i18n>freightOrderAppTitle}"
+                },
+                "freightOrderDetail": {
+                    "viewType": "XML",
+                    "viewName": "FreightOrderDetail"
+                },
+                "freightOrderDetailItem": {
+                    "viewType": "XML",
+                    "viewName": "FreightOrderDetailItem"
+                },
+                "rateQuote": {
+                    "viewType": "XML",
+                    "viewName": "RateQuote"
+                },
+                "requestRouting": {
+                    "viewType": "XML",
+                    "viewName": "RequestRouting"
+                },
+                "requestForPickup": {
+                    "viewType": "XML",
+                    "viewName": "RequestForPickup"
+                },
+                "objectNotFound": {
+                    "viewName": "ObjectNotFound",
+                    "viewId": "objectNotFound"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        },
+        "flexBundle": false
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/serptm/frt_ord_apps/webapp",
+        "_version": "1.1.0"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "comerpisshiperpfreightorderplanning"
     }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "sap-icon://task",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    },
-    "fullWidth": true
-  },
-  "sap.ui5": {
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css",
-          "id": "stylecss"
-        }
-      ]
-    },
-    "rootView": {
-      "viewName": "com.erpis.shiperp.freightorderplanning.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "app"
-    },
-    "dependencies": {
-      "minUI5Version": "1.52.0",
-      "libs": {
-        "sap.ui.core": {},
-        "sap.m": {},
-        "sap.f": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "com.erpis.shiperp.freightorderplanning.i18n.i18n"
-        }
-      },
-      "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {
-          "useBatch": true,
-          "refreshAfterChange": false,
-          "countMode": "Inline"
-        }
-      },
-      "statusList": {
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
-        "uri": "model/StatusList.json",
-        "preload": true
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      }
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "viewPath": "com.erpis.shiperp.freightorderplanning.view",
-        "controlId": "app",
-        "controlAggregation": "pages",
-        "bypassed": {
-          "target": [
-            "notFound"
-          ]
-        },
-        "async": true
-      },
-      "routes": [
-        {
-          "pattern": "",
-          "name": "home",
-          "target": [
-            "home"
-          ]
-        },
-        {
-          "pattern": "FreightUnit/{Station}/{Profile}",
-          "name": "freightUnit",
-          "target": [
-            "freightUnit"
-          ]
-        },
-        {
-          "pattern": "FreightUnitDetail/{FreightUnitNumber}/{Station}/{Profile}",
-          "name": "freightUnitDetail",
-          "target": [
-            "freightUnitDetail"
-          ]
-        },
-        {
-          "pattern": "FreightOrder/{Station}/{Profile}",
-          "name": "freightOrder",
-          "target": [
-            "freightOrder"
-          ]
-        },
-        {
-          "pattern": "FreightOrderDetail/{FreightOrderNumber}/{Station}/{Profile}",
-          "name": "freightOrderDetail",
-          "target": [
-            "freightOrderDetail"
-          ]
-        },
-        {
-          "pattern": "FreightOrderDetailItem/{FreightOrderNumber}/{Station}/{Profile}",
-          "name": "freightOrderDetailItem",
-          "target": [
-            "freightOrderDetailItem"
-          ]
-        },
-        {
-          "pattern": "RateQuote/{Station}/{Profile}",
-          "name": "rateQuote",
-          "target": [
-            "rateQuote"
-          ]
-        },
-        {
-          "pattern": "RequestRouting/{Station}/{Profile}",
-          "name": "requestRouting",
-          "target": [
-            "requestRouting"
-          ]
-        },
-        {
-          "pattern": "RequestForPickup/{Station}/{Profile}",
-          "name": "requestForPickup",
-          "target": [
-            "requestForPickup"
-          ]
-        }
-      ],
-      "targets": {
-        "home": {
-          "viewType": "XML",
-          "viewName": "Home",
-          "viewId": "home",
-          "viewLevel": 1
-        },
-        "freightUnit": {
-          "viewName": "FreightUnit",
-          "viewId": "freightUnit",
-          "viewLevel": 1,
-          "title": "{i18n>worklistViewTitle}"
-        },
-        "freightUnitDetail": {
-          "viewName": "FreightUnitDetail",
-          "viewId": "freightUnitDetail",
-          "viewLevel": 2,
-          "title": "{i18n>objectViewTitle}"
-        },
-        "freightOrder": {
-          "viewName": "FreightOrder",
-          "viewId": "freightOrder",
-          "viewLevel": 1,
-          "title": "{i18n>freightOrderAppTitle}"
-        },
-        "freightOrderDetail": {
-          "viewType": "XML",
-          "viewName": "FreightOrderDetail"
-        },
-        "freightOrderDetailItem": {
-          "viewType": "XML",
-          "viewName": "FreightOrderDetailItem"
-        },
-        "rateQuote": {
-          "viewType": "XML",
-          "viewName": "RateQuote"
-        },
-        "requestRouting": {
-          "viewType": "XML",
-          "viewName": "RequestRouting"
-        },
-        "requestForPickup": {
-          "viewType": "XML",
-          "viewName": "RequestForPickup"
-        },
-        "objectNotFound": {
-          "viewName": "ObjectNotFound",
-          "viewId": "objectNotFound"
-        },
-        "notFound": {
-          "viewName": "NotFound",
-          "viewId": "notFound"
-        }
-      }
-    },
-    "flexBundle": false
-  },
-  "sap.platform.hcp": {
-    "uri": "webapp",
-    "_version": "1.1.0"
-  },
-  "sap.platform.abap": {
-    "uri": "/sap/bc/ui5_ui5/serptm/frt_ord_apps/webapp",
-    "_version": "1.1.0"
-  },
-  "sap.cloud": {
-    "public": true,
-    "service": "comerpisshiperpfreightorderplanning"
-  }
 }

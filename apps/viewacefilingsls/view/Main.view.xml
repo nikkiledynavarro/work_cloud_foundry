@@ -14,12 +14,12 @@
 					<!--<OverflowToolbarButton icon="sap-icon://synchronize" press="onViewAceFiling" tooltip="Refresh" type="Emphasized"/>-->
 					<!--Cancel ACE Filing-->
 					<!--<OverflowToolbarButton icon="sap-icon://sys-cancel" press="onCancelAceFiling" tooltip="Cancel ACE Filing App" type="Reject"/>-->
-					<!--app:crossNavigate="#cancelacehr7-Display"-->
+					<!--app:crossNavigate="#cancelacefilingsls-display"-->
 					<!--Submit ACE Filing-->
 					<OverflowToolbarButton icon="sap-icon://shipping-status" press="onCrossNavigate" tooltip="Submit ACE Filing App" type="Emphasized"
-						app:crossNavigate="#submitacehr7-Display"/>
+						app:crossNavigate="#submitacefilingsls-display"/>
 					<OverflowToolbarButton icon="sap-icon://cancel" press="onCrossNavigate" tooltip="Cancel App" type="Reject"
-						app:crossNavigate="#cancelacehr7-Display"/>
+						app:crossNavigate="#cancelacefilingsls-display"/>
 				</f:actions>
 			</f:DynamicPageTitle>
 		</f:title>
@@ -41,7 +41,7 @@
 							<Label text="Search:" class="sapUiSmallMarginEnd" width="6rem" textAlign="End"/>
 							<SearchField id="idSearchTable" search="onSearch" width="12rem"/>
 							<ToolbarSeparator/>
-							<Button icon="sap-icon://detail-view" app:crossNavigate="#submitacehr7-Display" press="onViewSubmitAceFiling" tooltip="View"
+							<Button icon="sap-icon://detail-view" app:crossNavigate="#submitacefilingsls-display" press="onViewSubmitAceFiling" tooltip="View"
 								type="Emphasized" enabled="{local>/EnableButton}"/>
 							<Button icon="sap-icon://synchronize" press="onCheckAuthenticated" tooltip="View Get Web Status" type="Emphasized"
 								enabled="{local>/EnableButton}"/>

@@ -1,138 +1,153 @@
 {
-  "_version": "1.12.0",
-  "sap.app": {
-    "id": "comerpisshiperpcarrierperformancereportecc",
-    "type": "application",
-    "i18n": {
-      "bundleUrl": "i18n/i18n.properties",
-      "supportedLocales": [
-        "en"
-      ],
-      "fallbackLocale": "en"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "applicationVersion": {
-      "version": "1.0.0"
-    },
-    "dataSources": {
-      "Service": {
-        "uri": "sap/opu/odata/serperp/carrperf_srv/",
-        "type": "OData",
-        "settings": {
-          "odataVersion": "2.0",
-          "localUri": "localService/metadata.xml"
-        }
-      }
-    },
-    "sourceTemplate": {
-      "id": "sap.ui.ui5-template-plugin.1worklist",
-      "version": "1.40.12"
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "sap-icon://task",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    },
-    "fullWidth": true
-  },
-  "sap.ui5": {
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css",
-          "id": "stylecss"
-        }
-      ]
-    },
-    "rootView": {
-      "viewName": "com.erpis.shiperp.carrierperformancereportecc.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "app"
-    },
-    "dependencies": {
-      "minUI5Version": "1.103.0",
-      "libs": {
-        "sap.ui.layout": {},
-        "sap.ui.core": {},
-        "sap.m": {},
-        "sap.f": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "com.erpis.shiperp.carrierperformancereportecc.i18n.i18n",
-          "supportedLocales": [
-            "en"
-          ],
-          "fallbackLocale": "en"
-        }
-      },
-      "": {
-        "dataSource": "Service",
-        "preload": true
-      }
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "com.erpis.shiperp.carrierperformancereportecc.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "bypassed": {
-          "target": "notFound"
-        }
-      },
-      "routes": [
-        {
-          "pattern": "",
-          "name": "main",
-          "target": [
-            "main"
-          ]
-        }
-      ],
-      "targets": {
-        "main": {
-          "viewName": "Main",
-          "transition": "slide",
-          "viewId": "main",
-          "viewLevel": 1
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "comerpisshiperpcarrierperformancereportecc",
+        "type": "application",
+        "i18n": {
+            "bundleUrl": "i18n/i18n.properties",
+            "supportedLocales": [
+                "en"
+            ],
+            "fallbackLocale": "en"
         },
-        "notFound": {
-          "viewName": "NotFound",
-          "viewId": "notFound"
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "Service": {
+                "uri": "sap/opu/odata/serperp/carrperf_srv/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.1worklist",
+            "version": "1.40.12"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "carrierperfecchr7-Display": {
+                    "action": "Display",
+                    "icon": "sap-icon://app",
+                    "signature": {
+                        "additionalParameters": "allowed",
+                        "parameters": {}
+                    },
+                    "semanticObject": "carrierperfecchr7",
+                    "subTitle": "",
+                    "title": "{{appTitle}}"
+                }
+            }
         }
-      }
     },
-    "flexBundle": false
-  },
-  "sap.platform.hcp": {
-    "uri": "webapp",
-    "_version": "1.1.0"
-  },
-  "sap.cloud": {
-    "public": true,
-    "service": "comerpisshiperpcarrierperformancereportecc"
-  }
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "fullWidth": true
+    },
+    "sap.ui5": {
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css",
+                    "id": "stylecss"
+                }
+            ]
+        },
+        "rootView": {
+            "viewName": "com.erpis.shiperp.carrierperformancereportecc.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.103.0",
+            "libs": {
+                "sap.ui.layout": {},
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.erpis.shiperp.carrierperformancereportecc.i18n.i18n",
+                    "supportedLocales": [
+                        "en"
+                    ],
+                    "fallbackLocale": "en"
+                }
+            },
+            "": {
+                "dataSource": "Service",
+                "preload": true
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.erpis.shiperp.carrierperformancereportecc.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "bypassed": {
+                    "target": "notFound"
+                }
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "main",
+                    "target": [
+                        "main"
+                    ]
+                }
+            ],
+            "targets": {
+                "main": {
+                    "viewName": "Main",
+                    "transition": "slide",
+                    "viewId": "main",
+                    "viewLevel": 1
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        },
+        "flexBundle": false
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "comerpisshiperpcarrierperformancereportecc"
+    }
 }

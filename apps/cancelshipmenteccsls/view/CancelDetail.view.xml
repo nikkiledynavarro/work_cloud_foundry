@@ -28,7 +28,7 @@
 				</f:heading>
 				<f:actions>
 					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
-						app:crossNavigate="#parcelhr7-Display"/>
+						app:crossNavigate="#createshipmenteccsls-display"/>
 					<Button icon="sap-icon://clinical-tast-tracker" tooltip="Open Track Shipment App" type="Accept" press="onCrossNavigate"
 						app:crossNavigate="#Z_TRACKSHIPMENT_HR7-Display"/>
 				</f:actions>

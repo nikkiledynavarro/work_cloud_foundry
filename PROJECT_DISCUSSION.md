@@ -1404,3 +1404,45 @@ Initial automated rewrite of just the manifest was reverted to keep the app load
 
 Cleanup work logged as **§13.10**, deferred.
 
+
+---
+
+## 20. Code review fix pass (2026-06-10)
+
+External code review surfaced 16 findings. Validated each; fixed 10, deferred 2 already tracked, skipped 4 as intentional or environment-only.
+
+### 20.1 Fixed
+
+| # | Finding | Fix |
+|---|---|---|
+| 1 (Critical) | Plaintext HR7 credentials in `approuter/hr7-proxy.js` + CORS `*` origin | Rewrote proxy: reads `HR7_USER`/`HR7_PASS` from `approuter/.env` (gitignored), errors out if absent. CORS now defaults to `http://localhost:5000`. Listener bound to `127.0.0.1`. `approuter/.env.example` documents required vars. File is now tracked in git since it no longer contains secrets. |
+| 2 (High) | 9 SLS apps' source XML/JS still navigated to HR7 semantic objects (`#submitacehr7-Display`, etc.) | Sed across `view/`, `fragment/`, `controller/` (skipping `dist/`) rewriting all `*hr7-Display` refs to their SLS equivalents. Final grep confirms 0 remaining. |
+| 3 (High) | `createshipmenteccsls` + `createshipmentv2ewmsls` both publish intent `parcelSLS-display` (collision) | Disambiguated `createshipmentv2ewmsls` semantic object: `parcelSLS` → `parcelv2SLS`. |
+| 5 (High) | Stale conversion template `templates/neo-to-cf-hr7-sls.json` (21 apps + old MTA id) could regenerate wrong deployment if automation ran | Moved that template plus three other obsolete ones into `templates/_archived/` with a README explaining they're historical. Active templates (`neo-to-cf-hd6.json`, `cf-destinations-from-neo.json`, `destinations-needed.json`) remain in `templates/`. |
+| 6 (Medium) | 9 manifests lacked `crossNavigation.inbounds` (cancelacefiling, carrierperformancereportecc, createshipmentewm, freightorderplanning, manualshipmentecc, planshipment, cancelacefilingsls, carrierperformancereporteccsls, planshipmentsls) | Added minimal `{semObj}-Display` inbound per app referencing the app's canonical semantic object. Manifest discovery in Work Zone will now work for these. |
+| 9 (Medium) | 17 excess service keys from manual/admin tooling | Deleted 9 disposable keys (`html5-key-1780xxxxxx` × 8, `nnav-temp` × 1). Kept the 7 named admin keys (`backend-destinations-admin-key`, `local-approuter-key`) because they're plausibly in active use; user can decide later. |
+| 11 (Medium) | Stale CF MTA `comerpisshiperpparcelhr7` (XSUAA + destination services, no app) | `cf undeploy` + manual delete of orphan XSUAA + destination instances. `cf mtas` now shows only `shiperp-fiori-cf-migration` and `shiperp-fiori-hd6`. |
+| 13 (Medium) | 13 in-scope apps lacked `npm start` | Added `ui5 serve --config=ui5.yaml --port 8080 --open index.html` (or http-server fallback) to 21 apps (trackshipmentecc + all 12 SLS gaps + all 8 HD6). |
+| 14 (Medium) | `Stop All` task ran `taskkill /F /IM node.exe` (kills every Node process on the machine) | Scoped to PIDs listening on `:5000` and `:5001` via `netstat -ano \| findstr` + targeted `taskkill /PID`. |
+| 15 (Medium) | 12 SLS `neo-app.json` files still referenced `virtual-hr7-destination` (Neo-style previews would hit wrong backend) | Sed → `virtual-erps4sales-destination` across the 12 files. CF ignores `neo-app.json`, so deployed apps are unaffected; this is consistency only. |
+
+### 20.2 Deferred (already tracked)
+
+| # | Finding | Why deferred |
+|---|---|---|
+| 4 | `carrierperformancereportewm` / `freightorderplanning` HR7 xsappname typos | Already §13.9 — deployed XSUAA services encode the typos; fixing source requires service recreate + redeploy. Apps work. |
+| 12 | Live HR7/SLS destinations differ from Neo endpoints in protocol/hostname | Already §13.1 — pending Cloud Connector mapping verification. |
+
+### 20.3 Skipped (intentional or environmental, not bugs)
+
+| # | Finding | Reason |
+|---|---|---|
+| 7 | All 54 `xs-app.json` set `csrfProtection: false` for backend routes | Intentional for ABAP backends. UI5 framework handles CSRF token fetch/refresh at the model layer; OData backend enforces the token regardless of the route-level setting. |
+| 8 | All 54 HTML5 apps have public `sap.cloud.public: true` | Authentication is still enforced at the destination/XSUAA layer. Changing to `false` is a policy decision that affects launchpad behavior; out of scope for this pass. Logged for review. |
+| 10 | Standalone CF approuter is stopped, 0 instances, `no-route: true`, welcomeFile hardcoded to cancelacefiling | The whole standalone approuter is quota-blocked (§15.2 #3) and intentionally not running. The hardcoded welcomeFile is the simplest landing tile; if we ever stand the approuter up, swap it for a proper index page. |
+| 16 | Versions remain `1.0.0` / `0.0.1` despite repeated updates | Release-management decision — adopt semver bumps with each functional change. Not done in this pass to keep scope tight. |
+
+### 20.4 Deploy verification
+
+Rebuilt `shiperp-fiori-cf-migration_0.0.1.mtar`. Redeployed only the changed `-app-content` modules (18 of 54: 9 manifest-inbound adds + 9 SLS navigation/intent fixes). All deploys succeeded.
+

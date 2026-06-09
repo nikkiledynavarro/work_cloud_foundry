@@ -28,7 +28,7 @@
 				</f:heading>
 				<f:actions>
 					<Button icon="sap-icon://shipping-status" tooltip="Open Parcel App" type="Emphasized" press="onCrossNavigate"
-						app:crossNavigate="#parcelhr7-Display"/>
+						app:crossNavigate="#createshipmenteccsls-display"/>
 					<Button icon="sap-icon://sys-cancel" tooltip="Open Cancel App" type="Reject" press="onCrossNavigate" app:crossNavigate="#Cancel-display"/>
 				</f:actions>
 			</f:DynamicPageTitle>

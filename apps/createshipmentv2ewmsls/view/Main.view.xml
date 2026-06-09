@@ -63,7 +63,7 @@
 					<OverflowToolbarButton icon="sap-icon://clinical-tast-tracker" tooltip="Open Track Shipment App" type="Accept" press="onCrossNavigate"
 						app:crossNavigate="#trackshipmentewm-Display"/>
 					<OverflowToolbarButton icon="sap-icon://sys-cancel" tooltip="Open Cancel App" type="Reject" press="onCrossNavigate"
-						app:crossNavigate="#cancelhr7-Display"/>
+						app:crossNavigate="#cancelshipmenteccsls-display"/>
 				</uxap:navigationActions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>

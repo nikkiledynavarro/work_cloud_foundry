@@ -200,7 +200,7 @@
 											<!--Ship Days-->
 											<Text text="{data>ShipDays}" tooltip="{data>ShipDays}"/>
 											<!--Delivery Number-->
-											<Link text="{data>DeliveryNumber}" tooltip="{data>DeliveryNumber}" press="onNavigationParcelShipmentApp" app:crossNavigate="#parcelhr7-Display"/>
+											<Link text="{data>DeliveryNumber}" tooltip="{data>DeliveryNumber}" press="onNavigationParcelShipmentApp" app:crossNavigate="#createshipmenteccsls-display"/>
 											<!--Goods Issue Date-->
 											<Text text="{data>GoodsIssueDate}" tooltip="{data>GoodsIssueDate}"/>
 											<!--Total Weight-->

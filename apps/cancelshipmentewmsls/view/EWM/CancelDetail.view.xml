@@ -28,7 +28,7 @@
 				</f:heading>
 				<f:actions>
 					<Button icon="sap-icon://shipping-status" tooltip="Open Ship EWM App" type="Emphasized" press="onCrossNavigate"
-						app:crossNavigate="#shipewmhr7-Display"/>
+						app:crossNavigate="#createshipmentewmsls-display"/>
 					<Button icon="sap-icon://clinical-tast-tracker" tooltip="Open Track Shipment App" type="Accept" press="onCrossNavigate"
 						app:crossNavigate="#trackshipmentewm-Display"/>
 				</f:actions>
