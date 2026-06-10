@@ -44,4 +44,4 @@ comerpisshiperp*/
 
 ## Approuter local state
 approuter/manifest.yml
-approuter/server.js
+approuter/.local-approuter/
