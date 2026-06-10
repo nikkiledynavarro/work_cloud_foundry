@@ -1,2 +1,0 @@
-sap.ui.define(["com/erpis/shiperp/parceldemo/hd6/controller/BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.parceldemo.hd6.controller.NotFound",{onLinkPressed:function(){this.getRouter().navTo("worklist")}})});
-//# sourceMappingURL=NotFound-dbg.controller.js.map

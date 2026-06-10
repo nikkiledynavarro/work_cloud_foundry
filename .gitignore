@@ -45,3 +45,13 @@ comerpisshiperp*/
 ## Approuter local state
 approuter/manifest.yml
 approuter/.local-approuter/
+
+# Build artifacts (review-fix #5 §32.3, §33)
+apps/**/Component-preload.js
+apps/**/Component-preload-dbg.js
+apps/**/*-dbg.js
+apps/**/*-dbg.controller.js
+apps/**/*-dbg.view.xml
+apps/**/*-dbg.fragment.xml
+apps/**/*.js.map
+apps/**/sap-ui-cachebuster-info.json

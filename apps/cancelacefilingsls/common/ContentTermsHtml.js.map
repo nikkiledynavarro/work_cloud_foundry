@@ -1,1 +1,0 @@
-{"version":3,"file":"ContentTermsHtml.js","names":["sap","ui","define","getContentTermsHtml","sContent","outerHTML","innerHTML","replace"],"sources":["ContentTermsHtml-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,GAAI,WACjB,aAEA,MAAO,CACNC,oBAAqB,SAAUC,GAE9B,IAAIA,EAAWA,EAASC,WAAaD,EAASE,WAAaF,EAC3DA,EAAWA,EAASG,QAAQ,kBAAmB,wCAC/C,MAAO,+dAUHH,mDAIL,EAEF","ignoreList":[]}

@@ -1,2 +1,0 @@
-sap.ui.define([],function(){"use strict";return{getTransparentLogoLink:function(r){var e=jQuery.sap.getModulePath("com.erpis.shiperp.eod.hd6");return e+"/image/shiperp_logo.png"},numberUnit:function(r){if(!r){return""}return parseFloat(r).toFixed(2)},formatDateString:function(r){if(!r||r.length!==8||r==="00000000"){return""}else{var e=r.substring(0,4);var n=r.substring(4,6);var t=r.substring(6,8);return n+"/"+t+"/"+e}}}});
-//# sourceMappingURL=formatter-dbg.js.map

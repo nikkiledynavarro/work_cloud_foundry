@@ -1,5 +1,0 @@
-sap.ui.define([
-	"serp/so-shiperp-tab/test/unit/controller/View1.controller"
-], function () {
-	"use strict";
-});
