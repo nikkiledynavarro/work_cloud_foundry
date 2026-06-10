@@ -123,16 +123,21 @@ if (fs.existsSync(envSrc)) {
   env.destinations = env.destinations || [];
   const have = new Set(env.destinations.map((d) => d.name));
   const PROXY_DEFAULTS = { hr7: 'http://localhost:5001' };
+  // Stub URL points at a free localhost port that nothing listens on, so a
+  // misrouted request fails fast with ECONNREFUSED instead of silently hitting
+  // the wrong backend. The destination still has to be present (even with a
+  // dead URL) because approuter validates xs-app.json route targets at boot.
+  const STUB_URL = 'http://127.0.0.1:65535';
   for (const [backend, name] of Object.entries(BACKEND_TO_DEST)) {
     if (have.has(name)) continue;
     const envKey = `${backend.toUpperCase()}_PROXY_URL`;
-    const url = process.env[envKey] || PROXY_DEFAULTS[backend];
-    if (!url) {
+    const configured = process.env[envKey] || PROXY_DEFAULTS[backend];
+    const url = configured || STUB_URL;
+    if (!configured) {
       console.warn(
-        `[local-approuter] ${envKey} not set and no default — destination "${name}" left unconfigured. ` +
-          `Set ${envKey}=http://localhost:<port> in approuter/.env (and start a matching proxy) before using /${backend}/* routes.`,
+        `[local-approuter] ${envKey} not set and no default — destination "${name}" wired to ${STUB_URL} as a no-op. ` +
+          `/${backend}/* routes will fail with ECONNREFUSED. Set ${envKey}=http://localhost:<port> in approuter/.env (and start a matching proxy) to make them work.`,
       );
-      continue;
     }
     env.destinations.push({
       name,

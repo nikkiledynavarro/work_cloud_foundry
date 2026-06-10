@@ -6,7 +6,9 @@
             "label": "Start HR7 Auth Proxy (port 5001)",
             "isBackground": true,
             "command": "node",
-            "args": ["approuter/hr7-proxy.js"],
+            "args": [
+                "approuter/hr7-proxy.js"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "ShipERP",
@@ -19,7 +21,9 @@
             "label": "Start Local Approuter (port 5000)",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "ShipERP",
@@ -49,7 +53,10 @@
             "options": {
                 "shell": {
                     "executable": "cmd.exe",
-                    "args": ["/d", "/c"]
+                    "args": [
+                        "/d",
+                        "/c"
+                    ]
                 }
             },
             "type": "shell"
@@ -58,7 +65,10 @@
             "label": "Stop All (BAS/Linux)",
             "problemMatcher": [],
             "command": "sh",
-            "args": ["-c", "for p in 5000 5001; do pid=$(lsof -ti tcp:$p 2>/dev/null); [ -n \"$pid\" ] && kill -9 $pid && echo \"Stopped :$p ($pid)\" || echo \":$p free\"; done"],
+            "args": [
+                "-c",
+                "for p in 5000 5001; do pid=$(lsof -ti tcp:$p 2>/dev/null); [ -n \"$pid\" ] && kill -9 $pid && echo \"Stopped :$p ($pid)\" || echo \":$p free\"; done"
+            ],
             "type": "shell"
         },
         {
@@ -66,7 +76,9 @@
             "label": "Start cancelacefiling locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -82,7 +94,9 @@
             "label": "Start cancelpickuprequest locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -98,7 +112,9 @@
             "label": "Start cancelshipmentecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -114,7 +130,9 @@
             "label": "Start cancelshipmentewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -130,7 +148,9 @@
             "label": "Start carrierperformancereportecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -146,7 +166,9 @@
             "label": "Start carrierperformancereportewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -162,7 +184,9 @@
             "label": "Start closedelivery locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -178,7 +202,9 @@
             "label": "Start createshipmentecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -194,7 +220,9 @@
             "label": "Start createshipmentewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -210,7 +238,9 @@
             "label": "Start createshipmentv2ewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -226,7 +256,9 @@
             "label": "Start dispute locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -242,7 +274,9 @@
             "label": "Start freightaudit locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -258,7 +292,9 @@
             "label": "Start freightauditupload locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -274,7 +310,9 @@
             "label": "Start freightorderplanning locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -290,7 +328,9 @@
             "label": "Start ltlplanning locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -306,7 +346,9 @@
             "label": "Start manualshipmentecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -322,7 +364,9 @@
             "label": "Start manualshipmentewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -338,7 +382,9 @@
             "label": "Start planshipment locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -354,7 +400,9 @@
             "label": "Start quickpackecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -370,7 +418,9 @@
             "label": "Start quickpackewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -386,7 +436,9 @@
             "label": "Start requestforpickup locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -402,7 +454,9 @@
             "label": "Start saleorder locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -418,7 +472,9 @@
             "label": "Start shippingdashboard locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -434,7 +490,9 @@
             "label": "Start submitacefiling locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -450,7 +508,9 @@
             "label": "Start trackshipmentewm locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -466,7 +526,9 @@
             "label": "Start trackshipmentecc locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -482,7 +544,9 @@
             "label": "Start viewacefiling locally",
             "isBackground": true,
             "command": "npm",
-            "args": ["start"],
+            "args": [
+                "start"
+            ],
             "type": "shell",
             "presentation": {
                 "group": "Local Source",
@@ -491,6 +555,636 @@
             },
             "options": {
                 "cwd": "${workspaceFolder}/apps/viewacefiling"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start cancelacefilingsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/cancelacefilingsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start cancelpickuprequestsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/cancelpickuprequestsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start cancelshipmenteccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/cancelshipmenteccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start cancelshipmentewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/cancelshipmentewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start carrierperformancereporteccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/carrierperformancereporteccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start carrierperformancereportewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/carrierperformancereportewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start closedeliverysls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/closedeliverysls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start createshipmenteccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/createshipmenteccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start createshipmentewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/createshipmentewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start createshipmentv2ewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/createshipmentv2ewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start disputesls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/disputesls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start freightauditsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/freightauditsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start freightaudituploadsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/freightaudituploadsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start freightorderplanningsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/freightorderplanningsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start ltlplanningsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/ltlplanningsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start manualshipmenteccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/manualshipmenteccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start manualshipmentewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/manualshipmentewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start planshipmentsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/planshipmentsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start quickpackeccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/quickpackeccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start quickpackewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/quickpackewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start requestforpickupsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/requestforpickupsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start saleordersls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/saleordersls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start shippingdashboardsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/shippingdashboardsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start submitacefilingsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/submitacefilingsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start trackshipmenteccsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/trackshipmenteccsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start trackshipmentewmsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/trackshipmentewmsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start viewacefilingsls locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/viewacefilingsls"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start cancelhd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/cancelhd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start disputehd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/disputehd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start eodhd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/eodhd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start farpthd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/farpthd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start freightaudithd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/freightaudithd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start parceldemohd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/parceldemohd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start parcelhd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/parcelhd6"
+            }
+        },
+        {
+            "problemMatcher": [],
+            "label": "Start trackshipmenthd6 locally",
+            "isBackground": true,
+            "command": "npm",
+            "args": [
+                "start"
+            ],
+            "type": "shell",
+            "presentation": {
+                "group": "Local Source",
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/apps/trackshipmenthd6"
             }
         }
     ]

@@ -2669,6 +2669,636 @@
             "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
             "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelacefilingsls locally",
+            "name": "🌐 cancelacefilingsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 100
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelpickuprequestsls locally",
+            "name": "🌐 cancelpickuprequestsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 101
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelshipmenteccsls locally",
+            "name": "🌐 cancelshipmenteccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 102
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelshipmentewmsls locally",
+            "name": "🌐 cancelshipmentewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 103
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start carrierperformancereporteccsls locally",
+            "name": "🌐 carrierperformancereporteccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 104
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start carrierperformancereportewmsls locally",
+            "name": "🌐 carrierperformancereportewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 105
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start closedeliverysls locally",
+            "name": "🌐 closedeliverysls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 106
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipmenteccsls locally",
+            "name": "🌐 createshipmenteccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 107
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipmentewmsls locally",
+            "name": "🌐 createshipmentewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 108
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start createshipmentv2ewmsls locally",
+            "name": "🌐 createshipmentv2ewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 109
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start disputesls locally",
+            "name": "🌐 disputesls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 110
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightauditsls locally",
+            "name": "🌐 freightauditsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 111
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightaudituploadsls locally",
+            "name": "🌐 freightaudituploadsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 112
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightorderplanningsls locally",
+            "name": "🌐 freightorderplanningsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 113
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start ltlplanningsls locally",
+            "name": "🌐 ltlplanningsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 114
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start manualshipmenteccsls locally",
+            "name": "🌐 manualshipmenteccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 115
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start manualshipmentewmsls locally",
+            "name": "🌐 manualshipmentewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 116
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start planshipmentsls locally",
+            "name": "🌐 planshipmentsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 117
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start quickpackeccsls locally",
+            "name": "🌐 quickpackeccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 118
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start quickpackewmsls locally",
+            "name": "🌐 quickpackewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 119
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start requestforpickupsls locally",
+            "name": "🌐 requestforpickupsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 120
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start saleordersls locally",
+            "name": "🌐 saleordersls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 121
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start shippingdashboardsls locally",
+            "name": "🌐 shippingdashboardsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 122
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start submitacefilingsls locally",
+            "name": "🌐 submitacefilingsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 123
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start trackshipmenteccsls locally",
+            "name": "🌐 trackshipmenteccsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 124
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start trackshipmentewmsls locally",
+            "name": "🌐 trackshipmentewmsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 125
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start viewacefilingsls locally",
+            "name": "🌐 viewacefilingsls (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 126
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start cancelhd6 locally",
+            "name": "🌐 cancelhd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 127
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start disputehd6 locally",
+            "name": "🌐 disputehd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 128
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start eodhd6 locally",
+            "name": "🌐 eodhd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 129
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start farpthd6 locally",
+            "name": "🌐 farpthd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 130
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start freightaudithd6 locally",
+            "name": "🌐 freightaudithd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 131
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start parceldemohd6 locally",
+            "name": "🌐 parceldemohd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 132
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start parcelhd6 locally",
+            "name": "🌐 parcelhd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 133
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
+        },
+        {
+            "runtimeArgs": [
+                "-Command",
+                "Start-Process 'http://localhost:8080/index.html'"
+            ],
+            "type": "node",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start trackshipmenthd6 locally",
+            "name": "🌐 trackshipmenthd6 (Local Source)",
+            "presentation": {
+                "hidden": false,
+                "group": "🌐 Local Source",
+                "order": 134
+            },
+            "runtimeExecutable": "powershell.exe",
+            "console": "internalConsole",
+            "request": "launch"
         }
     ]
 }

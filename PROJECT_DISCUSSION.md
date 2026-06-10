@@ -55,6 +55,7 @@
 26. [§13.1 closed — Cloud Connector mappings live (2026-06-10)](#26-131-closed--cloud-connector-mappings-live-2026-06-10)
 27. [Clean destination architecture (subaccount-level) (2026-06-10)](#27--clean-destination-architecture-subaccount-level)
 28. [Fourth review fix pass (2026-06-10)](#28--fourth-review-fix-pass-2026-06-10)
+29. [Four-layer test sweep across all 62 apps (2026-06-10)](#29--four-layer-test-sweep-across-all-62-apps-2026-06-10)
 
 ---
 
@@ -2567,6 +2568,108 @@ $ node scripts/validate-hd6-apps.js
 HD6 validation passed.
 HD6 apps: 8
 ```
+
+---
+
+## §29 — Four-layer test sweep across all 62 apps (2026-06-10)
+
+User asked for a full test of all 62 apps in Local source / VS Code / BAS / CF. Three layers are automatable; BAS requires the user to drive it.
+
+### §29.1 — Layer 1: Local source (static)
+
+Walked 62 `apps/<app>/{manifest.json, xs-app.json, package.json}` files and checked: (a) all parse as JSON, (b) `sap.cloud.service === comerpisshiperp<app>`, (c) the `xs-app.json` route at `^/sap/opu/odata/(.*)$` targets the correct group destination (`shiperp-virtual-hr7-destination` / `shiperp-virtual-erps4sales-destination` / `shiperp-virtual-hd6-destination`).
+
+**Result: 62/62 pass, 0 issues.** Both validator scripts (`validate-deployed-apps.js`, `validate-hd6-apps.js`) also pass: 54/54 + 8/8.
+
+### §29.2 — Layer 2: CF — direct URLs
+
+Extracted the 62 CF Direct launchpad URLs from `.vscode/launch.json` (the `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/{dest-svc-GUID}.{cloud-service}.{cloud-service}-1.0.0/index.html` form) and issued an HTTP HEAD to each.
+
+**Result: 62/62 return HTTP 401.** That is the *expected healthy* response: the URL resolves to the Managed Approuter, which rejects unauthenticated requests. A real browser session with active SSO would be redirected through XSUAA login and would reach the app shell. Any code other than 401/302/303/307/200 (e.g. 404, 500) would mean the route or app-content registration is broken — there were zero such codes.
+
+### §29.3 — Layer 3: CF — live `xs-app.json` per app
+
+Walked all 62 deployed apps via `cf html5-get /comerpisshiperp<app>-1.0.0/xs-app.json -n <app>-app-front-service` and checked that the `^/sap/opu/odata/(.*)$` route targets the post-§27 destination name.
+
+**Result: 62/62 reference `shiperp-virtual-*`.** No instance carries a stale `virtual-*` reference. This confirms the §27 cutover + §27.5 cleanup landed cleanly across every app.
+
+### §29.4 — Layer 4: Local approuter
+
+`approuter/hr7-proxy.js` + `approuter/server.js` were started locally. Booted on `:5001` (HR7 OData proxy) and `:5000` (local approuter), respectively.
+
+**Boot bug caught and fixed in this sweep:** the §28 server.js change "no silent SLS/HD6 fallback" was too aggressive — it skipped adding the SLS / HD6 destinations to the local env entirely, but `xs-app.json` still has routes that reference them, so the approuter's xs-app validation rejected boot with `Route references unknown destination "virtual-erps4sales-destination"`. Re-fixed in this commit: the destinations are always added (so the routes validate), but absent `SLS_PROXY_URL` / `HD6_PROXY_URL` they get wired to a stub `http://127.0.0.1:65535` that fails fast (ECONNREFUSED) instead of silently routing to HR7. Behaviour now: approuter boots cleanly, HR7 routes work (proxy is up), SLS / HD6 routes return a connect error until you configure their respective proxies. Warning is logged at boot for each backend that's stubbed.
+
+Probes after the fix:
+
+| Probe | Result |
+|---|---|
+| `http://localhost:5000/comerpisshiperpquickpackecc/index.html` (HR7 app shell) | HTTP 200, 1135 bytes |
+| `http://localhost:5000/comerpisshiperpquickpackeccsls/index.html` (SLS app shell) | HTTP 200, 1139 bytes |
+| `http://localhost:5000/comerpisshiperpcancelhd6/index.html` (HD6 app shell) | HTTP 200, 1186 bytes |
+| `http://localhost:5000/hr7/sap/opu/odata/…/$metadata` (HR7 OData) | Timeout — `hr7-proxy` is up but the upstream `10.10.1.76:8001` is unreachable without VPN |
+| `http://localhost:5000/sls/sap/opu/odata/…/$metadata` (SLS OData) | Timeout — by design (stub URL). Set `SLS_PROXY_URL` + run a SLS proxy to make this work |
+| `http://localhost:5000/hd6/sap/opu/odata/…/$metadata` (HD6 OData) | Timeout — by design (stub URL). Set `HD6_PROXY_URL` + run a HD6 proxy to make this work |
+
+App shells served correctly for all three backends. OData round-trip needs VPN + matching proxy processes — that's a per-developer-machine setup, not a code issue.
+
+### §29.5 — Layer 5: VS Code launch.json + tasks.json
+
+Walked `launch.json` / `tasks.json` and checked that all 62 apps have the full triplet of launch modes: `🌐 X (Local Source)`, `☁ X (CF)`, `☁ X (CF Direct)`, plus a matching `Start X locally` task.
+
+**Issue found and fixed:** 35 apps (all 27 SLS + all 8 HD6) had only the two `☁` CF-mode entries. The `🌐 (Local Source)` entry — which launches a standalone `ui5 serve` on `localhost:8080` via `npm start` in `apps/<app>/` — existed only for the 27 HR7 apps. Added the missing 35 launch configurations (mirroring the HR7 shape: `runtimeArgs` = `["-Command","Start-Process 'http://localhost:8080/index.html'"]`, `preLaunchTask: "Start <app> locally"`) plus the matching 35 `Start <app> locally` tasks in `tasks.json` (using the §28 BAS-portable `npm` / `args` form, so the new tasks work on both Windows and BAS).
+
+**Result after fix:** 62/62 apps have all three launch modes + a matching task. `launch.json` grew from 152 to 187 configurations; `tasks.json` grew from 32 to 67 tasks.
+
+### §29.6 — Layer 6: BAS — copy-paste checklist (manual)
+
+I can't drive your BAS session. Run this checklist in BAS when you next open it:
+
+1. **Repo state.** Open the integrated terminal and run:
+   ```
+   cd ~/projects/neo_to_cf
+   git pull origin main
+   git log --oneline -3
+   ```
+   The top commit should be on or after the `review-fix #4` / `§29` commits I push in this batch.
+
+2. **Static validators.**
+   ```
+   node scripts/validate-deployed-apps.js
+   node scripts/validate-hd6-apps.js
+   ```
+   Both should print `Validation passed`.
+
+3. **VS Code tasks.** Open the Command Palette → `Tasks: Run Task` → confirm the list now includes `Start <app> locally` for every one of the 62 apps (was only HR7 before §29.5). Pick three at random across HR7 / SLS / HD6 and click each — each task should start `ui5 serve` on `:8080` without the `cmd.exe` error that the §28 fix specifically removed.
+
+4. **Local approuter end-to-end (needs VPN to your SAP network).** With VPN on:
+   - `🌐 quickpackecc (Local Source)` → opens `localhost:8080` → the UI5 dev server should serve the app shell.
+   - `☁ quickpackecc (CF)` → starts `🚀 Start ShipERP (Proxy + Approuter)` → opens `localhost:5000/comerpisshiperpquickpackecc/index.html` → the app shell should render, and the OData $metadata probe should *not* hang (you've reached HR7 through CC).
+
+5. **CF Direct (no VPN needed).** Pick one app per backend, click the `☁ X (CF Direct)` launch config in VS Code. Each opens the launchpad URL — log in once with `nnavarro@erp-is.com` if challenged. The app shell should render. If the OData call hangs more than 30 s, that's the same CC tunnel signal documented in §26 — the tunnel is alive but `USER_CF` may not be authorized for that specific OData service inside the SAP backend.
+
+6. **Report back.** If anything in steps 1–5 fails, paste the error here and I'll re-open the appropriate section.
+
+### §29.7 — Summary
+
+| Layer | Coverage | Result | Notes |
+|---|---|---|---|
+| 1 Local source static | 62/62 | ✅ Clean | All manifests / xs-app / package parse + match expected destinations |
+| 2 CF Direct URL | 62/62 | ✅ Healthy 401 | Route alive, XSUAA challenge enforced |
+| 3 CF live xs-app.json | 62/62 | ✅ Clean | All point at `shiperp-virtual-*` (post-§27) |
+| 4 Local approuter | 3/3 (one per backend) | ✅ App shells; ⚠ OData needs VPN | Caught + fixed a server.js boot regression from §28 |
+| 5 VS Code launch + tasks | 62/62 (post-fix) | ✅ Clean after adding 35 missing entries | All apps now have Local Source / CF / CF Direct + tasks |
+| 6 BAS | manual checklist | ⏸ deferred | §29.6 |
+
+**Code fixes from this sweep**
+
+- `approuter/server.js` — stub URL instead of skipping destination (so approuter validates + boots even when SLS/HD6 proxy URLs aren't set).
+- `.vscode/launch.json` — 35 new `🌐 X (Local Source)` configurations (27 SLS + 8 HD6).
+- `.vscode/tasks.json` — 35 new `Start X locally` tasks matching the launches.
+
+**Tests deliberately not run** (out of practical scope from this Windows session):
+
+- Actual OData round-trip from HR7 / SLS / HD6 — needs VPN to the SAP network *and* a `SLS_PROXY_URL` / `HD6_PROXY_URL` configured locally. The CC tunnel half is already proven in §26.
+- UI rendering inside a browser — needs a logged-in SSO session that can only be driven from your machine.
 
 ---
 
