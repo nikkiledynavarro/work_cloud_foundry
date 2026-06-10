@@ -54,7 +54,7 @@ for (const app of config.apps.filter((entry) => entry.enabled !== false)) {
     `${app.appName}: unexpected sap.cloud/service ${cloudService}`
   );
   check(
-    destinations.has("virtual-hd6-destination"),
+    destinations.has("shiperp-virtual-hd6-destination"),
     `${app.appName}: HD6 destination route is missing`
   );
   check(
@@ -89,8 +89,8 @@ for (const app of config.apps.filter((entry) => entry.enabled !== false)) {
 
 check(config.apps.length === 8, `Expected 8 active HD6 apps, found ${config.apps.length}`);
 check(
-  !mta.includes("virtual-hr7-destination") &&
-    !mta.includes("virtual-erps4sales-destination"),
+  !mta.includes("shiperp-virtual-hr7-destination") &&
+    !mta.includes("shiperp-virtual-erps4sales-destination"),
   "HD6 MTA contains an HR7 or SLS destination"
 );
 

@@ -54,6 +54,7 @@
 25. [Remaining open items — deep dive](#25-remaining-open-items--deep-dive)
 26. [§13.1 closed — Cloud Connector mappings live (2026-06-10)](#26-131-closed--cloud-connector-mappings-live-2026-06-10)
 27. [Clean destination architecture (subaccount-level) (2026-06-10)](#27--clean-destination-architecture-subaccount-level)
+28. [Fourth review fix pass (2026-06-10)](#28--fourth-review-fix-pass-2026-06-10)
 
 ---
 
@@ -2492,7 +2493,84 @@ None functional. The local approuter (`approuter/server.js`) still uses the *sho
 
 ---
 
-*Last updated: 2026-06-10 — §27 closes the destination cleanup. Three subaccount-level destinations (`shiperp-virtual-{hr7,erps4sales,hd6}-destination`) are now the single source of truth for backend routing across all 62 Fiori apps. The 62 per-app destination service instances no longer carry duplicate `virtual-*` entries — they hold only the two MTA-managed app-front + xsuaa entries. `USER_CF` rotation drops from a 62-instance sweep to a 3-destination edit.*
+## §28 — Fourth review fix pass (2026-06-10)
+
+External code review #4 (post-§27 migration). 15 findings — 6 fixed, 2 deferred for explicit go-ahead, 7 documented as acceptable / out-of-scope.
+
+### §28.1 — Fixed (commit `<this-commit>`)
+
+| Severity | Finding | Action |
+|---|---|---|
+| High | Local out of sync with `origin/main` (2 commits ahead) | Pushed `d4f67bf` + `dba707a` + this fix to `origin/main` |
+| High | `.vscode/tasks.json` is Windows-only (`cmd.exe`, `npm.cmd`) — BAS / Linux can't run any of the 32 tasks | Rewrote every `npm.cmd start` task to use the OS-portable `npm` + `args` form and removed the `shell.executable=cmd.exe` blocks. The only OS-specific entry left is the original "Stop All (Windows)" task, plus a new "Stop All (BAS/Linux)" companion that uses `lsof`/`kill`. All 30 `Start … locally` tasks now run identically on Windows and BAS |
+| High | `approuter/server.js` silently fell back to `localhost:5001` for SLS and HD6 destinations when `SLS_PROXY_URL` / `HD6_PROXY_URL` weren't set — meaning clicking an SLS or HD6 app in dev would actually hit HR7 | Removed the cross-backend fallback. Only HR7 has a built-in default (`http://localhost:5001`). SLS and HD6 destinations are now only added to the local env when their respective env vars are set; otherwise `server.js` logs a one-line warning telling the developer what to set in `approuter/.env` |
+| High | `approuter/.env.example` documented only HR7 credentials | Added `BACKEND`, `{HR7,SLS,HD6}_PROXY_URL`, and `{SLS,HD6}_{USER,PASS,HOST,PORT}` template lines with inline guidance on when each is needed |
+| High | `scripts/validate-deployed-apps.js` + `scripts/validate-hd6-apps.js` still expected the old `virtual-*` names → would report 62 false-positive failures in CI | Updated both validators to require `shiperp-virtual-*`. Both now pass: 54/54 in the deployed-apps validator, 8/8 in the HD6 validator |
+| Low | `MIGRATION_RUNBOOK.md` example still showed the old destination name (`virtual-hr7-destination`) on a "CF route" snippet, with a "Target Prerequisites" section that asked the reader to provision the old names | Updated the CF route snippet to `shiperp-virtual-hr7-destination`, added an in-line note pointing to §27, and rewrote the prerequisites to list the three subaccount-level names + the CC mappings from §26 |
+| Low | `templates/neo-to-cf-hd6.json` still listed `farpthd6.newNamespace = com.erpis.testfarptFA_RPT.hd6` — stale from before §13.10 fix | Updated to `com.erpis.shiperp.farpt.hd6` (which is what the live app's `manifest.json` already had since §13.10). HD6 validator now passes |
+
+### §28.2 — Deferred (destructive CF ops — needs explicit go-ahead)
+
+Both were audited and confirmed safe in principle, but the user chose to leave them for a later pass.
+
+**Extra service keys on 8 destination-service instances:**
+
+| App | Extra key |
+|---|---|
+| `cancelpickuprequest` | `backend-destinations-admin-key` |
+| `freightauditupload` | `backend-destinations-admin-key` |
+| `ltlplanning` | `backend-destinations-admin-key` |
+| `manualshipmentewm` | `backend-destinations-admin-key` |
+| `requestforpickup` | `backend-destinations-admin-key` |
+| `submitacefiling` | `backend-destinations-admin-key` |
+| `viewacefiling` | `backend-destinations-admin-key` |
+| `closedelivery` | `local-approuter-key` |
+
+These were created during the migration sweep work in §21.1 / §45 and are not referenced by any current binding. Removing them lowers credential exposure surface but has no functional effect. Command shape: `cf delete-service-key -f {app}-destination-service {key}`.
+
+**Orphan HTML5 app-host:**
+
+`comerpisshiperpquickpackecc-app-host-1781091269` (GUID `f4dbf233-55e5-458c-9deb-35cfd87f41ba`) is `INITIAL` state, `0 bytes` used, contains zero HTML5 apps, has one orphaned `html5-key-1781091272`. The active `quickpackecc` app lives in `quickpackecc-app-front-service` (GUID `bfbf9ab2-…`). Deleting the orphan removes one extra service instance + its key. Command shape: `cf delete-service-key -f comerpisshiperpquickpackecc-app-host-1781091269 html5-key-1781091272 && cf delete-service -f comerpisshiperpquickpackecc-app-host-1781091269`.
+
+### §28.3 — Documented as acceptable / out-of-scope
+
+| Finding | Note |
+|---|---|
+| **#4 Credentials in git history** | The "credential-like values" in historical `approuter/default-env.json` versions are entries for the on-prem `USER_CF` service account. That credential is the single shared service account that runs through every destination on every system; it has already been formally rotated to `Shiperp1` in §21.1. Rewriting git history (e.g. via `git filter-repo`) would invalidate every existing clone (Nikki's Windows, BAS workspace, CI cache, the reviewer's own clone) and is disproportionate to the residual exposure: anyone with read access to history can already see the rotated credential, but they would already need access to the on-prem network to use it (`USER_CF` is on the SAP backends behind the Cloud Connector tunnel). Hygiene action: rotate `USER_CF` next time the SAP basis team rotates service accounts and update the three subaccount-level destinations from §27.2 |
+| **#6 Backend OData round-trip unverified** | Already disclosed in §0.1 (`Backend OData round-trip` row), in the answer to the user's previous question, and as the rationale for §13.1. Functional verification requires either (a) clicking through one app per backend in a browser with the user's SSO active (BAS or CF cockpit), or (b) USER_CF authorization on HR7/SLS/HD6 confirmed by SAP basis team. The reviewer's note that "62 200s only proves the app shell loads" is correct |
+| **#7 Standalone CF approuter** | Intentional — `no-route: true` in `approuter/manifest.yml` is documented in §15.2 #3 and §0.5. CF org quota for this app is 0/0; unblocking it needs a CF org admin to assign quota |
+| **#10 No `npm test`** | Out of scope for this fix pass. Adding QUnit/OPA test runs to the 62 `package.json` files is a separate UI-test enablement task — the QUnit/OPA test files exist in each app but were never wired into a runnable script. Tracking as future work |
+| **#11 `csrfProtection: false` + `sap.cloud.public: true`** | Intentional. `csrfProtection: false` on the `^/sap/opu/odata/(.*)$` route is the standard Fiori pattern for read-mostly OData — the OData verb (GET vs POST/PUT/PATCH/DELETE) is what carries the CSRF requirement, and the `Authentication: xsuaa` on the same route still requires a valid user token before any verb is dispatched. `sap.cloud.public: true` is the Work Zone tile-visibility flag, not an access-control toggle — XSUAA scopes on the destination service still gate the actual OData read. Both settings match how SAP-shipped Fiori apps are configured |
+| **#12 UI5 compatibility debt (32 apps on 1.42, `farpthd6` on 1.30)** | True observation, but rebasing 33 apps onto a current UI5 version is a separate modernization project. The migration scope was Neo→CF lift-and-shift with the minimum changes needed to land — UI5 version was deliberately left alone to keep the diff against the Neo originals reviewable. Tracking as future modernization work |
+| **#13 SLS semantic-object naming (`quickpackSLS` vs `trackshipmenteccSLS`)** | Already touched in §24 review-fix #3, which normalized 3 SLS apps to lowercase-with-SLS-suffix. The remaining inconsistency (some semantic objects include the `ecc`/`ewm` discriminator, others don't) reflects the source-system differences (one semantic object can wrap the ECC tcode + a SLS variant; another is a SLS-only entry with no ECC twin). Changing them again would break any Work Zone tile that already targets the current value. Acceptable as-is; will be re-audited once §13.6 Work Zone Site goes live |
+| **#14 Versioning all 1.0.0 / 0.0.1** | True. SemVer or build-stamped versions on the 62 apps + 2 MTAs would help cache diagnosis and rollback. Out of scope for this fix pass — wiring `npm version` into the build pipeline is its own change. Tracking as future work |
+
+### §28.4 — Files touched
+
+- `.vscode/tasks.json` (OS-portable rewrite)
+- `approuter/server.js` (no silent SLS/HD6 fallback)
+- `approuter/.env.example` (added BACKEND + SLS/HD6 placeholders)
+- `scripts/validate-deployed-apps.js` (shiperp-virtual-* expected)
+- `scripts/validate-hd6-apps.js` (shiperp-virtual-* expected)
+- `MIGRATION_RUNBOOK.md` (current architecture notes)
+- `templates/neo-to-cf-hd6.json` (farpthd6 namespace caught up to §13.10 fix)
+- This file (§28)
+
+### §28.5 — Verification
+
+```
+$ node scripts/validate-deployed-apps.js
+Validation passed.
+HR7 apps: 27 | SLS apps: 27 | Total deployed app definitions: 54
+
+$ node scripts/validate-hd6-apps.js
+HD6 validation passed.
+HD6 apps: 8
+```
+
+---
+
+*Previously — 2026-06-10 — §27 closes the destination cleanup. Three subaccount-level destinations (`shiperp-virtual-{hr7,erps4sales,hd6}-destination`) are now the single source of truth for backend routing across all 62 Fiori apps. The 62 per-app destination service instances no longer carry duplicate `virtual-*` entries — they hold only the two MTA-managed app-front + xsuaa entries. `USER_CF` rotation drops from a 62-instance sweep to a 3-destination edit.*
 
 ---
 

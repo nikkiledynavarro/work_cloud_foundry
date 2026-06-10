@@ -68,17 +68,19 @@ Neo route:
 }
 ```
 
-CF route:
+CF route (current — post-§27 clean destination architecture):
 
 ```json
 {
   "source": "^/sap/opu/odata/(.*)$",
   "target": "/sap/opu/odata/$1",
-  "destination": "virtual-hr7-destination",
+  "destination": "shiperp-virtual-hr7-destination",
   "authenticationType": "xsuaa",
   "csrfProtection": false
 }
 ```
+
+> **Destination architecture note:** As of `2026-06-10` (`PROJECT_DISCUSSION.md` §27) the three backend destinations live at the **subaccount level** under the names `shiperp-virtual-hr7-destination`, `shiperp-virtual-erps4sales-destination`, and `shiperp-virtual-hd6-destination`. The per-app `destination` service instances no longer carry their own `virtual-*` copies — apps resolve them by fall-through from instance level to subaccount level. SLS and HD6 routes follow the same shape (substitute the right destination name).
 
 ## Target Prerequisites Before Deployment
 
@@ -87,9 +89,9 @@ The CF target needs:
 - `html5-apps-repo` service with `app-host` plan
 - `destination` service with `HTML5Runtime_enabled`
 - `xsuaa` service
-- `virtual-hr7-destination` available in the target subaccount
-- Cloud Connector mapping for `virtual-s4hr7.erp-is.com:50000`
-- Credentials/auth strategy for the HR7 on-premise destination
+- `shiperp-virtual-hr7-destination` (and `shiperp-virtual-erps4sales-destination` / `shiperp-virtual-hd6-destination` for SLS / HD6 apps) available at the **subaccount level**
+- Cloud Connector mapping for `virtual-s4hr7.erp-is.com:50000` (HR7), `erps4sales.erp-is.com:50000` (SLS), `virtual-s4hd6.erp-is.com:8000` (HD6) — see `PROJECT_DISCUSSION.md` §26
+- Credentials/auth strategy for the on-premise destinations (currently `USER_CF` Basic Auth — see `PROJECT_DISCUSSION.md` §21.1)
 
 Backend destinations are intentionally not created in `mta.yaml` because they require secrets and target Cloud Connector configuration. Create or validate them separately before deployment.
 

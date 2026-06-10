@@ -115,23 +115,31 @@ fs.writeFileSync(
 // Mirror default-env.json so the html5-apps-repo binding + destinations are visible.
 const envSrc = path.join(__dirname, 'default-env.json');
 if (fs.existsSync(envSrc)) {
-  // Ensure all three backend destinations exist in the env (point them all at
-  // hr7-proxy on :5001 by default — change ports/hosts here if you run separate
-  // proxies per backend).
+  // Wire each backend destination at its own proxy URL. Only HR7 has a
+  // built-in default (the bundled hr7-proxy.js on :5001). SLS and HD6 require
+  // explicit {SLS,HD6}_PROXY_URL in approuter/.env so a developer doesn't
+  // silently end up hitting HR7 when clicking through an SLS or HD6 app.
   let env = JSON.parse(fs.readFileSync(envSrc, 'utf8'));
   env.destinations = env.destinations || [];
   const have = new Set(env.destinations.map((d) => d.name));
+  const PROXY_DEFAULTS = { hr7: 'http://localhost:5001' };
   for (const [backend, name] of Object.entries(BACKEND_TO_DEST)) {
-    if (!have.has(name)) {
-      env.destinations.push({
-        name,
-        url:
-          process.env[`${backend.toUpperCase()}_PROXY_URL`] ||
-          'http://localhost:5001',
-        forwardAuthToken: false,
-        strictSSL: false,
-      });
+    if (have.has(name)) continue;
+    const envKey = `${backend.toUpperCase()}_PROXY_URL`;
+    const url = process.env[envKey] || PROXY_DEFAULTS[backend];
+    if (!url) {
+      console.warn(
+        `[local-approuter] ${envKey} not set and no default — destination "${name}" left unconfigured. ` +
+          `Set ${envKey}=http://localhost:<port> in approuter/.env (and start a matching proxy) before using /${backend}/* routes.`,
+      );
+      continue;
     }
+    env.destinations.push({
+      name,
+      url,
+      forwardAuthToken: false,
+      strictSSL: false,
+    });
   }
   fs.writeFileSync(
     path.join(localDir, 'default-env.json'),

@@ -90,8 +90,8 @@ for (const app of expectedApps) {
   const cloudService = manifest["sap.cloud"]?.service;
   const expectedService = `comerpisshiperp${app}`;
   const expectedDestination = app.endsWith("sls")
-    ? "virtual-erps4sales-destination"
-    : "virtual-hr7-destination";
+    ? "shiperp-virtual-erps4sales-destination"
+    : "shiperp-virtual-hr7-destination";
   const routeDestinations = new Set(
     (xsApp.routes || []).map((route) => route.destination).filter(Boolean)
   );
