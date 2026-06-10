@@ -1,30 +1,73 @@
 'use strict';
 /**
- * Local dev approuter bootstrap.
+ * Local dev approuter bootstrap (HR7 + SLS + HD6).
  *
  * The committed approuter/xs-app.json is the CF standalone configuration
  * (authenticationMethod=route + authenticationType=xsuaa), which requires a
  * UAA service binding we don't have when running on a developer machine. The
  * local dev chain is simpler: html5-apps-repo (credentials-bound) + ui5cdn +
- * virtual-hr7-destination → hr7-proxy.js. No user auth.
+ * one virtual-* destination per backend. No user auth.
  *
- * To keep the CF config intact (so `cf push approuter/` keeps working) without
- * forking xs-app.json, this script writes a local override under
+ * Backend routing is path-prefixed so a single approuter can serve apps
+ * pointed at any of the three backend systems:
+ *   /hr7/sap/opu/odata/...  → virtual-hr7-destination       (HR7 backend)
+ *   /sls/sap/opu/odata/...  → virtual-erps4sales-destination (SLS backend)
+ *   /hd6/sap/opu/odata/...  → virtual-hd6-destination        (HD6 backend)
+ *   /sap/opu/odata/...      → BACKEND env var (default: virtual-hr7-destination)
+ *
+ * Set BACKEND=hr7|sls|hd6 in approuter/.env to switch the default for apps
+ * that don't include the prefix in their data-source URI.
+ *
+ * To keep the CF xs-app.json intact (so `cf push approuter/` keeps working)
+ * without forking it, this script writes a local override under
  * approuter/.local-approuter/{xs-app.json, default-env.json} and starts the
- * approuter against that directory. The override is gitignored.
+ * approuter against that directory. The override dir is gitignored.
  */
 const fs = require('fs');
 const path = require('path');
 const approuter = require('@sap/approuter');
 
+// Load .env (used by hr7-proxy.js too)
+(function loadDotenv() {
+  try {
+    const envPath = path.join(__dirname, '.env');
+    if (!fs.existsSync(envPath)) return;
+    for (const raw of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+      const line = raw.trim();
+      if (!line || line.startsWith('#')) continue;
+      const eq = line.indexOf('=');
+      if (eq < 0) continue;
+      const k = line.slice(0, eq).trim();
+      let v = line.slice(eq + 1).trim();
+      if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+        v = v.slice(1, -1);
+      }
+      if (!(k in process.env)) process.env[k] = v;
+    }
+  } catch (_) {}
+})();
+
+const BACKEND_TO_DEST = {
+  hr7: 'virtual-hr7-destination',
+  sls: 'virtual-erps4sales-destination',
+  hd6: 'virtual-hd6-destination',
+};
+const defaultBackend = (process.env.BACKEND || 'hr7').toLowerCase();
+const defaultDestination = BACKEND_TO_DEST[defaultBackend] || BACKEND_TO_DEST.hr7;
+
 const localDir = path.join(__dirname, '.local-approuter');
 if (!fs.existsSync(localDir)) fs.mkdirSync(localDir, { recursive: true });
 
-// Local-dev xs-app.json. Auth is "none" because:
-//   1) html5-apps-repo-rt routes auth via client_credentials baked into the
-//      binding in default-env.json, not via user UAA.
-//   2) virtual-hr7-destination is proxied through hr7-proxy.js which injects
-//      Basic Auth using USER_CF from approuter/.env.
+function odataRoute(prefix, destination) {
+  return {
+    source: `^/${prefix}/sap/opu/odata/(.*)$`,
+    target: '/sap/opu/odata/$1',
+    destination,
+    authenticationType: 'none',
+    csrfProtection: false,
+  };
+}
+
 const localXsApp = {
   welcomeFile: '/index.html',
   authenticationMethod: 'none',
@@ -43,15 +86,19 @@ const localXsApp = {
       destination: 'ui5cdn',
       authenticationType: 'none',
     },
-    // OData → virtual-hr7-destination (hr7-proxy on :5001 adds Basic Auth)
+    // Explicit per-backend OData prefixes
+    odataRoute('hr7', BACKEND_TO_DEST.hr7),
+    odataRoute('sls', BACKEND_TO_DEST.sls),
+    odataRoute('hd6', BACKEND_TO_DEST.hd6),
+    // Fallback OData (no prefix) → BACKEND env var or HR7
     {
       source: '^/sap/opu/odata/(.*)$',
       target: '/sap/opu/odata/$1',
-      destination: 'virtual-hr7-destination',
+      destination: defaultDestination,
       authenticationType: 'none',
       csrfProtection: false,
     },
-    // Everything else → html5-apps-repo-rt (the deployed app content)
+    // Everything else → html5-apps-repo-rt (deployed app content)
     {
       source: '^(.*)$',
       target: '$1',
@@ -68,7 +115,34 @@ fs.writeFileSync(
 // Mirror default-env.json so the html5-apps-repo binding + destinations are visible.
 const envSrc = path.join(__dirname, 'default-env.json');
 if (fs.existsSync(envSrc)) {
-  fs.copyFileSync(envSrc, path.join(localDir, 'default-env.json'));
+  // Ensure all three backend destinations exist in the env (point them all at
+  // hr7-proxy on :5001 by default — change ports/hosts here if you run separate
+  // proxies per backend).
+  let env = JSON.parse(fs.readFileSync(envSrc, 'utf8'));
+  env.destinations = env.destinations || [];
+  const have = new Set(env.destinations.map((d) => d.name));
+  for (const [backend, name] of Object.entries(BACKEND_TO_DEST)) {
+    if (!have.has(name)) {
+      env.destinations.push({
+        name,
+        url:
+          process.env[`${backend.toUpperCase()}_PROXY_URL`] ||
+          'http://localhost:5001',
+        forwardAuthToken: false,
+        strictSSL: false,
+      });
+    }
+  }
+  fs.writeFileSync(
+    path.join(localDir, 'default-env.json'),
+    JSON.stringify(env, null, 2),
+  );
+} else {
+  // No default-env.json — minimal stub
+  fs.writeFileSync(
+    path.join(localDir, 'default-env.json'),
+    JSON.stringify({ PORT: 5000, destinations: [] }, null, 2),
+  );
 }
 
 const ar = approuter();
@@ -81,5 +155,10 @@ ar.first.use(function (req, res, next) {
   };
   next();
 });
+
+console.log(
+  `Local approuter starting — default OData backend: ${defaultBackend.toUpperCase()} (${defaultDestination})`,
+);
+console.log('Use /hr7/, /sls/, /hd6/ prefixes for explicit per-backend OData calls');
 
 ar.start({ workingDir: localDir });

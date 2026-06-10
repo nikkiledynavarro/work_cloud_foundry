@@ -1839,3 +1839,65 @@ Removed the `⚠ legacy id` footnotes from §0.2 — all 62 rows are now clean a
 ---
 
 *Last updated: 2026-06-10 — §23 closes §13.9 + §13.10. parceldemohd6 + farpthd6 UI5 namespaces renamed to canonical `com.erpis.shiperp.{app}.hd6`; carrierperformancereportewm + freightorderplanning XSUAA services recreated with canonical xsappname. cf html5-list shows the new comerpisshiperpfarpthd6 entry replacing the legacy comerpistestfarptFA_RPThd6 form. All 62 apps now have zero known latent issues on the layers we can test from this side. The only remaining open items are environmental: §13.1 CC mappings, §13.6 Work Zone Site, CF approuter quota. Migration is functionally complete on every layer the team has the keys to.*
+
+---
+
+## 24. Third review fix pass (2026-06-10)
+
+Third external review surfaced 13 findings. Triaged:
+
+### 24.1 Already fixed in `a723ce0` (reviewer was on `16fa324`)
+
+| # | Finding | Verified state today |
+|---|---|---|
+| High #1 | parceldemohd6 component namespace mismatch | `sap.app.id`, `rootView.viewName`, `index.html` `data-sap-ui-resourceroots`, and `Component.js` all use `com.erpis.shiperp.parceldemo.hd6`. |
+| Medium #4 | XSUAA `xsappname` typos on `carrierperformancereportewm` + `freightorderplanning` | Both now `comerpisshiperp{app}` canonical form. |
+
+### 24.2 Fixed in this pass (commit follows)
+
+| # | Finding | Fix |
+|---|---|---|
+| High #2 | `npm start` ran the stock SAP approuter (`node node_modules/@sap/approuter/approuter.js`), bypassing `server.js` and its local-dev override config | `approuter/package.json` `start` now runs `node server.js`. Original entry preserved as `start:vanilla` for emergencies. |
+| High #3 | `server.js` had a single OData route to `virtual-hr7-destination` only — SLS and HD6 traffic would have hit the wrong backend | `server.js` now publishes four OData routes: `/hr7/sap/opu/odata/*` → `virtual-hr7-destination`, `/sls/sap/opu/odata/*` → `virtual-erps4sales-destination`, `/hd6/sap/opu/odata/*` → `virtual-hd6-destination`, plus the prefix-less `/sap/opu/odata/*` fallback whose target is picked from `BACKEND=hr7\|sls\|hd6` in `approuter/.env` (default HR7). `default-env.json` is regenerated at boot so all three backend destinations are injected. |
+| Low #10 | Three SLS apps used Pascal/Camel-case semantic objects (`QuickPackSLS`, `SubmitACEFilingSLS`, `TrackShipmentSLS`) while every other SLS app used lowercase + `SLS` caps. Navigation is case-sensitive so the inconsistency is fragile. | Normalized to lowercase + `SLS` caps. To avoid collisions with sibling apps that already used `quickpackSLS` / `trackshipmentSLS`, each renamed semObj kept its app prefix: `QuickPackSLS` → `quickpackewmSLS`, `SubmitACEFilingSLS` → `submitacefilingSLS`, `TrackShipmentSLS` → `trackshipmenteccSLS`. Updated the manifest inbounds and any `crossNavigate` references in view XML / fragment / controller files. Audit confirms 0 remaining mixed-case SLS semObjs. Redeployed the 3 SLS `-app-content` modules. |
+
+### 24.3 Deferred / skipped (no change)
+
+| # | Finding | Disposition |
+|---|---|---|
+| Medium #5 | CF approuter `shiperp-fiori-test-approuter` stopped, 0/1 instances, no route | Quota-blocked — already §15.2 #3 |
+| Medium #6 | 8 destination services have 2 keys (named admin keys) | Kept by §20 decision — `backend-destinations-admin-key` × 7 + `local-approuter-key` × 1 are plausibly in use |
+| Medium #7 | No `npm test` on any of 62 apps | Out of migration scope; preexisting Neo apps don't have unit tests |
+| Medium #8 | Deprecated UI5 patterns (`sap.ui.getCore`, `sap.ui.xmlfragment`, global jQuery, deprecated themes, inline scripts, ambiguous XML event handlers) — particularly in `parceldemohd6` and `farpthd6`, broadly across the repo | Logged as tech debt. Fixing requires a UI5 modernization initiative + full regression cycle — not migration scope. |
+| Medium #9 | `csrfProtection: false` + `sap.cloud.public: true` on all 62 apps | Intentional (§20.3) — ABAP backend handles CSRF; XSUAA on routes handles authn. Worth a security-policy review but out of this pass. |
+| Low #11 | Legacy UI5 versions (32 apps on 1.42.0, `farpthd6` on 1.30.0, 7 apps directly load 1.56.6) | Tech debt — UI5 version bumps need broader regression testing. |
+| Low #12 | Versions stay `1.0.0` / MTA `0.0.1` | Release-management decision — adopt semver bumps per deployment. Out of this pass. |
+| Security history | Old `NNAVARRO_AI` credentials remain in git history despite source scrubbing | Git history rewrite is destructive + invalidates all clone hashes. User has previously declined to rewrite history; `USER_CF` has superseded the old credential for live use anyway. |
+
+### 24.4 server.js multi-backend usage
+
+After this pass, apps can address any of the three backends from a single local approuter:
+
+```
+http://localhost:5000/comerpisshiperp{anyapp}/index.html         # serves all 62 apps
+http://localhost:5000/sap/opu/odata/...                          # default backend (BACKEND env, fallback HR7)
+http://localhost:5000/hr7/sap/opu/odata/...                      # forced HR7
+http://localhost:5000/sls/sap/opu/odata/...                      # forced SLS
+http://localhost:5000/hd6/sap/opu/odata/...                      # forced HD6
+```
+
+`approuter/.env` can hold:
+```
+BACKEND=hr7                  # or sls, hd6 — selects the default backend
+HR7_USER=USER_CF             # used by hr7-proxy.js
+HR7_PASS=Shiperp1
+HR7_PROXY_URL=http://localhost:5001   # optional override per backend
+SLS_PROXY_URL=http://localhost:5002   # if you run a separate proxy per backend
+HD6_PROXY_URL=http://localhost:5003
+```
+
+If you only run `hr7-proxy.js`, leave the `*_PROXY_URL` overrides unset — they all default to `localhost:5001`, so OData calls through `/sls/` or `/hd6/` paths will still hit the HR7 proxy. The intent is that you spin up additional proxies per backend when needed.
+
+---
+
+*Last updated: 2026-06-10 — §24 third review fix pass. npm start now drives the local-dev server.js (was bypassing it). server.js extended to publish per-backend OData prefixes (/hr7, /sls, /hd6) plus a configurable default. Three mixed-case SLS semantic objects normalized to lowercase-with-SLS-caps (no remaining mixed-case SLS semObjs). Redeployed 3 SLS app-content modules. All 4 valid review findings cleared.*
