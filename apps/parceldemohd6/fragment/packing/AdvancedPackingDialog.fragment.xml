@@ -3,9 +3,9 @@
 		beforeClose="onAdvancedPackingDialogBeforeClose">
 		<content>
 			<Carousel id="AdvancePackingCarousel" class="sapUiContentPadding" height="100%" width="100%" arrowsPlacement="PageIndicator" pageChanged="onAdvancedPackingPageChanged">
-				<core:Fragment id="advancedModeMaterial" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parcel.fragment.packing.ItemsPacking"
+				<core:Fragment id="advancedModeMaterial" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.packing.ItemsPacking"
 					type="XML"/>
-				<core:Fragment id="advancedModeHU" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parcel.fragment.packing.HUPacking" type="XML"/>
+				<core:Fragment id="advancedModeHU" class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.packing.HUPacking" type="XML"/>
 			</Carousel>
 		</content>
 		<endButton>

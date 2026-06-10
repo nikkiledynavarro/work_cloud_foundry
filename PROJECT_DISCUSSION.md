@@ -141,15 +141,13 @@ Legend
 | 55 | cancelhd6                       | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 56 | disputehd6                      | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 57 | eodhd6                          | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 58 | farpthd6                        | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ ⚠ legacy id |
+| 58 | farpthd6                        | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 59 | freightaudithd6                 | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 60 | parceldemohd6                   | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ ⚠ legacy id |
+| 60 | parceldemohd6                   | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 61 | parcelhd6                       | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 62 | trackshipmenthd6                | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-**Footnotes:**
-- ⚠ `farpthd6` — manifest `sap.app.id` is the Neo legacy `com.erpis.testfarptFA_RPT.hd6`; the CF Direct launch URL encodes the legacy id correctly so the app still loads. Source rename is tracked as §13.10.
-- ⚠ `parceldemohd6` — `Component.js` namespace is `com.erpis.shiperp.parcel` while manifest says `com.erpis.shiperp.parceldemo.hd6`. Direct URL load works; Work Zone component discovery may fail. Same shape as §13.10, deferred.
+**All 62 apps: clean across every column.** Earlier audit reports tracked a legacy `sap.app.id` on `farpthd6` and a UI5 namespace mismatch on `parceldemohd6` — both fixed and verified live in §13.10 cleanup.
 
 ### 0.3 Backend destinations summary
 
@@ -188,8 +186,6 @@ f6bdb7c  deploy: apply §13.3 SLS title fix + §13.8 CF Direct GUID regen
 |---|---|---|---|---|
 | §13.1 | Cloud Connector mappings (HR7 / SLS / HD6 hosts on `btp_cf`) | 🔴 BLOCKER | rsantos | Pending |
 | §13.6 / #41 | Build Work Zone Site (60 tiles) | ⏸ | Nikki (needs WZ access) | Pending |
-| §13.9 | HR7 xsappname typos on `carrierperformancereportewm` + `freightorderplanning` | 🟡 | — | Deferred (apps work) |
-| §13.10 | `farpthd6` / `parceldemohd6` UI5 namespace mismatch | 🟡 | — | Deferred (apps work) |
 | §15.2 #3 | Standalone CF approuter quota = 0 | ⏸ | CF org admin | Pending |
 | Local approuter | `server.js` UAA binding (post-`60a1b24` refactor) | ⚠️ | — | Local-dev only; revert auth or add UAA binding |
 | §13.4 / §13.5 | BAS UI quirks (git panel, terminal input) | n/a | SAP BAS team | Cosmetic |
@@ -1796,3 +1792,50 @@ The §15 – §22 sections are an **audit log** of the iterative fix passes — 
 ---
 
 *Last updated: 2026-06-10 — Added §0 current-state snapshot (per-layer + per-app + destinations + commit chain + scripts + re-verification one-liner) and a reading guide at the foot. No prior content removed; existing sections kept intact for audit history.*
+
+---
+
+## 23. §13.9 + §13.10 closeout (2026-06-10)
+
+Both items were marked "deferred (apps work)" through §22. User asked to close the loop so every layer is provably clean. Both done.
+
+### 23.1 §13.10 — UI5 namespace mismatch (parceldemohd6 + farpthd6) — **CLOSED**
+
+Until today the two HD6 apps had latent UI5 namespace inconsistencies:
+
+| App | Manifest `sap.app.id` | Code namespace (Component.js + bootstrap) | Symptom |
+|---|---|---|---|
+| `parceldemohd6` | `com.erpis.shiperp.parceldemo.hd6` ✅ | `com.erpis.shiperp.parcel` ❌ | Direct URL load worked (code is self-consistent under `parcel`); Work Zone tile discovery would have failed because it resolves the component by manifest `sap.app.id`. |
+| `farpthd6` | `com.erpis.testfarptFA_RPT.hd6` ❌ | `com.erpis.testfarptFA_RPT.hd6` (consistent with manifest, but the *project convention* is `com.erpis.shiperp.{app}.hd6`) | Direct URL load worked; `cf html5-list` entry name was the ugly `comerpistestfarptFA_RPThd6` form. |
+
+`scripts/fix-hd6-namespaces.js` does a full rename across both apps' source trees. For `parceldemohd6` it rewrote `com.erpis.shiperp.parcel` → `com.erpis.shiperp.parceldemo.hd6` (40 files). For `farpthd6` it rewrote `com.erpis.testfarptFA_RPT.hd6` → `com.erpis.shiperp.farpt.hd6` and `com.erpis.testfarptFA_RPT` → `com.erpis.shiperp.farpt` (10 files). The rewrite touched `index.html` (`data-sap-ui-resourceroots`), `Component.js`, `Component-preload.js`, `Component-preload-dbg.js`, every controller, every view XML's `controllerName`, every fragment XML, every `sap.ui.define` path, the `manifest.json` `sap.ui5.rootView.viewName` / `models.i18n.settings.bundleName` / `routing.config.viewPath` fields, and `extended_runnable_file.html`.
+
+Rebuilt `mta-hd6.yaml`, redeployed `parceldemohd6-app-content` + `farpthd6-app-content`. `cf html5-list` now shows the canonical entries:
+```
+comerpisshiperpfarpthd6        1.0.0   ... farpthd6-app-front-service        Wed, 10 Jun 2026 04:46:08 GMT
+comerpisshiperpparceldemohd6   1.0.0   ... parceldemohd6-app-front-service   Wed, 10 Jun 2026 04:46:26 GMT
+```
+The legacy `comerpistestfarptFA_RPThd6` is gone. `scripts/regen-cf-direct-urls.js` rewrote the `☁ farpthd6 (CF Direct)` launch.json entry to the new canonical id. Browser verification confirmed both apps still load with the right title (`Freight Audit Report HD6`, `Parcel Demo HD6`).
+
+### 23.2 §13.9 — HR7 xsappname typos (carrierperformancereportewm + freightorderplanning) — **CLOSED**
+
+| App | Old `xsappname` | New `xsappname` |
+|---|---|---|
+| `carrierperformancereportewm` | `comerpisshiperpewmcarrierperformancereport` (words swapped) | `comerpisshiperpcarrierperformancereportewm` |
+| `freightorderplanning` | `comerpisshiperfreightorderPlanning` (missing `p` + camelCase) | `comerpisshiperpfreightorderplanning` |
+
+Sequence:
+1. Fixed `xsappname` in `security/xs-security-carrierperformancereportewm.json` and `security/xs-security-freightorderplanning.json` source files.
+2. `cf delete-service-key -f {app}-xsuaa-service {app}-xsuaa-service-key`, `cf delete-service -f {app}-xsuaa-service` for both apps.
+3. `mbt build -p cf` to repackage the MTA with the corrected xs-security files.
+4. `cf deploy mta_archives/shiperp-fiori-cf-migration_0.0.1.mtar -f -m {app}-app-content -m {app}-destination-content` for both apps — the MTA deployer recreated the XSUAA service with the corrected xsappname.
+
+Verified by reading the new service key. Both now report the canonical `comerpisshiperp{app}!t621` xsappname. Any future role-collection automation will find these apps under the expected name. Apps still load via launchpad.
+
+### 23.3 §0 snapshot refreshed
+
+Removed the `⚠ legacy id` footnotes from §0.2 — all 62 rows are now clean across all five status columns. Removed §13.9 and §13.10 from §0.5 open items table. The only items remaining in §0.5 are external (CC, Work Zone Site, CF approuter quota) or cosmetic (BAS UI quirks).
+
+---
+
+*Last updated: 2026-06-10 — §23 closes §13.9 + §13.10. parceldemohd6 + farpthd6 UI5 namespaces renamed to canonical `com.erpis.shiperp.{app}.hd6`; carrierperformancereportewm + freightorderplanning XSUAA services recreated with canonical xsappname. cf html5-list shows the new comerpisshiperpfarpthd6 entry replacing the legacy comerpistestfarptFA_RPThd6 form. All 62 apps now have zero known latent issues on the layers we can test from this side. The only remaining open items are environmental: §13.1 CC mappings, §13.6 Work Zone Site, CF approuter quota. Migration is functionally complete on every layer the team has the keys to.*

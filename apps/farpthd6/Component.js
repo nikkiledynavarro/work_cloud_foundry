@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/core/UIComponent","sap/ui/Device","com/erpis/testfarptFA_RPT/model/models"],function(e,t,i){"use strict";return e.extend("com.erpis.testfarptFA_RPT.hd6.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.setModel(i.createDeviceModel(),"device")}})});
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/Device","com/erpis/shiperp/farpt/model/models"],function(e,t,i){"use strict";return e.extend("com.erpis.shiperp.farpt.hd6.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.setModel(i.createDeviceModel(),"device")}})});
 //# sourceMappingURL=Component.js.map

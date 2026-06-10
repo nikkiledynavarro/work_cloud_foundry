@@ -4,9 +4,9 @@
 		singleContainerFullSize="false">
 		<f:content>
 			<core:Title text="Small Parcel"></core:Title>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.SmallParcel" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.parcel.SmallParcel" type="XML"/>
 			<core:Title text="Ship To"></core:Title>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.AddressShipTo" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.address.AddressShipTo" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 </core:FragmentDefinition>

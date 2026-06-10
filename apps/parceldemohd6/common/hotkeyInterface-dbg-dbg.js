@@ -2,7 +2,7 @@ sap.ui.define([
 	"sap/ui/base/Object"
 ], function(ui5Object) {
 	"use strict";
-	var HotkeyInterface = ui5Object.extend("com.erpis.shiperp.parcel.common.hotkeyInterface", {
+	var HotkeyInterface = ui5Object.extend("com.erpis.shiperp.parceldemo.hd6.common.hotkeyInterface", {
 		constructor: function(oComponent) {
 			this.oComponent = oComponent;
 		},

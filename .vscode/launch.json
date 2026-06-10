@@ -2588,7 +2588,7 @@
         {
             "runtimeArgs": [
                 "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/276433b8-5e2c-4072-90c7-e974915b8cf2.comerpisshiperpfarpthd6.comerpistestfarptFA_RPThd6-1.0.0/index.html'"
+                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/276433b8-5e2c-4072-90c7-e974915b8cf2.comerpisshiperpfarpthd6.comerpisshiperpfarpthd6-1.0.0/index.html'"
             ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",

@@ -8,7 +8,7 @@ sap.ui.define([
 ], function(Controller, JSONModel, Format, ChartFormatter, Filter, FilterOperator) {
 	"use strict";
 
-	return Controller.extend("com.erpis.testfarptFA_RPT.hd6.controller.Main", {
+	return Controller.extend("com.erpis.shiperp.farpt.hd6.controller.Main", {
 
 		oFilter: sap.ui.model.Filter,
 

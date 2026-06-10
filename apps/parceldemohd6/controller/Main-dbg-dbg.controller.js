@@ -1,21 +1,21 @@
 /*global location*/
-jQuery.sap.require("com.erpis.shiperp.parcel.common.jquery_hotkeys");
+jQuery.sap.require("com.erpis.shiperp.parceldemo.hd6.common.jquery_hotkeys");
 sap.ui.define([
-	"com/erpis/shiperp/parcel/controller/BaseController",
+	"com/erpis/shiperp/parceldemo/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"com/erpis/shiperp/parcel/model/formatter",
+	"com/erpis/shiperp/parceldemo/hd6/model/formatter",
 	"sap/m/Token",
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
-	"com/erpis/shiperp/parcel/common/Utils",
-	"com/erpis/shiperp/parcel/common/hotkeyInterface"
+	"com/erpis/shiperp/parceldemo/hd6/common/Utils",
+	"com/erpis/shiperp/parceldemo/hd6/common/hotkeyInterface"
 ], function (BaseController, JSONModel, formatter, Token, Filter, MessageBox, MessageToast, Utils, HotkeyInterface) {
 	"use strict";
 
-	return BaseController.extend("com.erpis.shiperp.parcel.controller.Main", {
+	return BaseController.extend("com.erpis.shiperp.parceldemo.hd6.controller.Main", {
 
-		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.parcel.controller.Main"),
+		_oLogger: jQuery.sap.log.getLogger("com.erpis.shiperp.parceldemo.hd6.controller.Main"),
 		formatter: formatter,
 		oBundle: null, // i18n bundle class
 
@@ -337,7 +337,7 @@ sap.ui.define([
 		// Add Default HU section
 		onAddDefaultHU: function () {
 			if (!this.oDialogDefaultHU) {
-				this.oDialogDefaultHU = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.CreateDefaultHUDialog", this);
+				this.oDialogDefaultHU = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.CreateDefaultHUDialog", this);
 				this.getView().addDependent(this.oDialogDefaultHU);
 			}
 			this.oDialogDefaultHU.open();
@@ -346,7 +346,7 @@ sap.ui.define([
 		// Add New HU section
 		onAddNewHU: function () {
 			if (!this.oDialogNewHU) {
-				this.oDialogNewHU = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.CreateHUDialog", this);
+				this.oDialogNewHU = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.CreateHUDialog", this);
 				this.getView().addDependent(this.oDialogNewHU);
 			}
 			this.oDialogNewHU.open();
@@ -438,7 +438,7 @@ sap.ui.define([
 			var oObject = oEvent.getSource().getBindingContext("local").getObject();
 			this.getModel("local").setProperty("/FreightunitItems", oObject.FreightunitItems.results);
 			if (!this._oHUItemsDialog) {
-				this._oHUItemsDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.packing.HUItemsDialog", this);
+				this._oHUItemsDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.packing.HUItemsDialog", this);
 				this.getView().addDependent(this._oHUItemsDialog);
 			}
 			this._oHUItemsDialog.open();
@@ -583,11 +583,11 @@ sap.ui.define([
 				return;
 			}
 			if (!this.oRatePricingDialog) {
-				this.oRatePricingDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RatePricingsDialog", this);
+				this.oRatePricingDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RatePricingsDialog", this);
 				this.getView().addDependent(this.oRatePricingDialog);
 			}
 			var oObject = sap.ui.getCore().byId("tableRates").getSelectedItem().getBindingContext("local").getObject();
-			var oRatePricingTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RatePricingColumnListItem", this);
+			var oRatePricingTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RatePricingColumnListItem", this);
 			var oBindingInfo = {
 				path: "local>/RatePricings",
 				template: oRatePricingTemplate,
@@ -691,11 +691,11 @@ sap.ui.define([
 				return;
 			}
 			if (!this.oRateDetailDialog) {
-				this.oRateDetailDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RateDetailsDialog", this);
+				this.oRateDetailDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RateDetailsDialog", this);
 				this.getView().addDependent(this.oRateDetailDialog);
 			}
 			var oObject = sap.ui.getCore().byId("tableRates").getSelectedItem().getBindingContext("local").getObject();
-			var oRateDetailTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RateDetailColumnListItem", this);
+			var oRateDetailTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RateDetailColumnListItem", this);
 			var oBindingInfo = {
 				path: "local>/RateDetails",
 				template: oRateDetailTemplate,
@@ -950,7 +950,7 @@ sap.ui.define([
 
 		onSerialPress: function () {
 			if (!this.oSerialDialog) {
-				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.SerialDialog", this);
+				this.oSerialDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.SerialDialog", this);
 				this.getView().addDependent(this.oSerialDialog);
 			}
 
@@ -1482,7 +1482,7 @@ sap.ui.define([
 
 		onReprint: function () {
 			this.oReprintDialog = Utils.getFragment("", "ReprintDisplayDialog", this);
-			var oReprintTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.ReprintColumnListItem", this);
+			var oReprintTemplate = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.ReprintColumnListItem", this);
 			// var oFilter
 			this.getModel("local").setProperty("/ReprintFilter", {
 				carrier: this.sCarrier,
@@ -1827,7 +1827,7 @@ sap.ui.define([
 					}
 
 					if (!this.oRateAnalysisDialog) {
-						this.oRateAnalysisDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RateAnalysisDialog", this);
+						this.oRateAnalysisDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RateAnalysisDialog", this);
 						this.getView().addDependent(this.oRateAnalysisDialog);
 					}
 					this.oRateAnalysisDialog.open();
@@ -1891,7 +1891,7 @@ sap.ui.define([
 					}
 
 					if (!this.oRateDialog) {
-						this.oRateDialog = sap.ui.xmlfragment("com.erpis.shiperp.parcel.fragment.RatesDialog", this);
+						this.oRateDialog = sap.ui.xmlfragment("com.erpis.shiperp.parceldemo.hd6.fragment.RatesDialog", this);
 						this.getView().addDependent(this.oRateDialog);
 					}
 					this.oRateDialog.open();

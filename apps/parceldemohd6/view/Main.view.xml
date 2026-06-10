@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.shiperp.parcel.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+<mvc:View controllerName="com.erpis.shiperp.parceldemo.hd6.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
 	xmlns:l="sap.ui.layout" height="100%" xmlns:uxap="sap.uxap" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false" toggleHeaderOnTitleClick="false" showHeaderContent="false"
 		preserveHeaderStateOnScroll="false" headerContentPinnable="false" enableLazyLoading="false" showFooter="true"
@@ -72,7 +72,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Packing">
 						<uxap:blocks>
-							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parcel.fragment.packing.ItemsPacking" type="XML"/>
+							<core:Fragment class="sapUiSizeCompact" fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.packing.ItemsPacking" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -81,7 +81,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Parcel">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.TabParcel" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.parcel.TabParcel" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -90,7 +90,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection id="iconTabCarrierSub">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.TabCarrier" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.TabCarrier" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -99,7 +99,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="International">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.TabInternational" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.TabInternational" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -108,7 +108,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Ship From">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressShipFrom" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.address.TabAddressShipFrom" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -117,7 +117,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Sold to">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressSoldTo" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.address.TabAddressSoldTo" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -126,7 +126,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Importer">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.address.TabAddressImporter" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.address.TabAddressImporter" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -135,7 +135,7 @@
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection title="Previous Shipment">
 						<uxap:blocks>
-							<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.TabPreviousShipment" type="XML"/>
+							<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.parcel.TabPreviousShipment" type="XML"/>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>

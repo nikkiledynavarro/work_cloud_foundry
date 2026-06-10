@@ -4,7 +4,7 @@
 		singleContainerFullSize="false"
 		visible="{= ${local>/basic/carrier_data/carrier} === 'FDXE' ? true : false }">
 		<f:content>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.FedEx" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.FedEx" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
@@ -12,21 +12,21 @@
 		singleContainerFullSize="false"
 		visible="{= ${local>/basic/carrier_data/carrier} === 'FDXG' ? true : false }">
 		<f:content>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.FedExGround" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.FedExGround" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
 		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
 		singleContainerFullSize="false" visible="{= ${local>/basic/carrier_data/carrier} === 'UPS' ? true : false }">
 		<f:content>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.UPS" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.UPS" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
 		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
 		singleContainerFullSize="false" visible="{= ${local>/basic/carrier_data/carrier} === 'DHL' ? true : false }">
 		<f:content>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.carrier.DHL" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.carrier.DHL" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 </core:FragmentDefinition>

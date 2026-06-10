@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/erpis/testfarptFA_RPT/model/models"
+	"com/erpis/shiperp/farpt/model/models"
 ], function(UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("com.erpis.testfarptFA_RPT.hd6.Component", {
+	return UIComponent.extend("com.erpis.shiperp.farpt.hd6.Component", {
 
 		metadata: {
 			manifest: "json"

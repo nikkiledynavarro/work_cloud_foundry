@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.erpis.testfarptFA_RPT.hd6.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="com.erpis.shiperp.farpt.hd6.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:chart="sap.suite.ui.microchart" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls"
 	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:uicommons="sap.suite.ui.commons"
 	xmlns:semantic="sap.m.semantic" >

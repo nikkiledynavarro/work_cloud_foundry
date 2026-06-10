@@ -5,7 +5,7 @@
 		singleContainerFullSize="false">
 		<f:content>
 			<core:Title text="Previous Shipment"></core:Title>
-			<core:Fragment fragmentName="com.erpis.shiperp.parcel.fragment.parcel.PreviousShipment" type="XML"/>
+			<core:Fragment fragmentName="com.erpis.shiperp.parceldemo.hd6.fragment.parcel.PreviousShipment" type="XML"/>
 		</f:content>
 	</f:SimpleForm>
 </core:FragmentDefinition>

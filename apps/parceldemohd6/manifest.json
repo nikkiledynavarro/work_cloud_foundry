@@ -66,7 +66,7 @@
             ]
         },
         "rootView": {
-            "viewName": "com.erpis.shiperp.parcel.view.App",
+            "viewName": "com.erpis.shiperp.parceldemo.hd6.view.App",
             "type": "XML",
             "async": true,
             "id": "app"
@@ -87,7 +87,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "com.erpis.shiperp.parcel.i18n.i18n"
+                    "bundleName": "com.erpis.shiperp.parceldemo.hd6.i18n.i18n"
                 }
             },
             "": {
@@ -99,7 +99,7 @@
             "config": {
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
-                "viewPath": "com.erpis.shiperp.parcel.view",
+                "viewPath": "com.erpis.shiperp.parceldemo.hd6.view",
                 "controlId": "app",
                 "controlAggregation": "pages",
                 "bypassed": {
