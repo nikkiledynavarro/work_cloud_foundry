@@ -1216,24 +1216,38 @@ Nine Neo applications that use HD6 were converted and deployed as an isolated MT
 - `scripts/validate-hd6-apps.js` passes.
 - The existing validator still passes for 27 HR7 and 27 SLS definitions.
 
-### 16.2 HD6 destination (created 2026-06-10)
+### 16.2 Backend destinations — full sweep (2026-06-10)
 
-All HD6 apps route backend requests through `virtual-hd6-destination`. Originally that destination was not present in `btp_cf`. User instructed to reuse the HR7/SLS Basic Auth credentials. Created in each of the 8 HD6 app destination-service instances via the destination-configuration API:
+Initial audit found that **only 12 of 27 HR7 apps had `virtual-hr7-destination`, 0 of 27 SLS apps had `virtual-erps4sales-destination`, and `freightaudit` was mis-configured with `virtual-hd6-destination`.** Most apps would have 404'd on any backend call regardless of Cloud Connector status.
 
+User created a single new service account (`USER_CF` / `Shiperp1`) that exists on all three backend systems and instructed to use it everywhere.
+
+Provisioned the correct instance destination on each of the 62 apps via the destination-configuration API:
+
+| App group | Destination name | URL |
+|---|---|---|
+| HR7 (×27) | `virtual-hr7-destination` | `http://virtual-s4hr7.erp-is.com:50000` |
+| SLS (×27) | `virtual-erps4sales-destination` | `http://erps4sales.erp-is.com:50000` |
+| HD6 (×8) | `virtual-hd6-destination` | `http://virtual-s4hd6.erp-is.com:8000` |
+
+Common across all 62:
 ```
-Name:            virtual-hd6-destination
 Type:            HTTP
-URL:             http://virtual-s4hd6.erp-is.com:8000
 Authentication:  BasicAuthentication
 ProxyType:       OnPremise
-User:            nnavarro
+User:            USER_CF
 HTML5DynamicDestination: true
 WebIDEEnabled:           true
+WebIDEUsage:             odata_abap,ui5_execute_abap,dev_abap
 ```
 
-Verified by GETting `/destination-configuration/v1/instanceDestinations` on each of `cancelhd6 / disputehd6 / eodhd6 / farpthd6 / freightaudithd6 / parceldemohd6 / parcelhd6 / trackshipmenthd6` — all 8 return the destination with the correct URL + user.
+Sweep outcome: **41 created** (apps with no prior destination), **20 updated** (apps that already had a destination but with old/different credentials), **1 replaced** (freightaudit had `virtual-hd6-destination` — now correctly `virtual-hr7-destination`), **0 failures**.
 
-Runtime OData calls will still fail until the **HD6 Cloud Connector mapping** is added on the `btp_cf` subaccount connection (same operational blocker as §13.1 for HR7/SLS — needs rsantos). The destination is provisioned and authenticated; only the CC tunnel from `btp_cf` to `virtual-s4hd6.erp-is.com:8000` is missing.
+Verified: re-listed all 62 instanceDestinations after the sweep — every app returns the expected destination with `User=USER_CF` and the correct URL.
+
+Local proxy `approuter/hr7-proxy.js` `.env` updated to `HR7_USER=USER_CF` / `HR7_PASS=Shiperp1` to match.
+
+Runtime OData calls will start working as soon as the **HR7 / SLS / HD6 Cloud Connector mappings** are added on the `btp_cf` subaccount connection (§13.1 blocker — needs rsantos). The destinations are provisioned and authenticated end-to-end; only the CC tunnel from `btp_cf` to the three internal hosts is missing.
 
 ### 16.3 HD6 catalog correction
 
