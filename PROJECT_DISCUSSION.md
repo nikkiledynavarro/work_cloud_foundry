@@ -53,6 +53,7 @@
 24. [Third review fix pass (2026-06-10)](#24-third-review-fix-pass-2026-06-10)
 25. [Remaining open items — deep dive](#25-remaining-open-items--deep-dive)
 26. [§13.1 closed — Cloud Connector mappings live (2026-06-10)](#26-131-closed--cloud-connector-mappings-live-2026-06-10)
+27. [Clean destination architecture (subaccount-level) (2026-06-10)](#27--clean-destination-architecture-subaccount-level)
 
 ---
 
@@ -155,17 +156,22 @@ Legend
 
 ### 0.3 Backend destinations summary
 
-| Group | Destination name | Backend URL | Service account | Tunnel |
-|---|---|---|---|---|
-| HR7 (27) | `virtual-hr7-destination` | `http://virtual-s4hr7.erp-is.com:50000` | `USER_CF` | Cloud Connector (pending §13.1) |
-| SLS (27) | `virtual-erps4sales-destination` | `http://erps4sales.erp-is.com:50000` | `USER_CF` | Cloud Connector (pending §13.1) |
-| HD6 (8)  | `virtual-hd6-destination` | `http://virtual-s4hd6.erp-is.com:8000` | `USER_CF` | Cloud Connector (pending §13.1) |
+As of §27 (2026-06-10), backend routing is consolidated at the **subaccount level** — three destinations serve all 62 apps:
 
-All 62 destinations share: `Type=HTTP`, `Authentication=BasicAuthentication`, `ProxyType=OnPremise`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,ui5_execute_abap,dev_abap`. The destination-service auto-builds `Authorization: Basic VVNFUl9DRjpTaGlwZXJwMQ==` at request time (proven in §17.2 / §46 OData probe).
+| Group | Destination name (subaccount) | Backend URL | Service account | Tunnel |
+|---|---|---|---|---|
+| HR7 (27) | `shiperp-virtual-hr7-destination` | `http://virtual-s4hr7.erp-is.com:50000` | `USER_CF` | Cloud Connector `(default)` |
+| SLS (27) | `shiperp-virtual-erps4sales-destination` | `http://erps4sales.erp-is.com:50000` | `USER_CF` | Cloud Connector `(default)` |
+| HD6 (8)  | `shiperp-virtual-hd6-destination` | `http://virtual-s4hd6.erp-is.com:8000` | `USER_CF` | Cloud Connector `(default)` |
+
+All three share: `Type=HTTP`, `Authentication=BasicAuthentication`, `ProxyType=OnPremise`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,ui5_execute_abap,dev_abap`. The destination-service auto-builds `Authorization: Basic VVNFUl9DRjpTaGlwZXJwMQ==` at request time (proven in §17.2 / §46 OData probe).
+
+The 62 per-app destination service instances no longer carry their own `virtual-*` copies — those entries were deleted in §27.5. Apps now resolve via instance-level (no match) → subaccount-level (match). `USER_CF` rotation is a 3-destination edit going forward, not a 62-instance sweep.
 
 ### 0.4 Commit chain since 2026-06-09
 
 ```
+d4f67bf  feat: migrate to clean destination architecture (§27)
 9e49424  review-fix #3: 3 valid findings + 2 verified-already-fixed (§24)
 a723ce0  fix: §13.9 + §13.10 — close last two latent issues
 16fa324  fix(approuter): make server.js work for local dev without UAA binding
@@ -2400,4 +2406,94 @@ Estimated execution time once the new CC is up: ~30 minutes. The work is well-sc
 
 ---
 
-*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. Verified live across all three systems: HR7 (Quick Pack ECC) returns HTTP 200 on QUICK_PACK_SRV/$metadata; SLS (Dispute SLS) returns HTTP 200 on frta_disp_srv/$metadata; HD6 (Cancel HD6) shows the active-tunnel `pending` state on cancel_ship_srv/$metadata. §26.8 clarifies that `btp_cf` has TWO CC connections (the `(default)` SLM CC and a separate `a` location instance) — all migration work landed on `(default)`. §26.9 records the exact names, ports, descriptions, and resource entries for audit and future Work Zone tile configuration. §26.10 documents why an isolated Location ID is blocked on IT provisioning a new CC instance — staying on `(default)` for now.*
+## §27 — Clean destination architecture (subaccount-level)
+
+**Status:** ✅ done 2026-06-10.
+
+### §27.1 — Why
+
+Before this section, every one of the 62 deployed Fiori apps owned its own per-app `destination` service instance, and each instance carried a copy of the `virtual-{backend}-destination` entry (`virtual-hr7-destination` for HR7 apps, `virtual-erps4sales-destination` for SLS apps, `virtual-hd6-destination` for HD6 apps). That meant 62 separate copies of essentially the same three configurations. Any change — credential rotation, URL change, proxy property — had to be applied 62 times. The §21.1 `USER_CF` sweep already had to walk all 62 to fix a single password; rotating again would mean repeating that loop.
+
+The fix is to push the three backend destinations *up* one level — from instance to subaccount — so there is exactly one source of truth per backend, and let the per-app destination service instances stop carrying their own copy. The managed approuter's resolution order is *instance first, then subaccount*: if an instance no longer defines the destination, the lookup falls through to the subaccount one. Apps don't know or care which level answered.
+
+### §27.2 — Names chosen
+
+To keep the new subaccount destinations clearly attributable to the migration project and avoid colliding with anything pre-existing at the subaccount, the three names are prefixed with `shiperp-`:
+
+| Name | Backend | URL | Auth |
+|---|---|---|---|
+| `shiperp-virtual-hr7-destination` | HR7 | `http://virtual-s4hr7.erp-is.com:50000` | BasicAuthentication, `USER_CF` |
+| `shiperp-virtual-erps4sales-destination` | SLS | `http://erps4sales.erp-is.com:50000` | BasicAuthentication, `USER_CF` |
+| `shiperp-virtual-hd6-destination` | HD6 | `http://virtual-s4hd6.erp-is.com:8000` | BasicAuthentication, `USER_CF` |
+
+All three: `Type=HTTP`, `ProxyType=OnPremise`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,ui5_execute_abap,dev_abap`. They route through the same Cloud Connector tunnel and `(default)` Location ID set up in §26.
+
+### §27.3 — Creation
+
+POSTed via the destination-configuration REST API against the subaccount-level endpoint `POST /destination-configuration/v1/subaccountDestinations`. Token obtained from any per-app destination service's `quickpackecc-destination-content-quickpackecc-destination-service-credentials` key — the credentials there carry the destination-service xsappname, which is what the subaccount endpoint authorizes against. All three returned HTTP 201.
+
+### §27.4 — Cutover of all 62 apps
+
+Each app's `xs-app.json` was rewritten to reference the new destination name. The `apps/{app}/xs-app.json` and `apps/{app}/dist/xs-app.json` were both edited so the dist tree could be repackaged without a fresh UI5 build. Total: 124 files edited, single-line `destination` field change per route.
+
+Mass redeploy used `cf html5-push -r apps/{app}/dist {app}-app-front-service` (the `-r` flag is the `--redeploy` switch that the html5-plugin requires when an app version already exists in the app-host service). Repackaging used `npm run package` per app (just bestzip of the existing dist tree — no rebuild needed since the only changed file was xs-app.json, which already lived in dist).
+
+The first batch script had a detection bug — `tail -1` was hitting an empty trailing newline on `cf html5-push` output, so every successful push was misreported as `FAIL`. Switched to checking the process exit code instead. Net: 62/62 deployed (3 smoke tests on `quickpackecc` / `quickpackeccsls` / `cancelhd6`, then 28 in the resume batch after the loop was fixed, plus the 31 from the first run that had actually succeeded despite the bad detection).
+
+Verification was a full sweep of `cf html5-get /comerpisshiperp{app}-1.0.0/xs-app.json` — 62/62 live `xs-app.json` files now reference `shiperp-virtual-*`.
+
+> Windows note: `cf html5-get` paths start with `/`, and Git Bash auto-translates that into a Windows path (e.g. `C:/Program Files/Git/comerpisshiperpquickpackecc-1.0.0/...`). Prefix the command with `MSYS_NO_PATHCONV=1` to suppress the translation.
+
+> mbt note: the `mbt build` path doesn't work on a vanilla Windows machine — it shells out to `make`, which isn't installed by default. The `npm run package` + `cf html5-push -r` route is the workaround. For full MTA deploys (when service instances or xsuaa scopes change), still build from BAS or any Linux box with `make`.
+
+### §27.5 — Instance-level cleanup
+
+Once all 62 live `xs-app.json` files were confirmed pointing at `shiperp-virtual-*`, the old per-app entries became dead weight. Walked all 62 destination service instances and DELETEd the obsolete entry from each via `DELETE /destination-configuration/v1/instanceDestinations/{name}`:
+
+| Group | Apps | Destination removed | Result |
+|---|---|---|---|
+| HR7 | 27 | `virtual-hr7-destination` | 27/27 OK |
+| SLS | 27 | `virtual-erps4sales-destination` | 27/27 OK |
+| HD6 | 8 | `virtual-hd6-destination` | 8/8 OK |
+
+After cleanup, each `{app}-destination-service` instance carries only the two MTA-managed entries (`{app}-app-front-service`, `{app}-xsuaa-service`) — both of which the MTA `destination-content` module re-asserts on every deploy.
+
+Token detail: the MTA-managed key `{app}-destination-content-{app}-destination-service-credentials` nests the UAA credentials under a `credentials.uaa` sub-object (unlike a freshly created service key, which has the same fields at the top level). The delete script normalizes both shapes with `uaa = creds.get("uaa", creds)`.
+
+### §27.6 — Resolution flow after the migration
+
+```
+App  →  managed approuter  →  destination service lookup for "shiperp-virtual-{backend}-destination"
+            ↓
+        instance-level (per-app destination service) — not present, falls through
+            ↓
+        subaccount-level — found: USER_CF / OnPremise / CC tunnel
+            ↓
+        Cloud Connector (default Location ID, SLM CC)
+            ↓
+        on-prem backend (HR7 / SLS / HD6)
+```
+
+There is exactly one place to rotate `USER_CF`'s password from here on out: the three subaccount destinations. No more 62-instance sweep.
+
+### §27.7 — Impact on future MTA deploys
+
+The MTA `destination-content` modules in `mta.yaml` and `mta-hd6.yaml` only declare the `{app}-app-front-service` and `{app}-xsuaa-service` destinations — they do *not* declare `virtual-*`. So a future `cf deploy` will not re-introduce the deleted entries. Verified by inspecting the `destination-content` blocks in both MTAs.
+
+### §27.8 — Files touched
+
+- `apps/*/xs-app.json` — 62 files, rewrote `destination` field on each `^/sap/opu/odata/(.*)$` route.
+- `apps/*/dist/xs-app.json` — 62 files, mirrored the same change in the prebuilt dist tree so `npm run package` could ship the change without running `ui5 build`.
+- Commit `d4f67bf` (`feat: migrate to clean destination architecture`).
+
+### §27.9 — Carry-overs
+
+None functional. The local approuter (`approuter/server.js`) still uses the *short* names (`virtual-hr7-destination`, etc.) in its local override mapping — that file is a dev convenience that wires local OData proxies to a `hr7-proxy` on `localhost:5001` and never touches the CF-side destinations. No change needed there.
+
+---
+
+*Last updated: 2026-06-10 — §27 closes the destination cleanup. Three subaccount-level destinations (`shiperp-virtual-{hr7,erps4sales,hd6}-destination`) are now the single source of truth for backend routing across all 62 Fiori apps. The 62 per-app destination service instances no longer carry duplicate `virtual-*` entries — they hold only the two MTA-managed app-front + xsuaa entries. `USER_CF` rotation drops from a 62-instance sweep to a 3-destination edit.*
+
+---
+
+*Previously — 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. Verified live across all three systems: HR7 (Quick Pack ECC) returns HTTP 200 on QUICK_PACK_SRV/$metadata; SLS (Dispute SLS) returns HTTP 200 on frta_disp_srv/$metadata; HD6 (Cancel HD6) shows the active-tunnel `pending` state on cancel_ship_srv/$metadata. §26.8 clarifies that `btp_cf` has TWO CC connections (the `(default)` SLM CC and a separate `a` location instance) — all migration work landed on `(default)`. §26.9 records the exact names, ports, descriptions, and resource entries for audit and future Work Zone tile configuration. §26.10 documents why an isolated Location ID is blocked on IT provisioning a new CC instance — staying on `(default)` for now.*
