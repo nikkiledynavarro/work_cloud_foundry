@@ -1533,3 +1533,52 @@ Migration is **end-to-end functionally complete** on the build / deploy / launch
 ---
 
 *Last updated: 2026-06-10 — Final consolidation pass. §21 logs the backend destination sweep (62/62 with USER_CF), HR7 title cleanup (matches SLS+HD6 quality), and the full layer-by-layer verification scorecard. All 62 apps now load via Managed App Router with clean titles. Only §13.1 CC remains as a runtime blocker.*
+
+---
+
+## 22. Second review fix pass (2026-06-10)
+
+Second external code review surfaced 12 findings. Triaged: 4 fixed in this pass, 4 already documented as deferred, 4 skipped (intentional, scope, or release-management).
+
+### 22.1 Fixed in this pass
+
+| # | Finding | Fix |
+|---|---|---|
+| Critical | Backend credentials (`NNAVARRO_AI` / `Greenrose123!`) committed in `apps/dispute/ui5-local.yaml` and `apps/disputehd6/ui5-local.yaml` line 22 | Replaced literal credentials with `username: env:UI5_BACKEND_USER` / `password: env:UI5_BACKEND_PASS` placeholders. The `fiori-tools-proxy` middleware resolves these from the environment at runtime. Scrubbed both src and dist copies. **Caveat**: the credentials remain in git history (rotated `USER_CF` via §21.1 supersedes them for backend access; only `NNAVARRO_AI` exposure remains, which the user has chosen not to rewrite history for). |
+| High | All 8 HD6 manifests retained the legacy HR7-derived inbound block in addition to the new HD6 inbound — would produce 16 tiles and intent collisions (`disputehd6` vs `dispute`, `freightaudithd6` vs `freightaudit`, etc.). | Removed the legacy inbound from each. Each HD6 manifest now has exactly 1 inbound on the canonical HD6 semantic object (`CancelShipmentHD6`, `DisputeHD6`, `EndOfDayHD6`, `FreightAuditReportHD6`, `FreightAuditHD6`, `ParcelDemoHD6`, `CreateParcelShipmentHD6`, `TrackShipmentHD6`). |
+| Medium | `disputehd6/neo-app.json` and `freightaudithd6/neo-app.json` still referenced `virtual-hr7-destination` (Neo-style preview would hit wrong backend) | Sed → `virtual-hd6-destination`. CF runtime was already correct; this is consistency only. |
+| Low | `shippingdashboard/xs-app.json` had a public Northwind sample route left over from scaffolding | Removed that route. Reduced from 4 routes to 3. |
+
+Rebuilt both MTAs and redeployed the 10 affected `-app-content` modules (2 HR7: dispute + shippingdashboard, 8 HD6).
+
+### 22.2 Deferred — already tracked
+
+| # | Finding | Where it's tracked |
+|---|---|---|
+| High | CF approuter is stopped with `no-route: true` | §15.2 #3 — quota-blocked |
+| High | `parceldemohd6` component identity mismatch (manifest says `com.erpis.shiperp.parceldemo.hd6` but `Component.js` and bootstrap use `com.erpis.shiperp.parcel`) | Same shape as §13.10 (`farpthd6` namespace inversion). Direct URL load works; Work Zone discovery may fail. Deferred — full namespace rename touches Component.js, controllers, view XML, preload bundle. |
+| Medium | XSUAA `xsappname` typos on `carrierperformancereportewm` + `freightorderplanning` | §13.9 — apps work; XSUAA service recreate is non-trivial |
+| Medium | 8 destination services have an extra named admin key (`backend-destinations-admin-key` ×7, `local-approuter-key` ×1) | §20 finding #9 — kept by explicit decision because they're plausibly in active use |
+
+### 22.3 Skipped — intentional, scope, or release-management
+
+| # | Finding | Reason |
+|---|---|---|
+| Medium | All 62 apps disable route-level CSRF; all html5-apps-repo entries are `public: true` | Intentional design choice for ABAP backends (CSRF token lifecycle handled at UI5 model layer) and developer convenience; flagged for explicit policy review in §20.3 #7 and #8 |
+| Medium | No `npm test` scripts on any of the 62 apps | Out of migration scope — these are inherited Neo Fiori apps without preexisting unit tests; adopting UI5 testing is its own initiative |
+| Low | Legacy UI5 baselines (32 apps on 1.42.0, `farpthd6` on 1.30.0, 7 apps bootstrapping 1.56.6 directly) | UI5 version bumps require regression testing the whole worklist of apps — substantial effort beyond migration scope |
+| Low | Versions still `1.0.0` / MTA `0.0.1` | Release-management decision deferred (§20.3 #16) |
+
+### 22.4 Verified healthy (review report)
+
+The review independently confirmed:
+- Exactly 27 HR7 + 27 SLS + 8 HD6 = 62 HTML5 apps in CF; no extra, no stale.
+- All 186 application service instances report successful operations.
+- All 62 backend destinations exist and resolve to the expected HR7 / SLS / HD6 endpoints.
+- Required files, package locks, build scripts, and inbounds exist.
+- JavaScript syntax check passed for 1,835 source files.
+- Git is clean and synchronized with origin/main.
+
+---
+
+*Last updated: 2026-06-10 — §22 second review fix pass. Critical credential exposure scrubbed from `ui5-local.yaml` (history remains; `USER_CF` supersedes for active use). All 8 HD6 manifests now have exactly 1 inbound each (no HR7 collision). HD6 `neo-app.json` references corrected. shippingdashboard Northwind sample route removed. Deployed: 2 HR7 + 8 HD6 `-app-content` modules. §22.4 captures the review's verified-healthy findings.*

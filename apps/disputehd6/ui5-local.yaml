@@ -18,6 +18,8 @@ server:
           - path: /sap
             url: http://10.10.1.76:8001
             client: "100"
+            # Credentials read from env vars at runtime (see approuter/.env).
+            # NEVER commit username/password here.
             credentials:
-              username: NNAVARRO_AI
-              password: "Greenrose123!"
+              username: env:UI5_BACKEND_USER
+              password: env:UI5_BACKEND_PASS
