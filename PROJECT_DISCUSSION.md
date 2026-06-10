@@ -194,6 +194,7 @@ f6bdb7c  deploy: apply §13.3 SLS title fix + §13.8 CF Direct GUID regen
 |---|---|---|---|---|
 | §13.6 / #41 | Build Work Zone Site (60 tiles) | ⏸ | Nikki (needs WZ access) | Pending |
 | §15.2 #3 | Standalone CF approuter quota = 0 | ⏸ | CF org admin | Pending |
+| §26.10 | Isolate migration CC mappings to a dedicated Location ID (e.g. `shiperp_fiori_apps`) | ⏸ | IT — provision new physical CC instance | Hygiene; current setup on `(default)` works |
 | Local approuter | `server.js` UAA binding (post-`60a1b24` refactor) | ⚠️ | — | Local-dev only; revert auth or add UAA binding |
 | §13.4 / §13.5 | BAS UI quirks (git panel, terminal input) | n/a | SAP BAS team | Cosmetic |
 
@@ -2362,6 +2363,41 @@ Resources (one per mapping, under each mapping's *Resources* tab):
 
 The legacy Neo subaccount on this same CC had the SLS mapping at `virtual-erps4sales.erp-is.com:50000`. Our CF destinations (the 27 SLS apps) point at `erps4sales.erp-is.com:50000` — **no** `virtual-` prefix — because that's how the destinations were originally created in §16.2 / §21.1. Instead of touching 27 destination service instances to add a `virtual-` prefix, I added the CC mapping under the plain `erps4sales.erp-is.com` virtual hostname. Functionally equivalent. If anyone later wants to standardize on the `virtual-` prefix for symmetry with HR7/HD6, it would mean updating all 27 SLS destinations AND adding a second CC mapping for the new name — not worth the churn just for naming.
 
+### 26.10 Isolation attempt — why migration mappings stay on `(default)` for now
+
+User raised a hygiene concern: the migration mappings should ideally live on their own Location ID (e.g. `shiperp_fiori_apps`) so they cannot be confused with — or accidentally edited alongside — the existing S/4HC mappings (`erps42023`, `erps42023cd`, `s4std21`) on `(default)` that other teams depend on.
+
+Investigation showed this is not possible from the CC side alone.
+
+**Product rule** (SAP Cloud Connector): *one CC installation can hold at most ONE connection per (subaccount, regionHost) tuple.* The CC REST API enforces it:
+
+| API call | Result |
+|---|---|
+| `POST /api/v1/configuration/subaccounts` with `regionHost=cf.us11.hana.ondemand.com`, `subaccount=eecc9986-...`, `locationID=shiperp_fiori_apps` | `HTTP 409 — "Subaccount already added"` |
+| `PUT /api/v1/configuration/subaccounts/cf.us11.hana.ondemand.com/eecc9986-.../` with `locationID=shiperp_fiori_apps` | `HTTP 200` — *but moved the entire connection (all 6 mappings, including the 3 S/4HC ones) to the new Location ID, breaking other teams' apps that were resolving via the empty Location ID*. Reverted within ~25 seconds by re-PUT'ing `locationID=""`. |
+
+**Both physical CC instances currently registered to `btp_cf` are full:**
+
+| Location ID | CC instance | Status |
+|---|---|---|
+| `(default)` | SLM CC `erpslm1.erp-is.com:8443` | Holds the migration mappings + 3 unrelated S/4HC mappings used by other teams. Slot already used. |
+| `a` | A separate CC (Connector ID `C5F4...`) | Holds connections from yet another team. Slot already used. User explicitly does not want to share it. |
+
+**What it would take to get a truly-isolated Location ID:** IT installs a **new physical SAP Cloud Connector** on a new internal host. Lead time depends on IT, but the SAP CC product is a free download — installation is a Java service + a TLS cert. Once it's up:
+
+1. Connect new CC to `btp_cf` at `locationID=shiperp_fiori_apps` (Add Subaccount in the new CC's admin UI).
+2. Recreate the 3 system mappings + 3 resources under the new CC's connection (mirror what §26.9 lists — values stay the same).
+3. Update each of the 62 CF destinations to add the property `CloudConnectorLocationId: shiperp_fiori_apps` (one batch PUT per destination service via the destination-configuration API; same shape as the `USER_CF` sweep in §21.1).
+4. Verify that one app per backend still loads `$metadata` cleanly.
+5. Delete the 3 migration mappings from the SLM CC's `(default)` connection.
+6. Tell the S/4HC team that `(default)` is fully theirs again.
+
+Estimated execution time once the new CC is up: ~30 minutes. The work is well-scoped — same shape as §26.2 + §26.3 + §21.1.
+
+**Decision for now (2026-06-10):** stay on `(default)`. The 3 migration mappings have distinct virtual hostnames (`virtual-s4hr7`, `erps4sales`, `virtual-s4hd6`) that don't collide with the S/4HC ones, and their descriptions all start with `Migration:` so any future admin can tell at a glance what's ours. Operationally there is no functional difference between `(default)` and a dedicated Location ID — only a hygiene benefit when multiple teams share the same CC.
+
+**Tracking:** added as a future item in §0.5 ("Isolate migration CC mappings to a dedicated Location ID — needs new physical CC instance from IT").
+
 ---
 
-*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. Verified live across all three systems: HR7 (Quick Pack ECC) returns HTTP 200 on QUICK_PACK_SRV/$metadata; SLS (Dispute SLS) returns HTTP 200 on frta_disp_srv/$metadata; HD6 (Cancel HD6) shows the active-tunnel `pending` state on cancel_ship_srv/$metadata. §26.8 clarifies that `btp_cf` has TWO CC connections (the `(default)` SLM CC and a separate `a` location instance) — all migration work landed on `(default)`. §26.9 records the exact names, ports, descriptions, and resource entries for audit and future Work Zone tile configuration.*
+*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. Verified live across all three systems: HR7 (Quick Pack ECC) returns HTTP 200 on QUICK_PACK_SRV/$metadata; SLS (Dispute SLS) returns HTTP 200 on frta_disp_srv/$metadata; HD6 (Cancel HD6) shows the active-tunnel `pending` state on cancel_ship_srv/$metadata. §26.8 clarifies that `btp_cf` has TWO CC connections (the `(default)` SLM CC and a separate `a` location instance) — all migration work landed on `(default)`. §26.9 records the exact names, ports, descriptions, and resource entries for audit and future Work Zone tile configuration. §26.10 documents why an isolated Location ID is blocked on IT provisioning a new CC instance — staying on `(default)` for now.*
