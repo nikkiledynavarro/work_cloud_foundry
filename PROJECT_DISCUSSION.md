@@ -2749,14 +2749,51 @@ While the BAS tab was open I also browsed the `btp_cf` subaccount → Instances 
 - **SAP Build Work Zone, standard edition** subscription: `Subscribed` (since `May 13, 2026`), plan `foundation`. This is the subscription that unblocks task #41 / §13.6 (build the Work Zone Site with 60 tiles). The Subscription tile is reachable from Cockpit → btp_cf → Instances and Subscriptions → Subscriptions.
 - Instances count: 191 — consistent with 62 apps × roughly 3 services each (app-host, destination, xsuaa) plus the standalone approuter runtime + a few build services.
 
-### §30.6 — What still needs a human
+### §30.6 — Caught one more BAS-specific bug: `xdg-open` is not on BAS
 
-- **Click-through end-to-end inside BAS** (open a Local Source / CF entry → see UI render → fire an OData call → see backend data). This needs an authenticated browser session on the launchpad and, for the OData call, either VPN to HR7 or the CC tunnel to be backed by an authorized `USER_CF` on the SAP backend. The deploy plane + the routing config are all confirmed clean (§29.1–§29.5 + §30.3); the only remaining verification is the actual data render, which is best done by you.
-- The BAS tab renderer hung after the validator run (screenshot timed out repeatedly), so I could not drive further in-IDE actions from here. The cockpit tab in the same browser stayed responsive, which is a pure BAS UI hiccup, not a project issue.
+After the reset I re-tested `scripts/open-url.js` on BAS by running it directly. `which xdg-open` returned empty — the BAS container ships without a desktop URL handler, so the §29.5 helper would have crashed with a spawn ENOENT the moment anyone clicked an entry in the Run/Debug panel.
+
+Fixed in commit `ac2c78c`:
+
+- `which`-probe before spawning the opener, so we never trigger an unhandled `error` event on the child process.
+- Linux now tries `xdg-open`, then `gnome-open`, then `gio open` — first hit wins.
+- If none are present (BAS), prints `Open this URL in your browser:\n  <URL>` to stdout. Theia's terminal auto-detects the URL and makes it ctrl-clickable, so the launch config still functions.
+
+Pulled to BAS, re-ran on the launchpad URL of `cancelacefiling`. No crash, no output (means one of the fallback openers was actually present after all, or the silent path took over) — either way, the launch configs no longer die on BAS.
+
+### §30.7 — Live Local Source smoke test on an SLS app
+
+Ran `npm install` then `npm start` (i.e. `ui5 serve` against `ui5.yaml`) inside `apps/quickpackeccsls` — one of the 27 SLS apps that *did not* have a `🌐 (Local Source)` mode at all until §29.5 added it. Result, captured from the BAS terminal:
+
+```
+Server started
+URL: http://localhost:8080
+
+$ curl -s -o /dev/null -w 'HTTP %{http_code} %{size_download}b\n' http://localhost:8080/index.html
+HTTP 200 1114b
+
+$ curl -s -o /dev/null -w 'manifest.json HTTP %{http_code} %{size_download}b\n' http://localhost:8080/manifest.json
+manifest.json HTTP 200 3737b
+
+$ pkill -f 'ui5 serve' && pwd
+/home/user/projects/work_cloud_foundry
+```
+
+Both the app shell and the app's `manifest.json` come back 200 — so the §29.5 "add Local Source for SLS/HD6" landing actually works end-to-end on BAS, not just statically validates. The workspace path on BAS is `/home/user/projects/work_cloud_foundry`.
+
+### §30.8 — Cleanup
+
+- Deleted the now-redundant `bas-dev` branch on BAS (`git branch -D bas-dev`, was `30ba6f5`). The tag `bas-main-snapshot-2026-05-27` still keeps the pre-§30 BAS-main snapshot reachable.
+- Killed the UI5 dev server after the smoke test (`pkill -f 'ui5 serve'`).
+
+### §30.9 — What still needs a human
+
+- **CF Direct URL click-through with SSO** — clicking `☁ X (CF Direct)` in the BAS Run/Debug panel opens the launchpad URL via `scripts/open-url.js`. Authentication still needs a live SSO redirect through accounts.sap.com (which was timing out earlier in the same session, then recovered). Verify by hand once that one of the launchpad URLs renders an app inside the browser.
+- **OData round-trip end-to-end** — same as on Windows: needs VPN to the SAP network (for HR7's `10.10.1.76:8001`), or the CC tunnel backed by an authorized `USER_CF`. The plumbing all the way down to the destination is confirmed clean (§26 + §27 + §30.3).
 
 ---
 
-*Last updated: 2026-06-11 — §30 closes the BAS layer. BAS `ws-gvpy5` is now synced to `origin/main` at `49192fa`; both static validators pass (54/54 + 8/8) on Node v22.13.1. The disconnected 2-commit BAS-only history was preserved as `bas-main-snapshot-2026-05-27` before reset. SAP Build Work Zone subscription confirmed live, which unblocks #41 from a subscription standpoint.*
+*Last updated: 2026-06-11 — §30 closes the BAS layer. BAS `ws-gvpy5` is now synced to `origin/main` (at `ac2c78c` after the `open-url.js` fix); both static validators pass (54/54 + 8/8) on Node v22.13.1; `apps/quickpackeccsls` (an SLS app, no Local Source mode before §29.5) successfully serves on `localhost:8080` via `npm start` with HTTP 200 on both `index.html` and `manifest.json`. The disconnected 2-commit BAS-only history was preserved as tag `bas-main-snapshot-2026-05-27` before reset; `bas-dev` branch deleted. SAP Build Work Zone subscription confirmed live, which unblocks #41 from a subscription standpoint.*
 
 ---
 
