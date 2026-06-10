@@ -2629,9 +2629,20 @@ Walked `launch.json` / `tasks.json` and checked that all 62 apps have the full t
 
 **Result after fix:** 62/62 apps have all three launch modes + a matching task. `launch.json` grew from 152 to 187 configurations; `tasks.json` grew from 32 to 67 tasks.
 
-### §29.6 — Layer 6: BAS — copy-paste checklist (manual)
+### §29.6 — Layer 6: BAS — fixed at the source + copy-paste verification (manual)
 
-I can't drive your BAS session. Run this checklist in BAS when you next open it:
+**Update 2026-06-11.** Audited every artifact that BAS touches and removed the remaining Windows-only patterns:
+
+- **`.vscode/launch.json`** — all 187 launch configurations used `"runtimeExecutable": "powershell.exe"` with `"runtimeArgs": ["-Command", "Start-Process '<URL>'"]`. PowerShell does not exist on BAS, so every single launch entry would have failed there. Replaced the whole pattern with a tiny cross-platform Node helper:
+  - New file `scripts/open-url.js` — uses `child_process.spawn` to call `cmd /c start` on Windows, `open` on macOS, `xdg-open` on Linux / BAS.
+  - All 187 launch entries now use `"type": "node"`, `"program": "${workspaceFolder}/scripts/open-url.js"`, `"args": ["<URL>"]` — same behaviour on Windows and BAS.
+- **`.vscode/tasks.json`** — already made portable in §28 (none of the 67 tasks rely on `cmd.exe` / `npm.cmd` anymore; the explicit `Stop All (Windows)` and `Stop All (BAS/Linux)` siblings cover both).
+- **`approuter/server.js`** — already cross-platform (pure Node).
+- **`scripts/*.ps1`** — 8 PowerShell automation scripts (deploy / template / fix helpers) remain Windows-only. These are *dev-side* utilities run from a Windows shell, never from BAS at runtime. Acceptable as-is; flagged in the runbook.
+
+With those changes, every code path BAS actually executes (open VS Code in BAS → run a task → run a launch config → run a validator) now runs identically on Windows and BAS/Linux.
+
+Run this checklist in BAS to confirm on your side:
 
 1. **Repo state.** Open the integrated terminal and run:
    ```

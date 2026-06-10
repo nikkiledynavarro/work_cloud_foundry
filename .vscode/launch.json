@@ -5,20 +5,15 @@
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
             "request": "launch",
             "console": "internalConsole",
-            "runtimeArgs": [
-                "-Command",
-                "Write-Host 'Services starting...'"
-            ],
             "type": "node",
             "name": "🚀 Start ShipERP (Services Only)",
-            "runtimeExecutable": "powershell.exe",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelacefiling locally",
@@ -28,15 +23,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelpickuprequest locally",
@@ -46,15 +40,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelshipmentecc locally",
@@ -64,15 +57,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelshipmentewm locally",
@@ -82,15 +74,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start carrierperformancereportecc locally",
@@ -100,15 +91,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start carrierperformancereportewm locally",
@@ -118,15 +108,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start closedelivery locally",
@@ -136,15 +125,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmentecc locally",
@@ -154,15 +142,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmentewm locally",
@@ -172,15 +159,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmentv2ewm locally",
@@ -190,15 +176,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start dispute locally",
@@ -208,15 +193,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightaudit locally",
@@ -226,15 +210,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightauditupload locally",
@@ -244,15 +227,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightorderplanning locally",
@@ -262,15 +244,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start ltlplanning locally",
@@ -280,15 +261,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start manualshipmentecc locally",
@@ -298,15 +278,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start manualshipmentewm locally",
@@ -316,15 +295,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start planshipment locally",
@@ -334,15 +312,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start quickpackecc locally",
@@ -352,15 +329,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start quickpackewm locally",
@@ -370,15 +346,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start requestforpickup locally",
@@ -388,15 +363,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start saleorder locally",
@@ -406,15 +380,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start shippingdashboard locally",
@@ -424,15 +397,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start submitacefiling locally",
@@ -442,15 +414,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start trackshipmentewm locally",
@@ -460,15 +431,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start trackshipmentecc locally",
@@ -478,15 +448,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start viewacefiling locally",
@@ -496,15 +465,14 @@
                 "group": "🌐 Local Source",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelacefiling/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -514,15 +482,14 @@
                 "group": "☁ CF Apps",
                 "order": 1
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelacefiling/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelacefilingsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -532,15 +499,14 @@
                 "group": "☁ CF Apps",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelacefilingsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -550,15 +516,14 @@
                 "group": "☁ CF Apps",
                 "order": 3
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelpickuprequest/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelpickuprequestsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -568,15 +533,14 @@
                 "group": "☁ CF Apps",
                 "order": 4
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelpickuprequestsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -586,15 +550,14 @@
                 "group": "☁ CF Apps",
                 "order": 5
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelshipmentecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmenteccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -604,15 +567,14 @@
                 "group": "☁ CF Apps",
                 "order": 6
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelshipmenteccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -622,15 +584,14 @@
                 "group": "☁ CF Apps",
                 "order": 7
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelshipmentewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelshipmentewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -640,15 +601,14 @@
                 "group": "☁ CF Apps",
                 "order": 8
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelshipmentewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -658,15 +618,14 @@
                 "group": "☁ CF Apps",
                 "order": 9
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcarrierperformancereportecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereporteccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -676,15 +635,14 @@
                 "group": "☁ CF Apps",
                 "order": 10
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcarrierperformancereporteccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -694,15 +652,14 @@
                 "group": "☁ CF Apps",
                 "order": 11
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcarrierperformancereportewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcarrierperformancereportewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -712,15 +669,14 @@
                 "group": "☁ CF Apps",
                 "order": 12
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcarrierperformancereportewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpclosedelivery/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -730,15 +686,14 @@
                 "group": "☁ CF Apps",
                 "order": 13
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpclosedelivery/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpclosedeliverysls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -748,15 +703,14 @@
                 "group": "☁ CF Apps",
                 "order": 14
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpclosedeliverysls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -766,15 +720,14 @@
                 "group": "☁ CF Apps",
                 "order": 15
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmentecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmenteccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -784,15 +737,14 @@
                 "group": "☁ CF Apps",
                 "order": 16
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmenteccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -802,15 +754,14 @@
                 "group": "☁ CF Apps",
                 "order": 17
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmentewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -820,15 +771,14 @@
                 "group": "☁ CF Apps",
                 "order": 18
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmentewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentv2ewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -838,15 +788,14 @@
                 "group": "☁ CF Apps",
                 "order": 19
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmentv2ewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcreateshipmentv2ewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -856,15 +805,14 @@
                 "group": "☁ CF Apps",
                 "order": 20
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcreateshipmentv2ewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpdispute/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -874,15 +822,14 @@
                 "group": "☁ CF Apps",
                 "order": 21
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpdispute/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpdisputesls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -892,15 +839,14 @@
                 "group": "☁ CF Apps",
                 "order": 22
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpdisputesls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudit/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -910,15 +856,14 @@
                 "group": "☁ CF Apps",
                 "order": 23
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightaudit/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightauditsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -928,15 +873,14 @@
                 "group": "☁ CF Apps",
                 "order": 24
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightauditsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightauditupload/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -946,15 +890,14 @@
                 "group": "☁ CF Apps",
                 "order": 25
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightauditupload/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudituploadsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -964,15 +907,14 @@
                 "group": "☁ CF Apps",
                 "order": 26
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightaudituploadsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightorderplanning/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -982,15 +924,14 @@
                 "group": "☁ CF Apps",
                 "order": 27
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightorderplanning/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightorderplanningsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1000,15 +941,14 @@
                 "group": "☁ CF Apps",
                 "order": 28
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightorderplanningsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpltlplanning/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1018,15 +958,14 @@
                 "group": "☁ CF Apps",
                 "order": 29
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpltlplanning/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpltlplanningsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1036,15 +975,14 @@
                 "group": "☁ CF Apps",
                 "order": 30
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpltlplanningsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1054,15 +992,14 @@
                 "group": "☁ CF Apps",
                 "order": 31
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpmanualshipmentecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmenteccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1072,15 +1009,14 @@
                 "group": "☁ CF Apps",
                 "order": 32
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpmanualshipmenteccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmentewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1090,15 +1026,14 @@
                 "group": "☁ CF Apps",
                 "order": 33
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpmanualshipmentewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpmanualshipmentewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1108,15 +1043,14 @@
                 "group": "☁ CF Apps",
                 "order": 34
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpmanualshipmentewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpplanshipment/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1126,15 +1060,14 @@
                 "group": "☁ CF Apps",
                 "order": 35
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpplanshipment/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpplanshipmentsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1144,15 +1077,14 @@
                 "group": "☁ CF Apps",
                 "order": 36
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpplanshipmentsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1162,15 +1094,14 @@
                 "group": "☁ CF Apps",
                 "order": 37
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpquickpackecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackeccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1180,15 +1111,14 @@
                 "group": "☁ CF Apps",
                 "order": 38
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpquickpackeccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1198,15 +1128,14 @@
                 "group": "☁ CF Apps",
                 "order": 39
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpquickpackewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpquickpackewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1216,15 +1145,14 @@
                 "group": "☁ CF Apps",
                 "order": 40
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpquickpackewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperprequestforpickup/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1234,15 +1162,14 @@
                 "group": "☁ CF Apps",
                 "order": 41
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperprequestforpickup/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperprequestforpickupsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1252,15 +1179,14 @@
                 "group": "☁ CF Apps",
                 "order": 42
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperprequestforpickupsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpsaleorder/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1270,15 +1196,14 @@
                 "group": "☁ CF Apps",
                 "order": 43
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpsaleorder/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpsaleordersls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1288,15 +1213,14 @@
                 "group": "☁ CF Apps",
                 "order": 44
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpsaleordersls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpshippingdashboard/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1306,15 +1230,14 @@
                 "group": "☁ CF Apps",
                 "order": 45
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpshippingdashboard/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpshippingdashboardsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1324,15 +1247,14 @@
                 "group": "☁ CF Apps",
                 "order": 46
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpshippingdashboardsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpsubmitacefiling/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1342,15 +1264,14 @@
                 "group": "☁ CF Apps",
                 "order": 47
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpsubmitacefiling/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpsubmitacefilingsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1360,15 +1281,14 @@
                 "group": "☁ CF Apps",
                 "order": 48
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpsubmitacefilingsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmentecc/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1378,15 +1298,14 @@
                 "group": "☁ CF Apps",
                 "order": 49
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperptrackshipmentecc/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmenteccsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1396,15 +1315,14 @@
                 "group": "☁ CF Apps",
                 "order": 50
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperptrackshipmenteccsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmentewm/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1414,15 +1332,14 @@
                 "group": "☁ CF Apps",
                 "order": 51
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperptrackshipmentewm/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmentewmsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1432,15 +1349,14 @@
                 "group": "☁ CF Apps",
                 "order": 52
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperptrackshipmentewmsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpviewacefiling/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1450,15 +1366,14 @@
                 "group": "☁ CF Apps",
                 "order": 53
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpviewacefiling/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpviewacefilingsls/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -1468,15 +1383,14 @@
                 "group": "☁ CF Apps",
                 "order": 54
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpviewacefilingsls/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelacefiling (CF Direct)",
@@ -1485,15 +1399,14 @@
                 "group": "☁ CF Direct",
                 "order": 1
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a167a84f-0812-44fd-86e6-01c300d56f26.comerpisshiperpcancelacefiling.comerpisshiperpcancelacefiling-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/811ab968-37f9-468d-814e-805ba8ec3630.comerpisshiperpcancelacefilingsls.comerpisshiperpcancelacefilingsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelacefilingsls (CF Direct)",
@@ -1502,15 +1415,14 @@
                 "group": "☁ CF Direct",
                 "order": 2
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/811ab968-37f9-468d-814e-805ba8ec3630.comerpisshiperpcancelacefilingsls.comerpisshiperpcancelacefilingsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/62a00323-d594-4b75-a301-5a072e6a4f43.comerpisshiperpcancelpickuprequest.comerpisshiperpcancelpickuprequest-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelpickuprequest (CF Direct)",
@@ -1519,15 +1431,14 @@
                 "group": "☁ CF Direct",
                 "order": 3
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/62a00323-d594-4b75-a301-5a072e6a4f43.comerpisshiperpcancelpickuprequest.comerpisshiperpcancelpickuprequest-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/b3403b0c-f2df-4c8c-8204-b06064c2b77f.comerpisshiperpcancelpickuprequestsls.comerpisshiperpcancelpickuprequestsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelpickuprequestsls (CF Direct)",
@@ -1536,15 +1447,14 @@
                 "group": "☁ CF Direct",
                 "order": 4
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/b3403b0c-f2df-4c8c-8204-b06064c2b77f.comerpisshiperpcancelpickuprequestsls.comerpisshiperpcancelpickuprequestsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bdded39b-e990-4f80-8daa-9d1b24805f6f.comerpisshiperpcancelshipmentecc.comerpisshiperpcancelshipmentecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelshipmentecc (CF Direct)",
@@ -1553,15 +1463,14 @@
                 "group": "☁ CF Direct",
                 "order": 5
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bdded39b-e990-4f80-8daa-9d1b24805f6f.comerpisshiperpcancelshipmentecc.comerpisshiperpcancelshipmentecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/b837b085-ac64-4c3d-a399-36edcd18e035.comerpisshiperpcancelshipmenteccsls.comerpisshiperpcancelshipmenteccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelshipmenteccsls (CF Direct)",
@@ -1570,15 +1479,14 @@
                 "group": "☁ CF Direct",
                 "order": 6
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/b837b085-ac64-4c3d-a399-36edcd18e035.comerpisshiperpcancelshipmenteccsls.comerpisshiperpcancelshipmenteccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6cea36c0-a554-4b48-b1fa-32899d98fb6d.comerpisshiperpcancelshipmentewm.comerpisshiperpcancelshipmentewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelshipmentewm (CF Direct)",
@@ -1587,15 +1495,14 @@
                 "group": "☁ CF Direct",
                 "order": 7
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6cea36c0-a554-4b48-b1fa-32899d98fb6d.comerpisshiperpcancelshipmentewm.comerpisshiperpcancelshipmentewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/53b3b031-557c-4aea-a6f4-2a78f184c2d8.comerpisshiperpcancelshipmentewmsls.comerpisshiperpcancelshipmentewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelshipmentewmsls (CF Direct)",
@@ -1604,15 +1511,14 @@
                 "group": "☁ CF Direct",
                 "order": 8
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/53b3b031-557c-4aea-a6f4-2a78f184c2d8.comerpisshiperpcancelshipmentewmsls.comerpisshiperpcancelshipmentewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a197c2ae-aa10-4bb1-b5d8-cf3e6d97bde7.comerpisshiperpcarrierperformancereportecc.comerpisshiperpcarrierperformancereportecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ carrierperformancereportecc (CF Direct)",
@@ -1621,15 +1527,14 @@
                 "group": "☁ CF Direct",
                 "order": 9
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a197c2ae-aa10-4bb1-b5d8-cf3e6d97bde7.comerpisshiperpcarrierperformancereportecc.comerpisshiperpcarrierperformancereportecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ba3e4954-2540-4bb4-ac63-9d4e4a30b230.comerpisshiperpcarrierperformancereporteccsls.comerpisshiperpcarrierperformancereporteccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ carrierperformancereporteccsls (CF Direct)",
@@ -1638,15 +1543,14 @@
                 "group": "☁ CF Direct",
                 "order": 10
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ba3e4954-2540-4bb4-ac63-9d4e4a30b230.comerpisshiperpcarrierperformancereporteccsls.comerpisshiperpcarrierperformancereporteccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/f5af55e1-329f-49b8-8988-20a176ee1b12.comerpisshiperpcarrierperformancereportewm.comerpisshiperpcarrierperformancereportewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ carrierperformancereportewm (CF Direct)",
@@ -1655,15 +1559,14 @@
                 "group": "☁ CF Direct",
                 "order": 11
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/f5af55e1-329f-49b8-8988-20a176ee1b12.comerpisshiperpcarrierperformancereportewm.comerpisshiperpcarrierperformancereportewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/76986626-1af7-419c-89c9-2f8c8756f06a.comerpisshiperpcarrierperformancereportewmsls.comerpisshiperpcarrierperformancereportewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ carrierperformancereportewmsls (CF Direct)",
@@ -1672,15 +1575,14 @@
                 "group": "☁ CF Direct",
                 "order": 12
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/76986626-1af7-419c-89c9-2f8c8756f06a.comerpisshiperpcarrierperformancereportewmsls.comerpisshiperpcarrierperformancereportewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0b862fac-0cf8-4714-81e1-a72b6c3e0b67.comerpisshiperpclosedelivery.comerpisshiperpclosedelivery-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ closedelivery (CF Direct)",
@@ -1689,15 +1591,14 @@
                 "group": "☁ CF Direct",
                 "order": 13
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0b862fac-0cf8-4714-81e1-a72b6c3e0b67.comerpisshiperpclosedelivery.comerpisshiperpclosedelivery-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/90855868-3524-491a-9484-697c48b21383.comerpisshiperpclosedeliverysls.comerpisshiperpclosedeliverysls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ closedeliverysls (CF Direct)",
@@ -1706,15 +1607,14 @@
                 "group": "☁ CF Direct",
                 "order": 14
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/90855868-3524-491a-9484-697c48b21383.comerpisshiperpclosedeliverysls.comerpisshiperpclosedeliverysls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/184628b3-acf8-4099-a3ac-438ea1c373f7.comerpisshiperpcreateshipmentecc.comerpisshiperpcreateshipmentecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmentecc (CF Direct)",
@@ -1723,15 +1623,14 @@
                 "group": "☁ CF Direct",
                 "order": 15
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/184628b3-acf8-4099-a3ac-438ea1c373f7.comerpisshiperpcreateshipmentecc.comerpisshiperpcreateshipmentecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bca220c4-1def-45ec-85fc-b3ac7c9d2fb1.comerpisshiperpcreateshipmenteccsls.comerpisshiperpcreateshipmenteccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmenteccsls (CF Direct)",
@@ -1740,15 +1639,14 @@
                 "group": "☁ CF Direct",
                 "order": 16
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bca220c4-1def-45ec-85fc-b3ac7c9d2fb1.comerpisshiperpcreateshipmenteccsls.comerpisshiperpcreateshipmenteccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0bead808-b76a-41bf-97f8-29589fcf9936.comerpisshiperpcreateshipmentewm.comerpisshiperpcreateshipmentewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmentewm (CF Direct)",
@@ -1757,15 +1655,14 @@
                 "group": "☁ CF Direct",
                 "order": 17
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0bead808-b76a-41bf-97f8-29589fcf9936.comerpisshiperpcreateshipmentewm.comerpisshiperpcreateshipmentewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c782b074-4646-4a2c-9c13-f6f34c967fc8.comerpisshiperpcreateshipmentewmsls.comerpisshiperpcreateshipmentewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmentewmsls (CF Direct)",
@@ -1774,15 +1671,14 @@
                 "group": "☁ CF Direct",
                 "order": 18
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c782b074-4646-4a2c-9c13-f6f34c967fc8.comerpisshiperpcreateshipmentewmsls.comerpisshiperpcreateshipmentewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/1bca7250-5614-4e8a-ab63-214a116c039f.comerpisshiperpcreateshipmentv2ewm.comerpisshiperpcreateshipmentv2ewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmentv2ewm (CF Direct)",
@@ -1791,15 +1687,14 @@
                 "group": "☁ CF Direct",
                 "order": 19
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/1bca7250-5614-4e8a-ab63-214a116c039f.comerpisshiperpcreateshipmentv2ewm.comerpisshiperpcreateshipmentv2ewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ad2fffa3-61fe-48ea-9f84-6757c5fc29a9.comerpisshiperpcreateshipmentv2ewmsls.comerpisshiperpcreateshipmentv2ewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ createshipmentv2ewmsls (CF Direct)",
@@ -1808,15 +1703,14 @@
                 "group": "☁ CF Direct",
                 "order": 20
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ad2fffa3-61fe-48ea-9f84-6757c5fc29a9.comerpisshiperpcreateshipmentv2ewmsls.comerpisshiperpcreateshipmentv2ewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ dispute (CF Direct)",
@@ -1825,15 +1719,14 @@
                 "group": "☁ CF Direct",
                 "order": 21
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/11387043-4c6f-4c9a-94d6-10e084b8b2d2.comerpisshiperpdispute.comerpisshiperpdispute-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4f4f9a8b-a414-495d-b5b9-89e094682c24.comerpisshiperpdisputesls.comerpisshiperpdisputesls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ disputesls (CF Direct)",
@@ -1842,15 +1735,14 @@
                 "group": "☁ CF Direct",
                 "order": 22
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4f4f9a8b-a414-495d-b5b9-89e094682c24.comerpisshiperpdisputesls.comerpisshiperpdisputesls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/97b62891-2307-4d6d-980b-285ed3da8d52.comerpisshiperpfreightaudit.comerpisshiperpfreightaudit-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightaudit (CF Direct)",
@@ -1859,15 +1751,14 @@
                 "group": "☁ CF Direct",
                 "order": 23
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/97b62891-2307-4d6d-980b-285ed3da8d52.comerpisshiperpfreightaudit.comerpisshiperpfreightaudit-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/dfb526fd-aaab-4236-aaa5-d431bb852d6e.comerpisshiperpfreightauditsls.comerpisshiperpfreightauditsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightauditsls (CF Direct)",
@@ -1876,15 +1767,14 @@
                 "group": "☁ CF Direct",
                 "order": 24
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/dfb526fd-aaab-4236-aaa5-d431bb852d6e.comerpisshiperpfreightauditsls.comerpisshiperpfreightauditsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/cb9cfcf9-375d-441b-af64-13c19ac7ce52.comerpisshiperpfreightauditupload.comerpisshiperpfreightauditupload-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightauditupload (CF Direct)",
@@ -1893,15 +1783,14 @@
                 "group": "☁ CF Direct",
                 "order": 25
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/cb9cfcf9-375d-441b-af64-13c19ac7ce52.comerpisshiperpfreightauditupload.comerpisshiperpfreightauditupload-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/fa8c660d-9d31-4662-9212-8465dcbeb86b.comerpisshiperpfreightaudituploadsls.comerpisshiperpfreightaudituploadsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightaudituploadsls (CF Direct)",
@@ -1910,15 +1799,14 @@
                 "group": "☁ CF Direct",
                 "order": 26
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/fa8c660d-9d31-4662-9212-8465dcbeb86b.comerpisshiperpfreightaudituploadsls.comerpisshiperpfreightaudituploadsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/5691af39-944e-45fe-a633-7834d4a2ab59.comerpisshiperpfreightorderplanning.comerpisshiperpfreightorderplanning-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightorderplanning (CF Direct)",
@@ -1927,15 +1815,14 @@
                 "group": "☁ CF Direct",
                 "order": 27
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/5691af39-944e-45fe-a633-7834d4a2ab59.comerpisshiperpfreightorderplanning.comerpisshiperpfreightorderplanning-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/142c95cd-b24b-4ba4-90b7-2ac1783f4029.comerpisshiperpfreightorderplanningsls.comerpisshiperpfreightorderplanningsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightorderplanningsls (CF Direct)",
@@ -1944,15 +1831,14 @@
                 "group": "☁ CF Direct",
                 "order": 28
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/142c95cd-b24b-4ba4-90b7-2ac1783f4029.comerpisshiperpfreightorderplanningsls.comerpisshiperpfreightorderplanningsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/7c91ee35-3751-405b-8229-f5a877d0623a.comerpisshiperpltlplanning.comerpisshiperpltlplanning-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ ltlplanning (CF Direct)",
@@ -1961,15 +1847,14 @@
                 "group": "☁ CF Direct",
                 "order": 29
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/7c91ee35-3751-405b-8229-f5a877d0623a.comerpisshiperpltlplanning.comerpisshiperpltlplanning-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/8c27c0ba-e2bf-4e46-b9ce-4627232903bb.comerpisshiperpltlplanningsls.comerpisshiperpltlplanningsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ ltlplanningsls (CF Direct)",
@@ -1978,15 +1863,14 @@
                 "group": "☁ CF Direct",
                 "order": 30
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/8c27c0ba-e2bf-4e46-b9ce-4627232903bb.comerpisshiperpltlplanningsls.comerpisshiperpltlplanningsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0812fc71-b035-49fd-a9f3-b2b77098f3da.comerpisshiperpmanualshipmentecc.comerpisshiperpmanualshipmentecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ manualshipmentecc (CF Direct)",
@@ -1995,15 +1879,14 @@
                 "group": "☁ CF Direct",
                 "order": 31
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/0812fc71-b035-49fd-a9f3-b2b77098f3da.comerpisshiperpmanualshipmentecc.comerpisshiperpmanualshipmentecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/84954229-37eb-4023-a0af-90289d252183.comerpisshiperpmanualshipmenteccsls.comerpisshiperpmanualshipmenteccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ manualshipmenteccsls (CF Direct)",
@@ -2012,15 +1895,14 @@
                 "group": "☁ CF Direct",
                 "order": 32
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/84954229-37eb-4023-a0af-90289d252183.comerpisshiperpmanualshipmenteccsls.comerpisshiperpmanualshipmenteccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3ca8f1f4-84bf-4e65-9d57-ddcd86735dd4.comerpisshiperpmanualshipmentewm.comerpisshiperpmanualshipmentewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ manualshipmentewm (CF Direct)",
@@ -2029,15 +1911,14 @@
                 "group": "☁ CF Direct",
                 "order": 33
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3ca8f1f4-84bf-4e65-9d57-ddcd86735dd4.comerpisshiperpmanualshipmentewm.comerpisshiperpmanualshipmentewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9840ffa6-d316-463a-a457-cc756910972f.comerpisshiperpmanualshipmentewmsls.comerpisshiperpmanualshipmentewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ manualshipmentewmsls (CF Direct)",
@@ -2046,15 +1927,14 @@
                 "group": "☁ CF Direct",
                 "order": 34
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9840ffa6-d316-463a-a457-cc756910972f.comerpisshiperpmanualshipmentewmsls.comerpisshiperpmanualshipmentewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6634ed2b-663e-4d29-99b8-d11c65b0e302.comerpisshiperpplanshipment.comerpisshiperpplanshipment-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ planshipment (CF Direct)",
@@ -2063,15 +1943,14 @@
                 "group": "☁ CF Direct",
                 "order": 35
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6634ed2b-663e-4d29-99b8-d11c65b0e302.comerpisshiperpplanshipment.comerpisshiperpplanshipment-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d12f2598-c0fa-4fd0-9ab3-7385bf9e0dbf.comerpisshiperpplanshipmentsls.comerpisshiperpplanshipmentsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ planshipmentsls (CF Direct)",
@@ -2080,15 +1959,14 @@
                 "group": "☁ CF Direct",
                 "order": 36
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d12f2598-c0fa-4fd0-9ab3-7385bf9e0dbf.comerpisshiperpplanshipmentsls.comerpisshiperpplanshipmentsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/1e17abef-4475-48af-b88a-255af9fc868b.comerpisshiperpquickpackecc.comerpisshiperpquickpackecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ quickpackecc (CF Direct)",
@@ -2097,15 +1975,14 @@
                 "group": "☁ CF Direct",
                 "order": 37
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/1e17abef-4475-48af-b88a-255af9fc868b.comerpisshiperpquickpackecc.comerpisshiperpquickpackecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/524c354f-f246-44b8-84dd-d49e3a15aded.comerpisshiperpquickpackeccsls.comerpisshiperpquickpackeccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ quickpackeccsls (CF Direct)",
@@ -2114,15 +1991,14 @@
                 "group": "☁ CF Direct",
                 "order": 38
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/524c354f-f246-44b8-84dd-d49e3a15aded.comerpisshiperpquickpackeccsls.comerpisshiperpquickpackeccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4a7f943c-e1d5-4a54-92a9-7a4b0bd3112b.comerpisshiperpquickpackewm.comerpisshiperpquickpackewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ quickpackewm (CF Direct)",
@@ -2131,15 +2007,14 @@
                 "group": "☁ CF Direct",
                 "order": 39
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4a7f943c-e1d5-4a54-92a9-7a4b0bd3112b.comerpisshiperpquickpackewm.comerpisshiperpquickpackewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/e8ce2396-3c89-443c-b5e8-93390881be2d.comerpisshiperpquickpackewmsls.comerpisshiperpquickpackewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ quickpackewmsls (CF Direct)",
@@ -2148,15 +2023,14 @@
                 "group": "☁ CF Direct",
                 "order": 40
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/e8ce2396-3c89-443c-b5e8-93390881be2d.comerpisshiperpquickpackewmsls.comerpisshiperpquickpackewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d8fca036-3f06-4f7a-beeb-5290ea84cdce.comerpisshiperprequestforpickup.comerpisshiperprequestforpickup-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ requestforpickup (CF Direct)",
@@ -2165,15 +2039,14 @@
                 "group": "☁ CF Direct",
                 "order": 41
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d8fca036-3f06-4f7a-beeb-5290ea84cdce.comerpisshiperprequestforpickup.comerpisshiperprequestforpickup-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/8cfc5357-8de8-4ebd-8310-f2d4efcaa1eb.comerpisshiperprequestforpickupsls.comerpisshiperprequestforpickupsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ requestforpickupsls (CF Direct)",
@@ -2182,15 +2055,14 @@
                 "group": "☁ CF Direct",
                 "order": 42
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/8cfc5357-8de8-4ebd-8310-f2d4efcaa1eb.comerpisshiperprequestforpickupsls.comerpisshiperprequestforpickupsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bfce2327-f7ee-4558-84a1-14112ccf0638.comerpisshiperpsaleorder.comerpisshiperpsaleorder-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ saleorder (CF Direct)",
@@ -2199,15 +2071,14 @@
                 "group": "☁ CF Direct",
                 "order": 43
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/bfce2327-f7ee-4558-84a1-14112ccf0638.comerpisshiperpsaleorder.comerpisshiperpsaleorder-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/772af4b0-f410-4e8a-8566-9aa75f429dd5.comerpisshiperpsaleordersls.comerpisshiperpsaleordersls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ saleordersls (CF Direct)",
@@ -2216,15 +2087,14 @@
                 "group": "☁ CF Direct",
                 "order": 44
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/772af4b0-f410-4e8a-8566-9aa75f429dd5.comerpisshiperpsaleordersls.comerpisshiperpsaleordersls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9cdc4545-6b36-4c74-96ab-b6a3ec6b51c4.comerpisshiperpshippingdashboard.comerpisshiperpshippingdashboard-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ shippingdashboard (CF Direct)",
@@ -2233,15 +2103,14 @@
                 "group": "☁ CF Direct",
                 "order": 45
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9cdc4545-6b36-4c74-96ab-b6a3ec6b51c4.comerpisshiperpshippingdashboard.comerpisshiperpshippingdashboard-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3b97bd8f-12dd-494f-9e64-1f8477415dae.comerpisshiperpshippingdashboardsls.comerpisshiperpshippingdashboardsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ shippingdashboardsls (CF Direct)",
@@ -2250,15 +2119,14 @@
                 "group": "☁ CF Direct",
                 "order": 46
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3b97bd8f-12dd-494f-9e64-1f8477415dae.comerpisshiperpshippingdashboardsls.comerpisshiperpshippingdashboardsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c84fa881-eebd-4602-bdbb-c24b4ac6318f.comerpisshiperpsubmitacefiling.comerpisshiperpsubmitacefiling-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ submitacefiling (CF Direct)",
@@ -2267,15 +2135,14 @@
                 "group": "☁ CF Direct",
                 "order": 47
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c84fa881-eebd-4602-bdbb-c24b4ac6318f.comerpisshiperpsubmitacefiling.comerpisshiperpsubmitacefiling-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3d12fd7a-8af8-4dc0-b6ca-b4b83bb4b8d1.comerpisshiperpsubmitacefilingsls.comerpisshiperpsubmitacefilingsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ submitacefilingsls (CF Direct)",
@@ -2284,15 +2151,14 @@
                 "group": "☁ CF Direct",
                 "order": 48
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/3d12fd7a-8af8-4dc0-b6ca-b4b83bb4b8d1.comerpisshiperpsubmitacefilingsls.comerpisshiperpsubmitacefilingsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/cb4c87a5-eccf-48a1-a368-961a435f8d95.comerpisshiperptrackshipmentecc.comerpisshiperptrackshipmentecc-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ trackshipmentecc (CF Direct)",
@@ -2301,15 +2167,14 @@
                 "group": "☁ CF Direct",
                 "order": 49
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/cb4c87a5-eccf-48a1-a368-961a435f8d95.comerpisshiperptrackshipmentecc.comerpisshiperptrackshipmentecc-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ebc3ddc0-72e3-4c47-abfe-902330f57144.comerpisshiperptrackshipmenteccsls.comerpisshiperptrackshipmenteccsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ trackshipmenteccsls (CF Direct)",
@@ -2318,15 +2183,14 @@
                 "group": "☁ CF Direct",
                 "order": 50
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/ebc3ddc0-72e3-4c47-abfe-902330f57144.comerpisshiperptrackshipmenteccsls.comerpisshiperptrackshipmenteccsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a4a44fe8-281d-48d6-81bc-4239963e8d19.comerpisshiperptrackshipmentewm.comerpisshiperptrackshipmentewm-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ trackshipmentewm (CF Direct)",
@@ -2335,15 +2199,14 @@
                 "group": "☁ CF Direct",
                 "order": 51
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a4a44fe8-281d-48d6-81bc-4239963e8d19.comerpisshiperptrackshipmentewm.comerpisshiperptrackshipmentewm-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/f38890e5-c74b-4ff1-abaf-8b48ec610d04.comerpisshiperptrackshipmentewmsls.comerpisshiperptrackshipmentewmsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ trackshipmentewmsls (CF Direct)",
@@ -2352,15 +2215,14 @@
                 "group": "☁ CF Direct",
                 "order": 52
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/f38890e5-c74b-4ff1-abaf-8b48ec610d04.comerpisshiperptrackshipmentewmsls.comerpisshiperptrackshipmentewmsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6e19bea4-614a-4fea-9e45-9bee6fd5544b.comerpisshiperpviewacefiling.comerpisshiperpviewacefiling-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ viewacefiling (CF Direct)",
@@ -2369,15 +2231,14 @@
                 "group": "☁ CF Direct",
                 "order": 53
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6e19bea4-614a-4fea-9e45-9bee6fd5544b.comerpisshiperpviewacefiling.comerpisshiperpviewacefiling-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4895c8e5-011b-4adc-b552-3bc2ed1a16ad.comerpisshiperpviewacefilingsls.comerpisshiperpviewacefilingsls-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ viewacefilingsls (CF Direct)",
@@ -2386,15 +2247,14 @@
                 "group": "☁ CF Direct",
                 "order": 54
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/4895c8e5-011b-4adc-b552-3bc2ed1a16ad.comerpisshiperpviewacefilingsls.comerpisshiperpviewacefilingsls-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpcancelhd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2404,15 +2264,14 @@
                 "group": "☁ CF Apps",
                 "order": 56
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpcancelhd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpdisputehd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2422,15 +2281,14 @@
                 "group": "☁ CF Apps",
                 "order": 57
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpdisputehd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpeodhd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2440,15 +2298,14 @@
                 "group": "☁ CF Apps",
                 "order": 58
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpeodhd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfarpthd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2458,15 +2315,14 @@
                 "group": "☁ CF Apps",
                 "order": 59
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfarpthd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpfreightaudithd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2476,15 +2332,14 @@
                 "group": "☁ CF Apps",
                 "order": 60
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpfreightaudithd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpparceldemohd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2494,15 +2349,14 @@
                 "group": "☁ CF Apps",
                 "order": 61
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpparceldemohd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperpparcelhd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2512,15 +2366,14 @@
                 "group": "☁ CF Apps",
                 "order": 62
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperpparcelhd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:5000/comerpisshiperptrackshipmenthd6/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "🚀 Start ShipERP (Proxy + Approuter)",
@@ -2530,15 +2383,14 @@
                 "group": "☁ CF Apps",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:5000/comerpisshiperptrackshipmenthd6/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d403ded5-fc13-4647-b5e5-681f80e352cf.comerpisshiperpcancelhd6.comerpisshiperpcancelhd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ cancelhd6 (CF Direct)",
@@ -2547,15 +2399,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/d403ded5-fc13-4647-b5e5-681f80e352cf.comerpisshiperpcancelhd6.comerpisshiperpcancelhd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c83c398e-33f4-48b2-9214-b35015671239.comerpisshiperpdisputehd6.comerpisshiperpdisputehd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ disputehd6 (CF Direct)",
@@ -2564,15 +2415,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/c83c398e-33f4-48b2-9214-b35015671239.comerpisshiperpdisputehd6.comerpisshiperpdisputehd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9aba6d0a-1598-4301-82af-015563ac20de.comerpisshiperpeodhd6.comerpisshiperpeodhd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ eodhd6 (CF Direct)",
@@ -2581,15 +2431,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9aba6d0a-1598-4301-82af-015563ac20de.comerpisshiperpeodhd6.comerpisshiperpeodhd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/276433b8-5e2c-4072-90c7-e974915b8cf2.comerpisshiperpfarpthd6.comerpisshiperpfarpthd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ farpthd6 (CF Direct)",
@@ -2598,15 +2447,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/276433b8-5e2c-4072-90c7-e974915b8cf2.comerpisshiperpfarpthd6.comerpisshiperpfarpthd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9f1ff735-4223-4adb-abe7-2a8180ba4072.comerpisshiperpfreightaudithd6.comerpisshiperpfreightaudithd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ freightaudithd6 (CF Direct)",
@@ -2615,15 +2463,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9f1ff735-4223-4adb-abe7-2a8180ba4072.comerpisshiperpfreightaudithd6.comerpisshiperpfreightaudithd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9e2be96c-73c2-4629-ae37-dfd306e500d9.comerpisshiperpparceldemohd6.comerpisshiperpparceldemohd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ parceldemohd6 (CF Direct)",
@@ -2632,15 +2479,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/9e2be96c-73c2-4629-ae37-dfd306e500d9.comerpisshiperpparceldemohd6.comerpisshiperpparceldemohd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a27513c8-979d-46ec-817c-19d3006612e1.comerpisshiperpparcelhd6.comerpisshiperpparcelhd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ parcelhd6 (CF Direct)",
@@ -2649,15 +2495,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/a27513c8-979d-46ec-817c-19d3006612e1.comerpisshiperpparcelhd6.comerpisshiperpparcelhd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6dd1fb23-92c0-4c78-9fae-1e76a837653e.comerpisshiperptrackshipmenthd6.comerpisshiperptrackshipmenthd6-1.0.0/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "name": "☁ trackshipmenthd6 (CF Direct)",
@@ -2666,15 +2511,14 @@
                 "group": "☁ CF Direct",
                 "order": 63
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/6dd1fb23-92c0-4c78-9fae-1e76a837653e.comerpisshiperptrackshipmenthd6.comerpisshiperptrackshipmenthd6-1.0.0/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelacefilingsls locally",
@@ -2684,15 +2528,14 @@
                 "group": "🌐 Local Source",
                 "order": 100
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelpickuprequestsls locally",
@@ -2702,15 +2545,14 @@
                 "group": "🌐 Local Source",
                 "order": 101
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelshipmenteccsls locally",
@@ -2720,15 +2562,14 @@
                 "group": "🌐 Local Source",
                 "order": 102
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelshipmentewmsls locally",
@@ -2738,15 +2579,14 @@
                 "group": "🌐 Local Source",
                 "order": 103
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start carrierperformancereporteccsls locally",
@@ -2756,15 +2596,14 @@
                 "group": "🌐 Local Source",
                 "order": 104
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start carrierperformancereportewmsls locally",
@@ -2774,15 +2613,14 @@
                 "group": "🌐 Local Source",
                 "order": 105
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start closedeliverysls locally",
@@ -2792,15 +2630,14 @@
                 "group": "🌐 Local Source",
                 "order": 106
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmenteccsls locally",
@@ -2810,15 +2647,14 @@
                 "group": "🌐 Local Source",
                 "order": 107
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmentewmsls locally",
@@ -2828,15 +2664,14 @@
                 "group": "🌐 Local Source",
                 "order": 108
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start createshipmentv2ewmsls locally",
@@ -2846,15 +2681,14 @@
                 "group": "🌐 Local Source",
                 "order": 109
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start disputesls locally",
@@ -2864,15 +2698,14 @@
                 "group": "🌐 Local Source",
                 "order": 110
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightauditsls locally",
@@ -2882,15 +2715,14 @@
                 "group": "🌐 Local Source",
                 "order": 111
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightaudituploadsls locally",
@@ -2900,15 +2732,14 @@
                 "group": "🌐 Local Source",
                 "order": 112
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightorderplanningsls locally",
@@ -2918,15 +2749,14 @@
                 "group": "🌐 Local Source",
                 "order": 113
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start ltlplanningsls locally",
@@ -2936,15 +2766,14 @@
                 "group": "🌐 Local Source",
                 "order": 114
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start manualshipmenteccsls locally",
@@ -2954,15 +2783,14 @@
                 "group": "🌐 Local Source",
                 "order": 115
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start manualshipmentewmsls locally",
@@ -2972,15 +2800,14 @@
                 "group": "🌐 Local Source",
                 "order": 116
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start planshipmentsls locally",
@@ -2990,15 +2817,14 @@
                 "group": "🌐 Local Source",
                 "order": 117
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start quickpackeccsls locally",
@@ -3008,15 +2834,14 @@
                 "group": "🌐 Local Source",
                 "order": 118
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start quickpackewmsls locally",
@@ -3026,15 +2851,14 @@
                 "group": "🌐 Local Source",
                 "order": 119
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start requestforpickupsls locally",
@@ -3044,15 +2868,14 @@
                 "group": "🌐 Local Source",
                 "order": 120
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start saleordersls locally",
@@ -3062,15 +2885,14 @@
                 "group": "🌐 Local Source",
                 "order": 121
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start shippingdashboardsls locally",
@@ -3080,15 +2902,14 @@
                 "group": "🌐 Local Source",
                 "order": 122
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start submitacefilingsls locally",
@@ -3098,15 +2919,14 @@
                 "group": "🌐 Local Source",
                 "order": 123
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start trackshipmenteccsls locally",
@@ -3116,15 +2936,14 @@
                 "group": "🌐 Local Source",
                 "order": 124
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start trackshipmentewmsls locally",
@@ -3134,15 +2953,14 @@
                 "group": "🌐 Local Source",
                 "order": 125
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start viewacefilingsls locally",
@@ -3152,15 +2970,14 @@
                 "group": "🌐 Local Source",
                 "order": 126
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start cancelhd6 locally",
@@ -3170,15 +2987,14 @@
                 "group": "🌐 Local Source",
                 "order": 127
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start disputehd6 locally",
@@ -3188,15 +3004,14 @@
                 "group": "🌐 Local Source",
                 "order": 128
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start eodhd6 locally",
@@ -3206,15 +3021,14 @@
                 "group": "🌐 Local Source",
                 "order": 129
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start farpthd6 locally",
@@ -3224,15 +3038,14 @@
                 "group": "🌐 Local Source",
                 "order": 130
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start freightaudithd6 locally",
@@ -3242,15 +3055,14 @@
                 "group": "🌐 Local Source",
                 "order": 131
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start parceldemohd6 locally",
@@ -3260,15 +3072,14 @@
                 "group": "🌐 Local Source",
                 "order": 132
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start parcelhd6 locally",
@@ -3278,15 +3089,14 @@
                 "group": "🌐 Local Source",
                 "order": 133
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         },
         {
-            "runtimeArgs": [
-                "-Command",
-                "Start-Process 'http://localhost:8080/index.html'"
-            ],
             "type": "node",
             "internalConsoleOptions": "neverOpen",
             "preLaunchTask": "Start trackshipmenthd6 locally",
@@ -3296,9 +3106,12 @@
                 "group": "🌐 Local Source",
                 "order": 134
             },
-            "runtimeExecutable": "powershell.exe",
             "console": "internalConsole",
-            "request": "launch"
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/open-url.js",
+            "args": [
+                "http://localhost:8080/index.html"
+            ]
         }
     ]
 }
