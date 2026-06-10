@@ -57,6 +57,7 @@
 28. [Fourth review fix pass (2026-06-10)](#28--fourth-review-fix-pass-2026-06-10)
 29. [Four-layer test sweep across all 62 apps (2026-06-10)](#29--four-layer-test-sweep-across-all-62-apps-2026-06-10)
 30. [BAS workspace verified live (2026-06-11)](#30--bas-workspace-verified-live-2026-06-11)
+31. [Work Zone site build — channel refreshed, blocked on RBAC (2026-06-11)](#31--work-zone-site-build-2026-06-11--partial-channel-fixed-site-create-blocked-on-rbac)
 
 ---
 
@@ -2793,7 +2794,88 @@ Both the app shell and the app's `manifest.json` come back 200 — so the §29.5
 
 ---
 
-*Last updated: 2026-06-11 — §30 closes the BAS layer. BAS `ws-gvpy5` is now synced to `origin/main` (at `ac2c78c` after the `open-url.js` fix); both static validators pass (54/54 + 8/8) on Node v22.13.1; `apps/quickpackeccsls` (an SLS app, no Local Source mode before §29.5) successfully serves on `localhost:8080` via `npm start` with HTTP 200 on both `index.html` and `manifest.json`. The disconnected 2-commit BAS-only history was preserved as tag `bas-main-snapshot-2026-05-27` before reset; `bas-dev` branch deleted. SAP Build Work Zone subscription confirmed live, which unblocks #41 from a subscription standpoint.*
+---
+
+## §31 — Work Zone site build (2026-06-11) — partial: channel fixed, site-create blocked on RBAC
+
+Drove the SAP Build Work Zone Standard Edition admin UI to start task #41 (Build Work Zone Site with tiles for all 62 apps + 6 SAP tcodes). Fixed one real problem, surfaced one real blocker.
+
+### §31.1 — Real fix: refreshed the `saas_approuter` channel (24 stale → 62 current)
+
+On arrival, **Content Manager → Content Explorer → HTML5 Apps** showed only **24 apps**, all with stale identifiers:
+
+- `com.erpis.shiperp.planningcockpit` — but we removed this from CF in §2–§5.
+- `com.erpis.testfarptFA_RPT` — but we renamed this to `com.erpis.shiperp.farpt.hd6` in §13.10.
+- `com.erpis.shiperp.cancelshipment` / `com.erpis.shiperp.trackshipment` — but we split these into `*ecc` / `*ewm` variants in §12 / §13.
+- `com.erpis.shiperp.hr7.requestforpickup`, `com.erpis.shiperp.hr7.ltlplanning`, `com.erpis.shiperp.hr7.viewacefiling`, `com.erpis.shiperp.hr7.cancelpickuprequest`, `com.erpis.shiperp.sls.cancelshipment` — uses a `.hr7.` / `.sls.` infix that the current 62 apps don't have.
+- `serp.so-shiperp-tab`, `products.list` — not in our migrated inventory at all.
+
+Root cause: the `saas_approuter` content channel was last refreshed `2026-05-30 10:03:24` — it predates 80 % of the work in §13.9–§29.
+
+Fix: in **Channel Manager**, clicked the refresh icon on the `HTML5 Apps / saas_approuter` row. Channel status went `Updated → Updating… → Updated` over ~30 seconds, last-modified timestamp jumped to `2026-06-11 05:31:27 AM`, and the channel ID picked up the subdomain suffix (`saas_approuter_btp-cf-8qsdli3e`). Content Explorer now shows **HTML5 Apps (62)** with current identifiers (e.g. `comerpisshiperpquickpackecc`, `com.erpis.shiperp.trackshipment.hd6`).
+
+### §31.2 — Blocker: `Launchpad_Admin_Read_Only` ≠ `Launchpad_Admin`
+
+Tried to create the site by clicking **Site Directory → Create**, but no Create button was rendered. Confirmed by navigating directly to the `#Site-Create` URL — Work Zone immediately redirected back to `#Site-Directory`, the standard WZ permission-denied signature.
+
+Cross-checked in **Cockpit → btp_cf → Security → Role Collections**:
+
+| Role collection | Description | Roles |
+|---|---|---|
+| `Launchpad_Admin` | Launchpad Admin | `Editor`, `Super_Admin`, + 2 more |
+| `Launchpad_Admin_Read_Only` | Launchpad Admin read only mode | `Super_Admin_Read_Only`, + 1 more |
+| `Launchpad_Advanced_Theming` | Custom CSS + theme publish | — |
+| `Launchpad_External_User` | End-user only | — |
+
+The behaviour `nnavarro@erp-is.com` is seeing (can browse / view / refresh channel, but cannot create a site) is the textbook `Launchpad_Admin_Read_Only` profile.
+
+**Per the safety rules I operate under, I cannot modify access controls / role-collection assignments myself.** That's a prohibited action category regardless of who asks. The role assignment has to be done by an admin manually.
+
+### §31.3 — Path forward (3-minute manual fix → I can resume)
+
+In **Cockpit → btp_cf → Security → Role Collections** (cockpit tab already open at this view):
+
+1. Click the **`Launchpad_Admin`** row.
+2. On the detail page → **Users** tab → **Edit** → **+ Add**.
+3. Enter `nnavarro@erp-is.com`, set Origin to whatever the existing entries on `Launchpad_Admin_Read_Only` use (typically `sap.ids` for the default IdP).
+4. Click **Save**.
+5. Log out of Work Zone, close the WZ tab, open a fresh WZ tab, log back in. The new role collection only takes effect on a fresh session.
+6. Hand the WZ tab back to me. Site Directory will now render a **Create** button.
+
+Once the role is in place, the remaining build is ~90 min of admin-UI work that I can drive end-to-end: 3 catalogs (HR7 / SLS / HD6) + 1 catalog for the 6 tcode URL tiles + 1 role + 1 site + 1 space + assignment + publish.
+
+### §31.4 — Tile inventory ready to wire in once unblocked
+
+Locked in from §13.6 and §18:
+
+**HTML5 app tiles — 62 (auto-discovered by the refreshed `saas_approuter_btp-cf-8qsdli3e` channel)**: 27 HR7, 27 SLS, 8 HD6. Each tile resolves to the Managed App Router launchpad URL `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/{dest-svc-GUID}.{cloud.service}.{cloud.service}-1.0.0/index.html` — Work Zone reads this from the app manifest's `crossNavigation.inbounds`, no manual entry needed.
+
+**SAP tcode URL tiles — 6 (manual entries)**: SLS backend via Cloud Connector tunnel using the §27 `shiperp-virtual-erps4sales-destination`.
+
+| Tile | Tcode | URL pattern |
+|---|---|---|
+| Create Sales Order — SLS | VA01 | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VA01` |
+| Change Sales Order — SLS | VA02 | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VA02` |
+| Display Sales Order — SLS | VA03 | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VA03` |
+| Create Delivery — SLS | VL01N | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VL01N` |
+| Change Delivery — SLS | VL02N | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VL02N` |
+| Display Delivery — SLS | VL03N | `https://erps4sales.erp-is.com:50000/sap/bc/gui/sap/its/webgui?~transaction=VL03N` |
+
+Total: **68 tiles** (62 app + 6 tcode).
+
+### §31.5 — Summary
+
+- Task #41 status: **partial** — channel staleness solved (real fix), site build blocked on RBAC. Cannot finish in this session without role-collection grant.
+- Tasks remaining for the user: ~3 minutes (assign role + relogin).
+- Tasks remaining for me after that: ~90 minutes (catalogs, role, site, space, tiles, publish), driven via the same browser session.
+
+---
+
+*Last updated: 2026-06-11 — §31 records the WZ site build attempt. Channel refresh fixed a real staleness bug (24 pre-rename apps → 62 current). Site creation is gated on `Launchpad_Admin` role collection — Nikki currently has read-only. Safety rules block me from assigning role collections; user must do it manually before I can resume. Tile URL inventory (62 app + 6 tcode) is locked in and ready to wire once the role is granted.*
+
+---
+
+*Previously — 2026-06-11 — §30 closes the BAS layer. BAS `ws-gvpy5` is now synced to `origin/main` (at `ac2c78c` after the `open-url.js` fix); both static validators pass (54/54 + 8/8) on Node v22.13.1; `apps/quickpackeccsls` (an SLS app, no Local Source mode before §29.5) successfully serves on `localhost:8080` via `npm start` with HTTP 200 on both `index.html` and `manifest.json`. The disconnected 2-commit BAS-only history was preserved as tag `bas-main-snapshot-2026-05-27` before reset; `bas-dev` branch deleted. SAP Build Work Zone subscription confirmed live, which unblocks #41 from a subscription standpoint.*
 
 ---
 
