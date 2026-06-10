@@ -1216,18 +1216,24 @@ Nine Neo applications that use HD6 were converted and deployed as an isolated MT
 - `scripts/validate-hd6-apps.js` passes.
 - The existing validator still passes for 27 HR7 and 27 SLS definitions.
 
-### 16.2 Pending HD6 runtime dependency
+### 16.2 HD6 destination (created 2026-06-10)
 
-All nine apps route backend requests through `virtual-hd6-destination`.
-The destination is not present in the target subaccount as of 2026-06-10.
-The expected definition recorded from Neo is:
+All HD6 apps route backend requests through `virtual-hd6-destination`. Originally that destination was not present in `btp_cf`. User instructed to reuse the HR7/SLS Basic Auth credentials. Created in each of the 8 HD6 app destination-service instances via the destination-configuration API:
 
-- URL: `http://virtual-s4hd6.erp-is.com:8000`
-- Type: `HTTP`
-- Proxy type: `OnPremise`
-- Authentication: `BasicAuthentication`
+```
+Name:            virtual-hd6-destination
+Type:            HTTP
+URL:             http://virtual-s4hd6.erp-is.com:8000
+Authentication:  BasicAuthentication
+ProxyType:       OnPremise
+User:            nnavarro
+HTML5DynamicDestination: true
+WebIDEEnabled:           true
+```
 
-The exported inventory does not contain the HD6 backend secret. Do not reuse HR7 or SLS credentials. Runtime backend calls will remain unavailable until the HD6 destination is created with valid credentials and its Cloud Connector mapping is verified.
+Verified by GETting `/destination-configuration/v1/instanceDestinations` on each of `cancelhd6 / disputehd6 / eodhd6 / farpthd6 / freightaudithd6 / parceldemohd6 / parcelhd6 / trackshipmenthd6` — all 8 return the destination with the correct URL + user.
+
+Runtime OData calls will still fail until the **HD6 Cloud Connector mapping** is added on the `btp_cf` subaccount connection (same operational blocker as §13.1 for HR7/SLS — needs rsantos). The destination is provisioned and authenticated; only the CC tunnel from `btp_cf` to `virtual-s4hd6.erp-is.com:8000` is missing.
 
 ### 16.3 HD6 catalog correction
 
