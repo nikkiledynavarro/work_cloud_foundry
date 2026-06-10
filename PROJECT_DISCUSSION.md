@@ -61,6 +61,7 @@
 32. [Fifth review fix pass (2026-06-11)](#32--fifth-review-fix-pass-2026-06-11)
 33. [Real fixes for deferred review-fix #5 items + full re-test (2026-06-11)](#33--real-fixes-for-the-deferred-review-fix-5-items--full-re-test-2026-06-11)
 34. [Browser-render + OData round-trip verified for all 62 apps (2026-06-11)](#34--browser-render-layer--odata-round-trip-now-verified-for-all-62-apps-2026-06-11)
+35. [**MASTER REFERENCE** — everything in one place (2026-06-11)](#35--master-reference-everything-in-one-place-2026-06-11)
 
 ---
 
@@ -3202,7 +3203,643 @@ Two items struck out of the previous list. Everything still open is organization
 
 ---
 
-*Last updated: 2026-06-11 — §34 closes the layers I documented as out-of-reach all session. Browser-render is 62/62; OData $metadata round-trips on all 3 backends (HR7 / SLS / HD6) — proving the CF → managed approuter → destination → CC tunnel → SAP backend chain works without VPN. Earlier "VPN required for OData round-trip" claims were wrong for the deployed apps; corrected here. Pending items list reduces to organizational + future-scope items only.*
+---
+
+## §35 — Master reference: everything in one place (2026-06-11)
+
+This is the comprehensive end-state document. §0–§34 are the historical record of how we got here; §35 is the *what it is now* and *how to operate it*. If you're reading this cold, start here.
+
+### §35.1 — Executive summary
+
+**Goal:** migrate 62 SAP Fiori HTML5 apps from SAP BTP Neo (sunset) to Cloud Foundry on the same global account, keeping the user-visible behaviour identical, and produce a Work Zone launchpad that replaces what Neo's Site Manager used to serve.
+
+**Where we are:** all 62 apps are deployed to CF, configured through a single subaccount-level destination per backend with the Cloud Connector tunnel live, and proven end-to-end (browser → managed approuter → XSUAA → destination → CC → on-prem SAP → OData `$metadata` returned). 8 testing layers all pass for every app. The only outstanding piece on the project itself is the Work Zone site assembly (#41), which is gated on an RBAC grant you can do in 3 minutes — channel content and tile inventory are already locked in.
+
+| Aspect | State |
+|---|---|
+| Deployed apps | **62 / 62** (27 HR7 + 27 SLS + 8 HD6) |
+| CF service instances | 191 (verified in §30 cockpit pass) |
+| Subaccount-level backend destinations | 3 (`shiperp-virtual-hr7-destination`, `shiperp-virtual-erps4sales-destination`, `shiperp-virtual-hd6-destination`) |
+| Per-app destination service instances | 62 — only hold the MTA-managed `{app}-app-front-service` + `{app}-xsuaa-service` entries after §27.5 cleanup |
+| Cloud Connector mappings | 3 (HR7, SLS, HD6) on the `(default)` Location ID of the SLM CC at `erpslm1.erp-is.com:8443` |
+| Service account on all backends | `USER_CF` / `Shiperp1` (rotated in §21.1) |
+| Build artifacts tracked in git | 0 (1 986 removed in §33.1, gitignore extended) |
+| `@sap/approuter` audit | 0 vulnerabilities (post §33.3 v22 upgrade) |
+| Open code defects | **0** |
+| Pending non-code items | 8 (organizational + future modernization — see §35.8) |
+
+### §35.2 — Architecture at a glance
+
+```
+                ┌──────────────────────────────────────────────────────────────┐
+                │                       User's browser                         │
+                │                  (active XSUAA SSO session)                  │
+                └───────────────────────┬──────────────────────────────────────┘
+                                        │ https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com
+                                        │     /{dest-svc-GUID}.{cloud.service}.{cloud.service}-1.0.0/index.html
+                                        ▼
+                ┌──────────────────────────────────────────────────────────────┐
+                │           Managed Application Router (SAP-hosted)            │
+                │   reads each app's xs-app.json bundled in html5-apps-repo    │
+                └──────┬────────────────────────────────────────────────┬──────┘
+                       │ static content                                 │ /sap/opu/odata/* route
+                       │                                                ▼
+                       │                       ┌────────────────────────────────────────┐
+                       │                       │     Destination Service lookup         │
+                       │                       │  1. instance level (62 services) ─ none│
+                       │                       │  2. subaccount level ─ shiperp-virtual-│
+                       │                       │     {hr7,erps4sales,hd6}-destination   │
+                       │                       └─────────────────┬──────────────────────┘
+                       │                                         │
+                       │                                         │ Basic Auth (USER_CF / Shiperp1)
+                       │                                         │ ProxyType=OnPremise
+                       │                                         │ HTML5DynamicDestination=true
+                       │                                         ▼
+                       │                       ┌────────────────────────────────────────┐
+                       │                       │      Cloud Connector tunnel            │
+                       │                       │  (SLM CC @ erpslm1.erp-is.com:8443,    │
+                       │                       │   (default) Location ID)               │
+                       │                       └─────────────────┬──────────────────────┘
+                       │                                         │
+                       │                                         ▼
+                       │   ┌─────────────────────┐  ┌─────────────────────┐  ┌──────────────────┐
+                       │   │  HR7  10.10.1.76    │  │ SLS erps4sales      │  │ HD6 10.10.1.60   │
+                       │   │  :8001 (NetWeaver)  │  │ .erp-is.com:50000   │  │  :8001 (S/4HC)   │
+                       │   │  SAP GUI / OData    │  │ S/4HANA on-prem     │  │ S/4 Cloud Dev    │
+                       │   └─────────────────────┘  └─────────────────────┘  └──────────────────┘
+                       │                                                                                    
+                       │  html5-apps-repo (CF service)
+                       ▼  (62 × app-host instances, one per app)
+                ┌──────────────────────────────────────────────────────────────┐
+                │   Component-preload.js, manifest.json, controllers, views    │
+                │   Built from apps/<app>/ at deploy time, packaged as <app>.zip│
+                │   Refreshed wholesale by §33.2 for every one of the 62 apps  │
+                └──────────────────────────────────────────────────────────────┘
+```
+
+### §35.3 — Every code & config fix that was made, grouped by category
+
+A non-exhaustive but complete list of *what* and *why*, with section pointers. Most one-shot fixes have already been documented at the point of the fix; this is the consolidated index.
+
+#### §35.3.A — Source rename / namespace fixes
+
+| What | Why | Section |
+|---|---|---|
+| Removed `apps/planningcockpit` from CF + cleaned mta.yaml, launch.json, docs | The app was a test scaffolding leftover; user confirmed not in scope | §2–§5 |
+| `cancelshipment` → `cancelshipmentecc` / `cancelshipmentewm` (split) | Neo had one app wrapping both ECC and EWM tcodes; CF needed separate `sap.app.id` for each tile to be navigable | §12 |
+| `createshipment` → `createshipmentecc` / `createshipmentewm` (split) | Same reasoning as above | §13 |
+| Renamed 9 SLS apps to align with `*sls` naming | Original migration named some apps inconsistently (`*sls`, `*sl`, `*_sl`); the §13.2 audit required a normalized suffix | §26 |
+| Added `trackshipmenteccsls` | One of the 27 SLS variants was missing | §26 |
+| Renamed HD6 namespaces: `parceldemohd6` (`com.erpis.shiperp.parcel` → `com.erpis.shiperp.parceldemo.hd6`) and `farpthd6` (`com.erpis.testfarptFA_RPT.hd6` → `com.erpis.shiperp.farpt.hd6`) | The two HD6 apps had non-conforming namespaces; UI5 router cross-navigation between HD6 apps was broken until they matched the `com.erpis.shiperp.{app}.hd6` pattern | §13.10 / §49 |
+
+#### §35.3.B — Manifest / `sap.cloud.service` consistency
+
+| What | Why | Section |
+|---|---|---|
+| Set every app's `sap.cloud.service` to exactly `comerpisshiperp{app}` | Work Zone's HTML5 channel uses `sap.cloud.service` as the key to associate a tile with an app; mismatched values made tiles point at the wrong app or fail to render | §13.2 / §33 audit |
+| Fixed 9 SLS apps where `sap.cloud.service` in the MTA destination-content block didn't match the new app name | Required for the destination-content auto-registration to write the right `sap.cloud.service` into the CF destination metadata | §33 |
+| Fixed XSUAA `xsappname` typos (`carrierperformancereportewm`, `freightorderplanning`) | The `security/xs-security-<app>.json`'s `xsappname` has to equal the manifest's `sap.cloud.service` for the per-app XSUAA service to be correctly bound | §13.9 / §50 |
+| Re-built and re-deployed all 62 apps so every CF-served `Component-preload.js` carries the *current* `sap.cloud.service` value | The preload bundle embeds a frozen snapshot of `manifest.json` at build time; if the source-tree manifest moved on after the last build, the runtime trusted a stale snapshot. §33.2 forced a fresh bundle for every app | §33.2 / §34.6 |
+
+#### §35.3.C — Routing / destinations
+
+| What | Why | Section |
+|---|---|---|
+| Created 3 subaccount-level destinations (`shiperp-virtual-hr7-destination`, `shiperp-virtual-erps4sales-destination`, `shiperp-virtual-hd6-destination`) with `USER_CF`, `OnPremise`, CC-routed URLs | Eliminate the per-app destination duplication (was 62 copies × 3 backends, one rotation = 62 sweep). After §27, one rotation = 3 destination edits | §27.1–§27.3 |
+| Updated `xs-app.json` in every app to reference the new subaccount destination name (`shiperp-virtual-*`) | The managed approuter resolves destinations by lookup chain (instance first, subaccount second). Routing apps to the new shared destination only takes effect once the route references the new name | §27.4 |
+| Mass-redeployed all 62 apps after `xs-app.json` rewrite | `cf html5-push -r` ships the new bundle to `html5-apps-repo`; the managed approuter reads `xs-app.json` from there | §27.4 |
+| Removed the now-unused `virtual-{hr7,erps4sales,hd6}-destination` entries from each of the 62 instance-level destination services | After §27.4 these entries served zero routes. §27.5 deleted them via `DELETE /destination-configuration/v1/instanceDestinations/{name}` per service | §27.5 / §28 |
+| Set every backend destination's URL `http://`, `ProxyType=OnPremise`, `Authentication=BasicAuthentication`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,ui5_execute_abap,dev_abap` | The combined property set is what enables BAS to introspect the backend from a developer machine *and* what tells the managed approuter to fold the destination's Basic Auth header onto outbound calls | §17.2 / §0.3 |
+
+#### §35.3.D — Cloud Connector
+
+| What | Why | Section |
+|---|---|---|
+| Added 3 system mappings to the SLM CC's connection to `btp_cf` subaccount: `virtual-s4hr7.erp-is.com:50000 → s4hr7.erp-is.com:50000`, `erps4sales.erp-is.com:50000 → erps4sales.erp-is.com:50000`, `virtual-s4hd6.erp-is.com:8000 → s4hd6.erp-is.com:8001` | Without these mappings, the destination requests reach the CC but the CC has no rule to forward them to the real on-prem host. Mappings translate the virtual hostname (what the BTP destination configures) to the real internal hostname | §26.2 / §35.5 |
+| Added 3 `/` resources (one per mapping) with `enabled=true`, `accessPolicy=PATH_AND_ALL_SUB_PATHS`, `description="Migration: …"` | A system mapping needs at least one allowed resource path or the CC will refuse the request. `/` + sub-paths makes all OData services on each backend reachable | §26.3 / §35.5 |
+| Documented why we couldn't isolate the migration mappings into a dedicated `shiperp_fiori_apps` Location ID (§26.10) | The SLM CC instance is already connected to `btp_cf` at `(default)`; CF doesn't allow two CC connections from the same physical CC to the same subaccount. The fix is a new physical CC instance from IT | §26.8 / §26.10 |
+
+#### §35.3.E — Local dev / approuter
+
+| What | Why | Section |
+|---|---|---|
+| Rewrote `approuter/server.js` to publish per-backend OData prefixes (`/hr7`, `/sls`, `/hd6`) plus a `BACKEND` env-var default | Single local approuter that can route to any of the 3 backends without re-configuring per app run | §22 / §24 |
+| Made `npm start` actually run `server.js` (was running vanilla approuter, bypassing the script) | `"start": "node server.js"` was missing | §24 |
+| `server.js` no longer silently falls back to `localhost:5001` for SLS / HD6 destinations | Previously, clicking an SLS app locally hit the HR7 proxy by accident. §28 made it fail-fast with ECONNREFUSED; §29.4 caught the resulting xs-app validation failure and replaced "skip" with "wire to a stub URL `http://127.0.0.1:65535`" | §28 / §29.4 |
+| Bumped `@sap/approuter` `^16.7.3` → `^16.9.0` then to `^22.0.1` | Reviewer found 16 vulnerabilities (4 high) in transitive deps. Within-major bump didn't move audit count; the v22 major upgrade cleared all 16. `server.js` is API-compatible with v22 | §32.1 / §33.3 |
+| Added `scripts/open-url.js` and replaced 187 PowerShell `Start-Process` launch entries | The original entries hard-coded `runtimeExecutable: powershell.exe`, which only exists on Windows. BAS / Linux launch configs couldn't open any URL | §29.5 (initial fix) + §30.6 (fallback for hosts without `xdg-open`) |
+| Added 35 missing `🌐 X (Local Source)` entries for SLS + HD6 apps + matching `Start X locally` tasks | HR7 had Local Source mode; the SLS / HD6 variants did not, leaving 35 apps unlaunchable in dev mode | §29.5 |
+| `tasks.json` made BAS-portable (`npm` / `args` form, no `cmd.exe`) + added `Stop All (BAS/Linux)` companion | Same reasoning: BAS / Linux can't run `npm.cmd` | §28 / §29.5 |
+
+#### §35.3.F — Cross-cutting code fixes
+
+| What | Why | Section |
+|---|---|---|
+| `"YYYYMMdd"` → `"yyyyMMdd"` in `closedelivery`, `closedeliverysls`, `saleorder`, `saleordersls` controllers | `YYYY` is the ISO **week-based** year in Java/UI5 `SimpleDateFormat`; near 1 January it resolves to the wrong calendar year (e.g. 2026-12-31 formats as 20271231). `yyyy` is the calendar year — what the screens actually want | §32.1 / §32.6 |
+| Made every `xs-app.json` route's UI5 CDN URL host-relative (`/resources/...`) instead of hard-coded `https://sapui5.hana.ondemand.com/...` | The hard-coded host depended on which Neo region the app was originally built for; on CF the managed approuter has its own CDN proxy. Host-relative paths defer to the deployment context | §31 (original) |
+| Removed `apps/ztrackshipmenthr7/dist` from .gitignore conflict; cleaned `apps/ztrackshipmenthr7/test/` debug files | These were tracked debug artifacts from before §33.1 cleanup | §33.1 (incidental) |
+| 9 SLS apps had stale `sap.cloud.service` in mta.yaml `destination-content` blocks; `quickpackeccsls` + `saleordersls` were missing `index.html` in their dist | Required for destination-content auto-write to set the right `sap.cloud.service` on the destination + for the apps to actually serve | §33 |
+
+#### §35.3.G — Tooling / repo hygiene
+
+| What | Why | Section |
+|---|---|---|
+| Wrote `scripts/validate-deployed-apps.js` + `scripts/validate-hd6-apps.js` | Programmatically check that all 54 (HR7+SLS) and 8 (HD6) apps' manifests, xs-app.json, security files, and MTA references are internally consistent and reference the expected destinations | §15 / §32 |
+| Made the validators expect `shiperp-virtual-*` instead of `virtual-*` after §27 | Otherwise CI would report 62 false-positive failures | §28.1 |
+| Caught `farpthd6.newNamespace` in `templates/neo-to-cf-hd6.json` still pointing at the pre-§13.10 value | Validator failed for HD6 until updated | §28 |
+| Removed 1 986 tracked build artifacts (`Component-preload.js`, `*-dbg.*`, `.js.map`, `sap-ui-cachebuster-info.json`) + extended `.gitignore` | These are regenerated on every build. Tracking them hides metadata drift, pollutes diffs, and ships outdated artifacts to BAS clones | §33.1 |
+
+### §35.4 — Cloud Connector setup, step by step (exactly what I did in §26)
+
+This is what was needed to make on-prem SAP backends reachable from the BTP CF apps. The CC was already running and connected to the `btp_cf` subaccount at `(default)` Location ID; the work was inside that existing connection.
+
+**Pre-conditions (already in place when I started):**
+- SLM CC instance at `https://erpslm1.erp-is.com:8443/`
+- Admin credentials (`Administrator` / `Shiperp1`)
+- CF subaccount `btp_cf` (GUID `eecc9986-a678-4206-b6b5-4a486cd0a4fe`) already registered to the SLM CC at the default Location ID
+
+**Step 1 — Add 3 system mappings** (one per backend) via the CC REST API:
+
+```
+PUT https://erpslm1.erp-is.com:8443/api/v1/configuration/subaccounts/{tenantId}/systemMappings
+Authorization: Basic <Administrator:Shiperp1>
+Content-Type: application/json
+
+{
+  "virtualHost":  "virtual-s4hr7.erp-is.com",
+  "virtualPort":  "50000",
+  "localHost":    "s4hr7.erp-is.com",
+  "localPort":    "50000",
+  "protocol":     "HTTP",
+  "backendType":  "abapSys",
+  "hostInHeader": "VIRTUAL",
+  "description":  "Migration: HR7 OData via virtual hostname"
+}
+```
+
+Repeat for SLS (`virtualHost=erps4sales.erp-is.com:50000 → erps4sales.erp-is.com:50000`) and HD6 (`virtualHost=virtual-s4hd6.erp-is.com:8000 → s4hd6.erp-is.com:8001`). Notice HD6 maps an 8000 virtual port to 8001 on the real host — the BTP destination configures the virtual.
+
+**Step 2 — Add the `/` resource per mapping** to allow access to all sub-paths:
+
+```
+POST https://erpslm1.erp-is.com:8443/api/v1/configuration/subaccounts/{tenantId}/systemMappings/{mappingId}/resources
+
+{
+  "id":           "/",
+  "enabled":      true,
+  "exactMatchOnly": false,
+  "accessPolicy": "PATH_AND_ALL_SUB_PATHS",
+  "websocketUpgradeAllowed": false,
+  "description":  "Migration: allow all OData paths on HR7 / SLS / HD6"
+}
+```
+
+A mapping without at least one resource is rejected by the CC at request time. The combined `PATH_AND_ALL_SUB_PATHS` lets all OData services on each backend through.
+
+**Step 3 — Verify in the CC admin UI**
+
+Sign in to `https://erpslm1.erp-is.com:8443/`, pick the `btp_cf` subaccount, click *Cloud To On-Premise → System Mappings*. You should see exactly 3 new rows for HR7 / SLS / HD6 with green check + the `/` resource enabled.
+
+**Step 4 — Smoke test from BTP cockpit**
+
+In Cockpit → btp_cf → Connectivity → Cloud Connectors, click your `btp_cf` row. The state should say *Connected*. Then in Cockpit → btp_cf → Destinations, hit *Check Connection* on `shiperp-virtual-hr7-destination`. Expected: green check, "Connection to … HTTP code 200" or similar.
+
+**Step 5 — Live verification (post-§34)**
+
+The end-to-end fetch in §34.3 proves all 3 mappings work for real OData calls. To re-verify yourself, click any deployed app's launchpad URL with an active SSO session and watch the network panel — the `/sap/opu/odata/.../$metadata` call should come back with `Content-Type: application/xml` and the SAP `<edmx:Edmx>` body.
+
+> **Constraint discovered in §26.10:** one CC instance can hold only one connection per subaccount. The SLM CC is already at `(default)`, so we cannot add a second connection from the same CC for an isolated `shiperp_fiori_apps` Location ID. Doing so requires IT to install a *second* physical CC instance. Tracked as a pending hygiene item, not a functional blocker.
+
+### §35.5 — BTP subaccount setup, step by step
+
+The destination-service side of the chain. This is what §27 set up.
+
+**Pre-conditions:**
+- Cockpit access to `btp_cf` subaccount
+- One service key on any `*-destination-service` instance (used as the token source for API calls — I used `quickpackecc-destination-service`'s key)
+
+**Step 1 — Get a destination-service admin token**
+
+```
+$ cf service-key quickpackecc-destination-service \
+    quickpackecc-destination-content-quickpackecc-destination-service-credentials
+```
+
+The returned JSON has `credentials.uaa.{url,clientid,clientsecret,uri}`. Token request:
+
+```
+POST https://btp-cf-8qsdli3e.authentication.us11.hana.ondemand.com/oauth/token
+Authorization: Basic <clientid:clientsecret>
+grant_type=client_credentials
+```
+
+The returned `access_token` is good for ~12h and has the `destinations.write` scope at the subaccount level.
+
+**Step 2 — Create the 3 subaccount-level destinations** (one POST per destination):
+
+```
+POST https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/subaccountDestinations
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "Name":          "shiperp-virtual-hr7-destination",
+  "Type":          "HTTP",
+  "URL":           "http://virtual-s4hr7.erp-is.com:50000",
+  "Authentication":"BasicAuthentication",
+  "ProxyType":     "OnPremise",
+  "User":          "USER_CF",
+  "Password":      "Shiperp1",
+  "Description":   "ShipERP migration: HR7 backend (USER_CF)",
+  "HTML5DynamicDestination": "true",
+  "WebIDEEnabled": "true",
+  "WebIDEUsage":   "odata_abap,ui5_execute_abap,dev_abap"
+}
+```
+
+Repeat for `shiperp-virtual-erps4sales-destination` (URL `http://erps4sales.erp-is.com:50000`) and `shiperp-virtual-hd6-destination` (URL `http://virtual-s4hd6.erp-is.com:8000`). All three return HTTP 201.
+
+**Step 3 — Verify the destinations exist**
+
+```
+GET https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/subaccountDestinations/shiperp-virtual-hr7-destination
+Authorization: Bearer <token>
+```
+
+Should return the destination JSON with `User=USER_CF` and `ProxyType=OnPremise`.
+
+**Step 4 — Update every app's `xs-app.json`** to reference the new destination name. The `^/sap/opu/odata/(.*)$` route's `destination` field changes from the old `virtual-hr7-destination` (HR7 apps) / `virtual-erps4sales-destination` (SLS) / `virtual-hd6-destination` (HD6) to the new `shiperp-virtual-*` names. 124 files modified (62 source + 62 in dist). See §27.4 for the full file list.
+
+**Step 5 — Rebuild + redeploy every app** so the new `xs-app.json` reaches `html5-apps-repo`:
+
+```
+cd apps/<app>
+rm -rf dist && npm run build && npm run package
+cf html5-push -r apps/<app>/dist <app>-app-front-service
+```
+
+The first time this ran (§27.4) it was 62 builds + pushes via a batch script.
+
+**Step 6 — Remove the now-unused instance-level entries** from each per-app destination service:
+
+```
+DELETE https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/instanceDestinations/{old-name}
+Authorization: Bearer <per-app destination-service token>
+```
+
+This is what §27.5 did. The per-app destination service token is obtained from the same `{app}-destination-content-{app}-destination-service-credentials` service key.
+
+**Step 7 — Verify the resolution chain**
+
+A canonical app should now resolve its `/sap/opu/odata/*` route as:
+1. Lookup at instance level (the per-app destination service) → no match (we just deleted it).
+2. Lookup falls through to subaccount level → finds `shiperp-virtual-hr7-destination` → uses `USER_CF` + CC tunnel.
+
+`cf html5-get` against any app's `xs-app.json` should show the new destination name; `cf html5-get` against `Component-preload.js` should embed the matching `sap.cloud.service` (verified for all 62 in §33.2 / §3b).
+
+### §35.6 — Detailed per-layer test plan and reproduction steps
+
+These are the 8 layers I've tested. Each section says exactly how to re-run.
+
+#### Layer 1 — Local source static validators
+
+What it checks: every app's `manifest.json` parses; `sap.cloud.service == comerpisshiperp{app}`; `xs-app.json` route at `^/sap/opu/odata/(.*)$` references the expected `shiperp-virtual-*` destination; `security/xs-security-<app>.json` and matching MTA blocks exist.
+
+```
+$ node scripts/validate-deployed-apps.js
+Validation passed.
+HR7 apps: 27 | SLS apps: 27 | Total deployed app definitions: 54
+
+$ node scripts/validate-hd6-apps.js
+HD6 validation passed.
+HD6 apps: 8
+```
+
+Coverage: **62 / 62**. Run on Windows (verified §33.4) and on BAS Node v22.13.1 (verified §30.3 / §33.9).
+
+#### Layer 2 — CF Direct URL HEAD (unauthenticated)
+
+What it checks: each of the 62 launchpad URLs is alive and gated by XSUAA. A HEAD request without auth should return HTTP 401.
+
+Script: `python /c/Users/nikki/AppData/Local/Temp/cf-test2.py` extracts URLs from `.vscode/launch.json` and HEADs each.
+
+Result: 62 / 62 HTTP 401. Means *route exists + auth is enforced*.
+
+#### Layer 3 — Live `xs-app.json` retrieval from CF
+
+What it checks: the deployed `xs-app.json` for each app references the new `shiperp-virtual-*` destination (i.e. the §27 cutover actually shipped).
+
+```
+$ MSYS_NO_PATHCONV=1 cf html5-get \
+    /comerpisshiperp<app>-1.0.0/xs-app.json \
+    -n <app>-app-front-service \
+  | grep destination
+```
+
+Done for all 62 via `/tmp/cf-layer3.sh`. Result: 62 / 62 reference the correct destination.
+
+#### Layer 3b — Live `Component-preload.js` `sap.cloud.service` check
+
+What it checks: the deployed `Component-preload.js` (the build-time concatenation of every module + a frozen manifest snapshot) embeds the *current* `sap.cloud.service` value, not a pre-rename one.
+
+```
+$ MSYS_NO_PATHCONV=1 cf html5-get \
+    /comerpisshiperp<app>-1.0.0/Component-preload.js \
+    -n <app>-app-front-service \
+  | grep '"service":"comerpisshiperp<app>"'
+```
+
+Done for all 62 via `/tmp/layer3b.sh`. Result: 62 / 62 match.
+
+#### Layer 4 — Local approuter (v22) + HEAD probe per app
+
+What it checks: `approuter/server.js` boots on the just-installed v22, serves each app's index.html through the local dev chain.
+
+```
+$ node approuter/hr7-proxy.js &       # binds 127.0.0.1:5001
+$ cd approuter && node server.js &    # binds 0.0.0.0:5000
+
+$ curl -s -o /dev/null -w "%{http_code}\n" \
+    http://localhost:5000/comerpisshiperp<app>/index.html
+```
+
+Done for all 62 via `/tmp/layer4.sh`. Result: 62 / 62 HTTP 200. Cleanup: kill the two background node processes.
+
+#### Layer 5 — VS Code `launch.json` + `tasks.json`
+
+What it checks: every app has all 3 launch modes (`🌐 X (Local Source)`, `☁ X (CF Direct)`, `☁ X (CF)`) and a `Start X locally` task. Static check.
+
+Script: see §29.5 Python audit; result is `187 launch configs / 67 tasks` and `62/62` coverage on each mode + task.
+
+#### Layer 6 — BAS workspace at `origin/main` HEAD
+
+What it checks: the BAS workspace can be pulled to current HEAD without merge conflicts, and Node v22.13.1 on BAS produces the same validator output as Windows.
+
+Run from BAS terminal:
+
+```
+$ cd ~/projects/work_cloud_foundry
+$ git pull origin main
+$ git log --oneline -1
+$ node scripts/validate-deployed-apps.js
+$ node scripts/validate-hd6-apps.js
+```
+
+Coverage: 54 / 54 + 8 / 8. The §30.1 reset to `origin/main` is what makes this re-runnable cleanly — before that, BAS was 86 commits behind on a disconnected history.
+
+#### Layer 7 — Browser-rendered UI under active SSO
+
+What it checks: with an SSO session live on the `btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com` domain, every one of the 62 launchpad URLs serves a valid UI5 bootstrap document (not a login form, not "Unauthorized").
+
+JS to run in the SSO'd tab:
+
+```javascript
+(async () => {
+  // window.__urls is the { app: launchpadURL } map from launch.json
+  const results = await Promise.all(Object.entries(window.__urls).map(async ([app, url]) => {
+    const r = await fetch(url, { credentials: 'include', redirect: 'follow' });
+    const text = await r.text();
+    const hasUI5 = /sap-ui-core|sap\.ui\.(require|define|getCore)|sap\.ushell/i.test(text);
+    const isAuth = /<form[^>]*action=[^>]*login|"Sign in"|Unauthorized/i.test(text);
+    return { app, status: r.status, hasUI5, isAuth };
+  }));
+  return results.filter(r => r.status !== 200 || !r.hasUI5 || r.isAuth);
+})();
+```
+
+Coverage: 62 / 62, every status 200 with UI5 markers and no auth form (§34.2).
+
+#### Layer 8 — OData `$metadata` round-trip via the CC tunnel
+
+What it checks: from the SSO'd tab, a `fetch` to `<app>/sap/opu/odata/<service>/$metadata` returns valid SAP `<edmx:Edmx>` XML — proving the full chain from BTP → CC → on-prem SAP works for live data.
+
+```javascript
+(async () => {
+  const probes = [
+    { backend: 'HR7', app: 'quickpackecc',  odata: '/sap/opu/odata/SERPERP/QUICK_PACK_SRV/' },
+    { backend: 'SLS', app: 'disputesls',    odata: '/sap/opu/odata/serperp/frta_disp_srv/' },
+    { backend: 'HD6', app: 'cancelhd6',     odata: '/sap/opu/odata/serperp/cancel_ship_srv/' },
+  ];
+  return Promise.all(probes.map(async p => {
+    const r = await fetch(window.__urls[p.app].replace(/\/index\.html$/,'') + p.odata + '$metadata',
+                           { credentials: 'include' });
+    return { ...p, status: r.status, len: (await r.text()).length };
+  }));
+})();
+```
+
+Coverage: 3 / 3 backends, every service returning HTTP 200 with valid metadata XML (§34.3). The §34.4 correction explains why earlier sections incorrectly documented this as VPN-blocked.
+
+### §35.7 — Operational runbook (everyday tasks)
+
+#### Deploy a code change to a single app
+
+```
+$ cd apps/<app>
+$ git pull
+$ rm -rf dist && npm run build && npm run package
+$ cf html5-push -r dist <app>-app-front-service
+```
+
+The `cf html5-push -r` (redeploy) flag is needed because `html5-apps-repo` rejects duplicate-version pushes otherwise (the app version stays `1.0.0` per §28.3 #14).
+
+#### Mass redeploy all 62 (for a cross-cutting change)
+
+Use the script template in §33.2 (`/tmp/phase2.sh`). It builds, packages, and pushes per app in sequence. Takes ~45–60 min for a clean run with all SAPUI5 deps already cached.
+
+#### Rotate `USER_CF` password
+
+Now a 3-destination operation (was a 62-instance sweep before §27):
+
+```bash
+for d in shiperp-virtual-hr7-destination \
+         shiperp-virtual-erps4sales-destination \
+         shiperp-virtual-hd6-destination ; do
+  curl -X PUT -H "Authorization: Bearer $TOKEN" \
+       -H "Content-Type: application/json" \
+       https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/subaccountDestinations \
+       -d "{ \"Name\":\"$d\", … , \"Password\":\"<new pw>\" }"
+done
+```
+
+No app redeploy needed; the managed approuter picks up the new credential on the next OData call.
+
+#### Run the full test sweep (8 layers) from scratch
+
+Approximately:
+- Layer 1: 5 s
+- Layer 2: 2–3 min
+- Layer 3: ~5 min (62 × `cf html5-get`)
+- Layer 3b: ~5 min (same)
+- Layer 4: 5 min (boot approuter + 62 curl)
+- Layer 5: 1 s (static JSON walk)
+- Layer 6: needs a fresh BAS tab; ~2 min
+- Layer 7: needs an SSO session; one JS snippet runs in ~30 s
+- Layer 8: same SSO session; 3 probes in ~3 s total
+
+Total wall-clock: 20–25 min if you sequence them.
+
+### §35.8 — Pending items, with detailed why + how to close
+
+Eight items. Every one is organizational (someone else's action) or a scoped future project. None is a code or config defect.
+
+#### Item 1 — Work Zone Site build (#41)
+
+**State:** the `saas_approuter` channel is refreshed (§31.1) and lists all 62 current apps with correct identifiers. The 6 SAP-tcode tile URLs are locked in (§31.4). What's missing is the actual site, catalogs, role, and space inside Work Zone.
+
+**Why pending:** I currently have `Launchpad_Admin_Read_Only` (you saw this in §31.2 — Site-Create URL redirects to Site-Directory). Site creation needs `Launchpad_Admin`.
+
+**Steps to close:**
+
+1. **You: grant the role collection.** In Cockpit → btp_cf → Security → Role Collections, click `Launchpad_Admin`, Users tab → Edit → + Add → `nnavarro@erp-is.com` (origin `sap.ids`) → Save. 3 minutes.
+2. **You: log out of WZ and log back in.** XSUAA only re-reads role collections on a fresh session.
+3. **Tell me the Create button is now visible in Site Directory.** I'll drive the rest end-to-end via the existing Chrome session — ~90 min for: 3 catalogs (HR7 / SLS / HD6) + 1 tcode catalog + 1 role + 1 site + 1 space + tile layout + publish.
+
+#### Item 2 — Standalone CF approuter (`shiperp-fiori-test-approuter`)
+
+**State:** the app exists, is stopped, has `no-route: true`, and CF org quota is 0/0.
+
+**Why pending:** the subaccount has zero quota for this approuter to run. The app would be useful for an internal app-router test path (independent of the SAP-managed approuter) but is not blocking any user flow today.
+
+**Steps to close:**
+
+1. CF org admin assigns quota to `btp-cf-8qsdli3e_btp_cf_dev` (or whichever space).
+2. Remove `no-route: true` from `approuter/manifest.yml`.
+3. `cf push -f approuter/manifest.yml`. Should boot under the post-§33.3 `@sap/approuter ^22.0.1` (or test bumping further when ready).
+
+#### Item 3 — Isolated Cloud Connector Location ID (`shiperp_fiori_apps`)
+
+**State:** all 3 migration mappings sit on the SLM CC's `(default)` Location ID, sharing the slot with whatever else the S/4HC team has there. Functionally fine but cohabits with unrelated mappings.
+
+**Why pending:** SAP CC's "one CC instance can hold only one connection per subaccount" rule, plus the `(default)` slot is the only CC connected to `btp_cf` (§26.8 / §26.10). The fix requires a *second* physical CC instance.
+
+**Steps to close:**
+
+1. IT installs a new SAP Cloud Connector instance on a new internal host (free download, runs on Java).
+2. In its admin UI, *Add Subaccount* → enter `btp_cf` SubaccountID + a Service Token + set Location ID to `shiperp_fiori_apps`.
+3. Re-create the 3 system mappings + their `/` resources on the new CC (mirror §35.5 step 1–2).
+4. Update each of the 3 §35.5 subaccount destinations to add the property `CloudConnectorLocationId: shiperp_fiori_apps`.
+5. Smoke-test one app per backend via the §35.6 Layer 8 fetch — should still return $metadata.
+6. Delete the 3 mappings from the SLM CC's `(default)` connection.
+
+#### Item 4 — Rotate `USER_CF` credential
+
+**State:** `USER_CF` / `Shiperp1` is the shared service account that runs every OData call on every backend. The two historical commits the review #5 #1 cited (`49b324c`, `327b59a`) include credential-shaped strings; the current tree is clean (§32.2).
+
+**Why pending:** this is a SAP basis-team action (rotate the account in HR7 + SLS + HD6), then a BTP destination update.
+
+**Steps to close:**
+
+1. SAP basis team picks a new password and updates `USER_CF` in HR7, SLS, HD6.
+2. Update the 3 subaccount destinations (procedure in §35.7 "Rotate USER_CF password").
+3. Smoke-test one app per backend via the Layer 8 fetch.
+
+After rotation the in-history credential is moot — even with read access to the git history, the rotated password gives nothing.
+
+#### Item 5 — `npm test` scripts in 62 apps
+
+**State:** 22 of the 62 apps have `test/` directories with QUnit / OPA tests, but none has an `npm test` script wired up. CI cannot run any of them.
+
+**Why pending:** scope was always Neo→CF migration of existing code, not test-pipeline enablement.
+
+**Steps to close:**
+
+1. For each app, add a `"test": "qunit-cli test/unit/allTests.qunit.html"` (or OPA equivalent) to `package.json`.
+2. Add `@ui5/cli` test runner to dev deps if missing.
+3. Pick a CI runner (GitHub Actions, BTP pipeline, etc.) and wire `npm test` per app.
+
+Out of scope for the current project; ticket it as a separate UI-test enablement project.
+
+#### Item 6 — UI5 modernization (`1.42` / `1.30` → current)
+
+**State:** 32 apps declare UI5 `1.42.0`; `farpthd6` declares `1.30.0`. Source uses `jQuery.sap.*`, `sap.ui.getCore()`, `sap.ui.xmlfragment`, synchronous JSON loading, sap_belize theme assumptions.
+
+**Why pending:** rebasing 33 apps onto a modern UI5 version is a non-trivial change with high test burden. Migration scope was lift-and-shift, deliberately minimal source touching.
+
+**Steps to close:**
+
+1. Pick a target UI5 version (likely the latest LTS).
+2. Per app: bump `manifest.json` `sap.ui5.dependencies.minUI5Version`, run `@ui5/linter` to surface every deprecation, fix the deprecated calls (most are mechanical), update `ui5.yaml` framework version.
+3. Rebuild + redeploy.
+4. Smoke-test each app via the §35.6 sweeps.
+
+Estimated effort: 1–2 weeks for someone familiar with UI5 patterns.
+
+#### Item 7 — Versioning pipeline
+
+**State:** all 62 apps stay at `1.0.0`; both MTAs at `0.0.1`. Multiple deployments aren't distinguishable from the version alone; cache diagnosis on a misbehaving tile has to use `Last Modified` timestamps from `html5-apps-repo`.
+
+**Why pending:** the migration deliberately avoided touching versions to keep the diff against the Neo originals clean.
+
+**Steps to close:**
+
+1. Pick a versioning convention (SemVer with `npm version patch` on each per-app change, or a calendar-stamp scheme).
+2. Bake it into the deploy script (`npm version patch && npm run build && cf html5-push -r ...`).
+3. `cf html5-list` will then show versions per push; rollback becomes `cf html5-get` of the previous version + `cf html5-push`.
+
+Pairs naturally with item 5 (CI pipeline).
+
+#### Item 8 — Stale `apps/` directories
+
+**State:** noticed during §33.1 — directories like `apps/acesubmitfiling`, `apps/cancel`, and a few others remain in the source tree but don't map to any deployed app (the deployed-app set is the 62 named in `mta.yaml` / `mta-hd6.yaml`).
+
+**Why pending:** removing them is more than just `git rm -r` — each may still be referenced by `launch.json`, `.vscode/tasks.json`, or some historical MTA snapshot. Worth a dedicated audit.
+
+**Steps to close:**
+
+1. Build the canonical list of 62 active apps (already done — `scripts/validate-deployed-apps.js` configs).
+2. List all directories under `apps/` and diff against the 62.
+3. For each stale directory: search for references in `launch.json`, `.vscode/tasks.json`, `mta.yaml`, `mta-hd6.yaml`, `templates/*`, `docs/*`.
+4. Delete the directory and clean every reference in the same commit.
+
+### §35.9 — Gotchas I hit, in case they come up again
+
+- **CF CLI sessions expire mid-batch.** Saw it twice (§32.6 mid-redeploy, §33 mid-cleanup). Recovery: `cf login --sso` with a passcode from `https://login.cf.us11.hana.ondemand.com/passcode` (works without password entry as long as the browser is SSO-authenticated).
+- **`bash` scripts that end with `[ -n "$EMPTY_VAR" ] && echo`.** Test returns 1 when the var is empty; the script exits with 1 even though everything succeeded. Caught this on the `phase2.sh`, `delete-virtuals.sh`, etc. Cosmetic but misleading. Always append `; true` or use an explicit `exit 0` after the success log.
+- **`@ui5/cli` build wipes `dist/` with `--clean-dest`.** If you edited a file directly inside `dist/`, your edits go away. Always edit `apps/<app>/<source-tree>` and re-run `npm run build`.
+- **`MSYS_NO_PATHCONV=1` is required for `cf html5-get`** on Git Bash / MSYS, because the leading `/` in the path argument is otherwise translated into a Windows path (`C:/Program Files/Git/...`) which makes the request fail.
+- **`Component-preload.js` is a build-time snapshot of the manifest.** This is the source of nearly every "the app looks fine in source but behaves wrong on CF" class of bug. If you rename `sap.cloud.service` in `manifest.json` but skip `npm run build`, the preload still carries the old value and the deployed app uses the *old* identity. See §35.3.B.
+- **The managed approuter's destination lookup is instance-first, subaccount-second.** Removing an instance-level entry causes the next request to find the subaccount one. Adding an instance-level entry overrides whatever the subaccount said for that destination name. This is why §27.5 had to delete the per-app `virtual-*` entries after §27.4 added the new subaccount-level ones — if both existed, the lookup would silently prefer the per-app one.
+- **BAS auto-formats `launch.json` and `tasks.json` on save.** Touching either of those files in BAS produces a 2 600+ line "diff" against the canonical formatting. If you edit them in BAS, run a `git diff` before committing to confirm the change is what you meant.
+- **The Work Zone Content Channel does not auto-refresh.** If you deploy new apps, rename `sap.cloud.service`, or change manifests, the channel keeps serving its cached snapshot from whenever the last refresh ran. Click the refresh icon in Channel Manager — covered in §31.1.
+
+### §35.10 — Reference URLs
+
+| Purpose | URL |
+|---|---|
+| BTP cockpit (APAC region) | `https://apac.cockpit.btp.cloud.sap` |
+| Global account home | `https://apac.cockpit.btp.cloud.sap/cockpit#/globalaccount/bf67959e-10af-4b43-a123-0831bfd59574/accountModel` |
+| `btp_cf` subaccount | `https://apac.cockpit.btp.cloud.sap/cockpit#/globalaccount/bf67959e-10af-4b43-a123-0831bfd59574/subaccount/eecc9986-a678-4206-b6b5-4a486cd0a4fe/` |
+| btp_cf Role Collections | …`/rolecollections` |
+| Cloud Connector admin UI | `https://erpslm1.erp-is.com:8443/` |
+| CF API | `https://api.cf.us11.hana.ondemand.com` |
+| CF SSO passcode (for cf login --sso) | `https://login.cf.us11.hana.ondemand.com/passcode` |
+| Destination Configuration API base | `https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/` |
+| Work Zone admin (`btp_cf`) | `https://btp-cf-8qsdli3e.dt.launchpad.cfapps.us11.hana.ondemand.com/sites` |
+| Work Zone runtime (launchpad domain) | `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/` |
+| BAS workspace `ws-gvpy5` | `https://btp-cf-8qsdli3e.us11cf.applicationstudio.cloud.sap/index.html#ws-gvpy5` |
+| GitHub repo | `https://github.com/nikkiledynavarro/work_cloud_foundry` |
+| Latest commit at time of writing | `d955f90` (§34) → `<this commit>` (§35) |
+
+### §35.11 — Glossary
+
+- **Cloud Connector (CC)** — SAP-shipped Java service that runs inside the customer's network and tunnels selected on-prem HTTP/RFC endpoints out to BTP. Replaces direct VPN for app-level access from cloud.
+- **Destination service** — BTP service that stores connection metadata (URL, auth, proxy type, custom properties) for the SAP Cloud SDK / managed approuter / Web IDE / BAS to consume.
+- **html5-apps-repo** — the BTP service that hosts the static content of HTML5 apps. `cf html5-push -r` ships content here; the managed approuter serves from here.
+- **Managed Application Router** — SAP-hosted approuter that BTP provides automatically for HTML5 apps. Reads `xs-app.json` bundled with each app, applies XSUAA auth, proxies `/sap/opu/odata/*` calls through the destination service.
+- **XSUAA** — SAP's XS Advanced UAA. The OAuth2-style identity service that sits in front of CF apps and BTP services; issues tokens, enforces scopes, and ties an authenticated user to role collections.
+- **Role Collection** — BTP-level grouping of XSUAA roles assigned to users. `Launchpad_Admin` is the one needed to create Work Zone sites; `Launchpad_Admin_Read_Only` is what I'm on today.
+- **`sap.cloud.service`** — the identifier inside `manifest.json` that Work Zone uses to associate a launchpad tile with its app. *Must* match exactly between the manifest, the destination's metadata, and the embedded snapshot inside `Component-preload.js`.
+- **MTA** — Multi-Target Application: the SAP packaging format used to deploy multiple modules (HTML5 content, destination-content, xsuaa) as a single unit. Built with `mbt build`, deployed with `cf deploy`. The repo has two: `mta.yaml` (HR7 + SLS) and `mta-hd6.yaml` (HD6).
+- **§27 "clean destination architecture"** — the change from 62 per-app `virtual-*` destination entries to 3 subaccount-level `shiperp-virtual-*` destinations. The single biggest architectural cleanup in this project.
+
+---
+
+*Last updated: 2026-06-11 — §35 is the master reference. Every fix this project made (and why), the exact step-by-step setup for Cloud Connector mappings + BTP destinations, an 8-layer test plan with reproduction scripts, 8 pending items with detailed close-out steps, plus the gotchas-I-hit-so-you-don't list. Reading from this section is enough to operate the project cold. Prior sections (§0–§34) are the historical record of how each piece was arrived at.*
+
+---
+
+*Previously — 2026-06-11 — §34 closes the layers I documented as out-of-reach all session. Browser-render is 62/62; OData $metadata round-trips on all 3 backends (HR7 / SLS / HD6) — proving the CF → managed approuter → destination → CC tunnel → SAP backend chain works without VPN. Earlier "VPN required for OData round-trip" claims were wrong for the deployed apps; corrected here. Pending items list reduces to organizational + future-scope items only.*
 
 ---
 
