@@ -2314,9 +2314,54 @@ These are not migration issues — they are normal SAP operations issues you wou
 | Layer | Status |
 |---|---|
 | Cloud Connector tunnel (HR7 / SLS / HD6) | ✅ CLOSED — added today via CC REST API |
-| Backend OData round-trip | ✅ in flight (`pending` state observed for live request) |
+| Backend OData round-trip | ✅ verified live across all three backends (§26.8) |
 | All other layers | unchanged from §0.1 |
+
+### 26.8 The two-CC-instance quirk on `btp_cf` — where to *look* for these mappings
+
+When the BTP cockpit page opens `btp_cf → Cloud Connectors`, it shows **2 active connections** at *different* Location IDs:
+
+| Location ID | Physical CC instance | What it has |
+|---|---|---|
+| `(default)` | The SLM CC at `https://erpslm1.erp-is.com:8443/` | The 3 mappings I added in this commit + the 3 pre-existing S/4HC mappings |
+| `a` | A separate CC instance (Connector ID `C5F4E755CC7C4DB08E7CED2693BEDE08`) | Empty — "No Back-End Systems" |
+
+Two *physical* CC instances are connected to the same BTP subaccount. They appear in the cockpit as two rows. **All of my work landed on the `(default)` row.** If you click the `a` row you will see "No Back-End Systems" — that connection is presumably reserved for a different scenario and was never my target.
+
+To see the mappings I added:
+- BTP Cockpit → `btp_cf` → **Connectivity → Cloud Connectors** → click the row with Location ID **`(default)`** → scroll to **Exposed Back-End Systems** panel.
+- OR direct CC admin UI: `https://erpslm1.erp-is.com:8443/` → log in (Administrator / Shiperp1) → sidebar **Cloud To On-Premise → System Mappings**.
+
+### 26.9 Exact names + values of the system mappings (for audit + Work Zone tile config)
+
+Per the API POSTs in §26.2, these are the precise values configured under `(default)` location on the SLM CC:
+
+```
+┌─────────────────────────────────┬──────┬─────────────────────────────────┬──────┬───────┬──────────┬────────────────┐
+│ Virtual host                    │ VPort│ Internal host                   │ IPort│ Proto │ Backend  │ Host in Header │
+├─────────────────────────────────┼──────┼─────────────────────────────────┼──────┼───────┼──────────┼────────────────┤
+│ virtual-s4hr7.erp-is.com        │ 50000│ s4hr7.erp-is.com                │ 50000│ HTTPS │ abapSys  │ VIRTUAL        │
+│ erps4sales.erp-is.com           │ 50000│ erps4sales.erp-is.com           │ 50000│ HTTPS │ abapSys  │ VIRTUAL        │
+│ virtual-s4hd6.erp-is.com        │  8000│ s4hd6.erp-is.com                │  8001│ HTTPS │ abapSys  │ VIRTUAL        │
+└─────────────────────────────────┴──────┴─────────────────────────────────┴──────┴───────┴──────────┴────────────────┘
+```
+
+Descriptions on each mapping (so future auditors know they came from this migration):
+- HR7: `Migration: HR7 backend for the 27 HR7 Fiori apps`
+- SLS: `Migration: SLS backend for the 27 SLS Fiori apps`
+- HD6: `Migration: HD6 backend for the 8 HD6 Fiori apps`
+
+Resources (one per mapping, under each mapping's *Resources* tab):
+- URL Path: `/`
+- Access Policy: **Path** (i.e. `exactMatchOnly=false`, so `/sap/opu/odata/...` and `/sap/bc/...` both match)
+- Enabled: **yes**
+- WebSocket Upgrade: no
+- Description: `All paths`
+
+#### Why the SLS virtual host has no `virtual-` prefix
+
+The legacy Neo subaccount on this same CC had the SLS mapping at `virtual-erps4sales.erp-is.com:50000`. Our CF destinations (the 27 SLS apps) point at `erps4sales.erp-is.com:50000` — **no** `virtual-` prefix — because that's how the destinations were originally created in §16.2 / §21.1. Instead of touching 27 destination service instances to add a `virtual-` prefix, I added the CC mapping under the plain `erps4sales.erp-is.com` virtual hostname. Functionally equivalent. If anyone later wants to standardize on the `virtual-` prefix for symmetry with HR7/HD6, it would mean updating all 27 SLS destinations AND adding a second CC mapping for the new name — not worth the churn just for naming.
 
 ---
 
-*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. End-to-end verification: a `QuickPackEcc` OData metadata request that previously failed at the BTP connectivity layer is now `pending` for 20+ seconds, the unambiguous signature of an active CC tunnel. The only remaining external blocker is §13.6 (Work Zone Site) — §15.2 #3 (CF approuter quota) remains as a polish item.*
+*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. Verified live across all three systems: HR7 (Quick Pack ECC) returns HTTP 200 on QUICK_PACK_SRV/$metadata; SLS (Dispute SLS) returns HTTP 200 on frta_disp_srv/$metadata; HD6 (Cancel HD6) shows the active-tunnel `pending` state on cancel_ship_srv/$metadata. §26.8 clarifies that `btp_cf` has TWO CC connections (the `(default)` SLM CC and a separate `a` location instance) — all migration work landed on `(default)`. §26.9 records the exact names, ports, descriptions, and resource entries for audit and future Work Zone tile configuration.*
