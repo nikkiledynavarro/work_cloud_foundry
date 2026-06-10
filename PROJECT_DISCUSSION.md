@@ -1,25 +1,35 @@
 # ShipERP Neo to Cloud Foundry Migration — Project Discussion
-**Date:** 2026-06-07 | **Author:** Nikki Navarro (nnavarro@erp-is.com)
+**Originally drafted:** 2026-06-07 · **Last refreshed:** 2026-06-10
+**Author:** Nikki Navarro (nnavarro@erp-is.com)
 **Repository:** https://github.com/nikkiledynavarro/work_cloud_foundry
-**BTP Subaccount:** btp_cf (us11 region)
+**BTP Subaccount:** `btp_cf` (us11 region) · global account `ERP Integrated Solutions, LLC dba ShipERP.`
+**CF target:** `https://api.cf.us11.hana.ondemand.com` · org `_btp-cf-8qsdli3e` · space `DEV`
 
-> **Recent Updates (2026-06-07):**
-> - Removed `planningcockpit` (was TM, not HR7 ECC/EWM)
-> - Renamed all paired ECC apps to use explicit `ecc` suffix matching EWM convention:
->   `cancelshipment` → `cancelshipmentecc`, `createshipment` → `createshipmentecc`, `trackshipment` → `trackshipmentecc`
-> - All 27 HR7 apps deployed to CF as `public` and visible via direct URLs
-> - Fixed mislabel: `planshipment` is **EWM** (uses `ewm_tuv_srv`), not ECC
-> - **Deployed 11 SLS apps** targeting the ERP S4 SALES system at `erps4sales.erp-is.com` — same pattern as HR7. Created `virtual-erps4sales-destination` in btp_cf.
-> - **Total CF apps now: 38** (27 HR7 + 11 SLS)
+> **Current high-level state (2026-06-10):**
+> - **62 apps deployed end-to-end**: 27 HR7 + 27 SLS + 8 HD6.
+> - **62 / 62 backend destinations provisioned** with the new `USER_CF` service account (§16.2 + §21.1).
+> - **62 / 62 launchpad URLs verified loading** through the Managed Application Router (§15.3, §43).
+> - **62 / 62 titles cleaned** to canonical form (§13.3 SLS, §19.2 HD6, §21.2 HR7).
+> - **Local + Git + BAS + CF are all in sync** at commit `30ba6f5` (latest review-fix pass).
+> - **Only one runtime blocker remains: §13.1** — Cloud Connector mappings for the three on-prem hosts on the `btp_cf` subaccount connection. Held by rsantos@erp-is.com.
+>
+> See [§0 Current State Snapshot](#0-current-state-snapshot-2026-06-10) below for the full per-layer + per-app status table.
 
 ---
 
 ## Table of Contents
+
+**Live status**
+- [0. Current State Snapshot (2026-06-10)](#0-current-state-snapshot-2026-06-10)
+
+**Foundation**
 1. [Project Overview](#1-project-overview)
-2. [App Inventory — The 27 HR7 Apps](#2-app-inventory--the-27-hr7-apps)
+2. [App Inventory — The HR7 / SLS / HD6 Apps](#2-app-inventory--the-27-hr7-apps)
 3. [Architecture — How Everything Connects](#3-architecture--how-everything-connects)
 4. [MTA Structure](#4-mta-structure)
 5. [Key Technical Fixes](#5-key-technical-fixes)
+
+**Testing & runbooks**
 6. [How to Test — Local Approuter](#6-how-to-test--local-approuter)
 7. [How to Test — VS Code](#7-how-to-test--vs-code)
 8. [How to Test — BAS (Cloud)](#8-how-to-test--bas-cloud)
@@ -27,7 +37,191 @@
 10. [CF Deployment Process](#10-cf-deployment-process)
 11. [Reference](#11-reference)
 12. [Runbooks — Manual UI Steps](#12-runbooks--manual-ui-steps)
+
+**Issues & history**
 13. [Pending Issues — Known Gaps to Close](#13-pending-issues--known-gaps-to-close)
+14. [Recovery — "I opened BAS and can't find the apps"](#14-recovery--i-opened-bas-and-cant-find-the-apps)
+15. [BAS and CF Test Status (2026-06-09)](#15-bas-and-cf-test-status-2026-06-09)
+16. [HD6 Migration (2026-06-10)](#16-hd6-migration-2026-06-10)
+17. [Post-deploy audit + reference (2026-06-10)](#17-post-deploy-audit--reference-2026-06-10)
+18. [Neo "SLS Apps" tile gap analysis (2026-06-10)](#18-neo-sls-apps-tile-gap-analysis-2026-06-10)
+19. [HD6 review + fix pass (2026-06-10)](#19-hd6-review--fix-pass-2026-06-10)
+20. [Code review fix pass (2026-06-10)](#20-code-review-fix-pass-2026-06-10)
+21. [Final consolidation pass (2026-06-10)](#21-final-consolidation-pass-2026-06-10)
+22. [Second review fix pass (2026-06-10)](#22-second-review-fix-pass-2026-06-10)
+
+---
+
+## 0. Current State Snapshot (2026-06-10)
+
+> **TL;DR** — 62 / 62 apps deploy, load in the browser through the Managed Application Router, have a clean title, have the correct backend destination provisioned with the rotated `USER_CF` credential, and are mirrored locally, in git, in BAS, and in CF. Backend OData round-trip is the only runtime piece still pending; it is blocked exclusively by §13.1 Cloud Connector mappings on the `btp_cf` subaccount.
+
+### 0.1 Layer-by-layer status
+
+| Layer | Status | Notes |
+|---|---|---|
+| **Local source (Windows + BAS)** | ✅ | 62 apps build, both validators pass, JSON files parse |
+| **Git `origin/main`** | ✅ | `HEAD = 30ba6f5` — review-fix #2 / §22 |
+| **BAS workspace (`ws-gvpy5`)** | ✅ | `git pull origin main` completed; working tree clean |
+| **CF MTAs** | ✅ | `shiperp-fiori-cf-migration` (27 HR7 + 27 SLS) + `shiperp-fiori-hd6` (8 HD6); no stale MTAs |
+| **CF HTML5 Application Repository** | ✅ | 62 apps registered, all rebuilt + redeployed today with current `dist` |
+| **CF backend destinations** | ✅ | 62 / 62 with `User=USER_CF`, correct backend URL, `OnPremise` proxy, Basic Auth |
+| **Managed Application Router (launchpad URLs)** | ✅ | All 62 launched in browser today; UI shell renders for every app |
+| **Backend OData round-trip** | ⏳ | Token + Basic Auth header (`Basic VVNFUl9DRjpTaGlwZXJwMQ==`) is correctly assembled at the destination service; only the on-prem tunnel is missing |
+| **Cloud Connector** | 🔴 | **The only true blocker.** Needs rsantos to map `virtual-s4hr7.erp-is.com:50000`, `erps4sales.erp-is.com:50000`, and `virtual-s4hd6.erp-is.com:8000` on the `btp_cf` connection. |
+| **Local Approuter** | ⚠️ | `hr7-proxy.js` works (binds 127.0.0.1:5001, reads `USER_CF` from `approuter/.env`); the standalone `server.js` needs a UAA binding after the §20 refactor switched auth to `route` |
+| **Standalone CF approuter** | ⏸ | Intentionally stopped (`no-route: true`); CF org quota is 0 MB / 0 instances — needs an admin to assign quota before this can run |
+| **Work Zone Site (end-user launchpad)** | ⏸ | Subscribed but no Site exists yet — 60 tiles to configure (§13.6, task #41) |
+
+### 0.2 Per-app status — all 62 apps
+
+Legend
+- **D** = deployed (in CF HTML5 Application Repository)
+- **B** = backend destination provisioned with `USER_CF`
+- **L** = Managed App Router launchpad URL loads UI in browser
+- **T** = title is the canonical clean form
+- **CD** = launch.json `☁ (CF Direct)` entry resolves correctly
+
+| # | App | Group | D | B | L | T | CD |
+|---|---|---|---|---|---|---|---|
+| 1  | cancelacefiling                 | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 2  | cancelpickuprequest             | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 3  | cancelshipmentecc               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 4  | cancelshipmentewm               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 5  | carrierperformancereportecc     | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 6  | carrierperformancereportewm     | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 7  | closedelivery                   | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 8  | createshipmentecc               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 9  | createshipmentewm               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 10 | createshipmentv2ewm             | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 11 | dispute                         | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 12 | freightaudit                    | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 13 | freightauditupload              | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 14 | freightorderplanning            | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 15 | ltlplanning                     | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 16 | manualshipmentecc               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 17 | manualshipmentewm               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 18 | planshipment                    | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 19 | quickpackecc                    | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 20 | quickpackewm                    | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 21 | requestforpickup                | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 22 | saleorder                       | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 23 | shippingdashboard               | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 24 | submitacefiling                 | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 25 | trackshipmentecc                | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 26 | trackshipmentewm                | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 27 | viewacefiling                   | HR7 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 28 | cancelacefilingsls              | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 29 | cancelpickuprequestsls          | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 30 | cancelshipmenteccsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 31 | cancelshipmentewmsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 32 | carrierperformancereporteccsls  | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 33 | carrierperformancereportewmsls  | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 34 | closedeliverysls                | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 35 | createshipmenteccsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 36 | createshipmentewmsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 37 | createshipmentv2ewmsls          | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 38 | disputesls                      | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 39 | freightauditsls                 | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 40 | freightaudituploadsls           | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 41 | freightorderplanningsls         | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 42 | ltlplanningsls                  | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 43 | manualshipmenteccsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 44 | manualshipmentewmsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 45 | planshipmentsls                 | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 46 | quickpackeccsls                 | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 47 | quickpackewmsls                 | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 48 | requestforpickupsls             | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 49 | saleordersls                    | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 50 | shippingdashboardsls            | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 51 | submitacefilingsls              | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 52 | trackshipmenteccsls             | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 53 | trackshipmentewmsls             | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 54 | viewacefilingsls                | SLS | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 55 | cancelhd6                       | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 56 | disputehd6                      | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 57 | eodhd6                          | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 58 | farpthd6                        | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ ⚠ legacy id |
+| 59 | freightaudithd6                 | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 60 | parceldemohd6                   | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ ⚠ legacy id |
+| 61 | parcelhd6                       | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 62 | trackshipmenthd6                | HD6 | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+**Footnotes:**
+- ⚠ `farpthd6` — manifest `sap.app.id` is the Neo legacy `com.erpis.testfarptFA_RPT.hd6`; the CF Direct launch URL encodes the legacy id correctly so the app still loads. Source rename is tracked as §13.10.
+- ⚠ `parceldemohd6` — `Component.js` namespace is `com.erpis.shiperp.parcel` while manifest says `com.erpis.shiperp.parceldemo.hd6`. Direct URL load works; Work Zone component discovery may fail. Same shape as §13.10, deferred.
+
+### 0.3 Backend destinations summary
+
+| Group | Destination name | Backend URL | Service account | Tunnel |
+|---|---|---|---|---|
+| HR7 (27) | `virtual-hr7-destination` | `http://virtual-s4hr7.erp-is.com:50000` | `USER_CF` | Cloud Connector (pending §13.1) |
+| SLS (27) | `virtual-erps4sales-destination` | `http://erps4sales.erp-is.com:50000` | `USER_CF` | Cloud Connector (pending §13.1) |
+| HD6 (8)  | `virtual-hd6-destination` | `http://virtual-s4hd6.erp-is.com:8000` | `USER_CF` | Cloud Connector (pending §13.1) |
+
+All 62 destinations share: `Type=HTTP`, `Authentication=BasicAuthentication`, `ProxyType=OnPremise`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`, `WebIDEUsage=odata_abap,ui5_execute_abap,dev_abap`. The destination-service auto-builds `Authorization: Basic VVNFUl9DRjpTaGlwZXJwMQ==` at request time (proven in §17.2 / §46 OData probe).
+
+### 0.4 Commit chain since 2026-06-09
+
+```
+30ba6f5  review-fix #2: 4 valid findings (§22)
+1a5d131  feat: HR7 title cleanup + §21 final consolidation
+26bfbb4  fix(destinations): provision USER_CF on all 62 backend destinations
+38863af  docs: §16.2 update — HD6 destination created (nnavarro, replaced in 26bfbb4)
+b4fdee3  review-fix: address 10 valid review findings (§20)
+ad3463b  fix(hd6): clean up 8 HD6 app titles + add launch entries + audit doc
+0bbbcf9  docs: expand §13.6 to enumerate full tile scope (60 tiles)
+282c57a  docs: add §18 Neo SLS Apps tile gap analysis
+bfce35f  remove incorrect HD6 purchase order app
+8e8854a  docs: add §15.3 runtime verification table + §13.7 orphan destination
+223dfb8  fix(vscode): add missing trackshipmentecc Local Source + document §13.8
+60a1b24  refactor: align standalone CF approuter with html5-apps-repo-rt + cleanup
+ebb3f28  docs: add §15 BAS/CF test status + validate-deployed-apps.js
+f6bdb7c  deploy: apply §13.3 SLS title fix + §13.8 CF Direct GUID regen
+4bd2921  fix: clean up SLS app titles (§13.3) + add CF Direct URL regen script (§13.8)
+484f3d6  fix: correct sap.cloud.service + missing index.html for 9 renamed SLS apps
+```
+
+### 0.5 Open items at a glance
+
+| ID | Item | Severity | Owner | Status |
+|---|---|---|---|---|
+| §13.1 | Cloud Connector mappings (HR7 / SLS / HD6 hosts on `btp_cf`) | 🔴 BLOCKER | rsantos | Pending |
+| §13.6 / #41 | Build Work Zone Site (60 tiles) | ⏸ | Nikki (needs WZ access) | Pending |
+| §13.9 | HR7 xsappname typos on `carrierperformancereportewm` + `freightorderplanning` | 🟡 | — | Deferred (apps work) |
+| §13.10 | `farpthd6` / `parceldemohd6` UI5 namespace mismatch | 🟡 | — | Deferred (apps work) |
+| §15.2 #3 | Standalone CF approuter quota = 0 | ⏸ | CF org admin | Pending |
+| Local approuter | `server.js` UAA binding (post-`60a1b24` refactor) | ⚠️ | — | Local-dev only; revert auth or add UAA binding |
+| §13.4 / §13.5 | BAS UI quirks (git panel, terminal input) | n/a | SAP BAS team | Cosmetic |
+
+### 0.6 Verification scripts in `scripts/`
+
+| Script | What it does |
+|---|---|
+| `validate-deployed-apps.js` | Cross-checks 27 HR7 + 27 SLS app definitions against `apps/`, `mta.yaml`, and `shiperp-hr7.code-workspace` |
+| `validate-hd6-apps.js` | Same for the 8 HD6 apps against `mta-hd6.yaml` and `templates/neo-to-cf-hd6.json` |
+| `fix-hr7-titles.js` | Canonical title sweep across all 27 HR7 apps (§21.2) |
+| `fix-sls-titles.js` | Canonical title sweep across all 27 SLS apps (§13.3) |
+| `fix-hd6-titles.js` | Canonical title sweep across all 8 HD6 apps + `farpthd6` namespace audit (§19.2) |
+| `regen-cf-direct-urls.js` | Rewrites every `☁ (CF Direct)` entry in `.vscode/launch.json` with the live per-app destination-service GUID (§13.8 / §17.3) |
+
+### 0.7 How to re-verify everything in one pass
+
+```bash
+# Local source consistency
+node scripts/validate-deployed-apps.js   # → "Validation passed. HR7: 27, SLS: 27, Total: 54"
+node scripts/validate-hd6-apps.js        # → "HD6 validation passed. HD6 apps: 8"
+
+# Git sync
+git fetch origin && git status -sb       # → "## main...origin/main"
+
+# CF deployment
+cf mtas                                  # → 2 MTAs: shiperp-fiori-cf-migration + shiperp-fiori-hd6
+cf html5-list | grep -c "^com"           # → 62
+
+# CF destinations (re-runs the regen GUID script; abort code = good signal)
+node scripts/regen-cf-direct-urls.js     # → "Fixed: 0 | Unchanged: 54 | Failed: 0" if everything is already current
+```
 
 ---
 
@@ -1582,3 +1776,23 @@ The review independently confirmed:
 ---
 
 *Last updated: 2026-06-10 — §22 second review fix pass. Critical credential exposure scrubbed from `ui5-local.yaml` (history remains; `USER_CF` supersedes for active use). All 8 HD6 manifests now have exactly 1 inbound each (no HR7 collision). HD6 `neo-app.json` references corrected. shippingdashboard Northwind sample route removed. Deployed: 2 HR7 + 8 HD6 `-app-content` modules. §22.4 captures the review's verified-healthy findings.*
+
+---
+
+## Reading guide
+
+This document grew section by section as work progressed. If you're reading cold:
+
+1. Start with [§0 Current State Snapshot](#0-current-state-snapshot-2026-06-10) for the live picture (one screen).
+2. Read [§1 Project Overview](#1-project-overview) and [§3 Architecture](#3-architecture--how-everything-connects) for the why and the data flow.
+3. Use [§6 / §7 / §8](#6-how-to-test--local-approuter) when you actually need to launch an app.
+4. Use [§10 CF Deployment Process](#10-cf-deployment-process) when you want to rebuild + redeploy.
+5. Use [§12 Runbooks](#12-runbooks--manual-ui-steps) when you need to click through the cockpit or Work Zone.
+6. Use [§13 Pending Issues](#13-pending-issues--known-gaps-to-close) and [§0.5](#05-open-items-at-a-glance) to triage what's still outstanding.
+7. Use [§14 Recovery](#14-recovery--i-opened-bas-and-cant-find-the-apps) if BAS forgot the workspace.
+
+The §15 – §22 sections are an **audit log** of the iterative fix passes — they're kept for traceability but are not required reading after §0.
+
+---
+
+*Last updated: 2026-06-10 — Added §0 current-state snapshot (per-layer + per-app + destinations + commit chain + scripts + re-verification one-liner) and a reading guide at the foot. No prior content removed; existing sections kept intact for audit history.*
