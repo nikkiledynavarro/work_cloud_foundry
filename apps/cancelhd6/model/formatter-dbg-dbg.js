@@ -1,5 +1,5 @@
 sap.ui.define([
-	"com/erpis/shiperp/cancel/common/Utils"
+	"com/erpis/shiperp/cancel/hd6/common/Utils"
 ], function (Utils) {
 	"use strict";
 

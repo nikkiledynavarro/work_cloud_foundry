@@ -1,5 +1,5 @@
 sap.ui.define([
-	"com/erpis/shiperp/parcel/controller/BaseController",
+	"com/erpis/shiperp/parcel/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel"
 ], function(BaseController, JSONModel) {
 	"use strict";

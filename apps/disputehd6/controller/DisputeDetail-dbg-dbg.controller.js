@@ -1,15 +1,15 @@
 /*global location*/
 sap.ui.define([
-	"com/erpis/shiperp/dispute/hr7/controller/BaseController",
+	"com/erpis/shiperp/dispute/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/dispute/hr7/model/formatter",
+	"com/erpis/shiperp/dispute/hd6/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/m/UploadCollectionParameter",
-	"com/erpis/shiperp/dispute/hr7/common/Utils"
+	"com/erpis/shiperp/dispute/hd6/common/Utils"
 ], function (BaseController, JSONModel, History, formatter, Filter, FilterOperator, MessageToast, MessageBox, UploadCollectionParameter,
 	Utils) {
 	"use strict";

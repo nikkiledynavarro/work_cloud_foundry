@@ -1,5 +1,5 @@
 sap.ui.define([
-		"com/erpis/shiperp/trackshipment/controller/BaseController"
+		"com/erpis/shiperp/trackshipment/hd6/controller/BaseController"
 	], function (BaseController) {
 		"use strict";
 

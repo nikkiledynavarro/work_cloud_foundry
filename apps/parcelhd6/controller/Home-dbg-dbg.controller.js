@@ -1,9 +1,9 @@
 sap.ui.define([
-	"com/erpis/shiperp/parcel/controller/BaseController",
+	"com/erpis/shiperp/parcel/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"com/erpis/shiperp/parcel/model/formatter",
+	"com/erpis/shiperp/parcel/hd6/model/formatter",
 	"sap/m/MessageBox",
-	"com/erpis/shiperp/parcel/common/Utils",
+	"com/erpis/shiperp/parcel/hd6/common/Utils",
 	"sap/ui/model/Filter"
 ], function (BaseController, JSONModel, formatter, MessageBox, Utils, Filter) {
 	"use strict";

@@ -14,7 +14,7 @@ sap.ui.define([
 	BusyIndicator) {
 	"use strict";
 
-	return Controller.extend("com.erpis.shiperp.freightaudit.hd6.hr7.controller.BaseController", {
+	return Controller.extend("com.erpis.shiperp.freightaudit.hd6.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.
@@ -355,7 +355,7 @@ sap.ui.define([
 		 */
 		_getMessagePopover: function () {
 			if (!this._messagePopover) {
-				this._messagePopover = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hd6.hr7.fragment.MessagePopover", this);
+				this._messagePopover = sap.ui.xmlfragment("com.erpis.shiperp.freightaudit.hd6.fragment.MessagePopover", this);
 			}
 			this._messagePopover.setModel(this.getModel("messageModel"), "messageModel");
 			return this._messagePopover;

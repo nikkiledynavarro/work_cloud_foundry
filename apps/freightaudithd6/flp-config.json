@@ -1,12 +1,12 @@
 {
     "application": {
         "id": "",
-        "title": "com.erpis.shiperp.freightaudit.hd6.hr7.freightaudithr7",
+        "title": "com.erpis.shiperp.freightaudit.hd6.freightaudithr7",
         "description": "Freight Audit, HR7",
         "type": "SAP_UI5_Component",
         "componentUrl": "/",
         "appUrl": "#freightaudithr7-Display",
-        "navigationComponentName": "com.erpis.shiperp.freightaudit.hd6.hr7",
+        "navigationComponentName": "com.erpis.shiperp.freightaudit.hd6",
         "intentSemanticObject": "freightaudithr7",
         "intentAction": "Display",
         "html5ApplicationName": "freightaudithr7",

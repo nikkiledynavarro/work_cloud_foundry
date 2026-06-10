@@ -1,7 +1,7 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/erpis/shiperp/farpt/model/models"
+	"com/erpis/shiperp/farpt/hd6/model/models"
 ], function(UIComponent, Device, models) {
 	"use strict";
 

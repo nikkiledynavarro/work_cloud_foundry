@@ -2,8 +2,8 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/erpis/shiperp/cancel/model/models",
-	"com/erpis/shiperp/cancel/controller/ErrorHandler"
+	"com/erpis/shiperp/cancel/hd6/model/models",
+	"com/erpis/shiperp/cancel/hd6/controller/ErrorHandler"
 ], function (UIComponent, Device, models, ErrorHandler) {
 	"use strict";
 

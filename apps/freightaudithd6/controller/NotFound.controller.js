@@ -1,2 +1,2 @@
-sap.ui.define(["com/erpis/shiperp/freightaudit/hr7/controller/BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.freightaudit.hd6.hr7.controller.NotFound",{onLinkPressed:function(){this.getRouter().navTo("worklist")}})});
+sap.ui.define(["com/erpis/shiperp/freightaudit/hd6/controller/BaseController"],function(e){"use strict";return e.extend("com.erpis.shiperp.freightaudit.hd6.controller.NotFound",{onLinkPressed:function(){this.getRouter().navTo("worklist")}})});
 //# sourceMappingURL=NotFound.controller.js.map

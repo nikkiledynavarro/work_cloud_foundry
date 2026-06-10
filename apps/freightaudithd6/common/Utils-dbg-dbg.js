@@ -1,6 +1,6 @@
 sap.ui.define([], function() {
 	"use strict";
-	var sNameSpace = "com.erpis.shiperp.freightaudit.hd6.hr7.fragment.";
+	var sNameSpace = "com.erpis.shiperp.freightaudit.hd6.fragment.";
 	return {
 		getFragment: function(sFragmentId, sFragmentName, oController) {
 			var oView = oController.getView();

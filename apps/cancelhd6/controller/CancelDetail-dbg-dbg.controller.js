@@ -1,8 +1,8 @@
 sap.ui.define([
-	"com/erpis/shiperp/cancel/controller/BaseController",
+	"com/erpis/shiperp/cancel/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"com/erpis/shiperp/cancel/model/formatter",
+	"com/erpis/shiperp/cancel/hd6/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Sorter",

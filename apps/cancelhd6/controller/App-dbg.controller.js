@@ -1,2 +1,2 @@
-sap.ui.define(["com/erpis/shiperp/cancel/controller/BaseController","sap/ui/model/json/JSONModel"],function(e,n){"use strict";return e.extend("com.erpis.shiperp.cancel.hd6.controller.App",{onInit:function(){var e=new n({});this.setModel(e,"appView");this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}})});
+sap.ui.define(["com/erpis/shiperp/cancel/hd6/controller/BaseController","sap/ui/model/json/JSONModel"],function(e,n){"use strict";return e.extend("com.erpis.shiperp.cancel.hd6.controller.App",{onInit:function(){var e=new n({});this.setModel(e,"appView");this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass())}})});
 //# sourceMappingURL=App-dbg.controller.js.map

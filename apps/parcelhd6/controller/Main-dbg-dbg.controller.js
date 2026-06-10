@@ -1,15 +1,15 @@
 /*global location*/
 jQuery.sap.require("com.erpis.shiperp.parcel.hd6.common.jquery_hotkeys");
 sap.ui.define([
-	"com/erpis/shiperp/parcel/controller/BaseController",
+	"com/erpis/shiperp/parcel/hd6/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"com/erpis/shiperp/parcel/model/formatter",
+	"com/erpis/shiperp/parcel/hd6/model/formatter",
 	"sap/m/Token",
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
-	"com/erpis/shiperp/parcel/common/Utils",
-	"com/erpis/shiperp/parcel/common/hotkeyInterface"
+	"com/erpis/shiperp/parcel/hd6/common/Utils",
+	"com/erpis/shiperp/parcel/hd6/common/hotkeyInterface"
 ], function (BaseController, JSONModel, formatter, Token, Filter, MessageBox, MessageToast, Utils, HotkeyInterface) {
 	"use strict";
 
