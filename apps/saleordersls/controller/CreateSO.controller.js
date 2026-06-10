@@ -78,7 +78,7 @@ sap.ui.define([
 			this.byId("txtShipTo").setValue("");
 			this.byId("dpDelDate").setValue("");
 			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				pattern: "YYYYMMdd"
+				pattern: "yyyyMMdd"
 			});
 			var dateFormatted = dateFormat.format(new Date());
 			this.byId("dpDelDate").setValue(dateFormatted);
@@ -494,7 +494,7 @@ sap.ui.define([
 				sNextItem = "10";
 			}
 			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				pattern: "YYYYMMdd"
+				pattern: "yyyyMMdd"
 			});
 			var dateFormatted = dateFormat.format(new Date());
 			var oItem = {

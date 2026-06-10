@@ -10,6 +10,6 @@
     "start:vanilla": "node node_modules/@sap/approuter/approuter.js"
   },
   "dependencies": {
-    "@sap/approuter": "^16.7.3"
+    "@sap/approuter": "^16.9.0"
   }
 }

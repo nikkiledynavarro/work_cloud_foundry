@@ -25,7 +25,7 @@ sap.ui.define([
 
 			// global model
 			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				pattern: "YYYYMMdd"
+				pattern: "yyyyMMdd"
 			});
 			var dateFormatted = dateFormat.format(new Date());
 
