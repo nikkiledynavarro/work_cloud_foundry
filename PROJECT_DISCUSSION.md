@@ -3110,6 +3110,20 @@ Stale directories I noticed: `acesubmitfiling`, `cancel`, plus possibly others t
 
 ---
 
+### §33.9 — Sampling gaps closed (2026-06-11, follow-up)
+
+User pushed for proper 62/62 coverage on layers 3b, 4, 6 that §33.4 had originally sampled (3/62 or 1/62 each). Closed each:
+
+| Layer | Before this addendum | After |
+|---|---|---|
+| **3b** — Fresh `Component-preload.js` carries current `sap.cloud.service` | 3/62 sampled (one per backend) | ✅ **62/62** — iterated `cf html5-get /comerpisshiperp{app}-1.0.0/Component-preload.js -n {app}-app-front-service` for every app and grep'd for `"service":"comerpisshiperp{app}"`. All 62 matched. |
+| **4** — Local approuter (v22) serves `/comerpisshiperp{app}/index.html` | 3/62 sampled | ✅ **62/62 HTTP 200** — booted `hr7-proxy.js` (:5001) + `server.js` (:5000) under v22, ran HEAD against every cloud-service slug. Every app shell returned HTTP 200. |
+| **6** — BAS workspace at HEAD with validators | Layer 6 was carried from §30 (at `8195091`) | ✅ **62/62 at `77a5d29`** — drove the BAS terminal directly: `git pull origin main` advanced HEAD past the §33.1 + §33.3 + §33 commits; `node scripts/validate-deployed-apps.js` → "Validation passed. HR7: 27, SLS: 27, Total: 54"; `node scripts/validate-hd6-apps.js` → "HD6 validation passed. HD6: 8". |
+
+**Net: every layer I can drive is now 62/62, no sampling, no extrapolation.** The two layers that aren't 62/62 (browser-rendered UI, OData round-trip from real backend) are blocked on items I cannot perform unilaterally — SSO password entry and VPN-backed `USER_CF` authorization on the SAP basis side.
+
+---
+
 *Last updated: 2026-06-11 — §33 closes the three deferred items from review-fix #5: tracked build artifacts removed (1 986 files), `@sap/approuter` upgraded to v22 with audit `0`, all 62 apps rebuilt + redeployed with fresh `Component-preload.js`. Full re-test across layers 1–5 passes for every one of the 62 apps. BAS (layer 6) is one `git pull` behind. Pending items consolidated in §33.8 — every remaining open item is now organizational (RBAC, quota, IT, rotation, basis-team OData authz) or a scoped future project (UI test enablement, UI5 modernization, versioning pipeline, stale-directory cleanup).*
 
 ---
