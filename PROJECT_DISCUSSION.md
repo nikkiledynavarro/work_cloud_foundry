@@ -1466,3 +1466,70 @@ External code review surfaced 16 findings. Validated each; fixed 10, deferred 2 
 
 Rebuilt `shiperp-fiori-cf-migration_0.0.1.mtar`. Redeployed only the changed `-app-content` modules (18 of 54: 9 manifest-inbound adds + 9 SLS navigation/intent fixes). All deploys succeeded.
 
+
+---
+
+## 21. Final consolidation pass (2026-06-10)
+
+Everything left from the day's review pass, plus a backend-destination sweep, plus an HR7 title cleanup. The migration is now end-to-end audited and all three layers (HR7 + SLS + HD6) are at the same quality level.
+
+### 21.1 Backend destinations — full sweep (USER_CF)
+
+User created a single service account `USER_CF` that exists on all three backend systems and asked to reuse it everywhere. Audit of all 62 apps found:
+
+- 14 HR7 apps + all 27 SLS apps had **no** instance-level backend destination
+- `freightaudit` was mis-pointed at `virtual-hd6-destination`
+- Only HD6 (which we provisioned earlier this session) was fully wired up
+
+Sweep via `/destination-configuration/v1/instanceDestinations` produced **41 created + 20 updated + 1 replaced (freightaudit) + 0 failures**. Re-walked all 62 destinations afterward: every app returns the right destination + `User=USER_CF` + the right backend URL.
+
+| Group | Destination | Backend URL |
+|---|---|---|
+| HR7 ×27 | `virtual-hr7-destination` | `http://virtual-s4hr7.erp-is.com:50000` |
+| SLS ×27 | `virtual-erps4sales-destination` | `http://erps4sales.erp-is.com:50000` |
+| HD6 ×8  | `virtual-hd6-destination` | `http://virtual-s4hd6.erp-is.com:8000` |
+
+All with `Type=HTTP`, `Authentication=BasicAuthentication`, `ProxyType=OnPremise`, `User=USER_CF`, `HTML5DynamicDestination=true`, `WebIDEEnabled=true`.
+
+§13.1 Cloud Connector mappings remain the only operational blocker.
+
+### 21.2 HR7 titles
+
+For symmetry with §13.3 (SLS) and §19.2 (HD6) which cleaned their titles earlier this session, ran `scripts/fix-hr7-titles.js` over all 27 HR7 apps:
+
+- `<title>` in every `index.html` set to canonical form (e.g. `Plan Shipment`, `LTL Planning`, `Submit ACE Filing` — typo `Filling` corrected too)
+- `appTitle` / `appDescription` synced in `i18n.properties` + `i18n_*.properties` variants
+
+Rebuilt MTA and redeployed all 27 HR7 `-app-content` modules. Sample verification in browser confirms `planshipment` (was `TUV`), `ltlplanning` (was `ltlplanning`), `quickpackewm` (was `quickpackewm`), `viewacefiling` (was `ACE Submit Filling`), `submitacefiling` (was `Submit ACE Filling` — typo `Filling`→`Filing`).
+
+### 21.3 Verification layer summary
+
+| Layer | Coverage |
+|---|---|
+| Local source (62 apps) | ✅ titles + i18n + manifests + xs-app.json + xs-security all consistent |
+| Git (origin/main) | ✅ HEAD matches local; all today's commits pushed |
+| CF MTAs (2: `shiperp-fiori-cf-migration` + `shiperp-fiori-hd6`) | ✅ deploy state matches source |
+| CF HTML5 Application Repository | ✅ 62 apps, all redeployed today with current dist |
+| CF backend destinations | ✅ 62/62 with `USER_CF`, correct URLs |
+| Launchpad URL (Managed App Router) — 62 apps | ✅ all clicked through this session — none returned File Not Found / 500 |
+| VS Code F5 entries (152 launch configs) | ✅ all 62 `(CF Direct)` URLs verified by Task #43 (same URLs that PowerShell `Start-Process` would open) |
+| OData destination chain | ✅ destination service auto-builds `Basic USER_CF:Shiperp1` auth header on token request; only the CC tunnel itself is unverified (§13.1) |
+| Local Approuter standalone | ⚠️ `hr7-proxy.js` works; `server.js` needs UAA binding (pre-existing post commit 60a1b24 refactor) |
+| BAS workspace | ⚠️ depends on user `git pull origin main` in BAS terminal to pick up today's commits |
+
+### 21.4 What's left
+
+| # | Item | Owner / blocker |
+|---|---|---|
+| §13.1 | Cloud Connector mappings for HR7 / SLS / HD6 on `btp_cf` subaccount | rsantos |
+| §13.6 / task #41 | Build Work Zone Site with 60 tiles | your access |
+| §13.9 | HR7 xsappname typos on 2 apps | deferred — apps work |
+| §13.10 | farpthd6 manifest namespace | deferred — app works |
+| §15.2 #3 | Standalone CF approuter quota | your CF org quota |
+| `approuter/server.js` UAA binding | local-dev path | optional fix |
+
+Migration is **end-to-end functionally complete** on the build / deploy / launch / destination side for all 62 apps. The only thing standing between this and live backend data is the §13.1 Cloud Connector unblock.
+
+---
+
+*Last updated: 2026-06-10 — Final consolidation pass. §21 logs the backend destination sweep (62/62 with USER_CF), HR7 title cleanup (matches SLS+HD6 quality), and the full layer-by-layer verification scorecard. All 62 apps now load via Managed App Router with clean titles. Only §13.1 CC remains as a runtime blocker.*
