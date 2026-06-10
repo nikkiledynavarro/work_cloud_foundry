@@ -49,6 +49,8 @@
 20. [Code review fix pass (2026-06-10)](#20-code-review-fix-pass-2026-06-10)
 21. [Final consolidation pass (2026-06-10)](#21-final-consolidation-pass-2026-06-10)
 22. [Second review fix pass (2026-06-10)](#22-second-review-fix-pass-2026-06-10)
+23. [§13.9 + §13.10 closeout (2026-06-10)](#23-139--1310-closeout-2026-06-10)
+24. [Third review fix pass (2026-06-10)](#24-third-review-fix-pass-2026-06-10)
 
 ---
 
@@ -162,6 +164,10 @@ All 62 destinations share: `Type=HTTP`, `Authentication=BasicAuthentication`, `P
 ### 0.4 Commit chain since 2026-06-09
 
 ```
+9e49424  review-fix #3: 3 valid findings + 2 verified-already-fixed (§24)
+a723ce0  fix: §13.9 + §13.10 — close last two latent issues
+16fa324  fix(approuter): make server.js work for local dev without UAA binding
+acf6f60  docs: add §0 current-state snapshot + reading guide
 30ba6f5  review-fix #2: 4 valid findings (§22)
 1a5d131  feat: HR7 title cleanup + §21 final consolidation
 26bfbb4  fix(destinations): provision USER_CF on all 62 backend destinations
