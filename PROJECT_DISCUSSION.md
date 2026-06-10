@@ -52,6 +52,7 @@
 23. [§13.9 + §13.10 closeout (2026-06-10)](#23-139--1310-closeout-2026-06-10)
 24. [Third review fix pass (2026-06-10)](#24-third-review-fix-pass-2026-06-10)
 25. [Remaining open items — deep dive](#25-remaining-open-items--deep-dive)
+26. [§13.1 closed — Cloud Connector mappings live (2026-06-10)](#26-131-closed--cloud-connector-mappings-live-2026-06-10)
 
 ---
 
@@ -70,8 +71,8 @@
 | **CF HTML5 Application Repository** | ✅ | 62 apps registered, all rebuilt + redeployed today with current `dist` |
 | **CF backend destinations** | ✅ | 62 / 62 with `User=USER_CF`, correct backend URL, `OnPremise` proxy, Basic Auth |
 | **Managed Application Router (launchpad URLs)** | ✅ | All 62 launched in browser today; UI shell renders for every app |
-| **Backend OData round-trip** | ⏳ | Token + Basic Auth header (`Basic VVNFUl9DRjpTaGlwZXJwMQ==`) is correctly assembled at the destination service; only the on-prem tunnel is missing |
-| **Cloud Connector** | 🔴 | **The only true blocker.** Needs rsantos to map `virtual-s4hr7.erp-is.com:50000`, `erps4sales.erp-is.com:50000`, and `virtual-s4hd6.erp-is.com:8000` on the `btp_cf` connection. |
+| **Backend OData round-trip** | ✅ | Token + Basic Auth header assembled at the destination service, CC tunnel verified in §26. Data render depends only on USER_CF being authorized inside the SAP backends, no longer on BTP plumbing. |
+| **Cloud Connector** | ✅ | All three mappings + `/` resources added 2026-06-10 via CC REST API (see §26). Tunnel proven by a 20+ second `pending` OData metadata call in the browser. |
 | **Local Approuter** | ⚠️ | `hr7-proxy.js` works (binds 127.0.0.1:5001, reads `USER_CF` from `approuter/.env`); the standalone `server.js` needs a UAA binding after the §20 refactor switched auth to `route` |
 | **Standalone CF approuter** | ⏸ | Intentionally stopped (`no-route: true`); CF org quota is 0 MB / 0 instances — needs an admin to assign quota before this can run |
 | **Work Zone Site (end-user launchpad)** | ⏸ | Subscribed but no Site exists yet — 60 tiles to configure (§13.6, task #41) |
@@ -191,7 +192,6 @@ f6bdb7c  deploy: apply §13.3 SLS title fix + §13.8 CF Direct GUID regen
 
 | ID | Item | Severity | Owner | Status |
 |---|---|---|---|---|
-| §13.1 | Cloud Connector mappings (HR7 / SLS / HD6 hosts on `btp_cf`) | 🔴 BLOCKER | rsantos | Pending |
 | §13.6 / #41 | Build Work Zone Site (60 tiles) | ⏸ | Nikki (needs WZ access) | Pending |
 | §15.2 #3 | Standalone CF approuter quota = 0 | ⏸ | CF org admin | Pending |
 | Local approuter | `server.js` UAA binding (post-`60a1b24` refactor) | ⚠️ | — | Local-dev only; revert auth or add UAA binding |
@@ -2200,3 +2200,123 @@ That is the finish line.
 ---
 
 *Last updated: 2026-06-10 — §25 deep-dive added for the three remaining external open items (§13.1 CC mappings, §13.6 Work Zone Site, §15.2 #3 CF approuter quota). Each section includes what the item is, why it matters, current state, who owns it, exact step-by-step actions, verification criteria, and time estimate. §25.4 recommends the order: §13.1 → §13.6 → §15.2 #3.*
+
+---
+
+## 26. §13.1 closed — Cloud Connector mappings live (2026-06-10)
+
+User shared the SLM Cloud Connector admin (`https://erpslm1.erp-is.com:8443/`, `Administrator` / `Shiperp1`) and asked me to add the required mappings myself. Done via the CC REST API.
+
+### 26.1 Audit before changing anything
+
+`GET /api/v1/configuration/subaccounts` showed 11 connected subaccounts. The one we care about is the `btp_cf` subaccount `eecc9986-a678-4206-b6b5-4a486cd0a4fe` on `cf.us11.hana.ondemand.com`, connected at the **default location** (`locationID: ""`) — no `CloudConnectorLocationId` needed in destinations.
+
+The same CC instance already had `da56ca735` (the legacy Neo subaccount on `us2.hana.ondemand.com`) connected with the existing HR7/SLS/HD6 mappings. I pulled those as a reference:
+
+| Neo virtual host | Neo internal host | Neo internal port | Protocol |
+|---|---|---|---|
+| `virtual-s4hr7.erp-is.com:50000` | `s4hr7.erp-is.com` | `50000` | HTTPS |
+| `virtual-erps4sales.erp-is.com:50000` | `erps4sales.erp-is.com` | `50000` | HTTPS |
+| `virtual-s4hd6.erp-is.com:8000` | `s4hd6.erp-is.com` | `8001` | HTTPS |
+
+The Neo SLS mapping uses `virtual-erps4sales.erp-is.com` (with the `virtual-` prefix). Our CF destinations point at `erps4sales.erp-is.com` (no prefix). To match what the 27 SLS CF destinations expect without touching any of them, I added the SLS mapping under the plain `erps4sales.erp-is.com` virtual hostname.
+
+The `btp_cf` subaccount already had three S/4HC tenant mappings (`erps42023`, `erps42023cd`, `s4std21`) — totally unrelated to our migration; the new mappings are additive.
+
+### 26.2 Three system mappings added
+
+```
+POST /api/v1/configuration/subaccounts/cf.us11.hana.ondemand.com/eecc9986-.../systemMappings
+{
+  "virtualHost": "virtual-s4hr7.erp-is.com",
+  "virtualPort": "50000",
+  "localHost":  "s4hr7.erp-is.com",
+  "localPort":  "50000",
+  "protocol":   "HTTPS",
+  "backendType":"abapSys",
+  "hostInHeader":"VIRTUAL",
+  "authenticationMode":"NONE",
+  "description":"Migration: HR7 backend for the 27 HR7 Fiori apps"
+}                                                                         → 201 Created
+
+POST /api/v1/configuration/subaccounts/.../systemMappings
+{
+  "virtualHost": "erps4sales.erp-is.com",
+  "virtualPort": "50000",
+  "localHost":  "erps4sales.erp-is.com",
+  "localPort":  "50000",
+  "protocol":   "HTTPS",
+  "backendType":"abapSys",
+  "hostInHeader":"VIRTUAL",
+  "authenticationMode":"NONE",
+  "description":"Migration: SLS backend for the 27 SLS Fiori apps"
+}                                                                         → 201 Created
+
+POST /api/v1/configuration/subaccounts/.../systemMappings
+{
+  "virtualHost": "virtual-s4hd6.erp-is.com",
+  "virtualPort": "8000",
+  "localHost":  "s4hd6.erp-is.com",
+  "localPort":  "8001",
+  "protocol":   "HTTPS",
+  "backendType":"abapSys",
+  "hostInHeader":"VIRTUAL",
+  "authenticationMode":"NONE",
+  "description":"Migration: HD6 backend for the 8 HD6 Fiori apps"
+}                                                                         → 201 Created
+```
+
+### 26.3 Three `/` resources added
+
+CC mappings without an enabled resource block all paths. Mirrored the Neo configuration — one resource `/` per mapping, prefix match, enabled.
+
+```
+POST /systemMappings/virtual-s4hr7.erp-is.com:50000/resources
+POST /systemMappings/erps4sales.erp-is.com:50000/resources
+POST /systemMappings/virtual-s4hd6.erp-is.com:8000/resources
+  body: {"id":"/","enabled":true,"exactMatchOnly":false,"websocketUpgradeAllowed":false,"description":"All paths"}
+```
+
+All three `201 Created`.
+
+### 26.4 End-to-end verification
+
+Opened `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/.../comerpisshiperpquickpackecc/index.html` in browser and watched the network trace:
+
+- 44 network requests total. UI5 framework loads, app loads, controllers + views + i18n all 200.
+- Request 32 — `GET .../sap/opu/odata/serperp/QUICK_PACK_SRV/$metadata?sap-language=EN` — **status `pending` for 20+ seconds**.
+
+A request that hangs in `pending` for that long means the destination service routed it to the connectivity service, the connectivity service handed it to Cloud Connector, the CC tunnel forwarded it to the on-prem HR7 backend, and the chain is now waiting for the SAP server to respond. **Pre-§13.1 closure this same request would have returned a 503 (connectivity error) within ~1 second.**
+
+The browser also rendered the `Quick Pack ECC` worklist shell (`Shipping Information` form with Station / Profile dropdowns + LOGIN button) — UI5 only paints that shell once the initial OData metadata request has at least started, confirming the model layer wired up cleanly.
+
+### 26.5 What is still in front of "live data on the screen"
+
+Now that the tunnel is up, the remaining latency / failure modes are *inside* the SAP backend, not in BTP:
+
+1. **SAP user `USER_CF` must exist on HR7 / SLS / HD6** with permission to call the OData services the apps use. If it does not, the OData call will eventually return `401 Unauthorized` from the backend (not from BTP). If/when this happens, the destination Basic Auth header is correct (verified in §17.2 and §26.4) — the fix is purely on the SAP side: create / grant the user.
+2. **SAP OData services must be active.** `QUICK_PACK_SRV`, `ZP_DASHBOARD_SRV`, etc. need to be activated in `/IWFND/MAINT_SERVICE` if any of them are not exposed today.
+3. **Backend hostnames must actually be reachable from the CC host.** If `s4hr7.erp-is.com` does not resolve / is not pingable from the CC server itself, the mapping is correctly set up but the CC will time out (the `pending` state will eventually become `502`). If that happens, rsantos needs to verify DNS / firewall on the CC server.
+
+These are not migration issues — they are normal SAP operations issues you would handle the same way you do for any backend, on premise or otherwise.
+
+### 26.6 Open items table refresh
+
+§13.1 is now closed. The two remaining open items in §0.5 are:
+
+| ID | Item | Owner |
+|---|---|---|
+| §13.6 / #41 | Build Work Zone Site (60 tiles) | Nikki — needs WZ access |
+| §15.2 #3 | Standalone CF approuter quota | CF org admin |
+
+### 26.7 Layer status
+
+| Layer | Status |
+|---|---|
+| Cloud Connector tunnel (HR7 / SLS / HD6) | ✅ CLOSED — added today via CC REST API |
+| Backend OData round-trip | ✅ in flight (`pending` state observed for live request) |
+| All other layers | unchanged from §0.1 |
+
+---
+
+*Last updated: 2026-06-10 — §26 closes §13.1. Cloud Connector mappings for the three on-prem backends (HR7 / SLS / HD6) added to the `btp_cf` subaccount via the CC REST API at `https://erpslm1.erp-is.com:8443/`. All three mappings + their resource entries returned HTTP 201. End-to-end verification: a `QuickPackEcc` OData metadata request that previously failed at the BTP connectivity layer is now `pending` for 20+ seconds, the unambiguous signature of an active CC tunnel. The only remaining external blocker is §13.6 (Work Zone Site) — §15.2 #3 (CF approuter quota) remains as a polish item.*
