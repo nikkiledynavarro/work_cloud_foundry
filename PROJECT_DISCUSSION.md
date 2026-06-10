@@ -1907,3 +1907,295 @@ If you only run `hr7-proxy.js`, leave the `*_PROXY_URL` overrides unset — they
 ---
 
 *Last updated: 2026-06-10 — §24 third review fix pass. npm start now drives the local-dev server.js (was bypassing it). server.js extended to publish per-backend OData prefixes (/hr7, /sls, /hd6) plus a configurable default. Three mixed-case SLS semantic objects normalized to lowercase-with-SLS-caps (no remaining mixed-case SLS semObjs). Redeployed 3 SLS app-content modules. All 4 valid review findings cleared.*
+
+---
+
+## 25. Remaining open items — deep dive
+
+Everything inside the codebase is clean. The three items below are the only things stopping end-users from actually using the 62 apps for real work. None of them can be fixed by editing files in this repo or running `cf deploy` — each requires either an internal-network admin action (rsantos / IT) or a subscription/quota change at the BTP layer. This section spells out what each one is, why it matters, what the current state looks like, the exact steps to close it, and how to verify success.
+
+### 25.1 §13.1 — Cloud Connector mappings for the three on-prem backends
+
+#### What Cloud Connector (CC) is
+
+SAP Cloud Connector is a piece of on-premise software (Java service) that runs inside ShipERP's corporate network. It establishes a TLS tunnel out to a specific BTP subaccount and acts as a reverse-proxy for that subaccount: when a CF app inside BTP makes an HTTP call to a *virtual* hostname (`virtual-s4hr7.erp-is.com`, `erps4sales.erp-is.com`, `virtual-s4hd6.erp-is.com`), the destination service routes the request through the CC tunnel, the CC instance receives it, and the CC instance forwards it to the *real* internal host (`10.10.1.76`, the actual SLS server, etc.).
+
+```
++-------------------------------------+         +--------------------------------------+
+|  BTP CF (btp_cf, us11)              |         |  ShipERP corporate network           |
+|                                     |         |                                      |
+|  CF app                             |         |  +------------------------------+    |
+|   |                                 |         |  | Cloud Connector              |    |
+|   | http://virtual-s4hr7.erp-is.com |         |  |  -> mapping:                 |    |
+|   v                                 |         |  |     virtual host             |    |
+|  destination service                |         |  |     -> real internal host    |    |
+|   |  Basic USER_CF:Shiperp1         |         |  |                              |    |
+|   |  ProxyType=OnPremise            |         |  |  -> allowlist of paths       |    |
+|   v                                 |         |  +------------------------------+    |
+|  connectivity service               | ------> |   v                                  |
+|   |                                 |  TLS    |   real SAP backend (HR7 / SLS / HD6) |
+|   v                                 | tunnel  |   on internal network                |
++-------------------------------------+         +--------------------------------------+
+```
+
+#### Why the migration needs it
+
+All 62 apps' backend destinations have `ProxyType=OnPremise`. That tells the destination service "do not hit this URL directly from the public internet — hand it to the connectivity service, which will tunnel through Cloud Connector." Without a working CC tunnel + mapping for our three virtual hostnames:
+
+- The destination service builds the right `Basic VVNFUl9DRjpTaGlwZXJwMQ==` (USER_CF) header.
+- The connectivity service receives the request.
+- It looks for an active CC connection that *handles* the virtual hostname.
+- It finds none.
+- The request fails with a CC error (typically HTTP 503 or 404 from the connectivity service, depending on whether the subaccount has any CC connection at all vs. one that just does not map this host).
+
+This is exactly the state today — every OData call from every deployed CF app fails before reaching SAP. The UI loads (because that comes from `html5-apps-repo`, no on-prem involvement), and the destination metadata is correct (so the cockpit does not show a config error), but the moment UI5 calls the OData service the request dies at the CC layer.
+
+#### Current state
+
+- The `btp_cf` subaccount (`erpintegratedsolutionsllcdbashiperp-01`) probably has *no* CC connection at all today, or has one for a different subaccount/region.
+- An internal Cloud Connector instance does exist (used by HR7 on-prem to Neo bridge before this migration started), but it is connected to the old Neo subaccount, not the new `btp_cf` CF subaccount.
+- The three virtual hostnames we need mapped (`virtual-s4hr7.erp-is.com:50000`, `erps4sales.erp-is.com:50000`, `virtual-s4hd6.erp-is.com:8000`) almost certainly already exist as System Mappings *for the old Neo connection*. They have to be replicated on the new `btp_cf` connection.
+
+#### Who owns the work
+
+**rsantos@erp-is.com** — has admin access to the Cloud Connector instance and the BTP cockpit for the `btp_cf` subaccount.
+
+#### Steps for rsantos to close §13.1
+
+1. Open the Cloud Connector admin UI (typically `https://<cc-host>:8443`, internal URL — credentials in the SAP team password vault).
+2. **Add `btp_cf` as a connected subaccount** (if not already):
+   - Sidebar → **Connector** → **Subaccount** → **Add Subaccount**.
+   - Region: `cf.us11.hana.ondemand.com` (Cloud Foundry US11).
+   - Subaccount: `erpintegratedsolutionsllcdbashiperp-01` (or its internal ID `eecc9986-a678-4206-b6b5-4a486cd0a4fe`).
+   - User + Password: a BTP user that has the **Cloud Connector Admin** role on `btp_cf`.
+   - Description: e.g. "Neo→CF migration — ShipERP CF apps".
+   - Save. CC should report **Connected** within ~30 seconds.
+3. **Switch into the new subaccount** in the CC sidebar.
+4. **Add three System Mappings** (Cloud To On-Premise → System Mappings → Add):
+
+   | Virtual host | Virtual port | Internal host | Internal port | Protocol |
+   |---|---|---|---|---|
+   | `virtual-s4hr7.erp-is.com` | `50000` | `<real HR7 host>` (e.g. `10.10.1.76` or `s4hr7.erp-is.com`) | `8001` | `HTTP` |
+   | `erps4sales.erp-is.com` | `50000` | `<real SLS host>` | `<real port>` | `HTTP` |
+   | `virtual-s4hd6.erp-is.com` | `8000` | `<real HD6 host>` | `<real port>` | `HTTP` |
+
+   Match the *exact* virtual hostname + port that the destination uses (visible in §0.3 of this doc).
+5. For each System Mapping, **allow the OData paths the apps actually use** (Resources → Add):
+   - `/sap/opu/odata/` (prefix match) — covers all OData v2 services
+   - `/sap/bc/` (prefix match) — covers ICF services some apps use
+   - Add an explicit Resource per SAP service the apps reference if a wide prefix is not policy-acceptable.
+6. **Save**. Each mapping should report status **Reachable** if CC can hit the internal host.
+
+#### How to verify §13.1 is closed
+
+After rsantos finishes:
+
+- **Cockpit verification (no app needed):** BTP Cockpit → `btp_cf` subaccount → **Cloud Connectors** → should show **1 connector connected**, status green.
+- **Destination check (no app needed):** Cockpit → **Connectivity → Destinations** → pick any of the per-app destination service instances (e.g. `quickpackecc-destination-service`) → click **Check Connection** on `virtual-hr7-destination`. Expected: `Connection to virtual-hr7-destination established. Response returned: 200: OK` (or 401 if the SAP backend rejects USER_CF, which tells us the *tunnel* is fine and the next thing to fix is the SAP user).
+- **Live app test:** Open any of the 62 apps via cockpit click (e.g. `comerpisshiperpquickpackecc`) → the worklist should populate from real SAP data within 2–3 seconds. Previously the table stayed empty because the OData fetch died at CC.
+
+#### Notes
+
+- The CC tunnel is the **only** runtime gap. Everything else — destination metadata, USER_CF credentials, OData path routing, authentication header assembly — is verified working all the way up to the CC boundary (§17.2 / §46 OData probe).
+- The order does not matter much: §13.1 unblocks both Work Zone tiles AND the standalone CF approuter. Even Work Zone tiles will just open white screens if §13.1 is not done first.
+
+---
+
+### 25.2 §13.6 / Task #41 — Build SAP Build Work Zone Standard Site (60 tiles)
+
+#### What Work Zone Standard is
+
+SAP Build Work Zone, standard edition (the rebranded "Launchpad Service") is a **subscription** on the `btp_cf` subaccount that produces a branded launchpad — the thing end users actually see in their browser. Each tile launches an app — either one of our 62 HTML5 apps via the Managed Application Router URL, or one of the SAP standard transaction-code tiles (VA01 etc.) via a URL into SAP GUI for HTML.
+
+#### Why we need it
+
+- End users have **no entry point** today. They reach apps via BTP Cockpit click-through, which is an admin path, not a user path.
+- Without a Work Zone Site, role-based authorization cannot be wired. Anyone with CF API access can hit any app launchpad URL.
+- The migration published Neo deliverable had a Fiori launchpad with these tiles. Replacing it with the Cockpit click-through is a regression in UX.
+
+#### Total scope: 60 tiles + supporting structure
+
+| Tile group | Count | Source URL pattern |
+|---|---|---|
+| HR7 app tiles | 27 | `https://btp-cf-8qsdli3e.launchpad.cfapps.us11.hana.ondemand.com/{dest-svc-GUID}.{cloud.service}.{cloud.service}-1.0.0/index.html` — already in §17.3 |
+| SLS app tiles | 27 | same pattern, SLS variants |
+| SAP standard tcode tiles | 6 | `https://{cc-virtual-sls-host}/sap/bc/gui/sap/its/webgui?~transaction=VA01/VA02/VA03/VL01N/VL02N/VL03N` (see §18) |
+| **Total tiles** | **60** | |
+
+Each tile is one configuration entry in Work Zone. Plus we need a Catalog (groups tiles), one or more Roles (controls who sees which catalog), and Role Collection assignments (links Roles to users).
+
+#### Current state
+
+- Work Zone Standard is **subscribed** on `btp_cf` (visible in Cockpit → Service Marketplace → Subscriptions: `SAP Build Work Zone, standard edition` — plan `foundation`, status `Subscribed`).
+- **No Site has been created.** Site Directory is empty.
+- No Catalog, no Role, no Role Collection exists yet either.
+
+#### Prerequisites before §13.6 can begin
+
+1. **§13.1 must be done first** — otherwise every tile will open a white screen because OData does not work yet.
+2. **Nikki (you)** needs the **Launchpad_Admin** role collection assigned. Assigned via Cockpit → Security → Role Collections → `Launchpad_Admin` → Edit → Users → add `nnavarro@erp-is.com`. Today this is the gating issue: you do not have access to the Work Zone admin UI.
+
+#### Steps to close §13.6 (once Nikki has Launchpad_Admin)
+
+1. **Open Work Zone admin**: Cockpit → `btp_cf` subaccount → Instances and Subscriptions → **SAP Build Work Zone, standard edition** → click "Go to Application" → opens the Site Directory.
+
+2. **Create a Site**:
+   - Site Directory → **Create Site**.
+   - Site Name: e.g. `ShipERP Apps`.
+   - Description: "ShipERP HR7/SLS/HD6 Fiori launchpad migrated from Neo".
+   - Save. The Site appears in the directory; **do not publish yet**.
+
+3. **Open Channel Manager** (inside the Site) and add three Content Providers:
+   - **HTML5 Apps**: select the Cloud Foundry HTML5 Apps provider — automatically discovers the 62 deployed apps (because they all have `crossNavigation.inbounds` in their manifests, validated in §20.1 #6). This is one click.
+   - **External URLs** (or "Manual"): for the 6 SAP tcode tiles, since they have no HTML5 manifest. Each one is a static URL tile.
+
+4. **Build a Catalog** (or several catalogs grouped by backend):
+   - Site Manager → **Content Manager** → **Catalogs** → **Create**.
+   - Recommended naming: one catalog per system, e.g. `Z_SHIPERP_HR7`, `Z_SHIPERP_SLS`, `Z_SHIPERP_HD6_TCODES`.
+   - For each catalog → **Add Content** → pick the appropriate tiles from the providers.
+
+5. **Build a Role** (or several):
+   - Content Manager → **Roles** → **Create**.
+   - Recommended: one role per system + a `Z_SHIPERP_ALL_USERS` superset role.
+   - Assign catalogs to roles. Save.
+
+6. **Assign Role Collections** (Cockpit side):
+   - Cockpit → Security → Role Collections → create `ShipERP_HR7_User`, `ShipERP_SLS_User`, etc. → add the corresponding Work Zone scope.
+   - Assign these role collections to actual users.
+   - **Tip:** the Work Zone roles you created in step 5 each get auto-mapped to a Role Template named `Launchpad_<role>`. Add that template to the appropriate Role Collection.
+
+7. **Build the Space/Page** (the actual visual layout):
+   - Site Manager → **Spaces** → **Create** → e.g. `Shipping`.
+   - Add Pages and Sections.
+   - Drag tiles from the catalogs into sections.
+   - Save.
+
+8. **Assign the Space to a Role**:
+   - Site Manager → Roles → pick role → **Spaces** tab → add the space.
+
+9. **Test as different users**:
+   - In a clean browser session, sign in as a user that has only `ShipERP_HR7_User`. Confirm: they see only HR7 tiles.
+   - Sign in as a `ShipERP_ALL_USERS` user. Confirm: they see all tiles.
+   - Click a tile. The app should open in a new window (default) or as a shell-hosted iframe (configurable).
+
+10. **Publish the Site** (Site Directory → Site → "Set as Default" + activate). The Site URL becomes the official entry point for end users — bookmark it in their browsers.
+
+#### How to verify §13.6 is closed
+
+- The Site URL is up: `https://<work-zone-host>/site#Shell-home?siteId=<id>`.
+- Logged in as a non-admin user, you see exactly the tiles assigned to your roles.
+- Clicking a tile launches the right app, the app shell renders, and (post §13.1) data loads from SAP.
+- Sign-out works; sign-in routes through the same IdP used for cockpit access.
+
+#### Time estimate
+
+- Catalogs + roles + role collection mapping: **~2 hours** once admin access is in hand.
+- Visual layout (drag-and-drop tile placement): **~1 hour** depending on how grouped you want it.
+- Testing: **~30 minutes** with two test users.
+
+Total: roughly **half a working day** for the first build. Future tile additions are minutes-each.
+
+---
+
+### 25.3 §15.2 #3 — Standalone CF approuter quota
+
+#### What the standalone CF approuter is
+
+Beyond Work Zone, there is a *direct* CF-deployed approuter (the `shiperp-fiori-test-approuter` app in our space). It is a thin Node.js wrapper around the `@sap/approuter` library, packaged the same way Work Zone packages its internal approuter. The CF refactor in commit `60a1b24` set it up to:
+
+- Bind to `html5-apps-repo-rt` (so it serves all 62 apps content)
+- Use `xs-app.json` with `authenticationMethod: "route"` + XSUAA — meaning users authenticate via the corporate IdP before any tile loads
+- Optionally bind to the per-app destinations so it can proxy OData calls through the same connectivity service Work Zone uses
+
+This is **an alternative to Work Zone**, useful in three scenarios:
+
+1. **Bypassing Work Zone for a single power user / system test** — you can hit the approuter route directly and it loads any app by URL, without needing a Site / Catalog / Role to be built first.
+2. **Custom shell or embedded scenarios** — if you ever want to embed apps in a non-SAP shell (custom portal, intranet page), the standalone approuter is the right edge.
+3. **Disaster recovery for the Work Zone Site** — if the Site config breaks during a Work Zone version migration, the standalone approuter is still up and lets admins reach apps.
+
+#### Current state
+
+The app is deployed but stopped:
+
+```
+cf apps
+name                           requested state   instances   memory   disk   urls
+shiperp-fiori-test-approuter   stopped           web:0/1
+```
+
+It cannot start because the CF org has **0 MB application memory quota, 0 instances, 0 routes**:
+
+```
+cf org-users <org> | grep <space-quota>   # shows: shiperp-default — 0 MB / 0 instances / 0 routes
+```
+
+Our MTAs (the 62 apps + HD6) do not consume runtime memory — they are all `html5` modules deployed into `html5-apps-repo`, which is a SaaS bucket, not a CF runtime app. The standalone approuter is the *only* thing in our CF space that would need actual runtime memory.
+
+#### Why it is quota-blocked, not deploy-blocked
+
+The standalone approuter has been *pushed* — `cf push` succeeded and `cf apps` lists it. The issue is the `start` step: `cf start shiperp-fiori-test-approuter` fails because the CF scheduler refuses to allocate memory when the org quota is 0.
+
+#### Who owns the work
+
+The **CF org admin** — typically whoever set up the `btp_cf` subaccount on the BTP side. They can change the space quota in BTP Cockpit → Space → Quota.
+
+#### Steps to close §15.2 #3
+
+1. **CF org admin** opens BTP Cockpit → `btp_cf` → **Cloud Foundry → Spaces** → click **DEV** space → **Quotas** tab.
+2. Either pick an existing CF quota plan that grants enough resources, or **create a new one**:
+   - Memory: at least **256 MB** (the approuter default).
+   - App instances: at least **1**.
+   - Routes: at least **1**.
+   - Service instances: a generous number (50+) since we already have ~190.
+3. Apply the quota plan to the DEV space.
+4. **Nikki**: once quota is in place, scale + start the approuter:
+   ```
+   cf scale shiperp-fiori-test-approuter -m 256M -i 1
+   cf map-route shiperp-fiori-test-approuter cfapps.us11.hana.ondemand.com -n shiperp-fiori
+   cf start shiperp-fiori-test-approuter
+   ```
+5. Confirm the route resolves:
+   ```
+   curl -I https://shiperp-fiori.cfapps.us11.hana.ondemand.com/
+   # Expected: 302 redirect to IdP login (because authenticationMethod=route + xsuaa)
+   ```
+
+#### How to verify §15.2 #3 is closed
+
+- `cf apps` shows the approuter `started` with `1/1` instance.
+- `https://shiperp-fiori.cfapps.us11.hana.ondemand.com/comerpisshiperpquickpackecc/index.html` requires login → after login, serves the app HTML.
+- Same URL inside Work Zone (if built) opens the app via the standalone approuter instead of the Managed App Router.
+
+#### Time estimate
+
+- Quota change: **5 minutes** for an admin who knows where to click.
+- Scale + start + smoke-test: **10 minutes**.
+
+Total: ~15 minutes once the admin is engaged.
+
+#### Why this is the lowest-priority of the three
+
+- Today everyone reaches apps via the Managed Application Router URLs (the cockpit click-through and the URLs in `launch.json`).
+- Work Zone (§13.6) covers the production end-user case.
+- The standalone approuter is essentially a backup / power-user path. It is good hygiene to fix but the migration success does not depend on it.
+
+---
+
+### 25.4 Recommended order of operations
+
+1. **§13.1 first** — it unblocks every backend OData call. Without it, both Work Zone and the standalone approuter just open white screens. This is the only true blocker.
+2. **§13.6 second** — gives end users a real entry point. Time-consuming but well-scoped now (§13.6 lists the exact tile inventory).
+3. **§15.2 #3 last** — nice to have, but the cockpit click-through and the standalone Managed App Router URLs already cover the access scenarios.
+
+Once all three are done, end users can:
+- Open their browser bookmark
+- See a branded Fiori launchpad with their authorized tiles
+- Click any tile
+- Authenticate (if not already)
+- Use the app with live SAP data
+
+That is the finish line.
+
+---
+
+*Last updated: 2026-06-10 — §25 deep-dive added for the three remaining external open items (§13.1 CC mappings, §13.6 Work Zone Site, §15.2 #3 CF approuter quota). Each section includes what the item is, why it matters, current state, who owns it, exact step-by-step actions, verification criteria, and time estimate. §25.4 recommends the order: §13.1 → §13.6 → §15.2 #3.*
