@@ -56,6 +56,7 @@
 27. [Clean destination architecture (subaccount-level) (2026-06-10)](#27--clean-destination-architecture-subaccount-level)
 28. [Fourth review fix pass (2026-06-10)](#28--fourth-review-fix-pass-2026-06-10)
 29. [Four-layer test sweep across all 62 apps (2026-06-10)](#29--four-layer-test-sweep-across-all-62-apps-2026-06-10)
+30. [BAS workspace verified live (2026-06-11)](#30--bas-workspace-verified-live-2026-06-11)
 
 ---
 
@@ -2690,6 +2691,72 @@ Run this checklist in BAS to confirm on your side:
 
 - Actual OData round-trip from HR7 / SLS / HD6 — needs VPN to the SAP network *and* a `SLS_PROXY_URL` / `HD6_PROXY_URL` configured locally. The CC tunnel half is already proven in §26.
 - UI rendering inside a browser — needs a logged-in SSO session that can only be driven from your machine.
+
+---
+
+## §30 — BAS workspace verified live (2026-06-11)
+
+Drove the BAS session directly via the connected Chrome browser (Theia in `ws-gvpy5`, `work_cloud_foundry` workspace). Findings, fixes, and confirmations.
+
+### §30.1 — State on arrival
+
+- BAS was checked out on a branch called **`bas-dev`** at commit `30ba6f5` (§22 review-fix #2), with **uncommitted local autoformat-on-save changes** to `.vscode/launch.json` (5346 lines reformatted) and `.vscode/tasks.json` (2 lines).
+- BAS `main` branch was at `4b864e5` (tag `deployed-us11-dev-2026-05-27`) on top of `ae23678 Initial import` — a **separate history line** from `origin/main` (not an ancestor at all). BAS main was effectively a May-27 snapshot, **86 commits behind** origin/main *and* 2 commits ahead on the disconnected history.
+- File tree confirmed the staleness: explorer showed `xs-security-cancelshipment.json` / `xs-security-cancelhr7.json` (pre-§12/§13 renames) instead of the current `*ecc.json` / `*ewm.json` names.
+
+### §30.2 — Sync sequence
+
+1. `git stash push -m 'pre-pull autoformat from BAS' .vscode/launch.json .vscode/tasks.json` — preserved the BAS-side reformat so nothing was thrown away unseen.
+2. `git checkout main` — switched off `bas-dev`.
+3. `git tag bas-main-snapshot-2026-05-27 4b864e5` — pinned the 2 disconnected commits so they remain reachable forever via the tag, even after the next step.
+4. `git reset --hard origin/main` — rewrote BAS main to match `origin/main` at `49192fa`.
+5. `git stash drop` — dropped the autoformat stash. The reformatting was just pretty-printing of the same JSON; the post-sync launch.json (with all 187 cross-platform entries from §29.5) is correct.
+
+After this, BAS `main` = `49192fa` (latest). File explorer refreshed to the current naming. `git branch -vv` confirmed `bas-dev` still at `30ba6f5` (kept for reference, unchanged); `main` at `49192fa [origin/main]`.
+
+### §30.3 — Verification on BAS
+
+Run from BAS terminal:
+
+```
+$ node --version
+v22.13.1
+
+$ node scripts/validate-deployed-apps.js
+Validation passed.
+HR7 apps: 27
+SLS apps: 27
+Total deployed app definitions: 54
+
+$ node scripts/validate-hd6-apps.js
+HD6 validation passed.
+HD6 apps: 8
+```
+
+Both static validators pass on BAS with the same Node 22 runtime — confirms `scripts/validate-*` are pure Node and have no Windows-isms.
+
+### §30.4 — BAS-side notes
+
+- The `bas-dev` branch is left in place at `30ba6f5`. It is not pushed and has no upstream — if no longer needed, delete it on BAS with `git branch -D bas-dev`. Recommended to delete after confirming nothing on it is still wanted.
+- Tag `bas-main-snapshot-2026-05-27` is local to BAS only. If you want it on origin too, push it explicitly with `git push origin bas-main-snapshot-2026-05-27`.
+- BAS auto-formats `launch.json` / `tasks.json` on save. If anyone hand-edits one of those files in BAS, the next save will rewrite every line — the diff will be huge but semantically equal. Tip: either avoid in-BAS edits to those files, or normalize the formatter and the script-generated output so future commits show only real changes.
+
+### §30.5 — Cockpit confirmations (same session)
+
+While the BAS tab was open I also browsed the `btp_cf` subaccount → Instances and Subscriptions in the BTP cockpit. Two relevant signals:
+
+- **SAP Business Application Studio** subscription: `Subscribed` (since `Apr 11, 2025`), plan `standard-edition`.
+- **SAP Build Work Zone, standard edition** subscription: `Subscribed` (since `May 13, 2026`), plan `foundation`. This is the subscription that unblocks task #41 / §13.6 (build the Work Zone Site with 60 tiles). The Subscription tile is reachable from Cockpit → btp_cf → Instances and Subscriptions → Subscriptions.
+- Instances count: 191 — consistent with 62 apps × roughly 3 services each (app-host, destination, xsuaa) plus the standalone approuter runtime + a few build services.
+
+### §30.6 — What still needs a human
+
+- **Click-through end-to-end inside BAS** (open a Local Source / CF entry → see UI render → fire an OData call → see backend data). This needs an authenticated browser session on the launchpad and, for the OData call, either VPN to HR7 or the CC tunnel to be backed by an authorized `USER_CF` on the SAP backend. The deploy plane + the routing config are all confirmed clean (§29.1–§29.5 + §30.3); the only remaining verification is the actual data render, which is best done by you.
+- The BAS tab renderer hung after the validator run (screenshot timed out repeatedly), so I could not drive further in-IDE actions from here. The cockpit tab in the same browser stayed responsive, which is a pure BAS UI hiccup, not a project issue.
+
+---
+
+*Last updated: 2026-06-11 — §30 closes the BAS layer. BAS `ws-gvpy5` is now synced to `origin/main` at `49192fa`; both static validators pass (54/54 + 8/8) on Node v22.13.1. The disconnected 2-commit BAS-only history was preserved as `bas-main-snapshot-2026-05-27` before reset. SAP Build Work Zone subscription confirmed live, which unblocks #41 from a subscription standpoint.*
 
 ---
 
