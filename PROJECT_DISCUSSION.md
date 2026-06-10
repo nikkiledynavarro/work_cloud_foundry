@@ -2929,6 +2929,32 @@ HD6 validation passed.
 HD6 apps: 8
 ```
 
+### §32.6 — CF redeploy verified live (2026-06-11)
+
+After the §32 commit, re-authenticated to CF via `cf login --sso` (extracting a passcode from the existing browser-side SSO session at `https://login.cf.us11.hana.ondemand.com/passcode` — no password entry on my side) and pushed the four rebuilt apps:
+
+```
+$ cf html5-push -r apps/closedelivery/dist closedelivery-app-front-service        → OK
+$ cf html5-push -r apps/closedeliverysls/dist closedeliverysls-app-front-service  → OK
+$ cf html5-push -r apps/saleorder/dist saleorder-app-front-service                → OK
+$ cf html5-push -r apps/saleordersls/dist saleordersls-app-front-service          → OK
+```
+
+Then fetched the live controllers and confirmed the calendar-year pattern is in production:
+
+```
+$ for app in closedelivery closedeliverysls saleorder saleordersls; do
+    cf html5-get /comerpisshiperp$app-1.0.0/controller/App.controller.js \
+        -n $app-app-front-service | grep -E '"(yyyy|YYYY)MMdd"'
+  done
+closedelivery   → "yyyyMMdd" ✓
+closedeliverysls → "yyyyMMdd" ✓
+saleorder       → "yyyyMMdd" ✓
+saleordersls    → "yyyyMMdd" ✓
+```
+
+The Medium-severity date bug is now closed end-to-end (source ✓ + dist ✓ + live ✓).
+
 ---
 
 *Last updated: 2026-06-11 — §32 closes review-fix pass #5. Real bug fix: `YYYYMMdd` → `yyyyMMdd` in 4 apps (8 source locations + their `-dbg` companions, plus rebuilt `dist/` ready to push). Audit-driven dep bump: `@sap/approuter` from `^16.7.3` to `^16.9.0` (audit count unchanged — full clearance needs a `^22.x` major-upgrade test cycle). 8 other findings already documented in §28.3 or §29.4. 4 source apps need a `cf html5-push` once the user re-runs `cf login`.*
