@@ -5,7 +5,7 @@
         {
             "source": "^/sap/opu/odata/(.*)$",
             "target": "/sap/opu/odata/$1",
-            "destination": "virtual-erps4sales-destination",
+            "destination": "shiperp-virtual-erps4sales-destination",
             "authenticationType": "xsuaa",
             "csrfProtection": false
         },

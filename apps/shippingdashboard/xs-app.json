@@ -5,14 +5,14 @@
         {
             "source": "^/sap/opu/odata/(.*)$",
             "target": "/sap/opu/odata/$1",
-            "destination": "virtual-hr7-destination",
+            "destination": "shiperp-virtual-hr7-destination",
             "authenticationType": "xsuaa",
             "csrfProtection": false
         },
         {
             "source": "^/virtual-hr7-destination/(.*)$",
             "target": "/$1",
-            "destination": "virtual-hr7-destination",
+            "destination": "shiperp-virtual-hr7-destination",
             "authenticationType": "xsuaa",
             "csrfProtection": false
         },
