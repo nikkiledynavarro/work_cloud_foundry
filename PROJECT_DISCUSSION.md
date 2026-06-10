@@ -2512,7 +2512,7 @@ External code review #4 (post-§27 migration). 15 findings — 6 fixed, 2 deferr
 
 ### §28.2 — Deferred (destructive CF ops — needs explicit go-ahead)
 
-Both were audited and confirmed safe in principle, but the user chose to leave them for a later pass.
+**Update 2026-06-11: both cleanups executed successfully.** See §28.2.x below the lists for the run result.
 
 **Extra service keys on 8 destination-service instances:**
 
@@ -2532,6 +2532,15 @@ These were created during the migration sweep work in §21.1 / §45 and are not 
 **Orphan HTML5 app-host:**
 
 `comerpisshiperpquickpackecc-app-host-1781091269` (GUID `f4dbf233-55e5-458c-9deb-35cfd87f41ba`) is `INITIAL` state, `0 bytes` used, contains zero HTML5 apps, has one orphaned `html5-key-1781091272`. The active `quickpackecc` app lives in `quickpackecc-app-front-service` (GUID `bfbf9ab2-…`). Deleting the orphan removes one extra service instance + its key. Command shape: `cf delete-service-key -f comerpisshiperpquickpackecc-app-host-1781091269 html5-key-1781091272 && cf delete-service -f comerpisshiperpquickpackecc-app-host-1781091269`.
+
+### §28.2.x — Execution result (2026-06-11)
+
+Both cleanups executed successfully:
+
+- 8 / 8 extra service keys deleted (the 7 `backend-destinations-admin-key` entries on `cancelpickuprequest`, `freightauditupload`, `ltlplanning`, `manualshipmentewm`, `requestforpickup`, `submitacefiling`, `viewacefiling`, plus the 1 `local-approuter-key` on `closedelivery`). Verified gone via `cf service-keys {app}-destination-service`.
+- Orphan app-host `comerpisshiperpquickpackecc-app-host-1781091269` and its `html5-key-1781091272` deleted. Verified gone via `cf services | grep`.
+
+After this cleanup, every per-app `destination-service` instance carries only the MTA-managed key (`{app}-destination-content-{app}-destination-service-credentials`), and there are no orphan `app-host` service instances in the space. The `quickpackecc` app continues to serve from `quickpackecc-app-front-service` (GUID `bfbf9ab2-…`) unaffected.
 
 ### §28.3 — Documented as acceptable / out-of-scope
 
