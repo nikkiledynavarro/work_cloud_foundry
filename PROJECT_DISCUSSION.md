@@ -51,6 +51,7 @@
 22. [Second review fix pass (2026-06-10)](#22-second-review-fix-pass-2026-06-10)
 23. [§13.9 + §13.10 closeout (2026-06-10)](#23-139--1310-closeout-2026-06-10)
 24. [Third review fix pass (2026-06-10)](#24-third-review-fix-pass-2026-06-10)
+25. [Remaining open items — deep dive](#25-remaining-open-items--deep-dive)
 
 ---
 
