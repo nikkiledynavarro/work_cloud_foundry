@@ -63,6 +63,7 @@
 34. [Browser-render + OData round-trip verified for all 62 apps (2026-06-11)](#34--browser-render-layer--odata-round-trip-now-verified-for-all-62-apps-2026-06-11)
 35. [**MASTER REFERENCE** — everything in one place (2026-06-11)](#35--master-reference-everything-in-one-place-2026-06-11)
 36. [Full 65-OData-service sweep — 51/65 OK + 14 SAP-basis activations (2026-06-11)](#36--full-65-odata-service-sweep-2026-06-11)
+37. [Closed pending items 5 + 7 — npm test stubs + version-bump helper (2026-06-11)](#37--closed-pending-items-5--7-realistic-medium-2026-06-11)
 
 ---
 
@@ -3648,6 +3649,34 @@ The `cf html5-push -r` (redeploy) flag is needed because `html5-apps-repo` rejec
 
 Use the script template in §33.2 (`/tmp/phase2.sh`). It builds, packages, and pushes per app in sequence. Takes ~45–60 min for a clean run with all SAPUI5 deps already cached.
 
+#### Bump versions across all 62 apps + 2 MTAs (review-fix #5 item 7)
+
+Single command — the script handles the 62 `package.json` files + both `mta.yaml` and `mta-hd6.yaml` in lockstep:
+
+```
+$ node scripts/bump-version.js patch          # 1.0.0 -> 1.0.1 + MTAs 0.0.1 -> 0.0.2
+$ node scripts/bump-version.js minor           # bumps minor
+$ node scripts/bump-version.js major           # bumps major
+$ node scripts/bump-version.js patch --dry-run # print what would change, write nothing
+```
+
+**Caveat for CF deploys.** The version bump only affects source-tree metadata, not the CF-served URL. The launchpad path `comerpisshiperp{app}-1.0.0/index.html` is keyed on `sap.app.applicationVersion.version` inside `manifest.json`, not `package.json`'s `version`. If the team later wants the URL path to bump too (which would create new `comerpisshiperp{app}-1.0.1/` paths in `html5-apps-repo` alongside the existing `1.0.0/`), an extra step is needed: also bump `manifest.json`'s `sap.app.applicationVersion.version` field for every app, plus run a full mass-redeploy. The current script intentionally does **not** touch `manifest.json` so it's a no-risk metadata bump.
+
+#### Run `npm test` for an app (review-fix #5 item 5)
+
+After 38f3f66 every app's `package.json` has a `"test"` script:
+
+```
+$ cd apps/<app>
+$ npm test
+```
+
+For the **21 apps with QUnit test files** (`apps/<app>/test/testsuite.qunit.html` exists), the script prints `See test/testsuite.qunit.html — no headless runner wired …` and exits 0. The actual tests are reachable via `npm start` + browser navigation to the QUnit suite URL — interactive only until a headless runner is wired (item 7 on the next pass).
+
+For the **41 apps without tests**, the script prints `No tests configured` and exits 0.
+
+Both styles exit 0 so a future `for app in apps/*; do (cd $app && npm test); done` in CI passes without false positives.
+
 #### Rotate `USER_CF` password
 
 Now a 3-destination operation (was a 62-instance sweep before §27):
@@ -4011,7 +4040,100 @@ Nothing on this list is a code or BTP-config defect. The SLS/HD6 OData gaps are 
 
 ---
 
-*Last updated: 2026-06-11 — §36 closes the OData-coverage gap that §35 master reference still had. Sweep of every one of the 65 declared OData services across all 60 apps that declare any returned 51 OK + 14 SAP-side errors. Every one of the 14 is `/IWFND/MED/170 No service found for namespace` — meaning the BTP / CC plumbing delivered the request and the SAP backend itself answered that the OData service isn't registered. 13 of 14 are SLS-side gaps (10 distinct services); 1 is the HD6 farpthd6 secondary service. All addressable by the SAP basis team via `/IWFND/MAINT_SERVICE` registration on the respective backends — no code or configuration change needed on the project side.*
+---
+
+## §37 — Closed pending items 5 + 7 (realistic medium) (2026-06-11)
+
+User asked to close the "future scope" pending items 5 (npm test scripts) and 7 (versioning pipeline) at the realistic level — meaning wire enough that `npm test` doesn't lie or crash, and ship a single helper for version bumps; explicitly **not** trying to make broken tests pass or rebase all 33 UI5-debt apps onto a modern version (item 6, which stays open as multi-week scope).
+
+### §37.1 — Item 5 closed: `npm test` script in every one of the 62 apps
+
+**Pre-fix audit:**
+
+- 21 apps already had `test/testsuite.qunit.html` files in the source tree (QUnit suite entry).
+- 41 apps had no `test/` directory at all.
+- 62 / 62 had **no `"test"` script** in `package.json` — `npm test` would print `npm ERR! Missing script: test`.
+
+**Fix applied (commit `38f3f66`):**
+
+For the 21 apps with QUnit tests, `package.json` gains:
+
+```json
+"test": "echo \"See test/testsuite.qunit.html — no headless runner wired (review-fix #5 item 7). Tests reachable manually via 'npm start' + browser navigation.\" && exit 0"
+```
+
+For the 41 apps without tests, `package.json` gains:
+
+```json
+"test": "echo \"No tests configured (review-fix #5 item 7).\" && exit 0"
+```
+
+Both exit 0 so CI doesn't fail for missing scripts. The 21 informative messages tell future readers exactly where the QUnit files are and what's missing to make them runnable headlessly.
+
+**What this deliberately does NOT do:**
+
+- Add `karma-qunit`, `qunit-puppeteer`, or any other headless test runner. That's a per-app integration decision — some apps' tests are stale enough they'll fail when first run; others need mock data setup. Each needs human review.
+- Make any existing test pass or fail differently than it does today. The QUnit suites in source are unchanged.
+
+The closed-out item makes future CI integration a configuration change (swap the `echo` for the runner command) rather than a from-scratch setup.
+
+### §37.2 — Item 7 closed: `scripts/bump-version.js` helper
+
+**Pre-fix state:** all 62 apps at `package.json` version `1.0.0`; both MTAs at `0.0.1`. No tool to bump them in lockstep, so doing a `patch` bump by hand meant editing 64 files individually with the same change. No deployment / rollback story.
+
+**Fix applied (commit `38f3f66`):** new file `scripts/bump-version.js`, ~70 lines, pure Node (no deps). Usage:
+
+```
+$ node scripts/bump-version.js patch          # 1.0.0 → 1.0.1 + MTAs 0.0.1 → 0.0.2
+$ node scripts/bump-version.js minor          # bumps minor field, zeroes patch
+$ node scripts/bump-version.js major          # bumps major, zeroes minor + patch
+$ node scripts/bump-version.js patch --dry-run  # show what would change, write nothing
+```
+
+Touches: all 62 `apps/<app>/package.json` + `mta.yaml` + `mta-hd6.yaml`. 64 entries per run. Smoke-tested locally with a `patch` round-trip (1.0.0 → 1.0.1 → 1.0.0) before commit.
+
+**Caveat documented in §35.7:** the script intentionally does **not** touch `sap.app.applicationVersion.version` inside `manifest.json`. That field is what determines the launchpad path `comerpisshiperp{app}-<version>/index.html` in `html5-apps-repo`. Bumping it would create a second app-host entry under the new version path on the next `cf html5-push -r` while the old `1.0.0/` stays around — useful for staged rollouts, problematic for "I just want clean metadata." The team can decide later whether to extend the helper or do that bump as a separate step.
+
+### §37.3 — Item 6 explicitly stays open (not in scope for this pass)
+
+`@ui5/cli ^3.11.0` audit ~25 dev vulns / 19 high per app; 32 apps still declare UI5 `1.42.0`; `farpthd6` declares `1.30.0`; source still uses `jQuery.sap.*`, `sap.ui.getCore()`, `sap.ui.xmlfragment`, sync JSON loading, `sap_belize` theme assumptions. Closing this properly is **1–2 weeks of UI5-experienced developer time** because each deprecated API call needs to be rewritten and the apps re-tested. Bumping `minUI5Version` in `manifest.json` without rewriting the deprecated code would make every app crash on load.
+
+The honest answer is no, this is not closeable in a session; tracked as future scope. If you want a forward-motion artifact without doing the full work, the next-step play is to run `@ui5/linter` against all 33 affected apps and produce a per-app deprecation report so the team has a sized backlog — that's ~30 min and changes no code. Not done here; tagging it as Item 6.1 for the day someone picks this up.
+
+### §37.4 — Final pending-items table (post-§37)
+
+10 → 8 items. Items 5 + 7 closed in code.
+
+| # | Item | Owner |
+|---|---|---|
+| 1 | **Work Zone Site (#41)** | You (3 min role grant) → me (~90 min UI drive) |
+| 2 | Standalone CF approuter | CF org admin (quota) |
+| 3 | Isolated CC Location ID | IT (new physical CC instance) |
+| 4 | Rotate `USER_CF` credential | SAP basis team |
+| ~~5~~ | ~~`npm test` scripts~~ | ✅ **Closed §37.1** |
+| 6 | UI5 1.42 / 1.30 modernization | Future scope (1-2 weeks) |
+| ~~7~~ | ~~Versioning pipeline~~ | ✅ **Closed §37.2** (helper shipped; pipeline integration still open as the larger story) |
+| 8 | **Activate 10 OData services on SLS** | SAP basis (§36.3) |
+| 9 | **Activate `ZP_ODAT_FA_RPT_SRV` on HD6** | SAP basis (§36.3) |
+| 10 | Stale `apps/` directories | Future cleanup |
+
+Nothing on this list is a code defect. Items 1, 4, 6, 8, 9, 10 are either RBAC (1), basis-team work (4, 8, 9), or scoped future projects (6, 10). Items 2 + 3 are infrastructure provisioning (CF quota, new physical CC).
+
+### §37.5 — Sync state
+
+| Layer | HEAD |
+|---|---|
+| Windows local | `<this commit>` |
+| GitHub `origin/main` | `<this commit>` (pushed) |
+| BAS workspace | will be at HEAD after the `git pull` driven during §37 close |
+
+---
+
+*Last updated: 2026-06-11 — §37 closes pending items 5 + 7 at the "realistic medium" depth: every app has a `"test"` script (21 with QUnit-aware stubs, 41 with no-tests stubs, all exit 0), and a single `scripts/bump-version.js` helper bumps all 62 apps + 2 MTAs in lockstep. Item 6 (UI5 1.42 modernization) stays open as multi-week scope; explicitly not attempted. Final pending list shrinks from 10 to 8 items, none of which is a code defect.*
+
+---
+
+*Previously — 2026-06-11 — §36 closes the OData-coverage gap that §35 master reference still had. Sweep of every one of the 65 declared OData services across all 60 apps that declare any returned 51 OK + 14 SAP-side errors. Every one of the 14 is `/IWFND/MED/170 No service found for namespace` — meaning the BTP / CC plumbing delivered the request and the SAP backend itself answered that the OData service isn't registered. 13 of 14 are SLS-side gaps (10 distinct services); 1 is the HD6 farpthd6 secondary service. All addressable by the SAP basis team via `/IWFND/MAINT_SERVICE` registration on the respective backends — no code or configuration change needed on the project side.*
 
 ---
 
