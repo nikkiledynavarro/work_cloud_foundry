@@ -66,6 +66,7 @@
 36. [Full 65-OData-service sweep — 51/65 OK + 14 SAP-basis activations (2026-06-11)](#36--full-65-odata-service-sweep-2026-06-11)
 37. [Closed pending items 5 + 7 — npm test stubs + version-bump helper (2026-06-11)](#37--closed-pending-items-5--7-realistic-medium-2026-06-11)
 38. [Sixth review fix pass — CI + README + key cleanup + reconciliation (2026-06-11)](#38--sixth-review-fix-pass-2026-06-11)
+39. [BTP / CF / Cloud Connector configuration snapshot (2026-06-11)](#39--btp--cf--cloud-connector-configuration-snapshot-2026-06-11)
 
 ---
 
@@ -4193,7 +4194,81 @@ The OData round-trip pending items (8 + 9) and Work Zone Site (#1) and UI5 moder
 
 ---
 
-*Last updated: 2026-06-11 — §38 closes review-fix pass #6. Five valid in-session fixes landed: deleted 62 redundant `*-app-front-service-key` CF service keys (251 → 189 keys total), reconciled the Work Zone tile count from 60 to 68 across all current-state tables, rewrote the front-matter header to current state (was stuck at commit `30ba6f5` + CC-blocker era), fixed `mta-hd6.yaml` stat noise, and added `.github/workflows/ci.yml` (validators + JSON parse + `npm test` smoke + version-bump dry-run). Bonus: added a `README.md` at repo root as the GitHub entry point. Six re-asserted findings already documented as intentional. Pending-item count stays at 8 — this pass closed *adjacent* friction items, not the 8 organizational / future-scope items in §35.8.*
+---
+
+## §39 — BTP / CF / Cloud Connector configuration snapshot (2026-06-11)
+
+User asked for a backup of every BTP / CF / CC configuration produced by this project, so that the deployed state has a known reference point outside the cockpit / Cloud Connector admin UIs (which only show "current state" and have no version control).
+
+### §39.1 — How the snapshot works
+
+Added `scripts/dump-btp-cf-cc-snapshot.py`. Run it whenever you want a fresh capture:
+
+```
+$ python scripts/dump-btp-cf-cc-snapshot.py
+Wrote docs/btp-cf-cc-snapshot.md (≈ NN KB)
+```
+
+The script walks live state via:
+
+- `cf target` — current org / space
+- `cf services` — every service instance in the space (191 instances after §38.1's 62-key cleanup)
+- `cf curl /v3/service_credential_bindings?per_page=1000` — every service key + app binding (189 keys after §38.1)
+- Destination-service REST API (`https://destination-configuration.cfapps.us11.hana.ondemand.com/destination-configuration/v1/`) for both subaccount destinations (3) and per-app instance destinations (62 × 2 entries each)
+- The Cloud Connector mappings (3) are documented inline from the §26.9 verified config since the script doesn't store CC admin credentials
+
+### §39.2 — What the snapshot file `docs/btp-cf-cc-snapshot.md` contains
+
+| # | Section | Source |
+|---|---|---|
+| 1 | CF target (org / space) | `cf target` |
+| 2 | CF services (instances) | `cf services` |
+| 3 | CF service keys | `cf curl /v3/service_credential_bindings` |
+| 4 | Subaccount-level destinations — full property dump per destination (`Name`, `URL`, `Authentication`, `User`, `ProxyType`, `HTML5DynamicDestination`, `WebIDEEnabled`, `WebIDEUsage`, etc.) | Destination API subaccountDestinations endpoint |
+| 5 | Instance-level destinations — per-app list of what's in each `{app}-destination-service` | Destination API instanceDestinations endpoint, called 62 times |
+| 6 | Cloud Connector mappings + resources | §26.9 documented config (matches the live CC at `https://erpslm1.erp-is.com:8443/`) |
+| 7 | Service-instance to app mapping table | Static — derived from the 62-app inventory + 3 services per app |
+
+Passwords are redacted as `«REDACTED»` (the script does the substitution before writing). The destination metadata still includes the value of `User` (`USER_CF` — public service-account identifier, not a secret in itself). The CC mapping table includes the virtualHost / localHost / port pairs from §26.9 (no credentials there to redact).
+
+### §39.3 — Why this is sufficient as a backup
+
+The deployable state of the project is reconstructible from:
+
+| Component | Where it's already version-controlled | Where the snapshot helps |
+|---|---|---|
+| App source code | Git repo (62 × `apps/<app>`) | n/a — snapshot doesn't duplicate |
+| MTA definitions | `mta.yaml`, `mta-hd6.yaml` | n/a — version-controlled |
+| Deployment manifest fields (`sap.app.id`, `sap.cloud.service`, etc.) | `manifest.json` per app | n/a — version-controlled |
+| Subaccount destinations | **Only in BTP** | ✅ §4 of snapshot — every property, every destination |
+| Per-app destination-service entries | **Only in BTP** | ✅ §5 of snapshot |
+| CC mappings + resources | **Only in CC admin** | ✅ §6 of snapshot |
+| CF service-instance shape | Derived from MTA at deploy time, but actual GUIDs / keys live in CF | ✅ §2, §3, §7 of snapshot |
+
+If the BTP subaccount were ever rebuilt from scratch, the path would be: `cf deploy mta_archives/shiperp-fiori-cf-migration_0.0.1.mtar` (recreates everything in §2 / §7), then the §39 snapshot file is the authoritative source for re-creating the 3 subaccount destinations (§4) and 3 CC mappings (§6) by hand or by re-running §26.2 + §27.3 procedures from the master reference (§35.4 / §35.5).
+
+### §39.4 — Running periodically
+
+For an audit trail, run the script after any change to the deployed state. Commit the resulting `docs/btp-cf-cc-snapshot.md` so the git history shows when destinations / keys / mappings change. (The file is small — current capture is well under 100 KB.)
+
+Suggested cadence (not implemented as a hook, just convention):
+
+- After every CF deploy or destination edit
+- Before any planned destructive change (so there's a clean rollback target)
+- Monthly otherwise — proves nothing drifted
+
+### §39.5 — Files added
+
+- `scripts/dump-btp-cf-cc-snapshot.py` — the capture script (~250 lines, pure stdlib + `cf` CLI)
+- `docs/btp-cf-cc-snapshot.md` — the first captured snapshot (this commit)
+
+---
+
+*Last updated: 2026-06-11 — §39 adds a periodic-backup-style capture of every BTP / CF / Cloud Connector configuration the project produced. The state of the deployed system that isn't in `manifest.json` / `xs-app.json` / `mta.yaml` (so: subaccount destinations, instance destinations, CC mappings, service-instance shape, service keys) now lives in `docs/btp-cf-cc-snapshot.md`, regenerable via `python scripts/dump-btp-cf-cc-snapshot.py`. Disaster-recovery + audit + drift-detection in one ~250-line script.*
+
+---
+
+*Previously — 2026-06-11 — §38 closes review-fix pass #6. Five valid in-session fixes landed: deleted 62 redundant `*-app-front-service-key` CF service keys (251 → 189 keys total), reconciled the Work Zone tile count from 60 to 68 across all current-state tables, rewrote the front-matter header to current state (was stuck at commit `30ba6f5` + CC-blocker era), fixed `mta-hd6.yaml` stat noise, and added `.github/workflows/ci.yml` (validators + JSON parse + `npm test` smoke + version-bump dry-run). Bonus: added a `README.md` at repo root as the GitHub entry point. Six re-asserted findings already documented as intentional. Pending-item count stays at 8 — this pass closed *adjacent* friction items, not the 8 organizational / future-scope items in §35.8.*
 
 ---
 
