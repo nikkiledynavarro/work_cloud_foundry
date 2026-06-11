@@ -3780,7 +3780,65 @@ Estimated effort: 1–2 weeks for someone familiar with UI5 patterns.
 
 Pairs naturally with item 5 (CI pipeline).
 
-#### Item 8 — Stale `apps/` directories
+#### Item 8 — Activate 10 OData services on the SLS S/4HANA backend (new from §36)
+
+**State:** the SLS S/4HANA system at `erps4sales.erp-is.com:50000` is missing 10 OData service registrations that the HR7 system already has. Discovered during the §36 full sweep — every one of the 14 failing services returned the SAP-emitted error `/IWFND/MED/170 No service found for namespace`, which is IWFND (the SAP Gateway service-discovery layer) saying it has no registration for that service on this system.
+
+**Why pending:** OData service registration on a Netweaver / S/4HANA system is a basis-team task; can't be done from outside SAP. The chain on the BTP side is provably clean (the request reaches SAP, SAP answers with its own error code) — fix is on the SAP backend, not in this project.
+
+**Diagnosis evidence (§36.3):** every one of these 10 services has a *working twin on HR7*. Same service path, same destination shape, same managed-approuter route — only the backend host differs. That cinches it.
+
+**The 10 services and the 13 affected apps:**
+
+| Service path | SLS apps that fetch it |
+|---|---|
+| `/sap/opu/odata/serperp/ace_srv/` | `cancelacefilingsls`, `submitacefilingsls`, `viewacefilingsls` |
+| `/sap/opu/odata/serperp/rfp_srv/` | `cancelpickuprequestsls`, `requestforpickupsls` |
+| `/sap/opu/odata/serperp/carrperf_srv/` | `carrierperformancereporteccsls` |
+| `/sap/opu/odata/serperp/ewm_cp_srv` | `carrierperformancereportewmsls` |
+| `/sap/opu/odata/sap/zerpis_close_delivery_srv/` | `closedeliverysls` |
+| `/sap/opu/odata/serperp/shipewm_v2_srv/` | `createshipmentv2ewmsls` |
+| `/sap/opu/odata/serperp/fa_upl_srv/` | `freightaudituploadsls` |
+| `/sap/opu/odata/serperp/ltlplan_srv/` | `ltlplanningsls` |
+| `/sap/opu/odata/serperp/ewm_tuv_srv/` | `planshipmentsls` |
+| `/sap/opu/odata/serperp/ewm_qp_srv/` | `quickpackewmsls` |
+
+**User-visible symptom of leaving this open:** the 13 SLS apps will load (UI shell + manifest + controllers render fine; that's the layer 7 / §34.2 verification working), but the moment a user clicks a tile that triggers an OData call, the call returns `/IWFND/MED/170` and the screen shows whatever error banner the controller wires up for the failing model. The 14 HR7 twins are unaffected.
+
+**Steps to close:**
+
+1. SAP basis user logs into the SLS S/4HANA system (`erps4sales.erp-is.com:50000`) as a user with `S_RFC` + service-activation authorization.
+2. Transaction `/IWFND/MAINT_SERVICE`.
+3. For each of the 10 services above:
+   - Click *Add Service*.
+   - Enter the technical-name pattern matching the HR7 registration. The shorthand path in our project is `/sap/opu/odata/serperp/<name>/`; in `/IWFND/MAINT_SERVICE` the lookup field uses just the `<name>` portion (e.g. `ACE_SRV`, `RFP_SRV`, `ZERPIS_CLOSE_DELIVERY_SRV`).
+   - Pick *System Alias* = `LOCAL` (or whatever the SLS system uses for self-hosted services).
+   - Save, then *Activate*.
+4. Re-run the §36.5 reproduction script in any SSO-active launchpad tab. Watch the `SAP_ERR_/IWFND/MED/170` bucket move from 14 down to 1 (only the HD6 entry should remain).
+5. Spot-check one app per newly activated service in the browser — fetching `<launchpad-url>/<service>$metadata` should now return `<edmx:Edmx>` XML, and clicking the corresponding tile should show real data instead of an error banner.
+
+Estimated effort: ~1 hour of basis time once they sit down to do it. Each registration is essentially a single Add-Service form.
+
+#### Item 9 — Activate `ZP_ODAT_FA_RPT_SRV` on the HD6 backend (new from §36)
+
+**State:** `farpthd6` ("Freight Audit Report HD6") has two OData services in its manifest: `ZP_ODAT_FA_RPT_SRV` (returns `/IWFND/MED/170` — not activated) and `ZP_DASHBOARD_SRV` (returns 200 OK — works). The app loads and the dashboard view renders, but the report-detail view that consumes `ZP_ODAT_FA_RPT_SRV` will fail until activation.
+
+**Why pending:** same as Item 9 — SAP basis registration only.
+
+**Difference from Item 9:** HD6 is `erps4sales` … wait, HD6 is the S/4HC Cloud Dev system at `s4hd6.erp-is.com:8001`, *not* the on-prem ABAP NetWeaver system. S/4HC service activation goes through *Communication Arrangements* in the Fiori app "Display Communication Arrangements", not `/IWFND/MAINT_SERVICE`. Steps below reflect that.
+
+**Steps to close:**
+
+1. SAP basis user logs into the HD6 S/4HC system as a user with the `SAP_BR_ADMINISTRATOR` or equivalent role.
+2. Open the *Display Communication Arrangements* Fiori app, find the existing arrangement for the OData scenario that exposes ShipERP services to BTP. (If none exists, see step 3 alternative.)
+3. Edit the arrangement → *Inbound Services* tab → add `ZP_ODAT_FA_RPT_SRV` to the allowed-services list → Save.
+   - Alternative if no existing arrangement: create a new Communication Scenario in the customer namespace (`Z_…`) that publishes `ZP_ODAT_FA_RPT_SRV`, then a Communication Arrangement using that scenario, then add the system user that BTP destinations connect as (`USER_CF`) to the arrangement.
+4. Re-run §36.5 against just the one app: `farpthd6 / ZP_ODAT_FA_RPT_SRV`. Should return 200 + `<edmx:Edmx>`.
+5. Open `farpthd6` in a browser via its CF Direct URL, navigate to the report view, confirm data renders.
+
+Estimated effort: ~15 min if the Communication Arrangement already exists and just needs the service added; ~1 hour if a new Arrangement / Scenario has to be created.
+
+#### Item 10 — Stale `apps/` directories
 
 **State:** noticed during §33.1 — directories like `apps/acesubmitfiling`, `apps/cancel`, and a few others remain in the source tree but don't map to any deployed app (the deployed-app set is the 62 named in `mta.yaml` / `mta-hd6.yaml`).
 
