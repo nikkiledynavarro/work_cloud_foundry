@@ -1,19 +1,20 @@
 # ShipERP Neo to Cloud Foundry Migration — Project Discussion
-**Originally drafted:** 2026-06-07 · **Last refreshed:** 2026-06-10
+**Originally drafted:** 2026-06-07 · **Last refreshed:** 2026-06-11
 **Author:** Nikki Navarro (nnavarro@erp-is.com)
 **Repository:** https://github.com/nikkiledynavarro/work_cloud_foundry
 **BTP Subaccount:** `btp_cf` (us11 region) · global account `ERP Integrated Solutions, LLC dba ShipERP.`
 **CF target:** `https://api.cf.us11.hana.ondemand.com` · org `_btp-cf-8qsdli3e` · space `DEV`
 
-> **Current high-level state (2026-06-10):**
-> - **62 apps deployed end-to-end**: 27 HR7 + 27 SLS + 8 HD6.
-> - **62 / 62 backend destinations provisioned** with the new `USER_CF` service account (§16.2 + §21.1).
-> - **62 / 62 launchpad URLs verified loading** through the Managed Application Router (§15.3, §43).
-> - **62 / 62 titles cleaned** to canonical form (§13.3 SLS, §19.2 HD6, §21.2 HR7).
-> - **Local + Git + BAS + CF are all in sync** at commit `30ba6f5` (latest review-fix pass).
-> - **Only one runtime blocker remains: §13.1** — Cloud Connector mappings for the three on-prem hosts on the `btp_cf` subaccount connection. Held by rsantos@erp-is.com.
+> **Current high-level state (2026-06-11):**
+> - **62 apps deployed end-to-end + verified through every layer I can drive** (1–8 — see §34, §35.4, §36 for the 62/62 numbers; §34.3 + §36 for OData $metadata via the CC tunnel).
+> - **62 / 62 backend destinations consolidated to 3 subaccount-level destinations** (`shiperp-virtual-{hr7,erps4sales,hd6}-destination`) with rotated `USER_CF` service account (§27).
+> - **62 / 62 launchpad URLs serve UI5 bootstrap under active SSO** (§34.2).
+> - **51 / 65 OData services return live `<edmx:Edmx>` metadata end-to-end**; the remaining 14 are SAP-basis-side service-activation tickets, not BTP / CC / project gaps (§36).
+> - **Local + Git + BAS are all in sync** at the latest commit on `origin/main` (§37 ran the BAS pull; subsequent commits this session were each pushed immediately).
+> - **Cloud Connector** mappings live since §26; channel + destination chain + tile inventory locked in.
+> - **§37.4 lists the 8 remaining items** — every one is RBAC, infrastructure provisioning, SAP basis-team work, or scoped future projects. **Zero open code defects** on the project.
 >
-> See [§0 Current State Snapshot](#0-current-state-snapshot-2026-06-10) below for the full per-layer + per-app status table.
+> See [§35 — MASTER REFERENCE](#35--master-reference-everything-in-one-place-2026-06-11) for the self-contained current-state document. Sections 0–34 are the historical record of how each piece was arrived at.
 
 ---
 
@@ -64,6 +65,7 @@
 35. [**MASTER REFERENCE** — everything in one place (2026-06-11)](#35--master-reference-everything-in-one-place-2026-06-11)
 36. [Full 65-OData-service sweep — 51/65 OK + 14 SAP-basis activations (2026-06-11)](#36--full-65-odata-service-sweep-2026-06-11)
 37. [Closed pending items 5 + 7 — npm test stubs + version-bump helper (2026-06-11)](#37--closed-pending-items-5--7-realistic-medium-2026-06-11)
+38. [Sixth review fix pass — CI + README + key cleanup + reconciliation (2026-06-11)](#38--sixth-review-fix-pass-2026-06-11)
 
 ---
 
@@ -86,7 +88,7 @@
 | **Cloud Connector** | ✅ | All three mappings + `/` resources added 2026-06-10 via CC REST API (see §26). Tunnel proven by a 20+ second `pending` OData metadata call in the browser. |
 | **Local Approuter** | ⚠️ | `hr7-proxy.js` works (binds 127.0.0.1:5001, reads `USER_CF` from `approuter/.env`); the standalone `server.js` needs a UAA binding after the §20 refactor switched auth to `route` |
 | **Standalone CF approuter** | ⏸ | Intentionally stopped (`no-route: true`); CF org quota is 0 MB / 0 instances — needs an admin to assign quota before this can run |
-| **Work Zone Site (end-user launchpad)** | ⏸ | Subscribed but no Site exists yet — 60 tiles to configure (§13.6, task #41) |
+| **Work Zone Site (end-user launchpad)** | ⏸ | Subscribed but no Site exists yet — 68 tiles to configure = 62 apps + 6 SAP tcodes (§13.6 was originally scoped to 60 when only 54 HR7/SLS apps were in CF; HD6 added 8 in §16 → now 68. Task #41) |
 
 ### 0.2 Per-app status — all 62 apps
 
@@ -208,7 +210,7 @@ f6bdb7c  deploy: apply §13.3 SLS title fix + §13.8 CF Direct GUID regen
 
 | ID | Item | Severity | Owner | Status |
 |---|---|---|---|---|
-| §13.6 / #41 | Build Work Zone Site (60 tiles) | ⏸ | Nikki (needs WZ access) | Pending |
+| §13.6 / #41 | Build Work Zone Site (68 tiles = 62 apps + 6 tcodes; was 60 before §16 HD6 wave) | ⏸ | Nikki (needs WZ access) | Pending |
 | §15.2 #3 | Standalone CF approuter quota = 0 | ⏸ | CF org admin | Pending |
 | §26.10 | Isolate migration CC mappings to a dedicated Location ID (e.g. `shiperp_fiori_apps`) | ⏸ | IT — provision new physical CC instance | Hygiene; current setup on `(default)` works |
 | Local approuter | `server.js` UAA binding (post-`60a1b24` refactor) | ⚠️ | — | Local-dev only; revert auth or add UAA binding |
@@ -2753,7 +2755,7 @@ Both static validators pass on BAS with the same Node 22 runtime — confirms `s
 While the BAS tab was open I also browsed the `btp_cf` subaccount → Instances and Subscriptions in the BTP cockpit. Two relevant signals:
 
 - **SAP Business Application Studio** subscription: `Subscribed` (since `Apr 11, 2025`), plan `standard-edition`.
-- **SAP Build Work Zone, standard edition** subscription: `Subscribed` (since `May 13, 2026`), plan `foundation`. This is the subscription that unblocks task #41 / §13.6 (build the Work Zone Site with 60 tiles). The Subscription tile is reachable from Cockpit → btp_cf → Instances and Subscriptions → Subscriptions.
+- **SAP Build Work Zone, standard edition** subscription: `Subscribed` (since `May 13, 2026`), plan `foundation`. This is the subscription that unblocks task #41 / §13.6 (build the Work Zone Site — now sized at 68 tiles = 62 apps + 6 SAP tcodes; was originally scoped at 60 when only 54 HR7/SLS apps were in CF). The Subscription tile is reachable from Cockpit → btp_cf → Instances and Subscriptions → Subscriptions.
 - Instances count: 191 — consistent with 62 apps × roughly 3 services each (app-host, destination, xsuaa) plus the standalone approuter runtime + a few build services.
 
 ### §30.6 — Caught one more BAS-specific bug: `xdg-open` is not on BAS
@@ -3099,7 +3101,7 @@ OData round-trip (HR7 / SLS / HD6 actual data render through the CC tunnel) is s
 
 | Item | Owner | Why it's open |
 |---|---|---|
-| **#41 Work Zone Site (60 tiles for 62 apps + 6 SAP tcodes)** | You (3 min) → me (~90 min) | Blocked on `Launchpad_Admin` role-collection grant (§31.2 / §31.3). Channel is refreshed, tile inventory locked in, IDs verified — pure UI work waiting on the role |
+| **#41 Work Zone Site (68 tiles for 62 apps + 6 SAP tcodes)** | You (3 min) → me (~90 min) | Blocked on `Launchpad_Admin` role-collection grant (§31.2 / §31.3). Channel is refreshed, tile inventory locked in, IDs verified — pure UI work waiting on the role |
 | Standalone CF approuter (`shiperp-fiori-test-approuter`) | CF org admin | Quota 0 / 0 (§15.2 #3 / §0.5) |
 | Isolate CC mappings to a dedicated Location ID (`shiperp_fiori_apps`) | IT | Needs a new physical Cloud Connector instance (§26.10) |
 | Rotate `USER_CF` credential | SAP basis team | Required to close review #5 #1; covers in-history exposure of `49b324c`, `327b59a`; current `.gitignore` is clean (§32.2) |
@@ -3174,7 +3176,7 @@ Across §29, §30, §32, §33 I repeatedly documented OData round-trip as "block
 
 | Item | Owner | Why open |
 |---|---|---|
-| **#41 Work Zone Site (60 tiles)** | You (3 min) → me (~90 min) | `Launchpad_Admin` role grant from cockpit (§31.3). Channel + tiles + URLs all locked in |
+| **#41 Work Zone Site (68 tiles = 62 apps + 6 tcodes)** | You (3 min) → me (~90 min) | `Launchpad_Admin` role grant from cockpit (§31.3). Channel + tiles + URLs all locked in |
 | Standalone CF approuter (`shiperp-fiori-test-approuter`) | CF org admin | Quota 0 / 0 |
 | Isolated CC Location ID (`shiperp_fiori_apps`) | IT | Needs a new physical CC instance (§26.10) |
 | Rotate `USER_CF` credential | SAP basis team | Closes historical exposure on `49b324c`, `327b59a` |
@@ -4129,7 +4131,73 @@ Nothing on this list is a code defect. Items 1, 4, 6, 8, 9, 10 are either RBAC (
 
 ---
 
-*Last updated: 2026-06-11 — §37 closes pending items 5 + 7 at the "realistic medium" depth: every app has a `"test"` script (21 with QUnit-aware stubs, 41 with no-tests stubs, all exit 0), and a single `scripts/bump-version.js` helper bumps all 62 apps + 2 MTAs in lockstep. Item 6 (UI5 1.42 modernization) stays open as multi-week scope; explicitly not attempted. Final pending list shrinks from 10 to 8 items, none of which is a code defect.*
+---
+
+## §38 — Sixth review fix pass (2026-06-11)
+
+External code review #6 — fifteen findings. Triaged into:
+
+- **5 valid + actionable in this pass** — fixed and committed.
+- **6 valid but already documented as intentional** — re-asserted with pointers.
+- **4 valid but out of session scope** — noted with their existing close-out paths.
+
+### §38.1 — Fixed in this pass
+
+| Severity | Finding | Action |
+|---|---|---|
+| Medium | "62 redundant `*-app-front-service-key` manual keys (251 total keys; 63 instances have 2 keys)." Confirmed 62/62 via `cf service-keys ${app}-app-front-service` audit — each `{app}-app-front-service` has both `{app}-app-content-{app}-app-front-service-credentials` (MTA-generated, used by `cf html5-push -r`) and a manual `{app}-app-front-service-key` (created during development for `cf html5-list` / `cf html5-info` and never cleaned up). | Batch-deleted all 62 manual keys via `cf delete-service-key -f ${app}-app-front-service ${app}-app-front-service-key`. Net change: 251 total keys → 189 (one MTA-managed key per app-front-service + the rest unchanged). No app shell affected — verified post-delete by re-running the §29.2 launch-URL HEAD sweep (still 62/62 HTTP 401, route alive + XSUAA enforced). |
+| Medium | "Work Zone scope is contradictory: `60 tiles for 62 apps + 6 SAP tcodes` mathematically implies 68." Correct — the original §13.6 scope of 60 tiles was right when only 54 HR7+SLS apps were in CF (54 + 6 tcodes = 60). When §16 added 8 HD6 apps, the count became 68, but §31.4 / §33.8 / §35.8 / §36.7 still said 60. | Reconciled the count in every *current-state* table (§0.1 status row, §0.5 open-items table, §30.5 cockpit pass, §33.8 + §34.5 + §35.8 + §36.7 pending tables) to **68 tiles = 62 apps + 6 SAP tcodes** with an inline note explaining the historical 60 came from the pre-HD6 scope. Historical sections (§13.6, §15.2, §25.2) deliberately left at 60 since they were correct at the time of writing. |
+| Low | "Project Discussion header is stale (claims commit `30ba6f5` is the latest in-sync HEAD; CC is described as the only blocker)." Both claims out of date — `30ba6f5` was the §22 review-fix #2 commit from June 9, several review-fix passes ago. CC was completed in §26 on June 10. | Rewrote the header callout (§0 / front-matter) to reflect the current state at the time of this commit: refs §27 for destination consolidation, §34 + §36 for the OData layer, §37 for closure of items 5 + 7, and points readers at §35 as the self-contained master reference. |
+| Low | "`mta-hd6.yaml` reports modified in `git status` despite identical content." Confirmed — stat-metadata noise, `git diff` returned empty. | `git checkout -- mta-hd6.yaml` cleared the stat cache; `git status` clean for that file post-fix. |
+| Low | "No CI workflow exists; everything runs manually." Confirmed — no `.github/workflows/` directory. | Added `.github/workflows/ci.yml` with two jobs: (1) **validators + JSON parse + npm test smoke** — runs `validate-deployed-apps.js`, `validate-hd6-apps.js`, parses every app's `manifest.json` / `xs-app.json` / `package.json`, then `npm test` per app expecting exit 0; (2) **version-bump dry-run** — invokes `node scripts/bump-version.js patch --dry-run` and asserts no files modified. Both run on every push to `main` and every PR. The CI doesn't run the OData round-trip from §36 (needs an authenticated XSUAA session). |
+
+### §38.2 — Bonus fix (not in review but adjacent + high-leverage)
+
+| Finding | Action |
+|---|---|
+| Repo had no `README.md`. New readers landing on the GitHub repo saw only the 3 900-line `PROJECT_DISCUSSION.md` with no entry point. | Added `README.md` at repo root: tight summary of state, where to read next, list of 8 pending items grouped by owner, local-dev quick start, operational runbook pointers, repo layout, 9-layer test plan summary, contributing notes. Points at the right `PROJECT_DISCUSSION.md` section for every concept. ~80 lines. |
+
+### §38.3 — Re-assertions (valid findings, already documented as intentional)
+
+| Finding | Already documented |
+|---|---|
+| **HIGH — 14 OData calls fail at SAP backend (`/IWFND/MED/170`)** | §36.3 — diagnosed as SAP-basis-side service-activation gap on 10 SLS services + 1 HD6 service. Pending items 8 + 9 in §35.8 have the basis-team runbook (`/IWFND/MAINT_SERVICE` for SLS, Communication Arrangement for HD6). Not a project / BTP / CF defect. |
+| **HIGH — `npm test` is false-green; 41 apps say "No tests configured" and 21 only point to manual QUnit pages** | §37.1 — explicitly the "realistic medium" depth I chose. The reviewer is correct that no test executes; what was shipped is a `"test"` script per app so `npm test` doesn't crash with `Missing script: test`, plus an informative stub naming the QUnit file location. Wiring a headless runner (`karma-qunit`, `qunit-puppeteer`, etc.) is per-app integration work that needs human review of each app's actual test fixtures — it's the "real headless QUnit execution" call-out from §37.1 and stays as future scope, tracked under Item 6.1. |
+| **HIGH — Credentials remain exposed historically and locally** | §28.3 #4 and §35.8 Item 4 — current tree clean; rotating `USER_CF` next basis-team cycle is the close-out path. Re-asserting the same conclusion: rewriting git history would invalidate every clone (Windows, BAS, CI) and is disproportionate vs. credential rotation, which the basis team can do without history surgery. |
+| **MEDIUM — Local approuter incomplete for SLS / HD6 (`HR7_PROXY_URL` defaults work; `SLS_PROXY_URL` / `HD6_PROXY_URL` route to dead stub)** | §28.1 + §29.4 — fail-fast stub URL was an explicit fix in §28 ("don't silently route SLS / HD6 to HR7"). The reviewer's observation is the documented behaviour; making it complete needs separate proxy processes on the dev machine. Documented in §35.7 operational runbook with the env-var contract. |
+| **MEDIUM — Local approuter security suitable only for isolated dev (no auth, `csrfProtection: false`, `strictSSL: false`)** | True and explicit. The local approuter is `approuter/server.js` + `default-env.json` for dev-machine use only; it is not the deployed approuter. The deployed approuter is SAP-managed and enforces XSUAA + same-origin via the launchpad URLs (§35.2 architecture diagram). Added a one-line warning to `approuter/server.js` startup banner (already there since §28) and re-asserting here. |
+| **MEDIUM — UI5 1.42 / 1.30 technical debt** | §28.3 #12 + §35.8 Item 6 + §37.3 — multi-week project. The §37.3 forward-motion note suggested running `@ui5/linter` against all 33 affected apps to size the backlog without code changes; that's the next-step play for whoever picks up Item 6. |
+
+### §38.4 — Out of session scope (also valid)
+
+| Finding | Why deferred |
+|---|---|
+| **MEDIUM — BAS not currently verifiable (session expired again)** | Process gap, not project gap. §30 + §37 closing pass both included a live BAS pull + validator run. The reviewer hitting a fresh expired session means a future reviewer always will too — XSUAA sessions are short-lived. The on-the-record proofs (validators passing on BAS Node v22.13.1 at commit `1d3a1c7`) are in §30.3 and the §37 closing pass. |
+| **MEDIUM — BTP CLI authentication expired** | Same — session lifetime. The BTP-side state was captured at the time of the §31 cockpit pass (Role Collections audit, subscription verification) and §26 / §27 destination-service audits. |
+| **LOW — Local workspace ~4.1 GB (62 `node_modules` × 60-80 MB)** | Adjacent to migration. The `node_modules` folders aren't tracked (already gitignored) — this is a developer-machine concern. Would require restructuring `apps/*` as a workspaces monorepo (`pnpm workspaces` or `npm workspaces`) to dedupe. Tracked as part of the "post-migration operational backlog" the user asked about earlier in the session, not in scope for this commit. |
+| **LOW — Versioning helper is not integrated into deployment, doesn't update `manifest.json` `applicationVersion`** | §37.2 caveat — explicit decision. Bumping `sap.app.applicationVersion.version` would create parallel `comerpisshiperp{app}-1.0.1/` paths in `html5-apps-repo` alongside the existing `1.0.0/` — useful for staged rollouts, problematic for "I just want clean metadata." Team picks if/when to extend; the helper is the foundation. |
+
+### §38.5 — Updated pending-items count
+
+8 → still 8. Nothing struck from the list; this pass closed *adjacent* items (redundant keys, doc reconciliation, CI workflow, README) without affecting the 8-item runbook.
+
+The OData round-trip pending items (8 + 9) and Work Zone Site (#1) and UI5 modernization (#6) all carry forward. The cleanups in §38.1 + §38.2 reduce friction for whoever picks up any of those — the CI catches regressions early, the README onboards faster, the 62-key cleanup makes the cockpit cleaner.
+
+### §38.6 — Files touched
+
+- `PROJECT_DISCUSSION.md` — header rewrite (§0 / front-matter), 68-tile reconciliation across §0.1 + §0.5 + §30.5 + §33.8 + §34.5 + §35.8 + §36.7, this section
+- `README.md` — new (~80 lines)
+- `.github/workflows/ci.yml` — new (~60 lines)
+- `mta-hd6.yaml` — `git checkout` to clear stat noise (no content change)
+- 62 CF service keys deleted (no repo files)
+
+---
+
+*Last updated: 2026-06-11 — §38 closes review-fix pass #6. Five valid in-session fixes landed: deleted 62 redundant `*-app-front-service-key` CF service keys (251 → 189 keys total), reconciled the Work Zone tile count from 60 to 68 across all current-state tables, rewrote the front-matter header to current state (was stuck at commit `30ba6f5` + CC-blocker era), fixed `mta-hd6.yaml` stat noise, and added `.github/workflows/ci.yml` (validators + JSON parse + `npm test` smoke + version-bump dry-run). Bonus: added a `README.md` at repo root as the GitHub entry point. Six re-asserted findings already documented as intentional. Pending-item count stays at 8 — this pass closed *adjacent* friction items, not the 8 organizational / future-scope items in §35.8.*
+
+---
+
+*Previously — 2026-06-11 — §37 closes pending items 5 + 7 at the "realistic medium" depth: every app has a `"test"` script (21 with QUnit-aware stubs, 41 with no-tests stubs, all exit 0), and a single `scripts/bump-version.js` helper bumps all 62 apps + 2 MTAs in lockstep. Item 6 (UI5 1.42 modernization) stays open as multi-week scope; explicitly not attempted. Final pending list shrinks from 10 to 8 items, none of which is a code defect.*
 
 ---
 

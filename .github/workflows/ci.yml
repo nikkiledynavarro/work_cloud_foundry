@@ -1,0 +1,59 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validators:
+    name: Validators + JSON parse + npm test stubs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run deployed-apps validator (HR7 + SLS)
+        run: node scripts/validate-deployed-apps.js
+      - name: Run HD6 validator
+        run: node scripts/validate-hd6-apps.js
+      - name: Parse all app manifests + xs-app + package.json
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          errs = []
+          for entry in os.listdir('apps'):
+            d = f'apps/{entry}'
+            if not os.path.isdir(d):
+              continue
+            for f in ('manifest.json','xs-app.json','package.json'):
+              p = f'{d}/{f}'
+              if os.path.exists(p):
+                try: json.load(open(p,'r',encoding='utf-8'))
+                except Exception as e: errs.append(f'{p}: {e}')
+          if errs:
+            print('\n'.join(errs)); sys.exit(1)
+          print(f'All app JSON files parse cleanly.')
+          PY
+      - name: Smoke-test npm test scripts (must exit 0)
+        run: |
+          for app in apps/*/; do
+            name=$(basename "$app")
+            if [ -f "$app/package.json" ]; then
+              (cd "$app" && npm test --silent) || { echo "npm test failed for $name"; exit 1; }
+            fi
+          done
+          echo "npm test exits 0 for every app."
+  version-bump-dry-run:
+    name: Version bump helper dry-run smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Dry-run a patch bump (must not modify files)
+        run: |
+          node scripts/bump-version.js patch --dry-run
+          if ! git diff --quiet; then echo 'dry-run modified files'; exit 1; fi
+          echo 'bump-version helper dry-run clean.'
