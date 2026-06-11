@@ -67,6 +67,7 @@
 37. [Closed pending items 5 + 7 — npm test stubs + version-bump helper (2026-06-11)](#37--closed-pending-items-5--7-realistic-medium-2026-06-11)
 38. [Sixth review fix pass — CI + README + key cleanup + reconciliation (2026-06-11)](#38--sixth-review-fix-pass-2026-06-11)
 39. [BTP / CF / Cloud Connector configuration snapshot (2026-06-11)](#39--btp--cf--cloud-connector-configuration-snapshot-2026-06-11)
+40. [Closed pending Item 10 — stale `apps/` directory cleanup (2026-06-11)](#40--closed-pending-item-10--stale-apps-directory-cleanup-2026-06-11)
 
 ---
 
@@ -4264,7 +4265,98 @@ Suggested cadence (not implemented as a hook, just convention):
 
 ---
 
-*Last updated: 2026-06-11 — §39 adds a periodic-backup-style capture of every BTP / CF / Cloud Connector configuration the project produced. The state of the deployed system that isn't in `manifest.json` / `xs-app.json` / `mta.yaml` (so: subaccount destinations, instance destinations, CC mappings, service-instance shape, service keys) now lives in `docs/btp-cf-cc-snapshot.md`, regenerable via `python scripts/dump-btp-cf-cc-snapshot.py`. Disaster-recovery + audit + drift-detection in one ~250-line script.*
+---
+
+## §40 — Closed pending item 10 — stale `apps/` directory cleanup (2026-06-11)
+
+Item 10 of §35.8 — 24 directories in `apps/` that don't correspond to any of the 62 active apps. Earlier passes called them "future cleanup" because each dir had to be cross-checked against `launch.json`, `tasks.json`, both MTAs, the templates folder, and security descriptors before removal could be safe.
+
+### §40.1 — Audit (the easy half)
+
+A diff of `ls apps/*/` against the canonical 62-app list yielded:
+
+```
+acesubmitfiling                  freightorder         rulesmanagertony
+cancel                           manualecchr7         salesorderhr7
+createparcelshipment             parcel               shippingdashboarder8
+disputehr7                       parceldemo           shippingdashboarder8sidel
+eod                              planning             shippingdashboardhr7
+farpt                            productslist         soshiperptab
+freightaudithd6 (active — kept)  rulesmanager         zfreightorders
+freightorder                     rulesmanager2        zpkwporeport
+                                                      zpkwporeporthd6
+                                                      ztrackshipmenthr7
+```
+
+24 stale entries. Per-dir local-disk footprint ~100 MB (mostly `node_modules`); per-dir tracked-in-git footprint 12–116 source files. Total: ~2.4 GB on disk, **1 292 tracked source files**.
+
+Cross-reference safety sweep — every potential consumer checked:
+
+- `.vscode/launch.json` + `tasks.json` — **0** references to any stale name.
+- `mta.yaml` + `mta-hd6.yaml` — **0** references.
+- `templates/neo-to-cf-hd6.json` — references only the 8 active HD6 apps (`cancelhd6`, `disputehd6`, …); the substrings `cancel`, `eod`, `parcel`, `parceldemo`, `farpt` appear *only* inside the `cancelhd6` / `eodhd6` / etc. blocks (as Neo-source-zip paths from §16), never as standalone app names.
+- `scripts/fix-hd6-namespaces.js` + `scripts/fix-hd6-titles.js` — historical one-shot fix scripts from §13.10; references are about old Neo namespace transformations, not to active directories.
+- `security/` — 24 matching `xs-security-{name}.json` files (one per stale app). These were the only collateral.
+- `PROJECT_DISCUSSION.md` — historical mentions only; deliberately preserved as record.
+
+### §40.2 — Cleanup applied
+
+```
+$ git rm -r apps/<each-of-24>            # 1 292 files removed from index
+$ git rm security/xs-security-<each>.json  # 24 files removed from index
+$ rm -rf apps/<each-of-24>               # ~2.4 GB freed on disk
+```
+
+The `templates/_archived/*.json` snapshots still reference the stale app names (they're historical Neo-to-CF mapping snapshots, captured during early conversion). Those stay — the `_archived` prefix is exactly the convention that says "this is no longer live and is kept as a record." No active validator or MTA reads from `_archived`.
+
+### §40.3 — Verification
+
+Post-cleanup validators still pass cold:
+
+```
+$ node scripts/validate-deployed-apps.js
+Validation passed.
+HR7 apps: 27 | SLS apps: 27 | Total deployed app definitions: 54
+
+$ node scripts/validate-hd6-apps.js
+HD6 validation passed.
+HD6 apps: 8
+```
+
+The 62 deployed apps' source folders are untouched. CF state is untouched. Only orphan directories + their matching security descriptors went.
+
+### §40.4 — Final pending-item table (post-§40)
+
+8 → 7 items. Item 10 closed in code.
+
+| # | Item | Owner |
+|---|---|---|
+| 1 | Work Zone Site (#41) | You (3 min role grant) → me (~90 min UI drive) |
+| 2 | Standalone CF approuter | CF org admin (quota) |
+| 3 | Isolated CC Location ID | IT (new physical CC instance) |
+| 4 | Rotate `USER_CF` credential | SAP basis team |
+| ~~5~~ | ~~`npm test` scripts~~ | ✅ Closed §37.1 |
+| 6 | UI5 1.42 / 1.30 modernization | Future scope (1–2 weeks) |
+| ~~7~~ | ~~Versioning pipeline~~ | ✅ Closed §37.2 |
+| 8 | Activate 10 OData services on SLS | SAP basis (§36.3) |
+| 9 | Activate `ZP_ODAT_FA_RPT_SRV` on HD6 | SAP basis (§36.3) |
+| ~~10~~ | ~~Stale `apps/` directories~~ | ✅ **Closed §40** |
+
+The 7 remaining items are all either RBAC (#1), infrastructure provisioning (#2, #3), SAP basis work (#4, #8, #9), or a scoped future project (#6). **Zero open code defects.**
+
+### §40.5 — Files touched
+
+- `apps/<24 stale dirs>` — removed from index + disk (1 292 tracked files)
+- `security/xs-security-<24 stale names>.json` — removed from index (24 files)
+- This file (§40)
+
+---
+
+*Last updated: 2026-06-11 — §40 closes pending Item 10 (stale `apps/` directories). 24 orphan directories + 24 matching `security/xs-security-*.json` files removed from index + disk after a full cross-reference safety sweep proved zero active consumers. ~2.4 GB local disk freed; 1 292 tracked source files dropped. Validators still pass 54/54 + 8/8. Pending-item count drops from 8 to 7 — and like §37 before it, this pass closed a code-side item; the remaining 7 are RBAC, infrastructure, SAP basis, or future UI5 modernization.*
+
+---
+
+*Previously — 2026-06-11 — §39 adds a periodic-backup-style capture of every BTP / CF / Cloud Connector configuration the project produced. The state of the deployed system that isn't in `manifest.json` / `xs-app.json` / `mta.yaml` (so: subaccount destinations, instance destinations, CC mappings, service-instance shape, service keys) now lives in `docs/btp-cf-cc-snapshot.md`, regenerable via `python scripts/dump-btp-cf-cc-snapshot.py`. Disaster-recovery + audit + drift-detection in one ~250-line script.*
 
 ---
 

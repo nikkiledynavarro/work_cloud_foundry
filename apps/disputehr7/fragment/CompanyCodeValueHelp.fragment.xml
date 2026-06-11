@@ -1,7 +1,0 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<SelectDialog noDataText="{i18n>noCompanyCodeFound}" title="{i18n>companyCodeDialogTitle}" search="handleCompanyCodeSearch"
-		liveChange="handleCompanyCodeSearch" confirm="onHandleCompanyCodeSelect" cancel="handleClose" items="{ path: '/xSERPERPxCDS_COCODE' }"
-		multiSelect="true">
-		<StandardListItem title="{Name}" description="{CoCode}" iconDensityAware="false" iconInset="false" type="Active"/>
-	</SelectDialog>
-</core:FragmentDefinition>

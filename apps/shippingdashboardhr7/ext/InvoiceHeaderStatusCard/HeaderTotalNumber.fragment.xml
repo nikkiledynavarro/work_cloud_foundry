@@ -1,5 +1,0 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<CustomListItem>
-		<NumericContent class="kpiHeaderClass" value="{MainModel>TotalOfHeaderStatus}" withMargin="false"/>
-	</CustomListItem>
-</core:FragmentDefinition>
