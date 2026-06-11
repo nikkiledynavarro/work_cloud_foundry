@@ -3227,7 +3227,7 @@ This is the comprehensive end-state document. §0–§34 are the historical reco
 | Build artifacts tracked in git | 0 (1 986 removed in §33.1, gitignore extended) |
 | `@sap/approuter` audit | 0 vulnerabilities (post §33.3 v22 upgrade) |
 | Open code defects | **0** |
-| Pending non-code items | 8 (organizational + future modernization — see §35.8) |
+| Pending non-code items | 10 (organizational + future modernization + 2 SAP-basis OData activations from §36 — see §35.8) |
 
 ### §35.2 — Architecture at a glance
 
@@ -4005,7 +4005,7 @@ Reorganising §35.8 to reflect the new findings:
 | `npm test` scripts | Future scope | UI test enablement |
 | UI5 1.42 / 1.30 modernization | Future scope | Major UI5 upgrade |
 | Versioning pipeline | Future scope | Build tooling |
-| Stale `apps/` directories | Future cleanup | (§35.8 #8) |
+| Stale `apps/` directories | Future cleanup | (§35.8 #10) |
 
 Nothing on this list is a code or BTP-config defect. The SLS/HD6 OData gaps are new but clearly diagnosed and bounded to two backend-activation tickets.
 
@@ -4015,7 +4015,7 @@ Nothing on this list is a code or BTP-config defect. The SLS/HD6 OData gaps are 
 
 ---
 
-*Previously — 2026-06-11 — §35 is the master reference. Every fix this project made (and why), the exact step-by-step setup for Cloud Connector mappings + BTP destinations, an 8-layer test plan with reproduction scripts, 8 pending items with detailed close-out steps, plus the gotchas-I-hit-so-you-don't list. Reading from this section is enough to operate the project cold. Prior sections (§0–§34) are the historical record of how each piece was arrived at.*
+*Previously — 2026-06-11 — §35 is the master reference. Every fix this project made (and why), the exact step-by-step setup for Cloud Connector mappings + BTP destinations, an 8-layer test plan with reproduction scripts, 10 pending items with detailed close-out steps (items 8 + 9 added by §36 for SLS / HD6 OData activations), plus the gotchas-I-hit-so-you-don't list. Reading from this section is enough to operate the project cold. Prior sections (§0–§34) are the historical record of how each piece was arrived at.*
 
 ---
 
