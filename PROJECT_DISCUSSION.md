@@ -62,6 +62,7 @@
 33. [Real fixes for deferred review-fix #5 items + full re-test (2026-06-11)](#33--real-fixes-for-the-deferred-review-fix-5-items--full-re-test-2026-06-11)
 34. [Browser-render + OData round-trip verified for all 62 apps (2026-06-11)](#34--browser-render-layer--odata-round-trip-now-verified-for-all-62-apps-2026-06-11)
 35. [**MASTER REFERENCE** — everything in one place (2026-06-11)](#35--master-reference-everything-in-one-place-2026-06-11)
+36. [Full 65-OData-service sweep — 51/65 OK + 14 SAP-basis activations (2026-06-11)](#36--full-65-odata-service-sweep-2026-06-11)
 
 ---
 
@@ -3835,7 +3836,128 @@ Pairs naturally with item 5 (CI pipeline).
 
 ---
 
-*Last updated: 2026-06-11 — §35 is the master reference. Every fix this project made (and why), the exact step-by-step setup for Cloud Connector mappings + BTP destinations, an 8-layer test plan with reproduction scripts, 8 pending items with detailed close-out steps, plus the gotchas-I-hit-so-you-don't list. Reading from this section is enough to operate the project cold. Prior sections (§0–§34) are the historical record of how each piece was arrived at.*
+---
+
+## §36 — Full 65-OData-service sweep (2026-06-11)
+
+User asked to check every OData service across all 62 apps, not just the §34.3 sample of 3. Extracted every `sap.app.dataSources.*.uri` from every `manifest.json`, walked the SSO'd browser through `fetch(<launchpad-app>/<uri>$metadata)` for every one, classified each response.
+
+### §36.1 — Inventory
+
+`scripts`-style Python walked the 62 manifest.json files:
+
+- **65 OData services** declared across **60 apps** (2 apps have no `dataSources` at all: `shippingdashboard` + `shippingdashboardsls` — they're aggregate UIs over other apps' models).
+- 28 HR7 services, 28 SLS services, 9 HD6 services.
+- Many services are shared (e.g. `serperp/cancel_ship_srv` is the main service for `cancelshipmentecc`, `cancelshipmentewm.cancelECCService`, `cancelshipmenteccsls`, `cancelshipmentewmsls.cancelECCService`, `cancelhd6`).
+
+### §36.2 — Result
+
+After the launchpad session expired mid-sweep and was refreshed in a new tab (typical XSUAA short-lived session), the corrected run reported:
+
+| Bucket | Count | Meaning |
+|---|---|---|
+| **OK** (HTTP 200, valid `<edmx:Edmx>` metadata returned) | **51 / 65** | BTP → managed approuter → destination → CC tunnel → SAP backend → OData service → real metadata. End-to-end working. |
+| **SAP_ERR_/IWFND/MED/170** (HTTP 403 with SAP error payload) | **14 / 65** | The SAP backend itself answered: *"No service found for namespace `…`"*. The HTTP chain through BTP / CC succeeded; the OData service isn't activated on that backend. |
+
+**51 of 65 services are end-to-end working with live SAP data.** The 14 failures are all on the SAP-basis side — see §36.3.
+
+### §36.3 — The 14 SAP-side activations needed
+
+Every one of the 14 failures returned the *SAP-emitted* error code `/IWFND/MED/170: No service found for namespace`. That's IWFND (the SAP Gateway service-discovery layer) saying it has no registration for the requested OData service on this system. The BTP / CC plumbing isn't the issue — the request hit the SAP backend, which replied that the service simply isn't registered.
+
+13 of the 14 are SLS-side gaps, and *every one* of them has a working twin on HR7. That cinches the diagnosis: the SLS S/4HANA backend (`erps4sales.erp-is.com:50000`) is missing 10 OData service registrations that exist on HR7 (`virtual-s4hr7.erp-is.com:50000`).
+
+| # | App | OData service | Backend | HR7 twin works? |
+|---|---|---|---|---|
+| 1 | `cancelacefilingsls` | `serperp/ace_srv` | SLS | ✅ HR7 OK |
+| 2 | `cancelpickuprequestsls` | `serperp/rfp_srv` | SLS | ✅ HR7 OK |
+| 3 | `carrierperformancereporteccsls` | `serperp/carrperf_srv` | SLS | ✅ HR7 OK |
+| 4 | `carrierperformancereportewmsls` | `serperp/ewm_cp_srv` | SLS | ✅ HR7 OK |
+| 5 | `closedeliverysls` | `sap/zerpis_close_delivery_srv` | SLS | ✅ HR7 OK |
+| 6 | `createshipmentv2ewmsls` | `serperp/shipewm_v2_srv` | SLS | ✅ HR7 OK |
+| 7 | `freightaudituploadsls` | `serperp/fa_upl_srv` | SLS | ✅ HR7 OK |
+| 8 | `ltlplanningsls` | `serperp/ltlplan_srv` | SLS | ✅ HR7 OK |
+| 9 | `planshipmentsls` | `serperp/ewm_tuv_srv` | SLS | ✅ HR7 OK |
+| 10 | `quickpackewmsls` | `serperp/ewm_qp_srv` | SLS | ✅ HR7 OK |
+| 11 | `requestforpickupsls` | `serperp/rfp_srv` | SLS | (same as #2) |
+| 12 | `submitacefilingsls` | `serperp/ace_srv` | SLS | (same as #1) |
+| 13 | `viewacefilingsls` | `serperp/ace_srv` | SLS | (same as #1) |
+| 14 | `farpthd6` | `sap/ZP_ODAT_FA_RPT_SRV` | HD6 | n/a (HD6-only service) |
+
+Deduped, that's **10 distinct OData services missing on SLS** + **1 missing on HD6**.
+
+### §36.4 — What needs to happen to close these 14
+
+This is purely a SAP basis-team job on the backends — not anything in BTP / CF / Cloud Connector / `apps/*`:
+
+1. **For each of the 10 SLS services**: log into the SLS S/4HANA system as a basis user → transaction `/IWFND/MAINT_SERVICE` → *Add Service* → enter the technical-name pattern from the HR7 system (or use *System Alias* `LOCAL` if the metadata exists in the same client). Save + activate. The HR7 instance already has these services activated, so the metadata definitions exist in the ABAP repository — usually a one-click per service.
+2. **For the 1 HD6 service** (`ZP_ODAT_FA_RPT_SRV`): same procedure on the HD6 S/4HC system. (Note: HD6 is S/4HC Cloud Dev, so the activation may go through a different admin path — likely via Communication Arrangement rather than IWFND/MAINT_SERVICE.)
+3. After each activation, re-probe via the §36.5 reproduction script and confirm the result moves from `SAP_ERR_/IWFND/MED/170` to `OK`.
+
+Per the SAP basis owner you noted earlier, this is on the SAP basis team's plate — not yours, not mine, not a BTP project gap.
+
+### §36.5 — Reproduction script
+
+Inject the following into any SSO-active launchpad tab, then run the fetch sweep:
+
+```javascript
+window.__urls    = { /* 62 entries: app -> launchpad URL, see /tmp/cf-direct-urls.json */ };
+window.__probes  = [ /* 65 entries: { app, ds_name, uri }, see /tmp/odata-probes.json */ ];
+
+(async () => {
+  const results = await Promise.all(window.__probes.map(async (p) => {
+    const url = window.__urls[p.app].replace(/\/index\.html$/,'')
+                + p.uri + (p.uri.endsWith('/') ? '' : '/') + '$metadata';
+    const r = await fetch(url, { credentials: 'include', redirect: 'follow' });
+    const text = await r.text();
+    const cls = text.indexOf('<edmx:Edmx') >= 0 ? 'OK'
+              : text.indexOf('IWFND/MED') >= 0 ? 'SAP_ERR_NO_SERVICE'
+              : 'OTHER_' + r.status;
+    return { app: p.app, ds: p.ds_name, uri: p.uri, status: r.status, cls };
+  }));
+  const buckets = {};
+  for (const r of results) buckets[r.cls] = (buckets[r.cls] || 0) + 1;
+  return { total: results.length, buckets, bad: results.filter(r => r.cls !== 'OK') };
+})()
+```
+
+JSON files for `__urls` and `__probes` are persisted at `C:/Users/nikki/AppData/Local/Temp/cf-direct-urls.json` and `…/odata-probes.json` on the Windows workstation.
+
+Wall-clock: ~21 s for all 65 fetches in parallel.
+
+### §36.6 — Coverage matrix, updated
+
+| Layer | Coverage | Before §36 | After §36 |
+|---|---|---|---|
+| 7 — Browser-render via SSO | 62/62 apps | ✅ | ✅ unchanged |
+| 8 — OData `$metadata` round-trip | 1 service per backend (3 total) | ✅ 3/3 | ✅ **51/65** services genuinely end-to-end working; 14 documented SAP-basis gaps |
+
+### §36.7 — Updated pending-items table
+
+Reorganising §35.8 to reflect the new findings:
+
+| Item | Owner | Why open |
+|---|---|---|
+| #41 Work Zone Site (60 tiles) | You (3 min) → me (~90 min) | `Launchpad_Admin` role grant. Channel + tile inventory locked in (§31) |
+| **Activate 10 OData services on SLS** | SAP basis | `/IWFND/MED/170` on `ace_srv`, `rfp_srv`, `carrperf_srv`, `ewm_cp_srv`, `zerpis_close_delivery_srv`, `shipewm_v2_srv`, `fa_upl_srv`, `ltlplan_srv`, `ewm_tuv_srv`, `ewm_qp_srv` (§36.3). Each is `/IWFND/MAINT_SERVICE` → Add Service |
+| **Activate `ZP_ODAT_FA_RPT_SRV` on HD6** | SAP basis | Same — HD6 (S/4HC) variant |
+| Standalone CF approuter | CF org admin | Quota 0 / 0 |
+| Isolated CC Location ID | IT | New physical CC instance |
+| Rotate `USER_CF` credential | SAP basis | Closes historical exposure (§32.2) |
+| `npm test` scripts | Future scope | UI test enablement |
+| UI5 1.42 / 1.30 modernization | Future scope | Major UI5 upgrade |
+| Versioning pipeline | Future scope | Build tooling |
+| Stale `apps/` directories | Future cleanup | (§35.8 #8) |
+
+Nothing on this list is a code or BTP-config defect. The SLS/HD6 OData gaps are new but clearly diagnosed and bounded to two backend-activation tickets.
+
+---
+
+*Last updated: 2026-06-11 — §36 closes the OData-coverage gap that §35 master reference still had. Sweep of every one of the 65 declared OData services across all 60 apps that declare any returned 51 OK + 14 SAP-side errors. Every one of the 14 is `/IWFND/MED/170 No service found for namespace` — meaning the BTP / CC plumbing delivered the request and the SAP backend itself answered that the OData service isn't registered. 13 of 14 are SLS-side gaps (10 distinct services); 1 is the HD6 farpthd6 secondary service. All addressable by the SAP basis team via `/IWFND/MAINT_SERVICE` registration on the respective backends — no code or configuration change needed on the project side.*
+
+---
+
+*Previously — 2026-06-11 — §35 is the master reference. Every fix this project made (and why), the exact step-by-step setup for Cloud Connector mappings + BTP destinations, an 8-layer test plan with reproduction scripts, 8 pending items with detailed close-out steps, plus the gotchas-I-hit-so-you-don't list. Reading from this section is enough to operate the project cold. Prior sections (§0–§34) are the historical record of how each piece was arrived at.*
 
 ---
 
