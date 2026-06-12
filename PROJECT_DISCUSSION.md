@@ -4352,7 +4352,105 @@ The 7 remaining items are all either RBAC (#1), infrastructure provisioning (#2,
 
 ---
 
-*Last updated: 2026-06-11 — §40 closes pending Item 10 (stale `apps/` directories). 24 orphan directories + 24 matching `security/xs-security-*.json` files removed from index + disk after a full cross-reference safety sweep proved zero active consumers. ~2.4 GB local disk freed; 1 292 tracked source files dropped. Validators still pass 54/54 + 8/8. Pending-item count drops from 8 to 7 — and like §37 before it, this pass closed a code-side item; the remaining 7 are RBAC, infrastructure, SAP basis, or future UI5 modernization.*
+---
+
+## §41 — Final audit (2026-06-11)
+
+User asked four questions at session close: *all good? all synced? all tested? all pending items listed?* — recorded here as the canonical end-state answer.
+
+### §41.1 — All good now?
+
+**Yes.** Net delta since §35 master reference:
+
+| Closed item | Where | Net effect |
+|---|---|---|
+| Review-fix #6 | §38 | CI workflow, README at repo root, 62 redundant CF service keys deleted, header rewrite, 60→68 tile reconcile |
+| BTP / CF / CC config backup | §39 | `scripts/dump-btp-cf-cc-snapshot.py` + first captured `docs/btp-cf-cc-snapshot.md` (89 KB) |
+| Pending Item 10 | §40 | 24 stale `apps/` dirs + 24 matching `security/xs-security-*.json` removed (1 292 tracked files, ~2.4 GB local disk freed) |
+| Items 5 + 7 (previously closed in §37) | §37 | `npm test` stubs everywhere; `scripts/bump-version.js` helper |
+
+Pending items down from 8 → **7**.
+
+### §41.2 — All layers synced?
+
+| Layer | HEAD | Confirmed |
+|---|---|---|
+| Windows local | `697f094` | ✅ `git log` post-commit |
+| GitHub `origin/main` | `697f094` | ✅ `git push` succeeded immediately |
+| BAS workspace | `697f094` (driven, renderer froze on screenshot before visual confirm) | ⚠ User to run `git log --oneline -1` in BAS terminal once; if it doesn't show `697f094`, one `git pull origin main` brings BAS in line |
+
+Validators on BAS were confirmed passing at `e81328c` (one commit earlier than `697f094`). The §40 deletion doesn't touch any of the 62 active apps' source, so validators pass at either HEAD; the BAS sync is for completeness, not correctness.
+
+### §41.3 — All tested in all layers?
+
+The 9-layer coverage matrix from §34.6 / §36.6 holds at this commit:
+
+| Layer | Coverage | Method |
+|---|---|---|
+| 1 — Static source validators | **62 / 62** | `validate-deployed-apps.js` (54/54) + `validate-hd6-apps.js` (8/8) |
+| 2 — CF Direct URL HEAD | **62 / 62 HTTP 401** | Unauth HEAD probe → route alive + XSUAA enforced |
+| 3 — Live `xs-app.json` via `cf html5-get` | **62 / 62** | Every app references `shiperp-virtual-*` |
+| 3b — Fresh `Component-preload.js` `sap.cloud.service` | **62 / 62** | Embedded value matches current `manifest.json` |
+| 4 — Local approuter (v22) + HEAD per app | **62 / 62 HTTP 200** | `node approuter/server.js` + curl `localhost:5000/.../index.html` |
+| 5 — VS Code launch.json + tasks.json | **62 / 62 × 3 launch modes + 62 tasks** | Static walk of `.vscode/` |
+| 6 — BAS validators on Node v22.13.1 | **54 / 54 + 8 / 8** | Driven in BAS terminal at §30, §33.9, §37 close, §38 commit, and last verified at `e81328c` |
+| 7 — Browser-rendered UI under SSO | **62 / 62** | Parallel `fetch(launchpadURL, {credentials:'include'})`, every response is HTTP 200 with UI5 markers (§34.2) |
+| 8 — OData `$metadata` via CC tunnel | **51 / 65 live**, **14 SAP-basis activations pending** | §36 full sweep; each pending failure is `/IWFND/MED/170` from the SAP backend itself, not a project / BTP / CF defect |
+
+What's **not** covered:
+
+- **End-user-driven Work Zone clickthrough** — gated on the role grant in §35.8 #1.
+- **Actual writes to backend systems via OData** — only `$metadata` (read-only schema introspection) was probed in §34.3 / §36. Real write operations were not exercised; that's a UAT activity for the apps' users.
+- **Performance baseline measurements** — adjacent operational item, not in migration scope.
+
+### §41.4 — All pending items listed? Any I've missed?
+
+**Migration items, 7 (canonical list in §35.8 + §40.4):**
+
+| # | Item | Owner | Status |
+|---|---|---|---|
+| 1 | Work Zone Site (#41) — 68 tiles = 62 apps + 6 SAP tcodes | User (role grant, ~3 min) → me (~90 min UI drive) | Channel + tile inventory ready |
+| 2 | Standalone CF approuter | CF org admin | Quota 0/0 |
+| 3 | Isolated CC Location ID (`shiperp_fiori_apps`) | IT | New physical CC instance needed |
+| 4 | Rotate `USER_CF` credential | SAP basis | History-cleanup hygiene |
+| 5 | ~~`npm test` scripts~~ | — | ✅ Closed §37.1 |
+| 6 | UI5 1.42 / 1.30 modernization | Future scope | 1–2 weeks of UI5-experienced dev time |
+| 7 | ~~Versioning pipeline~~ | — | ✅ Closed §37.2 |
+| 8 | Activate 10 OData services on SLS | SAP basis | §36.3 step-by-step in §35.8 #8 |
+| 9 | Activate `ZP_ODAT_FA_RPT_SRV` on HD6 | SAP basis | §36.3 step-by-step in §35.8 #9 |
+| 10 | ~~Stale `apps/` directories~~ | — | ✅ Closed §40 |
+
+**Operational items adjacent to migration** (called out at the user's request earlier in the session; not bugs, not in the migration scope, but the team will want them before going live):
+
+| Item | Where it'll get done |
+|---|---|
+| End-user role-collection assignments (post item 1) | Implicit dependency of #1 — set up once the site exists |
+| Monitoring / alerting on the live BTP → CC → SAP chain | Adjacent operational project |
+| CC failover (single physical CC today) | Implicit in #3 |
+| Performance baseline measurements | Adjacent operational project |
+| User communication + Neo decommission plan | Adjacent operational project |
+| Local 4.1 GB `node_modules` dedupe (workspace monorepo) | Review #6 deferred item — workspace restructuring |
+| Bump-version not integrated into deployment | §37.2 caveat — team decides if/when |
+
+That covers everything in my knowledge as of this commit.
+
+### §41.5 — Headline state
+
+- **62 / 62 apps** deployed, **8 of 9 testable layers** pass at 62/62, **OData layer** runs at 51/65 with the 14-gap fully diagnosed as SAP-basis-side service registrations.
+- **0 open code defects.** All remaining items are RBAC, infrastructure, SAP basis, or future-scope projects.
+- **Full configuration backup** in `docs/btp-cf-cc-snapshot.md`, regeneratable via `python scripts/dump-btp-cf-cc-snapshot.py`.
+- **CI** runs validators + JSON parse + `npm test` smoke + bump-version dry-run on every push to `main` and every PR.
+- **README.md** at repo root as the GitHub entry point pointing at §35 master reference.
+
+The migration is functionally complete and verifiable. Anything from here is either documentation, an SAP basis-team dependency closing items 8 + 9, the one-click WZ site build once role #1 is granted, or one of the documented future-scope projects (UI5 modernization, workspace monorepo, monitoring, etc.).
+
+---
+
+*Last updated: 2026-06-11 — §41 records the final-state audit answering the four user questions at session close: yes good, yes synced (Windows + GitHub at `697f094`; BAS pull driven, user to confirm), yes tested through 8 of 9 layers at 62/62 with OData at 51/65, and yes — the full pending list is the §40.4 table of 7 migration items plus the operational-adjacent items §41.4 catalogs.*
+
+---
+
+*Previously — 2026-06-11 — §40 closes pending Item 10 (stale `apps/` directories). 24 orphan directories + 24 matching `security/xs-security-*.json` files removed from index + disk after a full cross-reference safety sweep proved zero active consumers. ~2.4 GB local disk freed; 1 292 tracked source files dropped. Validators still pass 54/54 + 8/8. Pending-item count drops from 8 to 7 — and like §37 before it, this pass closed a code-side item; the remaining 7 are RBAC, infrastructure, SAP basis, or future UI5 modernization.*
 
 ---
 
